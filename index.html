@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefania Konstantinidi, Ph.D.</title>
+<meta name="description" content="Stefania Konstantinidi — Postdoctoral Research Fellow, MIT. Fiber-reinforced dielectric elastomer actuators for facial reanimation implants and bioinspired flight.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦋</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161512;
+    --paper:#faf7f1;
+    --paper-dim:#f1ece2;
+    --rule:#ddd5c5;
+    --accent:#c4512f;
+    --accent-dim:#e8ded0;
+    --teal:#2f5d57;
+    --muted:#6f6a5e;
+    --card:#ffffff;
+    --maxw:1120px;
+    --radius:14px;
+    --shadow: 0 1px 2px rgba(22,21,18,.04), 0 8px 24px rgba(22,21,18,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif; font-weight:600; line-height:1.12; margin:0;}
+  p{margin:0 0 1em}
+  a{color:inherit}
+  img{max-width:100%; display:block}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+  section{padding:96px 0}
+  .eyebrow{
+    font-family:'Inter'; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:2px; background:var(--accent); display:inline-block}
+  .section-head{max-width:680px; margin-bottom:52px}
+  .section-head h2{font-size:clamp(28px,3.4vw,40px); margin-bottom:14px}
+  .section-head .lede{color:var(--muted); font-size:17px}
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky; top:0; z-index:50; background:rgba(250,247,241,.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav-inner{max-width:var(--maxw); margin:0 auto; padding:16px 28px; display:flex; align-items:center; justify-content:space-between; gap:20px}
+  .brand{font-family:'Fraunces'; font-weight:600; font-size:18px; text-decoration:none; white-space:nowrap}
+  nav.links{display:flex; gap:26px; flex-wrap:wrap}
+  nav.links a{font-size:14px; text-decoration:none; color:var(--ink); opacity:.75; font-weight:500}
+  nav.links a:hover{opacity:1}
+  .nav-cta{font-size:13.5px; font-weight:600; background:var(--ink); color:var(--paper); padding:9px 16px; border-radius:30px; text-decoration:none; white-space:nowrap}
+  .nav-toggle{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden; background:var(--ink); color:var(--paper);
+    padding:0;
+  }
+  .hero-pattern{
+    position:absolute; inset:0; opacity:.14;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="70" viewBox="0 0 120 70"><path d="M0 35 L20 5 L40 35 L60 5 L80 35 L100 5 L120 35" fill="none" stroke="%23c4512f" stroke-width="2.2"/><path d="M0 50 L20 20 L40 50 L60 20 L80 50 L100 20 L120 50" fill="none" stroke="%23f1ece2" stroke-width="1.4" opacity="0.5"/></svg>');
+    background-size:220px 128px;
+  }
+  .hero-grad{position:absolute; inset:0; background:radial-gradient(ellipse 900px 600px at 78% 18%, rgba(196,81,47,.22), transparent 60%);}
+  .hero-inner{
+    position:relative; max-width:var(--maxw); margin:0 auto; padding:76px 28px 84px;
+    display:grid; grid-template-columns:1.25fr .85fr; gap:56px; align-items:center;
+  }
+  .hero h1{font-size:clamp(36px,5.4vw,58px); color:#fff}
+  .hero .role{font-size:18px; color:#e9ddcf; margin-top:16px; max-width:46ch}
+  .hero .tagline{font-size:16.5px; color:#cfc6b4; margin-top:20px; max-width:52ch; line-height:1.7}
+  .hero-ctas{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:600; font-size:14px;
+    padding:12px 20px; border-radius:30px; border:1px solid transparent; transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-solid{background:var(--accent); color:#fff}
+  .btn-ghost{border-color:rgba(255,255,255,.35); color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+  .btn-dark{background:var(--ink); color:var(--paper)}
+  .btn-outline{border-color:var(--rule); color:var(--ink)}
+  .btn-outline:hover{background:var(--paper-dim)}
+  .hero-photo{position:relative}
+  .hero-photo .frame{
+    border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.15);
+    box-shadow:0 30px 60px rgba(0,0,0,.45);
+    aspect-ratio:4/5;
+  }
+  .hero-photo img{width:100%; height:100%; object-fit:cover}
+  .hero-photo .tag{
+    position:absolute; bottom:-16px; left:-16px; background:var(--card); color:var(--ink);
+    padding:12px 16px; border-radius:12px; box-shadow:var(--shadow); font-size:13px; max-width:220px;
+  }
+  .hero-photo .tag strong{display:block; font-family:'Fraunces'; font-size:15px; margin-bottom:2px}
+
+  /* ---------- STATS ---------- */
+  .stats{background:var(--paper-dim); border-bottom:1px solid var(--rule); border-top:1px solid var(--rule)}
+  .stats .wrap{display:grid; grid-template-columns:repeat(5,1fr); gap:0; padding:40px 28px}
+  .stat{text-align:center; padding:0 10px; border-left:1px solid var(--rule)}
+  .stat:first-child{border-left:none}
+  .stat b{display:block; font-family:'Fraunces'; font-size:clamp(24px,2.6vw,32px); color:var(--accent)}
+  .stat span{font-size:12.5px; color:var(--muted); letter-spacing:.02em}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start}
+  .about-grid p{color:#3c382f; font-size:16.5px}
+  .pillquote{
+    border-left:3px solid var(--accent); padding:4px 0 4px 22px; font-family:'Fraunces'; font-size:19px;
+    color:var(--ink); font-weight:500; margin-top:10px;
+  }
+
+  /* ---------- RESEARCH ---------- */
+  .research-card{
+    display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--card); border-radius:var(--radius);
+    overflow:hidden; box-shadow:var(--shadow); margin-bottom:34px; border:1px solid var(--rule);
+  }
+  .research-card.reverse .rc-media{order:2}
+  .rc-media{position:relative; min-height:320px; background:var(--ink)}
+  .rc-media .media-grid{position:absolute; inset:0; display:grid}
+  .rc-media.single .media-grid{grid-template-columns:1fr}
+  .rc-media.split .media-grid{grid-template-columns:1fr 1fr; gap:2px}
+  .rc-media img, .rc-media video{width:100%; height:100%; object-fit:cover}
+  .rc-body{padding:40px 44px}
+  .rc-body .badges{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px}
+  .badge{
+    font-size:11.5px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    background:var(--accent-dim); color:var(--accent); padding:5px 10px; border-radius:20px;
+  }
+  .rc-body h3{font-size:24px; margin-bottom:12px}
+  .rc-body p{color:#4a4538; font-size:15.3px}
+  .rc-body .meta{font-size:13px; color:var(--muted); margin-top:16px; border-top:1px solid var(--rule); padding-top:16px}
+  .wing-art{width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:30px}
+  .sensitive-media{position:relative; overflow:hidden}
+  .sensitive-media img.blurred{filter:blur(22px) saturate(.8); transform:scale(1.08); transition:filter .4s ease}
+  .sensitive-media.revealed img.blurred{filter:none; transform:none}
+  .sensitive-media .reveal-btn{
+    position:absolute; inset:0; width:100%; height:100%; border:none; cursor:pointer;
+    background:rgba(22,21,18,.42); color:#fff; display:flex; align-items:center; justify-content:center;
+    text-align:center; font-size:13px; font-weight:600; line-height:1.5; padding:16px;
+  }
+  .sensitive-media .reveal-btn small{display:block; font-weight:500; opacity:.85; margin-top:4px; font-size:11.5px}
+  .sensitive-media.revealed .reveal-btn{display:none}
+
+  /* ---------- VIDEO STORY ---------- */
+  .story{background:var(--ink); color:var(--paper)}
+  .story .section-head{color:var(--paper)}
+  .story .section-head .lede{color:#b9b2a2}
+  .story .eyebrow{color:#e8a98f}
+  .video-frame{
+    position:relative; border-radius:16px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.12); background:#000;
+  }
+  .video-frame video{width:100%; display:block; max-height:72vh}
+  .story-cap{margin-top:18px; color:#cfc6b4; font-size:14px; max-width:60ch}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{position:relative; margin-top:10px}
+  .timeline::before{content:""; position:absolute; left:128px; top:6px; bottom:6px; width:2px; background:var(--rule)}
+  .tl-item{position:relative; display:grid; grid-template-columns:128px 1fr; gap:28px; padding:0 0 38px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-year{font-family:'Fraunces'; font-weight:600; font-size:15px; color:var(--accent); padding-top:2px; padding-right:20px; text-align:right; white-space:nowrap}
+  .tl-dot{position:absolute; left:122px; top:5px; width:14px; height:14px; border-radius:50%; background:var(--paper); border:3px solid var(--accent)}
+  .tl-body{background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:18px 22px}
+  .tl-body h4{font-size:16.5px; margin-bottom:4px}
+  .tl-body p{font-size:14.3px; color:var(--muted); margin:0}
+  .tl-body .award{color:var(--accent); font-weight:600}
+
+  /* ---------- PUBLICATIONS ---------- */
+  .pub-stats{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:38px}
+  .pub-stats span{background:var(--paper-dim); border:1px solid var(--rule); border-radius:30px; padding:8px 16px; font-size:13.5px; color:var(--ink)}
+  .pub-list{display:flex; flex-direction:column; gap:2px}
+  .pub{
+    display:grid; grid-template-columns:52px 1fr auto; gap:18px; align-items:start;
+    padding:20px 0; border-bottom:1px solid var(--rule);
+  }
+  .pub:first-child{border-top:1px solid var(--rule)}
+  .pub-year{font-family:'Fraunces'; font-weight:600; color:var(--muted); font-size:15px; padding-top:2px}
+  .pub-title{font-size:15.5px; font-weight:600; margin-bottom:4px}
+  .pub-venue{font-size:13.5px; color:var(--muted)}
+  .pub-badge{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; color:var(--accent); white-space:nowrap; padding-top:3px}
+  .pub-more{margin-top:30px; display:flex; gap:12px; flex-wrap:wrap}
+
+  /* ---------- VENTURES (before academia) ---------- */
+  .venture-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px}
+  .venture-card{background:var(--card); border:1px solid var(--rule); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+  .venture-media{background:var(--ink)}
+  .venture-media img{width:100%; height:220px; object-fit:cover; display:block}
+  .venture-body{padding:28px 30px}
+  .venture-body .logo-row{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+  .venture-body .logo-row img{width:32px; height:32px; border-radius:8px}
+  .venture-body h3{font-size:19px}
+  .venture-body p{font-size:14.5px; color:#4a4538}
+  .venture-body .award{display:inline-block; margin-top:6px; font-size:12.5px; font-weight:700; color:var(--accent)}
+
+  /* ---------- TEACHING ---------- */
+  .teach-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:50px}
+  .tag-row{display:flex; flex-wrap:wrap; gap:9px; margin-top:16px}
+  .tag{font-size:13px; background:var(--paper-dim); border:1px solid var(--rule); padding:7px 13px; border-radius:20px; color:var(--ink)}
+  .thesis-table{width:100%; border-collapse:collapse; margin-top:10px}
+  .thesis-table th{text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:700; padding:0 0 10px; border-bottom:1px solid var(--rule)}
+  .thesis-table td{padding:12px 0; border-bottom:1px solid var(--rule); font-size:14px; vertical-align:top}
+  .thesis-table td.y{color:var(--muted); white-space:nowrap}
+  .star{color:var(--accent); font-weight:700}
+
+  /* ---------- SERVICE ---------- */
+  .service-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px}
+  .svc{background:var(--card); border:1px solid var(--rule); border-radius:12px; padding:22px 24px}
+  .svc h4{font-size:15.5px; margin-bottom:6px}
+  .svc p{font-size:13.8px; color:var(--muted); margin:0}
+  .svc .when{font-size:12px; color:var(--accent); font-weight:700; margin-bottom:6px; text-transform:uppercase; letter-spacing:.03em}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--ink); color:var(--paper)}
+  .contact .wrap{text-align:center}
+  .contact h2{color:#fff; font-size:clamp(30px,4vw,44px)}
+  .contact p{color:#cfc6b4; max-width:52ch; margin:16px auto 32px; font-size:16.5px}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap}
+
+  footer{padding:30px 28px; text-align:center; font-size:12.5px; color:var(--muted); background:var(--ink); border-top:1px solid rgba(255,255,255,.08); color:#8a8370}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1; transform:none}
+
+  @media (max-width: 880px){
+    nav.links{display:none}
+    .hero-inner{grid-template-columns:1fr; padding-top:56px}
+    .hero-photo{max-width:320px; margin:0 auto}
+    .stats .wrap{grid-template-columns:repeat(2,1fr); row-gap:24px}
+    .stat{border-left:none; padding:0}
+    .about-grid{grid-template-columns:1fr; gap:30px}
+    .research-card{grid-template-columns:1fr}
+    .research-card.reverse .rc-media{order:0}
+    .rc-body{padding:30px 26px}
+    .venture-grid{grid-template-columns:1fr}
+    .teach-grid{grid-template-columns:1fr; gap:36px}
+    .service-grid{grid-template-columns:1fr}
+    .timeline::before{left:70px}
+    .tl-item{grid-template-columns:70px 1fr; gap:16px}
+    .tl-dot{left:64px}
+    .tl-year{padding-right:10px; font-size:13px; white-space:normal; line-height:1.2}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">S. Konstantinidi</a>
+    <nav class="links">
+      <a href="#research">Research</a>
+      <a href="#journey">Journey</a>
+      <a href="#publications">Publications</a>
+      <a href="#before">Earlier Ventures</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#service">Service</a>
+    </nav>
+    <a class="nav-cta" href="assets/docs/Konstantinidi_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding:0">
+    <div class="hero-pattern"></div>
+    <div class="hero-grad"></div>
+    <div class="hero-inner">
+      <div class="reveal in">
+        <div class="eyebrow" style="color:#e8a98f">Faculty Candidate · Fall 2026</div>
+        <h1>Stefania Konstantinidi, Ph.D.</h1>
+        <p class="role">Postdoctoral Research Fellow — Department of Mechanical Engineering &amp; Department of Electrical Engineering and Computer Science, Massachusetts Institute of Technology</p>
+        <p class="tagline">I build soft actuators that encode motion directly into material structure — fiber-reinforced dielectric elastomers whose reinforcement architecture sets the direction, distribution, and magnitude of deformation. I apply them to mechanically active implants that restore movement after facial paralysis, and to bioinspired structures that need distributed, programmable morphing.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#research">See the research →</a>
+          <a class="btn btn-ghost" href="assets/docs/Konstantinidi_CV.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          <a class="btn btn-ghost" href="mailto:stef_k@mit.edu">Email me</a>
+        </div>
+      </div>
+      <div class="hero-photo reveal in">
+        <div class="frame"><img src="assets/img/headshot.jpg" alt="Portrait of Stefania Konstantinidi"></div>
+        <div class="tag"><strong>MIT · MechE &amp; EECS</strong>SNSF Postdoc.Mobility Fellow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats" style="padding:0">
+    <div class="wrap">
+      <div class="stat"><b>12</b><span>Journal articles (7 first/co-first author)</span></div>
+      <div class="stat"><b>1</b><span>Patent — facial paralysis implant</span></div>
+      <div class="stat"><b>20</b><span>Students mentored, EPFL · USZ · MIT</span></div>
+      <div class="stat"><b>8</b><span>Cross-institutional collaborations</span></div>
+      <div class="stat"><b>4</b><span>Best Paper / Demonstrator awards</span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="eyebrow">About</div>
+          <h2 style="font-size:clamp(26px,3vw,34px); margin-bottom:18px">From a Lausanne microengineering lab to MIT's aerial robotics bay</h2>
+        </div>
+        <div class="reveal">
+          <p>I am a Postdoctoral Research Fellow jointly appointed in MIT's Department of Mechanical Engineering and Department of Electrical Engineering and Computer Science, working across the <strong>Aerial and Underwater Robotics Laboratory</strong> (Prof. Raphaël Zufferey) and the <strong>Soft and Micro Robotics Laboratory</strong> (Prof. Yufeng Chen). My postdoctoral work is independently funded by a Swiss National Science Foundation Postdoc.Mobility Fellowship, combining aeroelastic flight dynamics with soft micro-actuation.</p>
+          <p>I completed my Ph.D. in Robotics, Control and Intelligent Systems at <strong>EPFL</strong> (2021–2025) with the Center for Artificial Muscles and the Integrated Actuators Laboratory, advised by Prof. Yves Perriard and Dr. Thomas Martinez, following an M.Sc. in Robotics (thesis grade 6.0/6.0) and a B.Sc. in Microengineering, also at EPFL. Before returning to robotics for my Ph.D., I led R&amp;D at a medtech startup and co-built an award-winning diagnostic device as part of the iGEM synthetic biology competition.</p>
+          <div class="pillquote">"Motion, encoded directly into the structure of a material — that's the thread running through every project."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research" style="background:var(--paper-dim); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Research</div>
+        <h2>Embedding a Musculature in Compliant Systems</h2>
+        <p class="lede">I treat soft machines and living tissue as a two-way street: biology informs how I design actuators, and the actuators deepen our understanding of the systems they replicate. One question runs through all of it — how to shift actuation from rigid joints directly into the compliant surface itself, so the structure that changes shape is the same structure that produces motion. Looking ahead, I want to push that question beyond flight and the face: embedding fine, distributed musculature into conventional, rigid-skeleton robots, the way muscle is embedded in every animal body plan.</p>
+      </div>
+
+      <!-- Research 1: Facial reanimation -->
+      <article class="research-card reveal">
+        <div class="rc-media split">
+          <div class="media-grid">
+            <img src="assets/img/deyea_closeup.jpg" alt="Close-up of the DEyeA artificial-muscle eyelid actuator mounted on a skull model">
+            <div class="sensitive-media" id="rat-media">
+              <img src="assets/img/invivo_rat.jpg" alt="In vivo surgical placement of a dielectric elastomer actuator neuroprosthesis" class="blurred">
+              <button type="button" class="reveal-btn" onclick="document.getElementById('rat-media').classList.add('revealed')">
+                <span>⚠ Sensitive content<br><small>In vivo surgical image — click to view</small></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div class="badges">
+            <span class="badge">Patent filed</span>
+            <span class="badge">Journal cover, AMT 2025</span>
+            <span class="badge">Clinical partnership · USZ</span>
+          </div>
+          <h3>Mechanically active implants for facial reanimation</h3>
+          <p>Reinforced dielectric elastomer implants that restore expressions — smiling, blinking — through directional deformation analogous to facial musculature itself, displacing tissue directly with no motors and no gearboxes. The work spans actuator design, dynamic modeling and real-time control, through to <em>in vivo</em> demonstrations establishing real-time neural control via a peripheral nerve interface, developed with the University Hospital Zurich Department of Plastic Surgery (Prof. Nicole Lindenblatt).</p>
+          <div class="meta">DEyeA: Artificial muscles for the restoration of eye blinking — <em>Advanced Materials Technologies</em>, 2025 (cover article) · Electromechanical device for actuating a patient's eyelid — International Patent Application WO2026028097</div>
+        </div>
+      </article>
+
+      <!-- Research 2: Fiber-reinforced mechanics -->
+      <article class="research-card reverse reveal">
+        <div class="rc-media split">
+          <div class="media-grid">
+            <video muted loop autoplay playsinline src="assets/video/instability_demo1.mp4"></video>
+            <video muted loop autoplay playsinline src="assets/video/instability_demo2.mp4"></video>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div class="badges">
+            <span class="badge">Best Paper, ICEMS 2023</span>
+            <span class="badge">TU Dresden collaboration</span>
+          </div>
+          <h3>How reinforcement architecture governs deformation</h3>
+          <p>A systematic investigation of buckling instabilities and necking in fiber-reinforced dielectric elastomer actuators — understanding, predicting, and ultimately designing around the structural instabilities that emerge when a soft membrane is both stretched and electrically actuated. The videos show a reinforced membrane buckling as voltage is applied, the structural signature these studies decode.</p>
+          <div class="meta">Investigation of buckling instabilities in fiber-reinforced DEAs — <em>Composites Science and Technology</em>, 2024 · Elimination of necking and aspect-ratio dependence by continuous fiber reinforcement — <em>Advanced Robotics Research</em>, 2026</div>
+        </div>
+      </article>
+
+      <!-- Research 3: Bioinspired flight -->
+      <article class="research-card reveal">
+        <div class="rc-media single" style="background:linear-gradient(135deg,#1c2b27,#161512)">
+          <div class="wing-art">
+            <svg viewBox="0 0 360 260" width="100%" height="100%" style="max-width:380px">
+              <defs>
+                <linearGradient id="wg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#e8a98f"/>
+                  <stop offset="1" stop-color="#c4512f"/>
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#wg)" stroke-width="2.2" stroke-linecap="round">
+                <path d="M180 220 C 120 190, 40 160, 15 70 C 70 95, 110 120, 150 150"/>
+                <path d="M180 220 C 110 180, 55 130, 40 60 C 85 85, 120 115, 155 150"/>
+                <path d="M180 220 C 240 190, 320 160, 345 70 C 290 95, 250 120, 210 150"/>
+                <path d="M180 220 C 250 180, 305 130, 320 60 C 275 85, 240 115, 205 150"/>
+                <path d="M180 220 L180 60" stroke-width="2.6"/>
+              </g>
+              <g fill="none" stroke="#5f554a" stroke-width="1" opacity=".55">
+                <path d="M60 110 C 100 130, 140 150, 175 155"/>
+                <path d="M300 110 C 260 130, 220 150, 185 155"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div class="badges">
+            <span class="badge">New direction · MIT</span>
+            <span class="badge">22% camber modulation</span>
+            <span class="badge">Best Poster, HAMER 2026</span>
+          </div>
+          <h3>An active, bat-inspired compliant wing membrane</h3>
+          <p>Bat wings are among nature's most refined aeroelastic structures. Unlike insect and bird wings — or the articulated rigid skeletons and passive membranes of current micro-air vehicles — bat flight is powered by soft, active, anisotropic membranes with embedded <em>plagiopatagiales</em> muscles that fire throughout the flap cycle, controlling camber by varying membrane stiffness, resisting aerodynamic billowing, and modulating lift.</p>
+          <p>I build the engineering analog: rolled DEA fibers integrated into a biomimetic, anisotropic composite membrane that mimics the elastin–collagen–muscle network of a bat wing. These artificial <em>plagiopatagiales</em> let the membrane actively modulate its own stiffness and shape under aerodynamic load. Current prototypes show controlled camber modulation of up to 22% during gliding, with work now progressing toward powered flapping flight — a lightweight skeleton spanning a compliant, actively-muscled membrane, so that shape change and locomotion come from the same structure. Shift actuation from the joint into the surface, and the wing stops being a structure that carries actuators and becomes one that <em>actuates</em>. I supervise an MIT master's thesis on pterosaur-inspired flapping-wing design and an ongoing semester project on bat-inspired flapping mechanisms.</p>
+          <div class="meta">Bat-inspired active aeroelastic membranes for flapping wing flight — in preparation, 2026 · Invited Rising Star Talk, "Embedding a Musculature in Compliant Systems," Northeastern Colloquium of Robotics, Princeton, 2026 · Best Poster Award, HAMER 2026</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- VIDEO STORY -->
+  <section class="story">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Watch</div>
+        <h2>What makes you smile?</h2>
+        <p class="lede">Learn more about artificial muscles.</p>
+      </div>
+      <div class="video-frame reveal">
+        <video controls preload="metadata" poster="" src="assets/video/phd_story.mp4"></video>
+      </div>
+      <p class="story-cap">Credits: Yichi Luo, Edoardo Bruretto, Stefania Konstantinidi.</p>
+    </div>
+  </section>
+
+  <!-- JOURNEY / TIMELINE -->
+  <section id="journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Journey</div>
+        <h2>From microengineering to artificial muscles</h2>
+      </div>
+      <div class="timeline reveal">
+
+        <div class="tl-item"><div class="tl-year">2015–18</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>B.Sc., Microengineering — EPFL</h4></div></div>
+
+        <div class="tl-item"><div class="tl-year">2018–19</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>R&amp;D Engineer, iGEM Switzerland</h4>
+          <p>Co-developed ViTest, a field-deployable grapevine-disease diagnostic. <span class="award">iGEM Grand Prize</span>, 353 international teams, plus Best Presentation, Best Wiki &amp; Best Human Practices.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2018–20</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>M.Sc., Robotics — EPFL</h4>
+          <p>Thesis grade 6.0/6.0, conducted within C-MedTec at the EPFL Innovation Park.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2019–20</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>R&amp;D Leader, C-MedTec</h4>
+          <p>Led development of a near-infrared concussion diagnostic. <span class="award">Venture Kick &amp; X-Grant</span> funding; finalist, Start Lausanne.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2021</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Sophie Afenduli Foundation Fellowship</h4>
+          <p>Awarded for research on soft actuators for facial reanimation, at the start of the Ph.D.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2021–25</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Ph.D., Robotics, Control &amp; Intelligent Systems — EPFL</h4>
+          <p>"Reinforced dielectric elastomer actuators for the restoration of facial movement." Advisors: Prof. Yves Perriard, Dr. Thomas Martinez.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2023</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Best Paper Award — IEEE ICEMS</h4>
+          <p>For the experimental design approach to uniaxial fiber-reinforced actuators.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2025</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Cover article, <em>Advanced Materials Technologies</em></h4>
+          <p>DEyeA eye-blink restoration study. Also: <span class="award">Best Demonstrator</span>, SPIE EAPAD; <span class="award">2nd Best Demonstrator</span>, IEEE RoboSoft.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2025–now</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Postdoctoral Research Fellow — MIT</h4>
+          <p>Joint appointment, Mechanical Engineering &amp; EECS. Independently funded by an SNSF Postdoc.Mobility Fellowship.</p></div></div>
+
+        <div class="tl-item"><div class="tl-year">2026</div><div class="tl-dot"></div>
+          <div class="tl-body"><h4>Rising Star recognitions</h4>
+          <p><span class="award">Invited Rising Star Talk</span>, Northeastern Colloquium of Robotics, Princeton · <span class="award">Rising Star in Mechanical Engineering</span>, Stanford workshop · <span class="award">Best Poster</span>, HAMER.</p></div></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications" style="background:var(--paper-dim); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Publications</div>
+        <h2>Selected publications</h2>
+        <p class="lede">Full list — 12 journal articles, 7 peer-reviewed conference papers and 22 presentations — in the CV and on Google Scholar.</p>
+      </div>
+      <div class="pub-stats reveal">
+        <span>12 journal articles</span>
+        <span>7 as first/co-first author</span>
+        <span>2 in preparation</span>
+        <span>7 conference papers</span>
+        <span>22 presentations &amp; posters</span>
+        <span>1 patent</span>
+      </div>
+
+      <div class="pub-list reveal">
+        <div class="pub">
+          <div class="pub-year">2025</div>
+          <div><div class="pub-title">DEyeA: Artificial muscles for the restoration of eye blinking for facial paralysis</div><div class="pub-venue">S. Konstantinidi, M. Koenigsdorff, P.-J. Martin, A. Benouhiba, Y. Civet, Y. Perriard · <em>Advanced Materials Technologies</em></div></div>
+          <div class="pub-badge">Cover article</div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2025</div>
+          <div><div class="pub-title">Towards artificial muscle implants: structured reinforcement of dielectric elastomers</div><div class="pub-venue">S. Konstantinidi, M. Koenigsdorff, A. Osorio Salazar, et al. · <em>Smart Materials and Structures</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2026</div>
+          <div><div class="pub-title">Dynamic modeling for the control of reinforced DEAs for post-paralysis facial movement restoration</div><div class="pub-venue">S. Konstantinidi, N. Liu, R. Ben Mustapha, et al. · <em>Interface Focus</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2024</div>
+          <div><div class="pub-title">Investigation of buckling instabilities in fiber-reinforced DEAs</div><div class="pub-venue">S. Konstantinidi†, M. Koenigsdorff†, T. Martinez, et al. · <em>Composites Science and Technology</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2024</div>
+          <div><div class="pub-title">Fiber-reinforced equibiaxial dielectric elastomer actuators for out-of-plane displacement</div><div class="pub-venue">S. Konstantinidi†, S. Holzer†, M. Koenigsdorff, et al. · <em>Materials</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2023</div>
+          <div><div class="pub-title">Uniaxial reinforced dielectric elastomer actuators with embedded 3D-printed fibers</div><div class="pub-venue">S. Konstantinidi, B. Tandon, T. Martinez, Y. Civet, Y. Perriard · <em>Smart Materials and Structures</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">2023</div>
+          <div><div class="pub-title">Real-time actuation of a dielectric elastomer actuator neuroprosthesis for facial paralysis</div><div class="pub-venue">S. Konstantinidi, C. Imholz, T. Martinez, et al. · <em>Smart Materials in Medicine</em></div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">Patent</div>
+          <div><div class="pub-title">Electromechanical device for actuating a patient's eyelid</div><div class="pub-venue">S. Konstantinidi, et al. · International Patent Application WO2026028097</div></div>
+          <div class="pub-badge"></div>
+        </div>
+        <div class="pub">
+          <div class="pub-year">In prep</div>
+          <div><div class="pub-title">In vivo actuation of compliant dielectric elastomer artificial muscles via a peripheral nerve interface</div><div class="pub-venue">S. Konstantinidi, S. Kollarik, A. Walter, et al. · Preprint</div></div>
+          <div class="pub-badge"></div>
+        </div>
+      </div>
+
+      <div class="pub-more reveal">
+        <a class="btn btn-dark" href="assets/docs/Konstantinidi_CV.pdf" target="_blank" rel="noopener">Full publication list (CV)</a>
+        <a class="btn btn-outline" href="https://scholar.google.com/citations?user=o15ov2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar profile →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE ACADEMIA -->
+  <section id="before">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Before the Ph.D.</div>
+        <h2>Earlier ventures</h2>
+        <p class="lede">Two projects that shaped how I approach research: build something people can actually use, fast.</p>
+      </div>
+      <div class="venture-grid reveal">
+
+        <div class="venture-card">
+          <div class="venture-media">
+            <img src="assets/img/igem_team.jpg" alt="The EPFL iGEM team celebrating on stage after winning the Grand Prize">
+          </div>
+          <div class="venture-body">
+            <h3>ViTest — iGEM Switzerland, 2018–2019</h3>
+            <p>A field-deployable diagnostic for the grapevine diseases flavescence dorée and bois noir, delivering results in under two hours with no laboratory equipment or specialist training. Responsible for device design and microneedle fabrication for plant DNA extraction.</p>
+            <span class="award">iGEM Grand Prize · 353 international teams</span><br>
+            <a href="https://2019.igem.org/Team:EPFL" target="_blank" rel="noopener" style="font-size:13px; font-weight:600; color:var(--accent); text-decoration:none; display:inline-block; margin-top:10px">View the iGEM team wiki →</a>
+          </div>
+        </div>
+
+        <div class="venture-card">
+          <div class="venture-media">
+            <img src="assets/img/cmedtec_nirs.jpg" alt="Near-infrared spectroscopy concussion diagnostic concept and head-phantom validation" style="object-position:top">
+          </div>
+          <div class="venture-body">
+            <div class="logo-row"><img src="assets/img/cmedtec_logo.png" alt="C-MedTec logo"><h3 style="margin:0">C-MedTec</h3></div>
+            <p>R&amp;D Leader for a concussion-diagnostic startup using near-infrared spectroscopy, developing finite element models of mechanical impact and validating them against an anatomically precise head phantom. Later served as an Investment Fellow at Verve Ventures, evaluating medtech ventures.</p>
+            <span class="award">Venture Kick &amp; X-Grant · Start Lausanne finalist</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching" style="background:var(--paper-dim); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Teaching &amp; Mentoring</div>
+        <h2>20 students, three institutions</h2>
+      </div>
+      <div class="teach-grid">
+
+        <div class="reveal">
+          <h3 style="font-size:19px; margin-bottom:10px">Teaching</h3>
+          <p style="color:#4a4538; font-size:15px">Teaching Assistant at EPFL (2021–2025) for Programming (C/C++), Electronics, and Actuators &amp; Electromagnetic Systems — leading exercise sessions and lab instruction, and designing and grading assessments. Holds the EPFL Tutoring Attestation, a formal certification in university-level teaching (2023).</p>
+          <h4 style="font-size:14px; margin:22px 0 4px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; font-family:Inter">Prepared to teach</h4>
+          <div class="tag-row">
+            <span class="tag">Mechatronics &amp; actuator design</span>
+            <span class="tag">Soft robotics</span>
+            <span class="tag">Smart materials &amp; electroactive polymers</span>
+            <span class="tag">Finite element modeling</span>
+            <span class="tag">Intro programming &amp; electronics</span>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h3 style="font-size:19px; margin-bottom:10px">Theses that became publications</h3>
+          <table class="thesis-table">
+            <tr><th>Student</th><th>Institution</th><th>Year</th></tr>
+            <tr><td>Enrico Bregni <span class="star">★</span><br><span style="color:var(--muted); font-weight:400">Pterosaur-inspired flapping wing</span></td><td class="y">MIT</td><td class="y">2026</td></tr>
+            <tr><td>Pierre-Jean Martin <span class="star">★</span><br><span style="color:var(--muted); font-weight:400">Design of an eye prosthesis</span></td><td class="y">EPFL</td><td class="y">2024</td></tr>
+            <tr><td>Carlotta Imholz <span class="star">★</span><br><span style="color:var(--muted); font-weight:400">Real-time actuation of DEAs</span></td><td class="y">USZ</td><td class="y">2022</td></tr>
+            <tr><td>Raki Ben Mustapha <span class="star">★</span><br><span style="color:var(--muted); font-weight:400">Closed-loop control of DEAs</span></td><td class="y">EPFL</td><td class="y">2024</td></tr>
+            <tr><td>Baptiste Tankwa <span class="star">★</span><br><span style="color:var(--muted); font-weight:400">Upper facial movement restoration</span></td><td class="y">EPFL</td><td class="y">2023</td></tr>
+          </table>
+          <p style="font-size:12.5px; color:var(--muted); margin-top:10px"><span class="star">★</span> resulted in a peer-reviewed publication with the student as co-author — 5 of 20 supervised projects.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE -->
+  <section id="service">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Service &amp; Outreach</div>
+        <h2>Beyond the bench</h2>
+      </div>
+      <div class="service-grid reveal">
+        <div class="svc"><div class="when">2026–present</div><h4>Treasurer, MIT Postdoctoral Association</h4><p>Administers an annual budget exceeding $35,000; negotiated a 25% budget increase with the MIT Office of the Vice President.</p></div>
+        <div class="svc"><div class="when">2025</div><h4>Session Chair, MRS Fall Meeting, Boston</h4><p>Chaired Symposium SF05 (From Robotic Toward Autonomous Materials) and Symposium EN02 (Next-Generation Technologies for Clean Energy and Materials Sustainability).</p></div>
+        <div class="svc"><div class="when">2025–present</div><h4>Reporter, Materials Research Society</h4><p>Selected to cover symposium sessions and report on emerging research for the society's MRS Fall Meeting coverage.</p></div>
+        <div class="svc"><div class="when">2024–present</div><h4>Outreach &amp; Dissemination Committee, EuroEAP Society</h4><p>European Scientific Network for Soft Transducers and Electromechanically Active Polymers.</p></div>
+        <div class="svc"><div class="when">2023–present</div><h4>Journal Reviewer</h4><p>Science Advances · Advanced Materials · IEEE Robotics and Automation Letters · Smart Materials and Structures · Materials Research Express.</p></div>
+        <div class="svc"><div class="when">2021–2025</div><h4>Operational Firefighter, SDIS Etraz, Switzerland</h4><p>Trained in hydraulics and radio communications alongside the Ph.D.</p></div>
+      </div>
+      <p style="margin-top:24px; font-size:13.5px; color:var(--muted)">Public engagement: invited panelist, Swissnex Boston &amp; New York, "How robotics are reinventing medicine" (2026); MIT Museum &amp; MExpo prototype exhibitions (2026); regular EPFL Open Days presentations (2021–2025); research coverage in <em>Advanced Science News</em>, the Werner Siemens-Stiftung magazine, and EPFL News.</p>
+    </div>
+  </section>
+
+  <!-- OUTSIDE THE LAB -->
+  <section style="background:var(--paper-dim); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="section-head reveal" style="margin-bottom:28px">
+        <div class="eyebrow">Outside the Lab</div>
+        <h2 style="font-size:clamp(24px,2.8vw,32px)">Endurance sports &amp; the outdoors</h2>
+        <p class="lede">Top 100 among Swiss women for marathon finishing times, training for the 2028 Patrouille des Glaciers, and 2nd place in an international fishing competition — Montreux, 2024.</p>
+      </div>
+      <div class="tag-row reveal">
+        <span class="tag">Marathon &amp; trail running</span>
+        <span class="tag">Alpine &amp; backcountry skiing</span>
+        <span class="tag">Rock climbing</span>
+        <span class="tag">Sailing — MIT Ladies' Team</span>
+        <span class="tag">Windsurfing</span>
+        <span class="tag">Fishing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="wrap">
+      <div class="eyebrow" style="justify-content:center; color:#e8a98f">Get in touch</div>
+      <h2>Let's talk about the position</h2>
+      <p>Happy to share the research statement, teaching statement, and full CV on request — and always glad to talk fiber-reinforced actuators, facial reanimation, or bioinspired flight.</p>
+      <div class="contact-links">
+        <a class="btn btn-solid" href="mailto:stef_k@mit.edu">stef_k@mit.edu</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/stefania-konstantinidi-828209186/" target="_blank" rel="noopener">LinkedIn →</a>
+        <a class="btn btn-ghost" href="https://scholar.google.com/citations?user=o15ov2MAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar →</a>
+        <a class="btn btn-ghost" href="assets/docs/Konstantinidi_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Stefania Konstantinidi · Cambridge, MA
+</footer>
+
+<script>
+  // Scroll-reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
