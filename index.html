@@ -162,6 +162,15 @@
   .video-frame video{width:100%; display:block; max-height:72vh}
   .story-cap{margin-top:18px; color:#cfc6b4; font-size:14px; max-width:60ch}
 
+  /* ---------- NEWS ---------- */
+  .news-list{list-style:none; margin:0; padding:0; border-top:1px solid var(--rule)}
+  .news-list li{display:grid; grid-template-columns:96px 1fr; gap:20px; padding:16px 0; border-bottom:1px solid var(--rule); font-size:15px}
+  .news-date{font-family:'Fraunces'; font-weight:600; color:var(--accent); font-size:14.5px; white-space:nowrap}
+  .news-list a{color:var(--accent)}
+  .news-more summary{cursor:pointer; margin-top:18px; font-size:14px; font-weight:600; color:var(--ink); opacity:.75}
+  .news-more summary:hover{opacity:1}
+  @media (max-width: 880px){ .news-list li{grid-template-columns:72px 1fr; gap:12px} }
+
   /* ---------- TIMELINE ---------- */
   .timeline{position:relative; margin-top:10px}
   .timeline::before{content:""; position:absolute; left:128px; top:6px; bottom:6px; width:2px; background:var(--rule)}
@@ -259,6 +268,7 @@
     <a class="brand" href="#top">S. Konstantinidi</a>
     <nav class="links">
       <a href="#research">Research</a>
+      <a href="#news">News</a>
       <a href="#journey">Journey</a>
       <a href="#publications">Publications</a>
       <a href="#before">Earlier Ventures</a>
@@ -411,6 +421,41 @@
         <video controls preload="metadata" poster="" src="assets/video/phd_story.mp4"></video>
       </div>
       <p class="story-cap">Credits: Yichi Luo, Edoardo Bruretto, Stefania Konstantinidi.</p>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <!-- Add month names where known; newest first. Keep about 8 items visible, move older ones into "Earlier news". -->
+  <section id="news" style="background:var(--paper-dim); border-bottom:1px solid var(--rule)">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">News</div>
+        <h2>Recent news</h2>
+      </div>
+      <div class="reveal">
+        <ul class="news-list">
+          <li><div class="news-date">Aug 2026</div><div>Preprint posted: <a href="https://doi.org/10.21203/rs.3.rs-10348254/v1" target="_blank" rel="noopener"><em>In vivo actuation of compliant dielectric elastomer artificial muscles via a peripheral nerve interface</em></a>, with the University Hospital Zurich.</div></li>
+          <li><div class="news-date">2026</div><div>Invited Rising Star talk, <em>Embedding a musculature in compliant systems</em>, Princeton University.</div></li>
+          <li><div class="news-date">2026</div><div>Selected as a Rising Star in Mechanical Engineering for the workshop at Stanford University.</div></li>
+          <li><div class="news-date">2026</div><div>Best Poster Award at the Hellenic-American Meeting of Early-Career Researchers (HAMER) for <em>Active aeroelastic membranes for bat-inspired flight</em>.</div></li>
+          <li><div class="news-date">2026</div><div>Presented our bat-inspired active membranes at EuroEAP 2026.</div></li>
+          <li><div class="news-date">2026</div><div>Best Demonstrator Award (team) at SPIE EAP/Soft Robotics-in-Action for a soft robotic fish led by Markus Koenigsdorff.</div></li>
+          <li><div class="news-date">2026</div><div>Invited talks at CY Cergy Paris Universit&eacute; and at the National Technical University of Athens.</div></li>
+          <li><div class="news-date">2026</div><div>Panelist at Swissnex in Boston and New York, <em>How robotics are reinventing medicine</em>; prototypes shown at the MIT Museum and MExpo.</div></li>
+        </ul>
+        <details class="news-more">
+          <summary>Earlier news</summary>
+          <ul class="news-list" style="margin-top:14px">
+            <li><div class="news-date">2026</div><div><a href="https://doi.org/10.1098/rsfs.2025.0042" target="_blank" rel="noopener">Dynamic modelling for the control of reinforced DEAs</a> published in <em>Interface Focus</em> (theme issue <em>Cyborg futures</em>).</div></li>
+            <li><div class="news-date">2026</div><div>International patent application WO2026028097 published: <em>Electromechanical device for actuating a patient&#39;s eyelid</em>.</div></li>
+            <li><div class="news-date">Apr 2026</div><div>Became Co-Treasurer of the MIT Postdoctoral Association.</div></li>
+            <li><div class="news-date">2025</div><div>Session chair at the MRS Fall Meeting, Boston.</div></li>
+            <li><div class="news-date">Jun 2025</div><div>Joined MIT as an SNSF Postdoc.Mobility fellow, with Rapha&euml;l Zufferey and Yufeng Chen.</div></li>
+            <li><div class="news-date">2025</div><div><a href="https://doi.org/10.1002/admt.202401616" target="_blank" rel="noopener">DEyeA</a> featured on the cover of <em>Advanced Materials Technologies</em>.</div></li>
+            <li><div class="news-date">Mar 2025</div><div>Completed my Ph.D. at EPFL.</div></li>
+          </ul>
+        </details>
+      </div>
     </div>
   </section>
 
