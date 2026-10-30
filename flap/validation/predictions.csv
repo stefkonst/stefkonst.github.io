@@ -1,0 +1,1925 @@
+sweep,curve,x,quantity,value
+voltage,AoA 0 deg,0.0,L_mN,0.0
+voltage,AoA 0 deg,400.0,L_mN,0.0
+voltage,AoA 0 deg,800.0,L_mN,0.0
+voltage,AoA 0 deg,1000.0,L_mN,0.0
+voltage,AoA 0 deg,1200.0,L_mN,0.0
+voltage,AoA 0 deg,1400.0,L_mN,0.0
+voltage,AoA 0 deg,1600.0,L_mN,0.0
+voltage,AoA 0 deg,1800.0,L_mN,0.0
+voltage,AoA 3 deg,0.0,L_mN,3.2060664094999733
+voltage,AoA 3 deg,400.0,L_mN,3.2095825238604236
+voltage,AoA 3 deg,800.0,L_mN,3.220642185748284
+voltage,AoA 3 deg,1000.0,L_mN,3.2294653782150773
+voltage,AoA 3 deg,1200.0,L_mN,3.2408051931594177
+voltage,AoA 3 deg,1400.0,L_mN,3.25527850769356
+voltage,AoA 3 deg,1600.0,L_mN,3.273625706322653
+voltage,AoA 3 deg,1800.0,L_mN,3.2968346219449014
+voltage,AoA 6 deg,0.0,L_mN,6.402815590718033
+voltage,AoA 6 deg,400.0,L_mN,6.409770759227814
+voltage,AoA 6 deg,800.0,L_mN,6.431615557137479
+voltage,AoA 6 deg,1000.0,L_mN,6.44880315849357
+voltage,AoA 6 deg,1200.0,L_mN,6.471047018694892
+voltage,AoA 6 deg,1400.0,L_mN,6.499427319721194
+voltage,AoA 6 deg,1600.0,L_mN,6.535243250242172
+voltage,AoA 6 deg,1800.0,L_mN,6.580461929200356
+voltage,AoA 9 deg,0.0,L_mN,9.586352847211899
+voltage,AoA 9 deg,400.0,L_mN,9.596595792447689
+voltage,AoA 9 deg,800.0,L_mN,9.6283676453118
+voltage,AoA 9 deg,1000.0,L_mN,9.653483311384122
+voltage,AoA 9 deg,1200.0,L_mN,9.685958047631523
+voltage,AoA 9 deg,1400.0,L_mN,9.727306087543065
+voltage,AoA 9 deg,1600.0,L_mN,9.779326848471147
+voltage,AoA 9 deg,1800.0,L_mN,9.844498196643073
+voltage,AoA 12 deg,0.0,L_mN,12.756112359623165
+voltage,AoA 12 deg,400.0,L_mN,12.769245351305896
+voltage,AoA 12 deg,800.0,L_mN,12.810176782353498
+voltage,AoA 12 deg,1000.0,L_mN,12.842659252337391
+voltage,AoA 12 deg,1200.0,L_mN,12.88463172976597
+voltage,AoA 12 deg,1400.0,L_mN,12.937803497142166
+voltage,AoA 12 deg,1600.0,L_mN,13.004226951743266
+voltage,AoA 12 deg,1800.0,L_mN,13.086983686931674
+voltage,AoA 0 deg,0.0,CL,0.0
+voltage,AoA 0 deg,400.0,CL,0.0
+voltage,AoA 0 deg,800.0,CL,0.0
+voltage,AoA 0 deg,1000.0,CL,0.0
+voltage,AoA 0 deg,1200.0,CL,0.0
+voltage,AoA 0 deg,1400.0,CL,0.0
+voltage,AoA 0 deg,1600.0,CL,0.0
+voltage,AoA 0 deg,1800.0,CL,0.0
+voltage,AoA 3 deg,0.0,CL,0.2373874892498476
+voltage,AoA 3 deg,400.0,CL,0.23764783368858702
+voltage,AoA 3 deg,800.0,CL,0.2384667266970824
+voltage,AoA 3 deg,1000.0,CL,0.23912002430210202
+voltage,AoA 3 deg,1200.0,CL,0.2399596607457572
+voltage,AoA 3 deg,1400.0,CL,0.24103131159746843
+voltage,AoA 3 deg,1600.0,CL,0.24238979731205718
+voltage,AoA 3 deg,1800.0,CL,0.2441082602208266
+voltage,AoA 6 deg,0.0,CL,0.4740851008907793
+voltage,AoA 6 deg,400.0,CL,0.4746000839818826
+voltage,AoA 6 deg,800.0,CL,0.4762175432190275
+voltage,AoA 6 deg,1000.0,CL,0.4774901686144528
+voltage,AoA 6 deg,1200.0,CL,0.47913717570974257
+voltage,AoA 6 deg,1400.0,CL,0.48123854465981347
+voltage,AoA 6 deg,1600.0,CL,0.4838904715807059
+voltage,AoA 6 deg,1800.0,CL,0.48723860829842053
+voltage,AoA 9 deg,0.0,CL,0.7098044590466489
+voltage,AoA 9 deg,400.0,CL,0.7105628797221667
+voltage,AoA 9 deg,800.0,CL,0.7129153701003691
+voltage,AoA 9 deg,1000.0,CL,0.7147750149574063
+voltage,AoA 9 deg,1200.0,CL,0.7171795490865118
+voltage,AoA 9 deg,1400.0,CL,0.7202410912151835
+voltage,AoA 9 deg,1600.0,CL,0.7240928760032317
+voltage,AoA 9 deg,1800.0,CL,0.7289183726516227
+voltage,AoA 12 deg,0.0,CL,0.9445036686286761
+voltage,AoA 12 deg,400.0,CL,0.9454760776569684
+voltage,AoA 12 deg,800.0,CL,0.9485067727227355
+voltage,AoA 12 deg,1000.0,CL,0.9509118794826148
+voltage,AoA 12 deg,1200.0,CL,0.9540196569774422
+voltage,AoA 12 deg,1400.0,CL,0.9579566659922931
+voltage,AoA 12 deg,1600.0,CL,0.9628748726359028
+voltage,AoA 12 deg,1800.0,CL,0.9690024480119708
+voltage,AoA 0 deg,0.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,400.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,800.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,1000.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,1200.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,1400.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,1600.0,camber_mid_pct,0.0
+voltage,AoA 0 deg,1800.0,camber_mid_pct,0.0
+voltage,AoA 3 deg,0.0,camber_mid_pct,1.1842057828865202
+voltage,AoA 3 deg,400.0,camber_mid_pct,1.1866383874784765
+voltage,AoA 3 deg,800.0,camber_mid_pct,1.1944535911119563
+voltage,AoA 3 deg,1000.0,camber_mid_pct,1.2008505187581393
+voltage,AoA 3 deg,1200.0,camber_mid_pct,1.209351132241803
+voltage,AoA 3 deg,1400.0,camber_mid_pct,1.2204996157918213
+voltage,AoA 3 deg,1600.0,camber_mid_pct,1.2350476064066769
+voltage,AoA 3 deg,1800.0,camber_mid_pct,1.2540798070043526
+voltage,AoA 6 deg,0.0,camber_mid_pct,2.1936664425342944
+voltage,AoA 6 deg,400.0,camber_mid_pct,2.1978387980941823
+voltage,AoA 6 deg,800.0,camber_mid_pct,2.2095183975402435
+voltage,AoA 6 deg,1000.0,camber_mid_pct,2.2170030346508076
+voltage,AoA 6 deg,1200.0,camber_mid_pct,2.227271168193573
+voltage,AoA 6 deg,1400.0,camber_mid_pct,2.2412734087039494
+voltage,AoA 6 deg,1600.0,camber_mid_pct,2.260210466986045
+voltage,AoA 6 deg,1800.0,camber_mid_pct,2.2826902927900643
+voltage,AoA 9 deg,0.0,camber_mid_pct,2.9556012890599024
+voltage,AoA 9 deg,400.0,camber_mid_pct,2.9605355060594922
+voltage,AoA 9 deg,800.0,camber_mid_pct,2.9756010176795873
+voltage,AoA 9 deg,1000.0,camber_mid_pct,2.9848979354672056
+voltage,AoA 9 deg,1200.0,camber_mid_pct,2.9950853443784777
+voltage,AoA 9 deg,1400.0,camber_mid_pct,3.0092658643122028
+voltage,AoA 9 deg,1600.0,camber_mid_pct,3.028500433723319
+voltage,AoA 9 deg,1800.0,camber_mid_pct,3.047392948237002
+voltage,AoA 12 deg,0.0,camber_mid_pct,3.554190187516827
+voltage,AoA 12 deg,400.0,camber_mid_pct,3.5587662609944775
+voltage,AoA 12 deg,800.0,camber_mid_pct,3.5736530333533847
+voltage,AoA 12 deg,1000.0,camber_mid_pct,3.5851007779880573
+voltage,AoA 12 deg,1200.0,camber_mid_pct,3.5975104671181555
+voltage,AoA 12 deg,1400.0,camber_mid_pct,3.6141399392508036
+voltage,AoA 12 deg,1600.0,camber_mid_pct,3.6358176953289454
+voltage,AoA 12 deg,1800.0,camber_mid_pct,3.661469839971798
+voltage,AoA 0 deg,0.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,400.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,800.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,1000.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,1200.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,1400.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,1600.0,camber_mean_pct,0.0
+voltage,AoA 0 deg,1800.0,camber_mean_pct,0.0
+voltage,AoA 3 deg,0.0,camber_mean_pct,0.604593086200147
+voltage,AoA 3 deg,400.0,camber_mean_pct,0.6057529506210995
+voltage,AoA 3 deg,800.0,camber_mean_pct,0.6095550447371204
+voltage,AoA 3 deg,1000.0,camber_mean_pct,0.6127429880850198
+voltage,AoA 3 deg,1200.0,camber_mean_pct,0.6170241695917311
+voltage,AoA 3 deg,1400.0,camber_mean_pct,0.622826187176139
+voltage,AoA 3 deg,1600.0,camber_mean_pct,0.630481793810035
+voltage,AoA 3 deg,1800.0,camber_mean_pct,0.6398498617100986
+voltage,AoA 6 deg,0.0,camber_mean_pct,1.127661233136563
+voltage,AoA 6 deg,400.0,camber_mean_pct,1.130182545076865
+voltage,AoA 6 deg,800.0,camber_mean_pct,1.1380808602418362
+voltage,AoA 6 deg,1000.0,camber_mean_pct,1.1443055732038645
+voltage,AoA 6 deg,1200.0,camber_mean_pct,1.1524113599587569
+voltage,AoA 6 deg,1400.0,camber_mean_pct,1.1630350047775617
+voltage,AoA 6 deg,1600.0,camber_mean_pct,1.177012899035859
+voltage,AoA 6 deg,1800.0,camber_mean_pct,1.1947692258018106
+voltage,AoA 9 deg,0.0,camber_mean_pct,1.56004445352631
+voltage,AoA 9 deg,400.0,camber_mean_pct,1.5638602601201084
+voltage,AoA 9 deg,800.0,camber_mean_pct,1.5757682950839826
+voltage,AoA 9 deg,1000.0,camber_mean_pct,1.5848362275343686
+voltage,AoA 9 deg,1200.0,camber_mean_pct,1.5962845403602373
+voltage,AoA 9 deg,1400.0,camber_mean_pct,1.611529693119453
+voltage,AoA 9 deg,1600.0,camber_mean_pct,1.6316299539973416
+voltage,AoA 9 deg,1800.0,camber_mean_pct,1.6566217439453967
+voltage,AoA 12 deg,0.0,camber_mean_pct,1.9261513376281136
+voltage,AoA 12 deg,400.0,camber_mean_pct,1.9309792308271068
+voltage,AoA 12 deg,800.0,camber_mean_pct,1.9462497418764466
+voltage,AoA 12 deg,1000.0,camber_mean_pct,1.9583845383801262
+voltage,AoA 12 deg,1200.0,camber_mean_pct,1.9738650121823118
+voltage,AoA 12 deg,1400.0,camber_mean_pct,1.993977153780735
+voltage,AoA 12 deg,1600.0,camber_mean_pct,2.0204032685873634
+voltage,AoA 12 deg,1800.0,camber_mean_pct,2.056735849668782
+voltage,AoA 0 deg,0.0,T_chord,0.11553633178245867
+voltage,AoA 0 deg,400.0,T_chord,0.11589311212989246
+voltage,AoA 0 deg,800.0,T_chord,0.11698775275570629
+voltage,AoA 0 deg,1000.0,T_chord,0.11785324514075456
+voltage,AoA 0 deg,1200.0,T_chord,0.11899847725337384
+voltage,AoA 0 deg,1400.0,T_chord,0.12049521117560719
+voltage,AoA 0 deg,1600.0,T_chord,0.12258779468408869
+voltage,AoA 0 deg,1800.0,T_chord,0.1252738130854944
+voltage,AoA 3 deg,0.0,T_chord,0.11607542449042695
+voltage,AoA 3 deg,400.0,T_chord,0.11643142302557125
+voltage,AoA 3 deg,800.0,T_chord,0.11753561796307091
+voltage,AoA 3 deg,1000.0,T_chord,0.11840060532055915
+voltage,AoA 3 deg,1200.0,T_chord,0.11955950872973053
+voltage,AoA 3 deg,1400.0,T_chord,0.1210447475164206
+voltage,AoA 3 deg,1600.0,T_chord,0.12316233081059076
+voltage,AoA 3 deg,1800.0,T_chord,0.12597356724938163
+voltage,AoA 6 deg,0.0,T_chord,0.1173768015293689
+voltage,AoA 6 deg,400.0,T_chord,0.11774894429749748
+voltage,AoA 6 deg,800.0,T_chord,0.11891066679530005
+voltage,AoA 6 deg,1000.0,T_chord,0.1198587163721251
+voltage,AoA 6 deg,1200.0,T_chord,0.12108798450604423
+voltage,AoA 6 deg,1400.0,T_chord,0.12265344101520145
+voltage,AoA 6 deg,1600.0,T_chord,0.12494139839008467
+voltage,AoA 6 deg,1800.0,T_chord,0.12794536232671075
+voltage,AoA 9 deg,0.0,T_chord,0.11945194882058431
+voltage,AoA 9 deg,400.0,T_chord,0.11985468751005843
+voltage,AoA 9 deg,800.0,T_chord,0.12113633608945124
+voltage,AoA 9 deg,1000.0,T_chord,0.12218860758031495
+voltage,AoA 9 deg,1200.0,T_chord,0.12354223988413907
+voltage,AoA 9 deg,1400.0,T_chord,0.1252341251194579
+voltage,AoA 9 deg,1600.0,T_chord,0.12770468153007655
+voltage,AoA 9 deg,1800.0,T_chord,0.13101981513759484
+voltage,AoA 12 deg,0.0,T_chord,0.12215695637744631
+voltage,AoA 12 deg,400.0,T_chord,0.12261216436884467
+voltage,AoA 12 deg,800.0,T_chord,0.12405659244297215
+voltage,AoA 12 deg,1000.0,T_chord,0.12519366975625223
+voltage,AoA 12 deg,1200.0,T_chord,0.12666885187079185
+voltage,AoA 12 deg,1400.0,T_chord,0.12852468595571834
+voltage,AoA 12 deg,1600.0,T_chord,0.1312704462821478
+voltage,AoA 12 deg,1800.0,T_chord,0.13491474995165606
+voltage,AoA 0 deg,0.0,T_span,0.43622368240885423
+voltage,AoA 0 deg,400.0,T_span,0.4364544664887135
+voltage,AoA 0 deg,800.0,T_span,0.4371567038561546
+voltage,AoA 0 deg,1000.0,T_span,0.43769325882925647
+voltage,AoA 0 deg,1200.0,T_span,0.4383590189944021
+voltage,AoA 0 deg,1400.0,T_span,0.4391626692209074
+voltage,AoA 0 deg,1600.0,T_span,0.440114745679749
+voltage,AoA 0 deg,1800.0,T_span,0.4412257932894974
+voltage,AoA 3 deg,0.0,T_span,0.4385734677408067
+voltage,AoA 3 deg,400.0,T_span,0.43880324280932115
+voltage,AoA 3 deg,800.0,T_span,0.4395035114528694
+voltage,AoA 3 deg,1000.0,T_span,0.44003963684187747
+voltage,AoA 3 deg,1200.0,T_span,0.44070560374701834
+voltage,AoA 3 deg,1400.0,T_span,0.4415127087693398
+voltage,AoA 3 deg,1600.0,T_span,0.4424710440261096
+voltage,AoA 3 deg,1800.0,T_span,0.4435904399673598
+voltage,AoA 6 deg,0.0,T_span,0.4444567053982953
+voltage,AoA 6 deg,400.0,T_span,0.4446872777988307
+voltage,AoA 6 deg,800.0,T_span,0.44538985611245596
+voltage,AoA 6 deg,1000.0,T_span,0.44592540645119266
+voltage,AoA 6 deg,1200.0,T_span,0.44659260650963584
+voltage,AoA 6 deg,1400.0,T_span,0.4474056242386459
+voltage,AoA 6 deg,1600.0,T_span,0.448378588203532
+voltage,AoA 6 deg,1800.0,T_span,0.4495240951434699
+voltage,AoA 9 deg,0.0,T_span,0.45218145996347636
+voltage,AoA 9 deg,400.0,T_span,0.4524175415260876
+voltage,AoA 9 deg,800.0,T_span,0.45313379356754147
+voltage,AoA 9 deg,1000.0,T_span,0.45367704279664983
+voltage,AoA 9 deg,1200.0,T_span,0.4543505375304472
+voltage,AoA 9 deg,1400.0,T_span,0.45517950798466184
+voltage,AoA 9 deg,1600.0,T_span,0.45618369348462884
+voltage,AoA 9 deg,1800.0,T_span,0.45736843995875265
+voltage,AoA 12 deg,0.0,T_span,0.4609023804594408
+voltage,AoA 12 deg,400.0,T_span,0.4611407126660306
+voltage,AoA 12 deg,800.0,T_span,0.461870108162795
+voltage,AoA 12 deg,1000.0,T_span,0.4624318221720749
+voltage,AoA 12 deg,1200.0,T_span,0.46313391716269664
+voltage,AoA 12 deg,1400.0,T_span,0.4639998278317902
+voltage,AoA 12 deg,1600.0,T_span,0.4650476081586346
+voltage,AoA 12 deg,1800.0,T_span,0.46629980630505713
+voltage,AoA 0 deg,0.0,T_chord_total,1.9456493007405866
+voltage,AoA 0 deg,400.0,T_chord_total,1.9246135322811206
+voltage,AoA 0 deg,800.0,T_chord_total,1.861752336657463
+voltage,AoA 0 deg,1000.0,T_chord_total,1.8148710614096002
+voltage,AoA 0 deg,1200.0,T_chord_total,1.7579142585485927
+voltage,AoA 0 deg,1400.0,T_chord_total,1.6911311287503812
+voltage,AoA 0 deg,1600.0,T_chord_total,1.6149633466591302
+voltage,AoA 0 deg,1800.0,T_chord_total,1.529690194216264
+voltage,AoA 3 deg,0.0,T_chord_total,1.946651418065418
+voltage,AoA 3 deg,400.0,T_chord_total,1.925628045728569
+voltage,AoA 3 deg,800.0,T_chord_total,1.86281498299206
+voltage,AoA 3 deg,1000.0,T_chord_total,1.8159678630423834
+voltage,AoA 3 deg,1200.0,T_chord_total,1.7590676757188168
+voltage,AoA 3 deg,1400.0,T_chord_total,1.6923359549811294
+voltage,AoA 3 deg,1600.0,T_chord_total,1.6162668306308265
+voltage,AoA 3 deg,1800.0,T_chord_total,1.5311886408088637
+voltage,AoA 6 deg,0.0,T_chord_total,1.949381781898977
+voltage,AoA 6 deg,400.0,T_chord_total,1.9284072800919891
+voltage,AoA 6 deg,800.0,T_chord_total,1.8657575815715468
+voltage,AoA 6 deg,1000.0,T_chord_total,1.819069612983332
+voltage,AoA 6 deg,1200.0,T_chord_total,1.7623517652975778
+voltage,AoA 6 deg,1400.0,T_chord_total,1.695849313732674
+voltage,AoA 6 deg,1600.0,T_chord_total,1.6201296509946443
+voltage,AoA 6 deg,1800.0,T_chord_total,1.535489745302622
+voltage,AoA 9 deg,0.0,T_chord_total,1.9537361465676675
+voltage,AoA 9 deg,400.0,T_chord_total,1.9328439169849725
+voltage,AoA 9 deg,800.0,T_chord_total,1.8704709742232306
+voltage,AoA 9 deg,1000.0,T_chord_total,1.8240110241233896
+voltage,AoA 9 deg,1200.0,T_chord_total,1.7675846080824869
+voltage,AoA 9 deg,1400.0,T_chord_total,1.7014352687990533
+voltage,AoA 9 deg,1600.0,T_chord_total,1.6261934227820276
+voltage,AoA 9 deg,1800.0,T_chord_total,1.5422227028288351
+voltage,AoA 12 deg,0.0,T_chord_total,1.959496400583481
+voltage,AoA 12 deg,400.0,T_chord_total,1.9387175026516388
+voltage,AoA 12 deg,800.0,T_chord_total,1.8767056856143713
+voltage,AoA 12 deg,1000.0,T_chord_total,1.8305073710412176
+voltage,AoA 12 deg,1200.0,T_chord_total,1.7744314788496436
+voltage,AoA 12 deg,1400.0,T_chord_total,1.7087381184413306
+voltage,AoA 12 deg,1600.0,T_chord_total,1.6341328120631466
+voltage,AoA 12 deg,1800.0,T_chord_total,1.5509633920583878
+voltage,AoA 0 deg,0.0,T_span_total,0.43622368240885423
+voltage,AoA 0 deg,400.0,T_span_total,0.4364544664887135
+voltage,AoA 0 deg,800.0,T_span_total,0.4371567038561546
+voltage,AoA 0 deg,1000.0,T_span_total,0.43769325882925647
+voltage,AoA 0 deg,1200.0,T_span_total,0.4383590189944021
+voltage,AoA 0 deg,1400.0,T_span_total,0.4391626692209074
+voltage,AoA 0 deg,1600.0,T_span_total,0.440114745679749
+voltage,AoA 0 deg,1800.0,T_span_total,0.4412257932894974
+voltage,AoA 3 deg,0.0,T_span_total,0.4385734677408067
+voltage,AoA 3 deg,400.0,T_span_total,0.43880324280932115
+voltage,AoA 3 deg,800.0,T_span_total,0.4395035114528694
+voltage,AoA 3 deg,1000.0,T_span_total,0.44003963684187747
+voltage,AoA 3 deg,1200.0,T_span_total,0.44070560374701834
+voltage,AoA 3 deg,1400.0,T_span_total,0.4415127087693398
+voltage,AoA 3 deg,1600.0,T_span_total,0.4424710440261096
+voltage,AoA 3 deg,1800.0,T_span_total,0.4435904399673598
+voltage,AoA 6 deg,0.0,T_span_total,0.4444567053982953
+voltage,AoA 6 deg,400.0,T_span_total,0.4446872777988307
+voltage,AoA 6 deg,800.0,T_span_total,0.44538985611245596
+voltage,AoA 6 deg,1000.0,T_span_total,0.44592540645119266
+voltage,AoA 6 deg,1200.0,T_span_total,0.44659260650963584
+voltage,AoA 6 deg,1400.0,T_span_total,0.4474056242386459
+voltage,AoA 6 deg,1600.0,T_span_total,0.448378588203532
+voltage,AoA 6 deg,1800.0,T_span_total,0.4495240951434699
+voltage,AoA 9 deg,0.0,T_span_total,0.45218145996347636
+voltage,AoA 9 deg,400.0,T_span_total,0.4524175415260876
+voltage,AoA 9 deg,800.0,T_span_total,0.45313379356754147
+voltage,AoA 9 deg,1000.0,T_span_total,0.45367704279664983
+voltage,AoA 9 deg,1200.0,T_span_total,0.4543505375304472
+voltage,AoA 9 deg,1400.0,T_span_total,0.45517950798466184
+voltage,AoA 9 deg,1600.0,T_span_total,0.45618369348462884
+voltage,AoA 9 deg,1800.0,T_span_total,0.45736843995875265
+voltage,AoA 12 deg,0.0,T_span_total,0.4609023804594408
+voltage,AoA 12 deg,400.0,T_span_total,0.4611407126660306
+voltage,AoA 12 deg,800.0,T_span_total,0.461870108162795
+voltage,AoA 12 deg,1000.0,T_span_total,0.4624318221720749
+voltage,AoA 12 deg,1200.0,T_span_total,0.46313391716269664
+voltage,AoA 12 deg,1400.0,T_span_total,0.4639998278317902
+voltage,AoA 12 deg,1600.0,T_span_total,0.4650476081586346
+voltage,AoA 12 deg,1800.0,T_span_total,0.46629980630505713
+voltage,AoA 0 deg,0.0,dea_force_mean_mN,32.02697695676724
+voltage,AoA 0 deg,400.0,dea_force_mean_mN,31.652607352646495
+voltage,AoA 0 deg,800.0,dea_force_mean_mN,30.533380218280747
+voltage,AoA 0 deg,1000.0,dea_force_mean_mN,29.6978117847048
+voltage,AoA 0 deg,1200.0,dea_force_mean_mN,28.681026172666332
+voltage,AoA 0 deg,1400.0,dea_force_mean_mN,27.486128557558548
+voltage,AoA 0 deg,1600.0,dea_force_mean_mN,26.11657215956323
+voltage,AoA 0 deg,1800.0,dea_force_mean_mN,24.577286669788467
+voltage,AoA 3 deg,0.0,dea_force_mean_mN,32.03507988756235
+voltage,AoA 3 deg,400.0,dea_force_mean_mN,31.660940897302467
+voltage,AoA 3 deg,800.0,dea_force_mean_mN,30.54238888800731
+voltage,AoA 3 deg,1000.0,dea_force_mean_mN,29.707427010131926
+voltage,AoA 3 deg,1200.0,dea_force_mean_mN,28.691392922309014
+voltage,AoA 3 deg,1400.0,dea_force_mean_mN,27.497596130632406
+voltage,AoA 3 deg,1600.0,dea_force_mean_mN,26.12932874685413
+voltage,AoA 3 deg,1800.0,dea_force_mean_mN,24.591263787290938
+voltage,AoA 6 deg,0.0,dea_force_mean_mN,32.06008715646814
+voltage,AoA 6 deg,400.0,dea_force_mean_mN,31.686520876403605
+voltage,AoA 6 deg,800.0,dea_force_mean_mN,30.569821008584324
+voltage,AoA 6 deg,1000.0,dea_force_mean_mN,29.73619069069612
+voltage,AoA 6 deg,1200.0,dea_force_mean_mN,28.72211616385184
+voltage,AoA 6 deg,1400.0,dea_force_mean_mN,27.530927772555774
+voltage,AoA 6 deg,1600.0,dea_force_mean_mN,26.165794420579797
+voltage,AoA 6 deg,1800.0,dea_force_mean_mN,24.632026702078445
+voltage,AoA 9 deg,0.0,dea_force_mean_mN,32.099973460573956
+voltage,AoA 9 deg,400.0,dea_force_mean_mN,31.727311515811
+voltage,AoA 9 deg,800.0,dea_force_mean_mN,30.61335616734114
+voltage,AoA 9 deg,1000.0,dea_force_mean_mN,29.781892289503812
+voltage,AoA 9 deg,1200.0,dea_force_mean_mN,28.77074144347109
+voltage,AoA 9 deg,1400.0,dea_force_mean_mN,27.58352001439292
+voltage,AoA 9 deg,1600.0,dea_force_mean_mN,26.223552971909143
+voltage,AoA 9 deg,1800.0,dea_force_mean_mN,24.696050534596708
+voltage,AoA 12 deg,0.0,dea_force_mean_mN,32.15344027360561
+voltage,AoA 12 deg,400.0,dea_force_mean_mN,31.7818434199489
+voltage,AoA 12 deg,800.0,dea_force_mean_mN,30.67135913049949
+voltage,AoA 12 deg,1000.0,dea_force_mean_mN,29.842989772486902
+voltage,AoA 12 deg,1200.0,dea_force_mean_mN,28.835845972129906
+voltage,AoA 12 deg,1400.0,dea_force_mean_mN,27.65373506849822
+voltage,AoA 12 deg,1600.0,dea_force_mean_mN,26.300091401167478
+voltage,AoA 12 deg,1800.0,dea_force_mean_mN,24.78085123686781
+voltage,AoA 0 deg,0.0,dea_strain_pct,-4.307570886774825
+voltage,AoA 0 deg,400.0,dea_strain_pct,-4.289748871979038
+voltage,AoA 0 deg,800.0,dea_strain_pct,-4.235634518159948
+voltage,AoA 0 deg,1000.0,dea_strain_pct,-4.194403862110308
+voltage,AoA 0 deg,1200.0,dea_strain_pct,-4.143260338452681
+voltage,AoA 0 deg,1400.0,dea_strain_pct,-4.081685312278305
+voltage,AoA 0 deg,1600.0,dea_strain_pct,-4.009097313344379
+voltage,AoA 0 deg,1800.0,dea_strain_pct,-3.9246668242762794
+voltage,AoA 3 deg,0.0,dea_strain_pct,-4.306327794552511
+voltage,AoA 3 deg,400.0,dea_strain_pct,-4.288469710814735
+voltage,AoA 3 deg,800.0,dea_strain_pct,-4.234249458818217
+voltage,AoA 3 deg,1000.0,dea_strain_pct,-4.1929236979549085
+voltage,AoA 3 deg,1200.0,dea_strain_pct,-4.141662067911877
+voltage,AoA 3 deg,1400.0,dea_strain_pct,-4.079913955084469
+voltage,AoA 3 deg,1600.0,dea_strain_pct,-4.007122900617455
+voltage,AoA 3 deg,1800.0,dea_strain_pct,-3.922498911850947
+voltage,AoA 6 deg,0.0,dea_strain_pct,-4.302487086359397
+voltage,AoA 6 deg,400.0,dea_strain_pct,-4.284539110428698
+voltage,AoA 6 deg,800.0,dea_strain_pct,-4.230027869838349
+voltage,AoA 6 deg,1000.0,dea_strain_pct,-4.188492143585321
+voltage,AoA 6 deg,1200.0,dea_strain_pct,-4.1369219816729474
+voltage,AoA 6 deg,1400.0,dea_strain_pct,-4.074762449048297
+voltage,AoA 6 deg,1600.0,dea_strain_pct,-4.001476130803772
+voltage,AoA 6 deg,1800.0,dea_strain_pct,-3.9161724320515012
+voltage,AoA 9 deg,0.0,dea_strain_pct,-4.296355641589988
+voltage,AoA 9 deg,400.0,dea_strain_pct,-4.278265584094331
+voltage,AoA 9 deg,800.0,dea_strain_pct,-4.22332231008996
+voltage,AoA 9 deg,1000.0,dea_strain_pct,-4.181444977350235
+voltage,AoA 9 deg,1200.0,dea_strain_pct,-4.129413504821933
+voltage,AoA 9 deg,1400.0,dea_strain_pct,-4.066627308409176
+voltage,AoA 9 deg,1600.0,dea_strain_pct,-3.9925241603213424
+voltage,AoA 9 deg,1800.0,dea_strain_pct,-3.906226622337261
+voltage,AoA 12 deg,0.0,dea_strain_pct,-4.288128997443241
+voltage,AoA 12 deg,400.0,dea_strain_pct,-4.269870946879828
+voltage,AoA 12 deg,800.0,dea_strain_pct,-4.2143801582433476
+voltage,AoA 12 deg,1000.0,dea_strain_pct,-4.172015240952964
+voltage,AoA 12 deg,1200.0,dea_strain_pct,-4.119351324650422
+voltage,AoA 12 deg,1400.0,dea_strain_pct,-4.055756886414031
+voltage,AoA 12 deg,1600.0,dea_strain_pct,-3.9806517386374973
+voltage,AoA 12 deg,1800.0,dea_strain_pct,-3.893042679057601
+voltage,AoA 0 deg,0.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,400.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,800.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,1000.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,1200.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,1400.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,1600.0,te_z_mid_mm,0.0
+voltage,AoA 0 deg,1800.0,te_z_mid_mm,0.0
+voltage,AoA 3 deg,0.0,te_z_mid_mm,0.013762140721251735
+voltage,AoA 3 deg,400.0,te_z_mid_mm,0.013889578310841439
+voltage,AoA 3 deg,800.0,te_z_mid_mm,0.014298677803118972
+voltage,AoA 3 deg,1000.0,te_z_mid_mm,0.01462163421083654
+voltage,AoA 3 deg,1200.0,te_z_mid_mm,0.015036068675624318
+voltage,AoA 3 deg,1400.0,te_z_mid_mm,0.015560521149300248
+voltage,AoA 3 deg,1600.0,te_z_mid_mm,0.016216820293561234
+voltage,AoA 3 deg,1800.0,te_z_mid_mm,0.017036094395101238
+voltage,AoA 6 deg,0.0,te_z_mid_mm,0.02751473257089277
+voltage,AoA 6 deg,400.0,te_z_mid_mm,0.02777128579393351
+voltage,AoA 6 deg,800.0,te_z_mid_mm,0.028576444803255937
+voltage,AoA 6 deg,1000.0,te_z_mid_mm,0.02921563105494988
+voltage,AoA 6 deg,1200.0,te_z_mid_mm,0.030036878338941427
+voltage,AoA 6 deg,1400.0,te_z_mid_mm,0.03107487496545998
+voltage,AoA 6 deg,1600.0,te_z_mid_mm,0.03236953986039117
+voltage,AoA 6 deg,1800.0,te_z_mid_mm,0.03397694045000775
+voltage,AoA 9 deg,0.0,te_z_mid_mm,0.04119950168979272
+voltage,AoA 9 deg,400.0,te_z_mid_mm,0.04158032514474525
+voltage,AoA 9 deg,800.0,te_z_mid_mm,0.042768409069298255
+voltage,AoA 9 deg,1000.0,te_z_mid_mm,0.04370623854434134
+voltage,AoA 9 deg,1200.0,te_z_mid_mm,0.044920956039888195
+voltage,AoA 9 deg,1400.0,te_z_mid_mm,0.046445952754132616
+voltage,AoA 9 deg,1600.0,te_z_mid_mm,0.04834719007357858
+voltage,AoA 9 deg,1800.0,te_z_mid_mm,0.05069944226358177
+voltage,AoA 12 deg,0.0,te_z_mid_mm,0.054752294761333406
+voltage,AoA 12 deg,400.0,te_z_mid_mm,0.055248936694019986
+voltage,AoA 12 deg,800.0,te_z_mid_mm,0.05680524094461903
+voltage,AoA 12 deg,1000.0,te_z_mid_mm,0.05803489467706931
+voltage,AoA 12 deg,1200.0,te_z_mid_mm,0.05961202719340215
+voltage,AoA 12 deg,1400.0,te_z_mid_mm,0.06159517489381657
+voltage,AoA 12 deg,1600.0,te_z_mid_mm,0.06406159411542353
+voltage,AoA 12 deg,1800.0,te_z_mid_mm,0.0670965206414764
+voltage,AoA 0 deg,0.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,400.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,800.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,1000.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,1200.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,1400.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,1600.0,alpha_eff_75_deg,0.0
+voltage,AoA 0 deg,1800.0,alpha_eff_75_deg,0.0
+voltage,AoA 3 deg,0.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,400.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,800.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,1000.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,1200.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,1400.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,1600.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 3 deg,1800.0,alpha_eff_75_deg,3.0000000000000004
+voltage,AoA 6 deg,0.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,400.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,800.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,1000.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,1200.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,1400.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,1600.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 6 deg,1800.0,alpha_eff_75_deg,6.000000000000001
+voltage,AoA 9 deg,0.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,400.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,800.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,1000.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,1200.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,1400.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,1600.0,alpha_eff_75_deg,9.0
+voltage,AoA 9 deg,1800.0,alpha_eff_75_deg,9.0
+voltage,AoA 12 deg,0.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,400.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,800.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,1000.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,1200.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,1400.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,1600.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 12 deg,1800.0,alpha_eff_75_deg,12.000000000000002
+voltage,AoA 0 deg,0.0,lam_mem_max,1.0838834243297493
+voltage,AoA 0 deg,400.0,lam_mem_max,1.0837010361157586
+voltage,AoA 0 deg,800.0,lam_mem_max,1.083147359165004
+voltage,AoA 0 deg,1000.0,lam_mem_max,1.0827231677020164
+voltage,AoA 0 deg,1200.0,lam_mem_max,1.0821978241611845
+voltage,AoA 0 deg,1400.0,lam_mem_max,1.0815686551336376
+voltage,AoA 0 deg,1600.0,lam_mem_max,1.0808351790410604
+voltage,AoA 0 deg,1800.0,lam_mem_max,1.079989813872473
+voltage,AoA 3 deg,0.0,lam_mem_max,1.0839098306720718
+voltage,AoA 3 deg,400.0,lam_mem_max,1.0837275440347516
+voltage,AoA 3 deg,800.0,lam_mem_max,1.0831725446592961
+voltage,AoA 3 deg,1000.0,lam_mem_max,1.0827487104314892
+voltage,AoA 3 deg,1200.0,lam_mem_max,1.0822238885209081
+voltage,AoA 3 deg,1400.0,lam_mem_max,1.0815950855611671
+voltage,AoA 3 deg,1600.0,lam_mem_max,1.0808631095447354
+voltage,AoA 3 deg,1800.0,lam_mem_max,1.0800213446465752
+voltage,AoA 6 deg,0.0,lam_mem_max,1.083977441428326
+voltage,AoA 6 deg,400.0,lam_mem_max,1.0837943098906013
+voltage,AoA 6 deg,800.0,lam_mem_max,1.083238952850073
+voltage,AoA 6 deg,1000.0,lam_mem_max,1.082817065626475
+voltage,AoA 6 deg,1200.0,lam_mem_max,1.0822948979360443
+voltage,AoA 6 deg,1400.0,lam_mem_max,1.0816688653887347
+voltage,AoA 6 deg,1600.0,lam_mem_max,1.0809427807417318
+voltage,AoA 6 deg,1800.0,lam_mem_max,1.0801070380439401
+voltage,AoA 9 deg,0.0,lam_mem_max,1.0840733966343041
+voltage,AoA 9 deg,400.0,lam_mem_max,1.0838910484757083
+voltage,AoA 9 deg,800.0,lam_mem_max,1.0833389317566695
+voltage,AoA 9 deg,1000.0,lam_mem_max,1.082919454304445
+voltage,AoA 9 deg,1200.0,lam_mem_max,1.0824011579336927
+voltage,AoA 9 deg,1400.0,lam_mem_max,1.0817805045673703
+voltage,AoA 9 deg,1600.0,lam_mem_max,1.0810605488281553
+voltage,AoA 9 deg,1800.0,lam_mem_max,1.0802300146821007
+voltage,AoA 12 deg,0.0,lam_mem_max,1.0841926184673376
+voltage,AoA 12 deg,400.0,lam_mem_max,1.0840116110863656
+voltage,AoA 12 deg,800.0,lam_mem_max,1.0834643803425121
+voltage,AoA 12 deg,1000.0,lam_mem_max,1.083049382449975
+voltage,AoA 12 deg,1200.0,lam_mem_max,1.0825363073356669
+voltage,AoA 12 deg,1400.0,lam_mem_max,1.0819215582210258
+voltage,AoA 12 deg,1600.0,lam_mem_max,1.081208293352945
+voltage,AoA 12 deg,1800.0,lam_mem_max,1.0803889555477897
+aoa,"AoA 0 deg, 0 V",-8.0,L_mN,-8.526636469089189
+aoa,"AoA 0 deg, 0 V",-6.0,L_mN,-6.402831481999641
+aoa,"AoA 0 deg, 0 V",-4.0,L_mN,-4.27290938027335
+aoa,"AoA 0 deg, 0 V",-2.0,L_mN,-2.138124079670856
+aoa,"AoA 0 deg, 0 V",0.0,L_mN,4.2943949760648574e-07
+aoa,"AoA 0 deg, 0 V",2.0,L_mN,2.1381401544216954
+aoa,"AoA 0 deg, 0 V",4.0,L_mN,4.272923505497368
+aoa,"AoA 0 deg, 0 V",6.0,L_mN,6.4027965794175135
+aoa,"AoA 0 deg, 0 V",8.0,L_mN,8.526606624405387
+aoa,"AoA 0 deg, 0 V",10.0,L_mN,10.644593043688962
+aoa,"AoA 0 deg, 0 V",12.0,L_mN,12.756116064935581
+aoa,"AoA 0 deg, 1600 V",-8.0,L_mN,-8.699982948930026
+aoa,"AoA 0 deg, 1600 V",-6.0,L_mN,-6.535238466474847
+aoa,"AoA 0 deg, 1600 V",-4.0,L_mN,-4.362619195286696
+aoa,"AoA 0 deg, 1600 V",-2.0,L_mN,-2.183301986834138
+aoa,"AoA 0 deg, 1600 V",0.0,L_mN,-8.667627683811239e-06
+aoa,"AoA 0 deg, 1600 V",2.0,L_mN,2.1832432159438753
+aoa,"AoA 0 deg, 1600 V",4.0,L_mN,4.3626159000926545
+aoa,"AoA 0 deg, 1600 V",6.0,L_mN,6.53524442361906
+aoa,"AoA 0 deg, 1600 V",8.0,L_mN,8.70001101557339
+aoa,"AoA 0 deg, 1600 V",10.0,L_mN,10.85645381017228
+aoa,"AoA 0 deg, 1600 V",12.0,L_mN,13.004236159413265
+aoa,"AoA 0 deg, 0 V",-8.0,CL,-0.631339643229335
+aoa,"AoA 0 deg, 0 V",-6.0,CL,-0.47408627753248295
+aoa,"AoA 0 deg, 0 V",-4.0,CL,-0.31637998095410985
+aoa,"AoA 0 deg, 0 V",-2.0,CL,-0.15831359745815954
+aoa,"AoA 0 deg, 0 V",0.0,CL,3.1797084370881446e-08
+aoa,"AoA 0 deg, 0 V",2.0,CL,0.15831478768451626
+aoa,"AoA 0 deg, 0 V",4.0,CL,0.3163810268312179
+aoa,"AoA 0 deg, 0 V",6.0,CL,0.4740836932328206
+aoa,"AoA 0 deg, 0 V",8.0,CL,0.6313374334327649
+aoa,"AoA 0 deg, 0 V",10.0,CL,0.7881599736175824
+aoa,"AoA 0 deg, 0 V",12.0,CL,0.9445039429819485
+aoa,"AoA 0 deg, 1600 V",-8.0,CL,-0.6441747752458716
+aoa,"AoA 0 deg, 1600 V",-6.0,CL,-0.48389011737515636
+aoa,"AoA 0 deg, 1600 V",-4.0,CL,-0.32302238476832396
+aoa,"AoA 0 deg, 1600 V",-2.0,CL,-0.16165871530078305
+aoa,"AoA 0 deg, 1600 V",0.0,CL,-6.41779087144152e-07
+aoa,"AoA 0 deg, 1600 V",2.0,CL,0.16165436371466518
+aoa,"AoA 0 deg, 1600 V",4.0,CL,0.32302214078153757
+aoa,"AoA 0 deg, 1600 V",6.0,CL,0.4838905584613121
+aoa,"AoA 0 deg, 1600 V",8.0,CL,0.6441768533905976
+aoa,"AoA 0 deg, 1600 V",10.0,CL,0.8038468275383241
+aoa,"AoA 0 deg, 1600 V",12.0,CL,0.9628755544014634
+aoa,"AoA 0 deg, 0 V",-8.0,camber_mid_pct,-2.720690794567334
+aoa,"AoA 0 deg, 0 V",-6.0,camber_mid_pct,-2.1936758994684826
+aoa,"AoA 0 deg, 0 V",-4.0,camber_mid_pct,-1.5429994528175142
+aoa,"AoA 0 deg, 0 V",-2.0,camber_mid_pct,-0.8042942906054604
+aoa,"AoA 0 deg, 0 V",0.0,camber_mid_pct,9.197181136656818e-06
+aoa,"AoA 0 deg, 0 V",2.0,camber_mid_pct,0.8043088910447638
+aoa,"AoA 0 deg, 0 V",4.0,camber_mid_pct,1.5430285895096116
+aoa,"AoA 0 deg, 0 V",6.0,camber_mid_pct,2.193653694955475
+aoa,"AoA 0 deg, 0 V",8.0,camber_mid_pct,2.720663563297241
+aoa,"AoA 0 deg, 0 V",10.0,camber_mid_pct,3.1734963164056116
+aoa,"AoA 0 deg, 0 V",12.0,camber_mid_pct,3.5541901260084607
+aoa,"AoA 0 deg, 1600 V",-8.0,camber_mid_pct,-2.7937279729299074
+aoa,"AoA 0 deg, 1600 V",-6.0,camber_mid_pct,-2.26022528682064
+aoa,"AoA 0 deg, 1600 V",-4.0,camber_mid_pct,-1.6108100112870463
+aoa,"AoA 0 deg, 1600 V",-2.0,camber_mid_pct,-0.8376619973882279
+aoa,"AoA 0 deg, 1600 V",0.0,camber_mid_pct,-1.0149485348264936e-05
+aoa,"AoA 0 deg, 1600 V",2.0,camber_mid_pct,0.8376081571362657
+aoa,"AoA 0 deg, 1600 V",4.0,camber_mid_pct,1.6108155490972245
+aoa,"AoA 0 deg, 1600 V",6.0,camber_mid_pct,2.2602102523221945
+aoa,"AoA 0 deg, 1600 V",8.0,camber_mid_pct,2.793772472267056
+aoa,"AoA 0 deg, 1600 V",10.0,camber_mid_pct,3.243210331633406
+aoa,"AoA 0 deg, 1600 V",12.0,camber_mid_pct,3.6358230489042707
+aoa,"AoA 0 deg, 0 V",-8.0,camber_mean_pct,-1.4240036089741237
+aoa,"AoA 0 deg, 0 V",-6.0,camber_mean_pct,-1.1276712979367916
+aoa,"AoA 0 deg, 0 V",-4.0,camber_mean_pct,-0.7890092807348577
+aoa,"AoA 0 deg, 0 V",-2.0,camber_mean_pct,-0.41026428744957033
+aoa,"AoA 0 deg, 0 V",0.0,camber_mean_pct,5.561637693511868e-06
+aoa,"AoA 0 deg, 0 V",2.0,camber_mean_pct,0.41027134133312676
+aoa,"AoA 0 deg, 0 V",4.0,camber_mean_pct,0.7890206636760729
+aoa,"AoA 0 deg, 0 V",6.0,camber_mean_pct,1.1276559493740652
+aoa,"AoA 0 deg, 0 V",8.0,camber_mean_pct,1.423995417176566
+aoa,"AoA 0 deg, 0 V",10.0,camber_mean_pct,1.6888613559203476
+aoa,"AoA 0 deg, 0 V",12.0,camber_mean_pct,1.9261520355278166
+aoa,"AoA 0 deg, 1600 V",-8.0,camber_mean_pct,-1.4884259187747888
+aoa,"AoA 0 deg, 1600 V",-6.0,camber_mean_pct,-1.1770206568732986
+aoa,"AoA 0 deg, 1600 V",-4.0,camber_mean_pct,-0.8241837754539778
+aoa,"AoA 0 deg, 1600 V",-2.0,camber_mean_pct,-0.4268848915597306
+aoa,"AoA 0 deg, 1600 V",0.0,camber_mean_pct,-5.417766172534198e-06
+aoa,"AoA 0 deg, 1600 V",2.0,camber_mean_pct,0.4268564108440845
+aoa,"AoA 0 deg, 1600 V",4.0,camber_mean_pct,0.8241846103967035
+aoa,"AoA 0 deg, 1600 V",6.0,camber_mean_pct,1.1770120047977182
+aoa,"AoA 0 deg, 1600 V",8.0,camber_mean_pct,1.4884472425092135
+aoa,"AoA 0 deg, 1600 V",10.0,camber_mean_pct,1.7671714407922996
+aoa,"AoA 0 deg, 1600 V",12.0,camber_mean_pct,2.0204013183560643
+aoa,"AoA 0 deg, 0 V",-8.0,T_chord,0.11869557773960716
+aoa,"AoA 0 deg, 0 V",-6.0,T_chord,0.11737688284427011
+aoa,"AoA 0 deg, 0 V",-4.0,T_chord,0.11644587839702494
+aoa,"AoA 0 deg, 0 V",-2.0,T_chord,0.1157867418387047
+aoa,"AoA 0 deg, 0 V",0.0,T_chord,0.11553633576388336
+aoa,"AoA 0 deg, 0 V",2.0,T_chord,0.11578679577277572
+aoa,"AoA 0 deg, 0 V",4.0,T_chord,0.11644592980180934
+aoa,"AoA 0 deg, 0 V",6.0,T_chord,0.11737673057714237
+aoa,"AoA 0 deg, 0 V",8.0,T_chord,0.11869559058682892
+aoa,"AoA 0 deg, 0 V",10.0,T_chord,0.12026634652295183
+aoa,"AoA 0 deg, 0 V",12.0,T_chord,0.12215692038761983
+aoa,"AoA 0 deg, 1600 V",-8.0,T_chord,0.12671149022356754
+aoa,"AoA 0 deg, 1600 V",-6.0,T_chord,0.1249414390165675
+aoa,"AoA 0 deg, 1600 V",-4.0,T_chord,0.123615328777443
+aoa,"AoA 0 deg, 1600 V",-2.0,T_chord,0.12284302902492118
+aoa,"AoA 0 deg, 1600 V",0.0,T_chord,0.12258778786043444
+aoa,"AoA 0 deg, 1600 V",2.0,T_chord,0.12284301044682391
+aoa,"AoA 0 deg, 1600 V",4.0,T_chord,0.12361527574472908
+aoa,"AoA 0 deg, 1600 V",6.0,T_chord,0.12494135211253621
+aoa,"AoA 0 deg, 1600 V",8.0,T_chord,0.12671169587766679
+aoa,"AoA 0 deg, 1600 V",10.0,T_chord,0.12881768328447793
+aoa,"AoA 0 deg, 1600 V",12.0,T_chord,0.131270428993929
+aoa,"AoA 0 deg, 0 V",-8.0,T_span,0.44945974137396644
+aoa,"AoA 0 deg, 0 V",-6.0,T_span,0.44445691855873376
+aoa,"AoA 0 deg, 0 V",-4.0,T_span,0.4402337158498191
+aoa,"AoA 0 deg, 0 V",-2.0,T_span,0.4373040035286905
+aoa,"AoA 0 deg, 0 V",0.0,T_span,0.43622369190752563
+aoa,"AoA 0 deg, 0 V",2.0,T_span,0.43730409405039883
+aoa,"AoA 0 deg, 0 V",4.0,T_span,0.44023392200351935
+aoa,"AoA 0 deg, 0 V",6.0,T_span,0.4444565728907533
+aoa,"AoA 0 deg, 0 V",8.0,T_span,0.4494596085372673
+aoa,"AoA 0 deg, 0 V",10.0,T_span,0.4550128973633054
+aoa,"AoA 0 deg, 0 V",12.0,T_span,0.46090232579199997
+aoa,"AoA 0 deg, 1600 V",-8.0,T_span,0.4534315102868521
+aoa,"AoA 0 deg, 1600 V",-6.0,T_span,0.44837865466194093
+aoa,"AoA 0 deg, 1600 V",-4.0,T_span,0.4441458044431925
+aoa,"AoA 0 deg, 1600 V",-2.0,T_span,0.44119443712602635
+aoa,"AoA 0 deg, 1600 V",0.0,T_span,0.44011474393177935
+aoa,"AoA 0 deg, 1600 V",2.0,T_span,0.44119428684713047
+aoa,"AoA 0 deg, 1600 V",4.0,T_span,0.44414579950728644
+aoa,"AoA 0 deg, 1600 V",6.0,T_span,0.44837853586763216
+aoa,"AoA 0 deg, 1600 V",8.0,T_span,0.45343188483986574
+aoa,"AoA 0 deg, 1600 V",10.0,T_span,0.45904491741182346
+aoa,"AoA 0 deg, 1600 V",12.0,T_span,0.46504759332011303
+aoa,"AoA 0 deg, 0 V",-8.0,T_chord_total,1.9521250638896075
+aoa,"AoA 0 deg, 0 V",-6.0,T_chord_total,1.9493827722113717
+aoa,"AoA 0 deg, 0 V",-4.0,T_chord_total,1.9473889593061813
+aoa,"AoA 0 deg, 0 V",-2.0,T_chord_total,1.9461030857311024
+aoa,"AoA 0 deg, 0 V",0.0,T_chord_total,1.94564951974292
+aoa,"AoA 0 deg, 0 V",2.0,T_chord_total,1.9461041607818035
+aoa,"AoA 0 deg, 0 V",4.0,T_chord_total,1.9473899337051614
+aoa,"AoA 0 deg, 0 V",6.0,T_chord_total,1.9493809760281118
+aoa,"AoA 0 deg, 0 V",8.0,T_chord_total,1.9521257250268413
+aoa,"AoA 0 deg, 0 V",10.0,T_chord_total,1.95549499952952
+aoa,"AoA 0 deg, 0 V",12.0,T_chord_total,1.959495389825051
+aoa,"AoA 0 deg, 1600 V",-8.0,T_chord_total,1.6239653829629699
+aoa,"AoA 0 deg, 1600 V",-6.0,T_chord_total,1.6201298650921445
+aoa,"AoA 0 deg, 1600 V",-4.0,T_chord_total,1.6172755333967963
+aoa,"AoA 0 deg, 1600 V",-2.0,T_chord_total,1.6155441237611063
+aoa,"AoA 0 deg, 1600 V",0.0,T_chord_total,1.6149632127296463
+aoa,"AoA 0 deg, 1600 V",2.0,T_chord_total,1.6155443323401804
+aoa,"AoA 0 deg, 1600 V",4.0,T_chord_total,1.6172749339150876
+aoa,"AoA 0 deg, 1600 V",6.0,T_chord_total,1.6201291558315978
+aoa,"AoA 0 deg, 1600 V",8.0,T_chord_total,1.623966796050768
+aoa,"AoA 0 deg, 1600 V",10.0,T_chord_total,1.6286477359116465
+aoa,"AoA 0 deg, 1600 V",12.0,T_chord_total,1.634133178606393
+aoa,"AoA 0 deg, 0 V",-8.0,T_span_total,0.44945974137396644
+aoa,"AoA 0 deg, 0 V",-6.0,T_span_total,0.44445691855873376
+aoa,"AoA 0 deg, 0 V",-4.0,T_span_total,0.4402337158498191
+aoa,"AoA 0 deg, 0 V",-2.0,T_span_total,0.4373040035286905
+aoa,"AoA 0 deg, 0 V",0.0,T_span_total,0.43622369190752563
+aoa,"AoA 0 deg, 0 V",2.0,T_span_total,0.43730409405039883
+aoa,"AoA 0 deg, 0 V",4.0,T_span_total,0.44023392200351935
+aoa,"AoA 0 deg, 0 V",6.0,T_span_total,0.4444565728907533
+aoa,"AoA 0 deg, 0 V",8.0,T_span_total,0.4494596085372673
+aoa,"AoA 0 deg, 0 V",10.0,T_span_total,0.4550128973633054
+aoa,"AoA 0 deg, 0 V",12.0,T_span_total,0.46090232579199997
+aoa,"AoA 0 deg, 1600 V",-8.0,T_span_total,0.4534315102868521
+aoa,"AoA 0 deg, 1600 V",-6.0,T_span_total,0.44837865466194093
+aoa,"AoA 0 deg, 1600 V",-4.0,T_span_total,0.4441458044431925
+aoa,"AoA 0 deg, 1600 V",-2.0,T_span_total,0.44119443712602635
+aoa,"AoA 0 deg, 1600 V",0.0,T_span_total,0.44011474393177935
+aoa,"AoA 0 deg, 1600 V",2.0,T_span_total,0.44119428684713047
+aoa,"AoA 0 deg, 1600 V",4.0,T_span_total,0.44414579950728644
+aoa,"AoA 0 deg, 1600 V",6.0,T_span_total,0.44837853586763216
+aoa,"AoA 0 deg, 1600 V",8.0,T_span_total,0.45343188483986574
+aoa,"AoA 0 deg, 1600 V",10.0,T_span_total,0.45904491741182346
+aoa,"AoA 0 deg, 1600 V",12.0,T_span_total,0.46504759332011303
+aoa,"AoA 0 deg, 0 V",-8.0,dea_force_mean_mN,32.08501600762501
+aoa,"AoA 0 deg, 0 V",-6.0,dea_force_mean_mN,32.06010306392428
+aoa,"AoA 0 deg, 0 V",-4.0,dea_force_mean_mN,32.04150391591023
+aoa,"AoA 0 deg, 0 V",-2.0,dea_force_mean_mN,32.03053601811696
+aoa,"AoA 0 deg, 0 V",0.0,dea_force_mean_mN,32.026980719633144
+aoa,"AoA 0 deg, 0 V",2.0,dea_force_mean_mN,32.030553887657994
+aoa,"AoA 0 deg, 0 V",4.0,dea_force_mean_mN,32.04152006830867
+aoa,"AoA 0 deg, 0 V",6.0,dea_force_mean_mN,32.06007429539197
+aoa,"AoA 0 deg, 0 V",8.0,dea_force_mean_mN,32.085027352700216
+aoa,"AoA 0 deg, 0 V",10.0,dea_force_mean_mN,32.11650142761495
+aoa,"AoA 0 deg, 0 V",12.0,dea_force_mean_mN,32.153423215155044
+aoa,"AoA 0 deg, 1600 V",-8.0,dea_force_mean_mN,26.201943122939543
+aoa,"AoA 0 deg, 1600 V",-6.0,dea_force_mean_mN,26.1657974563226
+aoa,"AoA 0 deg, 1600 V",-4.0,dea_force_mean_mN,26.139053580838684
+aoa,"AoA 0 deg, 1600 V",-2.0,dea_force_mean_mN,26.122269157883245
+aoa,"AoA 0 deg, 1600 V",0.0,dea_force_mean_mN,26.11656993521121
+aoa,"AoA 0 deg, 1600 V",2.0,dea_force_mean_mN,26.122273133133742
+aoa,"AoA 0 deg, 1600 V",4.0,dea_force_mean_mN,26.139044017981277
+aoa,"AoA 0 deg, 1600 V",6.0,dea_force_mean_mN,26.16578656508358
+aoa,"AoA 0 deg, 1600 V",8.0,dea_force_mean_mN,26.20196425302927
+aoa,"AoA 0 deg, 1600 V",10.0,dea_force_mean_mN,26.247025920975453
+aoa,"AoA 0 deg, 1600 V",12.0,dea_force_mean_mN,26.300098118218123
+aoa,"AoA 0 deg, 0 V",-8.0,dea_strain_pct,-4.2986555885738635
+aoa,"AoA 0 deg, 0 V",-6.0,dea_strain_pct,-4.30248463690609
+aoa,"AoA 0 deg, 0 V",-4.0,dea_strain_pct,-4.305341629513371
+aoa,"AoA 0 deg, 0 V",-2.0,dea_strain_pct,-4.307025034433842
+aoa,"AoA 0 deg, 0 V",0.0,dea_strain_pct,-4.3075703129406335
+aoa,"AoA 0 deg, 0 V",2.0,dea_strain_pct,-4.307022283125406
+aoa,"AoA 0 deg, 0 V",4.0,dea_strain_pct,-4.305339143996811
+aoa,"AoA 0 deg, 0 V",6.0,dea_strain_pct,-4.302489066153214
+aoa,"AoA 0 deg, 0 V",8.0,dea_strain_pct,-4.298653839096833
+aoa,"AoA 0 deg, 0 V",10.0,dea_strain_pct,-4.2938133930505495
+aoa,"AoA 0 deg, 0 V",12.0,dea_strain_pct,-4.288131626875991
+aoa,"AoA 0 deg, 1600 V",-8.0,dea_strain_pct,-3.9958744485398268
+aoa,"AoA 0 deg, 1600 V",-6.0,dea_strain_pct,-4.001475663818555
+aoa,"AoA 0 deg, 1600 V",-4.0,dea_strain_pct,-4.005617398082051
+aoa,"AoA 0 deg, 1600 V",-2.0,dea_strain_pct,-4.008215621333145
+aoa,"AoA 0 deg, 1600 V",0.0,dea_strain_pct,-4.009097652793736
+aoa,"AoA 0 deg, 1600 V",2.0,dea_strain_pct,-4.0082150037847875
+aoa,"AoA 0 deg, 1600 V",4.0,dea_strain_pct,-4.005618882235417
+aoa,"AoA 0 deg, 1600 V",6.0,dea_strain_pct,-4.001477356089955
+aoa,"AoA 0 deg, 1600 V",8.0,dea_strain_pct,-3.9958711708119266
+aoa,"AoA 0 deg, 1600 V",10.0,dea_strain_pct,-3.98888391686566
+aoa,"AoA 0 deg, 1600 V",12.0,dea_strain_pct,-3.9806506988069867
+aoa,"AoA 0 deg, 0 V",-8.0,te_z_mid_mm,-0.03664909030309687
+aoa,"AoA 0 deg, 0 V",-6.0,te_z_mid_mm,-0.027512011524777343
+aoa,"AoA 0 deg, 0 V",-4.0,te_z_mid_mm,-0.018343392730727142
+aoa,"AoA 0 deg, 0 V",-2.0,te_z_mid_mm,-0.009177635525313903
+aoa,"AoA 0 deg, 0 V",0.0,te_z_mid_mm,4.857240450923918e-06
+aoa,"AoA 0 deg, 0 V",2.0,te_z_mid_mm,0.009172608840298089
+aoa,"AoA 0 deg, 0 V",4.0,te_z_mid_mm,0.018351570439799635
+aoa,"AoA 0 deg, 0 V",6.0,te_z_mid_mm,0.02751830014976907
+aoa,"AoA 0 deg, 0 V",8.0,te_z_mid_mm,0.03665330698216305
+aoa,"AoA 0 deg, 0 V",10.0,te_z_mid_mm,0.04573837457315331
+aoa,"AoA 0 deg, 0 V",12.0,te_z_mid_mm,0.05474941907029977
+aoa,"AoA 0 deg, 1600 V",-8.0,te_z_mid_mm,-0.04304440476586308
+aoa,"AoA 0 deg, 1600 V",-6.0,te_z_mid_mm,-0.032374553033854746
+aoa,"AoA 0 deg, 1600 V",-4.0,te_z_mid_mm,-0.021613466289229572
+aoa,"AoA 0 deg, 1600 V",-2.0,te_z_mid_mm,-0.010812303367586427
+aoa,"AoA 0 deg, 1600 V",0.0,te_z_mid_mm,4.618709946852016e-06
+aoa,"AoA 0 deg, 1600 V",2.0,te_z_mid_mm,0.010818185803607551
+aoa,"AoA 0 deg, 1600 V",4.0,te_z_mid_mm,0.02161727274971281
+aoa,"AoA 0 deg, 1600 V",6.0,te_z_mid_mm,0.03236694672354841
+aoa,"AoA 0 deg, 1600 V",8.0,te_z_mid_mm,0.04304921050294923
+aoa,"AoA 0 deg, 1600 V",10.0,te_z_mid_mm,0.05361013927442397
+aoa,"AoA 0 deg, 1600 V",12.0,te_z_mid_mm,0.06405989771321108
+aoa,"AoA 0 deg, 0 V",-8.0,alpha_eff_75_deg,-8.0
+aoa,"AoA 0 deg, 0 V",-6.0,alpha_eff_75_deg,-6.000000000000001
+aoa,"AoA 0 deg, 0 V",-4.0,alpha_eff_75_deg,-4.0
+aoa,"AoA 0 deg, 0 V",-2.0,alpha_eff_75_deg,-2.0
+aoa,"AoA 0 deg, 0 V",0.0,alpha_eff_75_deg,0.0
+aoa,"AoA 0 deg, 0 V",2.0,alpha_eff_75_deg,2.0
+aoa,"AoA 0 deg, 0 V",4.0,alpha_eff_75_deg,4.0
+aoa,"AoA 0 deg, 0 V",6.0,alpha_eff_75_deg,6.000000000000001
+aoa,"AoA 0 deg, 0 V",8.0,alpha_eff_75_deg,8.0
+aoa,"AoA 0 deg, 0 V",10.0,alpha_eff_75_deg,10.0
+aoa,"AoA 0 deg, 0 V",12.0,alpha_eff_75_deg,12.000000000000002
+aoa,"AoA 0 deg, 1600 V",-8.0,alpha_eff_75_deg,-8.0
+aoa,"AoA 0 deg, 1600 V",-6.0,alpha_eff_75_deg,-6.000000000000001
+aoa,"AoA 0 deg, 1600 V",-4.0,alpha_eff_75_deg,-4.0
+aoa,"AoA 0 deg, 1600 V",-2.0,alpha_eff_75_deg,-2.0
+aoa,"AoA 0 deg, 1600 V",0.0,alpha_eff_75_deg,0.0
+aoa,"AoA 0 deg, 1600 V",2.0,alpha_eff_75_deg,2.0
+aoa,"AoA 0 deg, 1600 V",4.0,alpha_eff_75_deg,4.0
+aoa,"AoA 0 deg, 1600 V",6.0,alpha_eff_75_deg,6.000000000000001
+aoa,"AoA 0 deg, 1600 V",8.0,alpha_eff_75_deg,8.0
+aoa,"AoA 0 deg, 1600 V",10.0,alpha_eff_75_deg,10.0
+aoa,"AoA 0 deg, 1600 V",12.0,alpha_eff_75_deg,12.000000000000002
+aoa,"AoA 0 deg, 0 V",-8.0,lam_mem_max,1.084038578742995
+aoa,"AoA 0 deg, 0 V",-6.0,lam_mem_max,1.083977470245714
+aoa,"AoA 0 deg, 0 V",-4.0,lam_mem_max,1.0839287071350097
+aoa,"AoA 0 deg, 0 V",-2.0,lam_mem_max,1.0838955502409802
+aoa,"AoA 0 deg, 0 V",0.0,lam_mem_max,1.0838834265549862
+aoa,"AoA 0 deg, 0 V",2.0,lam_mem_max,1.0838955398088432
+aoa,"AoA 0 deg, 0 V",4.0,lam_mem_max,1.083928688853602
+aoa,"AoA 0 deg, 0 V",6.0,lam_mem_max,1.0839774376301818
+aoa,"AoA 0 deg, 0 V",8.0,lam_mem_max,1.0840385696369619
+aoa,"AoA 0 deg, 0 V",10.0,lam_mem_max,1.08411057198722
+aoa,"AoA 0 deg, 0 V",12.0,lam_mem_max,1.084192619116008
+aoa,"AoA 0 deg, 1600 V",-8.0,lam_mem_max,1.0810179051807214
+aoa,"AoA 0 deg, 1600 V",-6.0,lam_mem_max,1.0809427616131906
+aoa,"AoA 0 deg, 1600 V",-4.0,lam_mem_max,1.0808843889554807
+aoa,"AoA 0 deg, 1600 V",-2.0,lam_mem_max,1.080847748132388
+aoa,"AoA 0 deg, 1600 V",0.0,lam_mem_max,1.0808351824824534
+aoa,"AoA 0 deg, 1600 V",2.0,lam_mem_max,1.0808476796731088
+aoa,"AoA 0 deg, 1600 V",4.0,lam_mem_max,1.0808843998553683
+aoa,"AoA 0 deg, 1600 V",6.0,lam_mem_max,1.0809427903915394
+aoa,"AoA 0 deg, 1600 V",8.0,lam_mem_max,1.0810179341488282
+aoa,"AoA 0 deg, 1600 V",10.0,lam_mem_max,1.0811065207509207
+aoa,"AoA 0 deg, 1600 V",12.0,lam_mem_max,1.0812083004384332
+phase,"AoA 0 deg, 0 V",0.0,L_mN,0.728815106572837
+phase,"AoA 0 deg, 0 V",30.0,L_mN,3.6008618090611275
+phase,"AoA 0 deg, 0 V",60.0,L_mN,5.549505299084555
+phase,"AoA 0 deg, 0 V",90.0,L_mN,6.00877488794313
+phase,"AoA 0 deg, 0 V",120.0,L_mN,4.816766093026991
+phase,"AoA 0 deg, 0 V",150.0,L_mN,2.336896214276192
+phase,"AoA 0 deg, 0 V",180.0,L_mN,-0.7288163177237992
+phase,"AoA 0 deg, 0 V",210.0,L_mN,-3.600876598670073
+phase,"AoA 0 deg, 0 V",240.0,L_mN,-5.549505300425843
+phase,"AoA 0 deg, 0 V",270.0,L_mN,-6.0087748879429945
+phase,"AoA 0 deg, 0 V",300.0,L_mN,-4.816766093026987
+phase,"AoA 0 deg, 0 V",330.0,L_mN,-2.3368962142761993
+phase,"AoA 0 deg, 0 V",360.0,L_mN,0.7288163177238004
+phase,"AoA 0 deg, 1600 V",0.0,L_mN,0.8256696912912393
+phase,"AoA 0 deg, 1600 V",30.0,L_mN,3.748642449159774
+phase,"AoA 0 deg, 1600 V",60.0,L_mN,5.711202502379539
+phase,"AoA 0 deg, 1600 V",90.0,L_mN,6.143054114511636
+phase,"AoA 0 deg, 1600 V",120.0,L_mN,4.884625221260279
+phase,"AoA 0 deg, 1600 V",150.0,L_mN,2.318205210222903
+phase,"AoA 0 deg, 1600 V",180.0,L_mN,-0.8256446433981802
+phase,"AoA 0 deg, 1600 V",210.0,L_mN,-3.7486424503349784
+phase,"AoA 0 deg, 1600 V",240.0,L_mN,-5.711202502379934
+phase,"AoA 0 deg, 1600 V",270.0,L_mN,-6.143054114511637
+phase,"AoA 0 deg, 1600 V",300.0,L_mN,-4.884625221260279
+phase,"AoA 0 deg, 1600 V",330.0,L_mN,-2.3182052102229034
+phase,"AoA 0 deg, 1600 V",360.0,L_mN,0.8256446433981809
+phase,"AoA 6 deg, 0 V",0.0,L_mN,7.10627535467821
+phase,"AoA 6 deg, 0 V",30.0,L_mN,9.97653585973726
+phase,"AoA 6 deg, 0 V",60.0,L_mN,11.962760606981764
+phase,"AoA 6 deg, 0 V",90.0,L_mN,12.4558085660944
+phase,"AoA 6 deg, 0 V",120.0,L_mN,11.26189633941273
+phase,"AoA 6 deg, 0 V",150.0,L_mN,8.756233154183933
+phase,"AoA 6 deg, 0 V",180.0,L_mN,5.677121099285231
+phase,"AoA 6 deg, 0 V",210.0,L_mN,2.8236068789650854
+phase,"AoA 6 deg, 0 V",240.0,L_mN,0.9167059769560435
+phase,"AoA 6 deg, 0 V",270.0,L_mN,0.48516862131538163
+phase,"AoA 6 deg, 0 V",300.0,L_mN,1.660749716847701
+phase,"AoA 6 deg, 0 V",330.0,L_mN,4.088166102696001
+phase,"AoA 6 deg, 0 V",360.0,L_mN,7.106268128943496
+phase,"AoA 6 deg, 1600 V",0.0,L_mN,7.323411587590795
+phase,"AoA 6 deg, 1600 V",30.0,L_mN,10.23704441497351
+phase,"AoA 6 deg, 1600 V",60.0,L_mN,12.23710725569226
+phase,"AoA 6 deg, 1600 V",90.0,L_mN,12.70913546989588
+phase,"AoA 6 deg, 1600 V",120.0,L_mN,11.458512310833617
+phase,"AoA 6 deg, 1600 V",150.0,L_mN,8.872243359218913
+phase,"AoA 6 deg, 1600 V",180.0,L_mN,5.714289142401081
+phase,"AoA 6 deg, 1600 V",210.0,L_mN,2.8072996143681848
+phase,"AoA 6 deg, 1600 V",240.0,L_mN,0.8868392167194269
+phase,"AoA 6 deg, 1600 V",270.0,L_mN,0.4868807947640455
+phase,"AoA 6 deg, 1600 V",300.0,L_mN,1.7306766729100462
+phase,"AoA 6 deg, 1600 V",330.0,L_mN,4.2382631398490345
+phase,"AoA 6 deg, 1600 V",360.0,L_mN,7.323411998831635
+phase,"AoA 12 deg, 0 V",0.0,L_mN,13.419653208163545
+phase,"AoA 12 deg, 0 V",30.0,L_mN,16.289361372805367
+phase,"AoA 12 deg, 0 V",60.0,L_mN,18.31571280036856
+phase,"AoA 12 deg, 0 V",90.0,L_mN,18.845624989879717
+phase,"AoA 12 deg, 0 V",120.0,L_mN,17.656372061618015
+phase,"AoA 12 deg, 0 V",150.0,L_mN,15.13348623029746
+phase,"AoA 12 deg, 0 V",180.0,L_mN,12.054028360976089
+phase,"AoA 12 deg, 0 V",210.0,L_mN,9.238063439270748
+phase,"AoA 12 deg, 0 V",240.0,L_mN,7.383391905146015
+phase,"AoA 12 deg, 0 V",270.0,L_mN,6.973316011835491
+phase,"AoA 12 deg, 0 V",300.0,L_mN,8.110650243603565
+phase,"AoA 12 deg, 0 V",330.0,L_mN,10.460022471041965
+phase,"AoA 12 deg, 0 V",360.0,L_mN,13.419655181286787
+phase,"AoA 12 deg, 1600 V",0.0,L_mN,13.735690776787584
+phase,"AoA 12 deg, 1600 V",30.0,L_mN,16.639610966592613
+phase,"AoA 12 deg, 1600 V",60.0,L_mN,18.67863083863259
+phase,"AoA 12 deg, 1600 V",90.0,L_mN,19.19488533601866
+phase,"AoA 12 deg, 1600 V",120.0,L_mN,17.960850785342544
+phase,"AoA 12 deg, 1600 V",150.0,L_mN,15.369815607810946
+phase,"AoA 12 deg, 1600 V",180.0,L_mN,12.219993374839344
+phase,"AoA 12 deg, 1600 V",210.0,L_mN,9.355298964826451
+phase,"AoA 12 deg, 1600 V",240.0,L_mN,7.489592056870973
+phase,"AoA 12 deg, 1600 V",270.0,L_mN,7.11045762864092
+phase,"AoA 12 deg, 1600 V",300.0,L_mN,8.307786379886668
+phase,"AoA 12 deg, 1600 V",330.0,L_mN,10.722292950773003
+phase,"AoA 12 deg, 1600 V",360.0,L_mN,13.735687619289468
+phase,"AoA 0 deg, 0 V",0.0,CL,0.05396381926588639
+phase,"AoA 0 deg, 0 V",30.0,CL,0.2666194129528346
+phase,"AoA 0 deg, 0 V",60.0,CL,0.41090325690847734
+phase,"AoA 0 deg, 0 V",90.0,CL,0.44490905737003134
+phase,"AoA 0 deg, 0 V",120.0,CL,0.3566488846704236
+phase,"AoA 0 deg, 0 V",150.0,CL,0.17303132689351228
+phase,"AoA 0 deg, 0 V",180.0,CL,-0.053963908943406844
+phase,"AoA 0 deg, 0 V",210.0,CL,-0.26662050802314385
+phase,"AoA 0 deg, 0 V",240.0,CL,-0.4109032570077907
+phase,"AoA 0 deg, 0 V",270.0,CL,-0.4449090573700213
+phase,"AoA 0 deg, 0 V",300.0,CL,-0.3566488846704234
+phase,"AoA 0 deg, 0 V",330.0,CL,-0.17303132689351283
+phase,"AoA 0 deg, 0 V",360.0,CL,0.053963908943406934
+phase,"AoA 0 deg, 1600 V",0.0,CL,0.061135244854735656
+phase,"AoA 0 deg, 1600 V",30.0,CL,0.27756156780302826
+phase,"AoA 0 deg, 1600 V",60.0,CL,0.4228758389470712
+phase,"AoA 0 deg, 1600 V",90.0,CL,0.45485152405102575
+phase,"AoA 0 deg, 1600 V",120.0,CL,0.3616733932165508
+phase,"AoA 0 deg, 1600 V",150.0,CL,0.17164738471732352
+phase,"AoA 0 deg, 1600 V",180.0,CL,-0.06113339022801093
+phase,"AoA 0 deg, 1600 V",210.0,CL,-0.27756156789004416
+phase,"AoA 0 deg, 1600 V",240.0,CL,-0.4228758389471004
+phase,"AoA 0 deg, 1600 V",270.0,CL,-0.4548515240510258
+phase,"AoA 0 deg, 1600 V",300.0,CL,-0.3616733932165508
+phase,"AoA 0 deg, 1600 V",330.0,CL,-0.17164738471732358
+phase,"AoA 0 deg, 1600 V",360.0,CL,0.06113339022801098
+phase,"AoA 6 deg, 0 V",0.0,CL,0.5261715288761689
+phase,"AoA 6 deg, 0 V",30.0,CL,0.7386948667490217
+phase,"AoA 6 deg, 0 V",60.0,CL,0.885761348103606
+phase,"AoA 6 deg, 0 V",90.0,CL,0.9222682079573805
+phase,"AoA 6 deg, 0 V",120.0,CL,0.8338670990356039
+phase,"AoA 6 deg, 0 V",150.0,CL,0.6483397217221663
+phase,"AoA 6 deg, 0 V",180.0,CL,0.4203523420267652
+phase,"AoA 6 deg, 0 V",210.0,CL,0.20906895304475617
+phase,"AoA 6 deg, 0 V",240.0,CL,0.06787586483084221
+phase,"AoA 6 deg, 0 V",270.0,CL,0.03592344829027769
+phase,"AoA 6 deg, 0 V",300.0,CL,0.12296726118544686
+phase,"AoA 6 deg, 0 V",330.0,CL,0.3027009933043454
+phase,"AoA 6 deg, 0 V",360.0,CL,0.5261709938594841
+phase,"AoA 6 deg, 1600 V",0.0,CL,0.5422489953327442
+phase,"AoA 6 deg, 1600 V",30.0,CL,0.7579837597277808
+phase,"AoA 6 deg, 1600 V",60.0,CL,0.9060748581196544
+phase,"AoA 6 deg, 1600 V",90.0,CL,0.9410253483193765
+phase,"AoA 6 deg, 1600 V",120.0,CL,0.8484251792000457
+phase,"AoA 6 deg, 1600 V",150.0,CL,0.6569294911726715
+phase,"AoA 6 deg, 1600 V",180.0,CL,0.42310438372167747
+phase,"AoA 6 deg, 1600 V",210.0,CL,0.2078615106200701
+phase,"AoA 6 deg, 1600 V",240.0,CL,0.065664433650381
+phase,"AoA 6 deg, 1600 V",270.0,CL,0.03605022313029167
+phase,"AoA 6 deg, 1600 V",300.0,CL,0.12814487836809077
+phase,"AoA 6 deg, 1600 V",330.0,CL,0.3138146616575711
+phase,"AoA 6 deg, 1600 V",360.0,CL,0.5422490257823414
+phase,"AoA 12 deg, 0 V",0.0,CL,0.9936343714684469
+phase,"AoA 12 deg, 0 V",30.0,CL,1.2061168122767634
+phase,"AoA 12 deg, 0 V",60.0,CL,1.3561544023596506
+phase,"AoA 12 deg, 0 V",90.0,CL,1.39539080863564
+phase,"AoA 12 deg, 0 V",120.0,CL,1.3073346891845445
+phase,"AoA 12 deg, 0 V",150.0,CL,1.120532091650513
+phase,"AoA 12 deg, 0 V",180.0,CL,0.8925191067407904
+phase,"AoA 12 deg, 0 V",210.0,CL,0.6840159888395203
+phase,"AoA 12 deg, 0 V",240.0,CL,0.5466901313449777
+phase,"AoA 12 deg, 0 V",270.0,CL,0.5163267906398623
+phase,"AoA 12 deg, 0 V",300.0,CL,0.6005386824825629
+phase,"AoA 12 deg, 0 V",330.0,CL,0.7744937735974429
+phase,"AoA 12 deg, 0 V",360.0,CL,0.9936345175648506
+phase,"AoA 12 deg, 1600 V",0.0,CL,1.0170348115535255
+phase,"AoA 12 deg, 1600 V",30.0,CL,1.2320504209610892
+phase,"AoA 12 deg, 1600 V",60.0,CL,1.3830260235000296
+phase,"AoA 12 deg, 1600 V",90.0,CL,1.421251170236006
+phase,"AoA 12 deg, 1600 V",120.0,CL,1.3298792751422124
+phase,"AoA 12 deg, 1600 V",150.0,CL,1.138030680387686
+phase,"AoA 12 deg, 1600 V",180.0,CL,0.9048076912278655
+phase,"AoA 12 deg, 1600 V",210.0,CL,0.6926964849702587
+phase,"AoA 12 deg, 1600 V",240.0,CL,0.5545535328332434
+phase,"AoA 12 deg, 1600 V",270.0,CL,0.5264811979187131
+phase,"AoA 12 deg, 1600 V",300.0,CL,0.6151352773297546
+phase,"AoA 12 deg, 1600 V",330.0,CL,0.7939131251440049
+phase,"AoA 12 deg, 1600 V",360.0,CL,1.0170345777621892
+phase,"AoA 0 deg, 0 V",0.0,camber_mid_pct,1.0163522368400468
+phase,"AoA 0 deg, 0 V",30.0,camber_mid_pct,1.8291968742146967
+phase,"AoA 0 deg, 0 V",60.0,camber_mid_pct,2.3684860598859183
+phase,"AoA 0 deg, 0 V",90.0,camber_mid_pct,2.347778124245033
+phase,"AoA 0 deg, 0 V",120.0,camber_mid_pct,1.7918818177681954
+phase,"AoA 0 deg, 0 V",150.0,camber_mid_pct,0.688830828300227
+phase,"AoA 0 deg, 0 V",180.0,camber_mid_pct,-1.0163580762024023
+phase,"AoA 0 deg, 0 V",210.0,camber_mid_pct,-1.829206808142235
+phase,"AoA 0 deg, 0 V",240.0,camber_mid_pct,-2.368486060535919
+phase,"AoA 0 deg, 0 V",270.0,camber_mid_pct,-2.3477781242449547
+phase,"AoA 0 deg, 0 V",300.0,camber_mid_pct,-1.7918818177681939
+phase,"AoA 0 deg, 0 V",330.0,camber_mid_pct,-0.6888308283002285
+phase,"AoA 0 deg, 0 V",360.0,camber_mid_pct,1.0163580762024065
+phase,"AoA 0 deg, 1600 V",0.0,camber_mid_pct,1.1883218040578387
+phase,"AoA 0 deg, 1600 V",30.0,camber_mid_pct,1.932304009831864
+phase,"AoA 0 deg, 1600 V",60.0,camber_mid_pct,2.450234958957284
+phase,"AoA 0 deg, 1600 V",90.0,camber_mid_pct,2.412395377494978
+phase,"AoA 0 deg, 1600 V",120.0,camber_mid_pct,1.8364864664804315
+phase,"AoA 0 deg, 1600 V",150.0,camber_mid_pct,0.6798437701883143
+phase,"AoA 0 deg, 1600 V",180.0,camber_mid_pct,-1.1882708391719945
+phase,"AoA 0 deg, 1600 V",210.0,camber_mid_pct,-1.9323040105093299
+phase,"AoA 0 deg, 1600 V",240.0,camber_mid_pct,-2.4502349589575276
+phase,"AoA 0 deg, 1600 V",270.0,camber_mid_pct,-2.4123953774949682
+phase,"AoA 0 deg, 1600 V",300.0,camber_mid_pct,-1.8364864664804397
+phase,"AoA 0 deg, 1600 V",330.0,camber_mid_pct,-0.6798437701883174
+phase,"AoA 0 deg, 1600 V",360.0,camber_mid_pct,1.1882708391720034
+phase,"AoA 6 deg, 0 V",0.0,camber_mid_pct,2.7120798449047063
+phase,"AoA 6 deg, 0 V",30.0,camber_mid_pct,3.385925345977636
+phase,"AoA 6 deg, 0 V",60.0,camber_mid_pct,3.694814877374021
+phase,"AoA 6 deg, 0 V",90.0,camber_mid_pct,3.6664724847700976
+phase,"AoA 6 deg, 0 V",120.0,camber_mid_pct,3.3045826151716007
+phase,"AoA 6 deg, 0 V",150.0,camber_mid_pct,2.6093155131011887
+phase,"AoA 6 deg, 0 V",180.0,camber_mid_pct,1.5954365450746995
+phase,"AoA 6 deg, 0 V",210.0,camber_mid_pct,0.49197851726967345
+phase,"AoA 6 deg, 0 V",240.0,camber_mid_pct,-0.40364020399974787
+phase,"AoA 6 deg, 0 V",270.0,camber_mid_pct,-0.1927369678735582
+phase,"AoA 6 deg, 0 V",300.0,camber_mid_pct,0.6160905780467147
+phase,"AoA 6 deg, 0 V",330.0,camber_mid_pct,1.6594647554827646
+phase,"AoA 6 deg, 0 V",360.0,camber_mid_pct,2.712036088811339
+phase,"AoA 6 deg, 1600 V",0.0,camber_mid_pct,2.8163178218143616
+phase,"AoA 6 deg, 1600 V",30.0,camber_mid_pct,3.5286026089950955
+phase,"AoA 6 deg, 1600 V",60.0,camber_mid_pct,3.8247632674808303
+phase,"AoA 6 deg, 1600 V",90.0,camber_mid_pct,3.7474713475442707
+phase,"AoA 6 deg, 1600 V",120.0,camber_mid_pct,3.3647411904444744
+phase,"AoA 6 deg, 1600 V",150.0,camber_mid_pct,2.6489867096769073
+phase,"AoA 6 deg, 1600 V",180.0,camber_mid_pct,1.6247092016129925
+phase,"AoA 6 deg, 1600 V",210.0,camber_mid_pct,0.48109625347173546
+phase,"AoA 6 deg, 1600 V",240.0,camber_mid_pct,-0.4665176667341848
+phase,"AoA 6 deg, 1600 V",270.0,camber_mid_pct,-0.19437036758142814
+phase,"AoA 6 deg, 1600 V",300.0,camber_mid_pct,0.7280102005105841
+phase,"AoA 6 deg, 1600 V",330.0,camber_mid_pct,1.7639022123050736
+phase,"AoA 6 deg, 1600 V",360.0,camber_mid_pct,2.8163195401389305
+phase,"AoA 12 deg, 0 V",0.0,camber_mid_pct,3.9206971352701743
+phase,"AoA 12 deg, 0 V",30.0,camber_mid_pct,4.453229257536606
+phase,"AoA 12 deg, 0 V",60.0,camber_mid_pct,4.694887886415539
+phase,"AoA 12 deg, 0 V",90.0,camber_mid_pct,4.577884309233635
+phase,"AoA 12 deg, 0 V",120.0,camber_mid_pct,4.29698712040677
+phase,"AoA 12 deg, 0 V",150.0,camber_mid_pct,3.797132156817905
+phase,"AoA 12 deg, 0 V",180.0,camber_mid_pct,3.149053074547054
+phase,"AoA 12 deg, 0 V",210.0,camber_mid_pct,2.4785684643553916
+phase,"AoA 12 deg, 0 V",240.0,camber_mid_pct,2.0282067407071644
+phase,"AoA 12 deg, 0 V",270.0,camber_mid_pct,2.0548424632283204
+phase,"AoA 12 deg, 0 V",300.0,camber_mid_pct,2.5699173103984445
+phase,"AoA 12 deg, 0 V",330.0,camber_mid_pct,3.2847391783374715
+phase,"AoA 12 deg, 0 V",360.0,camber_mid_pct,3.9206986626033613
+phase,"AoA 12 deg, 1600 V",0.0,camber_mid_pct,4.28262546921629
+phase,"AoA 12 deg, 1600 V",30.0,camber_mid_pct,4.884557402486753
+phase,"AoA 12 deg, 1600 V",60.0,camber_mid_pct,5.134044079016069
+phase,"AoA 12 deg, 1600 V",90.0,camber_mid_pct,4.984238496653065
+phase,"AoA 12 deg, 1600 V",120.0,camber_mid_pct,4.43954195951891
+phase,"AoA 12 deg, 1600 V",150.0,camber_mid_pct,3.8675132736100903
+phase,"AoA 12 deg, 1600 V",180.0,camber_mid_pct,3.193391609523882
+phase,"AoA 12 deg, 1600 V",210.0,camber_mid_pct,2.5206535112917874
+phase,"AoA 12 deg, 1600 V",240.0,camber_mid_pct,2.078329372193297
+phase,"AoA 12 deg, 1600 V",270.0,camber_mid_pct,2.1273888365238376
+phase,"AoA 12 deg, 1600 V",300.0,camber_mid_pct,2.6620198844276097
+phase,"AoA 12 deg, 1600 V",330.0,camber_mid_pct,3.418922088648497
+phase,"AoA 12 deg, 1600 V",360.0,camber_mid_pct,4.282624417969148
+phase,"AoA 0 deg, 0 V",0.0,camber_mean_pct,0.5778437316483629
+phase,"AoA 0 deg, 0 V",30.0,camber_mean_pct,0.9526383673294501
+phase,"AoA 0 deg, 0 V",60.0,camber_mean_pct,1.183491966331297
+phase,"AoA 0 deg, 0 V",90.0,camber_mean_pct,1.1345079665312494
+phase,"AoA 0 deg, 0 V",120.0,camber_mean_pct,0.8162889714511679
+phase,"AoA 0 deg, 0 V",150.0,camber_mean_pct,0.17777814927021449
+phase,"AoA 0 deg, 0 V",180.0,camber_mean_pct,-0.5778461585844922
+phase,"AoA 0 deg, 0 V",210.0,camber_mean_pct,-0.9526440549192232
+phase,"AoA 0 deg, 0 V",240.0,camber_mean_pct,-1.1834919667128494
+phase,"AoA 0 deg, 0 V",270.0,camber_mean_pct,-1.134507966531228
+phase,"AoA 0 deg, 0 V",300.0,camber_mean_pct,-0.8162889714511589
+phase,"AoA 0 deg, 0 V",330.0,camber_mean_pct,-0.17777814927021543
+phase,"AoA 0 deg, 0 V",360.0,camber_mean_pct,0.5778461585844935
+phase,"AoA 0 deg, 1600 V",0.0,camber_mean_pct,0.6742528716180585
+phase,"AoA 0 deg, 1600 V",30.0,camber_mean_pct,1.0406306253104736
+phase,"AoA 0 deg, 1600 V",60.0,camber_mean_pct,1.2518873642166028
+phase,"AoA 0 deg, 1600 V",90.0,camber_mean_pct,1.1865823128211184
+phase,"AoA 0 deg, 1600 V",120.0,camber_mean_pct,0.8390821727094853
+phase,"AoA 0 deg, 1600 V",150.0,camber_mean_pct,0.09489399252343016
+phase,"AoA 0 deg, 1600 V",180.0,camber_mean_pct,-0.674230198726366
+phase,"AoA 0 deg, 1600 V",210.0,camber_mean_pct,-1.0406306261031442
+phase,"AoA 0 deg, 1600 V",240.0,camber_mean_pct,-1.2518873642167014
+phase,"AoA 0 deg, 1600 V",270.0,camber_mean_pct,-1.1865823128211166
+phase,"AoA 0 deg, 1600 V",300.0,camber_mean_pct,-0.8390821727094868
+phase,"AoA 0 deg, 1600 V",330.0,camber_mean_pct,-0.09489399252342906
+phase,"AoA 0 deg, 1600 V",360.0,camber_mean_pct,0.6742301987263669
+phase,"AoA 6 deg, 0 V",0.0,camber_mean_pct,1.4828640819715173
+phase,"AoA 6 deg, 0 V",30.0,camber_mean_pct,1.8383453543095734
+phase,"AoA 6 deg, 0 V",60.0,camber_mean_pct,1.9949627182541678
+phase,"AoA 6 deg, 0 V",90.0,camber_mean_pct,1.9481398880125664
+phase,"AoA 6 deg, 0 V",120.0,camber_mean_pct,1.7026765040872902
+phase,"AoA 6 deg, 0 V",150.0,camber_mean_pct,1.2878555255655812
+phase,"AoA 6 deg, 0 V",180.0,camber_mean_pct,0.7440734725916236
+phase,"AoA 6 deg, 0 V",210.0,camber_mean_pct,0.10997903151812556
+phase,"AoA 6 deg, 0 V",240.0,camber_mean_pct,-0.0980431491683575
+phase,"AoA 6 deg, 0 V",270.0,camber_mean_pct,-0.004626426902713711
+phase,"AoA 6 deg, 0 V",300.0,camber_mean_pct,0.489404818989014
+phase,"AoA 6 deg, 0 V",330.0,camber_mean_pct,0.9833552656139997
+phase,"AoA 6 deg, 0 V",360.0,camber_mean_pct,1.4828519315580146
+phase,"AoA 6 deg, 1600 V",0.0,camber_mean_pct,1.596887044216289
+phase,"AoA 6 deg, 1600 V",30.0,camber_mean_pct,1.9567423415811833
+phase,"AoA 6 deg, 1600 V",60.0,camber_mean_pct,2.109989945186407
+phase,"AoA 6 deg, 1600 V",90.0,camber_mean_pct,2.0445524353664433
+phase,"AoA 6 deg, 1600 V",120.0,camber_mean_pct,1.772659911800805
+phase,"AoA 6 deg, 1600 V",150.0,camber_mean_pct,1.3227026426719928
+phase,"AoA 6 deg, 1600 V",180.0,camber_mean_pct,0.7497839020158198
+phase,"AoA 6 deg, 1600 V",210.0,camber_mean_pct,0.08071074230234485
+phase,"AoA 6 deg, 1600 V",240.0,camber_mean_pct,-0.1256167790202415
+phase,"AoA 6 deg, 1600 V",270.0,camber_mean_pct,-0.005965976783236902
+phase,"AoA 6 deg, 1600 V",300.0,camber_mean_pct,0.5351799190611644
+phase,"AoA 6 deg, 1600 V",330.0,camber_mean_pct,1.0771006929628795
+phase,"AoA 6 deg, 1600 V",360.0,camber_mean_pct,1.5968856113601007
+phase,"AoA 12 deg, 0 V",0.0,camber_mean_pct,2.2147922032927503
+phase,"AoA 12 deg, 0 V",30.0,camber_mean_pct,2.49557053018329
+phase,"AoA 12 deg, 0 V",60.0,camber_mean_pct,2.6178322225381354
+phase,"AoA 12 deg, 0 V",90.0,camber_mean_pct,2.5659429240301455
+phase,"AoA 12 deg, 0 V",120.0,camber_mean_pct,2.3584426680106625
+phase,"AoA 12 deg, 0 V",150.0,camber_mean_pct,2.0217906806992985
+phase,"AoA 12 deg, 0 V",180.0,camber_mean_pct,1.610291476762231
+phase,"AoA 12 deg, 0 V",210.0,camber_mean_pct,1.2414434082875854
+phase,"AoA 12 deg, 0 V",240.0,camber_mean_pct,1.033767718285405
+phase,"AoA 12 deg, 0 V",270.0,camber_mean_pct,1.094223084705043
+phase,"AoA 12 deg, 0 V",300.0,camber_mean_pct,1.408293223719078
+phase,"AoA 12 deg, 0 V",330.0,camber_mean_pct,1.8317332665374688
+phase,"AoA 12 deg, 0 V",360.0,camber_mean_pct,2.21479370774493
+phase,"AoA 12 deg, 1600 V",0.0,camber_mean_pct,2.4088502265482212
+phase,"AoA 12 deg, 1600 V",30.0,camber_mean_pct,2.719951730447497
+phase,"AoA 12 deg, 1600 V",60.0,camber_mean_pct,2.8317842352253315
+phase,"AoA 12 deg, 1600 V",90.0,camber_mean_pct,2.73855920577926
+phase,"AoA 12 deg, 1600 V",120.0,camber_mean_pct,2.483971212633379
+phase,"AoA 12 deg, 1600 V",150.0,camber_mean_pct,2.10775256404535
+phase,"AoA 12 deg, 1600 V",180.0,camber_mean_pct,1.678988620116599
+phase,"AoA 12 deg, 1600 V",210.0,camber_mean_pct,1.279197118064073
+phase,"AoA 12 deg, 1600 V",240.0,camber_mean_pct,1.0709468801669129
+phase,"AoA 12 deg, 1600 V",270.0,camber_mean_pct,1.1485753484747971
+phase,"AoA 12 deg, 1600 V",300.0,camber_mean_pct,1.4974716106929045
+phase,"AoA 12 deg, 1600 V",330.0,camber_mean_pct,1.960660584032169
+phase,"AoA 12 deg, 1600 V",360.0,camber_mean_pct,2.4088507657839813
+phase,"AoA 0 deg, 0 V",0.0,T_chord,0.1159897168210837
+phase,"AoA 0 deg, 0 V",30.0,T_chord,0.11688088228696661
+phase,"AoA 0 deg, 0 V",60.0,T_chord,0.1174370428949519
+phase,"AoA 0 deg, 0 V",90.0,T_chord,0.11718992480873379
+phase,"AoA 0 deg, 0 V",120.0,T_chord,0.11637792410436096
+phase,"AoA 0 deg, 0 V",150.0,T_chord,0.11574885609709884
+phase,"AoA 0 deg, 0 V",180.0,T_chord,0.11598970168552207
+phase,"AoA 0 deg, 0 V",210.0,T_chord,0.1168809150710465
+phase,"AoA 0 deg, 0 V",240.0,T_chord,0.11743704289590695
+phase,"AoA 0 deg, 0 V",270.0,T_chord,0.11718992480873665
+phase,"AoA 0 deg, 0 V",300.0,T_chord,0.11637792410435902
+phase,"AoA 0 deg, 0 V",330.0,T_chord,0.11574885609709913
+phase,"AoA 0 deg, 0 V",360.0,T_chord,0.11598970168552214
+phase,"AoA 0 deg, 1600 V",0.0,T_chord,0.12322750782738354
+phase,"AoA 0 deg, 1600 V",30.0,T_chord,0.12438371655221175
+phase,"AoA 0 deg, 1600 V",60.0,T_chord,0.12520182090250603
+phase,"AoA 0 deg, 1600 V",90.0,T_chord,0.12480770921690841
+phase,"AoA 0 deg, 1600 V",120.0,T_chord,0.12359567628313987
+phase,"AoA 0 deg, 1600 V",150.0,T_chord,0.12282911999648734
+phase,"AoA 0 deg, 1600 V",180.0,T_chord,0.1232274988607965
+phase,"AoA 0 deg, 1600 V",210.0,T_chord,0.12438371655792253
+phase,"AoA 0 deg, 1600 V",240.0,T_chord,0.12520182090250445
+phase,"AoA 0 deg, 1600 V",270.0,T_chord,0.12480770921691019
+phase,"AoA 0 deg, 1600 V",300.0,T_chord,0.12359567628314139
+phase,"AoA 0 deg, 1600 V",330.0,T_chord,0.1228291199964867
+phase,"AoA 0 deg, 1600 V",360.0,T_chord,0.12322749886079702
+phase,"AoA 6 deg, 0 V",0.0,T_chord,0.11886303270035399
+phase,"AoA 6 deg, 0 V",30.0,T_chord,0.1210390696538589
+phase,"AoA 6 deg, 0 V",60.0,T_chord,0.12223185178176328
+phase,"AoA 6 deg, 0 V",90.0,T_chord,0.12180105306510358
+phase,"AoA 6 deg, 0 V",120.0,T_chord,0.12014575382960296
+phase,"AoA 6 deg, 0 V",150.0,T_chord,0.11814695989960086
+phase,"AoA 6 deg, 0 V",180.0,T_chord,0.11680935461527049
+phase,"AoA 6 deg, 0 V",210.0,T_chord,0.11627785858322655
+phase,"AoA 6 deg, 0 V",240.0,T_chord,0.11614512510401123
+phase,"AoA 6 deg, 0 V",270.0,T_chord,0.11599604564315831
+phase,"AoA 6 deg, 0 V",300.0,T_chord,0.11605954355392625
+phase,"AoA 6 deg, 0 V",330.0,T_chord,0.11698315492719016
+phase,"AoA 6 deg, 0 V",360.0,T_chord,0.11886300971140612
+phase,"AoA 6 deg, 1600 V",0.0,T_chord,0.12716448132566754
+phase,"AoA 6 deg, 1600 V",30.0,T_chord,0.13008406845749299
+phase,"AoA 6 deg, 1600 V",60.0,T_chord,0.13160516254742377
+phase,"AoA 6 deg, 1600 V",90.0,T_chord,0.13093608375828877
+phase,"AoA 6 deg, 1600 V",120.0,T_chord,0.12862161559190974
+phase,"AoA 6 deg, 1600 V",150.0,T_chord,0.12594131083465715
+phase,"AoA 6 deg, 1600 V",180.0,T_chord,0.12404099574741168
+phase,"AoA 6 deg, 1600 V",210.0,T_chord,0.1234254511261515
+phase,"AoA 6 deg, 1600 V",240.0,T_chord,0.12324542754543892
+phase,"AoA 6 deg, 1600 V",270.0,T_chord,0.12305050887123173
+phase,"AoA 6 deg, 1600 V",300.0,T_chord,0.1231966854302539
+phase,"AoA 6 deg, 1600 V",330.0,T_chord,0.12445817215930023
+phase,"AoA 6 deg, 1600 V",360.0,T_chord,0.12716445423010464
+phase,"AoA 12 deg, 0 V",0.0,T_chord,0.12463317215631835
+phase,"AoA 12 deg, 0 V",30.0,T_chord,0.127641415288332
+phase,"AoA 12 deg, 0 V",60.0,T_chord,0.12916626549754676
+phase,"AoA 12 deg, 0 V",90.0,T_chord,0.1285660296375485
+phase,"AoA 12 deg, 0 V",120.0,T_chord,0.1262092259354085
+phase,"AoA 12 deg, 0 V",150.0,T_chord,0.12318352176024383
+phase,"AoA 12 deg, 0 V",180.0,T_chord,0.12056082709339096
+phase,"AoA 12 deg, 0 V",210.0,T_chord,0.11889040301247283
+phase,"AoA 12 deg, 0 V",240.0,T_chord,0.11806960887385545
+phase,"AoA 12 deg, 0 V",270.0,T_chord,0.11806056739417622
+phase,"AoA 12 deg, 0 V",300.0,T_chord,0.11905767595424407
+phase,"AoA 12 deg, 0 V",330.0,T_chord,0.12134720790500936
+phase,"AoA 12 deg, 0 V",360.0,T_chord,0.12463319017971641
+phase,"AoA 12 deg, 1600 V",0.0,T_chord,0.13477809055278456
+phase,"AoA 12 deg, 1600 V",30.0,T_chord,0.13867683311651988
+phase,"AoA 12 deg, 1600 V",60.0,T_chord,0.14056928436718774
+phase,"AoA 12 deg, 1600 V",90.0,T_chord,0.13959525793998231
+phase,"AoA 12 deg, 1600 V",120.0,T_chord,0.13638213383755723
+phase,"AoA 12 deg, 1600 V",150.0,T_chord,0.1324333112982938
+phase,"AoA 12 deg, 1600 V",180.0,T_chord,0.12898858701066576
+phase,"AoA 12 deg, 1600 V",210.0,T_chord,0.12666187342206678
+phase,"AoA 12 deg, 1600 V",240.0,T_chord,0.12563236345044335
+phase,"AoA 12 deg, 1600 V",270.0,T_chord,0.12567772913656616
+phase,"AoA 12 deg, 1600 V",300.0,T_chord,0.12711443173113907
+phase,"AoA 12 deg, 1600 V",330.0,T_chord,0.13042718192994343
+phase,"AoA 12 deg, 1600 V",360.0,T_chord,0.1347781760113246
+phase,"AoA 0 deg, 0 V",0.0,T_span,0.43890863093972127
+phase,"AoA 0 deg, 0 V",30.0,T_span,0.44381375515569566
+phase,"AoA 0 deg, 0 V",60.0,T_span,0.4466040586854256
+phase,"AoA 0 deg, 0 V",90.0,T_span,0.44500770667254175
+phase,"AoA 0 deg, 0 V",120.0,T_span,0.440585420969669
+phase,"AoA 0 deg, 0 V",150.0,T_span,0.43728864697642866
+phase,"AoA 0 deg, 0 V",180.0,T_span,0.43890863643230166
+phase,"AoA 0 deg, 0 V",210.0,T_span,0.44381389613087097
+phase,"AoA 0 deg, 0 V",240.0,T_span,0.44660405869093944
+phase,"AoA 0 deg, 0 V",270.0,T_span,0.4450077066725419
+phase,"AoA 0 deg, 0 V",300.0,T_span,0.44058542096966724
+phase,"AoA 0 deg, 0 V",330.0,T_span,0.4372886469764284
+phase,"AoA 0 deg, 0 V",360.0,T_span,0.4389086364323028
+phase,"AoA 0 deg, 1600 V",0.0,T_span,0.4429976741128321
+phase,"AoA 0 deg, 1600 V",30.0,T_span,0.4480260097827542
+phase,"AoA 0 deg, 1600 V",60.0,T_span,0.4507320469060361
+phase,"AoA 0 deg, 1600 V",90.0,T_span,0.44894343084431554
+phase,"AoA 0 deg, 1600 V",120.0,T_span,0.4443671024332601
+phase,"AoA 0 deg, 1600 V",150.0,T_span,0.44114066934206125
+phase,"AoA 0 deg, 1600 V",180.0,T_span,0.44299756701077897
+phase,"AoA 0 deg, 1600 V",210.0,T_span,0.4480260097951936
+phase,"AoA 0 deg, 1600 V",240.0,T_span,0.45073204690603963
+phase,"AoA 0 deg, 1600 V",270.0,T_span,0.44894343084431454
+phase,"AoA 0 deg, 1600 V",300.0,T_span,0.4443671024332586
+phase,"AoA 0 deg, 1600 V",330.0,T_span,0.4411406693420596
+phase,"AoA 0 deg, 1600 V",360.0,T_span,0.44299756701077897
+phase,"AoA 6 deg, 0 V",0.0,T_span,0.4522296966608307
+phase,"AoA 6 deg, 0 V",30.0,T_span,0.46013955249755256
+phase,"AoA 6 deg, 0 V",60.0,T_span,0.4635023124691188
+phase,"AoA 6 deg, 0 V",90.0,T_span,0.461097461013009
+phase,"AoA 6 deg, 0 V",120.0,T_span,0.4543586499378528
+phase,"AoA 6 deg, 0 V",150.0,T_span,0.446649421235067
+phase,"AoA 6 deg, 0 V",180.0,T_span,0.4409818446766248
+phase,"AoA 6 deg, 0 V",210.0,T_span,0.4388022048698824
+phase,"AoA 6 deg, 0 V",240.0,T_span,0.4385564026701027
+phase,"AoA 6 deg, 0 V",270.0,T_span,0.4379452457005459
+phase,"AoA 6 deg, 0 V",300.0,T_span,0.43837271767924985
+phase,"AoA 6 deg, 0 V",330.0,T_span,0.44335926153794153
+phase,"AoA 6 deg, 0 V",360.0,T_span,0.45222953646131064
+phase,"AoA 6 deg, 1600 V",0.0,T_span,0.4566057263118686
+phase,"AoA 6 deg, 1600 V",30.0,T_span,0.4645833850063906
+phase,"AoA 6 deg, 1600 V",60.0,T_span,0.4678978437402018
+phase,"AoA 6 deg, 1600 V",90.0,T_span,0.46527659311707864
+phase,"AoA 6 deg, 1600 V",120.0,T_span,0.4582041866050392
+phase,"AoA 6 deg, 1600 V",150.0,T_span,0.450290831956398
+phase,"AoA 6 deg, 1600 V",180.0,T_span,0.44471275279779693
+phase,"AoA 6 deg, 1600 V",210.0,T_span,0.4426485377592193
+phase,"AoA 6 deg, 1600 V",240.0,T_span,0.44241835293156284
+phase,"AoA 6 deg, 1600 V",270.0,T_span,0.4417662014842934
+phase,"AoA 6 deg, 1600 V",300.0,T_span,0.44228204077315003
+phase,"AoA 6 deg, 1600 V",330.0,T_span,0.4475421908259338
+phase,"AoA 6 deg, 1600 V",360.0,T_span,0.456605674159499
+phase,"AoA 12 deg, 0 V",0.0,T_span,0.47107718197382925
+phase,"AoA 12 deg, 0 V",30.0,T_span,0.4796268139317555
+phase,"AoA 12 deg, 0 V",60.0,T_span,0.483046956806623
+phase,"AoA 12 deg, 0 V",90.0,T_span,0.4801649267263204
+phase,"AoA 12 deg, 0 V",120.0,T_span,0.47218542889502235
+phase,"AoA 12 deg, 0 V",150.0,T_span,0.4623823469426436
+phase,"AoA 12 deg, 0 V",180.0,T_span,0.45389285189162704
+phase,"AoA 12 deg, 0 V",210.0,T_span,0.44815323533019336
+phase,"AoA 12 deg, 0 V",240.0,T_span,0.4454943165773769
+phase,"AoA 12 deg, 0 V",270.0,T_span,0.44603055968809124
+phase,"AoA 12 deg, 0 V",300.0,T_span,0.4508957138449733
+phase,"AoA 12 deg, 0 V",330.0,T_span,0.4602484205265005
+phase,"AoA 12 deg, 0 V",360.0,T_span,0.47107728416659983
+phase,"AoA 12 deg, 1600 V",0.0,T_span,0.4757373744433275
+phase,"AoA 12 deg, 1600 V",30.0,T_span,0.4843749173906619
+phase,"AoA 12 deg, 1600 V",60.0,T_span,0.4877518754905721
+phase,"AoA 12 deg, 1600 V",90.0,T_span,0.48470315751647985
+phase,"AoA 12 deg, 1600 V",120.0,T_span,0.47641776834629485
+phase,"AoA 12 deg, 1600 V",150.0,T_span,0.46624786775736965
+phase,"AoA 12 deg, 1600 V",180.0,T_span,0.4575541728135645
+phase,"AoA 12 deg, 1600 V",210.0,T_span,0.45188222585436305
+phase,"AoA 12 deg, 1600 V",240.0,T_span,0.44930736101085256
+phase,"AoA 12 deg, 1600 V",270.0,T_span,0.44997644603924264
+phase,"AoA 12 deg, 1600 V",300.0,T_span,0.45508828470316953
+phase,"AoA 12 deg, 1600 V",330.0,T_span,0.46467807159027213
+phase,"AoA 12 deg, 1600 V",360.0,T_span,0.475737427138346
+phase,"AoA 0 deg, 0 V",0.0,T_chord_total,1.9474390303533846
+phase,"AoA 0 deg, 0 V",30.0,T_chord_total,1.9498207511814833
+phase,"AoA 0 deg, 0 V",60.0,T_chord_total,1.9507457876238272
+phase,"AoA 0 deg, 0 V",90.0,T_chord_total,1.9493376072458404
+phase,"AoA 0 deg, 0 V",120.0,T_chord_total,1.946970372773657
+phase,"AoA 0 deg, 0 V",150.0,T_chord_total,1.9460069586563744
+phase,"AoA 0 deg, 0 V",180.0,T_chord_total,1.9474388632960327
+phase,"AoA 0 deg, 0 V",210.0,T_chord_total,1.9498213678487653
+phase,"AoA 0 deg, 0 V",240.0,T_chord_total,1.9507457876276106
+phase,"AoA 0 deg, 0 V",270.0,T_chord_total,1.9493376072458413
+phase,"AoA 0 deg, 0 V",300.0,T_chord_total,1.9469703727736614
+phase,"AoA 0 deg, 0 V",330.0,T_chord_total,1.9460069586563704
+phase,"AoA 0 deg, 0 V",360.0,T_chord_total,1.9474388632960284
+phase,"AoA 0 deg, 1600 V",0.0,T_chord_total,1.6175785099233342
+phase,"AoA 0 deg, 1600 V",30.0,T_chord_total,1.6209605340127382
+phase,"AoA 0 deg, 1600 V",60.0,T_chord_total,1.6222876829685673
+phase,"AoA 0 deg, 1600 V",90.0,T_chord_total,1.6201936867758102
+phase,"AoA 0 deg, 1600 V",120.0,T_chord_total,1.616706680894022
+phase,"AoA 0 deg, 1600 V",150.0,T_chord_total,1.615417291066961
+phase,"AoA 0 deg, 1600 V",180.0,T_chord_total,1.6175787521995855
+phase,"AoA 0 deg, 1600 V",210.0,T_chord_total,1.6209605340649704
+phase,"AoA 0 deg, 1600 V",240.0,T_chord_total,1.622287682968572
+phase,"AoA 0 deg, 1600 V",270.0,T_chord_total,1.620193686775814
+phase,"AoA 0 deg, 1600 V",300.0,T_chord_total,1.6167066808940178
+phase,"AoA 0 deg, 1600 V",330.0,T_chord_total,1.6154172910669722
+phase,"AoA 0 deg, 1600 V",360.0,T_chord_total,1.6175787521995775
+phase,"AoA 6 deg, 0 V",0.0,T_chord_total,1.9548899112257456
+phase,"AoA 6 deg, 0 V",30.0,T_chord_total,1.9598295103816867
+phase,"AoA 6 deg, 0 V",60.0,T_chord_total,1.9616808391142184
+phase,"AoA 6 deg, 0 V",90.0,T_chord_total,1.9593482994264257
+phase,"AoA 6 deg, 0 V",120.0,T_chord_total,1.9543834663225275
+phase,"AoA 6 deg, 0 V",150.0,T_chord_total,1.9497126663812048
+phase,"AoA 6 deg, 0 V",180.0,T_chord_total,1.9473204497950012
+phase,"AoA 6 deg, 0 V",210.0,T_chord_total,1.9467890487957693
+phase,"AoA 6 deg, 0 V",240.0,T_chord_total,1.9466366565006759
+phase,"AoA 6 deg, 0 V",270.0,T_chord_total,1.9462146147209551
+phase,"AoA 6 deg, 0 V",300.0,T_chord_total,1.9466992952253752
+phase,"AoA 6 deg, 0 V",330.0,T_chord_total,1.9497087404560094
+phase,"AoA 6 deg, 0 V",360.0,T_chord_total,1.9548901581333373
+phase,"AoA 6 deg, 1600 V",0.0,T_chord_total,1.6282087970443246
+phase,"AoA 6 deg, 1600 V",30.0,T_chord_total,1.635045428054958
+phase,"AoA 6 deg, 1600 V",60.0,T_chord_total,1.6374859563204305
+phase,"AoA 6 deg, 1600 V",90.0,T_chord_total,1.6341078615711606
+phase,"AoA 6 deg, 1600 V",120.0,T_chord_total,1.6270280776797723
+phase,"AoA 6 deg, 1600 V",150.0,T_chord_total,1.620411472452443
+phase,"AoA 6 deg, 1600 V",180.0,T_chord_total,1.616982386977
+phase,"AoA 6 deg, 1600 V",210.0,T_chord_total,1.6163556933705236
+phase,"AoA 6 deg, 1600 V",240.0,T_chord_total,1.6161712769294108
+phase,"AoA 6 deg, 1600 V",270.0,T_chord_total,1.6155905405589557
+phase,"AoA 6 deg, 1600 V",300.0,T_chord_total,1.616376365097509
+phase,"AoA 6 deg, 1600 V",330.0,T_chord_total,1.6207517439819215
+phase,"AoA 6 deg, 1600 V",360.0,T_chord_total,1.6282086358426437
+phase,"AoA 12 deg, 0 V",0.0,T_chord_total,1.968238965752724
+phase,"AoA 12 deg, 0 V",30.0,T_chord_total,1.9750452889366916
+phase,"AoA 12 deg, 0 V",60.0,T_chord_total,1.9775404600867816
+phase,"AoA 12 deg, 0 V",90.0,T_chord_total,1.974460415863927
+phase,"AoA 12 deg, 0 V",120.0,T_chord_total,1.9673149021650862
+phase,"AoA 12 deg, 0 V",150.0,T_chord_total,1.9595423273898738
+phase,"AoA 12 deg, 0 V",180.0,T_chord_total,1.953847764005659
+phase,"AoA 12 deg, 0 V",210.0,T_chord_total,1.9507839043837651
+phase,"AoA 12 deg, 0 V",240.0,T_chord_total,1.94964030594467
+phase,"AoA 12 deg, 0 V",270.0,T_chord_total,1.9502854758240096
+phase,"AoA 12 deg, 0 V",300.0,T_chord_total,1.9535729359745255
+phase,"AoA 12 deg, 0 V",330.0,T_chord_total,1.9600364763198044
+phase,"AoA 12 deg, 0 V",360.0,T_chord_total,1.9682390314920397
+phase,"AoA 12 deg, 1600 V",0.0,T_chord_total,1.6464956312189907
+phase,"AoA 12 deg, 1600 V",30.0,T_chord_total,1.6556154416386117
+phase,"AoA 12 deg, 1600 V",60.0,T_chord_total,1.6588322011369345
+phase,"AoA 12 deg, 1600 V",90.0,T_chord_total,1.6544866528199311
+phase,"AoA 12 deg, 1600 V",120.0,T_chord_total,1.6445981094316293
+phase,"AoA 12 deg, 1600 V",150.0,T_chord_total,1.633838394041495
+phase,"AoA 12 deg, 1600 V",180.0,T_chord_total,1.6259084287413663
+phase,"AoA 12 deg, 1600 V",210.0,T_chord_total,1.6215975361923878
+phase,"AoA 12 deg, 1600 V",240.0,T_chord_total,1.6201220950125441
+phase,"AoA 12 deg, 1600 V",270.0,T_chord_total,1.621177827360626
+phase,"AoA 12 deg, 1600 V",300.0,T_chord_total,1.625998348731108
+phase,"AoA 12 deg, 1600 V",330.0,T_chord_total,1.6352508509930002
+phase,"AoA 12 deg, 1600 V",360.0,T_chord_total,1.646496440879772
+phase,"AoA 0 deg, 0 V",0.0,T_span_total,0.43890863093972127
+phase,"AoA 0 deg, 0 V",30.0,T_span_total,0.44381375515569566
+phase,"AoA 0 deg, 0 V",60.0,T_span_total,0.4466040586854256
+phase,"AoA 0 deg, 0 V",90.0,T_span_total,0.44500770667254175
+phase,"AoA 0 deg, 0 V",120.0,T_span_total,0.440585420969669
+phase,"AoA 0 deg, 0 V",150.0,T_span_total,0.43728864697642866
+phase,"AoA 0 deg, 0 V",180.0,T_span_total,0.43890863643230166
+phase,"AoA 0 deg, 0 V",210.0,T_span_total,0.44381389613087097
+phase,"AoA 0 deg, 0 V",240.0,T_span_total,0.44660405869093944
+phase,"AoA 0 deg, 0 V",270.0,T_span_total,0.4450077066725419
+phase,"AoA 0 deg, 0 V",300.0,T_span_total,0.44058542096966724
+phase,"AoA 0 deg, 0 V",330.0,T_span_total,0.4372886469764284
+phase,"AoA 0 deg, 0 V",360.0,T_span_total,0.4389086364323028
+phase,"AoA 0 deg, 1600 V",0.0,T_span_total,0.4429976741128321
+phase,"AoA 0 deg, 1600 V",30.0,T_span_total,0.4480260097827542
+phase,"AoA 0 deg, 1600 V",60.0,T_span_total,0.4507320469060361
+phase,"AoA 0 deg, 1600 V",90.0,T_span_total,0.44894343084431554
+phase,"AoA 0 deg, 1600 V",120.0,T_span_total,0.4443671024332601
+phase,"AoA 0 deg, 1600 V",150.0,T_span_total,0.44114066934206125
+phase,"AoA 0 deg, 1600 V",180.0,T_span_total,0.44299756701077897
+phase,"AoA 0 deg, 1600 V",210.0,T_span_total,0.4480260097951936
+phase,"AoA 0 deg, 1600 V",240.0,T_span_total,0.45073204690603963
+phase,"AoA 0 deg, 1600 V",270.0,T_span_total,0.44894343084431454
+phase,"AoA 0 deg, 1600 V",300.0,T_span_total,0.4443671024332586
+phase,"AoA 0 deg, 1600 V",330.0,T_span_total,0.4411406693420596
+phase,"AoA 0 deg, 1600 V",360.0,T_span_total,0.44299756701077897
+phase,"AoA 6 deg, 0 V",0.0,T_span_total,0.4522296966608307
+phase,"AoA 6 deg, 0 V",30.0,T_span_total,0.46013955249755256
+phase,"AoA 6 deg, 0 V",60.0,T_span_total,0.4635023124691188
+phase,"AoA 6 deg, 0 V",90.0,T_span_total,0.461097461013009
+phase,"AoA 6 deg, 0 V",120.0,T_span_total,0.4543586499378528
+phase,"AoA 6 deg, 0 V",150.0,T_span_total,0.446649421235067
+phase,"AoA 6 deg, 0 V",180.0,T_span_total,0.4409818446766248
+phase,"AoA 6 deg, 0 V",210.0,T_span_total,0.4388022048698824
+phase,"AoA 6 deg, 0 V",240.0,T_span_total,0.4385564026701027
+phase,"AoA 6 deg, 0 V",270.0,T_span_total,0.4379452457005459
+phase,"AoA 6 deg, 0 V",300.0,T_span_total,0.43837271767924985
+phase,"AoA 6 deg, 0 V",330.0,T_span_total,0.44335926153794153
+phase,"AoA 6 deg, 0 V",360.0,T_span_total,0.45222953646131064
+phase,"AoA 6 deg, 1600 V",0.0,T_span_total,0.4566057263118686
+phase,"AoA 6 deg, 1600 V",30.0,T_span_total,0.4645833850063906
+phase,"AoA 6 deg, 1600 V",60.0,T_span_total,0.4678978437402018
+phase,"AoA 6 deg, 1600 V",90.0,T_span_total,0.46527659311707864
+phase,"AoA 6 deg, 1600 V",120.0,T_span_total,0.4582041866050392
+phase,"AoA 6 deg, 1600 V",150.0,T_span_total,0.450290831956398
+phase,"AoA 6 deg, 1600 V",180.0,T_span_total,0.44471275279779693
+phase,"AoA 6 deg, 1600 V",210.0,T_span_total,0.4426485377592193
+phase,"AoA 6 deg, 1600 V",240.0,T_span_total,0.44241835293156284
+phase,"AoA 6 deg, 1600 V",270.0,T_span_total,0.4417662014842934
+phase,"AoA 6 deg, 1600 V",300.0,T_span_total,0.44228204077315003
+phase,"AoA 6 deg, 1600 V",330.0,T_span_total,0.4475421908259338
+phase,"AoA 6 deg, 1600 V",360.0,T_span_total,0.456605674159499
+phase,"AoA 12 deg, 0 V",0.0,T_span_total,0.47107718197382925
+phase,"AoA 12 deg, 0 V",30.0,T_span_total,0.4796268139317555
+phase,"AoA 12 deg, 0 V",60.0,T_span_total,0.483046956806623
+phase,"AoA 12 deg, 0 V",90.0,T_span_total,0.4801649267263204
+phase,"AoA 12 deg, 0 V",120.0,T_span_total,0.47218542889502235
+phase,"AoA 12 deg, 0 V",150.0,T_span_total,0.4623823469426436
+phase,"AoA 12 deg, 0 V",180.0,T_span_total,0.45389285189162704
+phase,"AoA 12 deg, 0 V",210.0,T_span_total,0.44815323533019336
+phase,"AoA 12 deg, 0 V",240.0,T_span_total,0.4454943165773769
+phase,"AoA 12 deg, 0 V",270.0,T_span_total,0.44603055968809124
+phase,"AoA 12 deg, 0 V",300.0,T_span_total,0.4508957138449733
+phase,"AoA 12 deg, 0 V",330.0,T_span_total,0.4602484205265005
+phase,"AoA 12 deg, 0 V",360.0,T_span_total,0.47107728416659983
+phase,"AoA 12 deg, 1600 V",0.0,T_span_total,0.4757373744433275
+phase,"AoA 12 deg, 1600 V",30.0,T_span_total,0.4843749173906619
+phase,"AoA 12 deg, 1600 V",60.0,T_span_total,0.4877518754905721
+phase,"AoA 12 deg, 1600 V",90.0,T_span_total,0.48470315751647985
+phase,"AoA 12 deg, 1600 V",120.0,T_span_total,0.47641776834629485
+phase,"AoA 12 deg, 1600 V",150.0,T_span_total,0.46624786775736965
+phase,"AoA 12 deg, 1600 V",180.0,T_span_total,0.4575541728135645
+phase,"AoA 12 deg, 1600 V",210.0,T_span_total,0.45188222585436305
+phase,"AoA 12 deg, 1600 V",240.0,T_span_total,0.44930736101085256
+phase,"AoA 12 deg, 1600 V",270.0,T_span_total,0.44997644603924264
+phase,"AoA 12 deg, 1600 V",300.0,T_span_total,0.45508828470316953
+phase,"AoA 12 deg, 1600 V",330.0,T_span_total,0.46467807159027213
+phase,"AoA 12 deg, 1600 V",360.0,T_span_total,0.475737427138346
+phase,"AoA 0 deg, 0 V",0.0,dea_force_mean_mN,32.050362986815266
+phase,"AoA 0 deg, 0 V",30.0,dea_force_mean_mN,32.07644770565404
+phase,"AoA 0 deg, 0 V",60.0,dea_force_mean_mN,32.082903032755326
+phase,"AoA 0 deg, 0 V",90.0,dea_force_mean_mN,32.06258444264937
+phase,"AoA 0 deg, 0 V",120.0,dea_force_mean_mN,32.03536785171268
+phase,"AoA 0 deg, 0 V",150.0,dea_force_mean_mN,32.02951679478733
+phase,"AoA 0 deg, 0 V",180.0,dea_force_mean_mN,32.05036032818394
+phase,"AoA 0 deg, 0 V",210.0,dea_force_mean_mN,32.07645792361008
+phase,"AoA 0 deg, 0 V",240.0,dea_force_mean_mN,32.082903032804815
+phase,"AoA 0 deg, 0 V",270.0,dea_force_mean_mN,32.06258444264933
+phase,"AoA 0 deg, 0 V",300.0,dea_force_mean_mN,32.03536785171279
+phase,"AoA 0 deg, 0 V",330.0,dea_force_mean_mN,32.02951679478725
+phase,"AoA 0 deg, 0 V",360.0,dea_force_mean_mN,32.050360328183864
+phase,"AoA 0 deg, 1600 V",0.0,dea_force_mean_mN,26.151142536679142
+phase,"AoA 0 deg, 1600 V",30.0,dea_force_mean_mN,26.190094305559217
+phase,"AoA 0 deg, 1600 V",60.0,dea_force_mean_mN,26.199002586156073
+phase,"AoA 0 deg, 1600 V",90.0,dea_force_mean_mN,26.169254607280784
+phase,"AoA 0 deg, 1600 V",120.0,dea_force_mean_mN,26.12944258069044
+phase,"AoA 0 deg, 1600 V",150.0,dea_force_mean_mN,26.120292993733294
+phase,"AoA 0 deg, 1600 V",180.0,dea_force_mean_mN,26.15114693342881
+phase,"AoA 0 deg, 1600 V",210.0,dea_force_mean_mN,26.19009430637334
+phase,"AoA 0 deg, 1600 V",240.0,dea_force_mean_mN,26.199002586156183
+phase,"AoA 0 deg, 1600 V",270.0,dea_force_mean_mN,26.16925460728082
+phase,"AoA 0 deg, 1600 V",300.0,dea_force_mean_mN,26.129442580690338
+phase,"AoA 0 deg, 1600 V",330.0,dea_force_mean_mN,26.1202929937335
+phase,"AoA 0 deg, 1600 V",360.0,dea_force_mean_mN,26.151146933428656
+phase,"AoA 6 deg, 0 V",0.0,dea_force_mean_mN,32.13047037419436
+phase,"AoA 6 deg, 0 V",30.0,dea_force_mean_mN,32.17883271273699
+phase,"AoA 6 deg, 0 V",60.0,dea_force_mean_mN,32.19035727831797
+phase,"AoA 6 deg, 0 V",90.0,dea_force_mean_mN,32.157076811323144
+phase,"AoA 6 deg, 0 V",120.0,dea_force_mean_mN,32.09915996862618
+phase,"AoA 6 deg, 0 V",150.0,dea_force_mean_mN,32.05239986342807
+phase,"AoA 6 deg, 0 V",180.0,dea_force_mean_mN,32.03394416564529
+phase,"AoA 6 deg, 0 V",210.0,dea_force_mean_mN,32.0339458287195
+phase,"AoA 6 deg, 0 V",240.0,dea_force_mean_mN,32.033601799441634
+phase,"AoA 6 deg, 0 V",270.0,dea_force_mean_mN,32.02882495886145
+phase,"AoA 6 deg, 0 V",300.0,dea_force_mean_mN,32.036195654250356
+phase,"AoA 6 deg, 0 V",330.0,dea_force_mean_mN,32.072697746754336
+phase,"AoA 6 deg, 0 V",360.0,dea_force_mean_mN,32.1304750973838
+phase,"AoA 6 deg, 1600 V",0.0,dea_force_mean_mN,26.2682755250765
+phase,"AoA 6 deg, 1600 V",30.0,dea_force_mean_mN,26.336823792955638
+phase,"AoA 6 deg, 1600 V",60.0,dea_force_mean_mN,26.352913891027622
+phase,"AoA 6 deg, 1600 V",90.0,dea_force_mean_mN,26.30550611172526
+phase,"AoA 6 deg, 1600 V",120.0,dea_force_mean_mN,26.222113086537597
+phase,"AoA 6 deg, 1600 V",150.0,dea_force_mean_mN,26.153227828311255
+phase,"AoA 6 deg, 1600 V",180.0,dea_force_mean_mN,26.126474346517796
+phase,"AoA 6 deg, 1600 V",210.0,dea_force_mean_mN,26.126279239276517
+phase,"AoA 6 deg, 1600 V",240.0,dea_force_mean_mN,26.12620236421951
+phase,"AoA 6 deg, 1600 V",270.0,dea_force_mean_mN,26.119450554535174
+phase,"AoA 6 deg, 1600 V",300.0,dea_force_mean_mN,26.130644394176965
+phase,"AoA 6 deg, 1600 V",330.0,dea_force_mean_mN,26.185137506895874
+phase,"AoA 6 deg, 1600 V",360.0,dea_force_mean_mN,26.268273178219438
+phase,"AoA 12 deg, 0 V",0.0,dea_force_mean_mN,32.2631013879371
+phase,"AoA 12 deg, 0 V",30.0,dea_force_mean_mN,32.3295677888463
+phase,"AoA 12 deg, 0 V",60.0,dea_force_mean_mN,32.346548405311616
+phase,"AoA 12 deg, 0 V",90.0,dea_force_mean_mN,32.303151758961626
+phase,"AoA 12 deg, 0 V",120.0,dea_force_mean_mN,32.21934933401936
+phase,"AoA 12 deg, 0 V",150.0,dea_force_mean_mN,32.13627909851853
+phase,"AoA 12 deg, 0 V",180.0,dea_force_mean_mN,32.0825213959647
+phase,"AoA 12 deg, 0 V",210.0,dea_force_mean_mN,32.05813627399762
+phase,"AoA 12 deg, 0 V",240.0,dea_force_mean_mN,32.05248719873926
+phase,"AoA 12 deg, 0 V",270.0,dea_force_mean_mN,32.063935897522086
+phase,"AoA 12 deg, 0 V",300.0,dea_force_mean_mN,32.104017050354926
+phase,"AoA 12 deg, 0 V",330.0,dea_force_mean_mN,32.17706219725892
+phase,"AoA 12 deg, 0 V",360.0,dea_force_mean_mN,32.263102222965664
+phase,"AoA 12 deg, 1600 V",0.0,dea_force_mean_mN,26.45505696165861
+phase,"AoA 12 deg, 1600 V",30.0,dea_force_mean_mN,26.546425649136612
+phase,"AoA 12 deg, 1600 V",60.0,dea_force_mean_mN,26.569601043470573
+phase,"AoA 12 deg, 1600 V",90.0,dea_force_mean_mN,26.510599410399106
+phase,"AoA 12 deg, 1600 V",120.0,dea_force_mean_mN,26.393779572896264
+phase,"AoA 12 deg, 1600 V",150.0,dea_force_mean_mN,26.274588948006024
+phase,"AoA 12 deg, 1600 V",180.0,dea_force_mean_mN,26.196097230287265
+phase,"AoA 12 deg, 1600 V",210.0,dea_force_mean_mN,26.16137409848062
+phase,"AoA 12 deg, 1600 V",240.0,dea_force_mean_mN,26.153570302336767
+phase,"AoA 12 deg, 1600 V",270.0,dea_force_mean_mN,26.171251718921056
+phase,"AoA 12 deg, 1600 V",300.0,dea_force_mean_mN,26.23046854749946
+phase,"AoA 12 deg, 1600 V",330.0,dea_force_mean_mN,26.334414208603498
+phase,"AoA 12 deg, 1600 V",360.0,dea_force_mean_mN,26.45506963519783
+phase,"AoA 0 deg, 0 V",0.0,dea_strain_pct,-4.303960108618831
+phase,"AoA 0 deg, 0 V",30.0,dea_strain_pct,-4.2999545049405175
+phase,"AoA 0 deg, 0 V",60.0,dea_strain_pct,-4.298977918830394
+phase,"AoA 0 deg, 0 V",90.0,dea_strain_pct,-4.3021151413543794
+phase,"AoA 0 deg, 0 V",120.0,dea_strain_pct,-4.306296376994245
+phase,"AoA 0 deg, 0 V",150.0,dea_strain_pct,-4.307177863242517
+phase,"AoA 0 deg, 0 V",180.0,dea_strain_pct,-4.303960518406802
+phase,"AoA 0 deg, 0 V",210.0,dea_strain_pct,-4.299952933309004
+phase,"AoA 0 deg, 0 V",240.0,dea_strain_pct,-4.298977918822966
+phase,"AoA 0 deg, 0 V",270.0,dea_strain_pct,-4.3021151413543794
+phase,"AoA 0 deg, 0 V",300.0,dea_strain_pct,-4.306296376994245
+phase,"AoA 0 deg, 0 V",330.0,dea_strain_pct,-4.307177863242517
+phase,"AoA 0 deg, 0 V",360.0,dea_strain_pct,-4.303960518406802
+phase,"AoA 0 deg, 1600 V",0.0,dea_strain_pct,-4.003722751668937
+phase,"AoA 0 deg, 1600 V",30.0,dea_strain_pct,-3.997691899471667
+phase,"AoA 0 deg, 1600 V",60.0,dea_strain_pct,-3.996329350291916
+phase,"AoA 0 deg, 1600 V",90.0,dea_strain_pct,-4.000954526101152
+phase,"AoA 0 deg, 1600 V",120.0,dea_strain_pct,-4.007119750283761
+phase,"AoA 0 deg, 1600 V",150.0,dea_strain_pct,-4.0085170205653835
+phase,"AoA 0 deg, 1600 V",180.0,dea_strain_pct,-4.003722069746241
+phase,"AoA 0 deg, 1600 V",210.0,dea_strain_pct,-3.997691899345379
+phase,"AoA 0 deg, 1600 V",240.0,dea_strain_pct,-3.996329350291894
+phase,"AoA 0 deg, 1600 V",270.0,dea_strain_pct,-4.000954526101152
+phase,"AoA 0 deg, 1600 V",300.0,dea_strain_pct,-4.007119750283805
+phase,"AoA 0 deg, 1600 V",330.0,dea_strain_pct,-4.008517020565339
+phase,"AoA 0 deg, 1600 V",360.0,dea_strain_pct,-4.003722069746251
+phase,"AoA 6 deg, 0 V",0.0,dea_strain_pct,-4.291644062934685
+phase,"AoA 6 deg, 0 V",30.0,dea_strain_pct,-4.284216657060613
+phase,"AoA 6 deg, 0 V",60.0,dea_strain_pct,-4.282463875703724
+phase,"AoA 6 deg, 0 V",90.0,dea_strain_pct,-4.287602061200879
+phase,"AoA 6 deg, 0 V",120.0,dea_strain_pct,-4.296511451735463
+phase,"AoA 6 deg, 0 V",150.0,dea_strain_pct,-4.303681455279607
+phase,"AoA 6 deg, 0 V",180.0,dea_strain_pct,-4.306493043300952
+phase,"AoA 6 deg, 0 V",210.0,dea_strain_pct,-4.306481187606048
+phase,"AoA 6 deg, 0 V",240.0,dea_strain_pct,-4.30653903309458
+phase,"AoA 6 deg, 0 V",270.0,dea_strain_pct,-4.30728086965404
+phase,"AoA 6 deg, 0 V",300.0,dea_strain_pct,-4.306146372590069
+phase,"AoA 6 deg, 0 V",330.0,dea_strain_pct,-4.300528118855606
+phase,"AoA 6 deg, 0 V",360.0,dea_strain_pct,-4.291643332776207
+phase,"AoA 6 deg, 1600 V",0.0,dea_strain_pct,-3.985568421029906
+phase,"AoA 6 deg, 1600 V",30.0,dea_strain_pct,-3.974949836321595
+phase,"AoA 6 deg, 1600 V",60.0,dea_strain_pct,-3.972475758492444
+phase,"AoA 6 deg, 1600 V",90.0,dea_strain_pct,-3.979849998404228
+phase,"AoA 6 deg, 1600 V",120.0,dea_strain_pct,-3.9927828925165887
+phase,"AoA 6 deg, 1600 V",150.0,dea_strain_pct,-4.003436756358292
+phase,"AoA 6 deg, 1600 V",180.0,dea_strain_pct,-4.007552258193126
+phase,"AoA 6 deg, 1600 V",210.0,dea_strain_pct,-4.007569366454378
+phase,"AoA 6 deg, 1600 V",240.0,dea_strain_pct,-4.0075868187363195
+phase,"AoA 6 deg, 1600 V",270.0,dea_strain_pct,-4.0086415990472135
+phase,"AoA 6 deg, 1600 V",300.0,dea_strain_pct,-4.00690627255893
+phase,"AoA 6 deg, 1600 V",330.0,dea_strain_pct,-3.9984554342995304
+phase,"AoA 6 deg, 1600 V",360.0,dea_strain_pct,-3.9855687855249733
+phase,"AoA 12 deg, 0 V",0.0,dea_strain_pct,-4.271226045767451
+phase,"AoA 12 deg, 0 V",30.0,dea_strain_pct,-4.261004443055938
+phase,"AoA 12 deg, 0 V",60.0,dea_strain_pct,-4.258411354348091
+phase,"AoA 12 deg, 0 V",90.0,dea_strain_pct,-4.265116410088254
+phase,"AoA 12 deg, 0 V",120.0,dea_strain_pct,-4.278023910652151
+phase,"AoA 12 deg, 0 V",150.0,dea_strain_pct,-4.290789936977168
+phase,"AoA 12 deg, 0 V",180.0,dea_strain_pct,-4.29903105491336
+phase,"AoA 12 deg, 0 V",210.0,dea_strain_pct,-4.302760865959154
+phase,"AoA 12 deg, 0 V",240.0,dea_strain_pct,-4.303624286001606
+phase,"AoA 12 deg, 0 V",270.0,dea_strain_pct,-4.301866484118522
+phase,"AoA 12 deg, 0 V",300.0,dea_strain_pct,-4.295703545153062
+phase,"AoA 12 deg, 0 V",330.0,dea_strain_pct,-4.284465382569424
+phase,"AoA 12 deg, 0 V",360.0,dea_strain_pct,-4.271225914740928
+phase,"AoA 12 deg, 1600 V",0.0,dea_strain_pct,-3.9565748906223885
+phase,"AoA 12 deg, 1600 V",30.0,dea_strain_pct,-3.94240020586194
+phase,"AoA 12 deg, 1600 V",60.0,dea_strain_pct,-3.9388253302905962
+phase,"AoA 12 deg, 1600 V",90.0,dea_strain_pct,-3.948014894828078
+phase,"AoA 12 deg, 1600 V",120.0,dea_strain_pct,-3.9661575661914195
+phase,"AoA 12 deg, 1600 V",150.0,dea_strain_pct,-3.9846299650118655
+phase,"AoA 12 deg, 1600 V",180.0,dea_strain_pct,-3.996767754563768
+phase,"AoA 12 deg, 1600 V",210.0,dea_strain_pct,-4.002125959882729
+phase,"AoA 12 deg, 1600 V",240.0,dea_strain_pct,-4.0033295709678285
+phase,"AoA 12 deg, 1600 V",270.0,dea_strain_pct,-4.000592882052423
+phase,"AoA 12 deg, 1600 V",300.0,dea_strain_pct,-3.991415604817794
+phase,"AoA 12 deg, 1600 V",330.0,dea_strain_pct,-3.975294628710868
+phase,"AoA 12 deg, 1600 V",360.0,dea_strain_pct,-3.956572916732304
+phase,"AoA 0 deg, 0 V",0.0,te_z_mid_mm,0.033404130079589756
+phase,"AoA 0 deg, 0 V",30.0,te_z_mid_mm,0.042841333250898526
+phase,"AoA 0 deg, 0 V",60.0,te_z_mid_mm,0.04107900859906002
+phase,"AoA 0 deg, 0 V",90.0,te_z_mid_mm,0.028271026070841004
+phase,"AoA 0 deg, 0 V",120.0,te_z_mid_mm,0.0076049106882580715
+phase,"AoA 0 deg, 0 V",150.0,te_z_mid_mm,-0.015065970440924177
+phase,"AoA 0 deg, 0 V",180.0,te_z_mid_mm,-0.03340518607930177
+phase,"AoA 0 deg, 0 V",210.0,te_z_mid_mm,-0.04284146318657732
+phase,"AoA 0 deg, 0 V",240.0,te_z_mid_mm,-0.04107900792135825
+phase,"AoA 0 deg, 0 V",270.0,te_z_mid_mm,-0.028271026070954452
+phase,"AoA 0 deg, 0 V",300.0,te_z_mid_mm,-0.007604910688258088
+phase,"AoA 0 deg, 0 V",330.0,te_z_mid_mm,0.0150659704409242
+phase,"AoA 0 deg, 0 V",360.0,te_z_mid_mm,0.03340518607930167
+phase,"AoA 0 deg, 1600 V",0.0,te_z_mid_mm,0.03904498099046207
+phase,"AoA 0 deg, 1600 V",30.0,te_z_mid_mm,0.05011637249647946
+phase,"AoA 0 deg, 1600 V",60.0,te_z_mid_mm,0.048132480461802005
+phase,"AoA 0 deg, 1600 V",90.0,te_z_mid_mm,0.033250911317909665
+phase,"AoA 0 deg, 1600 V",120.0,te_z_mid_mm,0.009085200993884832
+phase,"AoA 0 deg, 1600 V",150.0,te_z_mid_mm,-0.017523618840423874
+phase,"AoA 0 deg, 1600 V",180.0,te_z_mid_mm,-0.03904267574181015
+phase,"AoA 0 deg, 1600 V",210.0,te_z_mid_mm,-0.05011637216232179
+phase,"AoA 0 deg, 1600 V",240.0,te_z_mid_mm,-0.04813248046148067
+phase,"AoA 0 deg, 1600 V",270.0,te_z_mid_mm,-0.03325091131790964
+phase,"AoA 0 deg, 1600 V",300.0,te_z_mid_mm,-0.00908520099388481
+phase,"AoA 0 deg, 1600 V",330.0,te_z_mid_mm,0.01752361884042372
+phase,"AoA 0 deg, 1600 V",360.0,te_z_mid_mm,0.039042675741810105
+phase,"AoA 6 deg, 0 V",0.0,te_z_mid_mm,0.060563833878857526
+phase,"AoA 6 deg, 0 V",30.0,te_z_mid_mm,0.06994073462906833
+phase,"AoA 6 deg, 0 V",60.0,te_z_mid_mm,0.06841413325647036
+phase,"AoA 6 deg, 0 V",90.0,te_z_mid_mm,0.05595405673492033
+phase,"AoA 6 deg, 0 V",120.0,te_z_mid_mm,0.03545803201337073
+phase,"AoA 6 deg, 0 V",150.0,te_z_mid_mm,0.012660183850368305
+phase,"AoA 6 deg, 0 V",180.0,te_z_mid_mm,-0.0059102834829714195
+phase,"AoA 6 deg, 0 V",210.0,te_z_mid_mm,-0.015337114746921694
+phase,"AoA 6 deg, 0 V",240.0,te_z_mid_mm,-0.013328384890780937
+phase,"AoA 6 deg, 0 V",270.0,te_z_mid_mm,-0.00030117637596144856
+phase,"AoA 6 deg, 0 V",300.0,te_z_mid_mm,0.020277710013851914
+phase,"AoA 6 deg, 0 V",330.0,te_z_mid_mm,0.04255875244471418
+phase,"AoA 6 deg, 0 V",360.0,te_z_mid_mm,0.06056968072692306
+phase,"AoA 6 deg, 1600 V",0.0,te_z_mid_mm,0.07072487334741966
+phase,"AoA 6 deg, 1600 V",30.0,te_z_mid_mm,0.08153792541819081
+phase,"AoA 6 deg, 1600 V",60.0,te_z_mid_mm,0.07980449637717993
+phase,"AoA 6 deg, 1600 V",90.0,te_z_mid_mm,0.06546906542618759
+phase,"AoA 6 deg, 1600 V",120.0,te_z_mid_mm,0.04172881340690548
+phase,"AoA 6 deg, 1600 V",150.0,te_z_mid_mm,0.01512475180793933
+phase,"AoA 6 deg, 1600 V",180.0,te_z_mid_mm,-0.006673873515468596
+phase,"AoA 6 deg, 1600 V",210.0,te_z_mid_mm,-0.01781301146931278
+phase,"AoA 6 deg, 1600 V",240.0,te_z_mid_mm,-0.0155488799021508
+phase,"AoA 6 deg, 1600 V",270.0,te_z_mid_mm,-0.00033122469168592167
+phase,"AoA 6 deg, 1600 V",300.0,te_z_mid_mm,0.02377919000660903
+phase,"AoA 6 deg, 1600 V",330.0,te_z_mid_mm,0.049828507002568544
+phase,"AoA 6 deg, 1600 V",360.0,te_z_mid_mm,0.07072157478948002
+phase,"AoA 12 deg, 0 V",0.0,te_z_mid_mm,0.0871134372227968
+phase,"AoA 12 deg, 0 V",30.0,te_z_mid_mm,0.09629742419039641
+phase,"AoA 12 deg, 0 V",60.0,te_z_mid_mm,0.09498529935016267
+phase,"AoA 12 deg, 0 V",90.0,te_z_mid_mm,0.08293694103732385
+phase,"AoA 12 deg, 0 V",120.0,te_z_mid_mm,0.06281154396631322
+phase,"AoA 12 deg, 0 V",150.0,te_z_mid_mm,0.04019872888293879
+phase,"AoA 12 deg, 0 V",180.0,te_z_mid_mm,0.021692883252776737
+phase,"AoA 12 deg, 0 V",210.0,te_z_mid_mm,0.012364944542102737
+phase,"AoA 12 deg, 0 V",240.0,te_z_mid_mm,0.014571116925518579
+phase,"AoA 12 deg, 0 V",270.0,te_z_mid_mm,0.027671925004674393
+phase,"AoA 12 deg, 0 V",300.0,te_z_mid_mm,0.047956695762748226
+phase,"AoA 12 deg, 0 V",330.0,te_z_mid_mm,0.06965592320128977
+phase,"AoA 12 deg, 0 V",360.0,te_z_mid_mm,0.08711614526841156
+phase,"AoA 12 deg, 1600 V",0.0,te_z_mid_mm,0.10119174247304069
+phase,"AoA 12 deg, 1600 V",30.0,te_z_mid_mm,0.11159001628512803
+phase,"AoA 12 deg, 1600 V",60.0,te_z_mid_mm,0.11006795781355266
+phase,"AoA 12 deg, 1600 V",90.0,te_z_mid_mm,0.09637887531088855
+phase,"AoA 12 deg, 1600 V",120.0,te_z_mid_mm,0.07336855334887264
+phase,"AoA 12 deg, 1600 V",150.0,te_z_mid_mm,0.04727226812196236
+phase,"AoA 12 deg, 1600 V",180.0,te_z_mid_mm,0.02574210722316768
+phase,"AoA 12 deg, 1600 V",210.0,te_z_mid_mm,0.01479916769718169
+phase,"AoA 12 deg, 1600 V",240.0,te_z_mid_mm,0.017316705008029242
+phase,"AoA 12 deg, 1600 V",270.0,te_z_mid_mm,0.03257758232373166
+phase,"AoA 12 deg, 1600 V",300.0,te_z_mid_mm,0.05618386392953983
+phase,"AoA 12 deg, 1600 V",330.0,te_z_mid_mm,0.0812429248490983
+phase,"AoA 12 deg, 1600 V",360.0,te_z_mid_mm,0.10119271268838012
+phase,"AoA 0 deg, 0 V",0.0,alpha_eff_75_deg,0.0
+phase,"AoA 0 deg, 0 V",30.0,alpha_eff_75_deg,4.935762622695303
+phase,"AoA 0 deg, 0 V",60.0,alpha_eff_75_deg,8.507130964668162
+phase,"AoA 0 deg, 0 V",90.0,alpha_eff_75_deg,9.799337056589362
+phase,"AoA 0 deg, 0 V",120.0,alpha_eff_75_deg,8.507130964668164
+phase,"AoA 0 deg, 0 V",150.0,alpha_eff_75_deg,4.935762622695303
+phase,"AoA 0 deg, 0 V",180.0,alpha_eff_75_deg,1.2119125370447276e-15
+phase,"AoA 0 deg, 0 V",210.0,alpha_eff_75_deg,-4.935762622695305
+phase,"AoA 0 deg, 0 V",240.0,alpha_eff_75_deg,-8.507130964668162
+phase,"AoA 0 deg, 0 V",270.0,alpha_eff_75_deg,-9.799337056589362
+phase,"AoA 0 deg, 0 V",300.0,alpha_eff_75_deg,-8.507130964668162
+phase,"AoA 0 deg, 0 V",330.0,alpha_eff_75_deg,-4.935762622695307
+phase,"AoA 0 deg, 0 V",360.0,alpha_eff_75_deg,-2.4238250740894552e-15
+phase,"AoA 0 deg, 1600 V",0.0,alpha_eff_75_deg,0.0
+phase,"AoA 0 deg, 1600 V",30.0,alpha_eff_75_deg,4.935762622695303
+phase,"AoA 0 deg, 1600 V",60.0,alpha_eff_75_deg,8.507130964668162
+phase,"AoA 0 deg, 1600 V",90.0,alpha_eff_75_deg,9.799337056589362
+phase,"AoA 0 deg, 1600 V",120.0,alpha_eff_75_deg,8.507130964668164
+phase,"AoA 0 deg, 1600 V",150.0,alpha_eff_75_deg,4.935762622695303
+phase,"AoA 0 deg, 1600 V",180.0,alpha_eff_75_deg,1.2119125370447276e-15
+phase,"AoA 0 deg, 1600 V",210.0,alpha_eff_75_deg,-4.935762622695305
+phase,"AoA 0 deg, 1600 V",240.0,alpha_eff_75_deg,-8.507130964668162
+phase,"AoA 0 deg, 1600 V",270.0,alpha_eff_75_deg,-9.799337056589362
+phase,"AoA 0 deg, 1600 V",300.0,alpha_eff_75_deg,-8.507130964668162
+phase,"AoA 0 deg, 1600 V",330.0,alpha_eff_75_deg,-4.935762622695307
+phase,"AoA 0 deg, 1600 V",360.0,alpha_eff_75_deg,-2.4238250740894552e-15
+phase,"AoA 6 deg, 0 V",0.0,alpha_eff_75_deg,6.000000000000001
+phase,"AoA 6 deg, 0 V",30.0,alpha_eff_75_deg,10.935762622695302
+phase,"AoA 6 deg, 0 V",60.0,alpha_eff_75_deg,14.50713096466816
+phase,"AoA 6 deg, 0 V",90.0,alpha_eff_75_deg,15.79933705658936
+phase,"AoA 6 deg, 0 V",120.0,alpha_eff_75_deg,14.507130964668164
+phase,"AoA 6 deg, 0 V",150.0,alpha_eff_75_deg,10.935762622695302
+phase,"AoA 6 deg, 0 V",180.0,alpha_eff_75_deg,6.000000000000002
+phase,"AoA 6 deg, 0 V",210.0,alpha_eff_75_deg,1.0642373773046965
+phase,"AoA 6 deg, 0 V",240.0,alpha_eff_75_deg,-2.5071309646681614
+phase,"AoA 6 deg, 0 V",270.0,alpha_eff_75_deg,-3.799337056589362
+phase,"AoA 6 deg, 0 V",300.0,alpha_eff_75_deg,-2.5071309646681614
+phase,"AoA 6 deg, 0 V",330.0,alpha_eff_75_deg,1.0642373773046931
+phase,"AoA 6 deg, 0 V",360.0,alpha_eff_75_deg,5.999999999999998
+phase,"AoA 6 deg, 1600 V",0.0,alpha_eff_75_deg,6.000000000000001
+phase,"AoA 6 deg, 1600 V",30.0,alpha_eff_75_deg,10.935762622695302
+phase,"AoA 6 deg, 1600 V",60.0,alpha_eff_75_deg,14.50713096466816
+phase,"AoA 6 deg, 1600 V",90.0,alpha_eff_75_deg,15.79933705658936
+phase,"AoA 6 deg, 1600 V",120.0,alpha_eff_75_deg,14.507130964668164
+phase,"AoA 6 deg, 1600 V",150.0,alpha_eff_75_deg,10.935762622695302
+phase,"AoA 6 deg, 1600 V",180.0,alpha_eff_75_deg,6.000000000000002
+phase,"AoA 6 deg, 1600 V",210.0,alpha_eff_75_deg,1.0642373773046965
+phase,"AoA 6 deg, 1600 V",240.0,alpha_eff_75_deg,-2.5071309646681614
+phase,"AoA 6 deg, 1600 V",270.0,alpha_eff_75_deg,-3.799337056589362
+phase,"AoA 6 deg, 1600 V",300.0,alpha_eff_75_deg,-2.5071309646681614
+phase,"AoA 6 deg, 1600 V",330.0,alpha_eff_75_deg,1.0642373773046931
+phase,"AoA 6 deg, 1600 V",360.0,alpha_eff_75_deg,5.999999999999998
+phase,"AoA 12 deg, 0 V",0.0,alpha_eff_75_deg,12.000000000000002
+phase,"AoA 12 deg, 0 V",30.0,alpha_eff_75_deg,16.935762622695304
+phase,"AoA 12 deg, 0 V",60.0,alpha_eff_75_deg,20.50713096466816
+phase,"AoA 12 deg, 0 V",90.0,alpha_eff_75_deg,21.799337056589362
+phase,"AoA 12 deg, 0 V",120.0,alpha_eff_75_deg,20.507130964668164
+phase,"AoA 12 deg, 0 V",150.0,alpha_eff_75_deg,16.935762622695304
+phase,"AoA 12 deg, 0 V",180.0,alpha_eff_75_deg,12.000000000000002
+phase,"AoA 12 deg, 0 V",210.0,alpha_eff_75_deg,7.064237377304697
+phase,"AoA 12 deg, 0 V",240.0,alpha_eff_75_deg,3.492869035331839
+phase,"AoA 12 deg, 0 V",270.0,alpha_eff_75_deg,2.200662943410639
+phase,"AoA 12 deg, 0 V",300.0,alpha_eff_75_deg,3.492869035331839
+phase,"AoA 12 deg, 0 V",330.0,alpha_eff_75_deg,7.064237377304694
+phase,"AoA 12 deg, 0 V",360.0,alpha_eff_75_deg,11.999999999999998
+phase,"AoA 12 deg, 1600 V",0.0,alpha_eff_75_deg,12.000000000000002
+phase,"AoA 12 deg, 1600 V",30.0,alpha_eff_75_deg,16.935762622695304
+phase,"AoA 12 deg, 1600 V",60.0,alpha_eff_75_deg,20.50713096466816
+phase,"AoA 12 deg, 1600 V",90.0,alpha_eff_75_deg,21.799337056589362
+phase,"AoA 12 deg, 1600 V",120.0,alpha_eff_75_deg,20.507130964668164
+phase,"AoA 12 deg, 1600 V",150.0,alpha_eff_75_deg,16.935762622695304
+phase,"AoA 12 deg, 1600 V",180.0,alpha_eff_75_deg,12.000000000000002
+phase,"AoA 12 deg, 1600 V",210.0,alpha_eff_75_deg,7.064237377304697
+phase,"AoA 12 deg, 1600 V",240.0,alpha_eff_75_deg,3.492869035331839
+phase,"AoA 12 deg, 1600 V",270.0,alpha_eff_75_deg,2.200662943410639
+phase,"AoA 12 deg, 1600 V",300.0,alpha_eff_75_deg,3.492869035331839
+phase,"AoA 12 deg, 1600 V",330.0,alpha_eff_75_deg,7.064237377304694
+phase,"AoA 12 deg, 1600 V",360.0,alpha_eff_75_deg,11.999999999999998
+phase,"AoA 0 deg, 0 V",0.0,lam_mem_max,1.0839463550251822
+phase,"AoA 0 deg, 0 V",30.0,lam_mem_max,1.0840016657477753
+phase,"AoA 0 deg, 0 V",60.0,lam_mem_max,1.0841039203200749
+phase,"AoA 0 deg, 0 V",90.0,lam_mem_max,1.0841248320311623
+phase,"AoA 0 deg, 0 V",120.0,lam_mem_max,1.0840426209072642
+phase,"AoA 0 deg, 0 V",150.0,lam_mem_max,1.0839391103497944
+phase,"AoA 0 deg, 0 V",180.0,lam_mem_max,1.083946360847416
+phase,"AoA 0 deg, 0 V",210.0,lam_mem_max,1.0840016542614461
+phase,"AoA 0 deg, 0 V",240.0,lam_mem_max,1.084103920319825
+phase,"AoA 0 deg, 0 V",270.0,lam_mem_max,1.0841248320311554
+phase,"AoA 0 deg, 0 V",300.0,lam_mem_max,1.084042620907262
+phase,"AoA 0 deg, 0 V",330.0,lam_mem_max,1.0839391103497926
+phase,"AoA 0 deg, 0 V",360.0,lam_mem_max,1.0839463608474182
+phase,"AoA 0 deg, 1600 V",0.0,lam_mem_max,1.0809011569340832
+phase,"AoA 0 deg, 1600 V",30.0,lam_mem_max,1.080962835904101
+phase,"AoA 0 deg, 1600 V",60.0,lam_mem_max,1.0810745648945561
+phase,"AoA 0 deg, 1600 V",90.0,lam_mem_max,1.0810962632433427
+phase,"AoA 0 deg, 1600 V",120.0,lam_mem_max,1.0810054526592934
+phase,"AoA 0 deg, 1600 V",150.0,lam_mem_max,1.0808937759887585
+phase,"AoA 0 deg, 1600 V",180.0,lam_mem_max,1.0809011578766836
+phase,"AoA 0 deg, 1600 V",210.0,lam_mem_max,1.0809628359051362
+phase,"AoA 0 deg, 1600 V",240.0,lam_mem_max,1.0810745648945548
+phase,"AoA 0 deg, 1600 V",270.0,lam_mem_max,1.0810962632433383
+phase,"AoA 0 deg, 1600 V",300.0,lam_mem_max,1.0810054526592903
+phase,"AoA 0 deg, 1600 V",330.0,lam_mem_max,1.0808937759887605
+phase,"AoA 0 deg, 1600 V",360.0,lam_mem_max,1.0809011578766805
+phase,"AoA 6 deg, 0 V",0.0,lam_mem_max,1.0840818746962382
+phase,"AoA 6 deg, 0 V",30.0,lam_mem_max,1.084194469555369
+phase,"AoA 6 deg, 0 V",60.0,lam_mem_max,1.0843058575859885
+phase,"AoA 6 deg, 0 V",90.0,lam_mem_max,1.0843117138673504
+phase,"AoA 6 deg, 0 V",120.0,lam_mem_max,1.0841904984292239
+phase,"AoA 6 deg, 0 V",150.0,lam_mem_max,1.084028041707417
+phase,"AoA 6 deg, 0 V",180.0,lam_mem_max,1.0839387555160125
+phase,"AoA 6 deg, 0 V",210.0,lam_mem_max,1.083966014586336
+phase,"AoA 6 deg, 0 V",240.0,lam_mem_max,1.0840469897139455
+phase,"AoA 6 deg, 0 V",270.0,lam_mem_max,1.0840866750678633
+phase,"AoA 6 deg, 0 V",300.0,lam_mem_max,1.0840604039338553
+phase,"AoA 6 deg, 0 V",330.0,lam_mem_max,1.0840331061912314
+phase,"AoA 6 deg, 0 V",360.0,lam_mem_max,1.0840818597368536
+phase,"AoA 6 deg, 1600 V",0.0,lam_mem_max,1.08106354091527
+phase,"AoA 6 deg, 1600 V",30.0,lam_mem_max,1.081195632193964
+phase,"AoA 6 deg, 1600 V",60.0,lam_mem_max,1.081319783024561
+phase,"AoA 6 deg, 1600 V",90.0,lam_mem_max,1.0813247625894702
+phase,"AoA 6 deg, 1600 V",120.0,lam_mem_max,1.0811860473212531
+phase,"AoA 6 deg, 1600 V",150.0,lam_mem_max,1.080998028657739
+phase,"AoA 6 deg, 1600 V",180.0,lam_mem_max,1.0808936110810954
+phase,"AoA 6 deg, 1600 V",210.0,lam_mem_max,1.080920681253896
+phase,"AoA 6 deg, 1600 V",240.0,lam_mem_max,1.0810079923134959
+phase,"AoA 6 deg, 1600 V",270.0,lam_mem_max,1.0810515590583092
+phase,"AoA 6 deg, 1600 V",300.0,lam_mem_max,1.0810251582001054
+phase,"AoA 6 deg, 1600 V",330.0,lam_mem_max,1.081001184274529
+phase,"AoA 6 deg, 1600 V",360.0,lam_mem_max,1.0810635466008605
+phase,"AoA 12 deg, 0 V",0.0,lam_mem_max,1.0843378855749803
+phase,"AoA 12 deg, 0 V",30.0,lam_mem_max,1.0844791515131342
+phase,"AoA 12 deg, 0 V",60.0,lam_mem_max,1.084596465544854
+phase,"AoA 12 deg, 0 V",90.0,lam_mem_max,1.0845912525180708
+phase,"AoA 12 deg, 0 V",120.0,lam_mem_max,1.0844403104647231
+phase,"AoA 12 deg, 0 V",150.0,lam_mem_max,1.084230783574764
+phase,"AoA 12 deg, 0 V",180.0,lam_mem_max,1.0840956676596585
+phase,"AoA 12 deg, 0 V",210.0,lam_mem_max,1.084086871905954
+phase,"AoA 12 deg, 0 V",240.0,lam_mem_max,1.0841551153446702
+phase,"AoA 12 deg, 0 V",270.0,lam_mem_max,1.0842146295847377
+phase,"AoA 12 deg, 0 V",300.0,lam_mem_max,1.0842338656123733
+phase,"AoA 12 deg, 0 V",330.0,lam_mem_max,1.084255821086173
+phase,"AoA 12 deg, 0 V",360.0,lam_mem_max,1.0843378860401174
+phase,"AoA 12 deg, 1600 V",0.0,lam_mem_max,1.08137355141771
+phase,"AoA 12 deg, 1600 V",30.0,lam_mem_max,1.0815337835419119
+phase,"AoA 12 deg, 1600 V",60.0,lam_mem_max,1.0816643413816445
+phase,"AoA 12 deg, 1600 V",90.0,lam_mem_max,1.081658957869727
+phase,"AoA 12 deg, 1600 V",120.0,lam_mem_max,1.0814891049944633
+phase,"AoA 12 deg, 1600 V",150.0,lam_mem_max,1.0812527635009312
+phase,"AoA 12 deg, 1600 V",180.0,lam_mem_max,1.081091317735692
+phase,"AoA 12 deg, 1600 V",210.0,lam_mem_max,1.0810699663955812
+phase,"AoA 12 deg, 1600 V",240.0,lam_mem_max,1.081140637411797
+phase,"AoA 12 deg, 1600 V",270.0,lam_mem_max,1.0812081666296784
+phase,"AoA 12 deg, 1600 V",300.0,lam_mem_max,1.0812374332069072
+phase,"AoA 12 deg, 1600 V",330.0,lam_mem_max,1.0812729345615195
+phase,"AoA 12 deg, 1600 V",360.0,lam_mem_max,1.0813735427814868
+bench_U0,AoA 0 deg,0.0,L_mN,0.0
+bench_U0,AoA 0 deg,400.0,L_mN,0.0
+bench_U0,AoA 0 deg,800.0,L_mN,0.0
+bench_U0,AoA 0 deg,1000.0,L_mN,0.0
+bench_U0,AoA 0 deg,1200.0,L_mN,0.0
+bench_U0,AoA 0 deg,1400.0,L_mN,0.0
+bench_U0,AoA 0 deg,1600.0,L_mN,0.0
+bench_U0,AoA 0 deg,1800.0,L_mN,0.0
+bench_U0,AoA 0 deg,0.0,CL,0.0
+bench_U0,AoA 0 deg,400.0,CL,0.0
+bench_U0,AoA 0 deg,800.0,CL,0.0
+bench_U0,AoA 0 deg,1000.0,CL,0.0
+bench_U0,AoA 0 deg,1200.0,CL,0.0
+bench_U0,AoA 0 deg,1400.0,CL,0.0
+bench_U0,AoA 0 deg,1600.0,CL,0.0
+bench_U0,AoA 0 deg,1800.0,CL,0.0
+bench_U0,AoA 0 deg,0.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,400.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,800.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,1000.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,1200.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,1400.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,1600.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,1800.0,camber_mid_pct,0.0
+bench_U0,AoA 0 deg,0.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,400.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,800.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,1000.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,1200.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,1400.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,1600.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,1800.0,camber_mean_pct,0.0
+bench_U0,AoA 0 deg,0.0,T_chord,0.8266884488309949
+bench_U0,AoA 0 deg,400.0,T_chord,0.8266884488309955
+bench_U0,AoA 0 deg,800.0,T_chord,0.8266884488309949
+bench_U0,AoA 0 deg,1000.0,T_chord,0.8266884488309951
+bench_U0,AoA 0 deg,1200.0,T_chord,0.8266884488309949
+bench_U0,AoA 0 deg,1400.0,T_chord,0.8266884488309946
+bench_U0,AoA 0 deg,1600.0,T_chord,0.8266884488309949
+bench_U0,AoA 0 deg,1800.0,T_chord,0.8266884488309949
+bench_U0,AoA 0 deg,0.0,T_span,0.49977091523099454
+bench_U0,AoA 0 deg,400.0,T_span,0.4997709152309944
+bench_U0,AoA 0 deg,800.0,T_span,0.49977091523099454
+bench_U0,AoA 0 deg,1000.0,T_span,0.49977091523099443
+bench_U0,AoA 0 deg,1200.0,T_span,0.49977091523099426
+bench_U0,AoA 0 deg,1400.0,T_span,0.4997709152309942
+bench_U0,AoA 0 deg,1600.0,T_span,0.4997709152309944
+bench_U0,AoA 0 deg,1800.0,T_span,0.4997709152309944
+bench_U0,AoA 0 deg,0.0,T_chord_total,4.167419191045655
+bench_U0,AoA 0 deg,400.0,T_chord_total,4.139464161712322
+bench_U0,AoA 0 deg,800.0,T_chord_total,4.055599073712321
+bench_U0,AoA 0 deg,1000.0,T_chord_total,3.992700257712321
+bench_U0,AoA 0 deg,1200.0,T_chord_total,3.9158239270456536
+bench_U0,AoA 0 deg,1400.0,T_chord_total,3.8249700817123196
+bench_U0,AoA 0 deg,1600.0,T_chord_total,3.72013872171232
+bench_U0,AoA 0 deg,1800.0,T_chord_total,3.6013298470456534
+bench_U0,AoA 0 deg,0.0,T_span_total,0.49977091523099454
+bench_U0,AoA 0 deg,400.0,T_span_total,0.4997709152309944
+bench_U0,AoA 0 deg,800.0,T_span_total,0.49977091523099454
+bench_U0,AoA 0 deg,1000.0,T_span_total,0.49977091523099443
+bench_U0,AoA 0 deg,1200.0,T_span_total,0.49977091523099426
+bench_U0,AoA 0 deg,1400.0,T_span_total,0.4997709152309942
+bench_U0,AoA 0 deg,1600.0,T_span_total,0.4997709152309944
+bench_U0,AoA 0 deg,1800.0,T_span_total,0.4997709152309944
+bench_U0,AoA 0 deg,0.0,dea_force_mean_mN,58.462787988756546
+bench_U0,AoA 0 deg,400.0,dea_force_mean_mN,57.97357497542321
+bench_U0,AoA 0 deg,800.0,dea_force_mean_mN,56.5059359354232
+bench_U0,AoA 0 deg,1000.0,dea_force_mean_mN,55.4052066554232
+bench_U0,AoA 0 deg,1200.0,dea_force_mean_mN,54.05987086875653
+bench_U0,AoA 0 deg,1400.0,dea_force_mean_mN,52.4699285754232
+bench_U0,AoA 0 deg,1600.0,dea_force_mean_mN,50.635379775423196
+bench_U0,AoA 0 deg,1800.0,dea_force_mean_mN,48.556224468756525
+bench_U0,AoA 0 deg,0.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,400.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,800.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,1000.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,1200.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,1400.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,1600.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,1800.0,dea_strain_pct,0.0
+bench_U0,AoA 0 deg,0.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,400.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,800.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,1000.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,1200.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,1400.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,1600.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,1800.0,te_z_mid_mm,0.0
+bench_U0,AoA 0 deg,0.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,400.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,800.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,1000.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,1200.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,1400.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,1600.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,1800.0,alpha_eff_75_deg,0.0
+bench_U0,AoA 0 deg,0.0,lam_mem_max,1.0300000000000056
+bench_U0,AoA 0 deg,400.0,lam_mem_max,1.0300000000000031
+bench_U0,AoA 0 deg,800.0,lam_mem_max,1.0300000000000036
+bench_U0,AoA 0 deg,1000.0,lam_mem_max,1.030000000000003
+bench_U0,AoA 0 deg,1200.0,lam_mem_max,1.0300000000000031
+bench_U0,AoA 0 deg,1400.0,lam_mem_max,1.0300000000000031
+bench_U0,AoA 0 deg,1600.0,lam_mem_max,1.0300000000000031
+bench_U0,AoA 0 deg,1800.0,lam_mem_max,1.0300000000000031

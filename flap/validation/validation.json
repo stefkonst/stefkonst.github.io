@@ -1,0 +1,197 @@
+{
+ "V1": [
+  {
+   "material": "Membrane, chordwise",
+   "rms_kPa": 0.2771521331608557
+  },
+  {
+   "material": "Membrane, spanwise",
+   "rms_kPa": 0.38465555060484274
+  },
+  {
+   "material": "Wacker P6760",
+   "rms_kPa": 0.6416759418317177
+  },
+  {
+   "material": "DragonSkin 20",
+   "rms_kPa": 0.40116170642494886
+  }
+ ],
+ "V2": [
+  {
+   "material": "aniso",
+   "pre_span": 1.03,
+   "pre_chord": 1.03,
+   "T_span_FE": 0.4997709152309962,
+   "T_span_exact": 0.49977091523099804,
+   "T_chord_FE": 0.8266884488309953,
+   "T_chord_exact": 0.8266884488309979,
+   "err_pct": 3.6637359812630166e-13
+  },
+  {
+   "material": "aniso",
+   "pre_span": 1.1,
+   "pre_chord": 1.02,
+   "T_span_FE": 1.652873187811746,
+   "T_span_exact": 1.6528731878117477,
+   "T_chord_FE": 0.7060391169505035,
+   "T_chord_exact": 0.706039116950502,
+   "err_pct": 1.9984014443252818e-13
+  },
+  {
+   "material": "aniso",
+   "pre_span": 1.05,
+   "pre_chord": 1.15,
+   "T_span_FE": 1.114396997969599,
+   "T_span_exact": 1.1143969979695971,
+   "T_chord_FE": 4.629284435068431,
+   "T_chord_exact": 4.629284435068434,
+   "err_pct": 1.5543122344752192e-13
+  },
+  {
+   "material": "P6760",
+   "pre_span": 1.08,
+   "pre_chord": 1.08,
+   "T_span_FE": 1.0364943609516992,
+   "T_span_exact": 1.0364943609516946,
+   "T_chord_FE": 1.0364943609516994,
+   "T_chord_exact": 1.0364943609516946,
+   "err_pct": 4.662936703425657e-13
+  },
+  {
+   "material": "DS20",
+   "pre_span": 1.15,
+   "pre_chord": 1.05,
+   "T_span_FE": 11.967767611485856,
+   "T_span_exact": 11.96776761148586,
+   "T_chord_FE": 7.832235487262273,
+   "T_chord_exact": 7.832235487262261,
+   "err_pct": 1.5543122344752192e-13
+  }
+ ],
+ "V3": {
+  "max_err_pct": 1.5987211554602254e-12,
+  "dF_1600V_mN": 7.827408213333332
+ },
+ "V4": [
+  {
+   "mesh": "8x4",
+   "w_centre_FE_um": 70.79,
+   "w_centre_exact_um": 70.31302851336763
+  },
+  {
+   "mesh": "12x6",
+   "w_centre_FE_um": 69.11000000000001,
+   "w_centre_exact_um": 70.31272902267467
+  },
+  {
+   "mesh": "20x10",
+   "w_centre_FE_um": 69.88,
+   "w_centre_exact_um": 70.31255676783539
+  },
+  {
+   "mesh": "32x16",
+   "w_centre_FE_um": 70.33999999999999,
+   "w_centre_exact_um": 70.31249433066887
+  }
+ ],
+ "V5": {
+  "T_membrane_span_analytic": 0.49977091523099804,
+  "T_membrane_chord_analytic": 0.8266884488309979,
+  "F_dea_off_analytic_mN": 58.462787988756546,
+  "dF_dea_mN": 7.827408213333332,
+  "F_dea_off_FE_mN": 58.462865826864,
+  "F_dea_on_FE_mN": 50.63547807793948,
+  "mean_w_FE_off_um": 9.57036923076923,
+  "mean_w_FE_on_um": 9.964276923076921,
+  "mean_w_ritz_off_um": 9.380970267603612,
+  "mean_w_ritz_on_um": 9.784677767372681,
+  "rel_change_FE_pct": 4.115909039760535,
+  "rel_change_ritz_pct": 4.303472756578697,
+  "rel_change_smeared_pct": 11.25215925581966
+ },
+ "V6_glauert": {
+  "CL_flat_5deg": 0.5483113556160755,
+  "CL_flat_exact": 0.5483113556160755,
+  "CL_parabolic_2pct": 0.2502771903803984,
+  "CL_parabolic_exact": 0.25132741228718347,
+  "CL_from_cell_integration": 0.2502771903803984
+ },
+ "V6_aeroelastic": {
+  "T_chord": 3.811344500124738,
+  "max_w_FE_um": 182.93999999999997,
+  "max_w_1D_um": 189.51335296449813,
+  "err_pct": -3.4685434359496337
+ },
+ "V7_equilibrium": {
+  "applied_z_mN": 6.445681607578064,
+  "reactions_z_mN": -6.4457048646759185,
+  "free_node_residual_mN": 3.664727898851075e-05
+ },
+ "V7_convergence": [
+  {
+   "TE": "free + cord",
+   "mesh": "12x6",
+   "L_mN": 6.332777147343051,
+   "dL_mN": 0.1321013005599605,
+   "camber_mean_pct": 1.016518292166599,
+   "dT_chord_total_pct": -16.861645736932374
+  },
+  {
+   "TE": "free + cord",
+   "mesh": "16x8",
+   "L_mN": 6.402813385528788,
+   "dL_mN": 0.13243300545716252,
+   "camber_mean_pct": 1.127661398294514,
+   "dT_chord_total_pct": -16.890073141626328
+  },
+  {
+   "TE": "free + cord",
+   "mesh": "24x12",
+   "L_mN": 6.46675522634195,
+   "dL_mN": 0.13288662891952097,
+   "camber_mean_pct": 1.0869645502147143,
+   "dT_chord_total_pct": -16.884105309841868
+  },
+  {
+   "TE": "free + cord",
+   "mesh": "32x16",
+   "L_mN": 6.511248375698447,
+   "dL_mN": 0.1332805960020833,
+   "camber_mean_pct": 1.0691160672167657,
+   "dT_chord_total_pct": -16.87471969416302
+  },
+  {
+   "TE": "clamped",
+   "mesh": "12x6",
+   "L_mN": 6.177328209858597,
+   "dL_mN": 0.015905550148811898,
+   "camber_mean_pct": 0.34907759031085195,
+   "dT_chord_total_pct": -10.724616540101085
+  },
+  {
+   "TE": "clamped",
+   "mesh": "16x8",
+   "L_mN": 6.196634094841617,
+   "dL_mN": 0.015710511458140175,
+   "camber_mean_pct": 0.3386499308534388,
+   "dT_chord_total_pct": -10.72458533876387
+  },
+  {
+   "TE": "clamped",
+   "mesh": "24x12",
+   "L_mN": 6.218332817396527,
+   "dL_mN": 0.015361272927215452,
+   "camber_mean_pct": 0.3370379656915233,
+   "dT_chord_total_pct": -10.724889302872509
+  },
+  {
+   "TE": "clamped",
+   "mesh": "32x16",
+   "L_mN": 6.228747908496978,
+   "dL_mN": 0.01519115757839451,
+   "camber_mean_pct": 0.3368555954373969,
+   "dT_chord_total_pct": -10.724922612701892
+  }
+ ]
+}
