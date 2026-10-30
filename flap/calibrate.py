@@ -4,12 +4,13 @@ Input: paper_tension/fig1_membrane/results/unloading_stress_stretch.csv
 (engineering stress = force / (t0 w0), unloading branch, cycles 2-4, mean).
 
 Strain energy per reference volume (incompressible):
-    W = C10 (I1-3) + C20 (I1-3)^2 + C30 (I1-3)^3                      matrix (Yeoh)
-      + sum_d [ k1_d (I4_d-1)^2 + k2_d (I4_d-1)^3 ]  for I4_d > 1       fibre families (tension only)
-In a uniaxial test along fibre direction d the transverse fibres are compressed (inactive), so the
-lateral stretch is lambda^-1/2 and the engineering stress is
-    P = 2 (lam - lam^-2) W1 + 2 lam W4,   W1 = dW/dI1, W4 = dW/dI4 at I4 = lam^2
-which is linear in the constants -> non-negative least squares (keeps W convex in the fitted range).
+    W_s = v_m W_iso(I1) + sum_d v_f,d W_aniso,d(I4_d)     (Konstantinidi et al., Smart Mater. Struct. 2023)
+    W_iso = sum_i C_i (I1-3)^i  (Yeoh),   W_aniso,d = E_f,d (sqrt(I4_d) - 1)^2 / 2  for sqrt(I4_d) > 1
+In a uniaxial test along direction d the transverse family is compressed (inactive), lateral stretch lambda^-1/2,
+and the nominal stress is
+    s = 2 (lam - lam^-2) dW_iso/dI1 * v_m + (v_f E_f)_d (lam - 1)
+linear in the constants -> non-negative least squares. The "fibres" of the membrane are the compliant silicone
+features that make it anisotropic; (v_f E_f)_d is their effective contribution, not a stiff reinforcement.
 Run: python calibrate.py  (prints the dict pasted into model.py)
 """
 import numpy as np, pandas as pd
@@ -27,8 +28,7 @@ def basis_matrix(l):
 
 
 def basis_fibre(l):
-    e = l ** 2 - 1
-    return np.c_[2 * l * 2 * e, 2 * l * 3 * e ** 2]
+    return np.c_[l - 1]
 
 
 LAM_MAX = 1.22   # chordwise curve locks up above ~1.22 (PET lock-up, one point at 105 kPa): fit range limited
@@ -52,12 +52,12 @@ for name, col, lmin in [("P6760", "Wacker P6760 mean_kPa", 1.03), ("DS20", "Drag
 # so the matrix is the measured silicone; chordwise and spanwise fibre families fitted to the remaining stress.
 V_M = 0.577
 Cm = np.array(out["P6760"]["C"]) * V_M
-res = dict(C=Cm.tolist())
-for key, col in [("k_chord", "Membrane, chordwise mean_kPa"), ("k_span", "Membrane, spanwise mean_kPa")]:
+res = dict(C_matrix=out["P6760"]["C"], v_m=V_M)
+for key, col in [("vfEf_chord", "Membrane, chordwise mean_kPa"), ("vfEf_span", "Membrane, spanwise mean_kPa")]:
     l, y = clean(col)
     k, _ = nnls(basis_fibre(l), y - basis_matrix(l) @ Cm)
     r = basis_fibre(l) @ k + basis_matrix(l) @ Cm - y
-    res[key] = k.tolist(); res["rms_kPa_" + key[2:]] = float(np.sqrt(np.mean(r ** 2)) / 1e3)
+    res[key] = float(k[0]); res["rms_kPa_" + key[5:]] = float(np.sqrt(np.mean(r ** 2)) / 1e3)
 res["lam_max"] = LAM_MAX
 out["aniso"] = res
 for k, v in out.items():

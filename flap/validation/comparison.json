@@ -1,0 +1,364 @@
+{
+ "C2": {
+  "F_passive_bundle_mN": 84.65636742545755,
+  "measured_dT_1600_pct": [
+   -28.46588775812675,
+   -19.656039372301425,
+   -14.688766338624648
+  ],
+  "model_dT_1600_eta040_pct": -49.97889225984348,
+  "model_dT_1600_eta015_pct": -18.742084597441302
+ },
+ "C3": [
+  {
+   "membrane": "aniso",
+   "U": 2.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -0.01782442676783269,
+   "L0_mN": 7.656396948798321,
+   "floor_mN": 0.2156442235338604,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 2.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -0.0465632483376055,
+   "L0_mN": 15.274679088730458,
+   "floor_mN": 0.2156442235338604,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 2.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 1.2882615302290699,
+   "L0_mN": 8.886916456452749,
+   "floor_mN": 0.2156442235338604,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 2.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 1.3420105973991987,
+   "L0_mN": 17.418075073610982,
+   "floor_mN": 0.2156442235338604,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 4.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -41.64568778331163,
+   "L0_mN": 62.66369417381684,
+   "floor_mN": 1.005778646728008,
+   "converged": false
+  },
+  {
+   "membrane": "aniso",
+   "U": 4.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -14.116977976582874,
+   "L0_mN": 86.33706702204385,
+   "floor_mN": 1.005778646728008,
+   "converged": false
+  },
+  {
+   "membrane": "aniso",
+   "U": 4.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 3.1002155765467876,
+   "L0_mN": 70.29277184087117,
+   "floor_mN": 1.005778646728008,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 4.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 2.8232141078883046,
+   "L0_mN": 101.38967948047188,
+   "floor_mN": 1.005778646728008,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 6.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": 75.68802018573305,
+   "L0_mN": 154.78305846940572,
+   "floor_mN": 2.5469447117700774,
+   "converged": false
+  },
+  {
+   "membrane": "aniso",
+   "U": 6.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": 0.05409428925747761,
+   "L0_mN": 221.0645666806026,
+   "floor_mN": 2.5469447117700774,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 6.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 6.065079991598623,
+   "L0_mN": 208.49462313545035,
+   "floor_mN": 2.5469447117700774,
+   "converged": true
+  },
+  {
+   "membrane": "aniso",
+   "U": 6.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 5.526773515919729,
+   "L0_mN": 276.4453125160369,
+   "floor_mN": 2.5469447117700774,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 2.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": 0.12314826472736495,
+   "L0_mN": 6.58877431418159,
+   "floor_mN": 0.27200902290415,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 2.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": 0.1881417370580838,
+   "L0_mN": 13.233647391586288,
+   "floor_mN": 0.27200902290415,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 2.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 0.018745753401613108,
+   "L0_mN": 7.302370822125278,
+   "floor_mN": 0.27200902290415,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 2.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 0.037284264964808855,
+   "L0_mN": 14.599868383683066,
+   "floor_mN": 0.27200902290415,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 4.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -24.414029012804903,
+   "L0_mN": 37.48744204576175,
+   "floor_mN": 0.7376427713250236,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 4.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -14.131708899954702,
+   "L0_mN": 58.87986292539045,
+   "floor_mN": 0.7376427713250236,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 4.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 0.3466556269170056,
+   "L0_mN": 37.80661851516634,
+   "floor_mN": 0.7376427713250236,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 4.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 0.5245235947927256,
+   "L0_mN": 72.61743148062733,
+   "floor_mN": 0.7376427713250236,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 6.0,
+   "alpha": 5.0,
+   "config": "bat armwing",
+   "dL_pred_mN": 110.10350699153861,
+   "L0_mN": -29.09214962189493,
+   "floor_mN": 0.6786348504622294,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 6.0,
+   "alpha": 10.0,
+   "config": "bat armwing",
+   "dL_pred_mN": -5.849569752794224,
+   "L0_mN": 150.88948061228425,
+   "floor_mN": 0.6786348504622294,
+   "converged": false
+  },
+  {
+   "membrane": "DS",
+   "U": 6.0,
+   "alpha": 5.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 1.9770007150223705,
+   "L0_mN": 135.99286926865267,
+   "floor_mN": 0.6786348504622294,
+   "converged": true
+  },
+  {
+   "membrane": "DS",
+   "U": 6.0,
+   "alpha": 10.0,
+   "config": "rigid frame",
+   "dL_pred_mN": 1.8768143403801787,
+   "L0_mN": 210.9636313219736,
+   "floor_mN": 0.6786348504622294,
+   "converged": true
+  }
+ ],
+ "C4": [
+  {
+   "U": 2.0,
+   "alpha": -5.0,
+   "meas_CL0": -0.9627069894361748,
+   "meas_dCL": -0.2646135866682531,
+   "meas_dCL_sem": 0.0311476625861018,
+   "model_CL0": -0.6588176474758992,
+   "model_dCL": -0.33805512498706647,
+   "meas_ratio": 0.27486409631577347,
+   "model_ratio": 0.5131239672802377,
+   "converged": true
+  },
+  {
+   "U": 2.0,
+   "alpha": 0.0,
+   "meas_CL0": -1.1380675719498117,
+   "meas_dCL": 0.123436664113507,
+   "meas_dCL_sem": 0.0307896318218495,
+   "model_CL0": 0.0,
+   "model_dCL": 0.0,
+   "meas_ratio": -0.10846163018424929,
+   "model_ratio": null,
+   "converged": true
+  },
+  {
+   "U": 2.0,
+   "alpha": 10.0,
+   "meas_CL0": -0.3237174916703587,
+   "meas_dCL": 0.9793139425459454,
+   "meas_dCL_sem": 0.0585362594189597,
+   "model_CL0": 1.1945816167693306,
+   "model_dCL": 0.24535370813570734,
+   "meas_ratio": -3.0252116976835475,
+   "model_ratio": 0.2053888195594795,
+   "converged": true
+  },
+  {
+   "U": 4.0,
+   "alpha": -5.0,
+   "meas_CL0": -0.0459447412560584,
+   "meas_dCL": -0.1187425544932844,
+   "meas_dCL_sem": 0.0128692188339661,
+   "model_CL0": -1.3175201394707317,
+   "model_dCL": -0.05890646459836013,
+   "meas_ratio": 2.5844645382049394,
+   "model_ratio": 0.04471010562466527,
+   "converged": true
+  },
+  {
+   "U": 4.0,
+   "alpha": 0.0,
+   "meas_CL0": -0.0415892546156951,
+   "meas_dCL": -0.0135038018862557,
+   "meas_dCL_sem": 0.007527352065054,
+   "model_CL0": 0.0,
+   "model_dCL": 0.0,
+   "meas_ratio": 0.32469449166707565,
+   "model_ratio": null,
+   "converged": true
+  },
+  {
+   "U": 4.0,
+   "alpha": 10.0,
+   "meas_CL0": 0.2533863518374135,
+   "meas_dCL": 0.0926161485197267,
+   "meas_dCL_sem": 0.0086750075565087,
+   "model_CL0": 1.7354593465025316,
+   "model_dCL": 0.05438869492355369,
+   "meas_ratio": 0.36551356396320145,
+   "model_ratio": 0.03133965369639061,
+   "converged": true
+  },
+  {
+   "U": 6.0,
+   "alpha": -5.0,
+   "meas_CL0": -0.111449853559064,
+   "meas_dCL": -0.0669626750507134,
+   "meas_dCL_sem": 0.0074400548075471,
+   "model_CL0": -1.5758222034769596,
+   "model_dCL": -0.05162566327933127,
+   "meas_ratio": 0.6008323287318259,
+   "model_ratio": 0.032761096502779474,
+   "converged": true
+  },
+  {
+   "U": 6.0,
+   "alpha": 0.0,
+   "meas_CL0": -0.0628706253543288,
+   "meas_dCL": 0.0081096960248321,
+   "meas_dCL_sem": 0.0062627997978007,
+   "model_CL0": 0.0,
+   "model_dCL": 0.0,
+   "meas_ratio": -0.12899022363985005,
+   "model_ratio": null,
+   "converged": true
+  },
+  {
+   "U": 6.0,
+   "alpha": 10.0,
+   "meas_CL0": 0.1698504863957546,
+   "meas_dCL": 0.0568215709587377,
+   "meas_dCL_sem": 0.0076960275004129,
+   "model_CL0": 1.9841547158637556,
+   "model_dCL": 0.048197500931356,
+   "meas_ratio": 0.3345387591433942,
+   "model_ratio": 0.02429120095625927,
+   "converged": true
+  }
+ ]
+}

@@ -2,11 +2,11 @@
  "V1": [
   {
    "material": "Membrane, chordwise",
-   "rms_kPa": 0.2771521331608557
+   "rms_kPa": 0.8731707050666614
   },
   {
    "material": "Membrane, spanwise",
-   "rms_kPa": 0.38465555060484274
+   "rms_kPa": 0.4539403764388862
   },
   {
    "material": "Wacker P6760",
@@ -22,30 +22,30 @@
    "material": "aniso",
    "pre_span": 1.03,
    "pre_chord": 1.03,
-   "T_span_FE": 0.4997709152309962,
-   "T_span_exact": 0.49977091523099804,
-   "T_chord_FE": 0.8266884488309953,
-   "T_chord_exact": 0.8266884488309979,
-   "err_pct": 3.6637359812630166e-13
+   "T_span_FE": 0.5618059157259879,
+   "T_span_exact": 0.5618059157259907,
+   "T_chord_FE": 0.9561631972793861,
+   "T_chord_exact": 0.9561631972793893,
+   "err_pct": 4.884981308350689e-13
   },
   {
    "material": "aniso",
    "pre_span": 1.1,
    "pre_chord": 1.02,
-   "T_span_FE": 1.652873187811746,
-   "T_span_exact": 1.6528731878117477,
-   "T_chord_FE": 0.7060391169505035,
-   "T_chord_exact": 0.706039116950502,
+   "T_span_FE": 1.7563928280150198,
+   "T_span_exact": 1.7563928280150216,
+   "T_chord_FE": 0.7925586655318766,
+   "T_chord_exact": 0.7925586655318749,
    "err_pct": 1.9984014443252818e-13
   },
   {
    "material": "aniso",
    "pre_span": 1.05,
    "pre_chord": 1.15,
-   "T_span_FE": 1.114396997969599,
-   "T_span_exact": 1.1143969979695971,
-   "T_chord_FE": 4.629284435068431,
-   "T_chord_exact": 4.629284435068434,
+   "T_span_FE": 1.1938717555967182,
+   "T_span_exact": 1.1938717555967164,
+   "T_chord_FE": 4.704475800741442,
+   "T_chord_exact": 4.704475800741443,
    "err_pct": 1.5543122344752192e-13
   },
   {
@@ -70,8 +70,8 @@
   }
  ],
  "V3": {
-  "max_err_pct": 1.5987211554602254e-12,
-  "dF_1600V_mN": 7.827408213333332
+  "max_err_pct": 1.7208456881689926e-12,
+  "dF_1600V_mN": 8.462062933333332
  },
  "V4": [
   {
@@ -92,23 +92,23 @@
   {
    "mesh": "32x16",
    "w_centre_FE_um": 70.33999999999999,
-   "w_centre_exact_um": 70.31249433066887
+   "w_centre_exact_um": 70.31249433066888
   }
  ],
  "V5": {
-  "T_membrane_span_analytic": 0.49977091523099804,
-  "T_membrane_chord_analytic": 0.8266884488309979,
-  "F_dea_off_analytic_mN": 58.462787988756546,
-  "dF_dea_mN": 7.827408213333332,
-  "F_dea_off_FE_mN": 58.462865826864,
-  "F_dea_on_FE_mN": 50.63547807793948,
-  "mean_w_FE_off_um": 9.57036923076923,
-  "mean_w_FE_on_um": 9.964276923076921,
-  "mean_w_ritz_off_um": 9.380970267603612,
-  "mean_w_ritz_on_um": 9.784677767372681,
-  "rel_change_FE_pct": 4.115909039760535,
-  "rel_change_ritz_pct": 4.303472756578697,
-  "rel_change_smeared_pct": 11.25215925581966
+  "T_membrane_span_analytic": 0.5618059157259907,
+  "T_membrane_chord_analytic": 0.9561631972793893,
+  "F_dea_off_analytic_mN": 14.071809416078144,
+  "dF_dea_mN": 8.462062933333332,
+  "F_dea_off_FE_mN": 14.071925683814865,
+  "F_dea_on_FE_mN": 5.609983296368443,
+  "mean_w_FE_off_um": 13.493384615384617,
+  "mean_w_FE_on_um": 16.83304615384615,
+  "mean_w_ritz_off_um": 13.43731475022069,
+  "mean_w_ritz_on_um": 16.831784399304325,
+  "rel_change_FE_pct": 24.75036200075249,
+  "rel_change_ritz_pct": 25.26151773759624,
+  "rel_change_smeared_pct": 32.7313507178862
  },
  "V6_glauert": {
   "CL_flat_5deg": 0.5483113556160755,
@@ -118,80 +118,140 @@
   "CL_from_cell_integration": 0.2502771903803984
  },
  "V6_aeroelastic": {
-  "T_chord": 3.811344500124738,
+  "T_chord": 3.8113445001247284,
   "max_w_FE_um": 182.93999999999997,
-  "max_w_1D_um": 189.51335296449813,
-  "err_pct": -3.4685434359496337
+  "max_w_1D_um": 189.51335296449872,
+  "err_pct": -3.4685434359499334
  },
  "V7_equilibrium": {
-  "applied_z_mN": 6.445681607578064,
-  "reactions_z_mN": -6.4457048646759185,
-  "free_node_residual_mN": 3.664727898851075e-05
+  "applied_z_mN": 6.45514687092809,
+  "reactions_z_mN": -6.455204324202901,
+  "free_node_residual_mN": 4.85910252683168e-05
  },
  "V7_convergence": [
   {
-   "TE": "free + cord",
+   "config": "bat armwing (default)",
    "mesh": "12x6",
-   "L_mN": 6.332777147343051,
-   "dL_mN": 0.1321013005599605,
-   "camber_mean_pct": 1.016518292166599,
-   "dT_chord_total_pct": -16.861645736932374
+   "L_mN": 6.407955535795967,
+   "dL_mN": 0.2592588667133642,
+   "converged": true,
+   "camber_mean_pct": 0.8463456198035124,
+   "dT_chord_total_pct": -39.84772475985822
   },
   {
-   "TE": "free + cord",
+   "config": "bat armwing (default)",
    "mesh": "16x8",
-   "L_mN": 6.402813385528788,
-   "dL_mN": 0.13243300545716252,
-   "camber_mean_pct": 1.127661398294514,
-   "dT_chord_total_pct": -16.890073141626328
+   "L_mN": 6.453744833195654,
+   "dL_mN": 0.2674657716520681,
+   "converged": true,
+   "camber_mean_pct": 0.8506796629257027,
+   "dT_chord_total_pct": -40.612208154526066
   },
   {
-   "TE": "free + cord",
+   "config": "bat armwing (default)",
    "mesh": "24x12",
-   "L_mN": 6.46675522634195,
-   "dL_mN": 0.13288662891952097,
-   "camber_mean_pct": 1.0869645502147143,
-   "dT_chord_total_pct": -16.884105309841868
+   "L_mN": 6.500928496357735,
+   "dL_mN": 0.2774676401144598,
+   "converged": true,
+   "camber_mean_pct": 0.8289231823792147,
+   "dT_chord_total_pct": -40.81803461475548
   },
   {
-   "TE": "free + cord",
-   "mesh": "32x16",
-   "L_mN": 6.511248375698447,
-   "dL_mN": 0.1332805960020833,
-   "camber_mean_pct": 1.0691160672167657,
-   "dT_chord_total_pct": -16.87471969416302
-  },
-  {
-   "TE": "clamped",
+   "config": "rigid frame",
    "mesh": "12x6",
-   "L_mN": 6.177328209858597,
-   "dL_mN": 0.015905550148811898,
-   "camber_mean_pct": 0.34907759031085195,
-   "dT_chord_total_pct": -10.724616540101085
+   "L_mN": 7.150104165381406,
+   "dL_mN": 1.2028977300768124,
+   "converged": true,
+   "camber_mean_pct": 1.603270565333966,
+   "dT_chord_total_pct": -37.93219910260996
   },
   {
-   "TE": "clamped",
+   "config": "rigid frame",
    "mesh": "16x8",
-   "L_mN": 6.196634094841617,
-   "dL_mN": 0.015710511458140175,
-   "camber_mean_pct": 0.3386499308534388,
-   "dT_chord_total_pct": -10.72458533876387
+   "L_mN": 7.2155367987168875,
+   "dL_mN": 1.2265914972949998,
+   "converged": true,
+   "camber_mean_pct": 1.5942826304362663,
+   "dT_chord_total_pct": -37.962888960293164
   },
   {
-   "TE": "clamped",
+   "config": "rigid frame",
    "mesh": "24x12",
-   "L_mN": 6.218332817396527,
-   "dL_mN": 0.015361272927215452,
-   "camber_mean_pct": 0.3370379656915233,
-   "dT_chord_total_pct": -10.724889302872509
+   "L_mN": 7.2728710368468725,
+   "dL_mN": 1.2510925873460454,
+   "converged": true,
+   "camber_mean_pct": 1.574424206318343,
+   "dT_chord_total_pct": -38.0371926844849
+  }
+ ],
+ "V8_rod": [
+  {
+   "d_root_mm": 1.0,
+   "d_tip_mm": 1.0,
+   "segments": 8,
+   "tip_FE_mm": 0.019561468797182194,
+   "tip_exact_mm": 0.019409830110742106,
+   "err_pct": 0.7812468505644876
   },
   {
-   "TE": "clamped",
-   "mesh": "32x16",
-   "L_mN": 6.228747908496978,
-   "dL_mN": 0.01519115757839451,
-   "camber_mean_pct": 0.3368555954373969,
-   "dT_chord_total_pct": -10.724922612701892
+   "d_root_mm": 1.0,
+   "d_tip_mm": 1.0,
+   "segments": 16,
+   "tip_FE_mm": 0.019447739327480538,
+   "tip_exact_mm": 0.019409830110742106,
+   "err_pct": 0.19530936912968144
+  },
+  {
+   "d_root_mm": 1.0,
+   "d_tip_mm": 1.0,
+   "segments": 32,
+   "tip_FE_mm": 0.019419306959326428,
+   "tip_exact_mm": 0.019409830110742106,
+   "err_pct": 0.048824995016727435
+  },
+  {
+   "d_root_mm": 1.0,
+   "d_tip_mm": 0.5,
+   "segments": 8,
+   "tip_FE_mm": 0.03881228776196157,
+   "tip_exact_mm": 0.03881965900836974,
+   "err_pct": -0.01898843677782258
+  },
+  {
+   "d_root_mm": 1.0,
+   "d_tip_mm": 0.5,
+   "segments": 16,
+   "tip_FE_mm": 0.03881918579261412,
+   "tip_exact_mm": 0.03881965900836974,
+   "err_pct": -0.0012190105933673756
+  },
+  {
+   "d_root_mm": 1.0,
+   "d_tip_mm": 0.5,
+   "segments": 32,
+   "tip_FE_mm": 0.0388196292285837,
+   "tip_exact_mm": 0.03881965900836974,
+   "err_pct": -7.671315719326444e-05
+  }
+ ],
+ "V8_EA_cap": [
+  {
+   "rod_EA_cap": 50.0,
+   "L_mN": 6.467556773642875,
+   "dL_mN": 0.2784392706534753,
+   "converged": true
+  },
+  {
+   "rod_EA_cap": 100.0,
+   "L_mN": 6.453744833195654,
+   "dL_mN": 0.2674657716520681,
+   "converged": true
+  },
+  {
+   "rod_EA_cap": 400.0,
+   "L_mN": 6.4410041660694795,
+   "dL_mN": 0.25772283681855424,
+   "converged": true
   }
  ]
 }

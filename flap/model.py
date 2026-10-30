@@ -30,23 +30,29 @@ EPS0 = 8.854e-12
 _trapz = getattr(np, "trapezoid", None) or np.trapz   # numpy < 2 (Pyodide) compatibility
 
 # Constitutive constants (Pa) from calibrate.py (measured uniaxial unloading curves, fig1)
+# W_s = v_m sum_i C_i (I1-3)^i + sum_d (v_f E_f)_d (sqrt(I4_d) - 1)^2 / 2   (calibrate.py, fit_p7670.py)
 MATERIALS = {
-    "aniso": dict(label="Anisotropic membrane (measured)", C=(3252.0, 9140.2, 0.0),
-                  k_chord=(14263.5, 0.0), k_span=(6807.8, 0.0)),
-    "aniso90": dict(label="Anisotropic membrane, rotated 90 deg", C=(3252.0, 9140.2, 0.0),
-                    k_chord=(6807.8, 0.0), k_span=(14263.5, 0.0)),
-    "P6760": dict(label="Isotropic Wacker P6760 (measured)", C=(5636.1, 15840.8, 0.0), k_chord=(0, 0), k_span=(0, 0)),
-    "DS20": dict(label="Isotropic DragonSkin 20 (measured)", C=(63051.2, 0.0, 0.0), k_chord=(0, 0), k_span=(0, 0)),
+    "aniso": dict(label="Anisotropic composite membrane (measured)", C=(5636.1, 15840.8, 0.0), v_m=0.577,
+                  Ef_chord=143990.0, Ef_span=68770.0),
+    "aniso90": dict(label="Anisotropic composite membrane, rotated 90 deg", C=(5636.1, 15840.8, 0.0), v_m=0.577,
+                    Ef_chord=68770.0, Ef_span=143990.0),
+    "P6760": dict(label="Isotropic Wacker P6760 (measured)", C=(5636.1, 15840.8, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
+    "DS20": dict(label="Isotropic DragonSkin 20 (measured)", C=(63051.2, 0.0, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
+    "P7670": dict(label="Isotropic Elastosil P7670 (DEA silicone, measured)", C=(42842.1, 447.0, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
 }
 LAM_CAL = 1.22
-DEA_YEOH = (178426.0, -6023.0, 4234.0)   # DEA silicone (bending.m / stress_strain.m)
+DEA_YEOH = (42842.1, 447.0, 0.0)          # Elastosil P7670, fitted on the rolled-DEA bundle at 0 V (fit_p7670.py)
 
 DEFAULTS = dict(
-    span=0.070, chord=0.035, nx=20, ny=10,
+    span=0.070, chord=0.035, taper=1.0, nx=16, ny=8,     # chord = root chord; taper = tip chord / root chord
     material="aniso", t_mem=180e-6, rho_mem=1100.0, pre_span=1.03, pre_chord=1.03,
-    clamp_LE=True, clamp_TE=False, clamp_root=True, clamp_tip=True,
+    clamp_LE=True, clamp_TE=False, clamp_root=True, clamp_tip=False,
+    # leading edge: "rod" = carbon rod cantilevered at the root (linearly tapered), "rigid" = clamped edge
+    le_mode="rod", rod_d_root=1.0e-3, rod_d_tip=0.5e-3, rod_E=120e9, rod_rho=1550.0,
+    # chordwise carbon digits from the LE to the TE (span fractions), joined stiffly to the LE rod
+    digits="0.5, 1.0", digit_d=0.8e-3, rod_EA_cap=100.0,
     # rolled DEAs
-    n_dea_chord=4, n_dea_span=0, dea_width=10e-3, t_act=30e-6, t_pass=30e-6, eps_r=2.8, eta=0.37,
+    n_dea_chord=4, n_dea_span=0, dea_width=10e-3, t_act=30e-6, t_pass=30e-6, eps_r=2.8, eta=0.40,
     pre_dea=1.10, V=1600.0, act_chord=True, act_span=True, E_bd=100e6,
     # reinforcement (linear elastic strips)
     n_rf_chord=0, n_rf_span=0, rf_E=4e9, rf_width=1e-3, rf_thick=50e-6, rf_tension_only=True, te_cord=True,
@@ -54,7 +60,9 @@ DEFAULTS = dict(
     U=3.0, alpha_deg=6.0, rho_air=1.225, three_d=True, elliptic=True,
     # flapping (quasi-steady)
     flap=False, flap_f=3.0, flap_amp_deg=30.0, flap_phase_deg=90.0,
+    dea_schedule="always",                # "always", "downstroke" or "upstroke" (DEA on only in that half-stroke)
     # solver
+    wrinkle_residual=0.0,                 # fraction of compressive membrane stress kept (0 = pure tension field)
     p_uniform=None,                       # validation only: uniform pressure (Pa) instead of aerodynamics
     max_iter=30000, tol=1e-4, aero_every=10, ramp=400, n_glauert=8,
 )
@@ -84,7 +92,10 @@ class Wing:
         b, c = p["span"], p["chord"]
         fd_c, fr_c = _fibre_pos(p["n_dea_chord"]), _fibre_pos(p["n_rf_chord"])     # chordwise lines (span positions)
         fd_s, fr_s = _fibre_pos(p["n_dea_span"]), _fibre_pos(p["n_rf_span"])       # spanwise lines (chord positions)
-        xs, ix = _grid(b, p["nx"], fd_c + fr_c)
+        dg = p["digits"]
+        dg = [float(v) for v in str(dg).replace(";", ",").split(",") if str(v).strip()] if isinstance(dg, str) else list(dg or [])
+        self.dig_frac = sorted({min(max(f, 0.0), 1.0) for f in dg}) if p["le_mode"] == "rod" else []
+        xs, ix = _grid(b, p["nx"], fd_c + fr_c + [f for f in self.dig_frac if 0 < f < 1])
         ys, iy = _grid(c, p["ny"], fd_s + fr_s)
         nx, ny = len(xs) - 1, len(ys) - 1
         self.nx, self.ny, self.xs, self.ys = nx, ny, xs, ys
@@ -92,7 +103,9 @@ class Wing:
         self.I, self.J = I.ravel(), J.ravel()
         nid = lambda i, j: i * (ny + 1) + j
         self.nid = nid
-        xf = np.c_[xs[self.I], ys[self.J], np.zeros(self.I.size)]       # frame (mounted) positions
+        self.cx = c * (1 - (1 - p["taper"]) * xs / b)                  # local chord (straight LE at y = 0)
+        xf = np.c_[xs[self.I], ys[self.J] / c * self.cx[self.I], np.zeros(self.I.size)]   # frame (mounted) positions
+        self.area = b * c * (1 + p["taper"]) / 2
         self.x0 = xf.copy()
         self.X = np.c_[xf[:, 0] / p["pre_span"], xf[:, 1] / p["pre_chord"]]   # unstretched membrane
         # triangles (alternating diagonals), with their cell indices
@@ -116,12 +129,17 @@ class Wing:
         G[:, 0, 1], G[:, 1, 1], G[:, 2, 1] = (x3 - x2) / A2, (x1 - x3) / A2, (x2 - x1) / A2
         self.G = G
         m = MATERIALS[p["material"]]
-        self.C, self.kc, self.ks = m["C"], m["k_chord"], m["k_span"]
+        self.C = tuple(m["v_m"] * ci for ci in m["C"])                # v_m W_iso folded into the constants
+        self.Efc, self.Efs = m["Ef_chord"], m["Ef_span"]
         # boundary conditions
         fixed = np.zeros(self.I.size, bool)
         if p["clamp_root"]: fixed |= self.I == 0
         if p["clamp_tip"]: fixed |= self.I == nx
-        if p["clamp_LE"]: fixed |= self.J == 0
+        self.rod = p["le_mode"] == "rod"
+        if self.rod:
+            fixed |= (self.J == 0) & (self.I == 0)
+        elif p["clamp_LE"]:
+            fixed |= self.J == 0
         if p["clamp_TE"]: fixed |= self.J == ny
         self.fixed = fixed
         # bars: (n1, n2, L0, kind, group)
@@ -145,12 +163,49 @@ class Wing:
                 add_line(d, k, "dea", p["pre_dea"])
             for k in self.rf_lines[d]:
                 add_line(d, k, "rf", 1.0)
+        dfun = lambda xx: p["rod_d_root"] + (p["rod_d_tip"] - p["rod_d_root"]) * xx / b
+        # rod bending: discrete curvature kappa_i = a x_(i-1) + b x_i + c x_(i+1), energy EI_i L_i |kappa_i|^2 / 2.
+        # Each rod line starts at a stiff joint: the mirrored ghost x_g = x_1 - 2 h t enforces the initial tangent t
+        # (fixed at the clamped root for the LE; following the joint translation for the digits).
+        self.dig_lines = []
+        if self.rod:
+            IM, I0, IP, A_, B_, C_, W_, OFF = [], [], [], [], [], [], [], []
+
+            def rod_line(nodes, sc, d_of_s, t):
+                h = np.diff(sc)
+                hm, hp = np.r_[h[0], h[:-1]], h
+                a_, c_ = 2 / (hm * (hm + hp)), 2 / (hp * (hm + hp))
+                EI = p["rod_E"] * math.pi * d_of_s(sc[:-1]) ** 4 / 64
+                for k in range(len(nodes) - 1):
+                    ghost = k == 0                                       # clamp: mirrored ghost x_g = x_1 - 2 h t
+                    IM.append(nodes[k + 1] if ghost else nodes[k - 1]); I0.append(nodes[k]); IP.append(nodes[k + 1])
+                    A_.append(a_[k]); B_.append(-(a_[k] + c_[k])); C_.append(c_[k])
+                    W_.append(EI[k] * (0.5 * hp[k] if ghost else 0.5 * (hm[k] + hp[k])))
+                    OFF.append(-a_[k] * 2 * hm[k] * t if ghost else np.zeros(3))
+
+            rod_line([nid(i, 0) for i in range(nx + 1)], xs, dfun, np.array([1.0, 0, 0]))
+            add_line("span", 0, "rod", 1.0)                             # axial stiffness of the LE rod
+            self.dig_lines = sorted({int(np.argmin(np.abs(xs - f * b))) for f in self.dig_frac})
+            for i in self.dig_lines:
+                rod_line([nid(i, j) for j in range(ny + 1)], ys / c * self.cx[i], lambda q: np.full_like(q, p["digit_d"]),
+                         np.array([0, 1.0, 0]))
+                add_line("chord", i, "rod", 1.0)
+            self.rb = dict(im=np.array(IM), i0=np.array(I0), ip=np.array(IP), a=np.array(A_), b=np.array(B_),
+                           c=np.array(C_), W=np.array(W_), off=np.array(OFF))
         self.bars = bars
         nb = len(bars)
         self.b1 = np.array([b_[0] for b_ in bars], int)
         self.b2 = np.array([b_[1] for b_ in bars], int)
         self.bL0 = np.array([b_[2] for b_ in bars], float)
         self.bdea = np.array([b_[3] == "dea" for b_ in bars], bool)
+        self.brod = np.array([b_[3] == "rod" for b_ in bars], bool)
+        self.brf = ~self.bdea & ~self.brod
+        xmid = 0.5 * (xf[self.b1, 0] + xf[self.b2, 0]) if nb else np.zeros(0)
+        dch = np.array([b_[4] == "chord" for b_ in bars], bool)
+        self.EA_rod = p["rod_E"] * math.pi * np.where(dch, p["digit_d"], dfun(xmid)) ** 2 / 4
+        # numerical: rods are effectively inextensible (strain < 1e-4 under the membrane loads); their axial EA is capped
+        # so the explicit solver converges. Results are insensitive to the cap (validate.py, V8).
+        self.EA_rod = np.minimum(self.EA_rod, p["rod_EA_cap"])
         self.bchord = np.array([b_[4] == "chord" for b_ in bars], bool)
         self.A_dea = p["dea_width"] * (p["t_act"] + p["t_pass"])
         self.v_act = p["t_act"] / (p["t_act"] + p["t_pass"])
@@ -160,6 +215,7 @@ class Wing:
         np.add.at(mphys, self.tri.ravel(), np.repeat(p["rho_mem"] * p["t_mem"] * self.A0 / 3, 3))
         rho_rf = 1380.0                                              # PET
         bm = np.where(self.bdea, p["rho_mem"] * self.A_dea, rho_rf * p["rf_width"] * p["rf_thick"]) * self.bL0
+        bm = np.where(self.brod, p["rod_rho"] * self.EA_rod / p["rod_E"] * self.bL0, bm)
         np.add.at(mphys, self.b1, bm / 2)
         np.add.at(mphys, self.b2, bm / 2)
         self.mphys = mphys
@@ -177,9 +233,10 @@ class Wing:
         return C[0] + 2 * C[1] * e + 3 * C[2] * e ** 2
 
     @staticmethod
-    def _W4(I4, k):
-        e = np.maximum(I4 - 1, 0)
-        return 2 * k[0] * e + 3 * k[1] * e ** 2
+    def _W4(I4, Ef):
+        """dW_aniso/dI4 for W_aniso = (v_f E_f)(sqrt(I4) - 1)^2 / 2, tension only."""
+        r = np.sqrt(np.maximum(I4, 1e-12))
+        return np.where(r > 1, Ef * (r - 1) / (2 * r), 0.0)
 
     def membrane(self, x, want_stress=False):
         xe = x[self.tri]                                               # (ne,3 nodes,3 comps)
@@ -191,8 +248,8 @@ class Wing:
         I1 = c00 + c11 + 1 / det
         W1 = self._W1(I1, self.C)
         f = 2 * W1 / det ** 2                                          # inv(C)/det = adj(C)/det^2
-        S00 = 2 * W1 - f * c11 + 2 * self._W4(c00, self.ks)
-        S11 = 2 * W1 - f * c00 + 2 * self._W4(c11, self.kc)
+        S00 = 2 * W1 - f * c11 + 2 * self._W4(c00, self.Efs)
+        S11 = 2 * W1 - f * c00 + 2 * self._W4(c11, self.Efc)
         S01 = f * c01
         # no-compression (wrinkling): clamp negative principal stresses
         tr, dd = 0.5 * (S00 + S11), np.sqrt(0.25 * (S00 - S11) ** 2 + S01 ** 2)
@@ -201,7 +258,8 @@ class Wing:
             l1 = tr + dd
             th = 0.5 * np.arctan2(2 * S01, S00 - S11)
             co, si = np.cos(th), np.sin(th)
-            l1c, l2c = np.maximum(l1, 0), np.maximum(l2, 0)
+            r = self.p["wrinkle_residual"]                              # small residual compressive stiffness (regularisation)
+            l1c, l2c = np.where(l1 > 0, l1, r * l1), np.where(l2 > 0, l2, r * l2)
             S00 = l1c * co ** 2 + l2c * si ** 2
             S11 = l1c * si ** 2 + l2c * co ** 2
             S01 = (l1c - l2c) * co * si
@@ -236,16 +294,31 @@ class Wing:
             Vb = np.where(self.bchord[self.bdea], V_chord, V_span)
             dF = p["eta"] * self.v_act * EPS0 * p["eps_r"] * (Vb / p["t_act"]) ** 2 * self.A_dea
             N[self.bdea] = np.maximum(Np - dF, 0.0)
-        rf = ~self.bdea
+        rf = self.brf
         if rf.any():
             Nr = self.EA_rf * (lam[rf] - 1)
             N[rf] = np.maximum(Nr, 0.0) if p["rf_tension_only"] else Nr
+        if self.brod.any():
+            N[self.brod] = self.EA_rod[self.brod] * (lam[self.brod] - 1)
         e = d / l[:, None]
         fint = np.zeros_like(x)
         for k in range(3):
             fint[:, k] = np.bincount(self.b2, N * e[:, k], minlength=x.shape[0]) - \
                          np.bincount(self.b1, N * e[:, k], minlength=x.shape[0])
         return fint, N, lam
+
+    def rod_bending(self, x):
+        """Internal force dU/dx of the rods (LE and digits), U = sum_i EI_i L_i |kappa_i|^2 / 2."""
+        f = np.zeros_like(x)
+        if not self.rod:
+            return f
+        rb = self.rb
+        kap = rb["a"][:, None] * x[rb["im"]] + rb["b"][:, None] * x[rb["i0"]] + rb["c"][:, None] * x[rb["ip"]] + rb["off"]
+        Wk = rb["W"][:, None] * kap
+        np.add.at(f, rb["im"], rb["a"][:, None] * Wk)
+        np.add.at(f, rb["i0"], rb["b"][:, None] * Wk)
+        np.add.at(f, rb["ip"], rb["c"][:, None] * Wk)
+        return f
 
     # ---------------- loads ----------------
     def flow_state(self):
@@ -264,7 +337,7 @@ class Wing:
         q = 0.5 * p["rho_air"] * (U ** 2 + v ** 2)
         k3 = 1.0
         if p["three_d"]:
-            AR = 2 * p["span"] / p["chord"]
+            AR = 2 * p["span"] ** 2 / self.area
             k3 = AR / (AR + 2)
         ell = (4 / math.pi) * np.sqrt(np.clip(1 - (xcol / p["span"]) ** 2, 0, 1)) if p["elliptic"] else np.ones_like(xcol)
         return dict(alpha=alpha, q=q, load=k3 * ell, Om=Om, dOm=dOm, x=xcol)
@@ -335,23 +408,28 @@ class Wing:
         p = self.p
         lam = 1.35
         I1 = lam ** 2 + 2 / lam
-        Et = 6 * self._W1(I1, self.C) + 8 * lam ** 2 * (max(self.kc[0], self.ks[0]) + 3 * max(self.kc[1], self.ks[1]) * (lam ** 2 - 1))
-        Et *= 2.0
+        Et = (6 * self._W1(I1, self.C) + max(self.Efc, self.Efs)) * 2.0
         S = np.zeros(self.I.size)
         g = np.linalg.norm(self.G, axis=2)                              # (ne,3)
         ke = p["t_mem"] * self.A0[:, None] * Et * g * g.sum(1, keepdims=True)
         np.add.at(S, self.tri.ravel(), ke.ravel())
         if len(self.bars):
             Ed = 6 * self._W1(I1, DEA_YEOH) * 2.0
-            kb = np.where(self.bdea, Ed * self.A_dea, self.EA_rf) / self.bL0 * 2
+            kb = np.where(self.bdea, Ed * self.A_dea, np.where(self.brod, self.EA_rod, self.EA_rf)) / self.bL0 * 2
             np.add.at(S, self.b1, kb)
             np.add.at(S, self.b2, kb)
+        if self.rod:
+            rb = self.rb
+            row = rb["W"] * (np.abs(rb["a"]) + np.abs(rb["b"]) + np.abs(rb["c"]))
+            np.add.at(S, rb["im"], row * np.abs(rb["a"]))
+            np.add.at(S, rb["i0"], row * np.abs(rb["b"]))
+            np.add.at(S, rb["ip"], row * np.abs(rb["c"]))
         self.mdr = 0.5 * S * 1.2 + 1e-12
 
     def residual(self, x, fext, V):
         Vc = V if self.p["act_chord"] else 0.0
         Vs = V if self.p["act_span"] else 0.0
-        fint = self.membrane(x)
+        fint = self.membrane(x) + self.rod_bending(x)
         fb, N, lam = self.bar_forces(x, Vc, Vs)
         R = fext - fint - fb
         R[self.fixed] = 0
@@ -403,14 +481,21 @@ class Wing:
         CLcol = math.pi * (2 * A[:, 0] + A[:, 1]) * fs["load"]
         Lcol = fs["q"] * cl * CLcol
         L = float(_trapz(Lcol, fs["x"]))
+        gam = np.arctan2(fs["Om"] * fs["x"], max(p["U"], 1e-9))         # inflow angle from the plunge velocity
+        Phi = math.radians(p["flap_amp_deg"]) * math.cos(math.radians(p["flap_phase_deg"])) if p["flap"] else 0.0
+        F_vert = float(_trapz(Lcol * np.cos(gam), fs["x"])) * math.cos(Phi)
+        F_thrust = float(_trapz(-Lcol * np.sin(gam), fs["x"]))
+        tip = self.nid(self.nx, 0)
         q_inf = 0.5 * p["rho_air"] * p["U"] ** 2
-        CL = L / (q_inf * p["span"] * p["chord"]) if q_inf > 0 else 0.0
+        CL = L / (q_inf * self.area) if q_inf > 0 else 0.0
         mem_area = self.A0 * p["pre_span"] * p["pre_chord"]
         T_chord = float(np.sum(sig[:, 1, 1] * mem_area) / mem_area.sum())
         T_span = float(np.sum(sig[:, 0, 0] * mem_area) / mem_area.sum())
         Ndea = N[self.bdea]
         E_field = Vc * np.sqrt(lam_b[self.bdea]) / p["t_act"] if self.bdea.any() else np.array([0.0])
-        mid = int(np.argmin(np.abs(self.xs - p['span'] / 2)))
+        # measurement station: spanwise position of peak camber (mid-span can sit on a digit, where camber ~ 0)
+        inner = np.arange(1, self.nx) if self.nx > 1 else np.arange(self.nx + 1)
+        mid = int(inner[np.argmax(np.abs(camber[inner]))])
         cam_mean = float(_trapz(camber, self.xs) / p['span'])
         nl_c, nl_s = len(self.dea_lines['chord']), len(self.dea_lines['span'])
         Fc = float(np.mean(N[self.bdea & self.bchord])) if nl_c else 0.0
@@ -422,7 +507,8 @@ class Wing:
             camber_pct=(camber * 100).round(4).tolist(),
             CL_col=CLcol.round(5).tolist(),
             profile_mid_mm=(zr[mid] * 1e3).round(5).tolist(),
-            L_mN=L * 1e3, CL=CL,
+            L_mN=L * 1e3, CL=CL, F_vert_mN=F_vert * 1e3, F_thrust_mN=F_thrust * 1e3,
+            rod_tip_dy_mm=float((x[tip, 1] - self.x0[tip, 1]) * 1e3), rod_tip_dz_mm=float((x[tip, 2] - self.x0[tip, 2]) * 1e3),
             camber_mid_pct=float(camber[mid] * 100), camber_mean_pct=cam_mean * 100,
             T_chord=T_chord, T_span=T_span,
             T_chord_total=T_chord + nl_c * Fc / p['span'], T_span_total=T_span + nl_s * Fs / p['chord'],
@@ -431,21 +517,30 @@ class Wing:
             dea_slack=int(np.sum(Ndea <= 0)) if Ndea.size else 0,
             lam_mem_max=float(lam_mem.max()),
             dea_strain_pct=float((np.mean(lam_b[self.bdea]) / p["pre_dea"] - 1) * 100) if self.bdea.any() else 0.0,
-            te_z_mid_mm=float(x[self.nid(mid, self.ny), 2] * 1e3),
+            te_z_mid_mm=float(x[self.nid(mid, self.ny), 2] * 1e3), x_peak_mm=float(self.xs[mid] * 1e3),
             alpha_eff_75_deg=float(np.degrees(np.interp(0.75 * p["span"], self.xs, fs["alpha"]))),
             E_field_MV_m=float(np.max(E_field) / 1e6),
             iterations=info["iterations"], converged=info["converged"], residual=info["residual"],
         )
 
 
+def dea_active(p):
+    """DEA switched on at the current flap phase? Downstroke: Omega < 0 (phase 0-180 deg with Phi = Phi0 cos phase)."""
+    if not p["flap"] or p["dea_schedule"] == "always":
+        return True
+    down = math.sin(math.radians(p["flap_phase_deg"])) > 0
+    return down if p["dea_schedule"] == "downstroke" else not down
+
+
 def run(params=None):
     """Solve DEA off (V = 0) and on (V) and return everything the web page needs (JSON-friendly)."""
     w = Wing(**(params or {}))
     p = w.p
+    Von = p["V"] if dea_active(p) else 0.0
     x_off, i_off = w.solve(0.0)
     r_off = w.evaluate(x_off, 0.0, i_off)
-    x_on, i_on = w.solve(p["V"], x_init=x_off, ramp_steps=0)
-    r_on = w.evaluate(x_on, p["V"], i_on)
+    x_on, i_on = w.solve(Von, x_init=x_off, ramp_steps=0)
+    r_on = w.evaluate(x_on, Von, i_on)
     fs = i_off["fs"]
     a_eff = np.degrees(fs["alpha"])
     warnings = []
@@ -465,11 +560,16 @@ def run(params=None):
             warnings.append(f"reduced frequency k = {k:.2f} > 0.2: quasi-steady aerodynamics underestimates unsteady effects")
     if p["U"] < 0.5:
         warnings.append("flow speed below 0.5 m/s: aerodynamic load negligible")
+    if Von == 0 and p["V"] > 0:
+        warnings.append(f"DEA schedule '{p['dea_schedule']}': DEAs are off at this flap phase")
+    if not p["clamp_TE"] and not p["te_cord"] and p["U"] > 0.5:
+        warnings.append("free trailing edge without cord: no static equilibrium may exist (the edge carries no tension; a real membrane would luff)")
     return dict(
         off=r_off, on=r_on, params={k: v for k, v in p.items()},
         alpha_eff_deg=a_eff.round(3).tolist(), q_col=fs["q"].round(4).tolist(),
         flap=dict(Om=fs["Om"], dOm=fs["dOm"]),
         dea_lines={k: v for k, v in w.dea_lines.items()}, rf_lines={k: v for k, v in w.rf_lines.items()},
+        dig_lines=list(map(int, w.dig_lines)),
         m_dea_g=w.m_dea * 1e3, m_total_g=w.m_total * 1e3,
         d=dict(camber_mid_pct=r_on["camber_mid_pct"] - r_off["camber_mid_pct"],
                camber_mean_pct=r_on["camber_mean_pct"] - r_off["camber_mean_pct"],
@@ -483,28 +583,33 @@ def run(params=None):
     )
 
 
-SCALARS = ("L_mN", "CL", "camber_mid_pct", "camber_mean_pct", "T_chord", "T_span", "T_chord_total", "T_span_total",
+SCALARS = ("L_mN", "F_vert_mN", "F_thrust_mN", "rod_tip_dy_mm", "rod_tip_dz_mm", "CL", "camber_mid_pct", "camber_mean_pct", "T_chord", "T_span", "T_chord_total", "T_span_total",
            "dea_force_mean_mN", "dea_strain_pct", "te_z_mid_mm", "alpha_eff_75_deg", "lam_mem_max", "converged")
 
 
 def sweep(params, kind, values, voltages=(0.0,), aoas=None, progress=None):
-    """Experiment-style sweeps with warm starts. kind: 'voltage' (values = V list, one curve per AoA in aoas),
-    'aoa' (values = AoA list, one curve per voltage), 'phase' (values = flap phase list, curves per AoA x voltage),
-    'speed' (values = U list, curves per voltage). Returns {curve_label: {quantity: [..]}}."""
+    """Experiment-style sweeps with warm starts. Returns {kind, values, curves: {label: {quantity: [...]}}}.
+    kind = 'voltage'  : values = voltages, one curve per pitch angle in aoas
+           'aoa'      : values = pitch angles, one curve per voltage
+           'speed'    : values = flow speeds, one curve per voltage
+           'phase'    : values = flap phases, curves per pitch angle x voltage (DEA schedule from params)
+           'schedule' : values = flap phases, curves = DEA off / always / downstroke only / upstroke only at max(voltages)
+    For phase sweeps the cycle mean of lift, vertical force and thrust is added (phases sampled uniformly)."""
     base = dict(DEFAULTS); base.update(params or {})
-    out = {}
     aoas = [base["alpha_deg"]] if aoas is None else list(aoas)
-    curves = []
     if kind == "voltage":
-        curves = [(a, None) for a in aoas]
+        curves = [(a, None, None) for a in aoas]
+    elif kind == "schedule":
+        Vm = max(voltages) if len(voltages) else base["V"]
+        curves = [(aoas[0], 0.0, "always"), (aoas[0], Vm, "always"), (aoas[0], Vm, "downstroke"), (aoas[0], Vm, "upstroke")]
     else:
-        curves = [(a, V) for a in aoas for V in voltages]
-    total = len(curves) * len(values)
-    done = 0
-    for a, V in curves:
+        curves = [(a, V, base["dea_schedule"]) for a in aoas for V in voltages]
+    total, done, out = len(curves) * len(values), 0, {}
+    for a, V, sched in curves:
         pp = dict(base); pp["alpha_deg"] = a
-        if kind == "phase":
+        if kind in ("phase", "schedule"):
             pp["flap"] = True
+            pp["dea_schedule"] = sched
         w = Wing(**pp)
         x = None
         rec = {k: [] for k in SCALARS}
@@ -512,21 +617,27 @@ def sweep(params, kind, values, voltages=(0.0,), aoas=None, progress=None):
             if kind == "voltage":
                 Vv = float(v)
             else:
-                Vv = float(V)
-                key = {"aoa": "alpha_deg", "phase": "flap_phase_deg", "speed": "U"}[kind]
-                w.p[key] = float(v)
+                w.p[{"aoa": "alpha_deg", "phase": "flap_phase_deg", "schedule": "flap_phase_deg", "speed": "U"}[kind]] = float(v)
+                Vv = float(V) if dea_active(w.p) else 0.0
             if x is None:
-                x0, i0 = w.solve(0.0)
-                x = x0
-            xs_, info = w.solve(Vv, x_init=x, ramp_steps=0 if x is not None else None)
-            x = xs_
-            r = w.evaluate(xs_, Vv, info)
+                x, _ = w.solve(0.0)
+            x, info = w.solve(Vv, x_init=x, ramp_steps=0)
+            r = w.evaluate(x, Vv, info)
             for k in SCALARS:
                 rec[k].append(r[k])
             done += 1
             if progress:
                 progress(done, total)
-        label = f"AoA {a:g} deg" if kind == "voltage" else f"AoA {a:g} deg, {V:g} V"
+        if kind == "voltage":
+            label = f"pitch {a:g} deg"
+        elif kind == "schedule":
+            label = "DEA off" if V == 0 else f"{V:g} V, " + {"always": "always on", "downstroke": "downstroke only", "upstroke": "upstroke only"}[sched]
+        else:
+            label = f"pitch {a:g} deg, {V:g} V"
+        if kind in ("phase", "schedule"):
+            vals = np.asarray(values, float)
+            keep = ~np.isclose(np.mod(vals, 360), np.mod(vals[0], 360)) | (np.arange(len(vals)) == 0)
+            rec["cycle_mean"] = {q: float(np.mean(np.asarray(rec[q])[keep])) for q in ("L_mN", "F_vert_mN", "F_thrust_mN")}
         out[label] = rec
     return dict(kind=kind, values=list(map(float, values)), curves=out)
 
