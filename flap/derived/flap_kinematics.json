@@ -1,0 +1,66 @@
+{
+ "pivot": [
+  126,
+  358
+ ],
+ "kin": {
+  "0kV": {
+   "f_Hz": 2.0,
+   "amp_pp_deg": 72.0,
+   "amp_pp_sd": 0.0,
+   "max_deg": 37.0,
+   "min_deg": -35.0,
+   "mean_deg": 0.7523738130934533,
+   "down_frac": 0.437,
+   "cycles": 10
+  },
+  "900V": {
+   "f_Hz": 2.0,
+   "amp_pp_deg": 71.825,
+   "amp_pp_sd": 0.2512468905280223,
+   "max_deg": 36.825,
+   "min_deg": -35.0,
+   "mean_deg": 1.0560969515242378,
+   "down_frac": 0.4485,
+   "cycles": 10
+  }
+ },
+ "shape": [
+  {
+   "phi": 0.0,
+   "stroke": "up",
+   "nA": 8,
+   "nB": 9,
+   "within_single": 1.7911218404769897,
+   "split_half_0kV": 1.380121111869812,
+   "between_0kV_900V": 1.4929354190826416
+  },
+  {
+   "phi": 0.0,
+   "stroke": "down",
+   "nA": 10,
+   "nB": 10,
+   "within_single": 1.7367960214614868,
+   "split_half_0kV": 0.7687613368034363,
+   "between_0kV_900V": 1.0726263523101807
+  },
+  {
+   "phi": 20.0,
+   "stroke": "up",
+   "nA": 10,
+   "nB": 10,
+   "within_single": 1.2195872068405151,
+   "split_half_0kV": 0.7567325830459595,
+   "between_0kV_900V": 0.9603474736213684
+  },
+  {
+   "phi": 20.0,
+   "stroke": "down",
+   "nA": 10,
+   "nB": 10,
+   "within_single": 1.3358736038208008,
+   "split_half_0kV": 0.6115360260009766,
+   "between_0kV_900V": 0.9262177348136902
+  }
+ ]
+}
