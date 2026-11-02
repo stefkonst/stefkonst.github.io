@@ -19,6 +19,7 @@ import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spl
 from matplotlib.tri import Triangulation
+from scipy.optimize import brentq
 
 EPS0 = 8.854e-12
 YEOH = (42842.1, 447.0, 0.0)   # Elastosil P7670, fitted on the rolled-DEA bundle at 0 V (../plagiopatagiales/fit_p7670.py)
@@ -38,7 +39,7 @@ DEFAULTS = dict(
     # flow
     U=4.0, alpha_deg=6.0, rho_air=1.225, na_x=36, na_y=16, na_cos=True,
     # frame
-    fix_te=False, rigid_frame=True, rod_od=3e-3, rod_id=2e-3, rod_od_tip=None, rod_id_tip=None, rod_E=120e9, rod_G=5e9,
+    fix_te=False, no_batten=False, root_free=False, tensioners=(), rigid_frame=True, rod_od=3e-3, rod_id=2e-3, rod_od_tip=None, rod_id_tip=None, rod_E=120e9, rod_G=5e9,
     batten_d=0.8e-3, batten_E=120e9, batten_G=5e9, frame_relax=0.7, frame_iter=12,
     # solver
     max_iter=60000, tol=2e-7, aero_every=20,
@@ -86,15 +87,16 @@ def sheet_stress(c00, c11, c01, t, P):
     if np.any(wr):
         l1w, l2o = l1[wr], l2[wr]
         Pw = P[wr] if np.ndim(P) else np.full(l1w.shape, float(P))
+        tw = t[wr] if np.ndim(t) else t
         lw = l2o.copy()
         ok = np.ones(l1w.shape, bool)
         for _ in range(3):                                    # W1 varies slowly with stretch: fixed point on l2w
             Wk = W1_of(l1w + lw + 1 / (l1w * lw))
-            g = 1 - Pw * l1w / (2 * t * Wk)
+            g = 1 - Pw * l1w / (2 * tw * Wk)
             ok = g > 1e-6
             lw = np.where(ok, np.sqrt(1 / (l1w * np.where(ok, g, 1.0))), lw)
         Wk = W1_of(l1w + lw + 1 / (l1w * lw))
-        S1 = 2 * t * Wk * (1 - 1 / (l1w ** 2 * lw)) - Pw * lw
+        S1 = 2 * tw * Wk * (1 - 1 / (l1w ** 2 * lw)) - Pw * lw
         ok &= S1 > 0
         S1 = np.where(ok, S1, 0.0)
         th = 0.5 * np.arctan2(2 * c01[wr], c00[wr] - c11[wr])
@@ -259,6 +261,9 @@ class Wing:
             G[e, 0, 0], G[e, 1, 0], G[e, 2, 0] = (y2 - y3) / A2, (y3 - y1) / A2, (y1 - y2) / A2
             G[e, 0, 1], G[e, 1, 1], G[e, 2, 1] = (x3 - x2) / A2, (x1 - x3) / A2, (x2 - x1) / A2
         self.G, self.A0 = G, A0
+        self.t_p = np.broadcast_to(np.asarray(p["t"], float), (2,))
+        self.na_p = np.broadcast_to(np.asarray(p["n_a"], float), (2,))
+        self.te = self.t_p[self.tp]
         # supports
         fixed = np.zeros(len(nodes), bool)
         self.fib = {}
@@ -280,6 +285,10 @@ class Wing:
         if p["fix_te"]:
             for ids in self.fib.values():
                 fixed[ids] = True
+        if p["no_batten"] and len(self.panels) == 2:
+            fixed[self.ids[0][-1, 1:]] = False
+        if p["root_free"] and 0 in self.panels:
+            fixed[self.ids[0][0, 1:]] = False
         self.fixed = fixed
         # fibre bars, stretched with their panel's lam_d (rolled with the sheet)
         b1, b2, L0, Ab, dF, EAc, cpre, bp = [], [], [], [], [], [], [], []
@@ -288,7 +297,7 @@ class Wing:
             for n1, n2 in zip(ids[:-1], ids[1:]):
                 b1.append(n1); b2.append(n2)
                 L0.append(np.linalg.norm(self.x0[n2] - self.x0[n1]) / p["lam_d"][k])
-                Ab.append(w * p["t"])
+                Ab.append(w * float(np.broadcast_to(np.asarray(p["t"], float), (2,))[k]))
                 EAc.append(p["cord_EA"][k]); cpre.append(p["cord_pre"][k]); bp.append(k)
         self.b1, self.b2 = np.array(b1, int), np.array(b2, int)
         self.bL0, self.bA = np.array(L0), np.array(Ab)
@@ -297,13 +306,26 @@ class Wing:
         self.vlm = None
         self.pe = None
         self.f_ext = None                                     # known nodal loads: verification, and flapping inertia
+        # tensioners, fibre node to a fixed anchor: "line" = spring of stiffness k; "dea" = rolled fibre, Eq. F7 with its own Delta F
+        self.tens = []
+        for q_ in p["tensioners"]:
+            n_ = {"C": self.fib[0][-1], "D": self.fib[0][0]}[q_["at"]]
+            anc = np.array([q_["anchor"][0], q_["anchor"][1], 0.0])
+            L_ = np.linalg.norm(self.x0[n_] - anc)
+            if q_["kind"] == "line":
+                self.tens.append(dict(n=int(n_), anc=anc, kind="line", k=q_["k"], L0=L_ - q_["F0"] / q_["k"]))
+            else:
+                A_ = q_["w"] * self.t_p[0]
+                lam = brentq(lambda l: A_ * 2 * (l - l ** -2) * W1_of(l * l + 2 / l) - q_["F0"], 1.0, 2.0)
+                self.tens.append(dict(n=int(n_), anc=anc, kind="dea", A=A_, L0=L_ / lam, dF=q_["eta"] * EPS0 * p["eps_r"] * self.t_p[0] * (q_["w"] - 2e-3) / p["H"] ** 2))
+            self.m[n_] += 2 * (self.tens[-1].get("k", 0.0) + (6 * YEOH[0] * self.tens[-1].get("A", 0.0) * 3 / self.tens[-1]["L0"] if q_["kind"] == "dea" else 0.0))
         self.flap = None
 
     def set_flap(self, Om, dOm, rho_s=1100.0):
         """Stroke rate and acceleration (rad/s, rad/s^2): plunge load -m dOm r and centrifugal load m Om^2 r on the sheet and fibres."""
         self.flap = dict(Om=Om, dOm=dOm)
         m = np.zeros(self.x0.shape[0])
-        np.add.at(m, self.tri_flat, np.repeat(rho_s * self.p["t"] * self.A0 / 3, 3))
+        np.add.at(m, self.tri_flat, np.repeat(rho_s * self.te * self.A0 / 3, 3))
         if self.b1.size:
             np.add.at(m, self.b1, 0.5 * rho_s * self.bA * self.bL0)
             np.add.at(m, self.b2, 0.5 * rho_s * self.bA * self.bL0)
@@ -315,7 +337,7 @@ class Wing:
         """Maxwell resultant per element (N/m). V is a scalar or (V_panel1, V_panel2)."""
         p = self.p
         V = (V, V) if np.isscalar(V) else V
-        Pv = np.array([p["eta_s"] * p["n_a"] * EPS0 * p["eps_r"] * v ** 2 / p["H"] for v in V])
+        Pv = np.array([p["eta_s"] * na * EPS0 * p["eps_r"] * v ** 2 / p["H"] for v, na in zip(V, self.na_p)])
         return Pv[self.tp]
 
     def membrane(self, x, Pe, want=False):
@@ -324,7 +346,7 @@ class Wing:
         F0 = np.sum(xe * G0, 1)
         F1 = np.sum(xe * G1, 1)
         c00, c11, c01 = np.sum(F0 * F0, 1), np.sum(F1 * F1, 1), np.sum(F0 * F1, 1)
-        S00, S11, S01, st, N1, N2 = sheet_stress(c00, c11, c01, self.p["t"], Pe)
+        S00, S11, S01, st, N1, N2 = sheet_stress(c00, c11, c01, self.te, Pe)
         P0 = F0 * S00[:, None] + F1 * S01[:, None]
         P1 = F0 * S01[:, None] + F1 * S11[:, None]
         tA = self.A0[:, None, None]
@@ -342,7 +364,7 @@ class Wing:
         l = np.linalg.norm(d, axis=1)
         lam = l / self.bL0
         Vb = np.array((V, V) if np.isscalar(V) else V, float)[self.bp]
-        dF = p["eta_f"] * p["n_f"] * EPS0 * p["eps_r"] * Vb ** 2 / p["H"] * p["w_a_frac"] * np.array(p["w_s"])[self.bp] if p["active_fibre"] else 0.0
+        dF = p["eta_f"] * p["n_f"] * EPS0 * p["eps_r"] * Vb ** 2 / p["H"] * (np.array(p["w_a_frac"])[self.bp] if np.ndim(p["w_a_frac"]) else p["w_a_frac"]) * np.array(p["w_s"])[self.bp] if p["active_fibre"] else 0.0
         Ns = np.maximum(self.bA * 2 * (lam - lam ** -2) * W1_of(lam ** 2 + 2 / lam) - dF, 0.0)
         Nc = np.maximum(self.bEAc * (lam / np.array(p["lam_d"])[self.bp] - 1 + self.bcpre), 0.0)
         N = Ns + Nc
@@ -365,7 +387,7 @@ class Wing:
     def _masses(self):
         g = np.linalg.norm(self.G, axis=2)
         Et = 2 * 12 * YEOH[0] * 1.5
-        ke = self.p["t"] * self.A0[:, None] * Et * g * g.sum(1, keepdims=True)
+        ke = np.broadcast_to(np.asarray(self.p["t"], float), (2,))[self.tp][:, None] * self.A0[:, None] * Et * g * g.sum(1, keepdims=True)
         S = np.zeros(self.x0.shape[0])
         np.add.at(S, self.tri.ravel(), ke.ravel())
         if self.b1.size:
@@ -382,6 +404,16 @@ class Wing:
             f += self.pressure(x, pe)
         if self.f_ext is not None:
             f += self.f_ext
+        for q_ in self.tens:
+            d_ = x[q_["n"]] - q_["anc"]
+            l_ = np.linalg.norm(d_)
+            lam = l_ / q_["L0"]
+            if q_["kind"] == "line":
+                N_ = max(q_["k"] * (l_ - q_["L0"]), 0.0)
+            else:
+                Vv = max(V) if not np.isscalar(V) else V
+                N_ = max(q_["A"] * 2 * (lam - lam ** -2) * W1_of(lam * lam + 2 / lam) - q_["dF"] * Vv ** 2, 0.0)
+            f[q_["n"]] -= N_ * d_ / l_
         return f
 
     # ---------------- aero coupling ----------------

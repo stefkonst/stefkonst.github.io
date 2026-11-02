@@ -75,13 +75,14 @@ li{margin:.35em 0}
   <h2>Result: lift change over a flap cycle</h2>
   <div class="tw"><table>
     <tr><th>Cycle-mean lift change at 1.6 kV, one wing, 2 Hz</th><th>3 m/s</th><th>4 m/s</th><th>6 m/s</th></tr>
-    <tr class="main"><td>Full membrane, $\eta$ = 0.40</td><td>5.0 mN</td><td>9.2 mN</td><td>13.6 mN</td></tr>
+    <tr class="main"><td>Full membrane, one active layer, earlier shape, $\eta$ = 0.40</td><td>5.0 mN</td><td>9.2 mN</td><td>13.6 mN</td></tr>
+    <tr><td>Full membrane, best design: two active layers, new shape (lift change at 6°)</td><td>9.0 mN</td><td>16.9 mN</td><td>25.4 mN</td></tr>
     <tr class="main"><td>Discrete DEAs, ideal rigid trailing edge</td><td>0.4 mN</td><td>1.8 mN</td><td>9.4 mN</td></tr>
     <tr class="main"><td>Discrete DEAs, free trailing edge, as tested so far (estimate)</td><td>0.01 mN</td><td>0.04 mN</td><td>0.19 mN</td></tr>
   </table></div>
   <p class="cap">Baseline lift at 4 m/s is about 16–20 mN per wing.</p>
   <div class="fig" style="margin-top:12px"><img src="full_membrane/validation/F_main.png" alt="Lift change over the flap cycle at 4 m/s, 2 Hz for both wings, and the cycle-mean lift change at three speeds">
-  <p class="cap">a) Lift change over one cycle at 4 m/s, 2 Hz, 1.6 kV. The peak near 270° is one phase where the outboard wing's angle crosses zero; it should not be trusted. b) Cycle mean at 2 Hz.</p></div>
+  <p class="cap">a) Lift change over one cycle at 4 m/s, 2 Hz, 1.6 kV. The peak near 270° comes from the 0 V wing: its outer panel flips where the angle crosses zero, so it should not be trusted. b) Cycle mean at 2 Hz.</p></div>
 </section>
 
 <div class="two">
@@ -90,7 +91,8 @@ li{margin:.35em 0}
     <ul>
       <li><b>Weak results so far are expected.</b> With a free trailing edge, the model keeps about 2 % of the actuator's force. Bowed DEAs in the videos fit this.</li>
       <li><b>The full membrane leads in every case compared here,</b> by about 5× at 4 m/s against an ideal discrete wing.</li>
-      <li><b>The lead narrows</b> to 1.4× at 6 m/s, and to 1.7× at 4 m/s if the discrete wing's membrane is slack ($\lambda_{pre}$ = 1.00).</li>
+      <li><b>The lead narrows</b> to 1.4× at 6 m/s, and to 1.7× at 4 m/s if the discrete wing's membrane is slack ($\lambda_{pre}$ = 1.00). So a discrete wing with trailing-edge tension and low pre-stretch is still worth one test.</li>
+      <li><b>Over the stroke:</b> discrete DEAs follow the load, so they change lift most in the downstroke. The full membrane changes it about equally throughout.</li>
     </ul>
   </section>
   <section class="card">
@@ -103,7 +105,7 @@ li{margin:.35em 0}
   </section>
 </div>
 
-<div class="warn"><b>How far to trust the comparison:</b> the two wings use different models, a 3D finite-element and vortex-lattice model against a verified section model scaled to the same flat-wing lift. The free-edge row multiplies the ideal result by an estimated 0.02. Differences of tens of percent mean little; differences of 5× do.</div>
+<div class="warn"><b>How far to trust the comparison:</b> the two wings use different models, a 3D finite-element and vortex-lattice model against a verified section model scaled to the same flat-wing lift. The figure shows one active layer on the earlier shape. The free-edge row multiplies the ideal result by an estimated 0.02. Differences of tens of percent mean little; differences of 5× do.</div>
 
 <div class="two">
   <a class="go" href="full_membrane/"><b>Full membrane →</b><br>How to build it, the masks, and the model behind the numbers.</a>

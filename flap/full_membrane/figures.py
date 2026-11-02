@@ -95,7 +95,7 @@ def fig_final():
     a = ax[1, 0]
     for k, lbl in enumerate(dict.fromkeys(q["label"] for q in F["stack"])):
         r = [q for q in F["stack"] if q["label"] == lbl and q.get("dCL") is not None and q.get("ok1")]
-        a.plot([q["eta"] for q in r], [q["dCL"] for q in r], "o-", label=lbl)
+        a.plot([q["eta"] for q in r], [q["dCL"] for q in r], "o-", label={0: "1 active film, no cover, 35 µm", 1: "½D+E+D+E+½D, 70 µm", 2: "3 active films of 4, 140 µm"}[k])
     a.set(xlabel=r"$\eta$ of the flat sheet", ylabel=r"$\Delta C_L$"); a.legend(fontsize=6)
     a = ax[1, 1]
     for k, ddn in enumerate((-0.005, 0.0, 0.005)):
@@ -134,7 +134,7 @@ def fig_shape():
 def fig_masks():
     Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers.json")))
     fig, ax = plt.subplots(1, 2, figsize=(10.5, 4.7))
-    labels = dict(root=("Root end", "Batten tip"), tip=("Batten tip", "Wing tip, next to the LE"))
+    labels = dict(root=("Root end", "Batten tip"), tip=("Batten tip", "Tip, by the LE"))
     for a, k, ttl in ((ax[0], "root", "Panel 1 (inboard)"), (ax[1], "tip", "Panel 2 (outboard)")):
         q = Mk[k]
         ac = np.array(q["active"]); a.fill(ac[:, 0], ac[:, 1], color=PS.MATLAB[4], alpha=0.25, label="Active area (A and B overlap)")
@@ -144,8 +144,8 @@ def fig_masks():
         a.fill(tA[:, 0], tA[:, 1], color=PS.OFF, alpha=0.6, label="Contact A")
         a.fill(tB[:, 0], tB[:, 1], color=PS.ON, alpha=0.6, label="Contact B")
         fa, fb = np.array(q["fibre_A"]), np.array(q["fibre_B"])
-        a.plot(fa[:, 0], fa[:, 1], color=PS.OFF, lw=0.9, label="Additional fibre, A")
-        a.plot(fb[:, 0], fb[:, 1], color=PS.ON, lw=0.9, ls="--", label="Additional fibre, B")
+        a.plot(fa[:, 0], fa[:, 1], color=PS.OFF, lw=0.9, label="Spare rectangle, A")
+        a.plot(fb[:, 0], fb[:, 1], color=PS.ON, lw=0.9, ls="--", label="Spare rectangle, B")
         ym = float(np.mean(tA[:, 1]))
         a.text(tA[:, 0].mean(), np.max(st[:, 1]) + 1.2, labels[k][0], ha="center", va="top", fontsize=7)
         a.text(tB[:, 0].mean(), np.max(st[:, 1]) + 1.2, labels[k][1], ha="center", va="top", fontsize=7)
@@ -244,7 +244,37 @@ def fig_main():
     PS.apply()
 
 
+def fig_design():
+    ok = lambda r: r.get("ok0") and r.get("ok1") and r.get("dL_mN") is not None
+    fig, ax = plt.subplots(1, 4, figsize=(13, 3.3))
+    L = [r for r in load("opt_layers") if ok(r) and r["U"] == 4.0]
+    ns = sorted({r["na"][0] for r in L})
+    best = [max([r for r in L if r["na"][0] == n], key=lambda r: r["dL_mN"]) for n in ns]
+    a = ax[0]
+    a.plot(ns, [r["dL_mN"] for r in best], "o-", color=PS.MATLAB[0]); a.set(xlabel="Active layers on both panels", ylabel=r"$\Delta L$ in mN")
+    b = a.twinx(); b.plot(ns, [r["mass_mg"] for r in best], "s--", color=PS.MATLAB[1]); b.set_ylabel("Wing mass in mg", color=PS.MATLAB[1])
+    a = ax[1]
+    P = [r for r in load("opt_panels") if ok(r)]
+    for n2, c in zip((1, 2, 3, 4, 5), PS.MATLAB):
+        q = sorted([r for r in P if r["na"][1] == n2], key=lambda r: r["mass_mg"])
+        a.plot([r["mass_mg"] for r in q], [r["dL_mN"] for r in q], "o-", color=c, label=f"Panel 2: {n2}")
+    a.set(xlabel="Wing mass in mg", ylabel=r"$\Delta L$ in mN"); a.legend(fontsize=7, title="Panel 1: 1, 2 along each line", title_fontsize=6.5)
+    a = ax[2]
+    Rl = [r for r in load("opt_roll") if ok(r) and r["U"] == 4.0]
+    Rl = sorted(Rl, key=lambda r: r["ws"][0])
+    a.plot([r["ws"][0] * 1e3 for r in Rl], [r["dL_mN"] for r in Rl], "o-", color=PS.MATLAB[0])
+    a.axvline(17.5, color="k", ls=":", lw=0.8); a.text(18, min(r["dL_mN"] for r in Rl), "coater limit,\nchord 46 mm", fontsize=7)
+    a.set(xlabel="Roll width as cut in mm", ylabel=r"$\Delta L$ in mN")
+    a = ax[3]
+    Sh = [r for r in load("opt_shape") + load("opt_shape2") if ok(r) and r["U"] == 4.0 and r["na"][0] == 2 and abs(r["theta"] - 14) < 0.1]
+    for yc, c in ((42.5, PS.MATLAB[0]), (47.5, PS.MATLAB[1]), (52.5, PS.MATLAB[2])):
+        q = sorted({round(r["xc"] * 1e3, 1): r for r in Sh if abs(r["yc"] * 1e3 - yc) < 0.1}.items())
+        a.plot([k for k, _ in q], [v["dL_mN"] for _, v in q], "o-", color=c, label=f"Chord line at {yc:g} mm")
+    a.set(xlabel="Batten tip position $x$ in mm", ylabel=r"$\Delta L$ in mN"); a.legend(fontsize=7)
+    PS.finish(ax); fig.tight_layout(); fig.savefig(os.path.join(V, "F_design.png")); plt.close(fig)
+
+
 if __name__ == "__main__":
-    which = sys.argv[1:] or ["tension", "sweep", "final", "shape", "masks", "flap", "main"]
+    which = sys.argv[1:] or ["tension", "sweep", "final", "shape", "masks", "flap", "main", "design"]
     for w in which:
         globals()["fig_" + w]()

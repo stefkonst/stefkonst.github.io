@@ -1,7 +1,7 @@
 """Electrode masks from the model: reference outline = F^-1 (tensioned planform), on the 114 mm plates of mask_2partwing.svg.
 Contacts as in the original mask: electrodes A and B run into opposite ends of the strip. Between the end tabs the strip has no electrode, so the rolled
 fibre stays passive. The additional fibres (rectangles of the original mask, same size, A and B offset along their length) sit beside each panel.
-Run: python masks.py [lam_d] [dn] [w_s_mm] -> masks/mask_2partwing_model.svg, masks/mask_numbers.json"""
+Run: python masks.py [lam_d] [dn] [w_s_mm] [theta] [xc_mm] [yc_mm] -> masks/mask_2partwing_model.svg, masks/mask_numbers.json"""
 import json, math, os, re, sys
 import xml.etree.ElementTree as ET
 import numpy as np
@@ -19,7 +19,7 @@ OLD = {("root", "A"): "path3", ("root", "B"): "path3-4", ("tip", "A"): "path4", 
 M_LE, M_SEAM, M_ROOT, M_STRIP = 2.0, 1.5, 1.5, 1.0   # passive margins (mm): LE bond, batten, root rib, strip edge
 TAB = 4.8                                             # contact tab along the fibre (mm), as in the original mask
 COATER = 60.0
-EXTRA = {"root": dict(L=36.9, w=20.6, off=3.0), "tip": dict(L=40.0, w=16.3, off=3.0)}   # additional fibres: length, width, A-B offset (mm)
+EXTRA = {"root": dict(L=36.9, w=20.6, off=3.0), "tip": dict(L=40.0, w=16.3, off=3.0)}   # spare rectangles, e.g. a DEA tensioner: length, width, A-B offset (mm)
 FIB_GAP = 2.0                                         # clearance between a panel's outline and its additional fibre
 
 
@@ -87,9 +87,10 @@ def path_d(poly):
     return "M " + " L ".join(f"{a:.3f},{b:.3f}" for a, b in pts) + " Z"
 
 
-def main(lam_d=1.03, dn=0.01, w_s=16.5, theta=14.0):
+def main(lam_d=1.05, dn=0.04, w_s=13.0, theta=14.0, xc=70.0, yc=47.5):
     ln = lam_d ** -0.5 + dn
-    w = M.Wing(lam_d=(lam_d, lam_d), lam_n=(ln, ln), w_s=(w_s * 1e-3, w_s * 1e-3), theta_deg=theta, h=3e-3)
+    C_, D_ = (xc * 1e-3, yc * 1e-3), (3.8e-3 + (yc * 1e-3 - 6.4e-3) * math.tan(math.radians(13.7)), yc * 1e-3)
+    w = M.Wing(lam_d=(lam_d, lam_d), lam_n=(ln, ln), w_s=(w_s * 1e-3, w_s * 1e-3), theta_deg=theta, C=C_, D=D_, h=3e-3)
     P = {"root": design_panel(w, 0), "tip": design_panel(w, 1)}
     ET.register_namespace("", "http://www.w3.org/2000/svg")
     ET.register_namespace("inkscape", "http://www.inkscape.org/namespaces/inkscape")
