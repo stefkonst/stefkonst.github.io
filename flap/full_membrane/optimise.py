@@ -78,13 +78,17 @@ def jobs(stage):
     if stage == "panels":                    # different layers per panel, at the stretch given in the argument
         l, d = float(sys.argv[2]), float(sys.argv[3])
         return [("panels", dict(na=(a, b), lam_d=l, dn=d, U=U)) for a in (1, 2, 3, 4, 5) for b in (1, 2, 3, 4, 5) for U in (4.0,)]
-    if stage in ("roll", "shape", "shape2", "attach", "eta"):
+    if stage in ("roll", "shape", "shape2", "active", "attach", "eta"):
         n, l, d = (int(sys.argv[2]), int(sys.argv[3])), float(sys.argv[4]), float(sys.argv[5])
         base = dict(na=(n[0], n[1]), lam_d=l, dn=d)
         if stage == "roll":
             return [("roll", dict(base, ws=(w * 1e-3, w * 1e-3), U=U)) for w in (3, 6, 9, 13, 18, 25) for U in (3.0, 4.0, 6.0)]
         if stage == "eta":
             return [("eta", dict(base, eta_s=e, U=U)) for e in (0.15, 0.24, 0.4, 0.7) for U in (4.0,)]
+        if stage == "active":                # the rolled fibre active too, as built: every dielectric in the roll is active, so n_f = t / H
+            ws = float(sys.argv[6]) * 1e-3
+            G = geometry(70e-3, 47.5e-3)
+            return [("active", dict(na=(N, N), lam_d=l, dn=0.04, ws=(ws, ws), theta_deg=14.0, U=U, active_fibre=True, n_f=N + 1, eta_f=e, **G)) for N in (1, 2) for l in (1.05, 1.06, 1.08, 1.10, 1.12) for e in (0.3,) for U in (4.0,)] + [("active", dict(na=(2, 2), lam_d=l, dn=0.04, ws=(ws, ws), theta_deg=14.0, U=U, active_fibre=True, n_f=3, eta_f=0.4, **G)) for l in (1.08, 1.10, 1.12) for U in (3.0, 4.0, 6.0)]
         if stage == "shape2":                # further outboard, and the best shapes at other speeds and with one layer
             ws = float(sys.argv[6]) * 1e-3
             b2 = dict(base, ws=(ws, ws))

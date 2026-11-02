@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wing Model</title>
+<meta name="description" content="One analytical model for discrete DEA and full membrane wings: equations, parameters, trends and how to validate them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--a:#0072BD;--b:#D95319;--sheet:#dce7f5;--sheet2:#fbe3d6;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px} h3{font-size:17px;margin-top:16px}
+a{color:var(--accent)}
+.wrap{max-width:980px;margin:0 auto;padding:36px 16px}
+.lead{font-size:18px;max-width:800px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.wing h3{font-size:18px;margin:6px 0 4px}
+.wing p{margin:0 0 8px;font-size:14.5px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
+.fig img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+tr.main td{font-weight:600}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.note{font-size:13.5px;color:var(--muted)}
+ul{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
+ul.read{font-size:14.5px;margin-top:10px}
+.eq{overflow-x:auto;margin:6px 0 10px}
+code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4px}
+.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Model</p>
+<h1>One model for both wings</h1>
+<p class="lead">A short analytical model: one script, parameters at the top, every term written below. Notation as in Konstantinidi et al., <i>Smart Mater. Struct.</i> 32 (2023) 125011 and <i>Compos. Sci. Technol.</i> 258 (2024) 110849.</p>
+<div class="two" style="margin-bottom:18px">
+  <a class="go" href="../wing_analytical.py"><b>wing_analytical.py</b><br>The model. Change parameters and run.</a>
+  <a class="go" href="../check_analytical.py"><b>check_analytical.py</b><br>Its checks against closed forms and the detailed models.</a>
+</div>
+
+<section class="card">
+  <h2>Equations</h2>
+  <p>Each panel is a rectangle $a\times b$ ($a$ between supports, $b$ chord), held on all four edges, with aerodynamics as an external pressure. The energy has the same form as the fibre buckling model, $U=U_sA^2+U_b+U_f$, so the result looks the same: a threshold, then a square-root growth of the amplitude $A$.</p>
+  <h3 id="A1">Shape</h3>
+  <div class="eq">$$w=A\sin\frac{\pi x}{a}\sin\frac{\pi y}{b} \tag{A1}$$</div>
+  <h3 id="A2">Energy and balance</h3>
+  <div class="eq">$$U(A)=\tfrac12(T-D)A^2+\tfrac14KA^4-q\,\Phi\,a_L\,\alpha\,A \tag{A2}$$</div>
+  <div class="eq" id="A3">$$\frac{\partial U}{\partial A}=0:\qquad (T-D)\,A+K\,A^3=q\,\Phi\,a_L\,\alpha,\qquad \Phi=\frac{4}{\pi^2},\quad q=\tfrac12\rho U^2 \tag{A3}$$</div>
+  <h3 id="A4">Stiffness from tension</h3>
+  <div class="eq">$$T=n_xX+n_yY,\qquad X=\frac{\pi^2}{4a^2},\quad Y=\frac{\pi^2}{4b^2} \tag{A4}$$</div>
+  <h3 id="A5">Aerodynamic softening</h3>
+  <div class="eq">$$D=\frac{q\,\Phi\,a_L\,k\,c}{b},\qquad c=1.134,\quad k=1.476 \tag{A5}$$</div>
+  <p>More camber gives more lift, which gives more load. $T=D$ is static divergence, the analogue of $F=F_c$. $c$ comes from thin-airfoil theory on the chord shape. $k$ is not fitted: it makes A3 recover the exact 2D limit $C_{T,crit}=1.727$ (Eq. S5) for $a_L=2\pi$.</p>
+  <h3 id="A6">Stiffening from stretch</h3>
+  <div class="eq">$$K=\gamma\,2G\,(H+H_p)\,(X^2+XY+Y^2),\qquad G=2C_1,\qquad A=\sqrt{\frac{D-T}{K}}\ \ \text{past divergence, no load} \tag{A6}$$</div>
+  <p>$\gamma$ = 0.7 is the <b>one fitted number</b>: a real bulge is not uniform, so one shape over-counts stretching. Compare $A=\frac{2}{k}\sqrt{(F-F_c)/(h_fE_f)}$ in the buckling model.</p>
+  <h3 id="A7">Lift</h3>
+  <div class="eq">$$C_L=a_L\Big(\alpha+\frac{k\,c\,A}{b}\Big) \tag{A7}$$</div>
+  <h3 id="A8">Tension and voltage</h3>
+  <p><b>Full sheet</b>, from the equation of state $\sigma_x-\sigma_z=\lambda_x\partial W/\partial\lambda_x-\varepsilon_0\varepsilon_r\chi\lambda_x^2\lambda_y^2V^2/H^2$, at small strain, $e=\lambda-1$:</p>
+  <div class="eq">$$n_x=2G(H+H_p)(2e_x+e_y)-P,\quad n_y=2G(H+H_p)(e_x+2e_y)-P,\quad P=\eta\chi\varepsilon_0\varepsilon_r\frac{V^2}{H^2}(H+H_p) \tag{A8a}$$</div>
+  <p>Stack ½D + E + (D + E) × $N$ + ½D: $H_p=H$ for one active layer, and in general $\chi=N/(N+1)$. Once $n_y$ reaches 0 the sheet wrinkles and $n_x=3G(H+H_p)e_x-P/2$: <b>half the drop</b>. Chord strain includes an edge factor from the finite elements (0.50, 0.20).</p>
+  <p><b>Discrete DEAs</b>, smeared at spacing $s$, with the load-path factor from Eq. S10:</p>
+  <div class="eq">$$n_y=n_{y,m}+\frac{r}{s}\max\big(F_D-\Delta F_{1.6}(V/1.6\ \text{kV})^2,0\big),\quad r=\frac{k_a}{k_a+k_d},\quad k_a=\frac{8T_c\,s}{L_s^2} \tag{A8b}$$</div>
+  <p><b>Free trailing edge:</b> $T_c=0$, so $r=0$. This is statics, Eq. S13: the net chord force across a cut is zero when nothing acts aft of it. An earlier version multiplied by an assumed $r=0.02$; that number had no derivation and is gone.</p>
+  <h3 id="A9">Active rolled fibre</h3>
+  <div class="eq">$$F=2C_1A_0(\lambda_{pre}-\lambda_{pre}^{-2})-\Delta F,\qquad \Delta F=\eta_f\varepsilon_0\varepsilon_r\frac{V^2}{H^2}A_0\frac{w_e}{w_s} \tag{A9}$$</div>
+  <div class="eq">$$F>0\quad\text{if}\quad \lambda_{pre}-1\gtrsim\frac{\eta_f\varepsilon_0\varepsilon_r(V/H)^2\,w_e/w_s}{6C_1}$$</div>
+  <p>All the roll's dielectric is active ($\chi$ = 1), so this does not depend on thickness or roll width beyond $w_e/w_s$. Limit at 1.6 kV: $\lambda_{pre}$ = 1.054 at $\eta_f$ = 0.3, 1.073 at 0.4.</p>
+</section>
+
+<section class="card">
+  <h2>Parameters</h2>
+  <div class="tw"><table>
+    <tr><th>Symbol</th><th>Meaning</th><th>Full membrane</th><th>Discrete DEAs</th><th>Source</th></tr>
+    <tr><td>$C_1$</td><td>Yeoh constant</td><td>42.8 kPa (P7670)</td><td>3.25 kPa, plus composite $E_x$, $E_y$</td><td>Bench fits</td></tr>
+    <tr><td>$H$, $H_p$</td><td>Dielectric, passive thickness</td><td>35 µm each, per ½D + D + ½D</td><td>Membrane 180 µm</td><td>$H$ not measured</td></tr>
+    <tr><td>$\eta$</td><td>Efficiency</td><td>0.5 (estimate)</td><td>0.4 ($\Delta F$ = 8.6 mN per DEA)</td><td>Bench for rolled; estimate for flat</td></tr>
+    <tr><td>$\eta_f$</td><td>Efficiency of the roll</td><td>0.4</td><td>–</td><td>Bench</td></tr>
+    <tr><td>$\lambda$</td><td>Pre-stretch</td><td>$\lambda_d$ = 1.08, $\lambda_n$ = 1.002</td><td>$\lambda_{pre}$ = 1.03</td><td>Design</td></tr>
+    <tr><td>$a$, $b$</td><td>Panels</td><td>40 × 46, 68 × 31 mm</td><td>104 × 46, 104 × 31 mm</td><td>Sketch geometry</td></tr>
+    <tr><td>$T_c$, $r$</td><td>Trailing-edge tension, load path</td><td>–</td><td>0.5 N, $r$ = 0.59; free: 0, 0</td><td>A8b</td></tr>
+    <tr><td>$a_L$</td><td>Lift slope</td><td colspan="2">3.71 per rad, both</td><td>Vortex lattice, flat wing</td></tr>
+    <tr><td>$k$, $\gamma$</td><td>Softening, stretching</td><td colspan="2">1.476, 0.7, both</td><td>Eq. S5; one fit</td></tr>
+  </table></div>
+</section>
+
+<section class="card" id="voltage">
+  <h2>Voltage</h2>
+  <div class="fig"><img src="M4_voltage.png" alt="Lift against voltage for both wings, and tension resultants against voltage"></div>
+  <ul class="read">
+    <li><b>Equation:</b> <a href="#A8">A8</a> for tension, <a href="#A3">A3</a> and <a href="#A7">A7</a> for lift.</li>
+    <li><b>Trend:</b> the full sheet's chord tension falls from 0.76 N/m to 0, and $n_x$ from 2.54 to 1.25 N/m. The discrete wing only drops from 1.68 to 1.26 N/m, because the passive membrane stays in parallel. The kink in the full membrane's lift near 0.6 kV is panel 2 reaching $n_y$ = 0, where it wrinkles and the drop halves (<a href="#A8">A8</a>).</li>
+    <li><b>Validate:</b> resonance frequency or deflection under a small known pressure at each voltage, which gives tension directly. Then camber by stereo video.</li>
+  </ul>
+</section>
+
+<section class="card" id="stretch">
+  <h2>Pre-stretch</h2>
+  <div class="fig"><img src="M5_stretch.png" alt="Lift change against membrane pre-stretch for the discrete wing, and against stretch along the fibre for the full membrane"></div>
+  <ul class="read">
+    <li><b>Equation:</b> $T$ from <a href="#A4">A4</a> and <a href="#A8">A8</a>; fibre limit from <a href="#A9">A9</a>.</li>
+    <li><b>Trend:</b> a stiffer sheet leaves voltage less to do. Discrete: 12.7, 7.5, 3.5, 1.8, 0.7 mN at $\lambda_{pre}$ = 1.00, 1.01, 1.02, 1.03, 1.05. Full: 9.8, 8.3, 6.0, 4.7, 3.7 mN at $\lambda_d$ = 1.05, 1.06, 1.08, 1.10, 1.12.</li>
+    <li><b>Active fibre:</b> below the limit (shaded for $\eta_f$ = 0.3, dotted for 0.4), its force reaches zero at 1.6 kV. So an active fibre costs lift: about 9.8 mN at 1.05 becomes 6.0 mN at the design value of 1.08, where the fibre keeps 2.1 mN.</li>
+    <li><b>Validate:</b> same wing design at three stretches, measured by printed markers. Near $\lambda_{pre}$ = 1.00 the model is unchecked, so look for flutter first.</li>
+  </ul>
+</section>
+
+<section class="card" id="tendon">
+  <h2>Trailing-edge tension, discrete wing</h2>
+  <div class="fig"><img src="M6_tendon.png" alt="Load-path factor and lift change against trailing-edge tension"></div>
+  <ul class="read">
+    <li><b>Equation:</b> <a href="#A8">A8b</a>.</li>
+    <li><b>Trend:</b> most of the gain comes early: 0.8, 1.5, 1.8, 1.9 mN at $T_c$ = 0.05, 0.2, 0.5, 1 N. At $\lambda_{pre}$ = 1.01: 2.8, 6.4, 7.5, 7.4 mN. About 0.2 N already gives most of it, which also loads the LE less.</li>
+    <li><b>Validate:</b> same wing with a continuous edge cord at set tensions, measured by a load cell in series with the line. A line at a single point does not do this: its tension fades within about 50–70 mm.</li>
+  </ul>
+</section>
+
+<section class="card" id="check">
+  <h2>How far to trust it</h2>
+  <div class="fig"><img src="M7_check.png" alt="Lift change against active layers, and this model against the finite elements for all converged cases"></div>
+  <ul class="read">
+    <li><b>Equation:</b> <a href="#A3">A3</a> against the detailed models, with the reference cases' stretch and layers, at their $\eta$ = 0.4 and passive fibre.</li>
+    <li><b>Trend:</b> a) the model <b>misses the benefit of more layers</b>: it stays nearly flat, while the finite elements rise from 8.5 to 18.8 mN. One bulge shape cannot represent the wrinkled sheet. b) Across 40 cases, correlation 0.73, rms error 3.3 mN.</li>
+    <li><b>Validate:</b> build one and two active layers at the same stretch, the cheapest way to settle this.</li>
+  </ul>
+  <div class="tw" style="margin-top:10px"><table>
+    <tr><th>Check</th><th>Reference</th><th>This model</th></tr>
+    <tr><td>Exact divergence limit, 2D</td><td>$C_{T,crit}$ = 1.727</td><td>1.727 (sets $k$)</td></tr>
+    <tr><td>Small-load amplitude</td><td>Closed form of A3</td><td>Agrees to 1 part in 10⁵</td></tr>
+    <tr><td>One layer, $\lambda_d$ = 1.05, cycle mean, 4 m/s</td><td>8.4 mN (finite elements, leaving out 240–300°; 9.2 mN with them)</td><td>8.0 mN (leaves out 240–300°)</td></tr>
+    <tr><td>Rigid-edge discrete, cycle mean, 3 and 4 m/s</td><td>0.4, 1.8 mN (section model)</td><td>0.5, 2.0 mN</td></tr>
+    <tr><td>Same, 6 m/s</td><td>9.4 mN (section model)</td><td>16.3 mN: over-predicts</td></tr>
+    <tr><td>$C_L$ at 0 V, 40 cases</td><td>Finite elements</td><td>rms error 0.035</td></tr>
+    <tr><td>$C_L$ at 1.6 kV, 40 cases</td><td>Finite elements</td><td>rms error 0.105</td></tr>
+    <tr><td>Batten position, 18 cases, an earlier version</td><td>Finite elements</td><td>Correlation 0.30: <b>not captured</b></td></tr>
+  </table></div>
+  <p><b>Use it for:</b> comparing wings, and trends in tension, pre-stretch, $\eta$ and speed up to about 5 m/s. <b>Do not use it for:</b> number of layers, panel shape, the flip near zero angle, or flutter.</p>
+  <p class="note">The trailing edge is assumed held by its fibre. With the fibre force dropping at voltage, that gets weaker: finite-element runs with an active fibre mostly did not converge (18 of 19 cases, the one exception being 6.8 mN at one layer, $\lambda_d$ = 1.12). So the active fibre is the least checked part of this comparison. The bench evidence from the <a href="../full_membrane/#bench">vocal cord device</a> shows a threshold in voltage of this kind.</p>
+</section>
+<div class="two">
+  <a class="go" href="../"><b>← The comparison</b></a>
+  <a class="go" href="../full_membrane/"><b>Full membrane →</b><br>How to build it, masks, design study.</a>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});
+</script>
+</body>
+</html>

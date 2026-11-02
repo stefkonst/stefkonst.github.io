@@ -1,6 +1,6 @@
 """Electrode masks from the model: reference outline = F^-1 (tensioned planform), on the 114 mm plates of mask_2partwing.svg.
-Contacts as in the original mask: electrodes A and B run into opposite ends of the strip. Between the end tabs the strip has no electrode, so the rolled
-fibre stays passive. The additional fibres (rectangles of the original mask, same size, A and B offset along their length) sit beside each panel.
+Contacts as in the original mask: electrodes A and B run into opposite ends of the strip and overlap between the end tabs, so the rolled fibre is active.
+The spare rectangles of the original mask (same size, A and B offset along their length) sit beside each panel.
 Run: python masks.py [lam_d] [dn] [w_s_mm] [theta] [xc_mm] [yc_mm] -> masks/mask_2partwing_model.svg, masks/mask_numbers.json"""
 import json, math, os, re, sys
 import xml.etree.ElementTree as ET
@@ -61,8 +61,9 @@ def design_panel(w, k, lam_note=None):
 
     half_a = rect(0.0, TAB)
     half_b = rect(L - TAB, L)
-    # electrode A = active + tab at the start of the fibre, electrode B = active + tab at its end
-    ea, eb = unary_union([act.buffer(1e-3), half_a.buffer(1e-3)]), unary_union([act.buffer(1e-3), half_b.buffer(1e-3)])
+    strip_a, strip_b = rect(0.0, L - TAB), rect(TAB, L)
+    # electrode A = sheet + strip without its far tab, electrode B = sheet + strip without its near tab: they overlap in the sheet and in the fibre
+    ea, eb = unary_union([act.buffer(1e-3), strip_a.buffer(1e-3)]), unary_union([act.buffer(1e-3), strip_b.buffer(1e-3)])
     corners = np.r_[s2, st2]
     # additional fibre: long axis across the coater width, placed past the panel along the fibre direction; the group is recentred on the plate
     name = "root" if k == 0 else "tip"

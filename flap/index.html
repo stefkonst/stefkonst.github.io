@@ -4,119 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Active Membrane Wings</title>
-<meta name="description" content="Predicted lift change over a flap cycle for two kinds of dielectric elastomer membrane wing: discrete DEAs and a fully active membrane.">
+<meta name="description" content="Lift change over a flap cycle for two dielectric elastomer membrane wings, from one analytical model.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <style>
-:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--muted:#5d646b;--card:#fff;--a:#0072BD;--b:#D95319;--sheet:#dce7f5;--sheet2:#fbe3d6;--warn:#9a5b00;--warnbg:#fff4e0}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}}
-:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--a:#0072BD;--b:#D95319;--sheet:#dce7f5;--sheet2:#fbe3d6;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
-h1,h2{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
-h2{font-size:22px}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px} h3{font-size:17px;margin-top:16px}
 a{color:var(--accent)}
 .wrap{max-width:980px;margin:0 auto;padding:36px 16px}
-.lead{font-size:18px;max-width:780px}
+.lead{font-size:18px;max-width:800px}
 .card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media (max-width:720px){.two{grid-template-columns:1fr}}
-.wing h3{font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:6px 0 4px}
+.wing h3{font-size:18px;margin:6px 0 4px}
 .wing p{margin:0 0 8px;font-size:14.5px}
 svg{width:100%;height:auto;display:block}
 svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
 .fig img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
-.cap{font-size:13px;color:var(--muted);margin-top:6px}
 .tw{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
-th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:right}
-th:first-child,td:first-child{text-align:left}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
 tr.main td{font-weight:600}
 .warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
-ul{padding-left:20px;margin:.3em 0}
-li{margin:.35em 0}
+.note{font-size:13.5px;color:var(--muted)}
+ul{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
+ul.read{font-size:14.5px;margin-top:10px}
+.eq{overflow-x:auto;margin:6px 0 10px}
+code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4px}
 .go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
-.go:hover{border-color:var(--accent)}
-.go b{color:var(--accent)}
+.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
 <h1>Which active wing changes lift more?</h1>
-<p class="lead">Two ways of putting dielectric elastomer actuators in a bat-inspired wing, compared over a flap cycle on the same wing size, stroke and voltage.</p>
-<div class="warn"><b>These are model predictions.</b> The full membrane has not been built. Its advantage depends on an actuator efficiency $\eta$ that has not been measured on a flat sheet.</div>
-
+<p class="lead">Two ways of putting dielectric elastomer actuators in a bat-inspired wing, on the same wing size, stroke and voltage, from <a href="model/">one analytical model</a>.</p>
+<div class="warn"><b>These are model predictions.</b> The full membrane has not been built, and $\eta$ of a flat sheet is estimated (0.5), not measured.</div>
 <div class="two" style="margin-bottom:18px">
   <div class="card wing">
     <svg viewBox="0 0 300 130" role="img" aria-label="Wing with discrete rolled actuators running chordwise across a passive membrane">
       <path d="M12 16 L288 16 L288 26 L150 112 L40 114 Z" fill="var(--sheet2)" stroke="var(--muted)"/>
       <line x1="12" y1="16" x2="288" y2="16" stroke="var(--ink)" stroke-width="3"/>
       <g stroke="var(--b)" stroke-width="3"><line x1="58" y1="18" x2="62" y2="112"/><line x1="92" y1="18" x2="96" y2="113"/><line x1="126" y1="18" x2="130" y2="112"/><line x1="160" y1="18" x2="162" y2="106"/><line x1="194" y1="18" x2="195" y2="85"/><line x1="228" y1="18" x2="228" y2="64"/></g>
-      <text x="12" y="11">Leading edge</text><text x="60" y="126">Free trailing edge: nothing to pull against</text>
+      <text x="12" y="11">Leading edge</text><text x="70" y="126">Trailing edge: free, or under tension</text>
     </svg>
     <h3>Plagiopatagiales: discrete DEAs</h3>
-    <p>Rolled actuators in a passive membrane. Voltage relaxes the actuators, but the membrane in parallel carries most of the tension.</p>
+    <p>Rolled actuators in a passive silicone membrane.</p>
   </div>
   <div class="card wing">
     <svg viewBox="0 0 300 130" role="img" aria-label="Wing whose whole surface is active, with rolled fibres along the trailing edge meeting at a batten">
-      <path d="M12 16 L288 16 L288 26 L150 104 Q95 100 40 104 Z" fill="var(--sheet)" stroke="var(--muted)"/>
+      <path d="M12 16 L288 16 L288 26 L180 92 Q110 98 40 92 Z" fill="var(--sheet)" stroke="var(--muted)"/>
       <line x1="12" y1="16" x2="288" y2="16" stroke="var(--ink)" stroke-width="3"/>
-      <path d="M40 104 Q95 100 150 104 L288 26" fill="none" stroke="var(--a)" stroke-width="3.5"/>
-      <line x1="138" y1="17" x2="150" y2="104" stroke="var(--ink)" stroke-width="1.5"/>
-      <text x="12" y="11">Leading edge</text><text x="60" y="122">Rolled passive fibre along the trailing edge</text>
+      <path d="M40 92 Q110 98 180 92 L288 26" fill="none" stroke="var(--a)" stroke-width="3.5"/>
+      <line x1="160" y1="17" x2="180" y2="92" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="12" y="11">Leading edge</text><text x="70" y="114">Integral rolled fibre, active</text>
     </svg>
     <h3>Full membrane</h3>
-    <p>The skin is the actuator, with no passive membrane in parallel. It is tensioned before bonding, so voltage can remove most of its tension.</p>
+    <p>The whole skin is the actuator, two active layers, with its own rolled edge as the fibre.</p>
   </div>
 </div>
 
 <section class="card">
-  <h2>Result: lift change over a flap cycle</h2>
+  <h2>Result</h2>
   <div class="tw"><table>
-    <tr><th>Cycle-mean lift change at 1.6 kV, one wing, 2 Hz</th><th>3 m/s</th><th>4 m/s</th><th>6 m/s</th></tr>
-    <tr class="main"><td>Full membrane, one active layer, earlier shape, $\eta$ = 0.40</td><td>5.0 mN</td><td>9.2 mN</td><td>13.6 mN</td></tr>
-    <tr><td>Full membrane, best design: two active layers, new shape (lift change at 6°)</td><td>9.0 mN</td><td>16.9 mN</td><td>25.4 mN</td></tr>
-    <tr class="main"><td>Discrete DEAs, ideal rigid trailing edge</td><td>0.4 mN</td><td>1.8 mN</td><td>9.4 mN</td></tr>
-    <tr class="main"><td>Discrete DEAs, free trailing edge, as tested so far (estimate)</td><td>0.01 mN</td><td>0.04 mN</td><td>0.19 mN</td></tr>
+    <tr><th>Mean lift change at 1.6 kV, one wing, 2 Hz, 6° pitch</th><th>3 m/s</th><th>4 m/s</th><th>6 m/s*</th></tr>
+    <tr class="main"><td>Full membrane, $\eta$ = 0.5</td><td>2.2 mN</td><td>6.0 mN</td><td>18.5 mN</td></tr>
+    <tr class="main"><td>Discrete DEAs, $T_c$ = 0.5 N, $\lambda_{pre}$ = 1.03</td><td>0.5 mN</td><td>1.8 mN</td><td>14.3 mN</td></tr>
+    <tr class="main"><td>Discrete DEAs, free trailing edge, as tested</td><td>0</td><td>0</td><td>0</td></tr>
   </table></div>
-  <p class="cap">Baseline lift at 4 m/s is about 16–20 mN per wing.</p>
-  <div class="fig" style="margin-top:12px"><img src="full_membrane/validation/F_main.png" alt="Lift change over the flap cycle at 4 m/s, 2 Hz for both wings, and the cycle-mean lift change at three speeds">
-  <p class="cap">a) Lift change over one cycle at 4 m/s, 2 Hz, 1.6 kV. The peak near 270° comes from the 0 V wing: its outer panel flips where the angle crosses zero, so it should not be trusted. b) Cycle mean at 2 Hz.</p></div>
+  <p class="note">Baseline lift about 16 mN per wing at 4 m/s. *The model over-predicts at 6 m/s.</p>
+  <ul>
+    <li><b>Your tested wings:</b> weak results are expected. With a free trailing edge, statics leave no way for voltage to change chord tension.</li>
+    <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 3.3× at 4 m/s, narrowing with speed.</li>
+    <li><b>But a slack discrete wing may do as well.</b> Lowering $\lambda_{pre}$ raises its lift change to 7.5 mN at 1.01 and 12.7 mN at 1.00, close to or above the full membrane. Those are outside what the model has been checked on, and a slack membrane may flutter. See <a href="model/#stretch">pre-stretch</a>.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Over the stroke</h2>
+  <div class="fig"><img src="model/M1_stroke.png" alt="Lift and lift change over a flap cycle for each wing at 4 m/s, 2 Hz"></div>
+  <ul class="read">
+    <li><b>Equation:</b> <a href="model/#A3">A3</a> at each phase, with $\alpha_{eff}=\alpha-\arctan(\Omega r/U)$ and $q_{eff}=\tfrac12\rho(U^2+\Omega^2r^2)$ at each panel's radius.</li>
+    <li><b>Trend:</b> a discrete wing changes lift most in the downstroke (2.6 mN) and least in the upstroke (0.5 mN), because its camber follows the load. The full membrane is nearly constant at 6 mN, because voltage removes most of its chord tension whatever the load.</li>
+    <li><b>Not reliable from 240° to 300°:</b> the outer panel's angle crosses zero. This model flips the panel at voltage; the <a href="full_membrane/#performance">finite elements</a> flip it at 0 V. Left out of the means.</li>
+    <li><b>Validate:</b> high-speed video and force over a cycle, 0 V and 1.6 kV, same wing. Look for a flat lift change against phase on the full membrane, and for snap-through near 270°.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>With speed</h2>
+  <div class="fig"><img src="model/M2_speed.png" alt="Cycle-mean lift change and the ratio between the two wings against flow speed"></div>
+  <ul class="read">
+    <li><b>Equation:</b> <a href="model/#A3">A3</a>, with softening $D\propto q$ (<a href="model/#A5">A5</a>).</li>
+    <li><b>Trend:</b> the discrete wing needs high $q$ to act, because its tension stays high: $T$ falls by only 25 % at voltage. The full membrane loses all its chord tension, so it responds at low speed. The ratio falls from about 4.6× at 3 m/s to 3.3× at 4 m/s.</li>
+    <li><b>Validate:</b> static section in the tunnel, 3, 4, 5, 6 m/s, randomised, with a sham. Above 5 m/s (shaded) the model over-predicts, by about 1.7× on a rigid-edge discrete wing at 6 m/s.</li>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>With actuator efficiency</h2>
+  <div class="fig" style="max-width:560px"><img src="model/M3_eta.png" alt="Cycle-mean lift change against actuator efficiency for both wings"></div>
+  <ul class="read">
+    <li><b>Equation:</b> $P=\eta\chi\varepsilon_0\varepsilon_r(V/H)^2(H+H_p)$ (<a href="model/#A8">A8</a>); for discrete DEAs, $\Delta F\propto\eta$.</li>
+    <li><b>Trend:</b> full membrane 3.4, 4.1, 5.2, 8.0 mN at $\eta$ = 0.15, 0.24, 0.40, 0.70. Discrete 0.5, 0.9, 1.8, 4.0 mN. The sheet is estimated at 0.5, higher than a roll because it has no rolled air gaps.</li>
+    <li><b>Validate:</b> flat strip of the real stack on the texture analyser, isometric, held at 1.6 kV. This is the cheapest and most useful next measurement.</li>
+  </ul>
 </section>
 
 <div class="two">
-  <section class="card">
-    <h2>What this says</h2>
-    <ul>
-      <li><b>Weak results so far are expected.</b> With a free trailing edge, the model keeps about 2 % of the actuator's force. Bowed DEAs in the videos fit this.</li>
-      <li><b>The full membrane leads in every case compared here,</b> by about 5× at 4 m/s against an ideal discrete wing.</li>
-      <li><b>The lead narrows</b> to 1.4× at 6 m/s, and to 1.7× at 4 m/s if the discrete wing's membrane is slack ($\lambda_{pre}$ = 1.00). So a discrete wing with trailing-edge tension and low pre-stretch is still worth one test.</li>
-      <li><b>Over the stroke:</b> discrete DEAs follow the load, so they change lift most in the downstroke. The full membrane changes it about equally throughout.</li>
-    </ul>
-  </section>
-  <section class="card">
-    <h2>What could change it</h2>
-    <ul>
-      <li><b>Flat-sheet $\eta$.</b> At $\eta$ = 0.15, the full membrane falls to 2.8 mN at 4 m/s. Discrete DEAs at their bench cycle value give 0.5 mN.</li>
-      <li><b>Fabrication.</b> The pre-stretch and whole-wing active film are untested, and one defect could disable a panel.</li>
-      <li><b>Flutter and stall.</b> Neither is modelled. Both matter most on the slack, high-camber states.</li>
-    </ul>
-  </section>
+  <a class="go" href="model/"><b>The model →</b><br>Equations in your notation, one script, and how it compares with the detailed models.</a>
+  <a class="go" href="full_membrane/"><b>Full membrane →</b><br>How to build it, masks, design study.</a>
 </div>
-
-<div class="warn"><b>How far to trust the comparison:</b> the two wings use different models, a 3D finite-element and vortex-lattice model against a verified section model scaled to the same flat-wing lift. The figure shows one active layer on the earlier shape. The free-edge row multiplies the ideal result by an estimated 0.02. Differences of tens of percent mean little; differences of 5× do.</div>
-
+<div style="height:18px"></div>
 <div class="two">
-  <a class="go" href="full_membrane/"><b>Full membrane →</b><br>How to build it, the masks, and the model behind the numbers.</a>
-  <a class="go" href="plagiopatagiales/"><b>Plagiopatagiales →</b><br>Observations from the tested wings, the load-path finding, and a 3D design tool.</a>
+  <a class="go" href="plagiopatagiales/"><b>Plagiopatagiales →</b><br>Observations from the tested wings, and the load-path finding.</a>
 </div>
 </div>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false});});
+document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});
 </script>
 </body>
 </html>
