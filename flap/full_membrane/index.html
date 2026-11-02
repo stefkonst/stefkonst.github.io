@@ -52,37 +52,79 @@ ul.read li{margin:.25em 0}
   <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Full membrane</p>
   <h1>Full active membrane wing</h1>
   <p>The whole wing skin is the actuator. <b>Nothing here has been built or measured:</b> every number is a model prediction, and it depends on an efficiency $\eta$ not yet measured on a flat sheet.</p>
-  <nav class="toc"><a href="#short">In short</a><a href="#build">How to build it</a><a href="#masks">Masks</a><a href="#design-study">Design study</a><a href="../model/">The model</a><a href="#performance">Finite elements</a><a href="#bench">Bench evidence</a><a href="#next">Next tests</a><a href="#reference">Equations and checks</a></nav>
+  <nav class="toc"><a href="#short">In short</a><a href="#rotation">Tensioning by rotation</a><a href="#build">How to build it</a><a href="#masks">Masks</a><a href="#design-study">Design study</a><a href="../model/">The model</a><a href="#performance">Finite elements</a><a href="#bench">Bench evidence</a><a href="#next">Next tests</a><a href="#reference">Equations and checks</a></nav>
 </header>
 
 <section id="short" class="card">
   <h2>In short</h2>
   <div class="kpis">
-    <div class="kpi"><b>6 mN</b><span>Lift change per wing, 4 m/s, $\eta$ = 0.5, <a href="../model/">one model</a></span></div>
-    <div class="kpi"><b>2 layers</b><span>Active layers on each panel; batten tip at $x$ ≈ 70 mm</span></div>
-    <div class="kpi"><b>8 %, 0.2 %</b><span>Stretch along and across the fibre</span></div>
+    <div class="kpi"><b>16 mN</b><span>Lift change per wing, finite elements, 4 m/s, 6°, $\eta$ = 0.5. <a href="../model/">Simple model</a>: 12 mN</span></div>
+    <div class="kpi"><b>5°, 8.85°</b><span>Tilt of the batten and root edge as cut. Both go to vertical</span></div>
+    <div class="kpi"><b>84 mN</b><span>One line on the root edge, two active layers. The batten follows by itself</span></div>
     <div class="kpi"><b>$\eta$</b><span>Largest unknown: flat sheet estimated at 0.5, not measured</span></div>
   </div>
   <ul>
-    <li><b>Tension the sheet before bonding.</b> Pulling only on the fibre tips, or using only a line on a flat sheet, leaves much of it slack or wrinkled.</li>
-    <li><b>The rolled fibre is active and part of the sheet</b>, with contacts at its two ends. To keep its tension at 1.6 kV it needs $\lambda_d$ of about 1.07 or more (<a href="../model/#A8">step 8</a>).</li>
-    <li><b>Keep some chord tension.</b> It lowers baseline camber and keeps the full actuator force.</li>
-    <li><b>Best shape found, in the finite elements:</b> batten tip at $x$ ≈ 70 mm, chord 41 mm.</li>
+    <li><b>No pre-stretch before rolling or before the LE.</b> Cut the sheet tilted, roll it flat, bond it to the LE. Pulling the root edge and batten to vertical then stretches the fibres by about 5 %.</li>
+    <li><b>Tilt the root edge more than the batten.</b> With equal tilts the batten does not balance, and the sheet wrinkles 80–95 %. At $\theta_r\approx1.77\,\theta_b$ one line brings both to vertical.</li>
+    <li><b>Small tilt gives the most lift change</b>, but then the fibre cannot be active: it needs at least 5–7 % stretch to keep its force at 1.6 kV. <a href="#rotation">Passive fibre at 5°, or active at 10°</a>: about 3.6× in lift change. Passive is the safer start, but this is the main decision left.</li>
+    <li><b>A small chord stretch, 2–4 %, keeps the state clean.</b> With none, the sheet is 88 % wrinkled at 0 V and the model does not settle.</li>
   </ul>
+</section>
+
+<section id="rotation" class="card">
+  <h2>Tensioning by rotation</h2>
+  <p>Finite elements, one wing, 4 m/s, 6°, 1.6 kV, passive fibre, batten at $x$ = 60 mm, $\lambda_n$ = 1.04, both edges held vertical. An asterisk marks a case with no converged state at 0 V or at voltage: read it as indicative only.</p>
+  <div class="tw"><table style="max-width:860px">
+    <tr><th>$\theta_b$, $\theta_r$</th><th>Layers</th><th>$\eta$</th><th>$C_L$</th><th>$\Delta L$</th></tr>
+    <tr><td>4°, 7.08°</td><td>2</td><td>0.5</td><td>0.68 → 1.17</td><td>15.3 mN</td></tr>
+    <tr><td><b>5°, 8.85°</b></td><td><b>2</b></td><td><b>0.5</b></td><td><b>0.70 → 1.19</b></td><td><b>15.9 mN</b></td></tr>
+    <tr><td>5°, 8.85°</td><td>1</td><td>0.5</td><td>0.87 → 1.20</td><td>10.6 mN</td></tr>
+    <tr><td>5°, 8.85°</td><td>2</td><td>0.4</td><td>0.70 → 1.08</td><td>12.3 mN</td></tr>
+    <tr><td>6°, 10.62°</td><td>1</td><td>0.5</td><td>0.73 → 1.02</td><td>9.4 mN</td></tr>
+    <tr><td>7°, 12.39°</td><td>2</td><td>0.5</td><td>0.59 → 0.86</td><td>8.7 mN</td></tr>
+    <tr><td>10°, 18°, active fibre</td><td>2</td><td>0.4</td><td>0.52 → 0.63</td><td>3.4 mN</td></tr>
+    <tr><td>10°, 18°, passive fibre</td><td>2</td><td>0.4</td><td>0.52 → 0.66</td><td>4.3 mN</td></tr>
+    <tr><td>14°, 25°</td><td>2</td><td>0.4</td><td>0.50 → 0.58</td><td>2.6 mN</td></tr>
+  </table></div>
+  <div class="tw" style="margin-top:12px"><table style="max-width:860px">
+    <tr><th>Change from the design (5°, 8.85°, 2 layers, $\eta$ = 0.5)</th><th>$\Delta L$</th></tr>
+    <tr><td>Flow speed 3, 4, 6 m/s</td><td>6.0, 15.9, 26.3 mN (1 layer: 5.4, 10.6, 17.9 mN)</td></tr>
+    <tr><td>$\eta$ = 0.15, 0.4, 0.5, 0.7</td><td>3.8, 12.3, 15.9, 23.3 mN</td></tr>
+    <tr><td>Batten at $x$ = 50, 60, 70 mm</td><td>8.1, 15.9, 13.7* mN</td></tr>
+    <tr><td>Chord stretch $\lambda_n$ = 1.00, 1.02, 1.04, 1.06</td><td>16.9*, 16.5*, 15.9, 14.3 mN. Panel 1 wrinkled at 0 V: 88, 76, 64, 42 %</td></tr>
+    <tr><td>Rotation stopped short or overshot: 70, 85, 100, 115 % of the way</td><td>14.9 mN, 15.2 mN*, 15.9 mN, 11.8 mN*. Panel 1 wrinkled at 0 V: 41, 53, 64, 67 %</td></tr>
+    <tr><td>Mesh 3, 2, 1.5 mm</td><td>13.3, 15.9, 15.5* mN</td></tr>
+    <tr><td>Free root edge, held only at the fibre's root end</td><td>16.6* mN (1 layer: 11.1* mN), about the same as with a rod, but the 0 V state does not settle. Start with a rod</td></tr>
+  </table></div>
+  <div class="valfig"><img src="../model/M9_rotation.png" alt="Moment on the batten against root edge tilt, fibre stretch against root edge tilt, and the simple model against the finite elements">
+  <p class="cap"><b>Prediction.</b> a) Moment on the batten about its LE hinge with both edges vertical, no flow, one active layer. Zero is where the batten stays vertical by itself. b) Stretch of fibre 1. c) The simple model against the finite elements; it was tuned on these points (<a href="../model/#rotcheck">details</a>).</p></div>
+  <ul class="read"><li><b>Equation:</b> <a href="../model/#A3r">step 3b</a> for the stretch and <a href="../model/#A6">step 6</a> for the lift. The fibre limit is <a href="../model/#A8">step 8</a>.</li><li><b>Trend:</b> more tilt means a stiffer sheet and less for voltage to do. Below about 4° the gain stops. A rotation stopped short costs little; an overshoot costs more.</li><li><b>Validate:</b> build at 5°, release the batten and see whether it stops at vertical. Then measure fibre stretch with markers, resonance with voltage, and lift at 3–5 m/s.</li></ul>
+  <h3 style="margin-top:14px">Passive or active fibre?</h3>
+  <div class="tw"><table style="max-width:860px">
+    <tr><th></th><th>Passive fibre, 5°, 8.85°</th><th>Active fibre, 10°, 18°</th></tr>
+    <tr><td>Lift change, $\eta$ = 0.4, finite elements</td><td>12.3 mN</td><td>3.4 mN</td></tr>
+    <tr><td>Fibre stretch, closed form</td><td>1.05, 1.05</td><td>1.12, 1.10</td></tr>
+    <tr><td>Fibre force at 1.6 kV</td><td>20, 17 mN</td><td>19, 11 mN</td></tr>
+    <tr><td>Active fibre at this tilt</td><td>Goes slack: 4–7° never converged, 0.2–8 mN</td><td>Works</td></tr>
+    <tr><td>Fabrication</td><td>Same roll with no glue line. Contacts stay at its ends. Electrodes stop at the fibre line</td><td>Same roll. Electrodes also overlap in the roll</td></tr>
+    <tr><td>Masks</td><td><a href="masks/mask_2partwing_passive_fibre.svg">passive_fibre.svg</a></td><td><a href="masks/mask_2partwing_active_fibre.svg">active_fibre.svg</a></td></tr>
+  </table></div>
+  <p class="note">The loss comes from the tilt, not from the fibre being active: at 10° and 18° a passive fibre gives only 4.3 mN. A separate active fibre is still possible on a passive-fibre wing, for example from a spare rectangle on the root edge line. That has not been modelled at this tilt.</p>
 </section>
 
 <section id="build" class="card">
   <h2>How to build it</h2>
   <p>Full details, with schematics and checks at each stage, are on the <a href="../manufacturing/">manufacturing page</a>.</p>
   <ol>
-    <li><b>Make the sheet.</b> Pattern both electrodes with the <a href="#masks">masks</a>. The active area stops at the fibre line.</li>
-    <li><b>Roll the strip</b> while the sheet is flat. Each end of the fibre is one contact. No gluing: the fibre is part of the sheet, and this also avoids extra connections.</li>
-    <li><b>Stretch each panel,</b> gripping outside its outline: 8 % along the fibre, with the width held at 0.2 % by side rails or clips. Panel 1 can also use rigid bars on its root and batten edges; panel 2 cannot.</li>
-    <li><b>Bond to the frame while stretched.</b> The LE goes on the crank mechanism. The trailing edge goes to the body: a root rib, or a tensioner on the fibre's root end (see below). Cut the sheet free; the fibre bows in by 1–2 mm.
-    <li><b>Join the panels</b> on a batten tilted 14°, parallel to the root edge, with its tip at about $x$ = 70 mm.</li>
+    <li><b>Make the sheet flat, on the tilted <a href="#masks">masks</a>.</b> The active area stops at the fibre line.</li>
+    <li><b>Roll the strip while the sheet is flat and unstretched.</b> Each end of the fibre is one contact. No gluing: the fibre is part of the sheet, and this also avoids extra connections.</li>
+    <li><b>Bond the sheet to the LE as cut.</b> The root edge and batten are light rods, hinged at the LE, and sit at their tilts as cut: 8.85° and 5°. The LE goes on the crank mechanism.</li>
+    <li><b>Set the small chord stretch.</b> The mask's chord is 4 % short, so draw each fibre about 1.6 mm aft onto the rod tips. This happens after rolling and after the LE.</li>
+    <li><b>Pull the root edge to vertical</b> with an adjustable line from its tip to the body, about 84 mN for two layers, 56 mN for one. The batten should follow to vertical by itself. Fibres go to about 5 % stretch and bow in by about 2.6 mm on panel 1, 0.5 mm on panel 2.</li>
   </ol>
-  <p class="note">Steps 1–3 and the line's flapping behaviour are not simulated directly. Only the tensioned end state and the strip are. Design numbers are in the table below.</p>
-  <h3 style="margin-top:14px">Which tensioning works</h3>
+  <p class="note">The model starts from the end state, with the rods rigid and vertical and the chord stretch already in place. The order of these steps, friction in the hinges and the line over a flap cycle are not simulated. The batten was balanced with no flow; in flow it was held vertical, so if it drifts, lock it once vertical. Root rod load: about 136 mN for two layers, of which about 81 mN is compression along the rod.</p>
+  <h3 style="margin-top:14px">Earlier tensioning options, for a sheet stretched before bonding</h3>
+  <p class="note">Superseded by rotation for this wing, but they explain why rods on the edges and uniform tension matter.</p>
   <div class="tw"><table style="max-width:900px">
     <tr><th>Method</th><th>Result in the model</th><th>Verdict</th></tr>
     <tr><td>Pull fibre tips only</td><td>70–86 % of the sheet slack</td><td>No</td></tr>
@@ -96,7 +138,7 @@ ul.read li{margin:.25em 0}
     <tr><td>Same, with the line anchored on the stroke axis</td><td>No converged state: it pulls inboard and fibre 1 goes nearly slack</td><td>No</td></tr>
   </table></div>
   <p class="note">Rows above use 4 m/s, 6°, $\eta$ = 0.4, one active layer, a rigid frame and a line of fixed length. The flat-sheet line row is a coarser scoping run (2.5 mm mesh). The line was not run over a flap cycle. Data: <a href="validation/tension.json">tension.json</a>, <a href="validation/line_study.json">line_study.json</a>, <a href="validation/line_check.json">line_check.json</a>.</p>
-  <h3 style="margin-top:14px">LE on the crank, trailing edge to the body</h3>
+  <h3 style="margin-top:14px">LE on the crank, trailing edge to the body, earlier stretched design</h3>
   <div class="tw"><table style="max-width:820px">
     <tr><th>Layout, two active layers, 4 m/s, 6°, 1.6 kV, earlier shape</th><th>$C_L$</th><th>$\Delta L$</th></tr>
     <tr><td>Batten and rigid root rib</td><td>0.53 → 0.91</td><td>12.2 mN</td></tr>
@@ -109,14 +151,15 @@ ul.read li{margin:.25em 0}
   <div class="tw"><table style="max-width:820px">
     <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
     <tr><td>Active layers</td><td>2 on each panel (1 if weight is critical)</td><td><a href="#design-study">Design study</a></td></tr>
-    <tr><td>Batten tip, chord line</td><td>$x$ = 70 mm, $y$ = 47.5 mm (chord 41 mm), area 32.7 cm², mass 520 mg</td><td><a href="#design-study">Design study</a></td></tr>
-    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>1.08, so the active fibre keeps tension at 1.6 kV</td><td><a href="../model/#A8">step 8</a></td></tr>
-    <tr><td>Stretch across the fibre, $\lambda_n$</td><td>1.002 (natural necking + 0.04)</td><td><a href="#performance">Sweep</a></td></tr>
+    <tr><td>Batten tip, chord line</td><td>$x$ = 60 mm, $y$ = 47.5 mm (chord 41 mm), area 32.7 cm², mass about 520 mg</td><td><a href="#rotation">Rotation</a></td></tr>
+    <tr><td>Tilt as cut, batten and root edge</td><td>5°, 8.85°. Active fibre: 10°, 18°</td><td><a href="#rotation">Rotation</a></td></tr>
+    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>None when cut or rolled. From rotation: 1.05, 1.05</td><td><a href="../model/#A3r">step 3b</a></td></tr>
+    <tr><td>Stretch across the fibre, $\lambda_n$</td><td>1.04, set by drawing the fibre onto the rod tips</td><td><a href="#rotation">Rotation</a></td></tr>
     <tr><td>Strip to roll, as cut, $w_s$</td><td>13 mm</td><td>Coater limit</td></tr>
     <tr><td>Film stack</td><td>½D + E + D + E + ½D (D dielectric, E electrode), $H$ = 35 µm, $H_m$ = 70 µm, $\chi$ = 0.5</td><td>Your stack; $H$ not measured</td></tr>
     <tr><td>Material</td><td>Elastosil P7670, $C_1$ = 42.8 kPa, $C_2$ = 447 Pa, $\varepsilon_r$ = 2.8</td><td>Bundle fit; $\varepsilon_r$ assumed</td></tr>
     <tr><td>$\eta$ of the flat sheet</td><td>0.5</td><td><b>Estimated</b>: no rolled air gaps. Studies below used 0.4</td></tr>
-    <tr><td>Sag at 0 V, no flow</td><td>1.0 mm</td><td><a href="validation/final.json">final.json</a></td></tr>
+    <tr><td>Fibre bow at 0 V, no flow</td><td>2.6 mm, panel 1; 0.5 mm, panel 2</td><td><a href="validation/tilt_fine.json">tilt_fine.json</a></td></tr>
     <tr><td>LE rod</td><td>≥ 2 mm solid or a 3/2 mm tube: $\Delta C_L$ within 2 % of rigid. 1 mm solid: no steady state</td><td><a href="validation/final.json">final.json</a></td></tr>
   </table></div>
   <p class="note"><b>Film stack.</b> Lying flat, only the middle dielectric is active, so half the thickness is passive ($\chi$ = 0.5). Rolled, the two half-layers meet between turns and form a second active film. The stack is symmetric, so it should not curl under voltage, and the electrodes are covered on both sides. A thicker stack with three active films of four gives more lift change, $\Delta C_L$ ≈ 0.42 at $\eta$ = 0.4 (not fully converged).</p>
@@ -129,16 +172,17 @@ ul.read li{margin:.25em 0}
 
 <section id="masks" class="card">
   <h2>Masks</h2>
-  <p>The outline as cut is the pre-image of the tensioned wing (Eq. F2). Contacts sit at opposite ends of the fibre. Between them the electrodes overlap, so the fibre is active, as in the vocal cord device. Download: <a href="masks/mask_2partwing_model.svg">mask_2partwing_model.svg</a>, numbers in <a href="masks/mask_numbers.json">mask_numbers.json</a>.</p>
+  <p>The outline as cut is the tilted sheet: unstretched along the fibre, with a 4 % shorter chord. Contacts sit at opposite ends of the fibre. Download: <a href="masks/mask_2partwing_passive_fibre.svg">passive fibre, 5° and 8.85°</a> (shown; <a href="masks/mask_numbers_passive_fibre.json">numbers</a>), or <a href="masks/mask_2partwing_active_fibre.svg">active fibre, 10° and 18°</a> (<a href="masks/mask_numbers_active_fibre.json">numbers</a>), where the electrodes overlap in the roll as in the vocal cord device.</p>
   <div class="valfig"><img src="validation/F_masks.png" alt="Electrode outlines, active area, strip, contacts and additional fibres for panels 1 and 2, leading edge at the top">
-  <p class="cap">Outlines as cut, LE towards the top, with each panel rotated so its fibre is horizontal. Active sheet 1905 and 817 mm². Fibres 52.0 mm as cut and 56.2 mm tensioned; 49.8 and 53.7 mm. Spare rectangles: 36.9 × 20.6 and 40 × 16.3 mm, with A and B offset by 3 mm along their length, to use electrode area and as possible DEA tensioners.</p></div>
-  <ul class="read"><li><b>Equation:</b> outline as cut $=\mathbf F_{pre}^{-1}$ (tensioned outline), Eq. F2.</li><li><b>Trend:</b> Greater stretch means a smaller cut outline: 8 % shorter fibre.</li><li><b>Validate:</b> Cut, stretch and compare marker positions with the frame line.</li></ul>
+  <p class="cap">Outlines as cut, LE towards the top, with each panel rotated so its fibre is horizontal. Active sheet 1940 and 861 mm². Fibres 53.4 mm as cut and 56.2 mm vertical; 58.4 and 61.2 mm. Spare rectangles: 36.9 × 20.6 and 40 × 16.3 mm, with A and B offset by 3 mm along their length, to use electrode area and as possible DEA tensioners.</p></div>
+  <ul class="read"><li><b>Equation:</b> <a href="../model/#A3r">step 3b</a> gives the tilt; the chord as cut is the frame chord over $\lambda_n$.</li><li><b>Trend:</b> More tilt means a shorter fibre as cut: 53.4 mm at 5°, 50.1 mm at 10°.</li><li><b>Validate:</b> Bring the edges to vertical and compare marker positions with the frame line.</li></ul>
   <p><b>Wiring.</b> Tie panel 1's contact B and panel 2's contact A at the fibre junction, as a common connection running down the trailing edge. Panel 2's contact B then sits next to the LE and can run inside it, and panel 1's contact A sits at the root. Each panel keeps its own drive, so they can be switched separately: on the earlier shape, panel 1 alone gives $\Delta C_L$ = 0.16, panel 2 alone 0.10, both 0.26.</p>
-  <div class="warn">Check before cutting. Masks are drawn for the best shape, with 54.0 and 49.2 mm widths against the 60 mm coater limit, and the plates must be oriented as drawn. The spare rectangles sit past the panel along the fibre direction to stay inside this limit; cut them off before stretching. Margins (2 mm at the LE, 1.5 mm at the batten and root, 1 mm around the strip) are judgement, not modelled. The buried electrodes need access at the contact tabs.</div>
+  <div class="warn">Check before cutting. Masks are drawn for the chosen shape, with 52.5 and 45.3 mm widths against the 60 mm coater limit, and the plates must be oriented as drawn. The spare rectangles sit past the panel along the fibre direction to stay inside this limit; cut them off before bonding. Margins (2 mm at the LE, 1.5 mm at the batten and root, 1 mm around the strip) are judgement, not modelled. The buried electrodes need access at the contact tabs.</div>
 </section>
 
 <section id="design-study" class="card">
   <h2>Design study: layers, panels, roll, shape</h2>
+  <div class="warn">Run on the earlier design, stretched before bonding, with the batten then best at 70 mm. On the tilted cut it is best at 60 mm (<a href="#rotation">above</a>). Use this section for trends in layers and roll width. Layers on the tilted cut: 10.6 and 15.9 mN for 1 and 2; more has not been run.</div>
   <div class="valfig"><img src="validation/F_design.png" alt="Lift change against active layers, against mass for different layers per panel, against roll width, and against batten position">
   <p class="cap"><b>Prediction</b> at 4 m/s, 6°, 1.6 kV, $\eta$ = 0.4, rigid frame, converged cases only. a) Same layers on both panels, with the best stretch for each. b) Different layers per panel. c) Roll width, two layers. d) Batten tip position, two layers.</p></div>
   <ul class="read"><li><b>Equation:</b> <a href="#reference">Eqs. F1–F9</a>, $\Delta L=q\,S\,\Delta C_L$.</li><li><b>Trend:</b> More layers help with diminishing returns; roll width hardly matters; moving the batten outboard helps up to about 70 mm. Passive fibre, $\eta$ = 0.4.</li><li><b>Validate:</b> Two batten positions and one and two layers, in a static tunnel test, before any flapping.</li></ul>
@@ -156,7 +200,7 @@ ul.read li{margin:.25em 0}
 
 <section id="performance" class="card">
   <h2>Finite-element detail</h2>
-  <p>This section holds the detailed finite-element results, used to check <a href="../model/">the analytical model</a> and to study what it cannot, such as layers and shape. They use one active layer at $\lambda_d$ = 1.05 and $\eta$ = 0.4, with a passive fibre, because the active-fibre runs mostly did not converge.</p>
+  <p>This section holds the detailed finite-element results on the earlier stretched design, used to check <a href="../model/">the analytical model</a> and to study what it cannot, such as layers and shape. They use one active layer at $\lambda_d$ = 1.05 and $\eta$ = 0.4, with a passive fibre.</p>
   <div class="valfig"><img src="validation/F_final.png" alt="Lift against voltage and angle of attack, lift change against angle, film stack, stretch errors and LE rod">
   <p class="cap"><b>Prediction</b> (chosen design; rigid frame unless stated; attached flow). a) $C_L$ against $V$, close to $V^2$. b) $C_L(\alpha)$ at 0 V and 1.6 kV. c) $\Delta C_L(\alpha)$. d) $\Delta C_L$ against $\eta$ for three film stacks; only converged cases are shown. e) $\Delta C_L$ against errors in $\lambda_d$ and $\lambda_n$. f) $\Delta C_L$ with an elastic frame; a 1 mm solid rod reached no steady state and is omitted.</p></div>
   <ul class="read"><li><b>Equation:</b> Eqs. F3, F6, F9; closed form in <a href="../model/#A6">step 6</a>.</li><li><b>Trend:</b> $C_L$ rises close to $V^2$; lift change depends little on $\alpha$ and changes sign with it; a rod of 2 mm or more behaves as rigid.</li><li><b>Validate:</b> $C_L(\alpha)$ at 3–6 m/s, 0 V and 1.6 kV; tip deflection of the rod by camera.</li></ul>
@@ -199,8 +243,8 @@ ul.read li{margin:.25em 0}
   <h2>Next tests, in order</h2>
   <ul>
     <li><b>M1 ($\eta$ of a flat sheet).</b> Flat strip of the real stack on the texture analyser, held at 1.6 kV. Needed: $\Delta n$ of at least about 0.7 N/m. Cross-section for $H$.</li>
-    <li><b>M2 (recipe).</b> Build one panel 1 on the stretching rig. Measure stretch by markers and check for wrinkles and an edge bow near 1 mm at 0 V.</li>
-    <li><b>M3 (no flow).</b> Same panel with voltage on, camera on shape and fibre. Check that the fibre keeps its force.</li>
+    <li><b>M2 (rotation).</b> Build one panel 1 on hinged rods. Pull the root edge to vertical and check: does the batten follow, what is the line force (about 84 mN), and what are the fibre stretch and the wrinkling at 0 V? The model says 64 % of panel 1 is wrinkled; how visible that is, it cannot say.</li>
+    <li><b>M3 (no flow).</b> Same panel with voltage on, camera on shape and fibre. Read the resonance against voltage: panel 1 should fall from about 51 to 30 Hz.</li>
     <li><b>M4 (framed panel in flow).</b> 3–4 m/s, $\alpha$ from −6° to 12°, randomised voltage order with a sham, shape first and forces second. Compare with the $C_L(\alpha)$ figure above, and look for the predicted jump and any flutter near 0°.</li>
     <li><b>M5 (full wing, then flapping).</b> Only after M4 agrees.</li>
   </ul>

@@ -51,3 +51,23 @@ print("\n-- discrete, rigid trailing edge, against the section model --")
 rigid = dict(W.DISCRETE, T_c=1e9)
 for k, U in (("old_3_2", 3.0), ("old_4_2", 4.0), ("old_6_2", 6.0)):
     print(f"U {U:g}: dL section {np.mean(np.array(s[k]['L1']) - s[k]['L0']):.2f} mN, model {W.mean_delta(rigid, W.discrete_tension, U=U):.2f} mN")
+
+print("\n-- tilted wing, against the finite elements --")
+FE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "full_membrane", "validation")
+
+
+def rotated(r):
+    w = dict(W.ROTATED, theta_b=r["theta"], theta_r=r["theta_r"], n_layers=(r["N"], r["N"]), lam_n=r.get("lam_n", 1.0), eta=r.get("eta", 0.4))
+    u = r.get("U", 4.0)
+    return W.solve(w, W.rotation_tension, U=u)["L_mN"] - W.solve(w, W.rotation_tension, V=0.0, U=u)["L_mN"]
+
+
+def compare(name, rows):
+    fe, mo = np.array([r["dL_mN"] for r in rows]), np.array([rotated(r) for r in rows])
+    print(f"{name}: {len(rows)} cases, correlation {np.corrcoef(fe, mo)[0, 1]:.2f}, rms {np.sqrt(np.mean((fe - mo) ** 2)):.2f} mN")
+
+
+use = lambda r: "error" not in r and not r.get("active") and r.get("ok0") and r.get("ok1") and r["xb"] == 0.06 and r.get("h", 0.002) == 0.002
+compare("tuned on", [r for f in ("tilt_fine.json", "tilt_balanced.json") for r in json.load(open(os.path.join(FE_DIR, f))) if use(r) and r.get("U", 4.0) == 4.0])
+compare("not tuned on", [r for r in json.load(open(os.path.join(FE_DIR, "tilt_final.json"))) if use(r)])
+print("fibre stretch at 5 and 8.85 deg:", [round(x, 3) for x in W.rotation_geometry(W.ROTATED)[:2]], "against 1.059, 1.049 from the finite elements")

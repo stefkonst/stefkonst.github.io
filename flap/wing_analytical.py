@@ -37,6 +37,14 @@ FULL = dict(
     length_fibre=(0.040, 0.068),
 )
 
+ROTATED = dict(                                     # full membrane, cut unstretched and tensioned by bringing the root edge and batten to vertical
+    C1=42842.0, H=35e-6, eps_r=2.8, eta=0.50, n_layers=(2, 2), lam_n=1.04,
+    theta_b=5.0, theta_r=8.85,                      # tilt of the batten and root edge as cut, in degrees. theta_r > theta_b so the batten balances (balance_study.py)
+    x_root=3.8e-3, x_batten=60e-3, x_tip=108e-3, chord=41.1e-3, tip_drop=3.1e-3, fibre_2_angle=38.0,
+    edge=(0.5, 0.2), edge_rot=(0.79, 1.0),          # edge_rot: mean tension / uniform tension in the rotation state (from the FE)
+    a=(0.056, 0.061), b=(0.041, 0.016), share=(0.70, 0.30), radius=(0.03, 0.08), lift_slope=4.39,   # flat wing with a vertical root edge
+)
+
 DISCRETE = dict(
     C1=3252.0, H_m=180e-6, lam_x=1.03, lam_y=1.03,  # membrane: isotropic part (v_m C_1), thickness, pre-stretch
     E_x=68770.0, E_y=143990.0,                      # composite stiffness along span and chord (Pa)
@@ -83,6 +91,36 @@ def full_tension(w, i, V):
     return 3 * G * Hm * ex - P / 2, 0.0, Hm, G
 
 
+def rotation_geometry(w):
+    """A10: the stretch of each fibre when the root edge (tilt theta_r) and batten (tilt theta_b) rotate about the LE to vertical. All lengths in m."""
+    b = w["chord"]
+    tb, tr = math.tan(math.radians(w["theta_b"])), math.tan(math.radians(w["theta_r"]))
+    L1 = w["x_batten"] - w["x_root"]
+    dy = w["chord"] - w["tip_drop"]
+    L2_0 = math.hypot(w["x_tip"] - (w["x_batten"] + b * tb), dy)
+    L2 = math.hypot(w["x_tip"] - w["x_batten"], dy)
+    return L1 / (L1 + b * (tb - tr)), L2 / L2_0, 0.5 * (tb + tr)
+
+
+def rotation_tension(w, i, V):
+    """A10: sheet cut unstretched. Panel 1 shears as it goes vertical; panel 2 is pulled along its fibre. Both are taut along one direction, with a small chord stretch lam_n across it."""
+    n = w["n_layers"][i]
+    Hm, G = (n + 1) * w["H"], 2 * w["C1"]
+    P = w["eta"] * n * EPS0 * w["eps_r"] * V ** 2 / w["H"]
+    lam1, lam2, gam = rotation_geometry(w)
+    if i == 0:
+        g = lam1 * gam
+        tr_, det = lam1 ** 2 + g ** 2 + 1.0, lam1 ** 2
+        l2 = 0.5 * tr_ + math.sqrt(0.25 * tr_ ** 2 - det)                      # largest eigenvalue of F F^T
+        phi = 0.5 * math.atan2(2 * g, lam1 ** 2 + g ** 2 - 1.0)
+    else:
+        l2, phi = lam2 ** 2, math.radians(w["fibre_2_angle"])
+    l = math.sqrt(l2)
+    N1 = max(2 * Hm * w["C1"] * (l2 - 1 / l) / math.sqrt(l) * w["edge_rot"][i] - P / 2, 0.0)
+    ey = w["lam_n"] - 1
+    return N1 * math.cos(phi) ** 2, N1 * math.sin(phi) ** 2 + max(2 * G * Hm * 2 * ey * w["edge"][i] - P, 0.0), Hm, G
+
+
 def discrete_tension(w, i, V):
     Hm, G = w["H_m"], 2 * w["C1"]
     ex, ey = w["lam_x"] - 1, w["lam_y"] - 1
@@ -110,6 +148,7 @@ def panel(w, i, V, q, alpha, c, tension, h_prev=None):
 
 def solve(wing, tension, V=None, **flow):
     c = dict(COMMON, **flow)
+    c["lift_slope"] = wing.get("lift_slope", c["lift_slope"])
     q, V = 0.5 * c["rho"] * c["U"] ** 2, c["V"] if V is None else V
     al = math.radians(c["alpha_deg"])
     out = [panel(wing, i, V, q, al, c, tension) for i in range(len(wing["a"]))]
@@ -120,6 +159,7 @@ def solve(wing, tension, V=None, **flow):
 def cycle(wing, tension, V=None, **flow):
     """Lift over a stroke, quasi-steady (Eq. S12). Each panel has alpha and q at its own radius."""
     c = dict(COMMON, **flow)
+    c["lift_slope"] = wing.get("lift_slope", c["lift_slope"])
     V = c["V"] if V is None else V
     A, om = math.radians(c["Phi0_deg"]), 2 * math.pi * c["f"]
     phases = np.arange(0.0, 360.0, 15.0)
@@ -164,3 +204,5 @@ if __name__ == "__main__":
     print(f"  active fibre: {F * 1e3:.1f} mN at {COMMON['V']:.0f} V; stays in tension above lam_d = {lam:.3f}")
     report(f"Discrete DEAs, trailing-edge tension {DISCRETE['T_c']} N, r = {load_path(DISCRETE):.2f}", DISCRETE, discrete_tension)
     report("Discrete DEAs, free trailing edge, r = 0", dict(DISCRETE, T_c=0.0), discrete_tension)
+    report(f"Full membrane, cut tilted {ROTATED['theta_b']:g} and {ROTATED['theta_r']:g} deg, no pre-stretch", ROTATED, rotation_tension)
+    print("  fibre stretch from the rotation: %.3f, %.3f" % rotation_geometry(ROTATED)[:2])

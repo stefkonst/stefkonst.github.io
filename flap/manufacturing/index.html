@@ -64,9 +64,9 @@ svg .sm{font-size:9.5px}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Manufacturing</p>
 <h1>Making the full membrane wing</h1>
-<p class="lead">A multilayer sheet, spin-coated with carbon nanotube electrodes, stretched before it is bonded to a frame.</p>
+<p class="lead">A multilayer sheet, spin-coated with carbon nanotube electrodes, cut tilted and unstretched, then tensioned by bringing its root edge and batten to vertical.</p>
 <p><span class="tag pub">Established</span> is the established process. <span class="tag prop">Proposed, untested</span> is specific to this wing and has not been tried. <span class="tag fill">To confirm</span> depends on your lab's settings.</p>
-<nav class="toc"><a href="#stack">Stack</a><a href="#masks">Masks</a><a href="#electrodes">Electrodes</a><a href="#sheet">Sheet</a><a href="#roll">Rolling</a><a href="#stretch">Stretching</a><a href="#assembly">Assembly</a><a href="#checks">Checks</a><a href="#numbers">Numbers</a><a href="#risks">Risks</a></nav>
+<nav class="toc"><a href="#stack">Stack</a><a href="#masks">Masks</a><a href="#electrodes">Electrodes</a><a href="#sheet">Sheet</a><a href="#roll">Rolling</a><a href="#stretch">Rotation</a><a href="#assembly">Assembly</a><a href="#checks">Checks</a><a href="#numbers">Numbers</a><a href="#risks">Risks</a></nav>
 
 <section class="card" id="stack">
   <h2>1. The stack</h2>
@@ -80,14 +80,14 @@ svg .sm{font-size:9.5px}
 
 <section class="card" id="masks">
   <h2>2. Masks</h2>
-  <p>Download the outlines on your plates: <a href="../full_membrane/masks/mask_2partwing_model.svg">mask_2partwing_model.svg</a>, numbers in <a href="../full_membrane/masks/mask_numbers.json">mask_numbers.json</a>. Each panel has two masks, used alternately. Filled: contact tab. Dotted grey: the frame line. Dashed: spare rectangle.</p>
-  <div class="fig"><svg viewBox="0 0 500 202" role="img" aria-label="Panel 1: electrode A and electrode B masks to scale, with the shared active area and contact tabs"><text x="4.0" y="12" class="lbl" font-weight="700">Panel 1, Electrode A</text><polygon points="28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 28.1,45.5 48.4,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,135.2 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 44.9,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,162.8 153.5,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 161.0,135.2 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 140.2,45.5 28.1,45.5 28.1,45.5" fill="var(--sheet)" stroke="var(--a)" stroke-width="1.2"/><polygon points="44.9,135.2 55.9,135.2 55.9,162.8 44.9,162.8 44.9,135.2" fill="var(--a)"/><polygon points="169.1,57.1 216.5,57.1 216.5,142.0 169.1,142.0 169.1,57.1" fill="none" stroke="var(--a)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="23.5,40.9 142.7,40.9 164.5,135.2 44.9,135.2" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/><text x="264.0" y="12" class="lbl" font-weight="700">Panel 1, Electrode B</text><polygon points="288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 288.1,45.5 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 308.4,135.2 315.9,135.2 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 315.9,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,162.8 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 424.5,135.2 421.0,135.2 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 400.2,45.5 288.1,45.5 288.1,45.5" fill="var(--sheet)" stroke="var(--b)" stroke-width="1.2"/><polygon points="413.5,135.2 424.5,135.2 424.5,162.8 413.5,162.8 413.5,135.2" fill="var(--b)"/><polygon points="429.1,64.0 476.5,64.0 476.5,148.9 429.1,148.9 429.1,64.0" fill="none" stroke="var(--b)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="283.5,40.9 402.7,40.9 424.5,135.2 304.9,135.2" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/></svg></div>
-  <div class="fig" style="margin-top:10px"><svg viewBox="0 0 500 202" role="img" aria-label="Panel 2: electrode A and electrode B masks to scale, with the shared active area and contact tabs"><text x="4.0" y="12" class="lbl" font-weight="700">Panel 2, Electrode A</text><polygon points="86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 86.0,53.3 43.3,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,129.7 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 39.4,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,157.3 142.8,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 149.1,129.7 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 153.0,125.5 86.0,53.3 86.0,53.3" fill="var(--sheet)" stroke="var(--a)" stroke-width="1.2"/><polygon points="39.4,129.7 50.4,129.7 50.4,157.3 39.4,157.3 39.4,129.7" fill="var(--a)"/><polygon points="163.1,53.6 200.6,53.6 200.6,145.6 163.1,145.6 163.1,53.6" fill="none" stroke="var(--a)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="85.9,46.4 158.5,124.7 153.8,129.7 39.4,129.7" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/><text x="264.0" y="12" class="lbl" font-weight="700">Panel 2, Electrode B</text><polygon points="346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 346.0,53.3 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 303.3,129.7 310.4,129.7 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 310.4,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,157.3 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 413.8,129.7 409.1,129.7 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 413.0,125.5 346.0,53.3 346.0,53.3" fill="var(--sheet)" stroke="var(--b)" stroke-width="1.2"/><polygon points="402.8,129.7 413.8,129.7 413.8,157.3 402.8,157.3 402.8,129.7" fill="var(--b)"/><polygon points="423.1,60.5 460.6,60.5 460.6,152.5 423.1,152.5 423.1,60.5" fill="none" stroke="var(--b)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="345.9,46.4 418.5,124.7 413.8,129.7 299.4,129.7" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/></svg></div>
+  <p>Download the outlines on your plates: <a href="../full_membrane/masks/mask_2partwing_passive_fibre.svg">passive fibre, 5° and 8.85°</a>, drawn here (<a href="../full_membrane/masks/mask_numbers_passive_fibre.json">numbers</a>), or <a href="../full_membrane/masks/mask_2partwing_active_fibre.svg">active fibre, 10° and 18°</a> (<a href="../full_membrane/masks/mask_numbers_active_fibre.json">numbers</a>). <a href="../full_membrane/#rotation">Which to choose</a>. Each panel has two masks, used alternately. Filled: contact tab. Dotted grey: the frame line. Dashed: spare rectangle.</p>
+  <div class="fig"><svg viewBox="0 0 500 202" role="img" aria-label="Panel 1: electrode A and electrode B masks to scale, with the shared active area and contact tabs"><text x="4.0" y="12" class="lbl" font-weight="700">Panel 1, Electrode A</text><polygon points="29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 29.5,47.2 43.5,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,133.5 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 40.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,161.1 51.0,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 159.3,133.5 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 151.5,47.2 29.5,47.2 29.5,47.2" fill="var(--sheet)" stroke="var(--a)" stroke-width="1.2"/><polygon points="40.0,133.5 51.0,133.5 51.0,161.1 40.0,161.1 40.0,133.5" fill="var(--a)"/><polygon points="167.4,57.1 214.8,57.1 214.8,142.0 167.4,142.0 167.4,57.1" fill="none" stroke="var(--a)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="25.2,42.6 154.5,42.6 162.8,133.5 40.0,133.5" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/><text x="264.0" y="12" class="lbl" font-weight="700">Panel 1, Electrode B</text><polygon points="289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 289.5,47.2 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 303.5,133.5 411.7,133.5 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 411.7,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,161.1 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 422.8,133.5 419.3,133.5 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 411.5,47.2 289.5,47.2 289.5,47.2" fill="var(--sheet)" stroke="var(--b)" stroke-width="1.2"/><polygon points="411.7,133.5 422.8,133.5 422.8,161.1 411.7,161.1 411.7,133.5" fill="var(--b)"/><polygon points="427.4,64.0 474.8,64.0 474.8,148.9 427.4,148.9 427.4,64.0" fill="none" stroke="var(--b)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="285.2,42.6 414.5,42.6 422.8,133.5 300.0,133.5" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/></svg></div>
+  <div class="fig" style="margin-top:10px"><svg viewBox="0 0 500 202" role="img" aria-label="Panel 2: electrode A and electrode B masks to scale, with the shared active area and contact tabs"><text x="4.0" y="12" class="lbl" font-weight="700">Panel 2, Electrode A</text><polygon points="84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 84.5,56.8 33.7,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,125.2 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 29.4,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,152.8 40.5,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 159.2,125.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 162.8,121.2 84.5,56.8 84.5,56.8" fill="var(--sheet)" stroke="var(--a)" stroke-width="1.2"/><polygon points="29.4,125.2 40.5,125.2 40.5,152.8 29.4,152.8 29.4,125.2" fill="var(--a)"/><polygon points="173.1,53.6 210.6,53.6 210.6,145.6 173.1,145.6 173.1,53.6" fill="none" stroke="var(--a)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="84.6,50.9 168.5,120.0 163.8,125.2 29.4,125.2" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/><text x="264.0" y="12" class="lbl" font-weight="700">Panel 2, Electrode B</text><polygon points="344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 344.5,56.8 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 293.7,125.2 412.8,125.2 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 412.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.8,152.8 423.9,152.8 423.9,152.8 423.9,152.8 423.9,152.8 423.9,152.8 423.9,152.8 423.9,125.2 423.9,125.2 423.9,125.2 423.9,125.2 423.9,125.2 423.9,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 423.8,125.2 419.2,125.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 422.8,121.2 344.5,56.8 344.5,56.8" fill="var(--sheet)" stroke="var(--b)" stroke-width="1.2"/><polygon points="412.8,125.2 423.8,125.2 423.8,152.8 412.8,152.8 412.8,125.2" fill="var(--b)"/><polygon points="433.1,60.5 470.6,60.5 470.6,152.4 433.1,152.4 433.1,60.5" fill="none" stroke="var(--b)" stroke-width=".8" stroke-dasharray="3 2"/><polygon points="344.6,50.9 428.5,120.0 423.8,125.2 289.4,125.2" fill="none" stroke="var(--muted)" stroke-width=".6" stroke-dasharray="1.5 2"/></svg></div>
   <div class="tw" style="margin-top:10px"><table>
     <tr><th></th><th>Panel 1</th><th>Panel 2</th></tr>
-    <tr><td>Width against the coater limit, 60 mm</td><td>54.0 mm</td><td>49.2 mm</td></tr>
-    <tr><td>Fibre, as cut → tensioned</td><td>52.0 → 56.2 mm</td><td>49.8 → 53.7 mm</td></tr>
-    <tr><td>Active sheet</td><td>1905 mm²</td><td>817 mm²</td></tr>
+    <tr><td>Width against the coater limit, 60 mm</td><td>52.5 mm</td><td>45.3 mm</td></tr>
+    <tr><td>Fibre, as cut → vertical</td><td>53.4 → 56.2 mm</td><td>58.4 → 61.2 mm</td></tr>
+    <tr><td>Active sheet</td><td>1940 mm²</td><td>861 mm²</td></tr>
     <tr><td>Roll width as cut, with 1 mm electrode-free edge</td><td>13 mm</td><td>13 mm</td></tr>
     <tr><td>Contact tabs, one per electrode, at opposite fibre ends</td><td>4.8 mm</td><td>4.8 mm</td></tr>
   </table></div>
@@ -136,60 +136,85 @@ svg .sm{font-size:9.5px}
     </svg></div>
     <div>
       <p><span class="tag pub">Established</span> A planar sheet is cut and rolled, and caps with copper wires make the contacts.</p>
-      <p><span class="tag prop">Proposed, untested</span> Here, only the 13 mm edge strip is rolled, stopping at the fibre line, so the fibre stays part of the sheet with no glue line. Roll straight: a fibre that wanders stretches unevenly.</p>
+      <p><span class="tag prop">Proposed, untested</span> Here, only the 13 mm edge strip is rolled, flat and unstretched, stopping at the fibre line, so the fibre stays part of the sheet with no glue line. Roll straight: a fibre that wanders stretches unevenly.</p>
       <p><span class="tag fill">To confirm</span> Contacts at the two tabs: caps and copper wire, or silver ink.</p>
     </div>
   </div>
 </section>
 
 <section class="card" id="stretch">
-  <h2>6. Stretching</h2>
-  <div class="fig"><svg viewBox="0 0 560 210" role="img" aria-label="Stretching rig: sheet between two bars with arrows pulling along the fibre, side rails holding the width, panel outline in the middle">
-<rect x="70" y="40" width="420" height="130" fill="var(--sheet)" stroke="var(--muted)"/>
-<rect x="46" y="30" width="24" height="150" fill="var(--ink)"/><rect x="490" y="30" width="24" height="150" fill="var(--ink)"/>
-<line x1="70" y1="36" x2="490" y2="36" stroke="var(--b)" stroke-width="3"/><line x1="70" y1="174" x2="490" y2="174" stroke="var(--b)" stroke-width="3"/>
-<polygon points="190,62 330,62 355,132 215,132" fill="none" stroke="var(--a)" stroke-width="1.6"/>
-<rect x="215" y="132" width="140" height="28" fill="none" stroke="var(--a)" stroke-dasharray="3 2"/>
-<line x1="514" y1="105" x2="548" y2="105" stroke="var(--ink)" stroke-width="2" marker-end="url(#ar)"/><line x1="46" y1="105" x2="12" y2="105" stroke="var(--ink)" stroke-width="2" marker-end="url(#ar)"/>
+  <h2>6. Tilted cut, then rotate to vertical</h2>
+  <div class="fig"><svg viewBox="0 0 620 262" role="img" aria-label="Wing to scale, as cut with the root edge and batten tilted, and after a line brings both to vertical">
 <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--ink)"/></marker></defs>
-<text x="280" y="22" text-anchor="middle" class="lbl">Side rails hold the width: 0.2 % stretch across</text>
-<text x="272" y="100" text-anchor="middle" class="lbl">Panel</text><text x="285" y="150" text-anchor="middle" class="sm">Rolled strip</text>
-<text x="280" y="196" text-anchor="middle" class="lbl">Pull 8 % along the fibre. Keep the panel at least 20 mm from the bars.</text>
+<polygon points="57.5,27.4 536.8,27.4 536.8,41.7 316.0,216.5 57.5,216.5" fill="var(--sheet)" stroke="none"/>
+<line x1="40.0" y1="27.4" x2="536.8" y2="27.4" stroke="var(--ink)" stroke-width="4"/>
+<line x1="57.5" y1="27.4" x2="86.9" y2="216.5" stroke="var(--b)" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="316.0" y1="27.4" x2="332.5" y2="216.5" stroke="var(--b)" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="86.9" y1="216.5" x2="332.5" y2="216.5" stroke="var(--b)" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="332.5" y1="216.5" x2="536.8" y2="41.7" stroke="var(--b)" stroke-width="1.6" stroke-dasharray="5 3"/>
+<line x1="57.5" y1="27.4" x2="57.5" y2="216.5" stroke="var(--ink)" stroke-width="2.4"/>
+<line x1="316.0" y1="27.4" x2="316.0" y2="216.5" stroke="var(--ink)" stroke-width="2.4"/>
+<line x1="57.5" y1="216.5" x2="316.0" y2="216.5" stroke="var(--a)" stroke-width="4"/>
+<line x1="316.0" y1="216.5" x2="536.8" y2="41.7" stroke="var(--a)" stroke-width="4"/>
+<line x1="86.9" y1="228.5" x2="60.2" y2="228.5" stroke="var(--ink)" stroke-width="1.3" marker-end="url(#ar)"/>
+<line x1="57.5" y1="216.5" x2="10.1" y2="216.5" stroke="var(--warn)" stroke-width="2"/>
+<circle cx="57.5" cy="27.4" r="4" fill="var(--paper,#fff)" stroke="var(--ink)" stroke-width="1.5"/><circle cx="316.0" cy="27.4" r="4" fill="var(--paper,#fff)" stroke="var(--ink)" stroke-width="1.5"/>
+<text x="65" y="14" class="lbl">LE, bonded as cut; rods hinged here</text>
+<text x="113" y="208" class="sm">Dashed: as cut, unstretched</text>
+<text x="113" y="242" class="sm">Solid: vertical, fibres stretched about 5 %</text>
+<text x="324" y="86" class="sm">Batten: 5° → 0°</text><text x="324" y="99" class="sm">follows by itself</text>
+<text x="85" y="118" class="sm">Root rod: 8.85° → 0°</text>
+<text x="4" y="208" class="sm" fill="var(--warn)">Line to body</text>
 </svg></div>
+  <ol>
+    <li><span class="tag prop">Proposed, untested</span> <b>Bond the LE as cut.</b> Lay the rolled, unstretched sheet on a template with the outline printed. Bond the LE rod (2 mm margin). The sheet has seen no stretch so far, so the roll and the LE joint are made at rest.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Add the rods at their as-cut tilts.</b> Root rod at 8.85°, batten at 5°, each hinged at the LE, with panel 1 and panel 2 both bonded to the batten. About 0.5–0.8 mm carbon.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Set the chord stretch.</b> The mask's chord is 39.5 mm and the rods are 41.1 mm, so draw each fibre about 1.6 mm aft and fix it to the rod tips.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Pull the root rod to vertical</b> with the line, against a printed square. The batten should arrive at vertical by itself, because it is balanced at this tilt ratio.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Check before going further:</b> line force about 84 mN (56 mN with one active layer), fibres 5.9 and 4.9 % longer by markers, batten within about 1° of vertical.</li>
+  </ol>
+  <div class="tw"><table>
+    <tr><th>If the rotation is off, 2 layers, 4 m/s</th><th>Lift change</th><th>Panel 1 wrinkled, 0 V</th></tr>
+    <tr><td>70 % of the way</td><td>14.9 mN</td><td>41 %</td></tr>
+    <tr><td>85 %</td><td>15.2 mN*</td><td>53 %</td></tr>
+    <tr><td><b>100 %</b></td><td><b>15.9 mN</b></td><td>64 %</td></tr>
+    <tr><td>115 %, overshoot</td><td>11.8 mN*</td><td>67 %</td></tr>
+  </table></div>
+  <p class="note">*No converged state at voltage. So stopping short costs little, and overshooting costs more. One degree on the root rod is 0.7 mm of line and 1.5 % of fibre 1's stretch, which is why an adjustable line is useful.</p>
   <ul>
-    <li><span class="tag prop">Proposed, untested</span> Stretch each panel before bonding. Hold it away from its outline, in the model at least 20 mm from the grips, which gives a variation in tension of 2.6 %.</li>
-    <li><span class="tag prop">Proposed, untested</span> 8 % along the fibre: panel 1's fibre goes from 52.0 to 56.2 mm. Hold the width at 0.2 %, which is close to its unstretched width, so the sheet cannot neck.</li>
-    <li><span class="tag prop">Proposed, untested</span> Do not pull only on the fibre tips: the model leaves 70–86 % of the sheet slack. Do not move the LE after bonding: panel 2 wrinkles.</li>
-    <li><span class="tag prop">Proposed, untested</span> Print markers before stretching, to measure the stretch you actually got. Lift change is fairly tolerant of ±1 % in the model, but measure it.</li>
-    <li><span class="tag fill">To confirm</span> <b>CNT and stretch:</b> pre-stretching CNT electrodes lowers conductivity, and the established process uses no pre-stretch. Measure resistance before and after 8 %.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Why this is better than a stretching rig.</b> Vertical is a geometric target that can be checked by eye. It needs no grips or side rails, and the CNT electrodes see about 5–6 %, not 8 %.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Keep the chord stretch.</b> With none, the finite elements find no steady state and panel 1 is 88 % wrinkled at 0 V. At 2 % the 0 V state settles but the voltage state does not. 4 % is the first fully converged value.</li>
+    <li><span class="tag prop">Proposed, untested</span> <b>Root rod or no rod.</b> With a free root edge held only at the fibre's end, lift change is about the same (16.6 mN) but the 0 V state does not settle. Start with the rod. Try removing it later to save weight.</li>
+    <li><span class="tag fill">To confirm</span> <b>CNT and stretch:</b> stretching CNT electrodes lowers conductivity, and panel 1 also shears. Measure resistance flat and after rotation.</li>
   </ul>
 </section>
 
 <section class="card" id="assembly">
   <h2>7. Assembly</h2>
-  <div class="fig"><svg viewBox="0 0 620 280" role="img" aria-label="Assembled wing, to scale: leading edge rod to the crank, batten, active sheet panels, rolled fibres along the trailing edge, tensioner to the body, and wiring">
-<polygon points="56.0,48.9 493.6,48.9 493.6,61.9 334.0,221.5 95.4,221.5" fill="var(--sheet)" stroke="var(--muted)"/>
-<line x1="40.0" y1="48.88" x2="493.6" y2="48.88" stroke="var(--ink)" stroke-width="4"/>
-<line x1="290.9610001492102" y1="48.88" x2="334.0" y2="221.5" stroke="var(--ink)" stroke-width="2"/>
-<line x1="95.44" y1="221.5" x2="334.0" y2="221.5" stroke="var(--a)" stroke-width="4"/>
-<line x1="334.0" y1="221.5" x2="493.6" y2="61.9" stroke="var(--a)" stroke-width="4"/>
-<line x1="95.44" y1="221.5" x2="61.839999999999996" y2="255.10000000000002" stroke="var(--b)" stroke-width="2" stroke-dasharray="4 2"/>
-<circle cx="334.0" cy="221.5" r="5" fill="var(--b)"/><circle cx="95.44" cy="221.5" r="4" fill="var(--a)"/><circle cx="493.6" cy="61.9" r="4" fill="var(--a)"/>
-<text x="21.96" y="14" class="lbl">To crank: LE fixed on the mechanism</text>
-<text x="166.0" y="139.60000000000002" class="lbl">Panel 1</text><text x="367.6" y="114.4" class="lbl">Panel 2</text>
-<text x="227.96100014921018" y="114.4" class="sm" transform="rotate(-76 286.7610001492102 131.2)">Batten, 14°</text>
-<text x="191.20000000000002" y="246.70000000000002" class="sm">Rolled active fibre</text>
-<text x="346.6" y="234.10000000000002" class="sm">Junction: contacts tied, common lead</text>
-<text x="505" y="95.5" class="sm">Contact in the LE</text>
-<text x="51.839999999999996" y="277.9" class="sm">Tensioner to the body: line + spring, or DEA fibre</text>
+  <div class="fig"><svg viewBox="0 0 620 280" role="img" aria-label="Assembled wing, to scale: leading edge rod to the crank, vertical root rod and batten, active sheet panels, rolled fibres along the trailing edge, line to the body, and wiring">
+<polygon points="56.0,48.9 493.6,48.9 493.6,61.9 292.0,221.5 56.0,221.5" fill="var(--sheet)" stroke="var(--muted)"/>
+<line x1="40.0" y1="48.9" x2="493.6" y2="48.9" stroke="var(--ink)" stroke-width="4"/>
+<line x1="56.0" y1="48.9" x2="56.0" y2="221.5" stroke="var(--ink)" stroke-width="2"/>
+<line x1="292.0" y1="48.9" x2="292.0" y2="221.5" stroke="var(--ink)" stroke-width="2"/>
+<line x1="56.0" y1="221.5" x2="292.0" y2="221.5" stroke="var(--a)" stroke-width="4"/>
+<line x1="292.0" y1="221.5" x2="493.6" y2="61.9" stroke="var(--a)" stroke-width="4"/>
+<line x1="56.0" y1="221.5" x2="10.6" y2="221.5" stroke="var(--b)" stroke-width="2" stroke-dasharray="4 2"/>
+<circle cx="292.0" cy="221.5" r="5" fill="var(--b)"/><circle cx="56.0" cy="221.5" r="4" fill="var(--a)"/><circle cx="493.6" cy="61.9" r="4" fill="var(--a)"/>
+<text x="22" y="14" class="lbl">To crank: LE fixed on the mechanism</text>
+<text x="141" y="140" class="lbl">Panel 1</text><text x="342" y="114" class="lbl">Panel 2</text>
+<text x="252" y="114" class="sm">Batten</text><text x="62" y="114" class="sm">Root rod</text>
+<text x="132" y="236" class="sm">Rolled fibre</text>
+<text x="302" y="236" class="sm">Junction: contacts tied, common lead</text>
+<text x="506" y="66" class="sm">Contact in the LE</text>
+<text x="10" y="250" class="sm">Adjustable line to the body, pulling inboard along the span</text>
 </svg></div>
-  <p class="note">To scale: batten tip at $x$ = 70 mm, chord 41 mm, 104 mm span.</p>
+  <p class="note">To scale, after rotation: batten at $x$ = 60 mm, chord 41 mm, 104 mm span.</p>
   <ol>
-    <li><span class="tag prop">Proposed, untested</span> Bond the stretched sheet to the LE (2 mm margin) and batten: a tube of 3 mm outer and 2 mm inner diameter for the LE, about 0.5–0.8 mm carbon for the batten. A 1 mm solid LE reached no steady state in the model.</li>
-    <li><span class="tag prop">Proposed, untested</span> Cut the sheet free. The fibre should bow in by about 1 mm.</li>
-    <li><span class="tag prop">Proposed, untested</span> Bond panel 2 to the same batten, at about the same tension as panel 1.</li>
-    <li><span class="tag prop">Proposed, untested</span> LE to the crank. Trailing edge to the body at the fibre's root end: a line with a soft spring, or a DEA fibre rolled from a spare rectangle. In the model a 60 mN DEA fibre matches a rigid root rib (12.3 mN against 12.2 mN), a line gives 8.6–9.6 mN.</li>
-    <li><span class="tag prop">Proposed, untested</span> Wiring: tie panel 1's contact B and panel 2's contact A at the junction, down the trailing edge. Panel 2's other contact runs inside the LE, panel 1's at the root. The carbon rod is conductive: keep high voltage away from it, or use it as the grounded side.</li>
+    <li><span class="tag prop">Proposed, untested</span> LE: a tube of 3 mm outer and 2 mm inner diameter. A 1 mm solid LE reached no steady state in the model, on the earlier design.</li>
+    <li><span class="tag prop">Proposed, untested</span> LE to the crank. Root rod's tip to the body by an adjustable line, pulling inboard along the span. The tip is 3.8 mm from the stroke axis, so an eye on the axis at the same chord station keeps the line's length constant over a stroke. Run the line through the eye to an adjuster, with a soft spring if needed. Not modelled over a stroke.</li>
+    <li><span class="tag prop">Proposed, untested</span> Loads to design for, two layers: 84 mN in the line; about 81 mN compression along the root rod; about 32 mN along the batten, with almost no moment.</li>
+    <li><span class="tag prop">Proposed, untested</span> If the batten drifts in flow, lock it once vertical. Its balance was computed with no flow. In flow it was held vertical in the model.</li>
+    <li><span class="tag prop">Proposed, untested</span> Wiring: tie panel 1's contact B and panel 2's contact A at the junction, down the trailing edge. Panel 2's other contact runs inside the LE, panel 1's at the root. The carbon rods are conductive: keep high voltage away from them, or use them as the grounded side.</li>
   </ol>
 </section>
 
@@ -198,14 +223,14 @@ svg .sm{font-size:9.5px}
   <div class="tw"><table>
     <tr><th>Stage</th><th>Measure</th><th>Expect</th><th>If not</th></tr>
     <tr><td>Calibration</td><td>Cross-section of a test stack</td><td>35 µm per D, ±10 %</td><td>Adjust spin speed; update $H$ in the model</td></tr>
-    <tr><td>Electrodes</td><td>Resistance end to end, flat</td><td>Set your own baseline; repeat after stretching</td><td>Too high after stretching: adjust CNT or stretch</td></tr>
+    <tr><td>Electrodes</td><td>Resistance end to end, flat</td><td>Set your own baseline; repeat after rotation</td><td>Too high after rotation: adjust CNT, or use less tilt</td></tr>
     <tr><td>Finished sheet</td><td>Capacitance</td><td>About 2.7 nF panel 1, 1.2 nF panel 2, two layers, plus the strip, from area and $H$</td><td>Low: layer not connected. High: thinner than planned</td></tr>
     <tr><td>Finished sheet</td><td>Leakage and self-clearing, ramp to 1.6 kV</td><td>Stable current, no sparks after clearing</td><td>Reject; look for bubbles</td></tr>
     <tr><td>Flat strip</td><td>Isometric force drop on the texture analyser</td><td>$\eta$ about 0.5, $\Delta n$ of order 1.8 N/m for two layers</td><td><b>Update $\eta$ first; it decides everything</b></td></tr>
-    <tr><td>Stretched</td><td>Marker positions</td><td>8 %, 0.2 %</td><td>Correct the rig</td></tr>
-    <tr><td>Bonded, no flow</td><td>Wrinkles, and fibre bow</td><td>Smooth at 0 V, about 1 mm bow</td><td>Wrinkles at 0 V: tension too low or uneven</td></tr>
-    <tr><td>Bonded, no flow</td><td>Resonance at 0 V and 1.6 kV</td><td>Panel 1: 65 → 41 Hz. Panel 2: 42 → 24 Hz</td><td>Small fall: low $\eta$, or a poor load path</td></tr>
-    <tr><td>Fibre</td><td>Bow against voltage, by camera</td><td>No sudden jump up to 1.6 kV</td><td>A jump, as in the <a href="../full_membrane/#bench">vocal cord device</a>, means the fibre force has reached zero: raise $\lambda_d$</td></tr>
+    <tr><td>Rotated</td><td>Marker positions; batten angle; line force</td><td>Fibres 5.9 %, 4.9 %; batten within 1° of vertical; about 84 mN</td><td>Batten short of vertical: raise the root tilt. Batten past it: lower it</td></tr>
+    <tr><td>Bonded, no flow</td><td>Wrinkles, and fibre bow</td><td>About 2.6 mm bow on panel 1, 0.5 mm on panel 2. Panel 1 is predicted 64 % wrinkled at 0 V, so some wrinkles are expected; size unknown</td><td>Too rough: raise the chord stretch to 6 %, or stop the rotation short</td></tr>
+    <tr><td>Bonded, no flow</td><td>Resonance at 0 V and 1.6 kV</td><td>Panel 1: 51 → 30 Hz. Panel 2, less certain: 83 → 35 Hz</td><td>Small fall: low $\eta$, or a poor load path</td></tr>
+    <tr><td>Fibre</td><td>Bow against voltage, by camera</td><td>No sudden jump up to 1.6 kV</td><td>A jump, as in the <a href="../full_membrane/#bench">vocal cord device</a>, means tension is used up: more chord stretch or tilt</td></tr>
   </table></div>
   <p class="note">Reject by rules set in advance, and test at least 3 wings. In flow: randomised voltage order, a sham, a recorded voltage trace and frequent zero checks.</p>
 </section>
@@ -215,9 +240,11 @@ svg .sm{font-size:9.5px}
   <div class="tw"><table>
     <tr><th>Quantity</th><th>Value</th><th>Why</th></tr>
     <tr><td>Active layers</td><td>2 per panel</td><td><a href="../full_membrane/#design-study">Design study</a></td></tr>
-    <tr><td>$\lambda_d$, $\lambda_n$</td><td>1.08, 1.002</td><td>Active fibre keeps tension (<a href="../model/#A8">model, step 8</a>)</td></tr>
+    <tr><td>Tilt as cut: batten, root edge</td><td>5°, 8.85°</td><td>Batten balances at $\theta_r\approx1.77\,\theta_b$ (<a href="../model/#A3r">model, step 3b</a>)</td></tr>
+    <tr><td>Stretch from rotation; chord stretch</td><td>About 1.05, 1.05; 1.04</td><td><a href="../full_membrane/#rotation">Rotation study</a></td></tr>
+    <tr><td>Fibre</td><td>Passive at this tilt; active needs 10°, 18°</td><td><a href="../model/#A8">Model, step 8</a></td></tr>
     <tr><td>Roll width</td><td>13 mm</td><td>Fits the coater; 9–13 mm is enough</td></tr>
-    <tr><td>Batten tip; chord; tilt</td><td>$x$ = 70 mm; 41 mm; 14°</td><td>Design study</td></tr>
+    <tr><td>Batten; chord</td><td>$x$ = 60 mm; 41 mm</td><td><a href="../full_membrane/#rotation">Rotation study</a></td></tr>
     <tr><td>Voltage</td><td>1.6 kV</td><td>Field of 46 V/µm at 35 µm</td></tr>
     <tr><td>Mass, sheet and fibres</td><td>About 520 mg per wing</td><td>Before frame and contacts</td></tr>
   </table></div>
@@ -226,11 +253,13 @@ svg .sm{font-size:9.5px}
 <section class="card" id="risks">
   <h2>10. Main risks</h2>
   <ul>
-    <li><b>Scale.</b> The established process makes small pieces rolled into stiff shells. A 50 × 60 mm stretched free sheet of 105 µm is new, and uniformity and release are unknown.</li>
-    <li><b>Stretching CNT electrodes.</b> Conductivity falls with stretch.</li>
+    <li><b>Scale.</b> The established process makes small pieces rolled into stiff shells. A 50 × 60 mm free sheet of 105 µm is new, and uniformity and release are unknown.</li>
+    <li><b>Stretching CNT electrodes.</b> Conductivity falls with stretch, and panel 1 also shears.</li>
+    <li><b>Wrinkles at 0 V.</b> Panel 1 is predicted mostly wrinkled at rest. The model cannot say how large they are, or what they do to the flow. Test this first.</li>
+    <li><b>Hinges and sequence.</b> The bonding order, hinge friction and the batten's balance in flow are not simulated.</li>
     <li><b>Defects over a large area.</b> Self-clearing helps, but one short could disable a panel. This is why each panel has its own drive.</li>
-    <li><b>Creep.</b> Tension may relax after stretching. Repeat the resonance test after a day and after a week.</li>
-    <li><b>Active fibre.</b> The least checked part of the model. Build one panel and test it before a full wing.</li>
+    <li><b>Creep.</b> Tension may relax after rotation, and the adjustable line can take it up. Repeat the resonance test after a day and after a week.</li>
+    <li><b>$C_L$ near 1.2 at voltage.</b> Above what attached flow supports at this Reynolds number, so lift change at voltage may be lower than predicted.</li>
   </ul>
 </section>
 <div class="two">

@@ -61,15 +61,16 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <p>Rolled actuators in a passive silicone membrane.</p>
   </div>
   <div class="card wing">
-    <svg viewBox="0 0 300 130" role="img" aria-label="Wing whose whole surface is active, with rolled fibres along the trailing edge meeting at a batten">
-      <path d="M12 16 L288 16 L288 26 L180 92 Q110 98 40 92 Z" fill="var(--sheet)" stroke="var(--muted)"/>
+    <svg viewBox="0 0 300 130" role="img" aria-label="Wing whose whole surface is active, with a vertical root edge and batten, and rolled fibres along the trailing edge">
+      <path d="M30 16 L288 16 L288 26 L180 92 L30 92 Z" fill="var(--sheet)" stroke="var(--muted)"/>
       <line x1="12" y1="16" x2="288" y2="16" stroke="var(--ink)" stroke-width="3"/>
-      <path d="M40 92 Q110 98 180 92 L288 26" fill="none" stroke="var(--a)" stroke-width="3.5"/>
-      <line x1="160" y1="17" x2="180" y2="92" stroke="var(--ink)" stroke-width="1.5"/>
-      <text x="12" y="11">Leading edge</text><text x="70" y="114">Integral rolled fibre, active</text>
+      <path d="M30 92 L180 92 L288 26" fill="none" stroke="var(--a)" stroke-width="3.5"/>
+      <line x1="30" y1="17" x2="30" y2="92" stroke="var(--ink)" stroke-width="1.5"/>
+      <line x1="180" y1="17" x2="180" y2="92" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="12" y="11">Leading edge</text><text x="70" y="114">Integral rolled fibre</text>
     </svg>
     <h3>Full membrane</h3>
-    <p>The whole skin is the actuator, two active layers, with its own rolled edge as the fibre.</p>
+    <p>The whole skin is the actuator, two active layers, with its own rolled edge as the fibre. Cut tilted, and tensioned by bringing the root edge and batten to vertical.</p>
   </div>
 </div>
 
@@ -77,15 +78,16 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <h2>Result</h2>
   <div class="tw"><table>
     <tr><th>Mean lift change at 1.6 kV, one wing, 2 Hz, 6° pitch</th><th>3 m/s</th><th>4 m/s</th><th>6 m/s*</th></tr>
-    <tr class="main"><td>Full membrane, $\eta$ = 0.5</td><td>2.2 mN</td><td>6.0 mN</td><td>18.5 mN</td></tr>
+    <tr class="main"><td>Full membrane, tilted cut, $\eta$ = 0.5</td><td>3.9 mN</td><td>11.8 mN</td><td>35.8 mN</td></tr>
     <tr class="main"><td>Discrete DEAs, $T_c$ = 0.5 N, $\lambda_{pre}$ = 1.03</td><td>0.5 mN</td><td>1.8 mN</td><td>14.3 mN</td></tr>
     <tr class="main"><td>Discrete DEAs, free trailing edge, as tested</td><td>0</td><td>0</td><td>0</td></tr>
   </table></div>
-  <p class="note">Baseline lift about 16 mN per wing at 4 m/s. *The model over-predicts at 6 m/s.</p>
+  <p class="note">Baseline lift about 20 mN (full) and 16 mN (discrete) per wing at 4 m/s. *The model over-predicts at 6 m/s. For comparison, the finite elements on the full membrane at a fixed 6° give 6.0, 15.9 and 26.3 mN.</p>
   <ul>
     <li><b>Your tested wings:</b> weak results are expected. With a free trailing edge, statics leave no way for voltage to change chord tension.</li>
-    <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 3.3× at 4 m/s, narrowing with speed.</li>
-    <li><b>But a slack discrete wing may do as well.</b> Lowering $\lambda_{pre}$ raises its lift change to 7.5 mN at 1.01 and 12.7 mN at 1.00, close to or above the full membrane. Those are outside what the model has been checked on, and a slack membrane may flutter. See <a href="model/#stretch">pre-stretch</a>.</li>
+    <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 6.5× at 4 m/s, narrowing with speed.</li>
+    <li><b>The fibre is passive in these numbers.</b> An active fibre needs more tilt to keep its tension, 10° and 18° instead of 5° and 8.85°, and the finite elements then give 3.4 mN against 12.3 mN at the same $\eta$ = 0.4. See <a href="full_membrane/#rotation">the trade-off</a>.</li>
+    <li><b>But a slack discrete wing may do as well.</b> Lowering $\lambda_{pre}$ raises its lift change to 7.5 mN at 1.01 and 12.7 mN at 1.00, about the same as the full membrane. Those are outside what the model has been checked on, and a slack membrane may flutter. See <a href="model/#stretch">pre-stretch</a>.</li>
   </ul>
 </section>
 
@@ -94,7 +96,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <div class="fig"><img src="model/M1_stroke.png" alt="Lift and lift change over a flap cycle for each wing at 4 m/s, 2 Hz"></div>
   <ul class="read">
     <li><b>Equation:</b> <a href="model/#A6">step 6</a> at each phase, with $\alpha_{eff}=\alpha-\arctan(\Omega r/U)$ and $q_{eff}=\tfrac12\rho(U^2+\Omega^2r^2)$ at each panel's radius.</li>
-    <li><b>Trend:</b> a discrete wing changes lift most in the downstroke (2.6 mN) and least in the upstroke (0.5 mN), because its camber follows the load. The full membrane is nearly constant at 6 mN, because voltage removes most of its chord tension whatever the load.</li>
+    <li><b>Trend:</b> a discrete wing changes lift most in the downstroke (2.6 mN) and least in the upstroke (0.5 mN), because its camber follows the load. The full membrane stays near 12 mN, because voltage removes most of its chord tension whatever the load.</li>
     <li><b>Hatched, 240° to 300°, not reliable:</b> the outer panel's angle crosses zero, and it can flip to either side. Left out of the means. Raising the pitch to 8° avoids it: <a href="model/#flip">why, and how</a>.</li>
     <li><b>Validate:</b> high-speed video and force over a cycle, 0 V and 1.6 kV, same wing. Look for a flat lift change against phase on the full membrane, and for snap-through near 270°.</li>
   </ul>
@@ -105,8 +107,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <div class="fig"><img src="model/M2_speed.png" alt="Cycle-mean lift change and the ratio between the two wings against flow speed"></div>
   <ul class="read">
     <li><b>Equation:</b> <a href="model/#A6">step 6</a>, where softening $D$ grows with $q$.</li>
-    <li><b>Trend:</b> the discrete wing needs high $q$ to act, because its tension stays high: $T$ falls by only 25 % at voltage. The full membrane loses all its chord tension, so it responds at low speed. The ratio falls from about 4.6× at 3 m/s to 3.3× at 4 m/s.</li>
-    <li><b>Validate:</b> static section in the tunnel, 3, 4, 5, 6 m/s, randomised, with a sham. Above 5 m/s (shaded) the model over-predicts, by about 1.7× on a rigid-edge discrete wing at 6 m/s.</li>
+    <li><b>Trend:</b> the discrete wing needs high $q$ to act, because its tension stays high: $T$ falls by only 25 % at voltage. The full membrane loses about three quarters of its chord tension, so it responds at low speed. The ratio falls from about 8× at 3 m/s to 6.5× at 4 m/s and 2.5× at 6 m/s.</li>
+    <li><b>Validate:</b> static section in the tunnel, 3, 4, 5, 6 m/s, randomised, with a sham. Above 5 m/s (shaded) the model over-predicts: 1.7× on a rigid-edge discrete wing and 1.4× on the full membrane at 6 m/s.</li>
   </ul>
 </section>
 
@@ -114,8 +116,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <h2>With actuator efficiency</h2>
   <div class="fig" style="max-width:560px"><img src="model/M3_eta.png" alt="Cycle-mean lift change against actuator efficiency for both wings"></div>
   <ul class="read">
-    <li><b>Equation:</b> $P=\eta\chi\varepsilon_0\varepsilon_r(V/H)^2(H+H_p)$ (<a href="model/#A3b">step 3b</a>); for discrete DEAs, $\Delta F\propto\eta$.</li>
-    <li><b>Trend:</b> full membrane 3.4, 4.1, 5.2, 8.0 mN at $\eta$ = 0.15, 0.24, 0.40, 0.70. Discrete 0.5, 0.9, 1.8, 4.0 mN. The sheet is estimated at 0.5, higher than a roll because it has no rolled air gaps.</li>
+    <li><b>Equation:</b> $P=\eta\chi\varepsilon_0\varepsilon_r(V/H)^2(H+H_p)$ (<a href="model/#A3b">step 3c</a>); for discrete DEAs, $\Delta F\propto\eta$.</li>
+    <li><b>Trend:</b> full membrane 4.2, 6.7, 9.7, 16.1 mN at $\eta$ = 0.15, 0.24, 0.40, 0.70 (finite elements at 6°: 3.8 mN at 0.15, 12.3 at 0.40, 23.3 at 0.70). Discrete 0.5, 0.9, 1.8, 4.0 mN. The sheet is estimated at 0.5, higher than a roll because it has no rolled air gaps.</li>
     <li><b>Validate:</b> flat strip of the real stack on the texture analyser, isometric, held at 1.6 kV. This is the cheapest and most useful next measurement.</li>
   </ul>
 </section>

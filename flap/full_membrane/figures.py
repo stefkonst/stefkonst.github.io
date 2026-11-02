@@ -132,17 +132,16 @@ def fig_shape():
 
 
 def fig_masks():
-    Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers.json")))
+    Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers_passive_fibre.json")))
     fig, ax = plt.subplots(1, 2, figsize=(10.5, 4.7))
     labels = dict(root=("Root end", "Batten tip"), tip=("Batten tip", "Tip, by the LE"))
     for a, k, ttl in ((ax[0], "root", "Panel 1 (inboard)"), (ax[1], "tip", "Panel 2 (outboard)")):
         q = Mk[k]
         ac = np.array(q["active"]); a.fill(ac[:, 0], ac[:, 1], color=PS.MATLAB[4], alpha=0.25, label="Active sheet (A and B overlap)")
         s_ = np.array(q["sheet_mm"] + q["sheet_mm"][:1]); a.plot(s_[:, 0], s_[:, 1], "k:", lw=0.8, label="Frame line, as cut")
-        st = np.array(q["strip_mm"] + q["strip_mm"][:1]); a.plot(st[:, 0], st[:, 1], color="0.45", lw=0.9, label="Strip rolled into the active fibre")
+        st = np.array(q["strip_mm"] + q["strip_mm"][:1]); a.plot(st[:, 0], st[:, 1], color="0.45", lw=0.9, label="Strip rolled into the fibre")
         tA, tB = np.array(q["tab_A"]), np.array(q["tab_B"])
         st_ = np.array(q["strip_mm"])
-        a.fill([tA[:, 0].max(), tB[:, 0].min(), tB[:, 0].min(), tA[:, 0].max()], [tA[:, 1].min(), tA[:, 1].min(), tA[:, 1].max(), tA[:, 1].max()], color=PS.MATLAB[4], alpha=0.25)
         a.fill(tA[:, 0], tA[:, 1], color=PS.OFF, alpha=0.6, label="Contact A")
         a.fill(tB[:, 0], tB[:, 1], color=PS.ON, alpha=0.6, label="Contact B")
         fa, fb = np.array(q["fibre_A"]), np.array(q["fibre_B"])
@@ -154,7 +153,8 @@ def fig_masks():
         le_ = np.array(q["sheet_mm"])[:2]
         ang = np.degrees(np.arctan2(le_[1, 1] - le_[0, 1], le_[1, 0] - le_[0, 0]))
         a.text(le_[:, 0].mean(), le_[:, 1].mean() - 1.2, "Leading edge", ha="center", va="bottom", fontsize=7, rotation=-ang, rotation_mode="anchor")
-        a.set_aspect("equal"); a.invert_yaxis(); a.set(xlabel="mm", ylabel="mm", title=f"{ttl}: {q['width_mm']:.1f} mm wide")
+        a.set_ylim(np.max(st[:, 1]) + 6.0, np.min(np.array(q["sheet_mm"])[:, 1]) - 7.0)
+        a.set_aspect("equal"); a.set(xlabel="mm", ylabel="mm", title=f"{ttl}: {q['width_mm']:.1f} mm wide")
     PS.finish(ax)
     h_, l_ = ax[0].get_legend_handles_labels()
     fig.tight_layout(rect=(0, 0.1, 1, 1))
