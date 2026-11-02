@@ -42,121 +42,154 @@ ul.read{font-size:14.5px;margin-top:10px}
 code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4px}
 .go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
 .go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:18px;align-items:start;border-top:1px solid var(--rule);padding:14px 0}
+@media (max-width:820px){.row{grid-template-columns:1fr}}
+.row .eq{margin:0 0 6px}
+.row p{margin:.2em 0 .5em}
+table.terms{font-size:13.5px}
+table.terms td:first-child{white-space:nowrap}
+.step{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:17px;margin:0 0 4px}
+nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 </style>
 </head>
 <body>
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Model</p>
 <h1>One model for both wings</h1>
-<p class="lead">A short analytical model: one script, parameters at the top, every term written below. Notation as in Konstantinidi et al., <i>Smart Mater. Struct.</i> 32 (2023) 125011 and <i>Compos. Sci. Technol.</i> 258 (2024) 110849.</p>
+<p class="lead">Lift changes because voltage lowers the tension in the wing, so the wing bulges more under its air load. That is the whole idea. The steps below build it up term by term, with equations on the left and their meaning and how to measure each term on the right.</p>
+<nav class="toc"><a href="#start">The idea</a><a href="#equations">Equations, step by step</a><a href="#example">Worked example</a><a href="#plots">What it predicts</a><a href="#limits">Where it fails, and what to do</a><a href="../manufacturing/">Manufacturing</a></nav>
 <div class="two" style="margin-bottom:18px">
-  <a class="go" href="../wing_analytical.py"><b>wing_analytical.py</b><br>The model. Change parameters and run.</a>
+  <a class="go" href="../wing_analytical.py"><b>wing_analytical.py</b><br>The model, in one file. Change the parameters at the top and run it.</a>
   <a class="go" href="../check_analytical.py"><b>check_analytical.py</b><br>Its checks against closed forms and the detailed models.</a>
 </div>
 
-<section class="card">
-  <h2>Equations</h2>
-  <p>Each panel is a rectangle $a\times b$ ($a$ between supports, $b$ chord), held on all four edges, with aerodynamics as an external pressure. The energy has the same form as the fibre buckling model, $U=U_sA^2+U_b+U_f$, so the result looks the same: a threshold, then a square-root growth of the amplitude $A$.</p>
-  <h3 id="A1">Shape</h3>
-  <div class="eq">$$w=A\sin\frac{\pi x}{a}\sin\frac{\pi y}{b} \tag{A1}$$</div>
-  <h3 id="A2">Energy and balance</h3>
-  <div class="eq">$$U(A)=\tfrac12(T-D)A^2+\tfrac14KA^4-q\,\Phi\,a_L\,\alpha\,A \tag{A2}$$</div>
-  <div class="eq" id="A3">$$\frac{\partial U}{\partial A}=0:\qquad (T-D)\,A+K\,A^3=q\,\Phi\,a_L\,\alpha,\qquad \Phi=\frac{4}{\pi^2},\quad q=\tfrac12\rho U^2 \tag{A3}$$</div>
-  <h3 id="A4">Stiffness from tension</h3>
-  <div class="eq">$$T=n_xX+n_yY,\qquad X=\frac{\pi^2}{4a^2},\quad Y=\frac{\pi^2}{4b^2} \tag{A4}$$</div>
-  <h3 id="A5">Aerodynamic softening</h3>
-  <div class="eq">$$D=\frac{q\,\Phi\,a_L\,k\,c}{b},\qquad c=1.134,\quad k=1.476 \tag{A5}$$</div>
-  <p>More camber gives more lift, which gives more load. $T=D$ is static divergence, the analogue of $F=F_c$. $c$ comes from thin-airfoil theory on the chord shape. $k$ is not fitted: it makes A3 recover the exact 2D limit $C_{T,crit}=1.727$ (Eq. S5) for $a_L=2\pi$.</p>
-  <h3 id="A6">Stiffening from stretch</h3>
-  <div class="eq">$$K=\gamma\,2G\,(H+H_p)\,(X^2+XY+Y^2),\qquad G=2C_1,\qquad A=\sqrt{\frac{D-T}{K}}\ \ \text{past divergence, no load} \tag{A6}$$</div>
-  <p>$\gamma$ = 0.7 is the <b>one fitted number</b>: a real bulge is not uniform, so one shape over-counts stretching. Compare $A=\frac{2}{k}\sqrt{(F-F_c)/(h_fE_f)}$ in the buckling model.</p>
-  <h3 id="A7">Lift</h3>
-  <div class="eq">$$C_L=a_L\Big(\alpha+\frac{k\,c\,A}{b}\Big) \tag{A7}$$</div>
-  <h3 id="A8">Tension and voltage</h3>
-  <p><b>Full sheet</b>, from the equation of state $\sigma_x-\sigma_z=\lambda_x\partial W/\partial\lambda_x-\varepsilon_0\varepsilon_r\chi\lambda_x^2\lambda_y^2V^2/H^2$, at small strain, $e=\lambda-1$:</p>
-  <div class="eq">$$n_x=2G(H+H_p)(2e_x+e_y)-P,\quad n_y=2G(H+H_p)(e_x+2e_y)-P,\quad P=\eta\chi\varepsilon_0\varepsilon_r\frac{V^2}{H^2}(H+H_p) \tag{A8a}$$</div>
-  <p>Stack ½D + E + (D + E) × $N$ + ½D: $H_p=H$ for one active layer, and in general $\chi=N/(N+1)$. Once $n_y$ reaches 0 the sheet wrinkles and $n_x=3G(H+H_p)e_x-P/2$: <b>half the drop</b>. Chord strain includes an edge factor from the finite elements (0.50, 0.20).</p>
-  <p><b>Discrete DEAs</b>, smeared at spacing $s$, with the load-path factor from Eq. S10:</p>
-  <div class="eq">$$n_y=n_{y,m}+\frac{r}{s}\max\big(F_D-\Delta F_{1.6}(V/1.6\ \text{kV})^2,0\big),\quad r=\frac{k_a}{k_a+k_d},\quad k_a=\frac{8T_c\,s}{L_s^2} \tag{A8b}$$</div>
-  <p><b>Free trailing edge:</b> $T_c=0$, so $r=0$. This is statics, Eq. S13: the net chord force across a cut is zero when nothing acts aft of it. An earlier version multiplied by an assumed $r=0.02$; that number had no derivation and is gone.</p>
-  <h3 id="A9">Active rolled fibre</h3>
-  <div class="eq">$$F=2C_1A_0(\lambda_{pre}-\lambda_{pre}^{-2})-\Delta F,\qquad \Delta F=\eta_f\varepsilon_0\varepsilon_r\frac{V^2}{H^2}A_0\frac{w_e}{w_s} \tag{A9}$$</div>
-  <div class="eq">$$F>0\quad\text{if}\quad \lambda_{pre}-1\gtrsim\frac{\eta_f\varepsilon_0\varepsilon_r(V/H)^2\,w_e/w_s}{6C_1}$$</div>
-  <p>All the roll's dielectric is active ($\chi$ = 1), so this does not depend on thickness or roll width beyond $w_e/w_s$. Limit at 1.6 kV: $\lambda_{pre}$ = 1.054 at $\eta_f$ = 0.3, 1.073 at 0.4.</p>
+<section class="card" id="start">
+  <h2>The idea</h2>
+  <p>A membrane under pressure is like a drum skin: the lower its tension, the further it bulges. On a wing there are three forces on that bulge:</p>
+  <ul>
+    <li><b>Tension</b> pulls the skin flat. Voltage lowers it.</li>
+    <li><b>Air load</b> pushes the skin out. And more bulge means more camber, more lift, and so more load: a feedback.</li>
+    <li><b>Stretching</b> resists large bulges, because the skin has to lengthen.</li>
+  </ul>
+  <p>Each wing panel is treated as a rectangle with one bulge shape. Balancing those three gives one equation for one unknown, the bulge height $A$. Both wings use it. They differ only in where their tension comes from (step 3).</p>
+  <p class="note">Notation as in Konstantinidi et al., <i>Smart Mater. Struct.</i> 32 (2023) 125011 and <i>Compos. Sci. Technol.</i> 258 (2024) 110849. The result has the same form as the fibre buckling model: a threshold, then square-root growth.</p>
 </section>
 
-<section class="card">
-  <h2>Parameters</h2>
+<section class="card" id="equations">
+  <h2>Equations, step by step</h2>
+<div class="row" id="A1">
+  <div><p class="step">1. Starting point: a membrane under pressure</p><div class="eq">$$n_x\frac{\partial^2w}{\partial x^2}+n_y\frac{\partial^2w}{\partial y^2}=-p$$</div></div>
+  <div><p>Tension times curvature balances pressure. This is the only physics assumed for the sheet's shape.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$w(x,y)$</td><td>Out-of-plane deflection</td><td>Stereo video or laser line</td></tr><tr><td>$x,\ y$</td><td>Along the span, along the chord</td><td>–</td></tr><tr><td>$n_x,\ n_y$</td><td>Tension per unit width, N/m, along span and chord</td><td>Step 3. Measure by resonance (<a href='#example'>below</a>)</td></tr><tr><td>$p$</td><td>Pressure difference across the skin, Pa</td><td>Step 5: from the lift</td></tr></table></div></div>
+</div>
+<div class="row" id="A2">
+  <div><p class="step">2. One bulge shape</p><div class="eq">$$w=A\,\sin\frac{\pi x}{a}\,\sin\frac{\pi y}{b}$$</div></div>
+  <div><p>Instead of solving for the whole surface, assume one smooth bulge. The only unknown left is its height.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$A$</td><td>Bulge height, m. The answer</td><td>Same measurement as $w$</td></tr><tr><td>$a$</td><td>Panel span between supports, m</td><td>From the wing: 40 mm inboard, 68 mm outboard</td></tr><tr><td>$b$</td><td>Panel chord, m</td><td>From the wing: 46 mm, and 31 mm mean outboard</td></tr></table></div></div>
+</div>
+<div class="row" id="A3a">
+  <div><p class="step">3a. Tension from stretch</p><div class="eq">$$\begin{aligned}n_x&=2G(H+H_p)(2e_x+e_y)\\n_y&=2G(H+H_p)(e_x+2e_y)\end{aligned}$$</div></div>
+  <div><p>A stretched incompressible sheet. Pre-stretch sets the tension before any voltage.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$e_x,\ e_y$</td><td>Strain, $e=\lambda-1$. Along and across the strings</td><td>Printed markers on the sheet</td></tr><tr><td>$\lambda_d,\ \lambda_n$</td><td>Stretch along and across the fibre</td><td>Set on the rig: 1.08, 1.002</td></tr><tr><td>$G=2C_1$</td><td>Shear modulus, Pa</td><td>$C_1$ = 42.8 kPa, fit to the bench bundle</td></tr><tr><td>$H$</td><td>Dielectric thickness per film, m</td><td>35 µm. Measure by cross-section</td></tr><tr><td>$H_p$</td><td>Passive thickness, m</td><td>The cover layers. $H+H_p=(N+1)H$</td></tr><tr><td>$N$</td><td>Number of active layers</td><td>Your stack: 2</td></tr></table></div></div>
+</div>
+<div class="row" id="A3b">
+  <div><p class="step">3b. Voltage lowers the tension: full sheet</p><div class="eq">$$\begin{aligned}P&=\eta\,\chi\,\varepsilon_0\varepsilon_r\frac{V^2}{H^2}(H+H_p)\\n_x&\to n_x-P\\n_y&\to n_y-P\end{aligned}$$</div></div>
+  <div><p>The Maxwell stress of your equation of state, as a resultant. If $n_y$ reaches 0 the sheet wrinkles and $n_x$ then only falls by $P/2$, because the sheet can spread sideways.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$P$</td><td>Tension drop from voltage, N/m</td><td>Computed: 1.81 N/m at 1.6 kV. Measure by resonance</td></tr><tr><td>$\eta$</td><td>Efficiency: measured / ideal</td><td>Estimated 0.5. <b>Measure on a flat strip</b></td></tr><tr><td>$\chi$</td><td>Active fraction, $H/(H+H_p)$; $N/(N+1)$ here</td><td>From the stack</td></tr><tr><td>$\varepsilon_0\varepsilon_r$</td><td>Permittivity; $\varepsilon_r$ = 2.8</td><td>Assumed; capacitance gives it</td></tr><tr><td>$V$</td><td>Voltage</td><td>1.6 kV, from a calibrated monitor</td></tr></table></div></div>
+</div>
+<div class="row" id="A3c">
+  <div><p class="step">3c. Voltage lowers the tension: discrete DEAs</p><div class="eq">$$\begin{aligned}n_y&=n_{y,m}+\frac{r}{s}\big(F_D-\Delta F\big)\\r&=\frac{k_a}{k_a+k_d}\\k_a&=\frac{8T_cs}{L_s^2}\end{aligned}$$</div></div>
+  <div><p>Actuators in parallel with a passive membrane. Only the part $r$ of their force reaches the wing, because they pull against whatever holds their ends.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$n_{y,m}$</td><td>Tension of the passive membrane</td><td>Bench fit plus pre-stretch</td></tr><tr><td>$F_D,\ \Delta F$</td><td>DEA force at its pre-stretch; its drop at 1.6 kV</td><td>Bench: 14.1 mN; 8.6 mN</td></tr><tr><td>$s$</td><td>DEA spacing</td><td>12 mm</td></tr><tr><td>$r$</td><td>Load-path factor, 0 to 1</td><td>Computed. 0.59 at $T_c$ = 0.5 N</td></tr><tr><td>$k_d$</td><td>DEA stiffness</td><td>Bench: 3.1 N/m</td></tr><tr><td>$T_c,\ L_s$</td><td>Trailing-edge tension; its span</td><td>Load cell in the line; 104 mm</td></tr><tr><td>Free edge</td><td>$T_c=0$, so $r=0$</td><td>Statics, Eq. S13: nothing aft of a cut to react the chord force</td></tr></table></div></div>
+</div>
+<div class="row" id="A4">
+  <div><p class="step">4. Tension becomes stiffness</p><div class="eq">$$\begin{aligned}T&=n_xX+n_yY\\X&=\frac{\pi^2}{4a^2},\quad Y=\frac{\pi^2}{4b^2}\end{aligned}$$</div></div>
+  <div><p>Putting the shape of step 2 into step 1. Short spans are stiff, which is why tension counts most in the shorter direction.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$T$</td><td>Stiffness of the bulge from tension, N/m³</td><td>Computed; falls with voltage</td></tr><tr><td>$X,\ Y$</td><td>Curvature of the shape along span and chord, 1/m²</td><td>Computed from $a$, $b$</td></tr></table></div></div>
+</div>
+<div class="row" id="A5">
+  <div><p class="step">5. The air load, with its feedback</p><div class="eq">$$\begin{aligned}p&=q\,C_L\\C_L&=a_L\Big(\alpha+\frac{k\,c\,A}{b}\Big)\\q&=\tfrac12\rho U^2\end{aligned}$$</div></div>
+  <div><p>Lift gives the pressure. Lift depends on the wing's angle and on its camber, and camber is the bulge. So $A$ appears on both sides.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$C_L$</td><td>Lift coefficient of the panel</td><td>Force balance</td></tr><tr><td>$q$</td><td>Dynamic pressure, Pa</td><td>9.8 Pa at 4 m/s</td></tr><tr><td>$\rho,\ U$</td><td>Air density; flow speed</td><td>1.225 kg/m³; tunnel</td></tr><tr><td>$a_L$</td><td>Lift slope of the flat wing, per radian</td><td>3.71 from a vortex lattice; measure on a rigid wing</td></tr><tr><td>$\alpha$</td><td>Angle of attack, radians</td><td>Set; when flapping, it varies (<a href='#limits'>below</a>)</td></tr><tr><td>$c$</td><td>Extra incidence per unit $A/b$ for this shape</td><td>1.134, thin-airfoil theory</td></tr><tr><td>$k$</td><td>Corrects $c$ for loading that peaks at the LE</td><td>1.476: recovers Eq. S5 exactly. Not fitted</td></tr></table></div></div>
+</div>
+<div class="row" id="A6">
+  <div><p class="step">6. Balance: the one equation</p><div class="eq">$$(T-D)\,A+K\,A^3=q\,\Phi\,a_L\,\alpha$$</div></div>
+  <div><p>The three forces on the bulge. Left: tension and softening, then stretching. Right: the air load on a flat wing. Solving this cubic gives $A$.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$\Phi$</td><td>Mean of the shape, $4/\pi^2$: how much of a uniform pressure acts on this bulge</td><td>Fixed by the shape</td></tr><tr><td>$q\Phi a_L\alpha$</td><td>Air load on the flat wing, per unit area of bulge</td><td>Computed; see the worked example</td></tr><tr><td>$D=\dfrac{q\Phi a_Lkc}{b}$</td><td>Aerodynamic softening: bulge raises load</td><td>Computed. Grows with $U^2$</td></tr><tr><td>$K=\gamma\,2G(H+H_p)(X^2+XY+Y^2)$</td><td>Stiffening: the bulge stretches the sheet</td><td>Computed</td></tr><tr><td>$\gamma$</td><td>Corrects for one shape over-counting stretching</td><td>0.7. <b>The one fitted number</b></td></tr></table></div></div>
+</div>
+<div class="row" id="A7">
+  <div><p class="step">7. Two regimes</p><div class="eq">$$\begin{aligned}T>D:&\quad A\approx\frac{q\Phi a_L\alpha}{T-D}\\T<D:&\quad A\approx\sqrt{\frac{D-T}{K}}\end{aligned}$$</div></div>
+  <div><p>While tension wins, the bulge is proportional to the load. If voltage takes $T$ below $D$ the flat wing is unstable: static divergence, like $F>F_c$ in fibre buckling. Then stretching sets the bulge, whatever the load, and $A$ picks the side the air pushes. This is why the full membrane's lift change depends little on $\alpha$.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$T=D$</td><td>Divergence: the threshold</td><td>Equals $C_{T,crit}=1.727$ in 2D</td></tr><tr><td>$A=\sqrt{(D-T)/K}$</td><td>Compare $\frac{2}{k}\sqrt{(F-F_c)/(h_fE_f)}$ in your buckling model</td><td>Same form</td></tr></table></div></div>
+</div>
+<div class="row" id="A8">
+  <div><p class="step">8. Lift change, and the active fibre</p><div class="eq">$$\begin{aligned}\Delta L&=\sum_i\phi_i\big(C_{L,i}(V)-C_{L,i}(0)\big)\,qS\\F&=2C_1A_0(\lambda_d-\lambda_d^{-2})\\&\quad-\eta_f\varepsilon_0\varepsilon_r\frac{V^2}{H^2}A_0\frac{w_e}{w_s}\end{aligned}$$</div></div>
+  <div><p>Add up the panels. The rolled fibre must keep some force at full voltage, or the edge goes slack. This sets a minimum stretch: $\lambda_d$ of 1.054 at $\eta_f$ = 0.3, 1.073 at 0.4. It does not depend on thickness.</p><div class="tw"><table class="terms"><tr><th>Term</th><th>What it is</th><th>How to get it</th></tr><tr><td>$\phi_i,\ S$</td><td>Area share of each panel; wing area</td><td>0.54, 0.46; 33.3 cm²</td></tr><tr><td>$A_0$</td><td>Fibre section, $w_s(H+H_p)$</td><td>Mask and stack</td></tr><tr><td>$w_s,\ w_e$</td><td>Roll width; width with electrode</td><td>13 mm; 11 mm</td></tr><tr><td>$\eta_f$</td><td>Efficiency of the roll</td><td>0.4, bench, isometric</td></tr></table></div></div>
+</div>
+</section>
+
+<section class="card" id="example">
+  <h2>Worked example: full membrane at 4 m/s, 6°</h2>
+  <p>Every number below can be checked by hand from the steps above. Two active layers, so $H+H_p$ = 105 µm. $q$ = 9.8 Pa. Air load on the right of step 6: $q\Phi a_L\alpha$ = 1.54.</p>
   <div class="tw"><table>
-    <tr><th>Symbol</th><th>Meaning</th><th>Full membrane</th><th>Discrete DEAs</th><th>Source</th></tr>
-    <tr><td>$C_1$</td><td>Yeoh constant</td><td>42.8 kPa (P7670)</td><td>3.25 kPa, plus composite $E_x$, $E_y$</td><td>Bench fits</td></tr>
-    <tr><td>$H$, $H_p$</td><td>Dielectric, passive thickness</td><td>35 µm each, per ½D + D + ½D</td><td>Membrane 180 µm</td><td>$H$ not measured</td></tr>
-    <tr><td>$\eta$</td><td>Efficiency</td><td>0.5 (estimate)</td><td>0.4 ($\Delta F$ = 8.6 mN per DEA)</td><td>Bench for rolled; estimate for flat</td></tr>
-    <tr><td>$\eta_f$</td><td>Efficiency of the roll</td><td>0.4</td><td>–</td><td>Bench</td></tr>
-    <tr><td>$\lambda$</td><td>Pre-stretch</td><td>$\lambda_d$ = 1.08, $\lambda_n$ = 1.002</td><td>$\lambda_{pre}$ = 1.03</td><td>Design</td></tr>
-    <tr><td>$a$, $b$</td><td>Panels</td><td>40 × 46, 68 × 31 mm</td><td>104 × 46, 104 × 31 mm</td><td>Sketch geometry</td></tr>
-    <tr><td>$T_c$, $r$</td><td>Trailing-edge tension, load path</td><td>–</td><td>0.5 N, $r$ = 0.59; free: 0, 0</td><td>A8b</td></tr>
-    <tr><td>$a_L$</td><td>Lift slope</td><td colspan="2">3.71 per rad, both</td><td>Vortex lattice, flat wing</td></tr>
-    <tr><td>$k$, $\gamma$</td><td>Softening, stretching</td><td colspan="2">1.476, 0.7, both</td><td>Eq. S5; one fit</td></tr>
+    <tr><th>Quantity</th><th>Panel 1, 0 V</th><th>Panel 2, 0 V</th><th>Panel 1, 1.6 kV</th><th>Panel 2, 1.6 kV</th></tr>
+    <tr><td>Span tension $n_x$, N/m</td><td>2.54</td><td>2.31</td><td>1.25</td><td>1.25</td></tr>
+    <tr><td>Chord tension $n_y$, N/m</td><td>0.76</td><td>0.30</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>Stiffness $T$</td><td>4794</td><td>2009</td><td>1932</td><td>668</td></tr>
+    <tr><td>Softening $D$</td><td>536</td><td>795</td><td>536</td><td>795</td></tr>
+    <tr><td>State</td><td>Stable</td><td>Stable</td><td>Stable</td><td><b>Past divergence</b>: $T&lt;D$</td></tr>
+    <tr><td>Bulge $A$, mm</td><td>0.36</td><td>1.14</td><td>1.05</td><td>2.62</td></tr>
+    <tr><td>$C_L$ of the panel</td><td>0.44</td><td>0.62</td><td>0.53</td><td>0.91</td></tr>
+    <tr><td>Predicted resonance, no flow, Hz</td><td>65</td><td>42</td><td>41</td><td>24</td></tr>
   </table></div>
+  <p>Wing $C_L$ = 0.54 × panel 1 + 0.46 × panel 2: <b>0.52 at 0 V, 0.71 at 1.6 kV</b>. With $qS$ = 32.6 mN that is a lift change of 6.1 mN.</p>
+  <p class="note"><b>A cheap direct test.</b> Without flow, the resonance of a panel is $f=\tfrac12\sqrt{(n_x/a^2+n_y/b^2)/(\rho_m(H+H_p))}$ with $\rho_m$ about 1100 kg/m³. Tap or drive it with a speaker and read $f$ with a laser or camera. The measured fall with voltage gives $P$, and so $\eta$, on the real wing, with no tunnel needed.</p>
 </section>
 
-<section class="card" id="voltage">
-  <h2>Voltage</h2>
+<section class="card" id="plots">
+  <h2>What it predicts</h2>
+  <p>Graphs of the comparison itself, over the stroke, with speed and with $\eta$, are on the <a href="../">main page</a>. These show what controls it.</p>
+  <h3>Voltage</h3>
   <div class="fig"><img src="M4_voltage.png" alt="Lift against voltage for both wings, and tension resultants against voltage"></div>
   <ul class="read">
-    <li><b>Equation:</b> <a href="#A8">A8</a> for tension, <a href="#A3">A3</a> and <a href="#A7">A7</a> for lift.</li>
-    <li><b>Trend:</b> the full sheet's chord tension falls from 0.76 N/m to 0, and $n_x$ from 2.54 to 1.25 N/m. The discrete wing only drops from 1.68 to 1.26 N/m, because the passive membrane stays in parallel. The kink in the full membrane's lift near 0.6 kV is panel 2 reaching $n_y$ = 0, where it wrinkles and the drop halves (<a href="#A8">A8</a>).</li>
-    <li><b>Validate:</b> resonance frequency or deflection under a small known pressure at each voltage, which gives tension directly. Then camber by stereo video.</li>
+    <li><b>Equation:</b> steps <a href="#A3b">3b</a>, <a href="#A3c">3c</a> and <a href="#A6">6</a>.</li>
+    <li><b>Trend:</b> the full sheet's chord tension falls from 0.76 N/m to 0, and its span tension from 2.54 to 1.25 N/m. The discrete wing only falls from 1.68 to 1.26 N/m, because the passive membrane stays. The kink near 0.6 kV is panel 2 starting to wrinkle.</li>
+    <li><b>Validate:</b> resonance against voltage (<a href="#example">above</a>), then camber by stereo video.</li>
   </ul>
-</section>
-
-<section class="card" id="stretch">
-  <h2>Pre-stretch</h2>
+  <h3 id="stretch">Pre-stretch</h3>
   <div class="fig"><img src="M5_stretch.png" alt="Lift change against membrane pre-stretch for the discrete wing, and against stretch along the fibre for the full membrane"></div>
   <ul class="read">
-    <li><b>Equation:</b> $T$ from <a href="#A4">A4</a> and <a href="#A8">A8</a>; fibre limit from <a href="#A9">A9</a>.</li>
-    <li><b>Trend:</b> a stiffer sheet leaves voltage less to do. Discrete: 12.7, 7.5, 3.5, 1.8, 0.7 mN at $\lambda_{pre}$ = 1.00, 1.01, 1.02, 1.03, 1.05. Full: 9.8, 8.3, 6.0, 4.7, 3.7 mN at $\lambda_d$ = 1.05, 1.06, 1.08, 1.10, 1.12.</li>
-    <li><b>Active fibre:</b> below the limit (shaded for $\eta_f$ = 0.3, dotted for 0.4), its force reaches zero at 1.6 kV. So an active fibre costs lift: about 9.8 mN at 1.05 becomes 6.0 mN at the design value of 1.08, where the fibre keeps 2.1 mN.</li>
-    <li><b>Validate:</b> same wing design at three stretches, measured by printed markers. Near $\lambda_{pre}$ = 1.00 the model is unchecked, so look for flutter first.</li>
+    <li><b>Equation:</b> steps <a href="#A3a">3a</a>, <a href="#A4">4</a>, <a href="#A8">8</a>.</li>
+    <li><b>Trend:</b> a stiffer sheet leaves voltage less to do. Discrete: 12.7, 7.5, 3.5, 1.8, 0.7 mN at $\lambda_{pre}$ = 1.00, 1.01, 1.02, 1.03, 1.05. Full: 9.8, 8.3, 6.0, 4.7, 3.7 mN at $\lambda_d$ = 1.05, 1.06, 1.08, 1.10, 1.12. In b), the active fibre goes slack in the shaded zone ($\eta_f$ = 0.3) or left of the dotted line (0.4), so it costs lift.</li>
+    <li><b>Validate:</b> same design at three stretches, measured with markers. Near $\lambda_{pre}$ = 1.00, look for flutter first.</li>
   </ul>
-</section>
-
-<section class="card" id="tendon">
-  <h2>Trailing-edge tension, discrete wing</h2>
+  <h3 id="tendon">Trailing-edge tension, discrete wing</h3>
   <div class="fig"><img src="M6_tendon.png" alt="Load-path factor and lift change against trailing-edge tension"></div>
   <ul class="read">
-    <li><b>Equation:</b> <a href="#A8">A8b</a>.</li>
-    <li><b>Trend:</b> most of the gain comes early: 0.8, 1.5, 1.8, 1.9 mN at $T_c$ = 0.05, 0.2, 0.5, 1 N. At $\lambda_{pre}$ = 1.01: 2.8, 6.4, 7.5, 7.4 mN. About 0.2 N already gives most of it, which also loads the LE less.</li>
-    <li><b>Validate:</b> same wing with a continuous edge cord at set tensions, measured by a load cell in series with the line. A line at a single point does not do this: its tension fades within about 50–70 mm.</li>
+    <li><b>Equation:</b> step <a href="#A3c">3c</a>.</li>
+    <li><b>Trend:</b> most of the gain comes early: 0.8, 1.5, 1.8, 1.9 mN at $T_c$ = 0.05, 0.2, 0.5, 1 N. At $\lambda_{pre}$ = 1.01: 2.8, 6.4, 7.5, 7.4 mN. About 0.2 N gives most of it, which also loads the LE less.</li>
+    <li><b>Validate:</b> continuous edge cord at set tensions, with a load cell in the line. A line at one point does not do this: its tension fades within about 50–70 mm.</li>
   </ul>
 </section>
 
-<section class="card" id="check">
-  <h2>How far to trust it</h2>
+<section class="card" id="limits">
+  <h2>Where it fails, and what to do</h2>
+  <p>Up to about 5 m/s, the model agrees with the detailed models where they can be compared: mean lift change 8.0 against 8.4 mN (finite elements, one layer), and 1.95 against 1.83 mN (section model, discrete wing). Four situations are different.</p>
+  <div class="tw"><table>
+    <tr><th>Where</th><th>Why it fails</th><th>What to do</th></tr>
+    <tr id="flip"><td><b>Mid-upstroke, 240–300°, at 2 Hz</b></td><td>The stroke takes the outer panel's angle through zero. Past divergence, the panel can sit on either side, so the state depends on its history. This model flips it at voltage; the finite elements flip it at 0 V. Neither includes the dynamics of a flip.</td><td><b>Avoid it:</b> keep the angle positive, $\alpha&gt;\arctan(\Phi_0\,2\pi f\,r/U)$. At 4 m/s and 2 Hz that is 7°: at 8° pitch the flip is gone (below). Or fly at 1.5 Hz or less. <b>To model it:</b> add the panel's dynamics, and film it.</td></tr>
+    <tr><td><b>Above about 5 m/s</b></td><td>High air load, so the bulge is large and the uniform-load, one-shape picture is stretched. Over-predicts by 1.7× at 6 m/s on the discrete wing. Attached flow also becomes doubtful.</td><td>Refit $k$ and $\gamma$ to tunnel data. If it stays off, add a second chord shape.</td></tr>
+    <tr><td><b>More active layers, or panel shape</b></td><td>One shape cannot represent a wrinkled sheet: the finite elements rise from 8.5 to 18.8 mN from 1 to 6 layers, this model stays nearly flat. Batten position is not captured either.</td><td>Use the <a href="../full_membrane/#design-study">finite-element design study</a> for these. Test one against two layers.</td></tr>
+    <tr><td><b>Very low tension, $\lambda_{pre}$ near 1.00; active fibre near slack</b></td><td>Fibre and edge are assumed to hold the trailing edge. As their force falls, they stop doing so, and a slack sheet can flutter, which no steady model shows. Finite-element runs with an active fibre mostly did not converge.</td><td>Stay above the fibre limit. Build one active-fibre panel, measure edge motion, and add edge motion to the model if it matters.</td></tr>
+  </table></div>
+  <div class="fig" style="margin-top:12px"><img src="M8_pitch.png" alt="Lift change over the stroke at three mean pitch angles, and the pitch needed to avoid the flip against speed"></div>
+  <ul class="read">
+    <li><b>Equation:</b> $\alpha_{eff}=\alpha-\arctan(\Omega r/U)$ stays above 0 at the outer panel's radius, $r$ = 75 mm, with $\Omega_{max}=\Phi_0 2\pi f$ and $\Phi_0$ = 30°.</li>
+    <li><b>Trend:</b> a) at 6° the panel flips; at 8° and 10° lift change stays near 6.3–6.6 mN all round the stroke. b) The needed pitch grows with frequency and falls with speed.</li>
+    <li><b>Validate:</b> flapping at 2 Hz and 4 m/s, pitch 6° then 8°, high-speed video of the outer panel near mid-upstroke.</li>
+  </ul>
+  <h3>Comparison with the detailed models</h3>
   <div class="fig"><img src="M7_check.png" alt="Lift change against active layers, and this model against the finite elements for all converged cases"></div>
   <ul class="read">
-    <li><b>Equation:</b> <a href="#A3">A3</a> against the detailed models, with the reference cases' stretch and layers, at their $\eta$ = 0.4 and passive fibre.</li>
-    <li><b>Trend:</b> a) the model <b>misses the benefit of more layers</b>: it stays nearly flat, while the finite elements rise from 8.5 to 18.8 mN. One bulge shape cannot represent the wrinkled sheet. b) Across 40 cases, correlation 0.73, rms error 3.3 mN.</li>
-    <li><b>Validate:</b> build one and two active layers at the same stretch, the cheapest way to settle this.</li>
+    <li><b>Equation:</b> step <a href="#A6">6</a> at the detailed models' $\eta$ = 0.4 and passive fibre.</li>
+    <li><b>Trend:</b> a) misses the benefit of layers. b) Across 40 cases: correlation 0.73, typical error 3.3 mN.</li>
+    <li><b>Validate:</b> ultimately against measurements, since these are models too.</li>
   </ul>
-  <div class="tw" style="margin-top:10px"><table>
-    <tr><th>Check</th><th>Reference</th><th>This model</th></tr>
-    <tr><td>Exact divergence limit, 2D</td><td>$C_{T,crit}$ = 1.727</td><td>1.727 (sets $k$)</td></tr>
-    <tr><td>Small-load amplitude</td><td>Closed form of A3</td><td>Agrees to 1 part in 10⁵</td></tr>
-    <tr><td>One layer, $\lambda_d$ = 1.05, cycle mean, 4 m/s</td><td>8.4 mN (finite elements, leaving out 240–300°; 9.2 mN with them)</td><td>8.0 mN (leaves out 240–300°)</td></tr>
-    <tr><td>Rigid-edge discrete, cycle mean, 3 and 4 m/s</td><td>0.4, 1.8 mN (section model)</td><td>0.5, 2.0 mN</td></tr>
-    <tr><td>Same, 6 m/s</td><td>9.4 mN (section model)</td><td>16.3 mN: over-predicts</td></tr>
-    <tr><td>$C_L$ at 0 V, 40 cases</td><td>Finite elements</td><td>rms error 0.035</td></tr>
-    <tr><td>$C_L$ at 1.6 kV, 40 cases</td><td>Finite elements</td><td>rms error 0.105</td></tr>
-    <tr><td>Batten position, 18 cases, an earlier version</td><td>Finite elements</td><td>Correlation 0.30: <b>not captured</b></td></tr>
-  </table></div>
-  <p><b>Use it for:</b> comparing wings, and trends in tension, pre-stretch, $\eta$ and speed up to about 5 m/s. <b>Do not use it for:</b> number of layers, panel shape, the flip near zero angle, or flutter.</p>
-  <p class="note">The trailing edge is assumed held by its fibre. With the fibre force dropping at voltage, that gets weaker: finite-element runs with an active fibre mostly did not converge (18 of 19 cases, the one exception being 6.8 mN at one layer, $\lambda_d$ = 1.12). So the active fibre is the least checked part of this comparison. The bench evidence from the <a href="../full_membrane/#bench">vocal cord device</a> shows a threshold in voltage of this kind.</p>
 </section>
 <div class="two">
   <a class="go" href="../"><b>← The comparison</b></a>
-  <a class="go" href="../full_membrane/"><b>Full membrane →</b><br>How to build it, masks, design study.</a>
+  <a class="go" href="../manufacturing/"><b>Manufacturing →</b><br>Stack, masks, process and checks.</a>
 </div>
 </div>
 <script>

@@ -93,9 +93,9 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <h2>Over the stroke</h2>
   <div class="fig"><img src="model/M1_stroke.png" alt="Lift and lift change over a flap cycle for each wing at 4 m/s, 2 Hz"></div>
   <ul class="read">
-    <li><b>Equation:</b> <a href="model/#A3">A3</a> at each phase, with $\alpha_{eff}=\alpha-\arctan(\Omega r/U)$ and $q_{eff}=\tfrac12\rho(U^2+\Omega^2r^2)$ at each panel's radius.</li>
+    <li><b>Equation:</b> <a href="model/#A6">step 6</a> at each phase, with $\alpha_{eff}=\alpha-\arctan(\Omega r/U)$ and $q_{eff}=\tfrac12\rho(U^2+\Omega^2r^2)$ at each panel's radius.</li>
     <li><b>Trend:</b> a discrete wing changes lift most in the downstroke (2.6 mN) and least in the upstroke (0.5 mN), because its camber follows the load. The full membrane is nearly constant at 6 mN, because voltage removes most of its chord tension whatever the load.</li>
-    <li><b>Not reliable from 240° to 300°:</b> the outer panel's angle crosses zero. This model flips the panel at voltage; the <a href="full_membrane/#performance">finite elements</a> flip it at 0 V. Left out of the means.</li>
+    <li><b>Hatched, 240° to 300°, not reliable:</b> the outer panel's angle crosses zero, and it can flip to either side. Left out of the means. Raising the pitch to 8° avoids it: <a href="model/#flip">why, and how</a>.</li>
     <li><b>Validate:</b> high-speed video and force over a cycle, 0 V and 1.6 kV, same wing. Look for a flat lift change against phase on the full membrane, and for snap-through near 270°.</li>
   </ul>
 </section>
@@ -104,7 +104,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <h2>With speed</h2>
   <div class="fig"><img src="model/M2_speed.png" alt="Cycle-mean lift change and the ratio between the two wings against flow speed"></div>
   <ul class="read">
-    <li><b>Equation:</b> <a href="model/#A3">A3</a>, with softening $D\propto q$ (<a href="model/#A5">A5</a>).</li>
+    <li><b>Equation:</b> <a href="model/#A6">step 6</a>, where softening $D$ grows with $q$.</li>
     <li><b>Trend:</b> the discrete wing needs high $q$ to act, because its tension stays high: $T$ falls by only 25 % at voltage. The full membrane loses all its chord tension, so it responds at low speed. The ratio falls from about 4.6× at 3 m/s to 3.3× at 4 m/s.</li>
     <li><b>Validate:</b> static section in the tunnel, 3, 4, 5, 6 m/s, randomised, with a sham. Above 5 m/s (shaded) the model over-predicts, by about 1.7× on a rigid-edge discrete wing at 6 m/s.</li>
   </ul>
@@ -114,19 +114,20 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <h2>With actuator efficiency</h2>
   <div class="fig" style="max-width:560px"><img src="model/M3_eta.png" alt="Cycle-mean lift change against actuator efficiency for both wings"></div>
   <ul class="read">
-    <li><b>Equation:</b> $P=\eta\chi\varepsilon_0\varepsilon_r(V/H)^2(H+H_p)$ (<a href="model/#A8">A8</a>); for discrete DEAs, $\Delta F\propto\eta$.</li>
+    <li><b>Equation:</b> $P=\eta\chi\varepsilon_0\varepsilon_r(V/H)^2(H+H_p)$ (<a href="model/#A3b">step 3b</a>); for discrete DEAs, $\Delta F\propto\eta$.</li>
     <li><b>Trend:</b> full membrane 3.4, 4.1, 5.2, 8.0 mN at $\eta$ = 0.15, 0.24, 0.40, 0.70. Discrete 0.5, 0.9, 1.8, 4.0 mN. The sheet is estimated at 0.5, higher than a roll because it has no rolled air gaps.</li>
     <li><b>Validate:</b> flat strip of the real stack on the texture analyser, isometric, held at 1.6 kV. This is the cheapest and most useful next measurement.</li>
   </ul>
 </section>
 
 <div class="two">
-  <a class="go" href="model/"><b>The model →</b><br>Equations in your notation, one script, and how it compares with the detailed models.</a>
+  <a class="go" href="model/"><b>The model →</b><br>Step by step, with every term explained, and one script to run.</a>
   <a class="go" href="full_membrane/"><b>Full membrane →</b><br>How to build it, masks, design study.</a>
 </div>
 <div style="height:18px"></div>
 <div class="two">
   <a class="go" href="plagiopatagiales/"><b>Plagiopatagiales →</b><br>Observations from the tested wings, and the load-path finding.</a>
+  <a class="go" href="manufacturing/"><b>Manufacturing →</b><br>Stack, masks, process steps and checks, with schematics.</a>
 </div>
 </div>
 <script>

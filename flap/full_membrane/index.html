@@ -65,7 +65,7 @@ ul.read li{margin:.25em 0}
   </div>
   <ul>
     <li><b>Tension the sheet before bonding.</b> Pulling only on the fibre tips, or using only a line on a flat sheet, leaves much of it slack or wrinkled.</li>
-    <li><b>The rolled fibre is active and part of the sheet</b>, with contacts at its two ends. To keep its tension at 1.6 kV it needs $\lambda_d$ of about 1.07 or more (<a href="../model/#A9">A9</a>).</li>
+    <li><b>The rolled fibre is active and part of the sheet</b>, with contacts at its two ends. To keep its tension at 1.6 kV it needs $\lambda_d$ of about 1.07 or more (<a href="../model/#A8">step 8</a>).</li>
     <li><b>Keep some chord tension.</b> It lowers baseline camber and keeps the full actuator force.</li>
     <li><b>Best shape found, in the finite elements:</b> batten tip at $x$ ≈ 70 mm, chord 41 mm.</li>
   </ul>
@@ -73,6 +73,7 @@ ul.read li{margin:.25em 0}
 
 <section id="build" class="card">
   <h2>How to build it</h2>
+  <p>Full details, with schematics and checks at each stage, are on the <a href="../manufacturing/">manufacturing page</a>.</p>
   <ol>
     <li><b>Make the sheet.</b> Pattern both electrodes with the <a href="#masks">masks</a>. The active area stops at the fibre line.</li>
     <li><b>Roll the strip</b> while the sheet is flat. Each end of the fibre is one contact. No gluing: the fibre is part of the sheet, and this also avoids extra connections.</li>
@@ -109,7 +110,7 @@ ul.read li{margin:.25em 0}
     <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
     <tr><td>Active layers</td><td>2 on each panel (1 if weight is critical)</td><td><a href="#design-study">Design study</a></td></tr>
     <tr><td>Batten tip, chord line</td><td>$x$ = 70 mm, $y$ = 47.5 mm (chord 41 mm), area 32.7 cm², mass 520 mg</td><td><a href="#design-study">Design study</a></td></tr>
-    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>1.08, so the active fibre keeps tension at 1.6 kV</td><td><a href="../model/#A9">A9</a></td></tr>
+    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>1.08, so the active fibre keeps tension at 1.6 kV</td><td><a href="../model/#A8">step 8</a></td></tr>
     <tr><td>Stretch across the fibre, $\lambda_n$</td><td>1.002 (natural necking + 0.04)</td><td><a href="#performance">Sweep</a></td></tr>
     <tr><td>Strip to roll, as cut, $w_s$</td><td>13 mm</td><td>Coater limit</td></tr>
     <tr><td>Film stack</td><td>½D + E + D + E + ½D (D dielectric, E electrode), $H$ = 35 µm, $H_m$ = 70 µm, $\chi$ = 0.5</td><td>Your stack; $H$ not measured</td></tr>
@@ -158,10 +159,10 @@ ul.read li{margin:.25em 0}
   <p>This section holds the detailed finite-element results, used to check <a href="../model/">the analytical model</a> and to study what it cannot, such as layers and shape. They use one active layer at $\lambda_d$ = 1.05 and $\eta$ = 0.4, with a passive fibre, because the active-fibre runs mostly did not converge.</p>
   <div class="valfig"><img src="validation/F_final.png" alt="Lift against voltage and angle of attack, lift change against angle, film stack, stretch errors and LE rod">
   <p class="cap"><b>Prediction</b> (chosen design; rigid frame unless stated; attached flow). a) $C_L$ against $V$, close to $V^2$. b) $C_L(\alpha)$ at 0 V and 1.6 kV. c) $\Delta C_L(\alpha)$. d) $\Delta C_L$ against $\eta$ for three film stacks; only converged cases are shown. e) $\Delta C_L$ against errors in $\lambda_d$ and $\lambda_n$. f) $\Delta C_L$ with an elastic frame; a 1 mm solid rod reached no steady state and is omitted.</p></div>
-  <ul class="read"><li><b>Equation:</b> Eqs. F3, F6, F9; closed form in <a href="../model/#A3">A3</a>.</li><li><b>Trend:</b> $C_L$ rises close to $V^2$; lift change depends little on $\alpha$ and changes sign with it; a rod of 2 mm or more behaves as rigid.</li><li><b>Validate:</b> $C_L(\alpha)$ at 3–6 m/s, 0 V and 1.6 kV; tip deflection of the rod by camera.</li></ul>
+  <ul class="read"><li><b>Equation:</b> Eqs. F3, F6, F9; closed form in <a href="../model/#A6">step 6</a>.</li><li><b>Trend:</b> $C_L$ rises close to $V^2$; lift change depends little on $\alpha$ and changes sign with it; a rod of 2 mm or more behaves as rigid.</li><li><b>Validate:</b> $C_L(\alpha)$ at 3–6 m/s, 0 V and 1.6 kV; tip deflection of the rod by camera.</li></ul>
   <div class="valfig"><img src="validation/F_shape.png" alt="Out-of-plane deflection maps at 0 V and 1.6 kV and chordwise sections through each panel">
   <p class="cap"><b>Prediction</b> at 4 m/s, 6°. a–b) Deflection $w$ at 0 V and 1.6 kV. c–d) Chordwise sections. Under voltage the largest change sits in the middle of panel 2, and panel 1 forms a second bulge near its fibre, where chord tension has relaxed.</p></div>
-  <ul class="read"><li><b>Equation:</b> Eq. F3 with Eq. F9 as the load; one-shape version in <a href="../model/#A1">A1</a>.</li><li><b>Trend:</b> Voltage about doubles the bulge in both panels, largest mid-panel 2.</li><li><b>Validate:</b> Stereo video with a speckle pattern, compared section by section.</li></ul>
+  <ul class="read"><li><b>Equation:</b> Eq. F3 with Eq. F9 as the load; one-shape version in <a href="../model/#A2">step 2</a>.</li><li><b>Trend:</b> Voltage about doubles the bulge in both panels, largest mid-panel 2.</li><li><b>Validate:</b> Stereo video with a speckle pattern, compared section by section.</li></ul>
   <details><summary>Design sweep: which stretches</summary>
   <div class="valfig"><img src="validation/F_sweep.png" alt="Lift change and baseline lift against across-fibre stretch at 3, 4 and 6 m/s">
   <p class="cap"><b>Prediction</b> at $\alpha$ = 6°, $\eta$ = 0.4. Top: $\Delta C_L$ at 1.6 kV against stretch above necking. Crosses at zero mark cases with no converged state at voltage, not zero lift change. Bottom: $C_L$ at 0 V. Chord tension lowers the baseline, so voltage has more range to work with.</p></div>
@@ -185,7 +186,7 @@ ul.read li{margin:.25em 0}
   <p>An earlier vocal cord device uses the same architecture: two rolled fibres, about 32 mm long, each on its own flat active sheet in a ring of about 40 mm. No flow, 1 Hz drive, high-speed video from above.</p>
   <div class="valfig"><img src="validation/F_vocal.png" alt="Fibre motion against voltage with a V squared reference, with the buckling law fit, and motion over time at 1.8 kV">
   <p class="cap">a) <b>Observation.</b> Motion at mid-length against voltage. Dotted: $V^2$ scaled from 1 kV. b) <b>Hypothesis.</b> A fibre that has lost its pre-strain buckles as an arc, $h=L_f\sqrt{3\varepsilon/8}$, with $\varepsilon$ the excess length, $\propto V^2$ beyond a threshold. Two free parameters on five points per fibre. c) <b>Observation.</b> Motion at mid-length at 1.8 kV. Data: <a href="validation/vocal_cords_data.json">vocal_cords_data.json</a>, <a href="validation/vocal_cords_fit.json">vocal_cords_fit.json</a>, code: <a href="vocal_cords.py">vocal_cords.py</a>.</p></div>
-  <ul class="read"><li><b>Equation:</b> $A=L_f\sqrt{3\varepsilon/8}$, $\varepsilon\propto V^2$ past a threshold, the same form as <a href="../model/#A6">A6</a>.</li><li><b>Trend:</b> Small motion below about 1.4 kV, then a jump, 3–5× above $V^2$ at 1.8 kV.</li><li><b>Validate:</b> Repeat with a recorded voltage trace and a side view, at known stretch, so threshold and $\eta_f$ can be tested against <a href="../model/#A9">A9</a>.</li></ul>
+  <ul class="read"><li><b>Equation:</b> $A=L_f\sqrt{3\varepsilon/8}$, $\varepsilon\propto V^2$ past a threshold, the same form as <a href="../model/#A7">step 7</a>.</li><li><b>Trend:</b> Small motion below about 1.4 kV, then a jump, 3–5× above $V^2$ at 1.8 kV.</li><li><b>Validate:</b> Repeat with a recorded voltage trace and a side view, at known stretch, so threshold and $\eta_f$ can be tested against <a href="../model/#A8">step 8</a>.</li></ul>
   <ul>
     <li><b>What it supports:</b> a flat active sheet with a rolled edge can be made and driven repeatedly up to 1.8 kV. It moved up to 2 mm, far above the ≤ 0.2 mm seen on the FAAV wing without flow. Above about 1.4–1.6 kV the sheet visibly wrinkles and the motion jumps, 3–5× above $V^2$ at 1.8 kV, so pre-tension can be exhausted.</li>
     <li><b>What it does not show:</b> anything about lift. There is no flow, no force, and one device; thickness, pre-stretch and strip width were not recorded. The view from above mixes in-plane and out-of-plane motion, and the voltage trace was not recorded, so "on" is taken as the wrinkled state.</li>
