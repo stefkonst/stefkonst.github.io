@@ -1,5 +1,6 @@
 """Electrode masks from the model: reference outline = F^-1 (tensioned planform), on the 114 mm plates of mask_2partwing.svg.
-Active area stops at the fibre line, so the rolled strip stays passive: in the strip each electrode covers one half of the length.
+Contacts as in the original mask: electrodes A and B run into opposite ends of the strip. Between the end tabs the strip has no electrode, so the rolled
+fibre stays passive. The additional fibres (rectangles of the original mask, same size, A and B offset along their length) sit beside each panel.
 Run: python masks.py [lam_d] [dn] [w_s_mm] -> masks/mask_2partwing_model.svg, masks/mask_numbers.json"""
 import json, math, os, re, sys
 import xml.etree.ElementTree as ET
@@ -15,8 +16,11 @@ OUT = os.path.join(HERE, "masks"); os.makedirs(OUT, exist_ok=True)
 LAYER = np.array([63.002573, 44.99419])                       # layer translate of the source file
 CENTRES = {("tip", "A"): (58.15, 91.25), ("tip", "B"): (174.2, 89.75), ("root", "A"): (57.15, 209.5), ("root", "B"): (172.6, 209.25)}   # plate centres, from the holes
 OLD = {("root", "A"): "path3", ("root", "B"): "path3-4", ("tip", "A"): "path4", ("tip", "B"): "path4-1"}
-M_LE, M_SEAM, M_ROOT, M_STRIP, GAP = 2.0, 1.5, 1.5, 1.0, 4.0  # passive margins (mm): LE bond, batten, root rib, strip edge and ends; gap between strip electrodes
+M_LE, M_SEAM, M_ROOT, M_STRIP = 2.0, 1.5, 1.5, 1.0   # passive margins (mm): LE bond, batten, root rib, strip edge
+TAB = 4.8                                             # contact tab along the fibre (mm), as in the original mask
 COATER = 60.0
+EXTRA = {"root": dict(L=36.9, w=20.6, off=3.0), "tip": dict(L=40.0, w=16.3, off=3.0)}   # additional fibres: length, width, A-B offset (mm)
+FIB_GAP = 2.0                                         # clearance between a panel's outline and its additional fibre
 
 
 def inset(poly, a, b, m, inside):
@@ -55,12 +59,25 @@ def design_panel(w, k, lam_note=None):
         p = lambda ss, tt: a + ue * ss + ne * tt
         return Polygon([p(s0, 0), p(s1, 0), p(s1, wd - M_STRIP), p(s0, wd - M_STRIP)])
 
-    half_a = rect(M_STRIP, 0.5 * (L - GAP))
-    half_b = rect(0.5 * (L + GAP), L - M_STRIP)
-    # electrode A = active + strip half A, electrode B = active + strip half B
+    half_a = rect(0.0, TAB)
+    half_b = rect(L - TAB, L)
+    # electrode A = active + tab at the start of the fibre, electrode B = active + tab at its end
     ea, eb = unary_union([act.buffer(1e-3), half_a.buffer(1e-3)]), unary_union([act.buffer(1e-3), half_b.buffer(1e-3)])
     corners = np.r_[s2, st2]
-    return dict(sheet=s2, strip=st2, active=act, A=ea, B=eb, half_a=half_a, half_b=half_b,
+    # additional fibre: long axis across the coater width, placed past the panel along the fibre direction; the group is recentred on the plate
+    name = "root" if k == 0 else "tip"
+    ex = EXTRA[name]
+    xmax = float(np.r_[s2, st2][:, 0].max()) + FIB_GAP
+    ycen = float(0.5 * (np.r_[s2, st2][:, 1].min() + np.r_[s2, st2][:, 1].max()))
+    fib = lambda d: Polygon([(xmax, ycen - ex["L"] / 2 + d), (xmax + ex["w"], ycen - ex["L"] / 2 + d), (xmax + ex["w"], ycen + ex["L"] / 2 + d), (xmax, ycen + ex["L"] / 2 + d)])
+    fa, fb = fib(-ex["off"] / 2), fib(ex["off"] / 2)
+    shift = -0.5 * (float(np.r_[s2, st2][:, 0].min()) + xmax + ex["w"])
+    from shapely.affinity import translate
+    tr = lambda g: translate(g, shift, 0.0)
+    ea, eb, act, half_a, half_b, fa, fb = tr(ea), tr(eb), tr(act), tr(half_a), tr(half_b), tr(fa), tr(fb)
+    s2, st2 = s2 + [shift, 0.0], st2 + [shift, 0.0]
+    corners = np.r_[s2, st2]
+    return dict(sheet=s2, strip=st2, active=act, A=ea, B=eb, half_a=half_a, half_b=half_b, fibre_A=fa, fibre_B=fb,
                 width=float(np.ptp(corners[:, 1])), length=float(np.ptp(corners[:, 0])), angle_deg=float(math.degrees(ang)),
                 active_area=float(act.area), fibre_ref=float(L), fibre_target=float(np.linalg.norm(w.x0[w.fib[k][-1]] - w.x0[w.fib[k][0]]) * 1e3))
 
@@ -89,23 +106,23 @@ def main(lam_d=1.03, dn=0.01, w_s=16.5, theta=14.0):
                 parent.remove(e)
                 kept.append(e.get("id"))
     for (name, elec), oldid in OLD.items():
-        poly = P[name][elec]
         cen = np.array(CENTRES[(name, elec)]) + LAYER
-        moved = Polygon(np.array(poly.exterior.coords) + cen)
-        e = ET.SubElement(layer, f"{ns}path")
-        e.set("id", f"model_{name}_{elec}")
-        e.set("style", "fill:none;stroke:#000000;stroke-width:0.0746456;stroke-opacity:1")
-        e.set("d", path_d(moved))
+        for tag, poly in ((f"model_{name}_{elec}", P[name][elec]), (f"model_{name}_{elec}_additional_fibre", P[name]["fibre_" + elec])):
+            moved = Polygon(np.array(poly.exterior.coords) + cen)
+            e = ET.SubElement(layer, f"{ns}path")
+            e.set("id", tag)
+            e.set("style", "fill:none;stroke:#000000;stroke-width:0.0746456;stroke-opacity:1")
+            e.set("d", path_d(moved))
     fn = os.path.join(OUT, "mask_2partwing_model.svg")
     tree.write(fn, xml_declaration=True, encoding="UTF-8")
-    rep = dict(lam_d=lam_d, lam_n=ln, dn=dn, w_s_mm=w_s, theta_deg=theta, margins_mm=dict(LE=M_LE, batten=M_SEAM, root=M_ROOT, strip=M_STRIP, gap=GAP), removed_from_source=kept)
+    rep = dict(lam_d=lam_d, lam_n=ln, dn=dn, w_s_mm=w_s, theta_deg=theta, margins_mm=dict(LE=M_LE, batten=M_SEAM, root=M_ROOT, strip=M_STRIP), tab_mm=TAB, replaced_in_source=kept)
     for k, v in P.items():
         rep[k] = dict(width_mm=v["width"], length_mm=v["length"], rotation_deg=v["angle_deg"], active_area_mm2=v["active_area"], fibre_as_cut_mm=v["fibre_ref"], fibre_tensioned_mm=v["fibre_target"],
-                      fits_coater=bool(v["width"] <= COATER), sheet_mm=v["sheet"].tolist(), strip_mm=v["strip"].tolist(), A=np.array(v["A"].exterior.coords).tolist(), B=np.array(v["B"].exterior.coords).tolist(),
+                      fits_coater=bool(v["width"] <= COATER), total_length_with_fibre_mm=float(unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).bounds[2] - unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).bounds[0]), hole_clearance_mm=float(min(unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).distance(Polygon([(hx - 0.8, hy - 0.8), (hx + 0.8, hy - 0.8), (hx + 0.8, hy + 0.8), (hx - 0.8, hy + 0.8)])) for hx, hy in ((0, -49.4), (49.4, 0), (0, 49.4), (-49.4, 0)))), tab_A=np.array(v["half_a"].exterior.coords).tolist(), tab_B=np.array(v["half_b"].exterior.coords).tolist(), fibre_A=np.array(v["fibre_A"].exterior.coords).tolist(), fibre_B=np.array(v["fibre_B"].exterior.coords).tolist(), sheet_mm=v["sheet"].tolist(), strip_mm=v["strip"].tolist(), A=np.array(v["A"].exterior.coords).tolist(), B=np.array(v["B"].exterior.coords).tolist(),
                       active=np.array(v["active"].exterior.coords).tolist())
     json.dump(rep, open(os.path.join(OUT, "mask_numbers.json"), "w"), indent=1)
     for k in ("root", "tip"):
-        print(k, {a: (round(b, 2) if isinstance(b, float) else b) for a, b in rep[k].items() if a not in ("sheet_mm", "strip_mm", "A", "B", "active")})
+        print(k, {a: (round(b, 2) if isinstance(b, float) else b) for a, b in rep[k].items() if a not in ("sheet_mm", "strip_mm", "A", "B", "active", "tab_A", "tab_B", "fibre_A", "fibre_B")})
     print("removed:", kept)
     return rep
 

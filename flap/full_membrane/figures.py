@@ -133,18 +133,31 @@ def fig_shape():
 
 def fig_masks():
     Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers.json")))
-    fig, ax = plt.subplots(1, 2, figsize=(9.5, 4.8))
-    for a, k, ttl in ((ax[0], "root", "Panel 1"), (ax[1], "tip", "Panel 2")):
+    fig, ax = plt.subplots(1, 2, figsize=(10.5, 4.7))
+    labels = dict(root=("Root end", "Batten tip"), tip=("Batten tip", "Wing tip, next to the LE"))
+    for a, k, ttl in ((ax[0], "root", "Panel 1 (inboard)"), (ax[1], "tip", "Panel 2 (outboard)")):
         q = Mk[k]
-        ac = np.array(q["active"]); a.fill(ac[:, 0], ac[:, 1], color=PS.MATLAB[4], alpha=0.25, label="Active overlap")
-        A, B = np.array(q["A"]), np.array(q["B"])
-        a.plot(A[:, 0], A[:, 1], color=PS.OFF, label="Electrode A")
-        a.plot(B[:, 0], B[:, 1], color=PS.ON, ls="--", label="Electrode B")
-        s = np.array(q["sheet_mm"] + q["sheet_mm"][:1]); a.plot(s[:, 0], s[:, 1], "k:", lw=0.8, label="Tensioned frame, as cut")
-        st = np.array(q["strip_mm"] + q["strip_mm"][:1]); a.plot(st[:, 0], st[:, 1], color="0.5", lw=0.8, label="Strip to roll")
-        a.set_aspect("equal"); a.set(xlabel="mm", ylabel="mm", title=f"{ttl}: {q['width_mm']:.1f} x {q['length_mm']:.1f} mm")
-    ax[0].legend(fontsize=6)
-    PS.finish(ax); save(fig, "F_masks")
+        ac = np.array(q["active"]); a.fill(ac[:, 0], ac[:, 1], color=PS.MATLAB[4], alpha=0.25, label="Active area (A and B overlap)")
+        s_ = np.array(q["sheet_mm"] + q["sheet_mm"][:1]); a.plot(s_[:, 0], s_[:, 1], "k:", lw=0.8, label="Frame line, as cut")
+        st = np.array(q["strip_mm"] + q["strip_mm"][:1]); a.plot(st[:, 0], st[:, 1], color="0.45", lw=0.9, label="Strip rolled into the fibre (passive)")
+        tA, tB = np.array(q["tab_A"]), np.array(q["tab_B"])
+        a.fill(tA[:, 0], tA[:, 1], color=PS.OFF, alpha=0.6, label="Contact A")
+        a.fill(tB[:, 0], tB[:, 1], color=PS.ON, alpha=0.6, label="Contact B")
+        fa, fb = np.array(q["fibre_A"]), np.array(q["fibre_B"])
+        a.plot(fa[:, 0], fa[:, 1], color=PS.OFF, lw=0.9, label="Additional fibre, A")
+        a.plot(fb[:, 0], fb[:, 1], color=PS.ON, lw=0.9, ls="--", label="Additional fibre, B")
+        ym = float(np.mean(tA[:, 1]))
+        a.text(tA[:, 0].mean(), np.max(st[:, 1]) + 1.2, labels[k][0], ha="center", va="top", fontsize=7)
+        a.text(tB[:, 0].mean(), np.max(st[:, 1]) + 1.2, labels[k][1], ha="center", va="top", fontsize=7)
+        le_ = np.array(q["sheet_mm"])[:2]
+        ang = np.degrees(np.arctan2(le_[1, 1] - le_[0, 1], le_[1, 0] - le_[0, 0]))
+        a.text(le_[:, 0].mean(), le_[:, 1].mean() - 1.2, "Leading edge", ha="center", va="bottom", fontsize=7, rotation=-ang, rotation_mode="anchor")
+        a.set_aspect("equal"); a.invert_yaxis(); a.set(xlabel="mm", ylabel="mm", title=f"{ttl}: {q['width_mm']:.1f} mm wide")
+    PS.finish(ax)
+    h_, l_ = ax[0].get_legend_handles_labels()
+    fig.tight_layout(rect=(0, 0.1, 1, 1))
+    fig.legend(h_, l_, loc="lower center", ncol=4, fontsize=7.5)
+    fig.savefig(os.path.join(V, "F_masks.png")); plt.close(fig)
 
 
 def fig_flap():
@@ -198,7 +211,40 @@ def fig_flap():
     d = np.round(dl("full_4_2"), 1); print("full_4_2 dL by phase", d.tolist(), "alpha tip", np.round(C["full_4_2"]["alpha_tip"], 1).tolist())
 
 
+def fig_main():
+    """The comparison alone, for the main page."""
+    import glob
+    F = load("flap_compare")
+    for fn in glob.glob(os.path.join(V, "flap_compare_*.json")):
+        F["cases"].update(json.load(open(fn))["cases"])
+    C = F["cases"]
+    X = np.r_[np.array(F["phases"]), 360.0]
+    close = lambda y: np.r_[y, y[0]]
+    r = load("flap_compare_section")["r_free_te"]
+    d = lambda k: np.array(C[k]["L1"], float) - np.array(C[k]["L0"], float)
+    plt.rcParams.update({"font.size": 11, "axes.labelsize": 11, "legend.fontsize": 9.5})
+    fig, ax = plt.subplots(1, 2, figsize=(10.5, 4.0))
+    a = ax[0]
+    a.axvspan(0, 180, color="0.93", zorder=0)
+    a.text(90, 15.6, "Downstroke", ha="center", fontsize=9, color="0.35"); a.text(270, 0.9 + 15.0 - 0.3, "Upstroke", ha="center", fontsize=9, color="0.35")
+    a.plot(X, close(d("full_4_2")), "o-", color=PS.MATLAB[0], label="Full membrane")
+    a.plot(X, close(d("old_4_2")), "o-", color=PS.MATLAB[1], label="Discrete DEAs, ideal rigid trailing edge")
+    a.plot(X, close(r * d("old_4_2")), "k-.", label="Discrete DEAs, free trailing edge (estimate)")
+    a.set(xlabel=r"Flap phase $\varphi$ in °", ylabel=r"Lift change $\Delta L$ in mN", xlim=(0, 360), ylim=(-0.5, 17)); a.legend(loc="center right", bbox_to_anchor=(1.0, 0.31))
+    a = ax[1]
+    rows = [("3 m/s", "3_2"), ("4 m/s", "4_2"), ("6 m/s", "6_2")]
+    w_ = 0.38
+    for i, (lb, k) in enumerate(rows):
+        f_ = d("full_" + k).astype(float)
+        f_[~(np.array(C["full_" + k]["ok0"]) & np.array(C["full_" + k]["ok1"]))] = np.nan
+        a.bar(i - w_ / 2, np.nanmean(f_), w_, color=PS.MATLAB[0], label="Full membrane" if i == 0 else None)
+        a.bar(i + w_ / 2, d("old_" + k).mean(), w_, color=PS.MATLAB[1], label="Discrete DEAs, ideal rigid trailing edge" if i == 0 else None)
+    a.set_xticks(range(3)); a.set_xticklabels([q[0] for q in rows]); a.set(ylabel=r"Cycle-mean $\Delta L$ in mN"); a.legend(loc="upper left")
+    PS.finish(ax); save(fig, "F_main")
+    PS.apply()
+
+
 if __name__ == "__main__":
-    which = sys.argv[1:] or ["tension", "sweep", "final", "shape", "masks", "flap"]
+    which = sys.argv[1:] or ["tension", "sweep", "final", "shape", "masks", "flap", "main"]
     for w in which:
         globals()["fig_" + w]()

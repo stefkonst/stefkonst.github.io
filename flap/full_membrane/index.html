@@ -35,6 +35,13 @@ th,td{padding:4px 6px;border-bottom:1px solid var(--rule);text-align:left;vertic
 code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius:4px}
 .valfig img{width:100%;border-radius:8px;border:1px solid var(--rule);background:#fff}
 .note{font-size:13px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{border:1px solid var(--rule);border-radius:10px;padding:8px 10px}
+.kpi b{display:block;font-size:20px;font-family:'Source Serif 4',serif}
+.kpi span{font-size:12.5px;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding:8px 0}
+summary{cursor:pointer;font-weight:600}
 </style>
 </head>
 <body>
@@ -42,75 +49,90 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
 <header>
   <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Full membrane</p>
   <h1>Full active membrane wing</h1>
-  <p>The whole wing skin is the actuator: two dielectric elastomer panels, tensioned separately and glued at a batten, each with a rolled edge fibre. This page gives the model used to choose the tensioning procedure and the electrode masks. <b>Nothing here has been built or measured.</b> Every design number is a prediction, and depends on an $\eta$ that has not been measured on a flat sheet.</p>
-  <nav class="toc"><a href="#status">Status</a><a href="#design">Design</a><a href="#tension">Tensioning</a><a href="#masks">Masks</a><a href="#aero">Aerodynamics</a><a href="#cycle">Flap cycle</a><a href="#equations">Equations</a><a href="#verification">Verification</a><a href="#limits">Limitations</a><a href="#experiments">Experiments</a><a href="#files">Code and data</a></nav>
+  <p>The whole wing skin is the actuator. <b>Nothing here has been built or measured:</b> every number is a model prediction, and it depends on an efficiency $\eta$ not yet measured on a flat sheet.</p>
+  <nav class="toc"><a href="#short">In short</a><a href="#build">How to build it</a><a href="#masks">Masks</a><a href="#performance">What it should do</a><a href="#next">Next tests</a><a href="#reference">Equations and checks</a></nav>
 </header>
 
-<section id="status" class="card">
-  <h2>Status: what is checked and what is predicted</h2>
-  <p class="note">Labels as on the <a href="../plagiopatagiales/">plagiopatagiales page</a>: <b>Verification</b> means the code solves its equations; <b>Prediction</b> means model output with no matching experiment yet.</p>
-  <div class="tw"><table>
-    <tr><th>Claim</th><th>Type</th><th>Basis</th></tr>
-    <tr><td>Code solves Eqs. F1–F9: exact to round-off on closed forms, 0.23 % against the Fourier series, 0.011 % against the older FE</td><td>Verification</td><td><a href="#verification">V1–V7</a></td></tr>
-    <tr><td>Pulling only the fibre tips leaves 70–86 % of the sheet slack</td><td>Prediction</td><td>Fig. T a, d</td></tr>
-    <tr><td>Rigid grips on root and batten suit panel 1 (variation 8 % at $\theta$ = 14°). They do not suit panel 2 (about 85 % at every tilt), which needs grips outside the panel (2.6 %)</td><td>Prediction</td><td>Fig. T b, c, e</td></tr>
-    <tr><td>Moving the LE to add chord tension is a poor recipe: panel 2 ends up 37–47 % wrinkled</td><td>Prediction</td><td>Fig. T f</td></tr>
-    <tr><td>The fibre should stay passive. An active fibre reached no steady state in flow at 1.6 kV</td><td>Prediction</td><td>Section on aerodynamics</td></tr>
-    <tr><td>Chosen wing, 4 m/s, 6°, 1.6 kV, $\eta$ = 0.4: $C_L$ rises from about 0.60 to 0.86. Scales strongly with $\eta$: $\Delta C_L$ = 0.14 at $\eta$ = 0.24</td><td>Prediction</td><td>Fig. A, Eqs. F1–F8</td></tr>
-    <tr><td>Over a flap cycle at 4 m/s and 2 Hz, the full membrane changes lift by about 9 mN per wing at $\eta$ = 0.4, against 1.8–5.3 mN for discrete DEAs in an ideal framed wing, and about 0.04 mN for discrete DEAs on a free trailing edge</td><td>Prediction</td><td><a href="#cycle">Fig. C</a></td></tr>
-    <tr><td>At small $\alpha$ the state is past static divergence, so $\Delta C_L$ depends little on $\alpha$ and changes sign with it</td><td>Prediction</td><td>Fig. A b–c</td></tr>
-  </table></div>
+<section id="short" class="card">
+  <h2>In short</h2>
+  <div class="kpis">
+    <div class="kpi"><b>0.60 → 0.86</b><span>$C_L$ at 0 V and 1.6 kV; 4 m/s, 6°, $\eta$ = 0.4</span></div>
+    <div class="kpi"><b>9 mN</b><span>Mean lift change per wing, 4 m/s, 2 Hz (<a href="../">comparison</a>)</span></div>
+    <div class="kpi"><b>5 %, 1.6 %</b><span>Stretch along and across the fibre</span></div>
+    <div class="kpi"><b>$\eta$</b><span>Largest unknown: 2.8 mN at $\eta$ = 0.15</span></div>
+  </div>
+  <ul>
+    <li><b>Tension the sheet before bonding.</b> Pulling only on the fibre tips, or using only a line on a flat sheet, leaves much of it slack or wrinkled.</li>
+    <li><b>Keep the rolled fibre passive</b>, with contacts at its two ends and no electrode overlap between them.</li>
+    <li><b>Keep some chord tension.</b> It lowers baseline camber and keeps the full actuator force.</li>
+    <li><b>A line to the body can trim the tension</b>, and may replace the batten.</li>
+  </ul>
 </section>
 
-<section id="design" class="card">
-  <h2>Design</h2>
-  <p>Planform as in the sketch: LE of 104 mm, chord of 46 mm inboard, panel 1 between root rib and batten, panel 2 a triangle out to the tip. Both fibres now meet at the batten tip, which extends the batten by about 5 mm. The batten is tilted by $\theta$ = 14°, parallel to the root edge, and the two panels share it, so the seam follows the batten on both sides.</p>
-  <div class="tw"><table style="max-width:760px">
-    <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
-    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>1.05</td><td>Sweep, Fig. S</td></tr>
-    <tr><td>Stretch across the fibre, $\lambda_n$</td><td>1.016 (natural necking + 0.04)</td><td>Sweep, Fig. S</td></tr>
-    <tr><td>Strip to roll, as cut, $w_s$</td><td>13 mm</td><td>Coater limit</td></tr>
-    <tr><td>Film stack</td><td>E/D/E/D, $H$ = 35 µm per film, $H_m$ = 70 µm, $\chi$ = 0.5</td><td>Assumed; to confirm</td></tr>
-    <tr><td>Material</td><td>Elastosil P7670, $C_1$ = 42.8 kPa, $C_2$ = 447 Pa, $\varepsilon_r$ = 2.8</td><td>Bundle fit; $\varepsilon_r$ assumed</td></tr>
-    <tr><td>$\eta$ of the flat sheet</td><td>0.4</td><td><b>Assumed from rolled DEAs</b></td></tr>
-    <tr><td>Fibre force at 0 V, no flow</td><td>11–12 mN</td><td><a href="validation/final.json">final.json</a></td></tr>
-    <tr><td>Fibre sag at 0 V</td><td>1.0 mm and 1.05 mm (2.6 % and 1.5 % of its length)</td><td><a href="validation/final.json">final.json</a></td></tr>
-    <tr><td>LE rod</td><td>≥ 2 mm solid or a 3/2 mm tube; $\Delta C_L$ within 2 % of rigid</td><td>Fig. A f</td></tr>
-  </table></div>
-</section>
-
-<section id="tension" class="card">
-  <h2>Tensioning: pull on what?</h2>
-  <p>Each option is simulated from the flat, as-cut sheet to the tensioned state.</p>
-  <div class="valfig"><img src="validation/F_tension.png" alt="Tension maps for each pulling option; variation of tension against batten tilt; wrinkled area against LE shift">
-  <p class="cap"><b>Fig. T. Prediction.</b> a, d) Pulling only the fibre tips (5 % along the fibre): tension stays in a band beside the fibre, the rest is slack or buckled. b) Panel 1 with rigid bars on root and batten: nearly uniform. e) Panel 2 with rigid bars on the batten and LE: strings near the batten root are very short, so they overload. c) Variation (SD/mean) of the major resultant $n_1$ against batten tilt. Panel 1 is best at 14°, parallel to its root edge. Tilt lowers panel 2's wrinkled area from 42 % to 22 % but not its variation. Dotted: a 60 mm wide, 114 mm long strip gripped at its short ends, measured at least 20 mm from the grips. f) Wrinkled area of panel 2 if the LE is moved away from the fibre after bonding the other edges: it shears against the batten root.</p></div>
-  <h3 style="margin-top:14px">Recommended procedure</h3>
+<section id="build" class="card">
+  <h2>How to build it</h2>
   <ol>
-    <li>Pattern the electrodes, then roll the strip while the sheet is flat and unstretched.</li>
-    <li>Hold each panel's sheet on a stretching rig, outside the panel outline. Pull 5 % along the fibre and set the width to $\lambda_n$ = 1.016 with side rails or clips.</li>
-    <li>Bond the frame to the stretched sheet: LE and batten, plus root rib for panel 1.</li>
-    <li>Cut the sheet free. The edge relaxes, so the fibre bows inward by about 1 mm.</li>
-    <li>Bond panel 2 to the same batten; keep the panels' tensions similar so the batten stays lightly loaded.</li>
+    <li><b>Make the sheet.</b> Pattern both electrodes with the <a href="#masks">masks</a>. The active area stops at the fibre line.</li>
+    <li><b>Roll the strip</b> while the sheet is flat. Each end of the fibre is one contact.</li>
+    <li><b>Stretch each panel,</b> gripping outside its outline: 5 % along the fibre, with the width held at 1.6 % by side rails or clips. Panel 1 can also use rigid bars on its root and batten edges; panel 2 cannot.</li>
+    <li><b>Bond to the frame while stretched.</b> The LE goes on the flapping mechanism and the root edge is held on the body. Cut the sheet free; the fibre bows in by 1–2 mm.</li>
+    <li><b>Join the panels</b> along a line tilted 14°, parallel to the root edge. Use a batten, or leave it out and hold the fibre junction with a line to the body.</li>
+    <li><b>Trim with the line.</b> Each 1 mm aft raises panel 2's chord tension by about 0.03 N/m under load.</li>
   </ol>
-  <p class="note">The model checks the end state of this procedure and the uniaxial strip. It does not simulate the rails, or rolling itself. Forces at 0 V, no flow: batten 47 mN axial and 13 mN lateral, root rib 63 mN along the span and 20 mN along the chord, LE 57 mN along the chord. A 0.5 mm carbon batten buckles near 570 mN.</p>
+  <p class="note">Steps 1–3 and the line's flapping behaviour are not simulated directly. Only the tensioned end state and the strip are. Design numbers are in the table below.</p>
+  <h3 style="margin-top:14px">Which tensioning works</h3>
+  <div class="tw"><table style="max-width:900px">
+    <tr><th>Method</th><th>Result in the model</th><th>Verdict</th></tr>
+    <tr><td>Pull fibre tips only</td><td>70–86 % of the sheet slack</td><td>No</td></tr>
+    <tr><td>Rigid bars on root and batten, panel 1</td><td>Tension varies by 8 % at 14° tilt</td><td>Yes</td></tr>
+    <tr><td>Rigid bars on batten and LE, panel 2</td><td>Varies by about 85 % at every tilt</td><td>No</td></tr>
+    <tr><td>Grips outside the panel, then bond</td><td>Varies by 2.6 %</td><td>Yes, both panels</td></tr>
+    <tr><td>Move the LE after bonding, for chord tension</td><td>Panel 2 is 37–47 % wrinkled</td><td>No</td></tr>
+    <tr><td>Flat sheet, line only (aft at the fibre junction)</td><td>57–71 % of panel 2 wrinkled; $\Delta C_L$ 0.14–0.20</td><td>Weak</td></tr>
+    <tr><td>Pre-stretched sheet with batten</td><td>$\Delta C_L$ 0.26; $C_L$ 0.60 → 0.86</td><td>Yes</td></tr>
+    <tr><td>Pre-stretched sheet, no batten, line trim 0–2 mm</td><td>$\Delta C_L$ 0.27–0.29; $C_L$ at 0 V 0.81 to 0.62; line 26–48 mN</td><td>Promising</td></tr>
+  </table></div>
+  <p class="note">Rows use 4 m/s, 6°, $\eta$ = 0.4, a rigid frame and a line of fixed length. The flat-sheet line row is a coarser scoping run (2.5 mm mesh). The line was not run over a flap cycle. Data: <a href="validation/tension.json">tension.json</a>, <a href="validation/line_study.json">line_study.json</a>, <a href="validation/line_check.json">line_check.json</a>.</p>
+  <div class="warn" style="margin-top:10px">Anchor the line <b>on the stroke axis</b>. A point on that axis keeps a fixed distance from any point of the wing, so the tension stays constant while flapping. Anywhere else, the line's length changes with stroke: the fibre junction moves by about ±25 mm at 30°. A fishing line is stiff, so a soft spring in series would make the trim much less sensitive.</div>
+  <h3 style="margin-top:14px">Design values</h3>
+  <div class="tw"><table style="max-width:820px">
+    <tr><th>Quantity</th><th>Value</th><th>Source</th></tr>
+    <tr><td>Stretch along the fibre, $\lambda_d$</td><td>1.05</td><td><a href="#performance">Sweep</a></td></tr>
+    <tr><td>Stretch across the fibre, $\lambda_n$</td><td>1.016 (natural necking + 0.04)</td><td><a href="#performance">Sweep</a></td></tr>
+    <tr><td>Strip to roll, as cut, $w_s$</td><td>13 mm</td><td>Coater limit</td></tr>
+    <tr><td>Film stack</td><td>Electrode / dielectric / electrode / dielectric, $H$ = 35 µm per film, $H_m$ = 70 µm, $\chi$ = 0.5</td><td><b>Assumed</b>; see the note below</td></tr>
+    <tr><td>Material</td><td>Elastosil P7670, $C_1$ = 42.8 kPa, $C_2$ = 447 Pa, $\varepsilon_r$ = 2.8</td><td>Bundle fit; $\varepsilon_r$ assumed</td></tr>
+    <tr><td>$\eta$ of the flat sheet</td><td>0.4</td><td><b>Assumed</b> from rolled DEAs</td></tr>
+    <tr><td>Fibre force and sag at 0 V, no flow</td><td>11–12 mN; 1.0 mm</td><td><a href="validation/final.json">final.json</a></td></tr>
+    <tr><td>LE rod</td><td>≥ 2 mm solid or a 3/2 mm tube: $\Delta C_L$ within 2 % of rigid. 1 mm solid: no steady state</td><td><a href="validation/final.json">final.json</a></td></tr>
+  </table></div>
+  <p class="note"><b>Film stack.</b> A roll needs a dielectric on the outside of the electrodes, or the two electrodes touch and short. So the sheet is assumed to be electrode, dielectric, electrode, dielectric. Lying flat, only the dielectric between the electrodes is active, so half the thickness is passive ($\chi$ = 0.5). A sheet with three active films of four gives more lift change, $\Delta C_L$ ≈ 0.42 at $\eta$ = 0.4 (not fully converged).</p>
+  <details style="margin-top:10px"><summary>Tension maps for the tested methods</summary>
+  <div class="valfig"><img src="validation/F_tension.png" alt="Tension maps for each pulling option; variation of tension against batten tilt; wrinkled area against LE shift">
+  <p class="cap"><b>Prediction.</b> a, d) Fibre tips only: tension stays in a band beside the fibre. b) Panel 1 with rigid bars: nearly uniform. e) Panel 2 with rigid bars: strings near the batten root are very short, so they overload. c) Variation (SD/mean) of $n_1$ against batten tilt; dotted, a 60 × 114 mm strip gripped at its short ends, at least 20 mm from the grips. f) Wrinkled area of panel 2 if the LE is moved after bonding the other edges.</p></div>
+  </details>
 </section>
 
 <section id="masks" class="card">
   <h2>Masks</h2>
-  <p>The as-cut outline is the pre-image of the tensioned planform (Eq. F2). The active area stops at the fibre line, and in the strip each electrode covers one half of its length, so the roll has no field and stays passive. Rolling then connects each half of the strip to one electrode. Download: <a href="masks/mask_2partwing_model.svg">mask_2partwing_model.svg</a>, numbers in <a href="masks/mask_numbers.json">mask_numbers.json</a>.</p>
-  <div class="valfig"><img src="validation/F_masks.png" alt="Electrode outlines A and B, active overlap, frame and strip for panels 1 and 2">
-  <p class="cap">Outlines as cut, in plate coordinates with the fibre along the horizontal axis. a) Panel 1: 58.4 × 48.8 mm. b) Panel 2: 55.4 × 66.9 mm. Passive margins: 2 mm at the LE, 1.5 mm at the batten and root rib, 1 mm around the strip, 4 mm between the strip electrodes. Active areas 1513 and 1278 mm². Fibres: 38.1 mm as cut, 40.0 mm tensioned; 65.0 mm as cut, 68.25 mm tensioned.</p></div>
-  <div class="warn">Check before cutting. The coater limit of 60 mm leaves about 1.6 mm spare on panel 1, and the plates must be oriented as drawn: the sheet's narrow side runs across the fibre. Margins were chosen by judgement, not modelled. The rectangles in the earlier mask file were left out, since their purpose is unclear.</div>
+  <p>The outline as cut is the pre-image of the tensioned wing (Eq. F2). Contacts sit at opposite ends of the fibre, and between them the strip has no electrode, so it stays passive. Download: <a href="masks/mask_2partwing_model.svg">mask_2partwing_model.svg</a>, numbers in <a href="masks/mask_numbers.json">mask_numbers.json</a>.</p>
+  <div class="valfig"><img src="validation/F_masks.png" alt="Electrode outlines, active area, strip, contacts and additional fibres for panels 1 and 2, leading edge at the top">
+  <p class="cap">Outlines as cut, LE towards the top, with each panel rotated so its fibre is horizontal. Active areas 1513 and 1278 mm². Fibres 38.1 mm as cut and 40.0 mm tensioned; 65.0 and 68.25 mm. Additional fibres: 36.9 × 20.6 and 40 × 16.3 mm, with A and B offset by 3 mm along their length.</p></div>
+  <p><b>Wiring.</b> Tie panel 1's contact B and panel 2's contact A at the fibre junction, as a common connection running down the trailing edge. Panel 2's contact B then sits next to the LE and can run inside it, and panel 1's contact A sits at the root. Each panel keeps its own drive, so they can be switched separately: panel 1 alone gives $\Delta C_L$ = 0.16, panel 2 alone 0.10, both 0.26.</p>
+  <div class="warn">Check before cutting. The coater limit of 60 mm leaves 1.6 mm spare on panel 1, and the plates must be oriented as drawn. The additional fibres are placed past the panel along the fibre direction to stay inside this limit; cut them off before stretching. Margins (2 mm at the LE, 1.5 mm at the batten and root, 1 mm around the strip) are judgement, not modelled. Where the additional fibres go on the wing is not modelled either.</div>
 </section>
 
-<section id="aero" class="card">
-  <h2>With aerodynamic forces</h2>
+<section id="performance" class="card">
+  <h2>What it should do in flow</h2>
+  <p>The <a href="../">main page</a> compares this wing with discrete DEAs over a flap cycle.</p>
   <div class="valfig"><img src="validation/F_final.png" alt="Lift against voltage and angle of attack, lift change against angle, film stack, stretch errors and LE rod">
-  <p class="cap"><b>Fig. A. Prediction</b> (chosen design; rigid frame unless stated; attached flow). a) $C_L$ against $V$, close to $V^2$. b) $C_L(\alpha)$ at 0 V and 1.6 kV. c) $\Delta C_L(\alpha)$. d) $\Delta C_L$ against $\eta$ for three film stacks; only converged cases are shown. e) $\Delta C_L$ against errors in $\lambda_d$ and $\lambda_n$. f) $\Delta C_L$ with an elastic frame; a 1 mm solid rod reached no steady state and is omitted.</p></div>
+  <p class="cap"><b>Prediction</b> (chosen design; rigid frame unless stated; attached flow). a) $C_L$ against $V$, close to $V^2$. b) $C_L(\alpha)$ at 0 V and 1.6 kV. c) $\Delta C_L(\alpha)$. d) $\Delta C_L$ against $\eta$ for three film stacks; only converged cases are shown. e) $\Delta C_L$ against errors in $\lambda_d$ and $\lambda_n$. f) $\Delta C_L$ with an elastic frame; a 1 mm solid rod reached no steady state and is omitted.</p></div>
   <div class="valfig"><img src="validation/F_shape.png" alt="Out-of-plane deflection maps at 0 V and 1.6 kV and chordwise sections through each panel">
   <p class="cap"><b>Prediction</b> at 4 m/s, 6°. a–b) Deflection $w$ at 0 V and 1.6 kV. c–d) Chordwise sections. Under voltage the largest change sits in the middle of panel 2, and panel 1 forms a second bulge near its fibre, where chord tension has relaxed.</p></div>
+  <details><summary>Design sweep: which stretches</summary>
   <div class="valfig"><img src="validation/F_sweep.png" alt="Lift change and baseline lift against across-fibre stretch at 3, 4 and 6 m/s">
-  <p class="cap"><b>Fig. S. Prediction</b> at $\alpha$ = 6°, $\eta$ = 0.4. Top: $\Delta C_L$ at 1.6 kV against stretch above necking. Crosses at zero mark cases with no converged state at voltage, not zero lift change. Bottom: $C_L$ at 0 V. Chord tension lowers the baseline, so voltage has more range to work with.</p></div>
+  <p class="cap"><b>Prediction</b> at $\alpha$ = 6°, $\eta$ = 0.4. Top: $\Delta C_L$ at 1.6 kV against stretch above necking. Crosses at zero mark cases with no converged state at voltage, not zero lift change. Bottom: $C_L$ at 0 V. Chord tension lowers the baseline, so voltage has more range to work with.</p></div>
+  </details>
   <h3 style="margin-top:14px">What the flow changes</h3>
   <ul>
     <li><b>The load selects the side.</b> A sheet that runs out of tension has no preferred direction without flow. With flow, it cambers towards the suction side, so the response is antisymmetric in $\alpha$.</li>
@@ -123,11 +145,50 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
   </ul>
 </section>
 
-<section id="cycle" class="card">
-  <h2>Lift over a flap cycle: both approaches</h2>
+<section id="next" class="card">
+  <h2>Next tests, in order</h2>
+  <ul>
+    <li><b>M1 ($\eta$ of a flat sheet).</b> Flat strip of the real stack on the texture analyser, held at 1.6 kV. Needed: $\Delta n$ of at least about 0.7 N/m. Cross-section for $H$.</li>
+    <li><b>M2 (recipe).</b> Build one panel 1 on the stretching rig. Measure stretch by markers and check for wrinkles and an edge bow near 1 mm at 0 V.</li>
+    <li><b>M3 (no flow).</b> Same panel with voltage on, camera on shape and fibre. Check that the fibre keeps its force.</li>
+    <li><b>M4 (framed panel in flow).</b> 3–4 m/s, $\alpha$ from −6° to 12°, randomised voltage order with a sham, shape first and forces second. Compare with the $C_L(\alpha)$ figure above, and look for the predicted jump and any flutter near 0°.</li>
+    <li><b>M5 (full wing, then flapping).</b> Only after M4 agrees.</li>
+  </ul>
+</section>
+
+<section id="reference" class="card">
+  <h2>Equations and checks</h2>
+  <p class="note">Open only what you need.</p>
+  <details><summary>Status: what is checked and what is predicted</summary>
+  <p class="note">Labels as on the <a href="../plagiopatagiales/">plagiopatagiales page</a>: <b>Verification</b> means the code solves its equations; <b>Prediction</b> means model output with no matching experiment yet.</p>
+  <div class="tw"><table>
+    <tr><th>Claim</th><th>Type</th><th>Basis</th></tr>
+    <tr><td>Code solves Eqs. F1–F9: exact to round-off on closed forms, 0.23 % against the Fourier series, 0.011 % against the older FE</td><td>Verification</td><td>Verification, below</td></tr>
+    <tr><td>Pulling only the fibre tips leaves 70–86 % of the sheet slack</td><td>Prediction</td><td>Tensioning table</td></tr>
+    <tr><td>Rigid grips on root and batten suit panel 1 (variation 8 % at $\theta$ = 14°). They do not suit panel 2 (about 85 % at every tilt), which needs grips outside the panel (2.6 %)</td><td>Prediction</td><td>Tensioning table</td></tr>
+    <tr><td>Moving the LE to add chord tension is a poor recipe: panel 2 ends up 37–47 % wrinkled</td><td>Prediction</td><td>Tensioning table</td></tr>
+    <tr><td>The fibre should stay passive. An active fibre reached no steady state in flow at 1.6 kV</td><td>Prediction</td><td><a href="#performance">Performance</a></td></tr>
+    <tr><td>Chosen wing, 4 m/s, 6°, 1.6 kV, $\eta$ = 0.4: $C_L$ rises from about 0.60 to 0.86. Scales strongly with $\eta$: $\Delta C_L$ = 0.14 at $\eta$ = 0.24</td><td>Prediction</td><td>Eqs. F1–F9</td></tr>
+    <tr><td>Over a flap cycle at 4 m/s and 2 Hz, the full membrane changes lift by about 9 mN per wing at $\eta$ = 0.4, against 1.8–5.3 mN for discrete DEAs in an ideal framed wing, and about 0.04 mN for discrete DEAs on a free trailing edge</td><td>Prediction</td><td><a href="../">Main page</a></td></tr>
+    <tr><td>At small $\alpha$ the state is past static divergence, so $\Delta C_L$ depends little on $\alpha$ and changes sign with it</td><td>Prediction</td><td>$C_L(\alpha)$ figure</td></tr>
+  </table></div>
+</details>
+  <details><summary>Limitations</summary>
+  <ul class="note">
+    <li><b>$\eta$ is the largest unknown.</b> 0.4 comes from rolled DEAs in isometric pulses. The quasi-static cycles on the same bundle gave 0.03–0.15, which would predict far less. A flat film has no rolled air gaps, but this is untested.</li>
+    <li>Steady model: no flutter, luffing, separation or dynamic response. Below about 1° of $\alpha$ its solutions should not be trusted.</li>
+    <li>24 of the 48 sweep cases reached no converged state at voltage, all at +0.02 or below in chord stretch (all 12 at +0.04 converged). So did some thin or high-$\eta$ stacks, and small angles at 6 m/s. It is not yet clear whether this is the solver or a real absence of a steady state. They are not plotted as results.</li>
+    <li>No bending in the sheet: wrinkle wavelength and direction are not resolved, and buckling needs a load to select a side.</li>
+    <li>The explicit solver goes unstable with a stiff passive cord (cord EA ≫ sheet stiffness, $F$ above about 1 N). So stiff cords are outside this model's range; the design uses none.</li>
+    <li>Sheet modelled as uniform P7670: electrodes, bonding and viscoelasticity left out. No creep: pre-stretch may relax with time.</li>
+    <li>Root edge treated as a rigid rib, and the mirror plane placed at its inboard end: no body effects.</li>
+    <li>Stretching rig, side rails, rolling and cutting are not simulated. Margins and the 4 mm strip gap are judgement.</li>
+  </ul>
+</details>
+  <details><summary>Flap-cycle comparison: details and caveats</summary>
   <p>Same span (104 mm), area (33 cm²), stroke ($\Phi_0$ = 30°, 60° peak to peak), mean pitch 6°, 1.6 kV, one wing, quasi-steady (Eq. S12). <b>Prediction for both.</b></p>
   <div class="valfig"><img src="validation/F_flap.png" alt="Lift and lift change over the flap cycle for the full membrane and for discrete DEAs, and cycle-mean lift change at four conditions">
-  <p class="cap"><b>Fig. C. Prediction.</b> Shaded: downstroke ($\Omega\lt0$). a) Lift over a cycle at 4 m/s, 2 Hz, 0 V and 1.6 kV. b) Change of lift over the cycle. c) Cycle mean. Data: <a href="validation/flap_summary.json">flap_summary.json</a>.</p></div>
+  <p class="cap"><b>Prediction.</b> Shaded: downstroke ($\Omega\lt0$). a) Lift over a cycle at 4 m/s, 2 Hz, 0 V and 1.6 kV. b) Change of lift over the cycle. c) Cycle mean. Data: <a href="validation/flap_summary.json">flap_summary.json</a>.</p></div>
   <div class="tw"><table style="max-width:820px">
     <tr><th>Wing, 2 Hz unless stated</th><th>3 m/s</th><th>4 m/s, 1 Hz</th><th>4 m/s</th><th>6 m/s</th></tr>
     <tr><td><b>Full membrane</b>, $\eta$ = 0.40</td><td>5.0</td><td>8.5</td><td>9.2</td><td>13.6*</td></tr>
@@ -149,10 +210,8 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
     <li><b>Shape over the cycle.</b> $\Delta L$ is nearly constant, unlike a stroke-synchronised signal. The peak near $\varphi$ = 270° (15 mN at 4 m/s, $\eta$ = 0.4) is one phase where the outboard wing's $\alpha_{eff}$ passes through zero (down to −3.7° at the tip). It sits at the bifurcation described above, so it should not be trusted, and it may be hysteretic.</li>
     <li><b>Beyond attached flow.</b> $\alpha_{eff}$ at the tip reaches 15.7° at 4 m/s, 2 Hz. Attached-flow lift overestimates there, for both approaches.</li>
   </ul>
-</section>
-
-<section id="equations" class="card eqsec">
-  <h2>Governing equations</h2>
+</details>
+  <details class="eqsec"><summary>Governing equations</summary>
   <p class="note">Notation follows Konstantinidi et al., <i>Smart Mater. Struct.</i> 32 (2023) 125011 and <i>Compos. Sci. Technol.</i> 258 (2024) 110849, and the <a href="../plagiopatagiales/">plagiopatagiales page</a>. $x$ spanwise (root to tip), $y$ chordwise (LE to TE), $w$ out-of-plane deflection, $\lambda_z$ thickness stretch. SI units. Each block names the function in <a href="membrane.py">membrane.py</a> that implements it.</p>
 
   <h3>1. Kinematics <code>Wing.membrane</code></h3>
@@ -195,10 +254,8 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
   <h3>8. Equilibrium and solver <code>Wing.relax</code></h3>
   <div class="eq">$$\mathbf R_a=\mathbf f^{ext}_a-\sum_eH_mA^e_0\,\mathbf F\mathbf S\,\nabla_{\!X}N_a-\sum_\text{bars}F\,\mathbf e=\mathbf 0\qquad\text{at every free node}$$</div>
   <p>Dynamic relaxation with kinetic damping, fictitious masses from a Gershgorin bound on nodal stiffness, aerodynamics updated every 20 steps, converged at $\max|\mathbf R|<2\times10^{-7}$ N, about 1 % of a typical nodal pressure load.</p>
-</section>
-
-<section id="verification" class="card">
-  <h2>Verification</h2>
+</details>
+  <details><summary>Verification</summary>
   <p class="note">Generated by <a href="validate.py">validate.py</a>; numbers in <a href="validation/validation.json">validation.json</a>.</p>
   <div class="tw"><table>
     <tr><th>Check</th><th>Compared with</th><th>Result</th></tr>
@@ -214,37 +271,12 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
   </table></div>
   <div class="valfig" style="margin-top:12px"><img src="validation/V_checks.png" alt="Verification plots">
   <p class="cap"><b>Verification.</b> a) Resultants against closed forms. b) Peak deflection of a pressurised square against mesh size. c) Cable sag against the exact parabola. d) Deflection from dynamic relaxation and from L-BFGS. e) Lift slope against Helmbold. f) Relative error of the forces against the energy gradient.</p></div>
+</details>
+  <details><summary>Code and data</summary>
+  <p class="note"><a href="membrane.py">membrane.py</a> (model), <a href="validate.py">validate.py</a> (checks), <a href="design.py">design.py</a> (studies), <a href="masks.py">masks.py</a> (mask generator), <a href="flap_compare.py">flap_compare.py</a> and <a href="flap_compare_section.py">flap_compare_section.py</a> (flap cycle), <a href="figures.py">figures.py</a> (figures). Results: <a href="validation/tension.json">tension.json</a>, <a href="validation/chord_step.json">chord_step.json</a>, <a href="validation/sweep.json">sweep.json</a>, <a href="validation/final.json">final.json</a>. Rerun: <code>python validate.py</code>, then <code>python design.py tension</code>, <code>chord</code>, <code>sweep</code>, <code>final</code>, <code>alpha_fine</code>, then <code>python flap_compare.py</code>, <code>python flap_compare_section.py</code>, <code>python masks.py 1.05 0.04 13</code> and <code>python figures.py</code>. Line studies: <a href="line_study.py">line_study.py</a>, <a href="line_check.py">line_check.py</a>.</p>
+</details>
 </section>
 
-<section id="limits" class="card">
-  <h2>Limitations</h2>
-  <ul class="note">
-    <li><b>$\eta$ is the largest unknown.</b> 0.4 comes from rolled DEAs in isometric pulses. The quasi-static cycles on the same bundle gave 0.03–0.15, which would predict far less. A flat film has no rolled air gaps, but this is untested.</li>
-    <li>Steady model: no flutter, luffing, separation or dynamic response. Below about 1° of $\alpha$ its solutions should not be trusted.</li>
-    <li>24 of the 48 sweep cases reached no converged state at voltage, all at +0.02 or below in chord stretch (all 12 at +0.04 converged). So did some thin or high-$\eta$ stacks, and small angles at 6 m/s. It is not yet clear whether this is the solver or a real absence of a steady state. They are not plotted as results.</li>
-    <li>No bending in the sheet: wrinkle wavelength and direction are not resolved, and buckling needs a load to select a side.</li>
-    <li>The explicit solver goes unstable with a stiff passive cord (cord EA ≫ sheet stiffness, $F$ above about 1 N). So stiff cords are outside this model's range; the design uses none.</li>
-    <li>Sheet modelled as uniform P7670: electrodes, bonding and viscoelasticity left out. No creep: pre-stretch may relax with time.</li>
-    <li>Root edge treated as a rigid rib, and the mirror plane placed at its inboard end: no body effects.</li>
-    <li>Stretching rig, side rails, rolling and cutting are not simulated. Margins and the 4 mm strip gap are judgement.</li>
-  </ul>
-</section>
-
-<section id="experiments" class="card">
-  <h2>Experiments that test these predictions</h2>
-  <ul>
-    <li><b>M1 ($\eta$ of a flat sheet).</b> Flat strip of the real stack on the texture analyser, held at 1.6 kV. Needed: $\Delta n$ of at least about 0.7 N/m. Cross-section for $H$.</li>
-    <li><b>M2 (recipe).</b> Build one panel 1 on the stretching rig. Measure stretch by markers and check for wrinkles and an edge bow near 1 mm at 0 V.</li>
-    <li><b>M3 (no flow).</b> Same panel with voltage on, camera on shape and fibre. Check that the fibre keeps its force.</li>
-    <li><b>M4 (framed panel in flow).</b> 3–4 m/s, $\alpha$ from −6° to 12°, randomised voltage order with a sham, shape first and forces second. Compare with Fig. A b–c, and look for the predicted jump and any flutter near 0°.</li>
-    <li><b>M5 (full wing, then flapping).</b> Only after M4 agrees.</li>
-  </ul>
-</section>
-
-<section id="files" class="card">
-  <h2>Code and data</h2>
-  <p class="note"><a href="membrane.py">membrane.py</a> (model), <a href="validate.py">validate.py</a> (checks), <a href="design.py">design.py</a> (studies), <a href="masks.py">masks.py</a> (mask generator), <a href="flap_compare.py">flap_compare.py</a> and <a href="flap_compare_section.py">flap_compare_section.py</a> (flap cycle), <a href="figures.py">figures.py</a> (figures). Results: <a href="validation/tension.json">tension.json</a>, <a href="validation/chord_step.json">chord_step.json</a>, <a href="validation/sweep.json">sweep.json</a>, <a href="validation/final.json">final.json</a>. Rerun: <code>python validate.py</code>, then <code>python design.py tension</code>, <code>chord</code>, <code>sweep</code>, <code>final</code>, <code>alpha_fine</code>, then <code>python flap_compare.py</code>, <code>python flap_compare_section.py</code>, <code>python masks.py 1.05 0.04 13</code> and <code>python figures.py</code>.</p>
-</section>
 </div>
 <script>
 document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});

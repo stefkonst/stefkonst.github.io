@@ -4,40 +4,117 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Active Membrane Wings</title>
-<meta name="description" content="Models and observations for dielectric elastomer membrane wings: discrete plagiopatagiales DEAs and the full active membrane.">
+<meta name="description" content="Predicted lift change over a flap cycle for two kinds of dielectric elastomer membrane wing: discrete DEAs and a fully active membrane.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--muted:#5d646b;--card:#fff}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125}}
-:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125}
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--muted:#5d646b;--card:#fff;--a:#0072BD;--b:#D95319;--sheet:#dce7f5;--sheet2:#fbe3d6;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:15.5px;line-height:1.55}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
 h1,h2{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px}
 a{color:var(--accent)}
-.wrap{max-width:900px;margin:0 auto;padding:36px 16px}
-header p{color:var(--muted)}
-.card{display:block;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 18px;margin-bottom:18px;color:inherit;text-decoration:none}
-.card:hover{border-color:var(--accent)}
-.card h2{color:var(--accent);font-size:21px}
-.card p{margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:36px 16px}
+.lead{font-size:18px;max-width:780px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+.wing h3{font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:6px 0 4px}
+.wing p{margin:0 0 8px;font-size:14.5px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
+.fig img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.cap{font-size:13px;color:var(--muted);margin-top:6px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:right}
+th:first-child,td:first-child{text-align:left}
+tr.main td{font-weight:600}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+ul{padding-left:20px;margin:.3em 0}
+li{margin:.35em 0}
+.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.go:hover{border-color:var(--accent)}
+.go b{color:var(--accent)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <h1>Active membrane wings</h1>
-  <p>Two ways of using dielectric elastomer actuators in a bat-inspired membrane wing. Each page labels its claims as observation, verification or prediction.</p>
-</header>
-<a class="card" href="plagiopatagiales/">
-  <h2>Plagiopatagiales</h2>
-  <p>Discrete rolled DEAs embedded in a passive membrane, as in the wings tested so far. Observations from the bench and high-speed video, a verified section model, a 3D design tool in the browser, and the load-path finding: on a free trailing edge the DEAs have almost nothing to pull against.</p>
-</a>
-<a class="card" href="full_membrane/">
-  <h2>Full membrane</h2>
-  <p>The whole wing skin is the DEA: two tensioned panels, a batten and rolled edge fibres. A hyperelastic, tension-field model with 3D vortex-lattice aerodynamics sets the tensioning procedure and the shape of the electrode masks. Predictions only; nothing has been built yet.</p>
-</a>
+<h1>Which active wing changes lift more?</h1>
+<p class="lead">Two ways of putting dielectric elastomer actuators in a bat-inspired wing, compared over a flap cycle on the same wing size, stroke and voltage.</p>
+<div class="warn"><b>These are model predictions.</b> The full membrane has not been built. Its advantage depends on an actuator efficiency $\eta$ that has not been measured on a flat sheet.</div>
+
+<div class="two" style="margin-bottom:18px">
+  <div class="card wing">
+    <svg viewBox="0 0 300 130" role="img" aria-label="Wing with discrete rolled actuators running chordwise across a passive membrane">
+      <path d="M12 16 L288 16 L288 26 L150 112 L40 114 Z" fill="var(--sheet2)" stroke="var(--muted)"/>
+      <line x1="12" y1="16" x2="288" y2="16" stroke="var(--ink)" stroke-width="3"/>
+      <g stroke="var(--b)" stroke-width="3"><line x1="58" y1="18" x2="62" y2="112"/><line x1="92" y1="18" x2="96" y2="113"/><line x1="126" y1="18" x2="130" y2="112"/><line x1="160" y1="18" x2="162" y2="106"/><line x1="194" y1="18" x2="195" y2="85"/><line x1="228" y1="18" x2="228" y2="64"/></g>
+      <text x="12" y="11">Leading edge</text><text x="60" y="126">Free trailing edge: nothing to pull against</text>
+    </svg>
+    <h3>Plagiopatagiales: discrete DEAs</h3>
+    <p>Rolled actuators in a passive membrane. Voltage relaxes the actuators, but the membrane in parallel carries most of the tension.</p>
+  </div>
+  <div class="card wing">
+    <svg viewBox="0 0 300 130" role="img" aria-label="Wing whose whole surface is active, with rolled fibres along the trailing edge meeting at a batten">
+      <path d="M12 16 L288 16 L288 26 L150 104 Q95 100 40 104 Z" fill="var(--sheet)" stroke="var(--muted)"/>
+      <line x1="12" y1="16" x2="288" y2="16" stroke="var(--ink)" stroke-width="3"/>
+      <path d="M40 104 Q95 100 150 104 L288 26" fill="none" stroke="var(--a)" stroke-width="3.5"/>
+      <line x1="138" y1="17" x2="150" y2="104" stroke="var(--ink)" stroke-width="1.5"/>
+      <text x="12" y="11">Leading edge</text><text x="60" y="122">Rolled passive fibre along the trailing edge</text>
+    </svg>
+    <h3>Full membrane</h3>
+    <p>The skin is the actuator, with no passive membrane in parallel. It is tensioned before bonding, so voltage can remove most of its tension.</p>
+  </div>
 </div>
+
+<section class="card">
+  <h2>Result: lift change over a flap cycle</h2>
+  <div class="tw"><table>
+    <tr><th>Cycle-mean lift change at 1.6 kV, one wing, 2 Hz</th><th>3 m/s</th><th>4 m/s</th><th>6 m/s</th></tr>
+    <tr class="main"><td>Full membrane, $\eta$ = 0.40</td><td>5.0 mN</td><td>9.2 mN</td><td>13.6 mN</td></tr>
+    <tr class="main"><td>Discrete DEAs, ideal rigid trailing edge</td><td>0.4 mN</td><td>1.8 mN</td><td>9.4 mN</td></tr>
+    <tr class="main"><td>Discrete DEAs, free trailing edge, as tested so far (estimate)</td><td>0.01 mN</td><td>0.04 mN</td><td>0.19 mN</td></tr>
+  </table></div>
+  <p class="cap">Baseline lift at 4 m/s is about 16–20 mN per wing.</p>
+  <div class="fig" style="margin-top:12px"><img src="full_membrane/validation/F_main.png" alt="Lift change over the flap cycle at 4 m/s, 2 Hz for both wings, and the cycle-mean lift change at three speeds">
+  <p class="cap">a) Lift change over one cycle at 4 m/s, 2 Hz, 1.6 kV. The peak near 270° is one phase where the outboard wing's angle crosses zero; it should not be trusted. b) Cycle mean at 2 Hz.</p></div>
+</section>
+
+<div class="two">
+  <section class="card">
+    <h2>What this says</h2>
+    <ul>
+      <li><b>Weak results so far are expected.</b> With a free trailing edge, the model keeps about 2 % of the actuator's force. Bowed DEAs in the videos fit this.</li>
+      <li><b>The full membrane leads in every case compared here,</b> by about 5× at 4 m/s against an ideal discrete wing.</li>
+      <li><b>The lead narrows</b> to 1.4× at 6 m/s, and to 1.7× at 4 m/s if the discrete wing's membrane is slack ($\lambda_{pre}$ = 1.00).</li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>What could change it</h2>
+    <ul>
+      <li><b>Flat-sheet $\eta$.</b> At $\eta$ = 0.15, the full membrane falls to 2.8 mN at 4 m/s. Discrete DEAs at their bench cycle value give 0.5 mN.</li>
+      <li><b>Fabrication.</b> The pre-stretch and whole-wing active film are untested, and one defect could disable a panel.</li>
+      <li><b>Flutter and stall.</b> Neither is modelled. Both matter most on the slack, high-camber states.</li>
+    </ul>
+  </section>
+</div>
+
+<div class="warn"><b>How far to trust the comparison:</b> the two wings use different models, a 3D finite-element and vortex-lattice model against a verified section model scaled to the same flat-wing lift. The free-edge row multiplies the ideal result by an estimated 0.02. Differences of tens of percent mean little; differences of 5× do.</div>
+
+<div class="two">
+  <a class="go" href="full_membrane/"><b>Full membrane →</b><br>How to build it, the masks, and the model behind the numbers.</a>
+  <a class="go" href="plagiopatagiales/"><b>Plagiopatagiales →</b><br>Observations from the tested wings, the load-path finding, and a 3D design tool.</a>
+</div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false});});
+</script>
 </body>
 </html>
