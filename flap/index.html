@@ -101,7 +101,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <p class="note">Baseline lift about 20 mN (full) and 16 mN (discrete) per wing at 4 m/s. *The model over-predicts at 6 m/s. For comparison, the finite elements on the full membrane at a fixed 6° give 7.6, 14.5 and 19.0 mN (the 3 m/s state did not fully settle).</p>
   <ul>
     <li><b>Your tested wings:</b> weak results are expected. With a free trailing edge, statics leave no way for voltage to change chord tension.</li>
-    <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 8× at 4 m/s, narrowing with speed.</li>
+    <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 8× at 4 m/s, narrowing with speed. On the real 12 × 7 cm wing with a nylon line it is 2–3×: <a href="#line">below</a>.</li>
     <li><b>The trailing-edge fibre is active in these numbers.</b> It needs a wide roll with a narrow active band, so it keeps its force at voltage: <a href="design/#why">the equations</a>. It adds no lift: a passive fibre on the same outline gives 15.7 mN against 14.5 mN in the finite elements.</li>
     <li><b>But a slack discrete wing may do as well.</b> Lowering $\lambda_{pre}$ raises its lift change to 7.5 mN at 1.01 and 12.7 mN at 1.00, close to the full membrane. Those are outside what the model has been checked on, and a slack membrane may flutter. See <a href="model/#stretch">pre-stretch</a>.</li>
   </ul>
@@ -114,7 +114,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <tr><th>4 m/s, 1.6 kV</th><th>Lift change</th><th>In %</th><th>Status</th></tr>
     <tr><td>Full membrane, one wing</td><td>14.5 mN (15.7 mN passive)</td><td>+78 % (+84 %)</td><td>Predicted, not built</td></tr>
     <tr><td>Discrete DEAs, gliding, free trailing edge</td><td>0.2 mN or less; floors 0.7–6.7 mN</td><td>about 1 % or less</td><td>Measured: nothing detected, in all 4 campaigns</td></tr>
-    <tr><td>Discrete DEAs, flapping, 10°</td><td>+21.8 ± 2.0 mN</td><td>+37 % of a baseline that drifts</td><td>Measured: not established</td></tr>
+    <tr><td>Discrete DEAs, flapping, 10°, cycle mean against 0 V</td><td>+21.8 ± 2.0 mN</td><td>+37 % of a baseline that drifts</td><td>Measured: mostly drift, <a href="#line">see the re-analysis</a></td></tr>
+    <tr><td>Discrete DEAs, flapping, 10°, within-cycle contrast</td><td>−14 ± 7 mN; real error about twice that</td><td>rough limit about 10 %</td><td>Measured: no clear effect</td></tr>
     <tr><td>Discrete DEAs, flapping, 0°</td><td>−3.2 ± 1.8 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
     <tr><td>Discrete DEAs, flapping, −5°</td><td>−27.9 ± 3.0 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
   </table></div>
@@ -123,6 +124,32 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <li><b>Trend:</b> gliding wings show no lift change, as the load-path finding expects with a free trailing edge. Flapping shows a change that follows pitch, with the sign flipping between −5° and 10°, but it is one wing in one ascending voltage sweep.</li>
     <li><b>Why flapping is not established:</b> a linear drift fits the dose curves as well as the bench shape, and in the pulsed runs lift in the voltage-off windows moved about as much as in the on windows (+23.2 against +21.8 mN at 4 m/s, 10°). Zero drift reached 0.3 N, and with no wind the same analysis gives −10 to +8 mN. The voltage monitor clips above 1.1 kV, so 1.6 kV is nominal.</li>
     <li><b>Validate:</b> randomised voltage order with a sham, 0 Hz with wind on the same wing, and a full membrane wing measured the same way. Error bars are the standard error over cycles, so they do not include drift.</li>
+  </ul>
+</section>
+
+<section class="card" id="line">
+  <h2>The nylon line, and a re-analysis of the flapping data</h2>
+  <p class="note">3 Nov 2026. The FAAV wing was not a free-edge wing: a nylon line ran from the trailing edge at the root to the body. Its real size is 12 × 7 cm (84 cm²), measured at 10° and 1 Hz. The earlier comparison with about 2 mN was for a 33 cm² wing at 6°, so it was wrong.</p>
+  <h3>What the line could do: model only</h3>
+  <div class="fig"><div class="plotrow"><img src="model/L_faav_line.png" alt="Model lift change against load-path factor for discrete fibres, and model against the old measured values"><aside class="ps"><img src="model/schematic_line.png" alt="What holds the trailing edge: free, tendon or rod"></aside></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> $\Delta n = r\,\Delta F / s$, with $r = k_a/(k_a+k_d)$ and $k_a = 8 T_c s / L_s^2$. The line sets $T_c$. Lift then follows from the <a href="model/#equations">one-cubic model</a>.</li>
+    <li><b>Trend:</b> free edge 0.5 mN; line reaching the inboard panel only 3–12 mN; line along the whole edge 5–23 mN. $T_c$ = 0.1 N gives $r$ = 0.50, and 0.5 N gives 0.83.</li>
+    <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Measure it, then run the same wing with the line slack and tight: about 30× in the model. The right panel is the old result, which the next plot does not support.</li>
+  </ul>
+  <h3>Isolating the DEA: within-cycle contrast</h3>
+  <div class="fig"><div class="plotrow"><img src="model/contrast.png" alt="Within-cycle lift contrast per condition with placebo and model values, and the scale factor on the model"><aside class="ps"><img src="model/schematic_line.png" alt="Same wing, with a line at the trailing edge"></aside></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> per cycle $C = \bar L_{on} - \bar L_{off}$, using phases 0.05–0.45 and 0.55–0.95 from the DEA's rising edge. Then $C = c_0 + a\,s(V)$, with $s$ the bench force drop and $a$ the lift change caused while the DEA is on. Slow drift is common to both phases, so it cancels. Code: <a href="recalibrate_contrast.py">recalibrate_contrast.py</a>, numbers: <a href="model/contrast_attached.csv">contrast_attached.csv</a>.</li>
+    <li><b>Trend:</b> 4 m/s, 10°: −14 ± 7 mN, where the cycle mean gave +21.8. 6 m/s, 10°: −4 ± 9 mN, where it gave +30. Over all attached-flow conditions the scale on the model is $\kappa$ = 0.13 ± 0.16 for a line along the whole edge. So the +37 % was mostly drift, and the rough limit is about 10 % of lift at 4 m/s, 10°.</li>
+    <li><b>Validate:</b> phases rotated by a quarter cycle give values just as large, so the real error per condition is about twice the one shown, near 14 mN. The test cannot see a slow, constant shift, and it assumes the DEA relaxes within the off phase, as on the bench. Voltage above 1.1 kV is nominal, and the current monitor cannot show that the fibres were alive. Next: alternate 0 and 1.6 kV for about 60 cycles each, about 2 minutes per condition, for an error near 2 mN, with a sham.</li>
+  </ul>
+  <h3>The same planform as a full membrane: model only</h3>
+  <div class="fig"><img src="model/L_faav_vs_full.png" alt="Lift change, film mass and lift change per mass for discrete fibres and a full membrane on the same planform"></div>
+  <ul class="read">
+    <li><b>Equation:</b> full sheet $\Delta n = P = \eta\,n\,\varepsilon_0\varepsilon_r V^2/H$. Film mass $m = \rho\,A\,(n+1)H$, plus the edge strip. Code: <a href="faav_vs_full_figures.py">faav_vs_full_figures.py</a>.</li>
+    <li><b>Trend:</b> $\Delta L$ = 13–24, 15–30, 16–31 mN for $n$ = 1, 2, 3, against 3–8 (line inboard) and 5–16 mN (whole edge). Film 0.78, 1.17, 1.56 g against 2.08 g. At $n$ = 2: 2–3× a whole-edge line, 3–5× per gram, 44 % lighter. Layers saturate, so $n$ = 1 is best per gram.</li>
+    <li><b>Validate:</b> the re-analysis says the model is too high for fibres ($\kappa$ below about 0.45), so it may be too high here too. Film only, with no electrodes, rods or glue, and a 180 µm membrane assumed. $C_{L0}$ is above 0.9, so treat these as upper bounds. Weigh real wings, and measure $\eta$ and tension first.</li>
   </ul>
 </section>
 

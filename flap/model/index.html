@@ -92,6 +92,26 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
   <p class="note">Notation as in Konstantinidi et al., <i>Smart Mater. Struct.</i> 32 (2023) 125011 and <i>Compos. Sci. Technol.</i> 258 (2024) 110849. The result has the same form as the fibre buckling model: a threshold, then square-root growth.</p>
 </section>
 
+<section class="card" id="approaches">
+  <h2>Modelling approaches</h2>
+  <p>What each part of the modelling is built on. All of it assumes attached flow, either steady or quasi-steady.</p>
+  <div class="tw"><table>
+    <tr><th>Physics</th><th>Approach</th><th>Used for</th></tr>
+    <tr><td>Silicone</td><td>Incompressible Yeoh hyperelasticity, fitted on bench data</td><td>All sheet and fibre models</td></tr>
+    <tr><td>Composite membrane</td><td>Additive strain energy: isotropic matrix plus fibre families ($I_1$, $I_4$)</td><td>Biomimetic membrane design</td></tr>
+    <tr><td>Electromechanics</td><td>Dielectric elastomer free energy; Maxwell stress $P=\eta\,n\,\varepsilon_0\varepsilon_r V^2/H$</td><td>All active sheets and fibres</td></tr>
+    <tr><td>Membrane structure</td><td>Nonlinear finite elements: constant-strain triangles, total Lagrangian</td><td>Full wing (<a href="../full_membrane/">page</a>)</td></tr>
+    <tr><td>Wrinkling</td><td>Tension-field relaxation</td><td>Full wing</td></tr>
+    <tr><td>Rods and battens</td><td>3D Euler–Bernoulli frame; 1D tension-only bars for rolled fibres</td><td>Full wing</td></tr>
+    <tr><td>Solver</td><td>Dynamic relaxation with kinetic damping</td><td>Full wing</td></tr>
+    <tr><td>Aerodynamics</td><td>Steady vortex-ring lattice; thin-airfoil theory (Glauert) for sections</td><td>Full wing; section model</td></tr>
+    <tr><td>Flapping</td><td>Quasi-steady strips: local speed and angle along the stroke</td><td>Stroke results</td></tr>
+    <tr><td>Reduced model</td><td>Rayleigh–Ritz, one bulge per panel: one cubic, with static divergence</td><td>This page, sweeps, wing comparison</td></tr>
+    <tr><td>Load path</td><td>Springs in series; geometric stiffness of a tensioned edge</td><td>$r$ for discrete fibres</td></tr>
+    <tr><td>Measured flapping lift</td><td>Within-cycle contrast against voltage, with rotated-phase placebos</td><td><a href="../#line">Re-analysis</a></td></tr>
+  </table></div>
+</section>
+
 <section class="card" id="equations">
   <h2>Equations, step by step</h2>
 <div class="row" id="A1">
