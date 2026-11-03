@@ -9,8 +9,18 @@ sys.path[:0] = [HERE, os.path.join(HERE, "..", "plagiopatagiales")]
 import membrane as M
 from tilt_study import rotate, AX, AY
 RHO = 1100.0                                                  # kg/m3, film
-KEYS = ("err_b", "err_r", "f", "rod_od", "rod_id", "batten_d", "H", "ramp", "shape", "replan", "na_x", "na_y")
+KEYS = ("err_b", "err_r", "f", "rod_od", "rod_id", "batten_d", "H", "ramp", "shape", "replan", "na_x", "na_y", "n_f")
 BASE = dict(theta=5.0, theta_r=8.85, N=2, xb=0.060, yc=0.0475, lam_n=1.04, ws=(0.020, 0.020), we=(0.0104, 0.0104), eta=0.5, eta_f=0.4, active=True, U=4.0, alpha=6.0, h=2e-3, rot=1.0, V=1600.0, iters=80000, aero_relax=0.2, aero_every=5)
+
+
+def roll_films(N, w_s, w_e, H=35e-6):
+    """Active films in the roll, for a band w_e at the outer end of a tight spiral. Inside the stack: N. The join of the two half layers is active only where the band faces itself one turn in, and only if the outer electrodes differ, so N odd."""
+    t = (N + 1) * H
+    R_ = math.sqrt(w_s * t / math.pi)
+    s = np.linspace(0, w_e, 2001)
+    r_ = np.sqrt(np.maximum(R_ ** 2 - s * t / math.pi, 0))
+    over = float(np.mean(s + 2 * math.pi * (r_ - t / 2) < w_e) * w_e)
+    return N + (over / w_e if N % 2 else 0.0), over, 2 * math.pi * (R_ - t / 2)
 
 
 def te_split(w, x):
@@ -41,7 +51,7 @@ def build(k):
     Hm = (N + 1) * H_
     ws, we = tuple(k["ws"]), tuple(k["we"])
     extra = {q: k[q] for q in ("na_x", "na_y") if q in k}
-    w = M.Wing(C=C, D=D, theta_deg=k["theta"], lam_d=(1.0, 1.0), lam_n=(k["lam_n"], k["lam_n"]), H=H_, t=(Hm, Hm), n_a=(N, N), w_s=ws, w_a_frac=np.array(we) / np.array(ws), h=k["h"], max_iter=k["iters"], tol=5e-7, U=k["U"], alpha_deg=k["alpha"], eta_s=k["eta"], active_fibre=k["active"], n_f=N + 1, eta_f=k["eta_f"], no_batten=False, root_free=False, **extra)
+    w = M.Wing(C=C, D=D, theta_deg=k["theta"], lam_d=(1.0, 1.0), lam_n=(k["lam_n"], k["lam_n"]), H=H_, t=(Hm, Hm), n_a=(N, N), w_s=ws, w_a_frac=np.array(we) / np.array(ws), h=k["h"], max_iter=k["iters"], tol=5e-7, U=k["U"], alpha_deg=k["alpha"], eta_s=k["eta"], active_fibre=k["active"], n_f=k.get("n_f", N + 1), eta_f=k["eta_f"], no_batten=False, root_free=False, **extra)
     w.p["aero_relax"], w.p["aero_every"] = k["aero_relax"], k["aero_every"]
     x = w.x0.copy()
     g0 = w.ids[0]
@@ -167,7 +177,7 @@ def run_flap(job):
 
 
 def go(job):
-    return dict(elastic=run_elastic, flap=run_flap).get(job[0], run)(job)
+    return dict(elastic=run_elastic, flap=run_flap, flapfilms=run_flap).get(job[0], run)(job)
 
 
 def jobs(stage):
@@ -228,6 +238,14 @@ def jobs(stage):
             J.append(("lowEta", dict(D, eta=e, active=False, iters=200000)))
             J.append(("lowEta", dict(D, eta=e, we=W2(2.5), iters=200000)))
             J.append(("lowEta", dict(D, eta=e, N=3, iters=200000)))
+    if stage == "films":                                      # the true count of active films in the roll, and each stack's stroke
+        for N, wes in ((1, (5.0, 7.5, 10.0)), (2, (5.0, 7.5, 10.0)), (3, (5.0, 6.5, 7.5, 10.0))):
+            for we_ in wes:
+                nf = roll_films(N, .02, we_ * 1e-3)[0]
+                J.append(("films", dict(D, N=N, we=W2(we_), n_f=nf)))
+            nf = roll_films(N, .02, .005)[0]
+            J += [("flapfilms", dict(D, N=N, n_f=nf, U=4.0, f=2.0, alpha=a)) for a in (6.0, 8.0)]
+            J.append(("flapfilms", dict(D, N=N, active=False, U=4.0, f=2.0, alpha=8.0)))
     if stage == "pick":
         for N in (2, 3):
             for tr in (7.0, 7.5, 8.0):

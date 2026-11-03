@@ -63,7 +63,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
 <div class="wrap">
 <h1>Which active wing changes lift more?</h1>
 <p class="lead">Two ways of putting dielectric elastomer actuators in a bat-inspired wing, on the same wing size, stroke and voltage, from <a href="model/">one analytical model</a>.</p>
-<a class="go" href="design/" style="margin-bottom:18px"><b>The wing to build →</b><br>Two active layers, batten 4.5°, root edge 7.5°, 20 mm roll with a 5 mm active band. Masks, equations, tolerances and bench checks.</a>
+<a class="go" href="design/" style="margin-bottom:18px"><b>The wing to build →</b><br>First build: one 6 cm panel, three electrodes, passive 20 mm roll, with a fully active coupon from the same plate. Masks, equations, edge options and bench checks.</a>
 <div class="warn"><b>These are model predictions.</b> The full membrane has not been built, and $\eta$ of a flat sheet is estimated (0.5), not measured.</div>
 <div class="two" style="margin-bottom:18px">
   <div class="card wing">
@@ -104,6 +104,25 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <li><b>Full against discrete at $\lambda_{pre}$ = 1.03:</b> about 8× at 4 m/s, narrowing with speed.</li>
     <li><b>The trailing-edge fibre is active in these numbers.</b> It needs a wide roll with a narrow active band, so it keeps its force at voltage: <a href="design/#why">the equations</a>. It adds no lift: a passive fibre on the same outline gives 15.7 mN against 14.5 mN in the finite elements.</li>
     <li><b>But a slack discrete wing may do as well.</b> Lowering $\lambda_{pre}$ raises its lift change to 7.5 mN at 1.01 and 12.7 mN at 1.00, close to the full membrane. Those are outside what the model has been checked on, and a slack membrane may flutter. See <a href="model/#stretch">pre-stretch</a>.</li>
+  </ul>
+</section>
+
+<section class="card" id="measured">
+  <h2>Against what has been measured</h2>
+  <div class="fig"><div class="plotrow"><img src="model/M10_measured.png" alt="Predicted and measured lift change against flow speed, and measured lift change against pitch at three speeds with the no-wind range shaded"><!--s:M10--><aside class="ps"><svg viewBox="0 0 240 142" role="img" aria-label="A wing on a force sensor in the flow. Tested wings carry discrete actuators, and the full membrane has not been built"><text x="10" y="12" text-anchor="start" class="h">Lift change on a force sensor</text><line x1="10" y1="52" x2="44" y2="52" stroke="var(--ps-hi)" stroke-width="1.4"/><path d="M44 52 L38.5 54.4 L38.5 49.6 Z" fill="var(--ps-hi)"/><text x="10" y="44" text-anchor="start" class="m">U</text><path d="M60 56 Q120 28 190 56" fill="none" stroke="var(--accent)" stroke-width="2.4"/><path d="M60 58 Q120 44 190 58" fill="none" stroke="var(--muted)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="125" y1="50" x2="125" y2="84" stroke="var(--ink)" stroke-width="1.5"/><rect x="109" y="84" width="32" height="14" fill="none" stroke="var(--ink)" stroke-width="1.2"/><text x="147" y="95" text-anchor="start" class="m">Sensor</text><text x="10" y="118" text-anchor="start" class="m">Tested: discrete DEAs only</text><text x="10" y="134" text-anchor="start" class="m">Full membrane: predicted, not built</text></svg><p><b>Varied:</b> a) $U$. b) $\alpha$ and $U$.</p><p><b>Fixed:</b> Nominal 1.6 kV. Flapping wing at 1 Hz, as tested. Prediction: 2 Hz, 6°.</p></aside><!--/s--></div></div>
+  <div class="tw"><table>
+    <tr><th>4 m/s, 1.6 kV</th><th>Lift change</th><th>In %</th><th>Status</th></tr>
+    <tr><td>Full membrane, one wing</td><td>14.5 mN (15.7 mN passive)</td><td>+78 % (+84 %)</td><td>Predicted, not built</td></tr>
+    <tr><td>Discrete DEAs, gliding, free trailing edge</td><td>0.2 mN or less; floors 0.7–6.7 mN</td><td>about 1 % or less</td><td>Measured: nothing detected, in all 4 campaigns</td></tr>
+    <tr><td>Discrete DEAs, flapping, 10°</td><td>+21.8 ± 2.0 mN</td><td>+37 % of a baseline that drifts</td><td>Measured: not established</td></tr>
+    <tr><td>Discrete DEAs, flapping, 0°</td><td>−3.2 ± 1.8 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
+    <tr><td>Discrete DEAs, flapping, −5°</td><td>−27.9 ± 3.0 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
+  </table></div>
+  <ul class="read">
+    <li><b>Equation:</b> $\Delta L=\Delta C_L\,qS$, with $q=\tfrac12\rho U^2$. The wings differ in area, so compare trends and percentages, not millinewtons alone.</li>
+    <li><b>Trend:</b> gliding wings show no lift change, as the load-path finding expects with a free trailing edge. Flapping shows a change that follows pitch, with the sign flipping between −5° and 10°, but it is one wing in one ascending voltage sweep.</li>
+    <li><b>Why flapping is not established:</b> a linear drift fits the dose curves as well as the bench shape, and in the pulsed runs lift in the voltage-off windows moved about as much as in the on windows (+23.2 against +21.8 mN at 4 m/s, 10°). Zero drift reached 0.3 N, and with no wind the same analysis gives −10 to +8 mN. The voltage monitor clips above 1.1 kV, so 1.6 kV is nominal.</li>
+    <li><b>Validate:</b> randomised voltage order with a sham, 0 Hz with wind on the same wing, and a full membrane wing measured the same way. Error bars are the standard error over cycles, so they do not include drift.</li>
   </ul>
 </section>
 
