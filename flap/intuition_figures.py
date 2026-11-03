@@ -80,8 +80,9 @@ rows = [
     ("Measured", "Gliding, free edge, all campaigns", 0.0, 1.5, None, None),
     ("Measured", "Flapping, 4 m/s, 10°: old cycle mean", 37.0, 3.4, None, None),
     ("Measured", "Flapping, 6 m/s, 10°: old cycle mean", 33.5, 4.6, None, None),
-    ("Measured", "Flapping, 4 m/s, 10°: within-cycle", -21.5, 22.6, None, None),
-    ("Measured", "Flapping, 6 m/s, 10°: within-cycle", -3.6, 18.4, None, None),
+    ("Measured", "Flapping, 4 m/s, 10°: with time term", 11.4, 43.4, None, None),
+    ("Measured", "Flapping, 4 m/s, 10°: on minus off", -21.5, 22.6, None, None),
+    ("Measured", "Flapping, 6 m/s, 10°: on minus off", -3.6, 18.4, None, None),
     ("Model", "Fibres, free edge", None, None, 0.2, 0.4),
     ("Model", "Fibres, line inboard", None, None, 3.0, 8.9),
     ("Model", "Fibres, line whole edge", None, None, 6.4, 19.8),
@@ -92,7 +93,7 @@ rows = [
 fig, a = plt.subplots(figsize=(9.5, 4.4))
 y = np.arange(len(rows))[::-1]
 a.axvline(0, color="k", lw=0.8)
-a.axvspan(-10, 10, color="#EEEEEE", lw=0, label="Rough limit from the re-analysis: 10 %")
+a.axvspan(-10, 10, color="#EEEEEE", lw=0, label="Rough limit, fast effect only: 10 %")
 for yy, r in zip(y, rows):
     if r[0] == "Measured":
         col = GRAY if "old" in r[1] else BLACK
@@ -101,10 +102,10 @@ for yy, r in zip(y, rows):
         a.barh(yy, r[5] - r[4], left=r[4], height=0.55, color=BLUE if r[1].startswith("Full") else RED, alpha=0.85)
 a.set_yticks(y); a.set_yticklabels([r[1] for r in rows], fontsize=10)
 a.set_xlabel("Lift change at 1.6 kV, % of lift (4 m/s, 10° unless stated)")
-a.set_xlim(-50, 50)
+a.set_xlim(-55, 60)
 a.grid(axis="x", alpha=.3)
-a.axhline(5.5, color="#BBBBBB", lw=1)
-a.text(-49, 10.45, "Measured, ± 2 s.e.", fontsize=9, color="#555555", va="top")
-a.text(-49, 5.35, "Model", fontsize=9, color="#555555", va="top")
+a.axhline(4.5, color="#BBBBBB", lw=1)
+a.text(-49, 11.45, "Measured, ± 2 s.e.", fontsize=9, color="#555555", va="top")
+a.text(-49, 4.35, "Model", fontsize=9, color="#555555", va="top")
 a.legend(fontsize=9, loc="lower left", frameon=False)
 save(fig, "I_all_percent")

@@ -58,7 +58,7 @@ N = {}
 rs = np.array([0.02, 0.05, 0.1, 0.15, 0.22, 0.3, 0.4, 0.5, 0.6, 0.7, 0.81, 0.9, 1.0])
 fig, ax = plt.subplots(1, 2, figsize=(11.5, 4.3))
 a = ax[0]
-a.axhspan(10.9 - 1.0, 10.9 + 1.0, color=GRAY, alpha=0.25, label="Old cycle mean per wing: 10.9 ± 1.0 mN (mostly drift)")
+a.axhspan(10.9 - 1.0, 10.9 + 1.0, color=GRAY, alpha=0.25, label="Old cycle mean per wing: 10.9 mN (not conclusive)")
 for lam, c in ((1.00, BLUE), (1.01, RED)):
     a.plot(rs, [dL(disc(lam, r, r), ten) for r in rs], "-", color=c, lw=2, label=f"Line tensions whole edge, $\\lambda$ = {lam:.2f}")
     a.plot(rs, [dL(disc(lam, r, 0.02), ten) for r in rs], "--", color=c, lw=2, label=f"Line reaches inboard panel only, $\\lambda$ = {lam:.2f}")
