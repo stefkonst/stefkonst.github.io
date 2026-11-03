@@ -114,8 +114,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <tr><th>4 m/s, 1.6 kV</th><th>Lift change</th><th>In %</th><th>Status</th></tr>
     <tr><td>Full membrane, one wing</td><td>14.5 mN (15.7 mN passive)</td><td>+78 % (+84 %)</td><td>Predicted, not built</td></tr>
     <tr><td>Discrete DEAs, gliding, free trailing edge</td><td>0.2 mN or less; floors 0.7–6.7 mN</td><td>about 1 % or less</td><td>Measured: nothing detected, in all 4 campaigns</td></tr>
-    <tr><td>Discrete DEAs, flapping, 10°, cycle mean against 0 V</td><td>+21.8 ± 2.0 mN</td><td>+37 % of a baseline that drifts</td><td>Measured: mostly drift, <a href="#line">see the re-analysis</a></td></tr>
-    <tr><td>Discrete DEAs, flapping, 10°, within-cycle contrast</td><td>−14 ± 7 mN; real error about twice that</td><td>rough limit about 10 %</td><td>Measured: no clear effect</td></tr>
+    <tr><td>Discrete DEAs, flapping, 10°, cycle mean against 0 V</td><td>+21.8 ± 2.0 mN</td><td>+37 % of a baseline that drifts</td><td>Measured: not conclusive, <a href="#line">see the re-analysis</a></td></tr>
+    <tr><td>Discrete DEAs, flapping, 10°, within-cycle contrast</td><td>−14 ± 7 mN; real error about twice that</td><td>rough limit about 10 %, fast effect only</td><td>Measured: no clear fast effect</td></tr>
     <tr><td>Discrete DEAs, flapping, 0°</td><td>−3.2 ± 1.8 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
     <tr><td>Discrete DEAs, flapping, −5°</td><td>−27.9 ± 3.0 mN</td><td>not meaningful, baseline near zero</td><td>Measured: not established</td></tr>
   </table></div>
@@ -123,7 +123,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <li><b>Equation:</b> $\Delta L=\Delta C_L\,qS$, with $q=\tfrac12\rho U^2$. The wings differ in area, so compare trends and percentages, not millinewtons alone.</li>
     <li><b>Trend:</b> gliding wings show no lift change, as the load-path finding expects with a free trailing edge. Flapping shows a change that follows pitch, with the sign flipping between −5° and 10°, but it is one wing in one ascending voltage sweep.</li>
     <li><b>Why flapping is not established:</b> a linear drift fits the dose curves as well as the bench shape, and in the pulsed runs lift in the voltage-off windows moved about as much as in the on windows (+23.2 against +21.8 mN at 4 m/s, 10°). Zero drift reached 0.3 N, and with no wind the same analysis gives −10 to +8 mN. The voltage monitor clips above 1.1 kV, so 1.6 kV is nominal.</li>
-    <li><b>Validate:</b> randomised voltage order with a sham, 0 Hz with wind on the same wing, and a full membrane wing measured the same way. Error bars are the standard error over cycles, so they do not include drift.</li>
+    <li><b>Validate:</b> flapping tests are paused. The full membrane wing comes next, bench first, then gliding with randomised voltage order and a sham. Error bars are the standard error over cycles, so they do not include drift.</li>
   </ul>
 </section>
 
@@ -132,8 +132,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <div class="fig"><img src="model/I_all_percent.png" alt="Every lift result in percent: gliding near zero, old flapping values near 35 percent, within-cycle values near zero with large errors, model ranges from 0 to 37 percent"></div>
   <ul class="read">
     <li><b>Equation:</b> $\Delta L / |L|$, lift change at 1.6 kV over lift. In mN: <a href="#measured">measured</a> and <a href="#line">re-analysed</a>.</li>
-    <li><b>Trend:</b> once drift is removed, nothing measured clearly differs from zero. Fibres with a free edge should do nothing, and the model's full membrane sits furthest to the right.</li>
-    <li><b>Validate:</b> the model bars are not measurements. If a full membrane wing gets near them, it would be the first clear effect: alternate 0 and 1.6 kV, with a sham.</li>
+    <li><b>Trend:</b> nothing measured clearly differs from zero once time or drift is accounted for, but the errors still include the old value. Fibres with a free edge should do nothing, and the model's full membrane sits furthest to the right.</li>
+    <li><b>Validate:</b> the model bars are not measurements. If a full membrane wing gets near them, it would be the first clear effect: randomised voltage order, with a sham.</li>
   </ul>
 </section>
 
@@ -145,7 +145,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <ul class="read">
     <li><b>Equation:</b> $\Delta n = r\,\Delta F / s$, with $r = k_a/(k_a+k_d)$ and $k_a = 8 T_c s / L_s^2$. The line sets $T_c$. Lift then follows from the <a href="model/#equations">one-cubic model</a>.</li>
     <li><b>Trend:</b> free edge 0.5 mN (0.4 %); line reaching the inboard panel only 3–12 mN (3–11 %); line along the whole edge 5–23 mN (6–26 %). $T_c$ = 0.1 N gives $r$ = 0.50, and 0.5 N gives 0.83.</li>
-    <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Measure it, then run the same wing with the line slack and tight: about 30× in the model. The old result was 10.9 mN per wing, and the next plot does not support it. The right panel is for both wings.</li>
+    <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Flapping tests are paused, so this stays untested. If they resume: measure the line force, then run the same wing with the line slack and tight, about 30× in the model. The old result was 10.9 mN per wing, and the next plot does not support it. The right panel is for both wings.</li>
   </ul>
   <h3>Within-cycle contrast</h3>
   <div class="fig"><img src="model/I_contrast.png" alt="Drift moves both phases of the flap cycle, the DEA only the on phase; real 4 m/s data; the old cycle mean rises with voltage while the on-minus-off contrast does not follow the model"></div>
@@ -153,8 +153,22 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <div class="fig"><div class="plotrow"><img src="model/contrast.png" alt="Within-cycle lift contrast per condition with placebo and model values, and the scale factor on the model"><aside class="ps"><img src="model/schematic_line.png" alt="Same wing, with a line at the trailing edge"></aside></div></div>
   <ul class="read">
     <li><b>Equation:</b> per cycle $C = \bar L_{on} - \bar L_{off}$, using phases 0.05–0.45 and 0.55–0.95 from the DEA's rising edge. Then $C = c_0 + a\,s(V)$, with $s$ the bench force drop and $a$ the lift change caused while the DEA is on. Slow drift is common to both phases, so it cancels. Code: <a href="recalibrate_contrast.py">recalibrate_contrast.py</a>, numbers: <a href="model/contrast_attached.csv">contrast_attached.csv</a>.</li>
-    <li><b>Trend:</b> 4 m/s, 10°: −14 ± 7 mN (−22 %), where the cycle mean gave +21.8 mN (+37 %). 6 m/s, 10°: −4 ± 9 mN (−4 %), where it gave +30 mN (+34 %). Over all attached-flow conditions the scale on the model, for both wings, is $\kappa$ = 0.06 ± 0.08 for a line along the whole edge. So the +37 % was mostly drift, and the rough limit is about 10 % of lift at 4 m/s, 10°.</li>
-    <li><b>Validate:</b> phases rotated by a quarter cycle give values just as large, so the real error per condition is about twice the one shown, near 14 mN. The test cannot see a slow, constant shift, and it assumes the DEA relaxes within the off phase, as on the bench. Voltage above 1.1 kV is nominal, and the current monitor cannot show that the fibres were alive. Next: alternate 0 and 1.6 kV for about 60 cycles each, about 2 minutes per condition, for an error near 2 mN, with a sham.</li>
+    <li><b>Trend:</b> 4 m/s, 10°: −14 ± 7 mN (−22 %), where the cycle mean gave +21.8 mN (+37 %). 6 m/s, 10°: −4 ± 9 mN (−4 %), where it gave +30 mN (+34 %). Over all attached-flow conditions the scale on the model, for both wings, is $\kappa$ = 0.06 ± 0.08 for a line along the whole edge. So there is no clear fast effect, with a rough limit of about 10 % of lift at 4 m/s, 10°. This says nothing about a lasting effect. A negative value does not mean the DEA lowers lift: the off phase rose more than the on phase, and the placebo is just as negative.</li>
+    <li><b>Validate:</b> phases rotated by a quarter cycle give values just as large, so the real error per condition is about twice the one shown, near 14 mN. The test cannot see a slow, constant shift, and it assumes the DEA relaxes within the off phase, as on the bench. Voltage above 1.1 kV is nominal, and the current monitor cannot show that the fibres were alive. Flapping tests are paused, so this stays inconclusive. If they resume: alternate 0 and 1.6 kV for about 60 cycles each, about 2 minutes per condition, for an error near 2 mN, with a sham.</li>
+  </ul>
+  <h3>Old cycle mean and the tare</h3>
+  <div class="fig"><img src="model/I_tare.png" alt="Raw lift change, tare added and old result for each condition, and five estimates at 4 m/s, 10 degrees"></div>
+  <ul class="read">
+    <li><b>Equation:</b> old result = raw change + change in the wind-off tare between the 0 V and 1.6 kV windows. With a time term: $L = c + d\,t + a\,(V/1.6\,\mathrm{kV})^2$ per cycle. Code: <a href="cycle_mean_check.py">cycle_mean_check.py</a>, numbers: <a href="model/cycle_mean_check.csv">cycle_mean_check.csv</a>.</li>
+    <li><b>Trend:</b> the cycle mean is the right quantity, because it sees lasting effects too. But the tare sets its sign: at 4 m/s, 10° the raw change is −12 mN, the tare adds +34 mN, and the result is +22 mN. Time and voltage are almost the same variable ($r$ = 0.98), so with a time term it becomes +7 ± 13 mN (+11 ± 22 %).</li>
+    <li><b>Validate:</b> not settled either way. For a real effect: with wind $|L|$ grows and with no wind it does not (signed, +9.8 ± 1.0 against +0.3 ± 0.9 mN), and lift does not keep growing inside constant-voltage windows. Against: the tare, and +57.6 mN at 2 m/s, where the air load is a quarter of that at 4 m/s. The ± 2.0 mN is cycle scatter only, and leaves out the tare.</li>
+  </ul>
+  <h3>Sign flip between −5° and 10°</h3>
+  <div class="fig"><img src="model/I_signflip.png" alt="Raw lift change against the time each block starts, and the difference between plus 10 and minus 5 degrees against flow speed"></div>
+  <ul class="read">
+    <li><b>Equation:</b> $L = F_z\cos\alpha - F_x\sin\alpha$. The difference $\Delta L_{+10°} - \Delta L_{-5°}$ in one run cancels a zero shift common to the run. Code: <a href="sign_flip_check.py">sign_flip_check.py</a>, numbers: <a href="model/sign_flip_check.csv">sign_flip_check.csv</a>.</li>
+    <li><b>Trend:</b> the flip rules out a uniform zero shift and $F_x$ drift: it is all in $F_z$, and it does not need the tare (74, 53, 69 mN at 2, 4, 6 m/s). But −5° is always recorded first and 10° later (correlation 0.98), and the raw change shrinks with time in each wind run, so a zero that settles after wind-on gives the same flip. The flip also does not grow with speed, while the air load grows 9×.</li>
+    <li><b>Validate:</b> leans to time order, not proven. Decisive and short if flapping resumes: the same run with 10° first and −5° last. If the sign follows pitch, it is real; if it follows order, it is the zero.</li>
   </ul>
   <h3>All conditions, both wings</h3>
   <div class="fig"><div class="plotrow"><img src="model/contrast_percent.png" alt="Lift change at each condition in mN and percent: within-cycle contrast, old cycle mean and two model cases"><aside class="ps"><img src="model/schematic_line.png" alt="What holds the trailing edge"></aside></div></div>
@@ -180,7 +194,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   <ul class="read">
     <li><b>Equation:</b> full sheet $\Delta n = P = \eta\,n\,\varepsilon_0\varepsilon_r V^2/H$. Film mass $m = \rho\,A\,(n+1)H$, plus the edge strip. Code: <a href="faav_vs_full_figures.py">faav_vs_full_figures.py</a>.</li>
     <li><b>Trend:</b> $\Delta L$ = 13–24, 15–30, 16–31 mN (12–23, 17–32, 19–37 %) for $n$ = 1, 2, 3, against 3–8 mN (3–9 %) with the line inboard and 5–16 mN (6–20 %) along the whole edge. Film 0.78, 1.17, 1.56 g against 2.08 g. At $n$ = 2: 2–3× a whole-edge line, 3–5× per gram, 44 % lighter. Layers saturate, so $n$ = 1 is best per gram.</li>
-    <li><b>Validate:</b> the re-analysis says the model is too high for fibres ($\kappa$ below about 0.22), so it may be too high here too. Film only, with no electrodes, rods or glue, and a 180 µm membrane assumed. $C_{L0}$ is above 0.9, so treat these as upper bounds. Weigh real wings, and measure $\eta$ and tension first.</li>
+    <li><b>Validate:</b> for a fast effect the re-analysis puts the model too high for fibres ($\kappa$ below about 0.22), so it may be too high here too. Film only, with no electrodes, rods or glue, and a 180 µm membrane assumed. $C_{L0}$ is above 0.9, so treat these as upper bounds. Weigh real wings, and measure $\eta$ and tension first.</li>
   </ul>
 </section>
 
