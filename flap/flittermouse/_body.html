@@ -1,0 +1,48 @@
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Flittermouse</p>
+<h1>Flittermouse</h1>
+<p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
+<div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
+
+<section class="card" id="idea">
+<h2>The idea</h2>
+<ul>
+<li><b>Wing:</b> 5 cm span, skin of active DEA film, active rolled fibre along the trailing edge, carbon strip or cross along the leading edge.</li>
+<li><b>Drive:</b> one rolled DEA of about 2 cm per wing, through a transmission to the leading edge. The trailing-edge fibre pulls to the body.</li>
+<li><b>Flight:</b> forward flight, about 4 m/s.</li>
+<li><b>Timing:</b> skin stiffer on the upstroke than on the downstroke. Voltage lowers tension, so that means voltage on in the downstroke.</li>
+</ul>
+</section>
+
+<section class="card" id="first">
+<h2>First pass</h2>
+<p>Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
+<div class="tw"><table>
+<tr><th>Item</th><th>Value</th></tr>
+<tr><td>Mass</td><td>1.55 g</td></tr>
+<tr><td>Weight, lift</td><td>15.2 mN, 15.1 mN</td></tr>
+<tr><td>Net thrust per wing</td><td>+0.13 mN</td></tr>
+<tr><td>Air power per wing</td><td>9.4 mW, no transmission losses</td></tr>
+<tr><td>Power per core</td><td>15.6 mW from published energy per cycle; 7.1–19 mW for $\eta$ 0.15–0.4</td></tr>
+</table></div>
+<p class="note">Energy per cycle: Ren, Kim et al., Adv. Mater. 2022 report above 500 W/kg at 400 Hz, which is 1.25 J/kg per cycle.</p>
+</section>
+
+<section class="card" id="log">
+<h2>Update log</h2>
+<ul>
+<li><b>3 Nov, evening:</b> page opened with first-pass numbers. Next: unsteady lattice with a shed wake, then a coupled skin model, so twist and camber are computed rather than assumed.</li>
+</ul>
+</section>
+
+<div class="two">
+  <a class="go" href="../design/"><b>The wing to build →</b><br>The 6 cm wing this builds on.</a>
+  <a class="go" href="../manufacturing/"><b>Manufacturing →</b><br>Stack, masks, process, fixtures.</a>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});
+</script>
+</body>
+</html>
