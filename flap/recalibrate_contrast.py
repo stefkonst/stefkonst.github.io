@@ -109,7 +109,7 @@ def rotated(k):
     return np.roll(ON, k), np.roll(OFF, k)
 
 
-# ---- the model's on-phase lift change, same phase bands; upstroke = 180-360 deg in cycle(). The flapping wing's values at 1 Hz
+# ---- the model's on-phase lift change, same phase bands; upstroke = 180-360 deg in cycle(). Both wings, at 1 Hz
 AREA = 84e-4
 GEOM = dict(a=(0.06, 0.06), b=(0.07, 0.06), share=(0.55, 0.45), radius=(0.06, 0.12))
 
@@ -127,7 +127,7 @@ def model_a(U, aoa, r_in, r_out, dF=8.6e-3, lam=1.01):
     fl = dict(U=float(U), alpha_deg=float(aoa), area=AREA, Phi0_deg=30.0, f=1.0)
     p = W.cycle(w, ten, **fl)[0]
     d = W.delta_cycle(w, ten, **fl)
-    return float(d[(p > 198) & (p < 342)].mean())
+    return 2 * float(d[(p > 198) & (p < 342)].mean())   # both wings carried DEAs and the load cell measures both
 
 
 R = cycles()
@@ -193,12 +193,12 @@ lab = [f"{u:g} m/s\n{a_:+d}°" for u, a_ in zip(att.U, att.aoa)]
 ax[0].axhline(0, color="k", lw=0.8)
 ax[0].errorbar(x - 0.12, att.a, yerr=2 * att.se, fmt="o", color="k", capsize=3, label="Within-cycle contrast, ± 2 s.e.")
 ax[0].errorbar(x + 0.12, att.placebo, yerr=2 * att.placebo_se, fmt="s", color="#AAAAAA", capsize=3, label="Placebo: phases rotated by a quarter cycle")
-ax[0].plot(x, att.m_whole, "_", color="#D95319", ms=22, mew=2.5, label="Model: line along the whole edge")
-ax[0].plot(x, att.m_in, "_", color="#0072BD", ms=22, mew=2.5, label="Model: line inboard only")
+ax[0].plot(x, att.m_whole, "_", color="#D95319", ms=22, mew=2.5, label="Model, both wings: line along the whole edge")
+ax[0].plot(x, att.m_in, "_", color="#0072BD", ms=22, mew=2.5, label="Model, both wings: line inboard only")
 ax[0].set_xticks(x); ax[0].set_xticklabels(lab, fontsize=9)
 ax[0].set_ylabel("Lift change while the DEA is on, mN at 1.6 kV")
 ax[0].legend(fontsize=8.5); ax[0].grid(alpha=.3)
-ax[0].set_title("a) Drift-free estimate against the model", loc="left")
+ax[0].set_title("a) Each condition", loc="left")
 names = [("m_whole", "Line, whole edge"), ("m_in", "Line, inboard only"), ("m_low", "Line, low DEA force")]
 for i, (c, n_) in enumerate(names):
     d = S[c]
@@ -208,7 +208,7 @@ ax[1].set_yticks(range(3)); ax[1].set_yticklabels([n[1] for n in names])
 ax[1].set_ylim(-0.6, 2.6)
 ax[1].set_xlabel(r"Scale factor $\kappa$ on the model (0: no effect, 1: model right), ± 2 s.e.")
 ax[1].grid(alpha=.3)
-ax[1].set_title("b) All attached-flow blocks together", loc="left")
+ax[1].set_title("b) All conditions", loc="left")
 fig.tight_layout()
 fig.savefig(os.path.join(FIG, "contrast.png"), dpi=200)
 fig.savefig(os.path.join(FIG, "contrast.svg"))

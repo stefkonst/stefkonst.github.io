@@ -26,7 +26,7 @@ def ten(w, i, V):
 
 def base(U, a, r_in, r_out, lam=1.01):
     w = dict(W.DISCRETE, lam_x=lam, lam_y=lam, dF=8.6e-3, s=0.010, r=(r_in, r_out), **GEOM)
-    return float(W.cycle(w, ten, V=0.0, U=float(U), alpha_deg=float(a), area=AREA, Phi0_deg=30.0, f=1.0)[1].mean())
+    return 2 * float(W.cycle(w, ten, V=0.0, U=float(U), alpha_deg=float(a), area=AREA, Phi0_deg=30.0, f=1.0)[1].mean())   # both wings
 
 
 def pct(x, b):
@@ -56,8 +56,8 @@ lab = [f"{u:g} m/s\n{a:+d}°" for u, a in zip(T.U, T.aoa)]
 ax[0].axhline(0, color="k", lw=0.8)
 ax[0].errorbar(x, T.a_mN, yerr=2 * T.a_se, fmt="o", color="k", capsize=3, label="Measured, within-cycle, ± 2 s.e.")
 ax[0].plot(x, T.old_mN, "D", mfc="none", color="#7F7F7F", ms=7, label="Old cycle mean against 0 V")
-ax[0].plot(x, T.whole_mN, "_", color="#D95319", ms=22, mew=2.5, label="Model: line, whole edge")
-ax[0].plot(x, T.inboard_mN, "_", color="#0072BD", ms=22, mew=2.5, label="Model: line, inboard")
+ax[0].plot(x, T.whole_mN, "_", color="#D95319", ms=22, mew=2.5, label="Model, both wings: whole edge")
+ax[0].plot(x, T.inboard_mN, "_", color="#0072BD", ms=22, mew=2.5, label="Model, both wings: inboard")
 ax[0].set_ylabel(r"$\Delta L$ at 1.6 kV in mN")
 ax[0].set_title("a) In mN", loc="left")
 ax[0].legend(fontsize=8.5, loc="upper right", ncol=2)

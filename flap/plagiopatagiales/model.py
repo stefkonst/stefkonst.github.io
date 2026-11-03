@@ -36,7 +36,7 @@ MATERIALS = {
                   Ef_chord=143990.0, Ef_span=68770.0),
     "aniso90": dict(label="Anisotropic composite membrane, rotated 90 deg", C=(5636.1, 15840.8, 0.0), v_m=0.577,
                     Ef_chord=68770.0, Ef_span=143990.0),
-    "P6760": dict(label="Isotropic Wacker P6760 (measured)", C=(5636.1, 15840.8, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
+    "P6760": dict(label="Isotropic Elastosil P7670, sheet test (measured)", C=(5636.1, 15840.8, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
     "DS20": dict(label="Isotropic DragonSkin 20 (measured)", C=(63051.2, 0.0, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
     "P7670": dict(label="Isotropic Elastosil P7670 (DEA silicone, measured)", C=(42842.1, 447.0, 0.0), v_m=1.0, Ef_chord=0.0, Ef_span=0.0),
 }

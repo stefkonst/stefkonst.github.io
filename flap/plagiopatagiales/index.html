@@ -258,7 +258,7 @@ code{font-size:12.5px;background:var(--accent-dim);padding:1px 4px;border-radius
   <p>The constants are fitted to measured uniaxial nominal stress (non-negative least squares). The wing membrane is not reinforced with stiff fibres: its anisotropy comes from the compliant silicone features of the composite, and $v_fE_f$ is their effective contribution. Valid to $\lambda = 1.22$. Compressive principal stresses are set to zero (wrinkling; a small residual can be kept for regularisation, default 0).</p>
   <div class="tw"><table style="max-width:760px"><tr><th>Material</th><th>$C_1$ (Pa)</th><th>$C_2$ (Pa)</th><th>$v_m$</th><th>$v_fE_f$ chord (Pa)</th><th>$v_fE_f$ span (Pa)</th><th>fit rms</th></tr>
   <tr><td>Anisotropic composite membrane</td><td>5 636</td><td>15 841</td><td>0.577</td><td>143 990</td><td>68 770</td><td>0.87 / 0.45 kPa</td></tr>
-  <tr><td>Wacker P6760</td><td>5 636</td><td>15 841</td><td>1</td><td>–</td><td>–</td><td>0.41 kPa</td></tr>
+  <tr><td>Elastosil P7670, sheet test (file labelled P6760)</td><td>5 636</td><td>15 841</td><td>1</td><td>–</td><td>–</td><td>0.41 kPa</td></tr>
   <tr><td>DragonSkin 20</td><td>63 051</td><td>0</td><td>1</td><td>–</td><td>–</td><td>0.40 kPa</td></tr>
   <tr><td>Elastosil P7670 (DEAs)</td><td>42 842</td><td>447</td><td>1</td><td>–</td><td>–</td><td>0.58 mN on the 5-DEA bundle</td></tr></table></div>
 
@@ -357,7 +357,7 @@ const CTL = [
   ["clamp_root","Root clamped (body)","check"],["clamp_tip","Tip edge clamped (instead of a digit)","check"],
   ["clamp_TE","Trailing edge clamped","check"],["te_cord","Cord on the free trailing edge","check"]]],
  ["Membrane", [
-  ["material","Material","select",[["aniso","Anisotropic composite (measured)"],["aniso90","Anisotropic, rotated 90°"],["P6760","Isotropic P6760 (measured)"],["DS20","Isotropic DragonSkin 20 (measured)"],["P7670","Isotropic P7670 (measured)"]]],
+  ["material","Material","select",[["aniso","Anisotropic composite (measured)"],["aniso90","Anisotropic, rotated 90°"],["P6760","Isotropic P7670, sheet test (measured)"],["DS20","Isotropic DragonSkin 20 (measured)"],["P7670","Isotropic P7670 (measured)"]]],
   ["t_mem","Thickness H_m","range",50,400,10,"µm",1e-6],
   ["pre_span","Tensioning: pre-stretch λpre,x (span)","range",1.0,1.2,0.005,"",1],
   ["pre_chord","Tensioning: pre-stretch λpre,y (chord)","range",1.0,1.2,0.005,"",1]]],

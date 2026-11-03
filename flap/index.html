@@ -128,7 +128,7 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
 </section>
 
 <section class="card" id="glance">
-  <h2>Every lift result, in %</h2>
+  <h2>All results in %</h2>
   <div class="fig"><img src="model/I_all_percent.png" alt="Every lift result in percent: gliding near zero, old flapping values near 35 percent, within-cycle values near zero with large errors, model ranges from 0 to 37 percent"></div>
   <ul class="read">
     <li><b>Equation:</b> $\Delta L / |L|$, lift change at 1.6 kV over lift. In mN: <a href="#measured">measured</a> and <a href="#line">re-analysed</a>.</li>
@@ -138,49 +138,49 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
 </section>
 
 <section class="card" id="line">
-  <h2>The nylon line, and a re-analysis of the flapping data</h2>
-  <p class="note">3 Nov 2026. The FAAV wing was not a free-edge wing: a nylon line ran from the trailing edge at the root to the body. Its real size is 12 × 7 cm (84 cm²), measured at 10° and 1 Hz. The earlier comparison with about 2 mN was for a 33 cm² wing at 6°, so it was wrong.</p>
-  <h3>What the line could do: model only</h3>
+  <h2>Nylon line and flapping re-analysis</h2>
+  <p class="note">3 Nov 2026. The FAAV wing was not a free-edge wing: a nylon line ran from the trailing edge at the root to the body. Each wing is 12 × 7 cm (84 cm²), measured at 10° and 1 Hz, and both wings carried DEAs, so measured lift covers both. The earlier comparison with about 2 mN was for a 33 cm² wing at 6°, so it was wrong.</p>
+  <h3>Nylon line: model, one wing</h3>
   <div class="fig"><div class="plotrow"><img src="model/L_faav_line.png" alt="Model lift change against load-path factor for discrete fibres, and model against the old measured values"><aside class="ps"><img src="model/schematic_line.png" alt="What holds the trailing edge: free, tendon or rod"></aside></div></div>
   <ul class="read">
     <li><b>Equation:</b> $\Delta n = r\,\Delta F / s$, with $r = k_a/(k_a+k_d)$ and $k_a = 8 T_c s / L_s^2$. The line sets $T_c$. Lift then follows from the <a href="model/#equations">one-cubic model</a>.</li>
     <li><b>Trend:</b> free edge 0.5 mN (0.4 %); line reaching the inboard panel only 3–12 mN (3–11 %); line along the whole edge 5–23 mN (6–26 %). $T_c$ = 0.1 N gives $r$ = 0.50, and 0.5 N gives 0.83.</li>
-    <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Measure it, then run the same wing with the line slack and tight: about 30× in the model. The right panel is the old result, which the next plot does not support.</li>
+    <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Measure it, then run the same wing with the line slack and tight: about 30× in the model. The old result was 10.9 mN per wing, and the next plot does not support it. The right panel is for both wings.</li>
   </ul>
-  <h3>Isolating the DEA: within-cycle contrast</h3>
+  <h3>Within-cycle contrast</h3>
   <div class="fig"><img src="model/I_contrast.png" alt="Drift moves both phases of the flap cycle, the DEA only the on phase; real 4 m/s data; the old cycle mean rises with voltage while the on-minus-off contrast does not follow the model"></div>
   <p class="note">The intuition: drift lifts the whole cycle, so on minus off does not change. A DEA can only move the phase where it is on. Code: <a href="intuition_figures.py">intuition_figures.py</a>.</p>
   <div class="fig"><div class="plotrow"><img src="model/contrast.png" alt="Within-cycle lift contrast per condition with placebo and model values, and the scale factor on the model"><aside class="ps"><img src="model/schematic_line.png" alt="Same wing, with a line at the trailing edge"></aside></div></div>
   <ul class="read">
     <li><b>Equation:</b> per cycle $C = \bar L_{on} - \bar L_{off}$, using phases 0.05–0.45 and 0.55–0.95 from the DEA's rising edge. Then $C = c_0 + a\,s(V)$, with $s$ the bench force drop and $a$ the lift change caused while the DEA is on. Slow drift is common to both phases, so it cancels. Code: <a href="recalibrate_contrast.py">recalibrate_contrast.py</a>, numbers: <a href="model/contrast_attached.csv">contrast_attached.csv</a>.</li>
-    <li><b>Trend:</b> 4 m/s, 10°: −14 ± 7 mN (−22 %), where the cycle mean gave +21.8 mN (+37 %). 6 m/s, 10°: −4 ± 9 mN (−4 %), where it gave +30 mN (+34 %). Over all attached-flow conditions the scale on the model is $\kappa$ = 0.13 ± 0.16 for a line along the whole edge. So the +37 % was mostly drift, and the rough limit is about 10 % of lift at 4 m/s, 10°.</li>
+    <li><b>Trend:</b> 4 m/s, 10°: −14 ± 7 mN (−22 %), where the cycle mean gave +21.8 mN (+37 %). 6 m/s, 10°: −4 ± 9 mN (−4 %), where it gave +30 mN (+34 %). Over all attached-flow conditions the scale on the model, for both wings, is $\kappa$ = 0.06 ± 0.08 for a line along the whole edge. So the +37 % was mostly drift, and the rough limit is about 10 % of lift at 4 m/s, 10°.</li>
     <li><b>Validate:</b> phases rotated by a quarter cycle give values just as large, so the real error per condition is about twice the one shown, near 14 mN. The test cannot see a slow, constant shift, and it assumes the DEA relaxes within the off phase, as on the bench. Voltage above 1.1 kV is nominal, and the current monitor cannot show that the fibres were alive. Next: alternate 0 and 1.6 kV for about 60 cycles each, about 2 minutes per condition, for an error near 2 mN, with a sham.</li>
   </ul>
-  <h3>Re-analysis against the model, every condition</h3>
+  <h3>All conditions, both wings</h3>
   <div class="fig"><div class="plotrow"><img src="model/contrast_percent.png" alt="Lift change at each condition in mN and percent: within-cycle contrast, old cycle mean and two model cases"><aside class="ps"><img src="model/schematic_line.png" alt="What holds the trailing edge"></aside></div></div>
   <div class="tw"><table>
-    <tr><th>1.6 kV, 1 Hz</th><th>Baseline, measured / model</th><th>Old cycle mean</th><th>Within-cycle</th><th>Placebo</th><th>Model, whole edge</th><th>Model, inboard</th></tr>
-    <tr><td>2 m/s, −5°</td><td>−64 / −8 mN</td><td>−16 mN (−27 %)</td><td>−7 ± 7 mN (−10 %)</td><td>−14 mN</td><td>−1 mN</td><td>−1 mN</td></tr>
-    <tr><td>2 m/s, 0°</td><td>−70 / 0 mN</td><td>+7 mN (+11 %)</td><td>−34 ± 7 mN (−48 %)</td><td>−29 mN</td><td>−1 mN</td><td>0 mN</td></tr>
-    <tr><td>2 m/s, 10°</td><td>0 / 15 mN</td><td>+58 mN</td><td>+6 ± 6 mN</td><td>+5 mN</td><td>0 mN</td><td>0 mN</td></tr>
-    <tr><td>4 m/s, −5°</td><td>−25 / −42 mN</td><td>−28 mN</td><td>−15 ± 8 mN (−58 %)</td><td>−20 mN</td><td>−17 mN (−39 %)</td><td>−9 mN (−17 %)</td></tr>
-    <tr><td>4 m/s, 0°</td><td>−10 / 0 mN</td><td>−3 mN</td><td>+6 ± 6 mN</td><td>−13 mN</td><td>−13 mN</td><td>−7 mN</td></tr>
-    <tr class="main"><td>4 m/s, 10°</td><td>66 / 82 mN</td><td>+22 mN (+37 %)</td><td>−14 ± 7 mN (−22 %)</td><td>−13 mN</td><td>+16 mN (+19 %)</td><td>+9 mN (+9 %)</td></tr>
-    <tr><td>6 m/s, −5°</td><td>−81 / −170 mN</td><td>−35 mN (−60 %)</td><td>+7 ± 11 mN (+9 %)</td><td>−11 mN</td><td>−39 mN (−23 %)</td><td>−20 mN (−10 %)</td></tr>
-    <tr><td>6 m/s, 0°</td><td>−35 / 0 mN</td><td>+4 mN (+13 %)</td><td>−16 ± 6 mN (−44 %)</td><td>−11 mN</td><td>−46 mN</td><td>−19 mN</td></tr>
-    <tr class="main"><td>6 m/s, 10°</td><td>98 / 270 mN</td><td>+30 mN (+34 %)</td><td>−4 ± 9 mN (−4 %)</td><td>−2 mN</td><td>+38 mN (+14 %)</td><td>+18 mN (+6 %)</td></tr>
+    <tr><th>1.6 kV, 1 Hz</th><th>Baseline, measured / model</th><th>Old cycle mean</th><th>Within-cycle</th><th>Placebo</th><th>Model, whole edge, both wings</th><th>Model, inboard, both wings</th></tr>
+    <tr><td>2 m/s, −5°</td><td>−64 / −15 mN</td><td>−16 mN (−27 %)</td><td>−7 ± 7 mN (−10 %)</td><td>−14 mN</td><td>−3 mN</td><td>−1 mN</td></tr>
+    <tr><td>2 m/s, 0°</td><td>−70 / 0 mN</td><td>+7 mN (+11 %)</td><td>−34 ± 7 mN (−48 %)</td><td>−29 mN</td><td>−2 mN</td><td>−1 mN</td></tr>
+    <tr><td>2 m/s, 10°</td><td>0 / 30 mN</td><td>+58 mN</td><td>+6 ± 6 mN</td><td>+5 mN</td><td>+1 mN</td><td>+1 mN</td></tr>
+    <tr><td>4 m/s, −5°</td><td>−25 / −84 mN</td><td>−28 mN</td><td>−15 ± 8 mN (−58 %)</td><td>−20 mN</td><td>−33 mN (−39 %)</td><td>−17 mN (−17 %)</td></tr>
+    <tr><td>4 m/s, 0°</td><td>−10 / 0 mN</td><td>−3 mN</td><td>+6 ± 6 mN</td><td>−13 mN</td><td>−26 mN</td><td>−13 mN</td></tr>
+    <tr class="main"><td>4 m/s, 10°</td><td>66 / 163 mN</td><td>+22 mN (+37 %)</td><td>−14 ± 7 mN (−22 %)</td><td>−13 mN</td><td>+32 mN (+19 %)</td><td>+18 mN (+9 %)</td></tr>
+    <tr><td>6 m/s, −5°</td><td>−81 / −341 mN</td><td>−35 mN (−60 %)</td><td>+7 ± 11 mN (+9 %)</td><td>−11 mN</td><td>−78 mN (−23 %)</td><td>−40 mN (−10 %)</td></tr>
+    <tr><td>6 m/s, 0°</td><td>−35 / 0 mN</td><td>+4 mN (+13 %)</td><td>−16 ± 6 mN (−44 %)</td><td>−11 mN</td><td>−91 mN</td><td>−37 mN</td></tr>
+    <tr class="main"><td>6 m/s, 10°</td><td>98 / 539 mN</td><td>+30 mN (+34 %)</td><td>−4 ± 9 mN (−4 %)</td><td>−2 mN</td><td>+76 mN (+14 %)</td><td>+36 mN (+6 %)</td></tr>
   </table></div>
   <ul class="read">
     <li><b>Equation:</b> measured % = $\Delta L / |L|$, with $L$ the cycle-mean lift at low voltage; model % uses its own 0 V lift. % is left out under 20 mN, where it means little. Numbers: <a href="model/lift_table_percent.csv">lift_table_percent.csv</a>.</li>
     <li><b>Trend:</b> model and data disagree on sign and size. The model's large values at 6 m/s are excluded. The largest within-cycle values have placebos of the same size, so none is a clear effect.</li>
-    <li><b>Validate:</b> the model also misses the baseline: 0 mN at 0° against −10 to −70 mN measured, and 270 against 98 mN at 6 m/s, 10°. So it is not validated on this wing. Check whether one or both wings carried DEAs, as it changes the per-wing values.</li>
+    <li><b>Validate:</b> the model also misses the baseline: 0 mN at 0° against −10 to −70 mN measured, and 539 against 98 mN at 6 m/s, 10°, for both wings. So it is not validated on this wing.</li>
   </ul>
-  <h3>The same planform as a full membrane: model only</h3>
+  <h3>Full membrane, same wing: model, one wing</h3>
   <div class="fig"><img src="model/L_faav_vs_full.png" alt="Lift change, film mass and lift change per mass for discrete fibres and a full membrane on the same planform"></div>
   <ul class="read">
     <li><b>Equation:</b> full sheet $\Delta n = P = \eta\,n\,\varepsilon_0\varepsilon_r V^2/H$. Film mass $m = \rho\,A\,(n+1)H$, plus the edge strip. Code: <a href="faav_vs_full_figures.py">faav_vs_full_figures.py</a>.</li>
     <li><b>Trend:</b> $\Delta L$ = 13–24, 15–30, 16–31 mN (12–23, 17–32, 19–37 %) for $n$ = 1, 2, 3, against 3–8 mN (3–9 %) with the line inboard and 5–16 mN (6–20 %) along the whole edge. Film 0.78, 1.17, 1.56 g against 2.08 g. At $n$ = 2: 2–3× a whole-edge line, 3–5× per gram, 44 % lighter. Layers saturate, so $n$ = 1 is best per gram.</li>
-    <li><b>Validate:</b> the re-analysis says the model is too high for fibres ($\kappa$ below about 0.45), so it may be too high here too. Film only, with no electrodes, rods or glue, and a 180 µm membrane assumed. $C_{L0}$ is above 0.9, so treat these as upper bounds. Weigh real wings, and measure $\eta$ and tension first.</li>
+    <li><b>Validate:</b> the re-analysis says the model is too high for fibres ($\kappa$ below about 0.22), so it may be too high here too. Film only, with no electrodes, rods or glue, and a 180 µm membrane assumed. $C_{L0}$ is above 0.9, so treat these as upper bounds. Weigh real wings, and measure $\eta$ and tension first.</li>
   </ul>
 </section>
 

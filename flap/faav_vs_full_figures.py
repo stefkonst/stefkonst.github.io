@@ -58,13 +58,13 @@ N = {}
 rs = np.array([0.02, 0.05, 0.1, 0.15, 0.22, 0.3, 0.4, 0.5, 0.6, 0.7, 0.81, 0.9, 1.0])
 fig, ax = plt.subplots(1, 2, figsize=(11.5, 4.3))
 a = ax[0]
-a.axhspan(21.8 - 2.0, 21.8 + 2.0, color=GRAY, alpha=0.25, label="Measured, 10°: 21.8 ± 2.0 mN (not established)")
+a.axhspan(10.9 - 1.0, 10.9 + 1.0, color=GRAY, alpha=0.25, label="Old cycle mean per wing: 10.9 ± 1.0 mN (mostly drift)")
 for lam, c in ((1.00, BLUE), (1.01, RED)):
     a.plot(rs, [dL(disc(lam, r, r), ten) for r in rs], "-", color=c, lw=2, label=f"Line tensions whole edge, $\\lambda$ = {lam:.2f}")
     a.plot(rs, [dL(disc(lam, r, 0.02), ten) for r in rs], "--", color=c, lw=2, label=f"Line reaches inboard panel only, $\\lambda$ = {lam:.2f}")
 a.plot(rs, [dL(disc(1.01, r, r, dF=CYC), ten) for r in rs], ":", color=PURPLE, lw=2, label="Whole edge, cyclic DEA force (3.2 mN)")
 a.set_xlabel("Load-path factor $r$ (0: free edge, 1: rigid anchor)")
-a.set_ylabel(r"$\Delta L$ in mN, 4 m/s, 10°, 1 Hz")
+a.set_ylabel(r"$\Delta L$ per wing in mN, 4 m/s, 10°, 1 Hz")
 a.legend(fontsize=8.5, loc="upper left")
 a.set_ylim(0, 46)
 a.set_xlim(0, 1)
@@ -73,16 +73,16 @@ b = ax[1]
 meas = {2: (-15.4, 7, 57.6), 4: (-27.9, -3.2, 21.8), 6: (-35.4, 4.3, 30.2)}
 pts = [(-5, 0), (0, 1), (10, 2)]
 for U, c in ((2, GREEN), (4, PURPLE), (6, BLUE)):
-    mod = [dL(disc(1.01, 0.81, 0.81), ten, U=float(U), alpha_deg=float(p)) for p, _ in pts]
+    mod = [2 * dL(disc(1.01, 0.81, 0.81), ten, U=float(U), alpha_deg=float(p)) for p, _ in pts]
     b.plot(meas[U], mod, "o", color=c, ms=8, label=f"{U} m/s")
     N[f"trend_{U}"] = dict(model=mod, measured=meas[U], free=[dL(disc(1.01, 0.02, 0.02), ten, U=float(U), alpha_deg=float(p)) for p, _ in pts])
-b.plot([-60, 60], [-60, 60], ":", color=GRAY)
-b.set_xlabel(r"Measured $\Delta L$ in mN")
-b.set_ylabel(r"Model $\Delta L$ in mN, $r$ = 0.81, $\lambda$ = 1.01")
-b.set_xlim(-45, 65)
-b.set_ylim(-45, 65)
+b.plot([-70, 65], [-70, 65], ":", color=GRAY)
+b.set_xlabel(r"Old cycle-mean $\Delta L$ in mN, both wings")
+b.set_ylabel(r"Model $\Delta L$ in mN, both wings")
+b.set_xlim(-70, 65)
+b.set_ylim(-110, 75)
 b.legend(fontsize=10, loc="upper left")
-b.set_title("b) Pitch −5, 0, 10°: model against measured", loc="left", fontsize=12)
+b.set_title("b) Against the old result", loc="left", fontsize=12)
 save(fig, "L_faav_line")
 
 # ---- b) tension curve: the same physics for both wings
@@ -114,7 +114,7 @@ for x0, x1, lab, col, dy in _arrows:
     a.text(max(x0, x1) + 0.15, np.interp(max(x0, x1), ns, CL) + dy, lab, color=col, fontsize=11)
 a.set_xlabel(r"Chordwise tension $n_y$ in N/m")
 a.set_ylabel(r"$C_L$ of the panel, 4 m/s, 6°")
-a.set_title("a) Lower tension, more camber, more lift", loc="left", fontsize=12)
+a.set_title("a) Panel lift", loc="left", fontsize=12)
 b = ax[1]
 Ts = np.logspace(-3, 0.3, 80)
 ka = 8 * Ts * 0.01 / 0.06 ** 2
@@ -123,7 +123,7 @@ b.set_xlabel(r"Trailing-edge tension $T_c$ in N")
 b.set_ylabel(r"$r = k_a / (k_a + k_d)$")
 b.legend(fontsize=9.5, loc="upper left")
 b.set_ylim(0, 1)
-b.set_title("b) A small line force is enough for a good load path", loc="left", fontsize=12)
+b.set_title("b) Load path", loc="left", fontsize=12)
 save(fig, "L_tension_curve")
 for T in (0.02, 0.05, 0.1, 0.3, 0.5):
     ka = 8 * T * 0.01 / 0.06 ** 2
