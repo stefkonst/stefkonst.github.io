@@ -127,6 +127,16 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
   </ul>
 </section>
 
+<section class="card" id="glance">
+  <h2>Every lift result, in %</h2>
+  <div class="fig"><img src="model/I_all_percent.png" alt="Every lift result in percent: gliding near zero, old flapping values near 35 percent, within-cycle values near zero with large errors, model ranges from 0 to 37 percent"></div>
+  <ul class="read">
+    <li><b>Equation:</b> $\Delta L / |L|$, lift change at 1.6 kV over lift. In mN: <a href="#measured">measured</a> and <a href="#line">re-analysed</a>.</li>
+    <li><b>Trend:</b> once drift is removed, nothing measured clearly differs from zero. Fibres with a free edge should do nothing, and the model's full membrane sits furthest to the right.</li>
+    <li><b>Validate:</b> the model bars are not measurements. If a full membrane wing gets near them, it would be the first clear effect: alternate 0 and 1.6 kV, with a sham.</li>
+  </ul>
+</section>
+
 <section class="card" id="line">
   <h2>The nylon line, and a re-analysis of the flapping data</h2>
   <p class="note">3 Nov 2026. The FAAV wing was not a free-edge wing: a nylon line ran from the trailing edge at the root to the body. Its real size is 12 × 7 cm (84 cm²), measured at 10° and 1 Hz. The earlier comparison with about 2 mN was for a 33 cm² wing at 6°, so it was wrong.</p>
@@ -138,6 +148,8 @@ code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4
     <li><b>Validate:</b> $r$ and $\lambda$ were chosen, and the line force was never measured. Measure it, then run the same wing with the line slack and tight: about 30× in the model. The right panel is the old result, which the next plot does not support.</li>
   </ul>
   <h3>Isolating the DEA: within-cycle contrast</h3>
+  <div class="fig"><img src="model/I_contrast.png" alt="Drift moves both phases of the flap cycle, the DEA only the on phase; real 4 m/s data; the old cycle mean rises with voltage while the on-minus-off contrast does not follow the model"></div>
+  <p class="note">The intuition: drift lifts the whole cycle, so on minus off does not change. A DEA can only move the phase where it is on. Code: <a href="intuition_figures.py">intuition_figures.py</a>.</p>
   <div class="fig"><div class="plotrow"><img src="model/contrast.png" alt="Within-cycle lift contrast per condition with placebo and model values, and the scale factor on the model"><aside class="ps"><img src="model/schematic_line.png" alt="Same wing, with a line at the trailing edge"></aside></div></div>
   <ul class="read">
     <li><b>Equation:</b> per cycle $C = \bar L_{on} - \bar L_{off}$, using phases 0.05–0.45 and 0.55–0.95 from the DEA's rising edge. Then $C = c_0 + a\,s(V)$, with $s$ the bench force drop and $a$ the lift change caused while the DEA is on. Slow drift is common to both phases, so it cancels. Code: <a href="recalibrate_contrast.py">recalibrate_contrast.py</a>, numbers: <a href="model/contrast_attached.csv">contrast_attached.csv</a>.</li>
