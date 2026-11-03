@@ -5,7 +5,7 @@
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#idea">Idea</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -39,6 +39,39 @@
 </ul>
 </section>
 
+<section class="card" id="structure">
+<h2>Leading edge and transmission</h2>
+<p>Closed-form beam estimates for one wing at 25 Hz, ±30°. Code: <a href="structure_elec.py">structure_elec.py</a>. Sizes in mm.</p>
+<div class="tw"><table>
+<tr><th>Leading edge</th><th>Mass (mg)</th><th>Tip bend, flapping (mm)</th><th>Tip bend, skin tension (mm)</th><th>First mode (Hz)</th><th>$GJ$ (mN m²)</th></tr>
+<tr><td>strip 1.5 × 0.2, flat to flap</td><td>23</td><td>13.78</td><td>0.07</td><td>68</td><td>0.020</td></tr>
+<tr><td>strip 1.5 × 0.2, on edge</td><td>23</td><td>0.25</td><td>3.76</td><td>511</td><td>0.020</td></tr>
+<tr><td>cross 1 × 0.2</td><td>28</td><td>0.81</td><td>0.22</td><td>275</td><td>0.027</td></tr>
+<tr class="main"><td>cross 1.5 × 0.2</td><td>43</td><td>0.25</td><td>0.07</td><td>455</td><td>0.040</td></tr>
+<tr><td>cross 2 × 0.2</td><td>59</td><td>0.11</td><td>0.03</td><td>644</td><td>0.053</td></tr>
+<tr><td>tube 1/0.7</td><td>31</td><td>0.38</td><td>0.10</td><td>395</td><td>0.373</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Equation:</b> tip bend $\delta = q b^4 / (8 E I)$, with $q$ the load per length from wing inertia and peak lift, or from chord tension. A flat strip is stiff one way only, so one of the two loads always bends it.</li>
+<li><b>Trend:</b> a single strip fails in one direction, so the cross is needed, not optional. The tube is lighter and about 9× stiffer in torsion than the 1.5 mm cross.</li>
+<li><b>Trailing-edge anchor:</b> 1 mm off the stroke axis changes the fibre length by about 2 % over the stroke, about the same as the fibre's working stretch. Aim for 0.2 mm or better.</li>
+<li><b>Bias spring:</b> about 3.3 mN m/rad from a carbon flexure, for example 0.1 × 2 × 6.6 mm: 2 mg, 0.4 % strain. <b>Hinge:</b> polyimide 12.5 µm × 0.5 mm, 0.65 % strain. At 25 Hz, 2 million cycles take 22 h.</li>
+<li><b>Skin modes, no flow:</b> first mode 30–60 Hz with the batten bonded to the leading edge, and 15–34 Hz with it hinged, depending on tension. The hinged range includes the flapping frequency.</li>
+<li><b>Validate:</b> weigh and load a bonded leading edge; tap test a panel for the first mode at 0 V and at voltage.</li>
+</ul>
+</section>
+
+<section class="card" id="electrics">
+<h2>Electrics</h2>
+<p>Scaled from Ren, Kim et al. 2022, Table 1 (6 layers, 35.5 µm, 125 mg, 1.83 nF, 22.1 kΩ). The capacitance formula with $\varepsilon_r = 2.8$ gives 1.83 nF for that device, against 1.83 nF in the paper.</p>
+<ul class="read">
+<li><b>Core, 500 mg, 20 mm long, from 55 mm wide sheets:</b> about 12 layers at 35.5 µm, 5.5 mm outer diameter, 8.4 nF, 121 cm² of electrode. That is 4.6× the electrode area of the 6-layer device, which matters because breakdown probability grows with area.</li>
+<li><b>Time constants:</b> about 93 µs for the core, 20 µs for the skin and 78 µs for the fibre band, against a 20 ms half stroke. These assume the sheet resistance implied by that paper and a feed along the span. So electrode RC should not limit the sync, if the electrodes match theirs.</li>
+<li><b>Drive, one channel, core + skin + fibre:</b> 9.4 nF, 1.2 mA, about 301 mW at 25 Hz if no charge is recovered, against about 14 mW of mechanical output.</li>
+<li><b>Validate:</b> measure $R$ and $C$ of each device before any force test, and compare the waveform at the device with the command at 25 Hz.</li>
+</ul>
+</section>
+
 <section class="card" id="first">
 <h2>First pass</h2>
 <p><b>Being replaced.</b> Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
@@ -57,7 +90,8 @@
 <h2>Update log</h2>
 <ul>
 <li><b>3 Nov, evening:</b> page opened with first-pass numbers. Next: unsteady lattice with a shed wake, then a coupled skin model, so twist and camber are computed rather than assumed.</li>
-<li><b>3 Nov, 17:30:</b> bench energy per cycle and the lattice checks added. Finite-element reference runs for this panel are under way. A first batch had a setup error of mine (the lattice ran past the sheet to 10 cm) and was discarded. Coupled wing model and drive model written, not yet validated.</li>
+<li><b>3 Nov, 17:20:</b> bench energy per cycle and the lattice checks added. Finite-element reference runs for this panel are under way. A first batch had a setup error of mine (the lattice ran past the sheet to 10 cm) and was discarded. Coupled wing model and drive model written, not yet validated.</li>
+<li><b>3 Nov, 17:25:</b> leading edge, transmission, skin modes and electrics added. Finite-element runs still going.</li>
 </ul>
 </section>
 
