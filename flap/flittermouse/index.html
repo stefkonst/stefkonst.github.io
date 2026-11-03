@@ -69,6 +69,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
+<nav class="toc"><a href="#idea">Idea</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -79,9 +80,32 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 </ul>
 </section>
 
+<section class="card" id="actuator">
+<h2>How much energy per cycle?</h2>
+<p>A DEA gives a fixed amount of energy each cycle, so power falls with flapping frequency. This sets the whole budget. Bench data: bundle of 5 rolled fibres, 31 mm long.</p>
+<div class="fig"><img src="figures/A_actuator.png" alt="Force against stretch at 0 and 1.6 kV, energy per cycle against strain amplitude, and force fall time against voltage"></div>
+<ul class="read">
+<li><b>Equation:</b> $W = \frac{\pi}{2}\,\Delta F\,x_a - W_h$ for a sine drive, with $\Delta F$ the force change at full voltage and $x_a = s L_0$ the stroke amplitude. Loss $W_h \propto s^2$, so there is a best strain.</li>
+<li><b>Trend:</b> with the isometric force (44.7 mN at 1.6 kV), net energy at ±5 % is 0.7–0.9 J/kg. With the slow-cycle force (17 mN) it is 0.04–0.24 J/kg. Ren, Kim et al. 2022 report above 500 W/kg at 400 Hz, or 1.25 J/kg.</li>
+<li><b>Trend:</b> force falls in 35–42 ms at every voltage, while the vocal cord motion takes 130–190 ms. The logger samples at 200 Hz and its filter is unknown, so this is an upper limit on the force response.</li>
+<li><b>Validate:</b> drive a core against a load cell at 25 Hz and integrate the force-displacement loop. This also settles which force applies, 44.7 or 17 mN. One bundle shown; bundle b gave far less in the slow cycles (about 3 mN up to 1.4 kV).</li>
+</ul>
+</section>
+
+<section class="card" id="lattice">
+<h2>Unsteady lattice</h2>
+<p>The first pass assumed the twist and the wake. This replaces them: a 3D vortex lattice with a shed wake, code in <a href="uvlm.py">uvlm.py</a>, attached flow only.</p>
+<div class="fig"><img src="figures/L_lattice.png" alt="Lattice lift slope and induced drag against aspect ratio with theory, and the ratio of lattice to theory against reduced frequency"></div>
+<ul class="read">
+<li><b>Equation:</b> $\mathbf F = \rho\Gamma\,\mathbf V\times\mathbf l + \rho\,\dot\Gamma A\,\mathbf n$ on each segment and panel, with no net normal flow at the control points and the wake shed from the trailing edge.</li>
+<li><b>Trend:</b> lift slope is 1–5 % below Helmbold's approximation, and drag is within 4 % of $C_L^2/\pi AR$. In the shaded range, thrust is within 3 % of Garrick and power and lift within 7 %. Above $k \approx 0.8$, lift and power run high, by 20–50 %.</li>
+<li><b>Validate:</b> these are checks against theory, not against flow data. Flow separation is not modelled, so lift at high angle is an upper limit.</li>
+</ul>
+</section>
+
 <section class="card" id="first">
 <h2>First pass</h2>
-<p>Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
+<p><b>Being replaced.</b> Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
 <div class="tw"><table>
 <tr><th>Item</th><th>Value</th></tr>
 <tr><td>Mass</td><td>1.55 g</td></tr>
@@ -97,6 +121,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <h2>Update log</h2>
 <ul>
 <li><b>3 Nov, evening:</b> page opened with first-pass numbers. Next: unsteady lattice with a shed wake, then a coupled skin model, so twist and camber are computed rather than assumed.</li>
+<li><b>3 Nov, 17:30:</b> bench energy per cycle and the lattice checks added. Finite-element reference runs for this panel are under way. A first batch had a setup error of mine (the lattice ran past the sheet to 10 cm) and was discarded. Coupled wing model and drive model written, not yet validated.</li>
 </ul>
 </section>
 
