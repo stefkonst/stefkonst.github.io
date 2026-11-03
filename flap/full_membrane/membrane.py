@@ -42,7 +42,7 @@ DEFAULTS = dict(
     fix_te=False, no_batten=False, root_free=False, tensioners=(), rigid_frame=True, rod_od=3e-3, rod_id=2e-3, rod_od_tip=None, rod_id_tip=None, rod_E=120e9, rod_G=5e9,
     batten_d=0.8e-3, batten_E=120e9, batten_G=5e9, frame_relax=0.7, frame_iter=12,
     # solver
-    max_iter=60000, tol=2e-7, aero_every=20,
+    max_iter=60000, tol=2e-7, aero_every=20, aero_relax=1.0,
 )
 
 
@@ -503,7 +503,8 @@ class Wing:
         ok = False
         for it in range(max_iter):
             if aero and it % p["aero_every"] == 0:
-                pe, cl = self.aero(x)
+                pn, cl = self.aero(x)
+                pe = pe + p["aero_relax"] * (pn - pe)         # aero_relax < 1 under-relaxes the air load. The steady state is unchanged (active_study.py)
             R = self._rhs(x, Pe, V, pe)
             R[fx] = 0
             v += R / m

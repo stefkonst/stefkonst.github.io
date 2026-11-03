@@ -3,10 +3,22 @@ full axis box, light major + minor grid, labels 'Quantity symbol in unit', panel
 voltage off blue / on red."""
 import matplotlib
 matplotlib.use("Agg")
+import matplotlib.figure
 import matplotlib.pyplot as plt
 
 MATLAB = ["#0072BD", "#D95319", "#EDB120", "#7E2F8E", "#77AC30", "#4DBEEE", "#A2142F"]
 OFF, ON = "#0000FF", "#FF0000"
+_savefig = matplotlib.figure.Figure.savefig
+
+
+def _both(self, fname, *a, **k):
+    """Every PNG also gets an SVG beside it, with the same name."""
+    _savefig(self, fname, *a, **k)
+    if isinstance(fname, str) and fname.endswith(".png"):
+        _savefig(self, fname[:-4] + ".svg", *a, **{q: v for q, v in k.items() if q != "dpi"})
+
+
+matplotlib.figure.Figure.savefig = _both
 
 
 def apply():

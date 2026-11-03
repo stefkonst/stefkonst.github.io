@@ -20,7 +20,7 @@ def fig_tension():
     for a, key, ttl in ((ax[0, 0], "0_tips", "Panel 1, fibre tips only"), (ax[0, 1], "0_edges", "Panel 1, root and batten bars"), (ax[1, 0], "1_tips", "Panel 2, fibre tips only"), (ax[1, 1], "1_edges", "Panel 2, batten and LE bars")):
         f = Fd[key]
         x = np.array(f["x"]) * 1e3
-        tp = a.tripcolor(Triangulation(x[:, 0], x[:, 1], np.array(f["tri"])), facecolors=np.array(f["Ne"]), cmap="viridis", vmin=0, vmax=vm)
+        tp = a.tripcolor(Triangulation(x[:, 0], x[:, 1], np.array(f["tri"])), facecolors=np.array(f["Ne"]), cmap="viridis", vmin=0, vmax=vm, rasterized=True)
         a.set_aspect("equal"); a.invert_yaxis(); a.set(xlabel="$x$ in mm", ylabel="$y$ in mm", title=ttl)
         a.title.set_fontsize(9)
     fig.subplots_adjust(left=0.05, right=0.985, wspace=0.34, hspace=0.42, bottom=0.09, top=0.94)
@@ -115,7 +115,7 @@ def fig_shape():
     fig, ax = plt.subplots(2, 2, figsize=(10, 6.4))
     for a, xk, zk, ttl in ((ax[0, 0], "x0", "z0", "0 V"), (ax[0, 1], "x1", "z1", "1.6 kV")):
         x = np.array(S[xk]) * 1e3
-        c = a.tripcolor(Triangulation(x[:, 0], x[:, 1], tri), np.array(S[zk]) * 1e3, shading="gouraud", cmap="viridis", vmin=0, vmax=max(np.max(S["z1"]), np.max(S["z0"])) * 1e3)
+        c = a.tripcolor(Triangulation(x[:, 0], x[:, 1], tri), np.array(S[zk]) * 1e3, shading="gouraud", cmap="viridis", vmin=0, vmax=max(np.max(S["z1"]), np.max(S["z0"])) * 1e3, rasterized=True)
         fig.colorbar(c, ax=a, label="$w$ in mm", shrink=0.8)
         a.set_aspect("equal"); a.invert_yaxis(); a.set(xlabel="$x$ in mm", ylabel="$y$ in mm", title=ttl)
     x = np.array(S["x1"]) * 1e3
@@ -132,7 +132,7 @@ def fig_shape():
 
 
 def fig_masks():
-    Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers_passive_fibre.json")))
+    Mk = json.load(open(os.path.join(HERE, "masks", "mask_numbers_active_fibre.json")))
     fig, ax = plt.subplots(1, 2, figsize=(10.5, 4.7))
     labels = dict(root=("Root end", "Batten tip"), tip=("Batten tip", "Tip, by the LE"))
     for a, k, ttl in ((ax[0], "root", "Panel 1 (inboard)"), (ax[1], "tip", "Panel 2 (outboard)")):
@@ -144,6 +144,9 @@ def fig_masks():
         st_ = np.array(q["strip_mm"])
         a.fill(tA[:, 0], tA[:, 1], color=PS.OFF, alpha=0.6, label="Contact A")
         a.fill(tB[:, 0], tB[:, 1], color=PS.ON, alpha=0.6, label="Contact B")
+        ea, eb = np.array(q["A"]), np.array(q["B"])
+        a.plot(ea[:, 0], ea[:, 1], color=PS.OFF, lw=0.7, label="Electrode A")
+        a.plot(eb[:, 0], eb[:, 1], color=PS.ON, lw=0.7, ls="--", label="Electrode B")
         fa, fb = np.array(q["fibre_A"]), np.array(q["fibre_B"])
         a.plot(fa[:, 0], fa[:, 1], color=PS.OFF, lw=0.9, label="Spare rectangle, A")
         a.plot(fb[:, 0], fb[:, 1], color=PS.ON, lw=0.9, ls="--", label="Spare rectangle, B")

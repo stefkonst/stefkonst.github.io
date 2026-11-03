@@ -11,6 +11,8 @@ A6  Stretching   K = gamma 2 G (H + H_p) (X^2 + X Y + Y^2),  G = 2 C_1.  With no
 A7  Lift         C_L = a_L (alpha + k_cam c_cam A / b)
 A8  Full sheet   n_x = 2 G (H + H_p) (2 e_x + e_y) - P,  n_y = 2 G (H + H_p) (e_x + 2 e_y) - P,  P = eta chi eps0 epsr (V / H)^2 (H + H_p).  At n_y = 0: n_x = 3 G (H + H_p) e_x - P / 2
     Discrete     n_y = n_y,membrane + r max(F_D - dF (V / 1.6 kV)^2, 0) / s.  r = k_a / (k_a + k_d),  k_a = 8 T_c s / L_s^2.  Free trailing edge: T_c = 0, r = 0 (Eq. S13)
+A11 Tilted wing's active fibre  F = 2 C_1 w_s (H + H_p) (lambda - lambda^-2) - eta_f (n + 1) eps0 epsr V^2 w_e / H.  The layers cancel in the limit: F > 0 if w_e / w_s < 2 C_1 (lambda - lambda^-2) / (eta_f eps0 epsr (V / H)^2)
+A12 Edge rise    z_TE = q C_L ell a^2 / (12 (F + n_x ell)),  ell = 10 mm.  It costs C_L about 0.14 per mm
 A9  Active fibre F = F_0 - dF_f,  F_0 = 2 C_1 A_0 (lambda - lambda^-2),  dF_f = eta_f eps0 epsr (V / H)^2 A_0 w_e / w_s.  Stays in tension if F_0 > dF_f (near lambda - 1 = eta_f eps0 epsr (V / H)^2 (w_e / w_s) / (6 C_1))
 """
 import math
@@ -38,8 +40,9 @@ FULL = dict(
 )
 
 ROTATED = dict(                                     # full membrane, cut unstretched and tensioned by bringing the root edge and batten to vertical
-    C1=42842.0, H=35e-6, eps_r=2.8, eta=0.50, n_layers=(2, 2), lam_n=1.04,
-    theta_b=5.0, theta_r=8.85,                      # tilt of the batten and root edge as cut, in degrees. theta_r > theta_b so the batten balances (balance_study.py)
+    C1=42842.0, H=35e-6, eps_r=2.8, eta=0.50, n_layers=(2, 2), lam_n=1.05,
+    theta_b=4.5, theta_r=7.5,                       # tilt of the batten and root edge as cut, in degrees. theta_r > theta_b so the batten balances (full_membrane/active_study.py)
+    roll_width=(20e-3, 20e-3), w_e=(5e-3, 5e-3), eta_f=0.4,   # strip rolled into the active fibre, active band next to the sheet, eta of the roll
     x_root=3.8e-3, x_batten=60e-3, x_tip=108e-3, chord=41.1e-3, tip_drop=3.1e-3, fibre_2_angle=38.0,
     edge=(0.5, 0.2), edge_rot=(0.79, 1.0),          # edge_rot: mean tension / uniform tension in the rotation state (from the FE)
     a=(0.056, 0.061), b=(0.041, 0.016), share=(0.70, 0.30), radius=(0.03, 0.08), lift_slope=4.39,   # flat wing with a vertical root edge
@@ -100,6 +103,20 @@ def rotation_geometry(w):
     L2_0 = math.hypot(w["x_tip"] - (w["x_batten"] + b * tb), dy)
     L2 = math.hypot(w["x_tip"] - w["x_batten"], dy)
     return L1 / (L1 + b * (tb - tr)), L2 / L2_0, 0.5 * (tb + tr)
+
+
+def rotation_fibre(w, i, V):
+    """A11: active rolled fibre of the tilted wing (N): F_0 from the rotation's stretch, minus the drop in the active band. The layer count cancels in F_0 / dF."""
+    n, lam = w["n_layers"][i], rotation_geometry(w)[i]
+    Hm = (n + 1) * w["H"]
+    F0 = 2 * w["C1"] * w["roll_width"][i] * Hm * (lam - lam ** -2)
+    return F0 - w["eta_f"] * (n + 1) * EPS0 * w["eps_r"] * V ** 2 / w["H"] * w["w_e"][i], F0
+
+
+def edge_rise(w, i, V, q, CL, ell=10e-3):
+    """A12: mean rise of the trailing edge (m), as a string under the air load near the edge, with a strip ell of sheet carrying span tension with it. ell is set on the finite elements."""
+    a = (w["x_batten"] - w["x_root"], math.hypot(w["x_tip"] - w["x_batten"], w["chord"] - w["tip_drop"]))[i]
+    return q * CL * ell * a ** 2 / (12 * (max(rotation_fibre(w, i, V)[0], 0.0) + rotation_tension(w, i, V)[0] * ell))
 
 
 def rotation_tension(w, i, V):
@@ -206,3 +223,4 @@ if __name__ == "__main__":
     report("Discrete DEAs, free trailing edge, r = 0", dict(DISCRETE, T_c=0.0), discrete_tension)
     report(f"Full membrane, cut tilted {ROTATED['theta_b']:g} and {ROTATED['theta_r']:g} deg, no pre-stretch", ROTATED, rotation_tension)
     print("  fibre stretch from the rotation: %.3f, %.3f" % rotation_geometry(ROTATED)[:2])
+    print("  active fibre force at 0 V and 1.6 kV, mN:", [(round(rotation_fibre(ROTATED, i, 0.0)[0] * 1e3, 1), round(rotation_fibre(ROTATED, i, 1600.0)[0] * 1e3, 1)) for i in (0, 1)])

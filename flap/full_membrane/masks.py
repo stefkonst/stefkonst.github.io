@@ -1,5 +1,5 @@
 """Electrode masks from the model: reference outline = F^-1 (tensioned planform), on the 114 mm plates of mask_2partwing.svg.
-Contacts as in the original mask: electrodes A and B run into opposite ends of the strip and overlap between the end tabs, so the rolled fibre is active.
+Contacts as in the original mask: electrodes A and B run into opposite ends of the strip and overlap between the end tabs, over a band w_e next to the sheet, so the rolled fibre is active and keeps its tension.
 The spare rectangles of the original mask (same size, A and B offset along their length) sit beside each panel.
 Run: python masks.py -> masks/mask_2partwing_passive_fibre.svg, masks/mask_2partwing_active_fibre.svg, and numbers"""
 import json, math, os, re, sys
@@ -61,7 +61,8 @@ def design_panel(w, k, lam_note=None):
 
     half_a = rect(0.0, TAB)
     half_b = rect(L - TAB, L)
-    strip_a, strip_b = rect(0.0, L - TAB), rect(TAB, L)
+    band = lambda s0, s1: Polygon([a + ue * s0, a + ue * s1, a + ue * s1 + ne * W_E, a + ue * s0 + ne * W_E])   # active band of the roll, next to the sheet; the rest of the strip is the passive core
+    strip_a, strip_b = unary_union([half_a, band(0.0, L - TAB)]), unary_union([half_b, band(TAB, L)])
     # electrode A = sheet + strip without its far tab, electrode B = sheet + strip without its near tab: they overlap in the sheet and in the fibre
     if not ACTIVE:                                             # passive fibre: each electrode reaches only its own end tab, with no overlap in the roll
         strip_a, strip_b = half_a, half_b
@@ -90,13 +91,13 @@ def path_d(poly):
     return "M " + " L ".join(f"{a:.3f},{b:.3f}" for a, b in pts) + " Z"
 
 
-def main(theta=5.0, theta_r=8.85, lam_n=1.04, w_s=13.0, xb=60.0, yc=47.5, active_fibre=False):
+def main(theta=4.5, theta_r=7.5, lam_n=1.05, w_s=20.0, w_e=5.0, xb=60.0, yc=47.5, active_fibre=True):
     """The sheet is cut unstretched along the fibre, tilted, with a small chord stretch lam_n set at bonding. The tension comes from rotating the edges to vertical."""
     lam_d, ln = 1.0, lam_n
     C_ = ((xb * 1e-3 + (yc * 1e-3 - 6.4e-3) * math.tan(math.radians(theta))), yc * 1e-3)
     D_ = (3.8e-3 + (yc * 1e-3 - 6.4e-3) * math.tan(math.radians(theta_r)), yc * 1e-3)
-    global ACTIVE
-    ACTIVE = active_fibre
+    global ACTIVE, W_E
+    ACTIVE, W_E = active_fibre, w_e
     w = M.Wing(lam_d=(lam_d, lam_d), lam_n=(ln, ln), w_s=(w_s * 1e-3, w_s * 1e-3), theta_deg=theta, C=C_, D=D_, h=3e-3)
     P = {"root": design_panel(w, 0), "tip": design_panel(w, 1)}
     ET.register_namespace("", "http://www.w3.org/2000/svg")
@@ -124,7 +125,7 @@ def main(theta=5.0, theta_r=8.85, lam_n=1.04, w_s=13.0, xb=60.0, yc=47.5, active
     tag = "active_fibre" if active_fibre else "passive_fibre"
     fn = os.path.join(OUT, f"mask_2partwing_{tag}.svg")
     tree.write(fn, xml_declaration=True, encoding="UTF-8")
-    rep = dict(lam_n=ln, w_s_mm=w_s, theta_deg=theta, theta_r_deg=theta_r, xb_mm=xb, yc_mm=yc, active_fibre=active_fibre, margins_mm=dict(LE=M_LE, batten=M_SEAM, root=M_ROOT, strip=M_STRIP), tab_mm=TAB, replaced_in_source=kept)
+    rep = dict(lam_n=ln, w_s_mm=w_s, w_e_mm=w_e, theta_deg=theta, theta_r_deg=theta_r, xb_mm=xb, yc_mm=yc, active_fibre=active_fibre, margins_mm=dict(LE=M_LE, batten=M_SEAM, root=M_ROOT, strip=M_STRIP), tab_mm=TAB, replaced_in_source=kept)
     for k, v in P.items():
         rep[k] = dict(width_mm=v["width"], length_mm=v["length"], rotation_deg=v["angle_deg"], active_area_mm2=v["active_area"], fibre_as_cut_mm=v["fibre_ref"], fibre_tensioned_mm=v["fibre_target"],
                       fits_coater=bool(v["width"] <= COATER), total_length_with_fibre_mm=float(unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).bounds[2] - unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).bounds[0]), hole_clearance_mm=float(min(unary_union([v["A"], v["B"], v["fibre_A"], v["fibre_B"]]).distance(Polygon([(hx - 0.8, hy - 0.8), (hx + 0.8, hy - 0.8), (hx + 0.8, hy + 0.8), (hx - 0.8, hy + 0.8)])) for hx, hy in ((0, -49.4), (49.4, 0), (0, 49.4), (-49.4, 0)))), tab_A=np.array(v["half_a"].exterior.coords).tolist(), tab_B=np.array(v["half_b"].exterior.coords).tolist(), fibre_A=np.array(v["fibre_A"].exterior.coords).tolist(), fibre_B=np.array(v["fibre_B"].exterior.coords).tolist(), sheet_mm=v["sheet"].tolist(), strip_mm=v["strip"].tolist(), A=np.array(v["A"].exterior.coords).tolist(), B=np.array(v["B"].exterior.coords).tolist(),
@@ -139,5 +140,5 @@ def main(theta=5.0, theta_r=8.85, lam_n=1.04, w_s=13.0, xb=60.0, yc=47.5, active
 
 
 if __name__ == "__main__":
-    main()                                                     # best lift: 5 and 8.85 degrees, passive fibre
-    main(theta=10.0, theta_r=18.0, active_fibre=True)          # active fibre needs more tilt to keep its tension
+    main()                                                     # the design: active band 5 mm in a 20 mm strip
+    main(active_fibre=False)                                   # same outline, electrodes reach only the end tabs, for comparison

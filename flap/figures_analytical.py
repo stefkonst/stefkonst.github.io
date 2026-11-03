@@ -95,11 +95,11 @@ d_l = [W.mean_delta(dict(DI, lam_x=l, lam_y=l), W.discrete_tension) for l in lam
 a.plot(lam, d_l, color=CD); a.set(xlabel=r"Membrane pre-stretch $\lambda_{pre}$, discrete wing", ylabel=r"Cycle-mean $\Delta L$ in mN")
 a = ax[1]
 ths = np.array([3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0, 12.0, 14.0])
-d_th = [W.mean_delta(dict(FU, theta_b=t, theta_r=1.77 * t), W.rotation_tension) for t in ths]
+d_th = [W.mean_delta(dict(FU, theta_b=t, theta_r=1.67 * t), W.rotation_tension) for t in ths]
 a.plot(ths, d_th, color=CF)
 lims = [W.fibre_force(dict(W.FULL, eta_f=e), 0, 1600.0)[1] for e in (0.3, 0.4)]
 num["fibre_force_mN"] = {f"{l:g}": W.fibre_force(dict(W.FULL, lam_d=(l, l)), 0, 1600.0)[0] * 1e3 for l in (1.05, 1.08, 1.1)}
-a.set(xlabel=r"Batten tilt $\theta_b$ in °, root edge at 1.77 $\theta_b$", ylabel=r"Cycle-mean $\Delta L$ in mN")
+a.set(xlabel=r"Batten tilt $\theta_b$ in °, root edge at 1.67 $\theta_b$", ylabel=r"Cycle-mean $\Delta L$ in mN")
 PS.finish(ax); save(fig, "M5_stretch")
 num["prestretch_disc_mN"] = {f"{l:g}": float(np.interp(l, lam, d_l)) for l in (1.0, 1.01, 1.02, 1.03, 1.05)}
 num["tilt_full_mN"] = {f"{t:g}": float(v) for t, v in zip(ths, d_th)}
@@ -149,6 +149,21 @@ num["refs"] = dict(one_layer_cycle=W.mean_delta(one, W.full_tension),
                    disc_rigid={f"{u:g}": W.mean_delta(dict(DI, T_c=1e9), W.discrete_tension, U=u) for u in (3.0, 4.0, 6.0)},
                    CL_full={f"{u:g}": [W.solve(one, W.full_tension, V=0.0, U=u)["CL"], W.solve(one, W.full_tension, U=u)["CL"]] for u in (3.0, 4.0, 6.0)}, K_CAM=W.K_CAM, CAMBER=W.CAMBER, r_05=W.load_path(DI))
 
+
+# M8: the flip in mid-upstroke, and the pitch that avoids it
+fig, ax = plt.subplots(1, 2, figsize=(10, 3.4))
+a = ax[0]
+a.axvspan(0, 180, color="0.93", zorder=0)
+for al_, c_ in ((6.0, PS.MATLAB[1]), (8.0, PS.MATLAB[0]), (10.0, PS.MATLAB[4])):
+    a.plot(X, close(W.delta_cycle(FU, W.rotation_tension, alpha_deg=al_)), color=c_, label=f"Mean pitch {al_:.0f}°")
+a.set(xlabel=r"Flap phase $\varphi$ in °", ylabel=r"Lift change $\Delta L$ in mN", xlim=(0, 360)); a.legend(fontsize=8)
+a = ax[1]
+Up = np.linspace(2, 7, 51)
+for f_, st in ((1.0, ":"), (2.0, "-"), (3.0, "--")):
+    a.plot(Up, np.degrees(np.arctan(math.radians(30.0) * 2 * math.pi * f_ * 0.075 / Up)), st, color="k", label=f"$f$ = {f_:.0f} Hz")
+a.axhline(6, color=PS.MATLAB[1], lw=0.8); a.text(6.9, 6.2, "6°", color=PS.MATLAB[1], fontsize=8)
+a.set(xlabel="Flow speed $U$ in m/s", ylabel="Pitch needed to avoid the flip, in °"); a.legend(fontsize=8)
+PS.finish(ax); save(fig, "M8_pitch")
 
 # M9: the rotated wing against the finite elements, and the batten balance
 FE_ = json.load(open(os.path.join(FE, "tilt_fine.json"))) + json.load(open(os.path.join(FE, "tilt_balanced.json")))

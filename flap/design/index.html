@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wing Design</title>
+<meta name="description" content="The full membrane wing to build: two active layers, tilted cut, active rolled trailing edge. Equations, schematics, trends and checks for each choice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px} h3{font-size:17px;margin-top:16px}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:36px 16px}
+.lead{font-size:18px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
+svg text.h{fill:#c8440a;font-weight:600}
+.fig img,.plotrow>img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.tw{overflow-x:auto;position:relative}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+tr.main td{font-weight:600}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.note{font-size:13.5px;color:var(--muted)}
+ul,ol{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
+ul.read{font-size:14.5px;margin-top:10px}
+.eq{overflow-x:auto;margin:6px 0 10px;position:relative}
+.katex{position:relative}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:18px;align-items:start;border-top:1px solid var(--rule);padding:14px 0}
+@media (max-width:820px){.row{grid-template-columns:minmax(0,1fr)}}
+.row p{margin:.2em 0 .5em}
+.step{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:17px;margin:0 0 4px}
+nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
+.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+.plotrow{display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:14px;align-items:start}
+.plotrow>img{min-width:0}
+@media (max-width:820px){.plotrow{grid-template-columns:minmax(0,1fr)}.ps{max-width:380px}}
+.pcard{--ps-hi:#c8440a}
+.pcard svg text.h{fill:var(--ps-hi);font-weight:600}
+.ps{--ps-hi:#c8440a;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font-size:12.5px;line-height:1.4;background:var(--card)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ps,:root:not([data-theme="light"]) .pcard{--ps-hi:#f08a55}}
+:root[data-theme="dark"] .ps,:root[data-theme="dark"] .pcard{--ps-hi:#f08a55}
+.ps svg{width:100%;height:auto;display:block;margin-bottom:6px}
+.ps svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:10.5px}
+.ps svg text.h{fill:var(--ps-hi);font-weight:600}
+.ps svg text.m{fill:var(--muted)}
+.ps p{margin:.25em 0;color:var(--ink);font-size:12.5px}
+.ps b{color:var(--ps-hi)}
+.ps p+p b{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Design</p>
+<h1>The wing to build</h1>
+<p class="lead">Two active layers, cut tilted, with an active rolled trailing edge. Bring the root edge and batten to vertical with one line, and the wing is tensioned. Voltage then lets the sheet go slack, and it bulges into more lift.</p>
+<div class="warn"><b>Model predictions, nothing built yet.</b> Sheet $\eta$ = 0.5 and roll $\eta_f$ = 0.4 are not measured on this stack. Expect 14 ± 1.5 mN at 4 m/s for those values, and about 10–12 mN at $\eta$ = 0.4.</div>
+<nav class="toc"><a href="#design">The design</a><a href="#cut">What to cut</a><a href="#why">Why it works</a><a href="#layers">Layers</a><a href="#fibre">Active fibre</a><a href="#shape">Tilt, chord</a><a href="#roll">Roll, band</a><a href="#tol">Tolerances</a><a href="#expect">What to expect</a><a href="#check">Bench checks</a><a href="#limits">What is not known</a></nav>
+
+<section class="card" id="design">
+  <h2>The design</h2>
+  <div class="fig"><!--card--><div class="pcard"><svg viewBox="0 0 660 370" role="img" aria-label="Wing to scale as cut and with both edges vertical, with the rolled strip and its active band"><path d="M120.4 235.1 L368.9 235.1 L368.9 327.1 L120.4 327.1 Z" fill="none" stroke="var(--muted)" stroke-width="0.8"/><path d="M120.4 235.1 L368.9 235.1 L368.9 258.1 L120.4 258.1 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M368.9 235.1 L574.8 60.3 L634.3 130.4 L428.4 305.2 Z" fill="none" stroke="var(--muted)" stroke-width="0.8"/><path d="M368.9 235.1 L574.8 60.3 L589.7 77.8 L383.8 252.6 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M95.5 46.0 L574.8 46.0 L574.8 60.3 L354.0 235.1 L95.5 235.1 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.8"/><line x1="82.6" y1="46.0" x2="579.4" y2="46.0" stroke="var(--ink)" stroke-width="3.2"/><line x1="95.5" y1="46.0" x2="95.5" y2="235.1" stroke="var(--ink)" stroke-width="1.8"/><line x1="354.0" y1="46.0" x2="354.0" y2="235.1" stroke="var(--ink)" stroke-width="1.8"/><path d="M95.5 235.1 L354.0 235.1 L574.8 60.3" fill="none" stroke="var(--accent)" stroke-width="3"/><path d="M95.5 46.0 L120.4 235.1 L368.9 235.1 L574.8 60.3" fill="none" stroke="var(--ink)" stroke-width="1" stroke-dasharray="5 4"/><line x1="354.0" y1="46.0" x2="368.9" y2="235.1" stroke="var(--ink)" stroke-width="1" stroke-dasharray="5 4"/><text x="82.6" y="32.2" text-anchor="start">LE rod, to the crank</text><text x="114.8" y="138.0" text-anchor="start">θ<tspan dy="2.5" font-size="8">r</tspan><tspan dy="-2.5">​</tspan> = 7.5°</text><text x="367.8" y="119.6" text-anchor="start">θ<tspan dy="2.5" font-size="8">b</tspan><tspan dy="-2.5">​</tspan> = 4.5°</text><line x1="95.5" y1="235.1" x2="55.0" y2="235.1" stroke="var(--ink)" stroke-width="1.5"/><path d="M55.0 235.1 L60.5 232.6 L60.5 237.5 Z" fill="var(--ink)" stroke="var(--ink)" stroke-width="0.4"/><text x="4.0" y="223.1" text-anchor="start">Line to the body,</text><text x="4.0" y="251.1" text-anchor="start">about 81 mN</text><text x="142.4" y="276.0" text-anchor="start" class="h">Active band 5 mm</text><text x="142.4" y="349.6" text-anchor="start">Strip 20 mm: the passive core rolls first</text><text x="409.2" y="312.8" text-anchor="start">Solid: both edges vertical</text><text x="409.2" y="331.2" text-anchor="start">Dashed: as cut, chord 39.1 mm</text></svg></div><!--/card--></div>
+  <div class="tw" style="margin-top:10px"><table>
+    <tr><th>Choice</th><th>Value</th><th>Why, in one line</th></tr>
+    <tr class="main"><td>Active layers</td><td>$n$ = 2: ½D, E, D, E, D, E, ½D. 105 µm</td><td>Most lift change per mass. A third adds 17 % for 33 % more mass</td></tr>
+    <tr class="main"><td>Tilt as cut</td><td>Batten 4.5°, root edge 7.5°</td><td>Gives the tension. The batten stays balanced. Past 5° the lift change drops fast</td></tr>
+    <tr class="main"><td>Chord stretch</td><td>$\lambda_n$ = 1.05: chord 39.1 mm as cut, 41.1 mm on the rods</td><td>Panel 1 46 % wrinkled at 0 V against 57 % at 1.04, for 3 % less lift change</td></tr>
+    <tr class="main"><td>Rolled strip</td><td>$w_s$ = 20 mm, both panels</td><td>Largest that fits the 60 mm coater on panel 1 (59.1 mm)</td></tr>
+    <tr class="main"><td>Active band</td><td>$w_e$ = 5 mm, next to the sheet</td><td>Fibre keeps 57–64 % of its force at 1.6 kV, so the edge stays held</td></tr>
+    <tr><td>Batten position</td><td>$x$ = 60 mm</td><td>10.6, 15.7, 15.7, 13.5 mN at 55, 60, 65, 70 mm</td></tr>
+    <tr><td>Rods</td><td>LE 3/2 mm tube, batten and root rod 0.8 mm</td><td>With real rods: 14.3 mN. LE bends 0.012 mm, batten 0.1 mm</td></tr>
+    <tr><td>Tension</td><td>Line on the root rod, about 81 mN</td><td>Fibres 4.7 % and 4.5 % longer, force 24 and 23 mN</td></tr>
+  </table></div>
+  <h3>Predicted, one wing, 4 m/s, 6°</h3>
+  <div class="tw"><table>
+    <tr><th></th><th>$C_L$, 0 V → 1.6 kV</th><th>Lift change</th><th>Fibre force, panel 1 / 2, 0 V → 1.6 kV</th><th>Film mass</th></tr>
+    <tr class="main"><td>The design, $n$ = 2, active fibre</td><td>0.59 → 1.05</td><td>14.5 mN</td><td>24 / 23 → 15 / 14 mN</td><td>637 mg</td></tr>
+    <tr><td>Same mask, passive fibre</td><td>0.59 → 1.09</td><td>15.7 mN</td><td>24 / 23 → 25 / 24 mN</td><td>637 mg</td></tr>
+    <tr><td>Same mask, $n$ = 3, active fibre</td><td>0.53 → 1.07</td><td>16.9 mN</td><td>32 / 31 → 19 / 18 mN</td><td>849 mg</td></tr>
+  </table></div>
+  <p class="note">Finite elements. Over a stroke at 4 m/s and 2 Hz: 14.3 mN at 8° mean pitch (13.2–15.4 mN), 14.0 mN at 6°, where seven phases around mid-upstroke do not settle. The simple model gives $C_L$ 0.60 → 1.06 and 14.9 mN at this point, close, but it has no fibre term (<a href="#limits">below</a>).</p>
+</section>
+
+<section class="card" id="cut">
+  <h2>What to cut</h2>
+  <div class="two">
+    <a class="go" href="../full_membrane/masks/mask_2partwing_active_fibre.svg"><b>Active fibre mask</b><br>The design. 5 mm band in a 20 mm strip. <a href="../full_membrane/masks/mask_numbers_active_fibre.json">Numbers</a>.</a>
+    <a class="go" href="../full_membrane/masks/mask_2partwing_passive_fibre.svg"><b>Passive fibre mask</b><br>Same outline. Electrodes reach only the end tabs. <a href="../full_membrane/masks/mask_numbers_passive_fibre.json">Numbers</a>.</a>
+  </div>
+  <ul>
+    <li><b>The mask does not fix the number of layers.</b> Two or three layers use the same masks and tilts: electrode A, B, A for two layers, A, B, A, B for three. So the mask can be cut now, and layers decided later.</li>
+    <li><b>Sizes:</b> panel 1 59.1 × 59.4 mm, panel 2 51.8 × 60.7 mm, both inside the 60 mm coater limit. Fibres 54.0 and 58.7 mm as cut. Holes clear by 7.6 mm.</li>
+    <li><b>Rolling:</b> roll from the free edge towards the sheet. The 15 mm passive core goes first, so the core has no electrode to crack. The band ends up as the outer turn: a 20 mm strip of 105 µm rolls to about 1.6 mm diameter, so about 5 mm per turn.</li>
+    <li><b>Spare rectangles</b> are kept from your original mask. Cut them off before bonding.</li>
+    <li><b>Check against your plates before cutting.</b> Margins (2 mm at the LE, 1.5 mm at batten and root) are judgement, not modelled.</li>
+  </ul>
+  <p class="note">Steps and fixtures: <a href="../manufacturing/#stretch">manufacturing</a>.</p>
+</section>
+
+<section class="card" id="why">
+  <h2>Why it works, in five equations</h2>
+  <p>Terms are as on the <a href="../model/">model page</a>.</p>
+  <div class="row">
+    <div><p class="step">1. Tension fights the bulge</p><div class="eq">$$(T-D)A+KA^3=q\Phi a_L\alpha$$</div></div>
+    <div><p>The air load pushes the sheet up by a height $A$. Tension $T$ resists it, and the air's softening $D$ helps it. Lift grows with $A$. So <b>less tension, more lift</b>, and that is all voltage does here.</p></div>
+  </div>
+  <div class="row">
+    <div><p class="step">2. Layers set the 0 V state, not the 1.6 kV state</p><div class="eq">$$\begin{aligned}\text{0 V: }&A\approx\frac{q\Phi a_L\alpha}{T-D},\ \ T\propto n+1\\\text{1.6 kV: }&A\approx\Big(\frac{q\Phi a_L\alpha}{K}\Big)^{1/3},\ \ K\propto n+1\end{aligned}$$</div></div>
+    <div><p>At 0 V the sheet is taut, so a thicker stack bulges less, and lift falls. At voltage it is slack, so only its stretching stiffness $K$ holds it, and that enters as a cube root. So more layers lower the 0 V lift, and hardly change the 1.6 kV lift. <b>Lift change is the gap between the two.</b> The finite elements give $C_L$ at 1.6 kV of 1.02, 1.05, 1.07, 1.07 for $n$ = 1 to 4, and 0.75, 0.59, 0.53, 0.50 at 0 V.</p></div>
+  </div>
+  <div class="row">
+    <div><p class="step">3. Rotation gives the stretch</p><div class="eq">$$\begin{aligned}\lambda_1&=\frac{L_1}{L_1+b(\tan\theta_b-\tan\theta_r)}\\\lambda_2&=\frac{L_2}{L_{2,0}}\end{aligned}$$</div></div>
+    <div><p>The sheet is cut unstretched. Its fibres are too short for the vertical frame, so bringing the edges to vertical stretches them. Closed form: 1.040 and 1.043. Finite elements, with the chord stretch included: 1.047 and 1.045. No grips, and nothing stretched while rolling or bonding the LE.</p></div>
+  </div>
+  <div class="row">
+    <div><p class="step">4. Active fibre: stretch gives force, the band takes some away</p><div class="eq">$$\begin{aligned}F&=\underbrace{2C_1w_s(H+H_p)(\lambda-\lambda^{-2})}_{F_0}\\&\quad-\underbrace{\eta_f(n+1)\varepsilon_0\varepsilon_r\frac{V^2}{H}w_e}_{\Delta F}\end{aligned}$$</div></div>
+    <div><p>$F_0$ grows with the strip's whole width, and $\Delta F$ only with the active band. Both grow with layers, as $H+H_p=(n+1)H$, so <b>layers cancel</b>, and $F>0$ needs only
+    $$\frac{w_e}{w_s}<\frac{2C_1(\lambda-\lambda^{-2})}{\eta_f\varepsilon_0\varepsilon_r(V/H)^2}$$
+    At the design, the right side is 0.51, and $w_e/w_s$ = 0.25. Numbers for panel 2: $F_0$ = 23.1 mN, and the finite elements give the same; $\Delta F$ = 10.9 mN, and they give 9.4 mN, because the sheet moves the fibre at voltage. This is why the earlier active design failed: its band took 80 % of a 13 mm strip.</p></div>
+  </div>
+  <div class="row">
+    <div><p class="step">5. The fibre holds the edge down</p><div class="eq">$$\begin{aligned}\bar z_{TE}&=\frac{q\,C_L\,\ell\,a^2}{12\,(F+n_x\ell)}\\\Delta C_L&\approx-0.14\ \text{per mm of}\ \bar z_{TE}\end{aligned}$$</div></div>
+    <div><p>The edge is a string of span $a$, pulled by $F$, and lifted by the air load on the strip $\ell$ next to it. The same strip of sheet adds its span tension $n_x$. Rising, the edge lowers the angle of attack, like a sail twisting off. One fitted length, $\ell$ ≈ 10 mm, matches 206 finite-element states with correlation 0.985, and the lift loss is close to the flat wing's $a_L/c$ = 0.11 per mm. <b>So a softer fibre releases the sheet a little, and loses angle.</b> The two nearly cancel, which is why an active fibre about equals a passive one.</p></div>
+  </div>
+</section>
+
+<section class="card" id="layers">
+  <h2>How many layers? Two</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_layers.png" alt="Lift change, lift coefficient at 0 V and 1.6 kV, and lift change per mass and line force, against the number of active layers"><!--s:D_layers--><aside class="ps"><svg viewBox="0 0 240 92" role="img" aria-label="Film stacks with one and three active layers"><text x="10.0" y="14.0" text-anchor="start" class="h">Active layers n</text><path d="M14.0 26.0 L106.0 26.0 L106.0 29.0 L14.0 29.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="29.0" x2="106.0" y2="29.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M14.0 29.0 L106.0 29.0 L106.0 35.0 L14.0 35.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="35.0" x2="106.0" y2="35.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M14.0 35.0 L106.0 35.0 L106.0 38.0 L14.0 38.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><path d="M132.0 26.0 L224.0 26.0 L224.0 29.0 L132.0 29.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="132.0" y1="29.0" x2="224.0" y2="29.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M132.0 29.0 L224.0 29.0 L224.0 35.0 L132.0 35.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="132.0" y1="35.0" x2="224.0" y2="35.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M132.0 35.0 L224.0 35.0 L224.0 41.0 L132.0 41.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="132.0" y1="41.0" x2="224.0" y2="41.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M132.0 41.0 L224.0 41.0 L224.0 47.0 L132.0 47.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><line x1="132.0" y1="47.0" x2="224.0" y2="47.0" stroke="var(--ps-hi)" stroke-width="1.8"/><path d="M132.0 47.0 L224.0 47.0 L224.0 50.0 L132.0 50.0 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.5"/><text x="14.0" y="76.0" text-anchor="start" class="h">n = 1</text><text x="132.0" y="76.0" text-anchor="start" class="h">n = 3</text><text x="10.0" y="89.0" text-anchor="start" class="m">Mid-dielectrics active; half-layers cover</text></svg><p><b>Varied:</b> Active layers $n$, active and passive fibre.</p><p><b>Fixed:</b> $\theta_b$ 4.5°, $\theta_r$ 7.5°, $\lambda_n$ 1.05, $w_s$ 20 mm, $w_e$ 5 mm. 4 m/s, 6°, 1.6 kV, $\eta$ 0.5.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> 2 above. $\Delta L=qS\,(C_{L,V}-C_{L,0})$.</li>
+    <li><b>Trend:</b> a) 8.4, 14.5, 16.9, 18.0 mN for $n$ = 1 to 4. b) The upper curve is flat, and the lower curve falls with diminishing returns. c) Per mass, $n$ = 2 is best: 19.9, 22.8, 19.9, 16.9 mN/g. The line force grows steadily: 54, 81, 108, 135 mN.</li>
+    <li><b>Why not 3:</b> 17 % more lift change, for 33 % more mass and 33 % more line force, and one more cycle in which something can fail. Worth trying second, on the same mask. If stall really caps $C_L$ near 0.9–1, more layers help relatively more, as they lower the 0 V end: reason to build $n$ = 3 if $n$ = 2 shows a clear cap.</li>
+    <li><b>Validate:</b> $n$ = 2 and 3, same mask, static tunnel, $C_L$ at 0 V and 1.6 kV. The 1.6 kV value should barely change, and the 0 V value should fall.</li>
+  </ul>
+</section>
+
+<section class="card" id="fibre">
+  <h2>What the active fibre does</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_fibre.png" alt="Fibre force against voltage; lift change against fibre force at voltage; lift lost against trailing edge rise"><!--s:D_fibre--><aside class="ps"><svg viewBox="0 0 240 110" role="img" aria-label="Trailing edge seen from behind, as a string pulled by fibre force F and lifted by the air load"><line x1="30.0" y1="66.0" x2="210.0" y2="66.0" stroke="var(--muted)" stroke-width="0.7" stroke-dasharray="3 3"/><path d="M30.0 66.0 L37.5 60.6 L45.0 55.6 L52.5 51.1 L60.0 47.1 L67.5 43.6 L75.0 40.5 L82.5 37.9 L90.0 35.8 L97.5 34.1 L105.0 32.9 L112.5 32.2 L120.0 32.0 L127.5 32.2 L135.0 32.9 L142.5 34.1 L150.0 35.8 L157.5 37.9 L165.0 40.5 L172.5 43.6 L180.0 47.1 L187.5 51.1 L195.0 55.6 L202.5 60.6 L210.0 66.0" fill="none" stroke="var(--accent)" stroke-width="2.6"/><line x1="30.0" y1="40.0" x2="30.0" y2="92.0" stroke="var(--ink)" stroke-width="1.6"/><line x1="210.0" y1="40.0" x2="210.0" y2="92.0" stroke="var(--ink)" stroke-width="1.6"/><line x1="62.0" y1="40.0" x2="32.0" y2="28.0" stroke="var(--ps-hi)" stroke-width="1.5"/><path d="M32.0 28.0 L38.0 27.8 L36.2 32.3 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><line x1="178.0" y1="40.0" x2="208.0" y2="28.0" stroke="var(--ps-hi)" stroke-width="1.5"/><path d="M208.0 28.0 L203.8 32.3 L202.0 27.8 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="44.0" y="28.0" text-anchor="start" class="h">F</text><text x="190.0" y="28.0" text-anchor="start" class="h">F</text><line x1="70.0" y1="88.0" x2="70.0" y2="72.0" stroke="var(--muted)" stroke-width="1"/><path d="M70.0 72.0 L72.4 77.5 L67.6 77.5 Z" fill="var(--muted)" stroke="var(--muted)" stroke-width="0.4"/><line x1="100.0" y1="88.0" x2="100.0" y2="72.0" stroke="var(--muted)" stroke-width="1"/><path d="M100.0 72.0 L102.4 77.5 L97.6 77.5 Z" fill="var(--muted)" stroke="var(--muted)" stroke-width="0.4"/><line x1="150.0" y1="88.0" x2="150.0" y2="72.0" stroke="var(--muted)" stroke-width="1"/><path d="M150.0 72.0 L152.4 77.5 L147.6 77.5 Z" fill="var(--muted)" stroke="var(--muted)" stroke-width="0.4"/><line x1="180.0" y1="88.0" x2="180.0" y2="72.0" stroke="var(--muted)" stroke-width="1"/><path d="M180.0 72.0 L182.4 77.5 L177.6 77.5 Z" fill="var(--muted)" stroke="var(--muted)" stroke-width="0.4"/><line x1="120.0" y1="66.0" x2="120.0" y2="32.0" stroke="var(--ps-hi)" stroke-width="1.3"/><path d="M120.0 32.0 L122.4 37.5 L117.6 37.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M120.0 66.0 L117.6 60.5 L122.4 60.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="124.0" y="54.0" text-anchor="start" class="h">z<tspan dy="2.5" font-size="8">TE</tspan><tspan dy="-2.5">​</tspan></text><text x="120.0" y="104.0" text-anchor="middle" class="m">air load near the edge, q C<tspan dy="2.5" font-size="8">L</tspan><tspan dy="-2.5">​</tspan> ℓ</text><text x="120.0" y="14.0" text-anchor="middle" class="m">Lower F: the edge rises, the wing loses angle</text></svg><p><b>Varied:</b> a) $V$. b, c) All cases of the sweeps: layers, roll, band, tilt.</p><p><b>Fixed:</b> 4 m/s, 6°, $\eta$ 0.5 unless varied.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> 4 for a), 5 for c).</li>
+    <li><b>Trend:</b> a) force falls as $V^2$, from 23 to 14 mN. b) Hollow points did not settle. <b>Below about 10 mN at voltage almost nothing settles: 1 of 60 cases. From 12 to 20 mN most do, and above 20 mN all do.</b> The numbers in the shaded band are not usable. c) Each mm of edge rise costs $C_L$ 0.14.</li>
+    <li><b>Honest result:</b> an active fibre gives no extra lift on this outline: 14.5 mN against 15.7 mN passive, 7 % less, with $n$ = 1 to 4 all within 0–20 %. Fibre alone, with the sheet off: at 10° tilt it gave 0.09 mN. What active gives is a wing whose edge relaxes at voltage, your vocal-cord architecture, and a second measurable signal. If lift alone matters, use the passive mask: same outline.</li>
+    <li><b>Is the limit physical?</b> Unknown. Steady relaxation cannot say whether a state that does not settle would flutter or only needs a better solver. Treat 10 mN as a limit to stay clear of, and watch the edge on the first build.</li>
+    <li><b>Validate:</b> at 0 V and 1.6 kV, high-speed video of the edge in flow, against $\bar z_{TE}$ = 0.2 and 1.3 mm.</li>
+  </ul>
+</section>
+
+<section class="card" id="shape">
+  <h2>Tilt, balance, chord stretch</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_shape_choice.png" alt="Lift change against batten tilt; moment on the batten against root edge tilt; lift change and wrinkled area against chord stretch"><!--s:D_shape_choice--><aside class="ps"><svg viewBox="0 0 240 122" role="img" aria-label="Wing with tilts and chord stretch highlighted"><text x="10.0" y="14.0" text-anchor="start" class="h">a, b) Tilts θ<tspan dy="2.5" font-size="8">b</tspan><tspan dy="-2.5">​</tspan>, θ<tspan dy="2.5" font-size="8">r</tspan><tspan dy="-2.5">​</tspan>; c) chord stretch λ<tspan dy="2.5" font-size="8">n</tspan><tspan dy="-2.5">​</tspan></text><path d="M17.6 24.0 L226.0 24.0 L226.0 30.2 L130.0 106.2 L17.6 106.2 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.7"/><line x1="13.6" y1="24.0" x2="228.0" y2="24.0" stroke="var(--ink)" stroke-width="2.4"/><line x1="17.6" y1="24.0" x2="17.6" y2="106.2" stroke="var(--ink)" stroke-width="1.4"/><line x1="130.0" y1="24.0" x2="130.0" y2="106.2" stroke="var(--ink)" stroke-width="1.4"/><path d="M17.6 106.2 L130.0 106.2 L226.0 30.2" fill="none" stroke="var(--accent)" stroke-width="2.6"/><path d="M17.6 24.0 L47.5 106.2 L147.5 106.2 L226.0 30.2" fill="none" stroke="var(--ps-hi)" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="130.0" y1="24.0" x2="147.5" y2="106.2" stroke="var(--ps-hi)" stroke-width="1.1" stroke-dasharray="4 3"/><line x1="178.0" y1="28.0" x2="178.0" y2="52.0" stroke="var(--ps-hi)" stroke-width="1.3"/><path d="M178.0 52.0 L175.6 46.5 L180.4 46.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M178.0 28.0 L180.4 33.5 L175.6 33.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="184.0" y="46.0" text-anchor="start" class="h">λ<tspan dy="2.5" font-size="8">n</tspan><tspan dy="-2.5">​</tspan></text><text x="10.0" y="118.0" text-anchor="start" class="m">Tilts drawn larger than real</text></svg><p><b>Varied:</b> a) $\theta_b$. b) $\theta_r$. c) $\lambda_n$.</p><p><b>Fixed:</b> $n$ = 2, $w_s$ 20 mm, $w_e$ 5 mm. a, c) 4 m/s, 6°, 1.6 kV; c) $\theta_b$ 5°, the run before the final pick. b) No flow.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> 3, then 1. More tilt means more tension, so less for voltage to do.</li>
+    <li><b>Trend:</b> a) flat up to 5°, then falling fast: 15.9, 15.7, 12.3, 10.0 mN at 4.5, 5, 5.5, 6° for $n$ = 2. So 4.5° sits on the flat part, with margin. b) The moment on the batten is zero at $\theta_r$ = 7.4°, for $\theta_b$ = 4.5°. A wider roll moves the balance: the earlier rule of 1.77 becomes 1.67 here. Slope: about 0.38 mN m per degree of root tilt. c) Lift change falls gently and wrinkles fall quickly: 59, 48, 35, 18 % at $\lambda_n$ = 1.04, 1.05, 1.06, 1.08.</li>
+    <li><b>Validate:</b> a) markers on the fibres. b) Release the batten's hinge on the built wing: it should stop near vertical. c) Photograph the sheet at 0 V.</li>
+  </ul>
+</section>
+
+<section class="card" id="roll">
+  <h2>Roll width and active band</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_roll.png" alt="Lift change against roll width; lift change against active band; fibre force at voltage against active band"><!--s:D_roll--><aside class="ps"><svg viewBox="0 0 240 106" role="img" aria-label="Rolled strip as cut, with its active band next to the sheet and passive core"><path d="M40.0 22.0 L190.0 22.0 L190.0 76.0 L40.0 76.0 Z" fill="none" stroke="var(--muted)" stroke-width="0.9"/><path d="M40.0 22.0 L190.0 22.0 L190.0 36.0 L40.0 36.0 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.3"/><line x1="206.0" y1="22.0" x2="206.0" y2="76.0" stroke="var(--ps-hi)" stroke-width="1.4"/><path d="M206.0 76.0 L203.6 70.5 L208.4 70.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M206.0 22.0 L208.4 27.5 L203.6 27.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="212.0" y="53.0" text-anchor="start" class="h">w<tspan dy="2.5" font-size="8">s</tspan><tspan dy="-2.5">​</tspan></text><line x1="26.0" y1="22.0" x2="26.0" y2="36.0" stroke="var(--ps-hi)" stroke-width="1.2"/><path d="M26.0 36.0 L23.6 30.5 L28.4 30.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><path d="M26.0 22.0 L28.4 27.5 L23.6 27.5 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="6.0" y="33.0" text-anchor="start" class="h">w<tspan dy="2.5" font-size="8">e</tspan><tspan dy="-2.5">​</tspan></text><text x="115.0" y="60.0" text-anchor="middle" class="m">Passive core</text><text x="115.0" y="14.0" text-anchor="middle" class="m">Sheet side</text><text x="10.0" y="94.0" text-anchor="start" class="m">F<tspan dy="2.5" font-size="8">0</tspan><tspan dy="-2.5">​</tspan> grows with w<tspan dy="2.5" font-size="8">s</tspan><tspan dy="-2.5">​</tspan>, the voltage drop with w<tspan dy="2.5" font-size="8">e</tspan><tspan dy="-2.5">​</tspan></text></svg><p><b>Varied:</b> a) $w_s$. b, c) $w_e$.</p><p><b>Fixed:</b> The design otherwise.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> 4. $F_0\propto w_s$, $\Delta F\propto w_e$.</li>
+    <li><b>Trend:</b> a) 12.2, 13.6, 14.5, 15.1 mN at 16, 18, 20, 22 mm. Below about 16 mm the fibre force falls under the limit, and lift change collapses. b) 15.4, 15.2, 14.5, 13.5, 11.6 mN at $w_e$ = 2.5, 3.5, 5, 6.5, 8 mm: no gain from a wider band. c) The closed form: with $\eta_f$ up to 0.6 the fibre force is about 7 mN at 5 mm if the edge does not move; the finite elements keep it at 9 mN, and it still settles.</li>
+    <li><b>Why 5 mm, not 2.5 mm:</b> a smaller band loses less lift, but the drop would be small to measure. 5 mm drops the force by about 40 %, so it can be seen on a bench.</li>
+    <li><b>Validate:</b> isometric force drop on a rolled strip: 9–11 mN at 1.6 kV predicted. This also measures $\eta_f$, for the real single-turn band.</li>
+  </ul>
+</section>
+
+<section class="card" id="tol">
+  <h2>Tolerances: what the build can get wrong</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_tolerance.png" alt="Lift change against rotation fraction, rod angle error, film thickness and roll efficiency"><!--s:D_tolerance--><aside class="ps"><svg viewBox="0 0 240 132" role="img" aria-label="Wing with rods short of and past vertical highlighted"><text x="10.0" y="14.0" text-anchor="start" class="h">a, b) Rods short of or past vertical</text><path d="M17.6 24.0 L226.0 24.0 L226.0 30.2 L130.0 106.2 L17.6 106.2 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.7"/><line x1="13.6" y1="24.0" x2="228.0" y2="24.0" stroke="var(--ink)" stroke-width="2.4"/><line x1="17.6" y1="24.0" x2="17.6" y2="106.2" stroke="var(--ink)" stroke-width="1.4"/><line x1="130.0" y1="24.0" x2="130.0" y2="106.2" stroke="var(--ink)" stroke-width="1.4"/><path d="M17.6 106.2 L130.0 106.2 L226.0 30.2" fill="none" stroke="var(--accent)" stroke-width="2.6"/><line x1="130.0" y1="24.0" x2="145.0" y2="106.2" stroke="var(--ps-hi)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="130.0" y1="24.0" x2="115.0" y2="106.2" stroke="var(--ps-hi)" stroke-width="1.2" stroke-dasharray="4 3"/><line x1="17.6" y1="24.0" x2="32.6" y2="106.2" stroke="var(--ps-hi)" stroke-width="1.2" stroke-dasharray="4 3"/><text x="10.0" y="128.0" text-anchor="start" class="h">c) film thickness; d) η<tspan dy="2.5" font-size="8">f</tspan><tspan dy="-2.5">​</tspan> of the roll</text></svg><p><b>Varied:</b> Rod angles, film thickness, $\eta_f$.</p><p><b>Fixed:</b> The design otherwise. 4 m/s, 6°, 1.6 kV.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> $P\propto1/H$ at fixed $V$, in step 3c of the model; 3 and 4 above.</li>
+    <li><b>Trend:</b> a) 12.2, 14.6, 15.1, 14.5, 13.9, 13.3 mN at 70, 85, 95, 100, 105, 115 %. A forgiving optimum. b) 1° on either rod: 12.0–14.9 mN. <b>Do not overshoot the batten:</b> past vertical it did not settle. Root rod 2° short also failed to settle. c) 17.9, 14.5, 11.6 mN at $H$ = 30, 35, 40 µm: thickness matters most, so measure it. d) 15.4, 14.5, 12.3 mN at $\eta_f$ = 0.2, 0.4, 0.6; at 0.8 the fibre nears slack.</li>
+    <li><b>Validate:</b> cross-section for $H$. A printed square for the rods. Line force as a cross-check: 81 mN ± 10 %.</li>
+  </ul>
+</section>
+
+<section class="card" id="expect">
+  <h2>What to expect</h2>
+  <div class="fig"><div class="plotrow"><img src="../full_membrane/validation/D_expect.png" alt="Lift coefficient against voltage up and down; lift change against speed; lift change against sheet efficiency; lift change over the stroke"><!--s:D_expect--><aside class="ps"><svg viewBox="0 0 240 156" role="img" aria-label="Chord at pitch with voltage, speed and stroke highlighted"><path d="M34.0 64.0 L39.9 62.7 L45.8 61.7 L51.7 60.8 L57.7 60.1 L63.7 59.5 L69.7 59.2 L75.8 59.0 L81.8 59.1 L87.9 59.3 L94.1 59.7 L100.2 60.3 L106.4 61.1 L112.6 62.0 L118.8 63.2 L125.1 64.5 L131.4 66.0 L137.7 67.7 L144.0 69.6 L150.4 71.7 L156.7 74.0 L163.2 76.4 L169.6 79.1 L176.1 81.9 L182.5 84.9" fill="none" stroke="var(--accent)" stroke-width="2.2"/><line x1="34.0" y1="64.0" x2="200.0" y2="64.0" stroke="var(--muted)" stroke-width="0.7" stroke-dasharray="3 3"/><path d="M144.0 64.0 L144.0 64.6 L144.0 65.3 L144.0 65.9 L144.0 66.6 L144.0 67.2 L143.9 67.8 L143.9 68.5 L143.9 69.1 L143.8 69.8 L143.8 70.4 L143.8 71.0 L143.7 71.7 L143.7 72.3 L143.6 72.9 L143.6 73.6 L143.5 74.2 L143.5 74.9 L143.4 75.5 L143.3 76.1 L143.3 76.8 L143.2 77.4 L143.1 78.0 L143.0 78.7 L142.9 79.3" fill="none" stroke="var(--ps-hi)" stroke-width="1.3"/><line x1="4.0" y1="64.0" x2="26.0" y2="64.0" stroke="var(--ps-hi)" stroke-width="1.3"/><path d="M26.0 64.0 L20.5 66.4 L20.5 61.6 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><text x="4.0" y="56.0" text-anchor="start" class="h">b) U</text><text x="150.0" y="94.0" text-anchor="start" class="h">α</text><text x="84.0" y="30.0" text-anchor="start" class="h">a) V; c) η</text><path d="M71.7 118.2 L72.2 119.1 L72.8 120.0 L73.3 120.9 L73.8 121.9 L74.2 122.8 L74.6 123.8 L74.9 124.8 L75.2 125.8 L75.4 126.8 L75.6 127.8 L75.8 128.9 L75.9 129.9 L76.0 131.0 L76.0 132.0 L76.0 133.0 L75.9 134.1 L75.8 135.1 L75.6 136.2 L75.4 137.2 L75.2 138.2 L74.9 139.2 L74.6 140.2 L74.2 141.2 L73.8 142.1" fill="none" stroke="var(--ps-hi)" stroke-width="1.3"/><line x1="74.6" y1="140.2" x2="73.8" y2="142.1" stroke="var(--ps-hi)" stroke-width="1.3"/><path d="M73.8 142.1 L73.6 136.1 L78.1 138.0 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><line x1="72.8" y1="120.0" x2="71.7" y2="118.2" stroke="var(--ps-hi)" stroke-width="1.3"/><path d="M71.7 118.2 L76.7 121.5 L72.5 124.2 Z" fill="var(--ps-hi)" stroke="var(--ps-hi)" stroke-width="0.4"/><line x1="52.0" y1="132.0" x2="76.0" y2="118.0" stroke="var(--ink)" stroke-width="1.4"/><text x="90.0" y="136.0" text-anchor="start" class="h">d) stroke, mean pitch</text></svg><p><b>Varied:</b> a) $V$. b) $U$. c) $\eta$, active and passive fibre. d) Phase, at 6° and 8° mean pitch.</p><p><b>Fixed:</b> The design otherwise. d) 4 m/s, 2 Hz, $\Phi_0$ = 30°.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> 1 and 2; voltage enters as $V^2$, through $P$.</li>
+    <li><b>Trend:</b> a) $C_L$ rises close to $V^2$, and voltage up and down give the same state at every settled point, so no hysteresis. Between 1.0 and 1.4 kV states settle slowly: the point at 1.2 kV coming down did not settle. b) 2.2, 7.6, 14.5, 17.4, 19.0, 21.7 mN at 2, 3, 4, 5, 6, 7 m/s. c) 6.0, 8.5, 10.4, 14.5, 17.6, 20.7 mN at $\eta$ = 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, nearly linear, so lift change reads $\eta$ directly. Hollow points settled slowly even after 200 000 iterations. d) at 8° mean pitch, 13.2–15.4 mN all round the stroke, with 2 of 24 phases slow to settle. At 6° it dips to 8 mN and does not settle from 225° to 315°, where the outer panel's angle reaches zero. <b>So fly at 8°</b>, as $\alpha>\arctan(\Phi_0 2\pi f r/U)$ = 7° asks. At 4 m/s, 1 Hz, 6°: 14.5 mN, flat. At 6 m/s, 2 Hz, 6°: 19.1 mN.</li>
+    <li><b>If $\eta$ turns out low, nothing breaks.</b> The design gives less, in proportion: about 8.5 mN at 0.3, and 6 mN at 0.2. A passive fibre gives 5.5, 9.0, 12.4 mN at 0.2, 0.3, 0.4, about the same. Three layers: 9.3 mN at 0.3, 13.5 mN at 0.4. Low $\eta$ alone is no reason to change the mask.</li>
+    <li><b>Almost independent of pitch:</b> 13.5–14.6 mN from 2° to 12°. Voltage shifts the $C_L(\alpha)$ line up, at any angle, so you can read it at any pitch with attached flow.</li>
+    <li><b>Validate:</b> static section, 3–5 m/s, randomised, with a sham. Then the stroke.</li>
+  </ul>
+  <div class="fig" style="margin-top:12px"><div class="plotrow"><img src="../full_membrane/validation/D_map.png" alt="Height of the sheet at 0 V and 1.6 kV, and chordwise sections through each panel"><!--s:D_map--><aside class="ps"><svg viewBox="0 0 240 120" role="img" aria-label="Wing with two chordwise cuts"><path d="M17.6 22.0 L226.0 22.0 L226.0 28.2 L130.0 104.2 L17.6 104.2 Z" fill="var(--accent-dim)" stroke="var(--muted)" stroke-width="0.7"/><line x1="13.6" y1="22.0" x2="228.0" y2="22.0" stroke="var(--ink)" stroke-width="2.4"/><line x1="17.6" y1="22.0" x2="17.6" y2="104.2" stroke="var(--ink)" stroke-width="1.4"/><line x1="130.0" y1="22.0" x2="130.0" y2="104.2" stroke="var(--ink)" stroke-width="1.4"/><path d="M17.6 104.2 L130.0 104.2 L226.0 28.2" fill="none" stroke="var(--accent)" stroke-width="2.6"/><line x1="74.0" y1="22.0" x2="74.0" y2="104.2" stroke="var(--ps-hi)" stroke-width="1.8" stroke-dasharray="4 2"/><line x1="154.0" y1="22.0" x2="154.0" y2="85.2" stroke="var(--ps-hi)" stroke-width="1.8" stroke-dasharray="4 2"/><text x="60.0" y="14.0" text-anchor="start" class="h">x = 32 mm</text><text x="142.0" y="14.0" text-anchor="start" class="h">x = 72 mm</text><text x="10.0" y="116.0" text-anchor="start" class="h">Height w of the sheet, 0 V and 1.6 kV</text></svg><p><b>Varied:</b> Voltage: 0 and 1.6 kV.</p><p><b>Fixed:</b> The design, 4 m/s, 6°.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Trend:</b> at 0 V the peak height is 1.3 mm, and at 1.6 kV it is 5.7 mm.</li>
+    <li><b>Validate:</b> stereo video with speckle, section by section.</li>
+  </ul>
+</section>
+
+<section class="card" id="check">
+  <h2>Bench checks, in order</h2>
+  <div class="tw"><table>
+    <tr><th>Stage</th><th>Measure</th><th>Expect</th><th>If not</th></tr>
+    <tr><td>After coating</td><td>$H$ by cross-section; mass of panel 1</td><td>35 µm; film about 637 mg for the whole wing</td><td>Rescale: $\Delta L$ moves about 0.6 mN per µm</td></tr>
+    <tr><td>Roll</td><td>Isometric force drop of one fibre, on a strip off-cut</td><td>9–11 mN at 1.6 kV, at 4.5 % stretch</td><td>Sets $\eta_f$. Above 16 mN, cut the band</td></tr>
+    <tr><td>Rotate root rod to vertical</td><td>Batten angle, by itself</td><td>Within 1° of vertical</td><td>Adjust root rod with the line, or fix the batten</td></tr>
+    <tr><td>Same</td><td>Line force; fibre stretch by markers</td><td>81 mN; 4.7 % and 4.5 %</td><td>Check cut and chord stretch</td></tr>
+    <tr><td>0 V, no flow</td><td>Wrinkles by photo; fibre bow</td><td>Panel 1 about 46 % in the model; bow 2.6 mm, 0.7 mm</td><td>If rough, go to $\lambda_n$ = 1.06: 35 %, 13.9 mN</td></tr>
+    <tr><td>0 V → 1.6 kV, no flow</td><td>Resonance of panel 1</td><td>51 → 25 Hz (simple model)</td><td>Fall gives $\eta$ on the real wing</td></tr>
+    <tr><td>Static tunnel, 4 m/s, 6°</td><td>$C_L$; edge motion</td><td>0.59 → 1.05; edge 0.2 → 1.3 mm, steady</td><td>Edge unsteady: use the passive mask</td></tr>
+  </table></div>
+</section>
+
+<section class="card" id="limits">
+  <h2>What is not known</h2>
+  <ul>
+    <li><b>$\eta$ and $\eta_f$.</b> Not measured on this stack. The model also assumes $n+1$ active films in the roll; a single turn may have $n$, so a smaller drop than shown.</li>
+    <li><b>$C_L$ above about 0.9.</b> 1.05 is above what attached flow supports at Re ≈ 12 000, so the 1.6 kV end may be capped. With a cap at 0.9, lift change would be about 10 mN.</li>
+    <li><b>Lattice:</b> 13.0, 14.5, 14.3, 13.1 mN at 24, 36, 48, 72 panels along the span, with no clean trend. Hence ± 1.5 mN. <b>Mesh:</b> converged from 2 mm (11.2, 13.7, 14.5, 14.4, 14.4, 14.9 mN at 3, 2.5, 2, 1.75, 1.5, 1.25 mm, the finest three not fully settled).</li>
+    <li><b>Wrinkles:</b> panel 1 46 % at 0 V, both panels over 50 % at 1.6 kV. The model does not know what these do to the flow.</li>
+    <li><b>Not simulated:</b> the bonding sequence, hinge friction, the line over a stroke, flutter and any delay between voltage and shape.</li>
+    <li><b>Simple model:</b> on this design it matches, partly by luck. Across 102 new cases its correlation is only 0.30 and its typical error 4.7 mN: it has no fibre term, and it misses the layer trend. So the finite elements chose this design. Adding the edge law and refitting six parameters reached only 3.2 mN and correlation 0.28 on held-out cases, so it was not kept.</li>
+    <li><b>A correction.</b> A solver change (under-relaxed air load) first looked as if it let active-fibre cases settle. Case by case, it changed none of the 26 that could be compared. The real change was the wider roll and narrower band.</li>
+  </ul>
+  <div class="fig" style="margin-top:12px"><div class="plotrow"><img src="../full_membrane/validation/D_accuracy.png" alt="Lift change against mesh size, lattice size and rods, and fraction of cases that settle against fibre force"><!--s:D_accuracy--><aside class="ps"><svg viewBox="0 0 240 120" role="img" aria-label="Mesh and flexible rods"><line x1="14.0" y1="26.0" x2="14.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="26.0" x2="26.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="26.0" x2="38.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="26.0" x2="50.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="26.0" x2="62.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="26.0" x2="74.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="26.0" x2="86.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="26.0" x2="98.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="110.0" y1="26.0" x2="110.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="26.0" x2="110.0" y2="26.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="38.0" x2="110.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="50.0" x2="110.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="62.0" x2="110.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="74.0" x2="110.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="86.0" x2="110.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="26.0" x2="26.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="38.0" x2="26.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="50.0" x2="26.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="62.0" x2="26.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="14.0" y1="74.0" x2="26.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="26.0" x2="38.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="38.0" x2="38.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="50.0" x2="38.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="62.0" x2="38.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="26.0" y1="74.0" x2="38.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="26.0" x2="50.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="38.0" x2="50.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="50.0" x2="50.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="62.0" x2="50.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="38.0" y1="74.0" x2="50.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="26.0" x2="62.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="38.0" x2="62.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="50.0" x2="62.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="62.0" x2="62.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="50.0" y1="74.0" x2="62.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="26.0" x2="74.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="38.0" x2="74.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="50.0" x2="74.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="62.0" x2="74.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="62.0" y1="74.0" x2="74.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="26.0" x2="86.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="38.0" x2="86.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="50.0" x2="86.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="62.0" x2="86.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="74.0" y1="74.0" x2="86.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="26.0" x2="98.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="38.0" x2="98.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="50.0" x2="98.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="62.0" x2="98.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="86.0" y1="74.0" x2="98.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="26.0" x2="110.0" y2="38.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="38.0" x2="110.0" y2="50.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="50.0" x2="110.0" y2="62.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="62.0" x2="110.0" y2="74.0" stroke="var(--muted)" stroke-width="0.5"/><line x1="98.0" y1="74.0" x2="110.0" y2="86.0" stroke="var(--muted)" stroke-width="0.5"/><text x="14.0" y="14.0" text-anchor="start" class="h">a) mesh h</text><line x1="132.0" y1="40.0" x2="226.0" y2="40.0" stroke="var(--ps-hi)" stroke-width="3"/><line x1="180.0" y1="40.0" x2="180.0" y2="90.0" stroke="var(--ps-hi)" stroke-width="1.6"/><text x="132.0" y="14.0" text-anchor="start" class="h">c) real rods</text><text x="132.0" y="32.0" text-anchor="start" class="m">LE tube</text><text x="184.0" y="72.0" text-anchor="start" class="m">batten</text><text x="14.0" y="106.0" text-anchor="start" class="h">b) vortex lattice; d) solver settling</text></svg><p><b>Varied:</b> a) Mesh. b) Lattice. c) Rods. d) Solver.</p><p><b>Fixed:</b> The design otherwise.</p></aside><!--/s--></div></div>
+  <ul class="read">
+    <li><b>Equation:</b> checks on steps 1–5; fibre force from 4.</li>
+    <li><b>Trend:</b> a, b) as listed above. c) Real rods cost little: 14.3 mN with the 3/2 mm tube and 0.8 mm batten, 13.4 mN with a 0.5 mm batten. d) Whether a case settles depends mostly on the fibre force at voltage.</li>
+    <li><b>Validate:</b> only measurement can settle $\eta$, wrinkles and the cap. Data: <code>full_membrane/validation/active_*.jsonl</code>, code: <a href="../full_membrane/active_study.py">active_study.py</a>, <a href="../full_membrane/figures_design.py">figures_design.py</a>.</li>
+  </ul>
+</section>
+
+<div class="two">
+  <a class="go" href="../manufacturing/"><b>Manufacturing →</b><br>Stack, masks, process, fixtures.</a>
+  <a class="go" href="../model/"><b>The model →</b><br>All the terms, step by step.</a>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});
+</script>
+</body>
+</html>

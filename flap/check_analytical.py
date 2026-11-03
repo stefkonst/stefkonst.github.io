@@ -70,4 +70,4 @@ def compare(name, rows):
 use = lambda r: "error" not in r and not r.get("active") and r.get("ok0") and r.get("ok1") and r["xb"] == 0.06 and r.get("h", 0.002) == 0.002
 compare("tuned on", [r for f in ("tilt_fine.json", "tilt_balanced.json") for r in json.load(open(os.path.join(FE_DIR, f))) if use(r) and r.get("U", 4.0) == 4.0])
 compare("not tuned on", [r for r in json.load(open(os.path.join(FE_DIR, "tilt_final.json"))) if use(r)])
-print("fibre stretch at 5 and 8.85 deg:", [round(x, 3) for x in W.rotation_geometry(W.ROTATED)[:2]], "against 1.059, 1.049 from the finite elements")
+print("fibre stretch at 4.5 and 7.5 deg:", [round(x, 3) for x in W.rotation_geometry(W.ROTATED)[:2]], "against 1.047, 1.045 from the finite elements, with the chord stretch")
