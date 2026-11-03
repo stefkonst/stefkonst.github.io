@@ -1,5 +1,0 @@
-42 cases
-{'theta': 3.0, 'lam_n': 1.02, 'eta': 0.25, 'alpha': 10.0, 'U': None, 'ok0': True, 'ok1': True, 'error': None} CL 0.9655248880077978 0.9348532944917493 wall 90
-{'theta': 3.0, 'lam_n': 1.02, 'eta': 0.5, 'alpha': 10.0, 'U': None, 'ok0': True, 'ok1': True, 'error': None} CL 0.9655248880077978 1.0995772631281153 wall 98
-{'theta': 3.0, 'lam_n': 1.04, 'eta': 0.5, 'alpha': 10.0, 'U': None, 'ok0': True, 'ok1': True, 'error': None} CL 0.8835985229417264 1.0203379694356727 wall 126
-{'theta': 3.0, 'lam_n': 1.04, 'eta': 0.25, 'alpha': 10.0, 'U': None, 'ok0': True, 'ok1': True, 'error': None} CL 0.8835985229417264 0.8318853352838232 wall 137
