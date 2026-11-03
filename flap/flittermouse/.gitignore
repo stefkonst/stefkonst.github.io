@@ -2,4 +2,3 @@ __pycache__/
 *.nbc
 *.nbi
 *.log
-data/fe_reference.jsonl

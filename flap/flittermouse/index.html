@@ -69,7 +69,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -77,6 +77,19 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>Drive:</b> one rolled DEA of about 2 cm per wing, through a transmission to the leading edge. The trailing-edge fibre pulls to the body.</li>
 <li><b>Flight:</b> forward flight, about 4 m/s.</li>
 <li><b>Timing:</b> skin stiffer on the upstroke than on the downstroke. Voltage lowers tension, so that means voltage on in the downstroke.</li>
+</ul>
+</section>
+
+<section class="card" id="reference">
+<h2>Voltage on the 5 cm panel</h2>
+<p>Your finite-element wing, unchanged, steady, on one 5 × 2.5 cm panel: one active layer, 10 mm roll, 3 mm active band, batten bonded in place. Code: <a href="fe_reference.py">fe_reference.py</a>. 42 cases, of which only 15 settled.</p>
+<div class="fig"><img src="figures/F_reference.png" alt="Lift coefficient at voltage against zero volts for settled and unsettled cases, lift change against fibre force, and trailing edge height against fibre force"></div>
+<ul class="read">
+<li><b>Equation:</b> the sheet is a set of spanwise strings, $w \approx p L^2 / (8 N_s)$. Chord tension is close to zero, so the surface tilts about the leading edge as well as bulging. A raised trailing edge lowers the local angle, which cancels part of the extra camber.</li>
+<li><b>Trend:</b> where it settles (10°, 4 m/s), $\Delta C_L$ runs from −0.10 to +0.14, or about −1 to +1.6 mN on a baseline near 10 mN. The 7–10 cm design predicted much more. At $\eta$ 0.25 and low tilt, voltage lowers lift.</li>
+<li><b>Trend:</b> the trailing edge rises 1–1.6 mm with voltage at $\eta$ 0.5, about 3° over this chord. That is a twist under voltage control, not a lift change.</li>
+<li><b>Trend:</b> at 6° almost nothing settles, and refining the mesh changes $C_L$ from 0.23 to 0.55. Some states sit on a negatively cambered branch at 0 V. The solver may be finding no steady state because there is none, but this is not proven.</li>
+<li><b>Validate:</b> one panel at 4 m/s, filmed from the side. Look for a steady edge or flutter, and measure edge height at 0 V and at voltage. Only then measure force.</li>
 </ul>
 </section>
 
@@ -156,6 +169,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>3 Nov, evening:</b> page opened with first-pass numbers. Next: unsteady lattice with a shed wake, then a coupled skin model, so twist and camber are computed rather than assumed.</li>
 <li><b>3 Nov, 17:20:</b> bench energy per cycle and the lattice checks added. Finite-element reference runs for this panel are under way. A first batch had a setup error of mine (the lattice ran past the sheet to 10 cm) and was discarded. Coupled wing model and drive model written, not yet validated.</li>
 <li><b>3 Nov, 17:25:</b> leading edge, transmission, skin modes and electrics added. Finite-element runs still going.</li>
+<li><b>3 Nov, evening:</b> finite-element reference finished: 15 of 42 settled, small lift change where settled. The coupled wing model does not yet reproduce it: 0 V lift is close after calibration, but it predicts about +0.15 for $\Delta C_L$ where the finite elements give about 0, with too little trailing-edge rise. It is not used for any result here. Fixes under test.</li>
 </ul>
 </section>
 

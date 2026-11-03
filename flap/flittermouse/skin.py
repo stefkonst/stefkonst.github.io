@@ -24,6 +24,8 @@ PARAMS = dict(
     # sheet
     n=1, H=35e-6, eps_r=2.8, V=1600.0, eta=0.5, C1=42842.0, rho_f=1070.0, N_min=0.02,
     N_s0=1.0, N_c0=1.0,
+    ns_te=1.0,                      # span tension at the TE relative to the LE; the FE gives about 0.67 (linear across the chord, same mean)
+    k_Nc=1.0, k_st=1.0,             # calibration against the FE (skin_calibrate.py): chord tension factor, stretch-stiffening factor
     # fibre
     F0=0.020, eta_f=0.4, w_s=0.010, w_e=0.003, active=True,
     # LE and batten
@@ -94,7 +96,8 @@ class Structure:
                         dNb = np.array([-(1 - a), -(1 + a), (1 + a), (1 - a)]) / 4 * 2 / dc
                         J = ds * dc / 4
                         sg = (i + (a + 1) / 2) * ds
-                        Ks[np.ix_(nodes, nodes)] += J * np.outer(dNa, dNa)
+                        xi = (j + (b_ + 1) / 2) / nc
+                        Ks[np.ix_(nodes, nodes)] += J * np.outer(dNa, dNa) * (1 + (p["ns_te"] - 1) * xi) / (0.5 * (1 + p["ns_te"]))
                         Kc[np.ix_(nodes, nodes)] += J * np.outer(dNb, dNb)
                         Ksc[np.ix_(nodes, nodes)] += J * np.outer(dNa, dNa) * ms * (p["b"] ** 2 - sg ** 2) / 2
         # fibre along the TE
@@ -166,11 +169,12 @@ class Structure:
         es, ec = 0.5 * np.mean(ws ** 2), 0.5 * np.mean(wc ** 2)
         ef = 0.5 * np.mean(ws[:, -1] ** 2)
         P = self.Pmax * v
+        es, ec, ef = p["k_st"] * es, p["k_st"] * ec, p["k_st"] * ef
         F = max(p["F0"] - self.dFf * v + self.EAf * ef, 1e-4)
         kb = 8 * F / self.L2
         a = p["N_c0"] - P + self.Gt * (4 * ec + 2 * es)
         d = (a - kb * self.b0) / (self.kc_edge + kb)
-        Nc = max(kb * (self.b0 + d), p["N_min"])
+        Nc = max(p["k_Nc"] * kb * (self.b0 + d), p["N_min"])
         # chord nearly slack: uniaxial, span force falls by P/2 (bench law A8); taut in both directions: by P
         Ns = max(p["N_s0"] - P * (0.5 + 0.5 * Nc / max(p["N_s0"], Nc)) + self.Gt * (3 * es + 2 * ec), p["N_min"])
         return Nc, Ns, F, self.b0 + d

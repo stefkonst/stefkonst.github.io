@@ -11,7 +11,7 @@ import skin
 
 def one(r):
     n = r.get("N", 1)
-    kw = dict(f=0.0, cycles=2, tip_fixed=True, EI_override=1e3, U=r.get("U", 4.0), alpha=np.radians(r.get("alpha", 6.0)), eta=r.get("eta", 0.5), n=n,
+    kw = dict(f=0.0, cycles=2, zeta=0.3, tip_fixed=True, EI_override=1e3, U=r.get("U", 4.0), alpha=np.radians(r.get("alpha", 6.0)), eta=r.get("eta", 0.5), n=n,
               N_s0=r["ns"]["N1"], N_c0=max(r["ns"]["N2"], 0.02), F0=r["ns"]["F_mN"] * 1e-3, active=r.get("active", True), w_s=0.010, w_e=0.003)
     q = 0.5 * 1.225 * kw["U"] ** 2 * 0.05 * 0.025
     out = dict(case={k: r.get(k) for k in ("theta", "lam_n", "eta", "alpha", "U", "N", "active", "h")})
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     R = [r for r in R if "V1" in r]
     if len(sys.argv) > 1:
         R = R[:int(sys.argv[1])]
-    with mp.Pool(12) as pool:
+    with mp.Pool(int(os.environ.get("WORKERS", 12))) as pool:
         res = pool.map(one, R)
     json.dump(res, open(os.path.join(HERE, "data", "skin_vs_fe.json"), "w"), indent=1, default=float)
     a = lambda f: np.array([f(x) for x in res])
