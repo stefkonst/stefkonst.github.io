@@ -95,13 +95,22 @@ def stage_m():
     return c
 
 
+def stage_t():
+    """Heavy trailing edge: fibre inertia against rib, voltage and damping."""
+    c = []
+    K = [dict(f=25.0, Phi_deg=30.0, alpha_deg=8.0), dict(f=25.0, Phi_deg=20.0, alpha_deg=12.0), dict(f=20.0, Phi_deg=30.0, alpha_deg=8.0), dict(f=15.0, Phi_deg=30.0, alpha_deg=12.0)]
+    for (nm, w), tm, m, z, k in itertools.product((("plain", dict()), ("one stiff rib", STIFF)), (0.1, 0.25, 0.5, 1.0, 1.5, 2.0), ("off", "up", "down"), (0.015, 0.05), K):
+        c.append(dict(wing=nm, te_mass=tm, mode=m, zeta=z, **w, **k))
+    return c
+
+
 if __name__ == "__main__":
     tag = sys.argv[1]
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 12
     OUT = os.path.join(HERE, "data", f"coupled_{tag}.jsonl")
     key = lambda d: json.dumps({k: v for k, v in d.items() if k not in ("wall",) and not (k in ("L", "T", "L_ns", "T_ns", "P", "P_ns", "wmax", "wmin", "P_shaft", "tau_peak", "unstable", "periodic", "w_tip_amp", "w_mid_amp", "wmax_peak", "wmin_peak", "L_down", "L_up", "mass_mg", "error"))}, sort_keys=True, default=list)
     seen = {key(json.loads(l)) for l in open(OUT)} if os.path.exists(OUT) else set()
-    todo = [c for c in dict(r=stage_r, f=stage_f, b=stage_b, c=stage_c, m=stage_m)[tag]() if key(c) not in seen]
+    todo = [c for c in dict(r=stage_r, f=stage_f, b=stage_b, c=stage_c, m=stage_m, t=stage_t)[tag]() if key(c) not in seen]
     print(len(todo), "cases", flush=True)
     with mp.Pool(workers) as pool, open(OUT, "a") as fh:
         for i, r in enumerate(pool.imap_unordered(run, todo)):

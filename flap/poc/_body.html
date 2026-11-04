@@ -1,0 +1,193 @@
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / B-cube POC</p>
+<h1>B-cube: first prototype</h1>
+<p class="lead">One wing side, built today and characterised; transmission, assembly and tests tomorrow. Named for the bumblebee bat and Bat Bot.</p>
+<div class="warn"><b>Everything here is a model prediction or an untested proposal</b>, unless marked as bench. Print the masks at scale and check them against your plates before cutting. Background: <a href="../flittermouse/">Flittermouse study</a>.</div>
+<nav class="toc"><a href="#build">What to build</a><a href="#masks">Masks</a><a href="#wings">Wings</a><a href="#stretch">Stretch</a><a href="#fab">Wing steps</a><a href="#le">Leading edge</a><a href="#core">Core</a><a href="#char">Characterise</a><a href="#trans">Transmission</a><a href="#te">Heavy edge</a></nav>
+
+<section class="card" id="build">
+<h2>What to build</h2>
+<div class="tw"><table>
+<tr><th>Part</th><th>Stack</th><th>Filters</th></tr>
+<tr><td>Wing A, rectangle: the control</td><td>4 electrodes, 3 active layers</td><td>4</td></tr>
+<tr><td>Wing B, taper 35→15 mm</td><td>4 electrodes</td><td>4</td></tr>
+<tr><td>Wing C, steep taper 40→10 mm</td><td>4 electrodes</td><td>4</td></tr>
+<tr><td>Core 1, two strips rolled as one, about 350 mg</td><td>5 electrodes</td><td>5</td></tr>
+<tr><td>Core 2, the same: second core or spare</td><td>5 electrodes</td><td>5</td></tr>
+<tr class="main"><td>Total</td><td></td><td>22 of 24</td></tr>
+</table></div>
+<ul class="read">
+<li><b>If time runs short:</b> build wing A and core 1 first. Those two give a full test tomorrow.</li>
+<li><b>Before spending electrodes:</b> run one blank sheet with no electrodes, through the release and stretch steps.</li>
+<li><b>Rib:</b> not a separate sheet. Glue it on after the first tests, so one wing gives both results.</li>
+<li><b>Voltage:</b> 1370 V at 30 µm is the field used throughout (46 V/µm). The rectangle did not settle at 1.6 kV at 6°, so start low and ramp.</li>
+</ul>
+</section>
+
+<section class="card" id="masks">
+<h2>Masks</h2>
+<p>Same 114 mm plates and holes as your earlier masks. Each file holds four plates, A and B for each of two parts. Use electrodes alternately A, B, A, B.</p>
+<ul class="read">
+<li><a href="masks/mask_bcube_taper_rectangle.svg">Taper and rectangle</a></li>
+<li><a href="masks/mask_bcube_steep_taper_core.svg">Steep taper and core strips</a></li>
+<li><a href="masks/mask_bcube_numbers.json">Numbers and corner coordinates</a></li>
+</ul>
+<div class="tw"><table>
+<tr><th>Part</th><th>Cut span</th><th>Width against the 60 mm coater</th><th>Active area</th></tr>
+<tr><td>Rectangle</td><td>48.1 mm</td><td>45.0 mm</td><td>1037 mm²</td></tr>
+<tr><td>Taper</td><td>48.1 mm, fibre 52.1 mm</td><td>52.3 mm</td><td>1037 mm²</td></tr>
+<tr><td>Steep taper</td><td>48.1 mm, fibre 56.7 mm</td><td>53.9 mm; 62 mm along the fibre, check your usable area</td><td>1037 mm²</td></tr>
+<tr><td>Core, 2 strips</td><td>55 × 23 mm each, 3 mm offset leaves 20 mm active</td><td>49 mm</td><td>2120 mm²</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Margins:</b> 2 mm at the leading edge, 1.5 mm at root and tip, 1 mm on the strip. These are my judgement.</li>
+<li><b>Roll:</b> 20 mm strip, passive, with a 4.8 mm contact tab at each end. An active band added almost nothing once the skin is stretched (8.07 against 7.80 mN), so this mask leaves it out.</li>
+<li><b>Lighter option, no new mask:</b> trim the strip to 15 mm before rolling.</li>
+</ul>
+</section>
+
+<section class="card" id="wings">
+<h2>Wing designs</h2>
+<div class="fig"><img src="P_wings.png" alt="Three wing outlines, their lift change for several stretches and with a rib, and their mass"></div>
+<div class="tw"><table>
+<tr><th>Wing</th><th>Lift change, 4 % stretch</th><th>With rib</th><th>Wing mass</th><th>Purpose</th></tr>
+<tr class="main"><td>A, rectangle</td><td>9.2 mN</td><td>8.6 mN</td><td>321 mg</td><td>Most authority, simplest</td></tr>
+<tr><td>B, taper 35→15</td><td>8.1 mN</td><td>7.6 mN</td><td>330 mg</td><td>7 % less inertia</td></tr>
+<tr><td>C, steep taper 40→10</td><td>6.7 mN</td><td>6.0 mN</td><td>341 mg</td><td>The pterosaur-like one, 8 % less inertia</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Correction:</b> the taper won on the Flittermouse page only because the rotated skin was about 65 % wrinkled. With a stretched skin, the rectangle wins.</li>
+<li><b>Triangle:</b> a true triangle does settle (4.0 mN against 5.2 mN for the 35→15 taper, both 2 layers with rotation), but it does not fit the coater with a 20 mm roll. Wing C is the closest that fits.</li>
+<li><b>Batten:</b> the tip bar stays, as the grip for stretching. It can be short on the tapers.</li>
+<li><b>Leading edge:</b> straight. The lattice and all these numbers assume it, and flat carbon strips resist bending in their own plane. Curving is a later experiment.</li>
+<li><b>Limits:</b> steady, 4 m/s. Flapping numbers and lift / weight on the Flittermouse page used rotation tensions and have not been rerun for stretched skin.</li>
+<li><b>Validate:</b> static panel at 4 m/s, or bulge at voltage: expect a peak of about 1.3 mm at 0 V and 5.6 mm at 1370 V in flow.</li>
+</ul>
+</section>
+
+<section class="card" id="stretch">
+<h2>Stretch and thickness</h2>
+<div class="tw"><table>
+<tr><th>Rectangle, 6° pitch, 1370 V field</th><th>Lift change</th><th>Mass, skin + roll</th></tr>
+<tr><td>Tilted cut, rotation, 2 layers</td><td>2.9 mN (65 % wrinkled)</td><td>205 mg</td></tr>
+<tr><td>Straight cut, 4 % span stretch, 2 layers, chord stretched 6 %</td><td>7.8 mN (1 % wrinkled); 8.2 on the finest mesh</td><td>202 mg</td></tr>
+<tr><td>1 layer</td><td>5.2 mN</td><td>135 mg</td></tr>
+<tr class="main"><td>3 layers</td><td>9.0 mN</td><td>269 mg</td></tr>
+<tr><td>4 layers</td><td>9.5 mN</td><td>336 mg</td></tr>
+<tr><td>2 layers at 45 µm, 2055 V</td><td>7.9 mN</td><td>303 mg</td></tr>
+<tr><td>2 layers + 30 µm dead film</td><td>5.4 mN</td><td>269 mg</td></tr>
+<tr><td>2 layers + 60 µm dead film</td><td>2.8 mN</td><td>336 mg</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Does thicker hurt displacement?</b> Only if the extra film is dead. More active layers keep the same bulge at voltage (about 4.5 mm), because tension and Maxwell stress grow together. So 4 electrodes is a good choice: stronger to handle, and no loss of authority.</li>
+<li><b>How much stretch:</b> 2, 4, 6 % give 5.5, 9.2, 11.0 mN at 3 layers. The mask is cut for 4 %, and you can pull it further on the same mask. 4 % is 1.9 mm of travel, far less than the 1.1× you have already pulled on earlier wings.</li>
+<li><b>Chord stretch:</b> not needed. These masks and numbers use none, which removes a step. The cost is more camber at 0 V.</li>
+<li><b>Hot bonding, if handling fails:</b> silicone shrinks far more than carbon on cooling, so a frame bonded hot should leave biaxial tension with no pulling. Models: 1, 2, 3 % biaxial give 3.8, 5.1, 7.0 mN at 2 layers, all above rotation. My estimate is about 1 % from 60 °C, using a thermal expansion of about 3×10⁻⁴/K from memory. Measure it: mark two points and compare before and after cooling.</li>
+</ul>
+</section>
+
+<section class="card" id="fab">
+<h2>Wing steps: never hold the film</h2>
+<p>This extends your pterosaur process, where the frame bonds on the acrylic and the film only comes off after. Proposed, untested on this wing. The film is only ever carried by its bars.</p>
+<ol class="read">
+<li><b>Stack and cure</b> as usual, on acrylic. Use a thicker top half-D if the surface stays tacky, and cure fully before going on.</li>
+<li><b>Cut the outline</b> on the acrylic, with the carrier still on. Leave extra film past the root and tip for bonding.</li>
+<li><b>Bond the root and tip bars</b> onto the film on the acrylic, with primer, press and cure. Use a carbon or FR4 bar with two pin holes. Keep them off the active area.</li>
+<li><b>Roll the trailing edge</b> on the acrylic: free edge first, a fine thread as the axis, stop at a fence on the fibre line. The bars now hold both ends of the fibre.</li>
+<li><b>Release:</b> lift both bars together at a shallow angle, slowly, with a little IPA at the peel front. Test IPA on the blank sheet first. If two sticky faces touch, IPA also helps part them.</li>
+<li><b>Stretch on pins:</b> drop the bars onto a laser-cut plate with pins at the 50.0 mm spacing (51.0 mm for 6 %). Hard stops, with no gauge to read. Lay the film on a PTFE or release liner, or hang it just above.</li>
+<li><b>Bond the leading edge last</b>, with the film stretched on the plate. See below.</li>
+<li><b>Lift off the plate,</b> then trim. Mark two points on the skin to check real stretch.</li>
+</ol>
+<ul class="read">
+<li><b>Tack:</b> keep tacky faces on PTFE or release liner, not paper or acrylic. Your earlier wings suffered from frame delamination: test the bond on the blank sheet by pulling on a bar.</li>
+<li><b>Later batches:</b> spin on a thin PET sheet taped to the acrylic. Then you peel by bending the carrier, not the film.</li>
+</ul>
+</section>
+
+<section class="card" id="le">
+<h2>Leading edge on a flat strip</h2>
+<ul class="read">
+<li><b>Make the cross first:</b> glue the two strips on a straight edge. Reject any that bow.</li>
+<li><b>Sandwich the film:</b> film on the cross's flat face, with a thin cap strip on top (1.5 × 0.1 mm, about 12 mg). Peel at the strip's edge is what tears; a sandwich turns it into shear. Skip the cap on wing A if time is short, and compare.</li>
+<li><b>Fillet:</b> leave a small bead of soft silicone at the strip's rear edge, so the film does not bend sharply over a corner.</li>
+<li><b>Shorts:</b> you found these deadly to the DEA. The strip is 1.5 mm and the electrode margin 2 mm, so film should overhang the strip's rear edge by 0.5 mm or more with no electrode on it. Check under the microscope. Sand strip edges and seal them, with polyimide tape or a primer and silicone coat.</li>
+<li><b>Stick:</b> your primer + press + cure. Measured bead width, stencilled if possible, and a straight weighted bar on top.</li>
+<li><b>Wrap with thread:</b> you tried this in July 2026, and it is heavier. The sandwich avoids it.</li>
+</ul>
+</section>
+
+<section class="card" id="core">
+<h2>Core DEA</h2>
+<ul class="read">
+<li><b>Why two strips per core:</b> one 5-electrode strip is about 180 mg, 3.4 mm across. Two strips rolled together are about 350 mg, 4.7 mm across. The earlier sizing asked for 500 mg or more for ±20° at 25 Hz, so this is a test core, not a flight core.</li>
+<li><b>How:</b> roll strip 1, butt strip 2 against its end, and carry on rolling. Keep A and B tabs on the same ends, so one cap connects both strips. Check capacitance after rolling, to catch a lost strip.</li>
+<li><b>Caps:</b> as your rolled DEAs: carbon caps with copper wire. Add a thread eye on each, centred, since a side pull will bend the core.</li>
+<li><b>To go bigger:</b> 7 electrodes gives about 250 mg per strip, 500 mg per core. That would need 14 filters, and 24 would not cover three wings as well.</li>
+</ul>
+</section>
+
+<section class="card" id="char">
+<h2>Characterise today</h2>
+<div class="tw"><table>
+<tr><th>Measure</th><th>Wing, 3 layers</th><th>Core, 2 strips</th><th>If not</th></tr>
+<tr><td>Mass</td><td>About 280 mg before the leading edge</td><td>About 350 mg</td><td>Thicker film than planned</td></tr>
+<tr><td>Capacitance, from area, $\varepsilon_r$ 2.8, 30 µm</td><td>About 2.6 nF</td><td>About 7 nF, up to 8.8 once rolled</td><td>Low: a layer is not connected. High: thinner film</td></tr>
+<tr><td>Leakage, ramp to 1370 V</td><td>Stable, no sparks after clearing</td><td>Same</td><td>Look for bubbles</td></tr>
+<tr><td>Force at 10 % stretch, 0 V</td><td></td><td>About 390 mN</td><td>Updates $C_1$</td></tr>
+<tr><td>Force drop at voltage</td><td></td><td>246 mN isometric, 95 mN if slow-cycle force holds (bench scaling)</td><td>Sets the real stroke</td></tr>
+<tr><td>Fibre force, or pluck</td><td>About 24 mN; first mode somewhere around 30–50 Hz (not computed for this stack)</td><td></td><td>Check the stretch</td></tr>
+<tr><td>Response at 1, 5, 25 Hz</td><td>Bulge or force, voltage at the device</td><td>Force</td><td>Gives the lag: the timing work needs 5–10 ms or less</td></tr>
+</table></div>
+</section>
+
+<section class="card" id="trans">
+<h2>Transmission, tomorrow</h2>
+<div class="fig"><img src="P_transmission.png" alt="Front view: a hinge with a 3 mm lever above and below it, a core pulling the lower end inboard to bring the wing down, and a second core or flexure on the upper end"></div>
+<ul class="read">
+<li><b>Do you need a spring?</b> You need a return force and a stiffness that sets the resonance. A 20 mm core only pulls: it would buckle in compression. A second core does both jobs with no extra part.</li>
+<li><b>Equations:</b> stroke $\phi \approx$ core travel $/ r$. Resonance $f = \frac{1}{2\pi}\sqrt{k_t / I}$, where $k_t = 2 k r^2$ for two cores, $k \approx$ 178 N/m each at 350 mg, and $I \approx$ 2.5×10⁻⁷ kg m² for the wing.</li>
+<li><b>Pick $r$:</b> a bigger lever raises the resonance and lowers the stroke.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>$r$</th><th>Resonance</th><th>Stroke, isometric force</th><th>Stroke, slow-cycle force</th></tr>
+<tr><td>2.5 mm</td><td>15 Hz</td><td>±20°</td><td>±11°</td></tr>
+<tr class="main"><td>3 mm</td><td>18 Hz</td><td>±18°</td><td>±10°</td></tr>
+<tr><td>3.5 mm</td><td>21 Hz</td><td>±16°</td><td>±9°</td></tr>
+<tr><td>4 mm</td><td>24 Hz</td><td>±15°</td><td>±8°</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Build:</b> one core driven, one passive, both stretched 10 % (2 mm) on assembly. Driving both risks slack in the model, so try it later. These assume 350 mg cores and the stiff-rib wing's air power.</li>
+<li><b>Hinge:</b> polyimide flexure, 25 µm thick, 1 mm long, across the leading edge width. Its stiffness is negligible here. It sees up to about 1 N in pull from the cores, so make it wide, with two pieces if needed.</li>
+<li><b>Lever:</b> carbon strip bonded square across the leading edge root, with a hole 3 mm above and below the hinge.</li>
+<li><b>Link:</b> short, low-stretch braided thread from the cap to the lever, glued at a knot. It stays in tension as long as the core does not go slack. Stiffer than the core by far: watch for stretch in nylon.</li>
+<li><b>With one core only:</b> replace the upper core with a carbon flexure, 0.1 × 2 mm, about 13 mm long ($k_t \approx$ 1.6 mN m/rad), bent so it holds the core's 10 %. That is about 42° of pre-bend, about 0.4 % strain at the extreme.</li>
+<li><b>Tune:</b> sweep frequency at low voltage and find the peak first, with a dummy mass in place of the wing. Then the wing at 0 V flow off, and only then at full voltage.</li>
+<li><b>Timing:</b> keep the skin on its own channel for the first tests, so you can swap the phase with no rebuild. Voltage on the lower core slackens the pull, so the wing rises: on one shared channel that gives the bat timing, soft and rising together.</li>
+</ul>
+</section>
+
+<section class="card" id="te">
+<h2>Heavy trailing edge</h2>
+<p>The 20 mm roll is 96 mg at 2 layers (about 128 mg at 3), against 43 mg for the cross. The centre of mass sits near 60 % chord. Coupled model, with rotation tensions.</p>
+<div class="tw"><table>
+<tr><th>Wing, 25 Hz, ±30°</th><th>First mode, 0 V / voltage on</th><th>Trailing edge swing at mid span</th><th>Lift, air power</th></tr>
+<tr><td>Plain, roll inertia ×0.5</td><td>43 / 33 Hz</td><td>±5.5 mm</td><td>7.8 mN, 49 mW</td></tr>
+<tr class="main"><td>Plain, full roll</td><td>34 / <b>27 Hz</b></td><td>±7.4 mm</td><td>7.9 mN, 51 mW</td></tr>
+<tr><td>Plain, roll inertia ×2</td><td>25 / 19 Hz</td><td>±9.9 mm</td><td>8.3 mN, 51 mW</td></tr>
+<tr class="main"><td>One stiff rib, full roll</td><td>53 / 45 Hz</td><td>±2.7 mm</td><td>6.9 mN, 36 mW</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Trend:</b> a heavy edge does not cost much lift or power in the model. It lowers the first mode onto the flapping frequency and makes the edge swing more. A rib halves the fibre's span and clears that.</li>
+<li><b>What the model leaves out:</b> leading edge torsion and classical flutter. A centre of mass behind the leading edge is the textbook flutter setup, so treat it as a real risk.</li>
+<li><b>In practice:</b> watch the edge with the high-speed camera. Stay below the first mode at first. If it flutters, add the rib, then trim the roll to 15 mm (8.4 against 9.2 mN, 31 mg lighter).</li>
+<li><b>Validate:</b> pluck the wing and compare with these modes, at 0 V and at voltage. The voltage-on mode at or below the flapping frequency is the warning sign.</li>
+</ul>
+</section>
+
+<p class="note"><a href="../flittermouse/">Flittermouse</a>: the full study. Code: <code>flittermouse/wing_shape.py</code>, <code>build_study.py</code>, <code>stretch_check.py</code>, <code>poc_cases.py</code>, <code>transmission.py</code>, <code>te_modes.py</code>, <code>masks_bcube.py</code>.</p>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}]})});</script>
+</body>
+</html>

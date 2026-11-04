@@ -12,7 +12,7 @@ from tilt_study import rotate, AX, AY
 from fe_reference import state
 
 OUT = os.path.join(HERE, "data", "wing_shape.jsonl")
-BASE = dict(H=30e-6, N=2, span=0.050, cr=0.025, ct=0.025, theta=5.0, stretch=1.7e-3, lam_n=1.06, ws=0.020, we=0.005, eta=0.5, eta_f=0.4, U=4.0, alpha=6.0, V=1600.0, h=2e-3, free_tip=False, veins=())
+BASE = dict(t_extra=0.0, cord_EA=0.0, cord_pre=0.0, lam_d=1.0, H=30e-6, N=2, span=0.050, cr=0.025, ct=0.025, theta=5.0, stretch=1.7e-3, lam_n=1.06, ws=0.020, we=0.005, eta=0.5, eta_f=0.4, U=4.0, alpha=6.0, V=1600.0, h=2e-3, free_tip=False, veins=())
 RHO, RHO_CF, LE_MG = 1070.0, 1550.0, 43.0
 VEIN_MG_MM = 0.5e-3 * 0.1e-3 * RHO_CF * 1e3            # carbon strip 0.5 x 0.1 mm, mg per mm
 
@@ -23,11 +23,11 @@ def build(k):
     tr = math.atan((k["stretch"] + k["ct"] * math.tan(th)) / k["cr"])
     C = (AX + k["span"] + k["ct"] * math.tan(th), AY + k["ct"])
     D = (AX + k["cr"] * math.tan(tr), AY + k["cr"])
-    Hm = (k["N"] + 1) * k["H"]
+    Hm = (k["N"] + 1) * k["H"] + k["t_extra"]        # t_extra: dead film, no electrodes
     tip = AX + k["span"]
-    w = M.Wing(panels=(0,), C=C, D=D, E=(tip, AY), T=(tip, AY + 1e-3), theta_deg=k["theta"], lam_d=(1.0, 1.0), lam_n=(k["lam_n"], k["lam_n"]), H=k["H"], t=(Hm, Hm), n_a=(k["N"], k["N"]),
+    w = M.Wing(panels=(0,), C=C, D=D, E=(tip, AY), T=(tip, AY + 1e-3), theta_deg=k["theta"], lam_d=(k["lam_d"], k["lam_d"]), lam_n=(k["lam_n"], k["lam_n"]), H=k["H"], t=(Hm, Hm), n_a=(k["N"], k["N"]),
                w_s=(k["ws"], k["ws"]), w_a_frac=(k["we"] / k["ws"],) * 2, n_f=k["N"], eta_s=k["eta"], eta_f=k["eta_f"], active_fibre=True,
-               U=k["U"], alpha_deg=k["alpha"], h=k["h"], na_x=24, na_y=12)
+               cord_EA=(k["cord_EA"],) * 2, cord_pre=(k["cord_pre"],) * 2, U=k["U"], alpha_deg=k["alpha"], h=k["h"], na_x=24, na_y=12)
     x = w.x0.copy()
     g0 = w.ids[0]
     seam, rn = g0[-1, :], g0[0, :]
@@ -62,7 +62,7 @@ def vein_mm(w, x, veins):
 def mass_inertia(w, k):
     """Skin + fibre + LE + veins, mg; second moment about the stroke axis, mg mm^2. Sheet and fibre from the mesh."""
     r = (w.x0[w.tri].mean(1)[:, 0] - AX) * 1e3
-    te = (k["N"] + 1) * k["H"]
+    te = (k["N"] + 1) * k["H"] + k["t_extra"]
     ms = RHO * te * w.A0 * 1e6
     rb = (0.5 * (w.x0[w.b1, 0] + w.x0[w.b2, 0]) - AX) * 1e3
     mb = RHO * w.bA * w.bL0 * 1e6

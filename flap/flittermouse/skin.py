@@ -37,6 +37,7 @@ PARAMS = dict(
     # timing: 'off', 'on', 'down', 'up', 'sin'; psi shifts the voltage phase; tau is the electromechanical lag
     mode="off", psi=0.0, tau=0.0, duty=0.5,
     ribs=(), rib_EI=5.4e-6, rib_mg_mm=0.078,  # chord ribs at these span fractions, cantilevers from the LE; default carbon strip 0.5 x 0.1 mm
+    te_mass=1.0,                    # factor on the fibre's inertia only, not its force: 0.5 is a lighter roll holding the same tension
     fold=0.0, tilt=0.0,             # prescribed: span scale 1 - fold (1 - sin wt) / 2, largest on the upstroke; stroke plane tilt (rad), downstroke moves forward. Tensions do not follow the fold
     feather=0.0,                    # prescribed twist, rigid chord: pitch = -feather * atan(s phi'/U), cancels that share of the flap angle. A requirement test, not a mechanism
     # numerics and viscous
@@ -68,7 +69,7 @@ def masses(p):
     """kg, one wing."""
     t = (p["n"] + 1) * p["H"]
     sheet = p["rho_f"] * t * p["b"] * p["c"]
-    fibre = p["rho_f"] * t * p["w_s"] * p["b"]
+    fibre = p["rho_f"] * t * p["w_s"] * p["b"] * p["te_mass"]
     le = le_area(p) * p["b"] * p["rho_cf"]
     ribs = len(p["ribs"]) * p["rib_mg_mm"] * p["c"] * 1e-3
     return dict(sheet=sheet, fibre=fibre, le=le, batten=p["batten_mg"] * 1e-6, ribs=ribs, total=sheet + fibre + le + p["batten_mg"] * 1e-6 + ribs)
@@ -106,7 +107,7 @@ class Structure:
                         Kc[np.ix_(nodes, nodes)] += J * np.outer(dNb, dNb)
                         Ksc[np.ix_(nodes, nodes)] += J * np.outer(dNa, dNa) * ms * (p["b"] ** 2 - sg ** 2) / 2
         # fibre along the TE
-        mf = p["rho_f"] * t * p["w_s"]
+        mf = p["rho_f"] * t * p["w_s"] * p["te_mass"]
         Kf, Kfc = np.zeros((N, N)), np.zeros((N, N))
         for i in range(ns):
             a_, b_ = idx(i, nc), idx(i + 1, nc)

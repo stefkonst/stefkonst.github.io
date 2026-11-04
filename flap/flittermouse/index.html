@@ -117,6 +117,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="shape">
 <h2>Wing shape and reinforcement</h2>
+<div class="warn"><b>Superseded for the build:</b> the results below use a tilted cut and rotation, which leaves about 65 % of the skin wrinkled. A straight cut with 4 % span stretch gives about 2.7× the lift change, and the rectangle then beats the taper. See the <a href="../poc/">B-cube POC</a>.</div>
 <p>Steady finite elements, 4 m/s, 5 cm span, about 12 cm², 2 layers, 20 mm roll. New work uses $H$ = 30 µm and 1370 V, the same field as 1.6 kV at 35 µm. Veins are rigid lines bonded after tensioning, so they show the most a stiff vein can do.</p>
 <div class="fig"><img src="figures/W_shape.png" alt="Planform sketches of eleven wing layouts, the lift change with voltage for each at 6 and 10 degrees, and the lift coefficient at 0 V and 1370 V"></div>
 <ul class="read">
@@ -422,6 +423,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>4 Nov, 00:30:</b> stall-limit, bigger-wing and prescribed-twist runs finished. Verdict and test order added. Overnight study complete.</li>
 <li><b>4 Nov:</b> layer thickness set to 30 µm for new work; older sections stay at 35 µm. Wing shape and reinforcement study added. A taper beats the rectangle, one rib costs little, a fan of veins costs most of the authority, a free tip does not settle. Next: bat kinematics, ribs in the flapping model, and the opposite timing (stiff on the downstroke).</li>
 <li><b>4 Nov, later:</b> ribs, span fold and stroke tilt added to the coupled model. Both timings compared. One stiff rib, fold and tilt raise best lift / weight to 0.84 at bench energy and 1.12 at the published value, with full suction. Stiff-downstroke timing wins only if a soft skin stalls earlier. Corrections: vein mass and lift-change area in the first post-processing, before anything was published.</li>
+<li><b>4 Nov, afternoon:</b> first build moved to the <a href="../poc/">B-cube POC</a> page. Span stretch beats rotation, which changes the wing shape result above. Flapping and lift / weight numbers on this page still use rotation tensions.</li>
 </ul>
 </section>
 
