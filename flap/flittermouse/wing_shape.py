@@ -85,6 +85,11 @@ def run(over):
         fa = fx.copy()
         if k["free_tip"]:                      # no tip edge: only the LE corner stays held
             fa[w.ids[0][-1, 1:]] = False
+        if k.get("free_from") is not None:     # edge past this span fraction is not bonded to anything: LE nodes and the tip edge go free
+            g_ = w.ids[0]
+            i0 = int(round(k["free_from"] * (g_.shape[0] - 1)))
+            fa[g_[i0 + 1:, 0]] = False
+            fa[g_[-1, :]] = False
         if k["veins"]:
             fa[vein_nodes(w, xr, k["veins"])] = True
             out["m_veins"] = vein_mm(w, xr, k["veins"]) * VEIN_MG_MM

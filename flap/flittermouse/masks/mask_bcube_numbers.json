@@ -128,6 +128,16 @@
    ]
   ]
  },
+ "curved_tip": {
+  "width": 47.0,
+  "length": 48.07692307692307,
+  "radius": 33.616924801892495,
+  "active_mm2": 1042.2608865856923,
+  "rotation_deg": 0.0,
+  "span_cut": 48.07692307692307,
+  "fibre_cut": 48.07692307692307,
+  "corners_mm": null
+ },
  "core": {
   "width": 49.0,
   "length": 55.0,

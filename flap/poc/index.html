@@ -75,8 +75,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="tw"><table>
 <tr><th>Part</th><th>Stack</th><th>Filters</th></tr>
 <tr><td>Wing A, rectangle: the control</td><td>4 electrodes, 3 active layers</td><td>4</td></tr>
-<tr><td>Wing B, taper 35→15 mm</td><td>4 electrodes</td><td>4</td></tr>
-<tr><td>Wing C, steep taper 40→10 mm</td><td>4 electrodes</td><td>4</td></tr>
+<tr><td>Wing B, curved tip, stiff edge</td><td>4 electrodes</td><td>4</td></tr>
+<tr><td>Wing C, curved tip, soft edge with a diagonal rib: the experiment</td><td>4 electrodes, same mask as B</td><td>4</td></tr>
 <tr><td>Core 1, two strips rolled as one, about 350 mg</td><td>5 electrodes</td><td>5</td></tr>
 <tr><td>Core 2, the same: second core or spare</td><td>5 electrodes</td><td>5</td></tr>
 <tr class="main"><td>Total</td><td></td><td>22 of 24</td></tr>
@@ -93,14 +93,16 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <h2>Masks</h2>
 <p>Same 114 mm plates and holes as your earlier masks. Each file holds four plates, A and B for each of two parts. Use electrodes alternately A, B, A, B.</p>
 <ul class="read">
-<li><a href="masks/mask_bcube_taper_rectangle.svg">Taper and rectangle</a></li>
-<li><a href="masks/mask_bcube_steep_taper_core.svg">Steep taper and core strips</a></li>
+<li><a href="masks/mask_bcube_curved_core.svg">Curved tip and core strips</a>, for wings B and C and the cores</li>
+<li><a href="masks/mask_bcube_taper_rectangle.svg">Taper and rectangle</a>, for wing A. Use its rectangle plates</li>
+<li><a href="masks/mask_bcube_steep_taper_core.svg">Steep taper and core strips</a>, spare option</li>
 <li><a href="masks/mask_bcube_numbers.json">Numbers and corner coordinates</a></li>
 </ul>
 <div class="tw"><table>
 <tr><th>Part</th><th>Cut span</th><th>Width against the 60 mm coater</th><th>Active area</th></tr>
 <tr><td>Rectangle</td><td>48.1 mm</td><td>45.0 mm</td><td>1037 mm²</td></tr>
 <tr><td>Taper</td><td>48.1 mm, fibre 52.1 mm</td><td>52.3 mm</td><td>1037 mm²</td></tr>
+<tr><td>Curved tip, chord 27 mm</td><td>48.1 mm</td><td>47.0 mm</td><td>1042 mm²</td></tr>
 <tr><td>Steep taper</td><td>48.1 mm, fibre 56.7 mm</td><td>53.9 mm; 62 mm along the fibre, check your usable area</td><td>1037 mm²</td></tr>
 <tr><td>Core, 2 strips</td><td>55 × 23 mm each, 3 mm offset leaves 20 mm active</td><td>49 mm</td><td>2120 mm²</td></tr>
 </table></div>
@@ -116,15 +118,21 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="P_wings.png" alt="Three wing outlines, their lift change for several stretches and with a rib, and their mass"></div>
 <div class="tw"><table>
 <tr><th>Wing</th><th>Lift change, 4 % stretch</th><th>With rib</th><th>Wing mass</th><th>Purpose</th></tr>
-<tr class="main"><td>A, rectangle</td><td>9.2 mN</td><td>8.6 mN</td><td>321 mg</td><td>Most authority, simplest</td></tr>
-<tr><td>B, taper 35→15</td><td>8.1 mN</td><td>7.6 mN</td><td>330 mg</td><td>7 % less inertia</td></tr>
-<tr><td>C, steep taper 40→10</td><td>6.7 mN</td><td>6.0 mN</td><td>341 mg</td><td>The pterosaur-like one, 8 % less inertia</td></tr>
+<tr class="main"><td>A, rectangle, stiff tip bar</td><td>9.2 mN</td><td>8.6 mN</td><td>321 mg</td><td>Most authority, simplest: the control</td></tr>
+<tr><td>B, curved from 35 mm, stiff edge</td><td>7.7 mN</td><td>6.3 mN</td><td>About 330 mg</td><td>4 % less inertia, no sharp tip corner</td></tr>
+<tr><td>C, curved, soft edge, diagonal rib</td><td></td><td>About 6.2–6.5 mN, <b>not converged</b></td><td>About 310 mg</td><td>Lightest tip, a floppy outer panel. Your idea, as an experiment</td></tr>
+<tr><td>Taper 35→15, stiff tip</td><td>8.1 mN</td><td>7.6 mN</td><td>330 mg</td><td>Option, 7 % less inertia</td></tr>
+<tr><td>Steep taper 40→10, stiff tip</td><td>6.7 mN</td><td>6.0 mN</td><td>341 mg</td><td>Option, nearest the pterosaur shape</td></tr>
 </table></div>
 <ul class="read">
+<li><b>Does the outer edge need to be stiff?</b> Yes, unless a rib replaces it. A rectangle with a free tip does not settle, and a curved soft edge with no rib collapses (fibre force about 1 mN). With a diagonal rib from the start of the curve, the wing holds its shape and force in the solver, without fully settling, and with up to 2.7–4.3 mm of bulge at 0 V.</li>
+<li><b>Rib angle:</b> with a stiff edge, ending it at 70, 85 or 100 % of span gives 6.2, 6.3, 6.4 mN. So it is not critical. A rib from further inboard costs more: curve from 25 mm with its rib, 4.8 mN.</li>
+<li><b>Curve start:</b> from 25, 35, 40 mm gives 7.8, 7.7, 7.4 mN, with chord adjusted to keep about 12.4 cm². A stiff curved edge here means rigid in the model. A real 0.2 mm plate lies between B and C.</li>
+<li><b>Tip piece:</b> flat strips will not curve in-plane, so cut it from 0.2 mm carbon plate, about 2 mm wide, and overlap the straight T section by 3–5 mm.</li>
 <li><b>Correction:</b> the taper won on the Flittermouse page only because the rotated skin was about 65 % wrinkled. With a stretched skin, the rectangle wins.</li>
 <li><b>Triangle:</b> a true triangle does settle (4.0 mN against 5.2 mN for the 35→15 taper, both 2 layers with rotation), but it does not fit the coater with a 20 mm roll. Wing C is the closest that fits.</li>
-<li><b>Batten:</b> the tip bar stays, as the grip for stretching. It can be short on the tapers.</li>
-<li><b>Leading edge:</b> straight. The lattice and all these numbers assume it, and flat carbon strips resist bending in their own plane. Curving is a later experiment.</li>
+<li><b>Grip:</b> stretching needs something to pull on at the tip. A and B have it built in. For C, leave a film tab past the tip with a temporary bar, and trim it once the leading edge is bonded.</li>
+<li><b>Curved edge in the model:</b> rigid or free only. A soft edge was not solved to a steady state, so test it rather than trust the number.</li>
 <li><b>Limits:</b> steady, 4 m/s. Flapping numbers and lift / weight on the Flittermouse page used rotation tensions and have not been rerun for stretched skin.</li>
 <li><b>Validate:</b> static panel at 4 m/s, or bulge at voltage: expect a peak of about 1.3 mm at 0 V and 5.6 mm at 1370 V in flow.</li>
 </ul>
@@ -154,6 +162,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <section class="card" id="fab">
 <h2>Wing steps: never hold the film</h2>
 <p>This extends your pterosaur process, where the frame bonds on the acrylic and the film only comes off after. Proposed, untested on this wing. The film is only ever carried by its bars.</p>
+<div class="fig"><img src="steps/P_steps.png" alt="Nine sketches: stack on acrylic, cut outline, bond root bar and tip piece, roll the trailing edge, release with IPA, stretch on pins, bond the leading edge, finished wing, and a leading edge section"></div>
+<p class="note">Each step as its own file: <a href="steps/step_1.svg">1</a> <a href="steps/step_2.svg">2</a> <a href="steps/step_3.svg">3</a> <a href="steps/step_4.svg">4</a> <a href="steps/step_5.svg">5</a> <a href="steps/step_6.svg">6</a> <a href="steps/step_7.svg">7</a> <a href="steps/step_8.svg">8</a> <a href="steps/step_9.svg">9</a> (SVG, with PNG alongside), or <a href="steps/P_steps.svg">all in one SVG</a>.</p>
 <ol class="read">
 <li><b>Stack and cure</b> as usual, on acrylic. Use a thicker top half-D if the surface stays tacky, and cure fully before going on.</li>
 <li><b>Cut the outline</b> on the acrylic, with the carrier still on. Leave extra film past the root and tip for bonding.</li>
@@ -161,7 +171,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>Roll the trailing edge</b> on the acrylic: free edge first, a fine thread as the axis, stop at a fence on the fibre line. The bars now hold both ends of the fibre.</li>
 <li><b>Release:</b> lift both bars together at a shallow angle, slowly, with a little IPA at the peel front. Test IPA on the blank sheet first. If two sticky faces touch, IPA also helps part them.</li>
 <li><b>Stretch on pins:</b> drop the bars onto a laser-cut plate with pins at the 50.0 mm spacing (51.0 mm for 6 %). Hard stops, with no gauge to read. Lay the film on a PTFE or release liner, or hang it just above.</li>
-<li><b>Bond the leading edge last</b>, with the film stretched on the plate. See below.</li>
+<li><b>Bond the leading edge last</b>, with the film stretched on the plate. See below. Bond the tip piece overlap at the same time.</li>
 <li><b>Lift off the plate,</b> then trim. Mark two points on the skin to check real stretch.</li>
 </ol>
 <ul class="read">
@@ -173,8 +183,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <section class="card" id="le">
 <h2>Leading edge on a flat strip</h2>
 <ul class="read">
-<li><b>Make the cross first:</b> glue the two strips on a straight edge. Reject any that bow.</li>
-<li><b>Sandwich the film:</b> film on the cross's flat face, with a thin cap strip on top (1.5 × 0.1 mm, about 12 mg). Peel at the strip's edge is what tears; a sandwich turns it into shear. Skip the cap on wing A if time is short, and compare.</li>
+<li><b>Make the T section first:</b> glue the two strips on a straight edge, one flat and one on its edge below it. Reject any that bow.</li>
+<li><b>Sandwich the film:</b> web in a groove on the plate, flat face up, level with the film. Film over it, with a thin cap strip on top (1.5 × 0.1 mm, about 12 mg). Peel at the strip's edge is what tears; a sandwich turns it into shear. Skip the cap on wing A if time is short, and compare.</li>
 <li><b>Fillet:</b> leave a small bead of soft silicone at the strip's rear edge, so the film does not bend sharply over a corner.</li>
 <li><b>Shorts:</b> you found these deadly to the DEA. The strip is 1.5 mm and the electrode margin 2 mm, so film should overhang the strip's rear edge by 0.5 mm or more with no electrode on it. Check under the microscope. Sand strip edges and seal them, with polyimide tape or a primer and silicone coat.</li>
 <li><b>Stick:</b> your primer + press + cure. Measured bead width, stencilled if possible, and a straight weighted bar on top.</li>

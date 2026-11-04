@@ -47,6 +47,28 @@ def wing(cr, ct):
                 active_mm2=float(act.area), rotation_deg=math.degrees(ang), span_cut=S, fibre_cut=float(np.linalg.norm(q[2] - q[3])), corners_mm=(corners.round(2)).tolist())
 
 
+def curved(xc=35.0, c=27.0, ct=3.0):
+    """Straight LE to xc (tensioned mm), then a quarter ellipse aft to a short tip edge. Fibre straight along the chord c."""
+    S = 50.0 / LAM
+    xc = xc / LAM
+    x = np.r_[0.0, xc, xc + (S - xc) * np.sin(np.linspace(0, np.pi / 2, 40))[1:]]
+    t = np.clip((x - xc) / (S - xc), 0, 1)
+    yl = (c - ct) * (1 - np.sqrt(1 - t ** 2))
+    sheet = Polygon(np.c_[np.r_[x, S, 0.0], np.r_[yl, c, c]])
+    # inset from LE, curve and tip, not from the fibre line
+    ext = Polygon(np.c_[np.r_[x, S, S, 0.0, 0.0], np.r_[yl, c, c + 6.0, c + 6.0, 0.0]])
+    act = ext.buffer(-M_LE, join_style=1).intersection(sheet).intersection(box(M_END, -1, S + 1, c))
+    ta = box(0.0, c, TAB, c + STRIP - M_STRIP)
+    tb = box(S - TAB, c, S, c + STRIP - M_STRIP)
+    A, B = unary_union([act.buffer(1e-3), ta.buffer(1e-3)]), unary_union([act.buffer(1e-3), tb.buffer(1e-3)])
+    assert A.geom_type == "Polygon" and B.geom_type == "Polygon"
+    pts = np.r_[np.array(sheet.exterior.coords), [(0, c + STRIP), (S, c + STRIP)]]
+    cen = 0.5 * (pts.min(0) + pts.max(0))
+    sh = lambda g: Polygon(np.array(g.exterior.coords) - cen)
+    return dict(A=[sh(A)], B=[sh(B)], cut=[sh(sheet)], width=float(np.ptp(pts[:, 1])), length=float(np.ptp(pts[:, 0])), radius=float(np.hypot(*(pts - cen).T).max()),
+                active_mm2=float(act.area), rotation_deg=0.0, span_cut=S, fibre_cut=S, corners_mm=None)
+
+
 def core(L=55.0, h=23.0, gap=3.0, off=3.0, side=1.0):
     """Two strips. A runs to one long edge, B to the other, overlap h - off = 20 mm along the core axis; side margins so the roll ends stay insulated."""
     A, B, cuts = [], [], []
@@ -84,9 +106,10 @@ def write(fn, root_part, tip_part):
     tree.write(os.path.join(OUT, fn), xml_declaration=True, encoding="UTF-8")
 
 
-D = dict(rectangle=wing(25.0, 25.0), taper=wing(35.0, 15.0), steep_taper=wing(40.0, 10.0), core=core())
+D = dict(rectangle=wing(25.0, 25.0), taper=wing(35.0, 15.0), steep_taper=wing(40.0, 10.0), curved_tip=curved(), core=core())
 write("mask_bcube_taper_rectangle.svg", D["taper"], D["rectangle"])
 write("mask_bcube_steep_taper_core.svg", D["steep_taper"], D["core"])
+write("mask_bcube_curved_core.svg", D["curved_tip"], D["core"])
 rep = {k: {q: v[q] for q in ("width", "length", "radius", "active_mm2", "rotation_deg", "span_cut", "fibre_cut", "corners_mm")} for k, v in D.items()}
 rep["notes"] = dict(lam_span=LAM, margins_mm=dict(LE=M_LE, root_tip=M_END, strip=M_STRIP), tab_mm=TAB, strip_mm=STRIP, coater=COATER, filter=FILTER)
 json.dump(rep, open(os.path.join(OUT, "mask_bcube_numbers.json"), "w"), indent=1)
