@@ -25,7 +25,7 @@ ax[1].semilogx([r["tau"] * 1e3 for r in T], [r["L"] * 1e3 for r in T], "o-", col
 ax[1].axhline(off, color="0.25", lw=1)
 ax[1].text(1.8, off + 0.03, "Always stiff", fontsize=8)
 ax[1].axvspan(10, 20, color="0.88")
-ax[1].text(10.5, dn - 0.12, "bench\nforce fall", fontsize=8)
+ax[1].text(10.5, 8.33, "bench\nforce fall", fontsize=8)
 ax[1].set(xlabel=r"Response lag $\tau$ in ms", ylabel=r"Lift per wing $L$ in mN")
 P = sorted([r for r in sel(B, mode="sin") if "psi" in r], key=lambda r: r["psi"])
 ax[2].plot([np.degrees(r["psi"]) for r in P], [r["L"] * 1e3 for r in P], "o-", color=PS.MATLAB[1])
