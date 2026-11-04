@@ -5,7 +5,7 @@
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -18,7 +18,7 @@
 
 <section class="card" id="reference">
 <h2>Voltage on the 5 cm panel</h2>
-<p>Your finite-element wing, unchanged, steady, on one 5 × 2.5 cm panel: one active layer, 10 mm roll, 3 mm active band, batten bonded in place. Code: <a href="fe_reference.py">fe_reference.py</a>. 42 cases, of which only 15 settled.</p>
+<p>The finite-element wing from the <a href="../full_membrane/">full membrane page</a>, unchanged, steady, on one 5 × 2.5 cm panel: one active layer, 10 mm roll, 3 mm active band, batten bonded in place. Code: <a href="fe_reference.py">fe_reference.py</a>. 42 cases, of which only 15 settled.</p>
 <div class="fig"><img src="figures/F_reference.png" alt="Lift coefficient at voltage against zero volts for settled and unsettled cases, lift change against fibre force, and trailing edge height against fibre force"></div>
 <ul class="read">
 <li><b>Equation:</b> the sheet is a set of spanwise strings, $w \approx p L^2 / (8 N_s)$. Chord tension is close to zero, so the surface tilts about the leading edge as well as bulging. A raised trailing edge lowers the local angle, which cancels part of the extra camber.</li>
@@ -26,6 +26,42 @@
 <li><b>Trend:</b> the trailing edge rises 1–1.6 mm with voltage at $\eta$ 0.5, about 3° over this chord. That is a twist under voltage control, not a lift change.</li>
 <li><b>Trend:</b> at 6° almost nothing settles, and refining the mesh changes $C_L$ from 0.23 to 0.55. Some states sit on a negatively cambered branch at 0 V. The solver may be finding no steady state because there is none, but this is not proven.</li>
 <li><b>Validate:</b> one panel at 4 m/s, filmed from the side. Look for a steady edge or flutter, and measure edge height at 0 V and at voltage. Only then measure force.</li>
+</ul>
+</section>
+
+<section class="card" id="tension">
+<h2>A tension that works</h2>
+<p>The same finite elements with wider rolls, two layers and more tilt. 72 cases at 4 m/s, 1.6 kV, $\eta$ 0.5, of which 63 settled. Filled markers settled.</p>
+<div class="fig"><img src="figures/D_tension.png" alt="Lift change against cut tilt, lift change against span tension, and lift change against skin and roll mass"></div>
+<div class="tw"><table>
+<tr><th>Tilt 5°, $\lambda_n$ 1.06</th><th>$C_L$, 6°</th><th>$C_L$, 10°</th><th>$\Delta L$ (mN)</th><th>Skin + roll (mg)</th></tr>
+<tr><td>1 layer, 10 mm roll</td><td colspan="3">Did not settle</td><td>131</td></tr>
+<tr><td>1 layer, 20 mm roll</td><td>0.53 → 0.67</td><td>0.84 → 1.02</td><td>1.5–2.0</td><td>168</td></tr>
+<tr><td>1 layer, 30 mm roll</td><td>0.50 → 0.73</td><td>0.80 → 1.04</td><td>2.6–2.7</td><td>206</td></tr>
+<tr class="main"><td>2 layers, 20 mm roll</td><td>0.43 → 0.71</td><td>0.71 → 1.02</td><td>3.1–3.5</td><td>253</td></tr>
+<tr><td>2 layers, 30 mm roll</td><td>0.42 → 0.71</td><td>0.70 → 1.02</td><td>3.3–3.6</td><td>309</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Equation:</b> voltage takes $P/2$ to $P$ from the span tension, with $P = \eta\, n\, \varepsilon V^2 / H$. So relative softening goes with $P/N_s$, and the stiff roll keeps the edge from rising. Authority needs low $N_s$ and a stiff edge at once.</li>
+<li><b>Trend:</b> authority peaks near 5° of tilt, is small by 8° and almost gone at 12°. Two layers double $P$ and give more lift change, at more mass. Wider rolls help up to about 20 mm for two layers.</li>
+<li><b>Caveat:</b> $C_L$ above about 0.9 is an upper limit at this Reynolds number. The best wing is about 300 mg with its leading edge, against 174 mg in the first pass.</li>
+<li><b>Validate:</b> the 6 cm panel you can already build: wide roll, tilt 5°, side view in flow at 0 V and at voltage.</li>
+</ul>
+</section>
+
+<section class="card" id="coupled">
+<h2>Coupled wing model</h2>
+<p>A membrane with a bending leading edge, a trailing-edge fibre with mass and voltage-driven tension, inside the unsteady lattice. Code: <a href="skin.py">skin.py</a>. Tensions come from the settled finite-element states, and nothing is fitted.</p>
+<div class="tw"><table>
+<tr><th>Check against finite elements, steady</th><th>Result</th></tr>
+<tr><td>$\Delta C_L$, 19 held-out settled cases</td><td>0.113 against 0.098, correlation 0.84, rms 0.07</td></tr>
+<tr><td>$C_L$ at 0 V</td><td>rms 0.11, reads high</td></tr>
+<tr><td>Trailing-edge height at voltage</td><td>0.14 against 0.78 mm: <b>about 5× too low</b></td></tr>
+<tr><td>Low tension, up to about 1.5 N/m and a 10 mm roll</td><td><b>Fails</b>, and depends on the mesh. Not used there</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Use:</b> comparing timings on the settled designs. Not absolute lift. Any benefit from voltage-driven twist will be underestimated.</li>
+<li><b>Flutter:</b> at low tension and $\zeta$ = 0.05 the slack trailing edge oscillates by about ±4.5 mm. Bench hysteresis of 13–20 % suggests $\zeta \approx 0.015$. The model has no sheet or roll bending, so this may overstate it.</li>
 </ul>
 </section>
 
@@ -105,7 +141,8 @@
 <li><b>3 Nov, evening:</b> page opened with first-pass numbers. Next: unsteady lattice with a shed wake, then a coupled skin model, so twist and camber are computed rather than assumed.</li>
 <li><b>3 Nov, 17:20:</b> bench energy per cycle and the lattice checks added. Finite-element reference runs for this panel are under way. A first batch had a setup error of mine (the lattice ran past the sheet to 10 cm) and was discarded. Coupled wing model and drive model written, not yet validated.</li>
 <li><b>3 Nov, 17:25:</b> leading edge, transmission, skin modes and electrics added. Finite-element runs still going.</li>
-<li><b>3 Nov, evening:</b> finite-element reference finished: 15 of 42 settled, small lift change where settled. The coupled wing model does not yet reproduce it: 0 V lift is close after calibration, but it predicts about +0.15 for $\Delta C_L$ where the finite elements give about 0, with too little trailing-edge rise. It is not used for any result here. Fixes under test.</li>
+<li><b>3 Nov, evening:</b> finite-element reference finished: 15 of 42 settled, small lift change where settled. The coupled wing model does not yet reproduce it: 0 V lift is close after calibration, but it predicts about +0.15 for $\Delta C_L$ where the finite elements give about 0, with too little trailing-edge rise. Two calibration attempts failed: at this low tension the result also depends on the mesh, so calibration stopped there. </li>
+<li><b>3 Nov, 19:30:</b> finite elements at higher tension finished: 63 of 72 settled, with a region that is steady and responsive. The coupled model passes on held-out cases in that region, with two stated biases. Timing study running.</li>
 </ul>
 </section>
 

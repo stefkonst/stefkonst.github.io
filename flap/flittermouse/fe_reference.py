@@ -64,6 +64,14 @@ def run(over):
     return out
 
 
+def cases_design():
+    """Higher tension: is there a state that settles and still responds to voltage?"""
+    c = []
+    for N, ws, th, ln, al in itertools.product((1, 2), (0.010, 0.020, 0.030), (5.0, 8.0, 12.0), (1.06, 1.12), (6.0, 10.0)):
+        c.append(dict(N=N, ws=ws, we=0.005, theta=th, lam_n=ln, alpha=al))
+    return c
+
+
 def cases():
     c = []
     for th, ln, eta, al in itertools.product((3.0, 5.0, 7.0), (1.02, 1.04, 1.06), (0.5, 0.25), (6.0, 10.0)):
@@ -79,15 +87,18 @@ def cases():
 
 if __name__ == "__main__":
     workers = int(sys.argv[1]) if len(sys.argv) > 1 else 10
+    design = len(sys.argv) > 2 and sys.argv[2] == "design"
+    if design:
+        OUT = OUT.replace("fe_reference", "fe_design")
     done = []
     if os.path.exists(OUT):
         done = [json.loads(l) for l in open(OUT)]
     key = lambda d: json.dumps({q: d[q] for q in sorted(d) if q in BASE}, sort_keys=True)
     seen = {key(d) for d in done}
-    todo = [c for c in cases() if key(c) not in seen]
+    todo = [c for c in (cases_design() if design else cases()) if key(c) not in seen]
     print(len(todo), "cases", flush=True)
     with mp.Pool(workers) as pool, open(OUT, "a") as fh:
         for r in pool.imap_unordered(run, todo):
             fh.write(json.dumps(r) + "\n"); fh.flush()
-            print({q: r.get(q) for q in ("theta", "lam_n", "eta", "alpha", "U", "ok0", "ok1", "error")}, "CL", r.get("V0", {}).get("CL"), r.get("V1", {}).get("CL"), "wall %.0f" % r["wall"], flush=True)
+            print({q: r.get(q) for q in ("N", "ws", "theta", "lam_n", "eta", "alpha", "U", "ok0", "ok1", "error")}, "CL", r.get("V0", {}).get("CL"), r.get("V1", {}).get("CL"), "wall %.0f" % r["wall"], flush=True)
     print("FE DONE", flush=True)
