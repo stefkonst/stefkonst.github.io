@@ -69,7 +69,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#timing">Timing</a><a href="#closure">Closure</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -93,6 +93,37 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 </ul>
 </section>
 
+<section class="card" id="timing">
+<h2>Does the timing help?</h2>
+<p>Coupled model, two-layer wing with a 20 mm roll, batten bonded to the leading edge, 25 Hz, ±30°, 4 m/s, $\eta$ 0.5. Voltage lowers tension, so a skin stiff on the upstroke means voltage on during the downstroke.</p>
+<div class="fig"><img src="figures/T_timing.png" alt="Lift against pitch for five timings, lift against response lag, lift against voltage phase, and lift for each timing under finer meshes, a free wake and capped section force"></div>
+<ul class="read">
+<li><b>Equation:</b> $v(t) = \tfrac12(1+\sin(\omega t+\psi))$ for the shared drive, where $\psi = 0$ puts peak voltage at mid downstroke. Tensions follow $v$ through a first-order lag $\tau$.</li>
+<li><b>Trend, timing:</b> soft on the downstroke gives the most lift of the five timings at each pitch shown, and soft on the upstroke gives the least. The gain is +1 mN on the coarse mesh and +0.5 to +0.6 mN (about +8 %) on a finer mesh or with a free wake.</li>
+<li><b>Trend, lag:</b> the gain has mostly gone by $\tau \approx 5$–10 ms. At the bench force-fall time (about 18 ms if that is real) the skin sits at its mean state.</li>
+<li><b>Trend, phase:</b> best within 45° of mid downstroke, which is where a shared sine drive puts it at resonance. So one channel per wing should work.</li>
+<li><b>Warning:</b> this assumes attached flow, though the tip sees about 45° of inflow on the downstroke. With section force capped at $c_n$ 1.2–1.6, lift falls from about 8 to 1–3 mN and the gain changes sign. Real flow lies somewhere between, perhaps with a leading-edge vortex.</li>
+<li><b>Other:</b> a free batten hinge is rejected: the tip swings about ±22 mm and power rises by half. A spring there, up to 1 mN m/rad, did not bring power down to the bonded value.</li>
+<li><b>Validate:</b> first, a flapping wing on a force sensor with no voltage, compared with these lift numbers. That tells you which lift model holds. Then 0 V, always on, and both sync phases, in randomised order with a sham.</li>
+</ul>
+</section>
+
+<section class="card" id="closure">
+<h2>Does it close?</h2>
+<p>Air power from the coupled model, then the core mass that supplies it, then lift against weight. Two wings at 299 mg, 200 mg frame, 80 % transmission, thrust at least zero, no electronics. Attached flow.</p>
+<div class="tw"><table>
+<tr><th>Energy per cycle</th><th>Best lift / weight, full suction</th><th>Half suction</th></tr>
+<tr><td>Bench, 0.8 J/kg</td><td>0.54</td><td>0.35</td></tr>
+<tr><td>Ren, Kim et al. 2022, 1.25 J/kg</td><td>0.76</td><td>0.49</td></tr>
+<tr><td>60 V/µm, about 2.1 J/kg (estimate)</td><td>1.08</td><td>0.70</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Equation:</b> $m_c = P / (e f \eta_{tr})$ per wing, $L/W = 2L / \big[(2m_c + 2m_w + m_f) g\big]$.</li>
+<li><b>Trend:</b> as drawn, it does not support its own weight in level flight unless everything goes right. The air power is 3× the first-pass estimate, because the first pass assumed twist that this wing does not have.</li>
+<li><b>Caveat:</b> this is not a verdict on tethered tests, which do not need lift to exceed weight. Small-stroke and larger-wing runs are under way.</li>
+</ul>
+</section>
+
 <section class="card" id="tension">
 <h2>A tension that works</h2>
 <p>The same finite elements with wider rolls, two layers and more tilt. 72 cases at 4 m/s, 1.6 kV, $\eta$ 0.5, of which 63 settled. Filled markers settled.</p>
@@ -109,7 +140,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>Equation:</b> voltage takes $P/2$ to $P$ from the span tension, with $P = \eta\, n\, \varepsilon V^2 / H$. So relative softening goes with $P/N_s$, and the stiff roll keeps the edge from rising. Authority needs low $N_s$ and a stiff edge at once.</li>
 <li><b>Trend:</b> authority peaks near 5° of tilt, is small by 8° and almost gone at 12°. Two layers double $P$ and give more lift change, at more mass. Wider rolls help up to about 20 mm for two layers.</li>
 <li><b>Caveat:</b> $C_L$ above about 0.9 is an upper limit at this Reynolds number. The best wing is about 300 mg with its leading edge, against 174 mg in the first pass.</li>
-<li><b>Validate:</b> the 6 cm panel you can already build: wide roll, tilt 5°, side view in flow at 0 V and at voltage.</li>
+<li><b>Validate:</b> the planned 6 cm panel: wide roll, tilt 5°, side view in flow at 0 V and at voltage.</li>
 </ul>
 </section>
 
@@ -187,7 +218,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="first">
 <h2>First pass</h2>
-<p><b>Being replaced.</b> Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
+<p><b>Superseded.</b> Its air power was too low and its claim about the timing was wrong (see <a href="#timing">timing</a>). Kept for the record. Quasi-steady strips, with assumed twist. Code: <a href="first_pass.py">first_pass.py</a>. 25 Hz, ±30°, 4 m/s. Assumed: 5 cm is one wing's span, chord 25 mm, core 500 mg, frame 200 mg, passive twist removes 50 % of the flap angle at the tip.</p>
 <div class="tw"><table>
 <tr><th>Item</th><th>Value</th></tr>
 <tr><td>Mass</td><td>1.55 g</td></tr>
@@ -207,6 +238,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>3 Nov, 17:25:</b> leading edge, transmission, skin modes and electrics added. Finite-element runs still going.</li>
 <li><b>3 Nov, evening:</b> finite-element reference finished: 15 of 42 settled, small lift change where settled. The coupled wing model does not yet reproduce it: 0 V lift is close after calibration, but it predicts about +0.15 for $\Delta C_L$ where the finite elements give about 0, with too little trailing-edge rise. Two calibration attempts failed: at this low tension the result also depends on the mesh, so calibration stopped there. </li>
 <li><b>3 Nov, 19:30:</b> finite elements at higher tension finished: 63 of 72 settled, with a region that is steady and responsive. The coupled model passes on held-out cases in that region, with two stated biases. Timing study running.</li>
+<li><b>3 Nov, 20:35:</b> timing, lag, phase, convergence and closure added. The timing helps with attached flow, by about +8 % once converged, not the +13 % of the coarse mesh. Lift itself is uncertain by a factor of about 3 from flow separation, and the budget does not close as drawn.</li>
 </ul>
 </section>
 

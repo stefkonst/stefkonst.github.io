@@ -74,12 +74,45 @@ def stage_c():
             for d, m, U, f, p, a in itertools.product(("two20",), ("off", "down"), (3.0, 4.0, 5.0, 6.0), (15.0, 20.0, 25.0, 30.0, 40.0), (20.0, 30.0, 40.0), (4.0, 8.0, 12.0))]
 
 
+def stage_d():
+    """Spring at the batten hinge: feathering without the free swing."""
+    jobs = []
+    for k_, m, (f, p) in itertools.product((1e-6, 3e-6, 1e-5, 3e-5, 1e-4, 3e-4, 1e-3), ("off", "down"), ((20.0, 30.0), (25.0, 30.0), (15.0, 30.0))):
+        jobs.append(dict(design="two20", tip_fixed=False, batten_k=k_, zeta=0.05, mode=m, f=f, Phi_deg=p, alpha_deg=8.0))
+    return jobs
+
+
+def stage_e():
+    """Convergence of the baseline."""
+    b = dict(design="two20", tip_fixed=True, zeta=0.05, f=25.0, Phi_deg=30.0, alpha_deg=8.0)
+    jobs = []
+    for m in ("off", "down"):
+        for x in (dict(ns=14, nc=7), dict(ns=20, nc=8), dict(ns=10, nc=8), dict(free_wake=True), dict(steps_per=80), dict(cycles=7), dict(cn_cap=1.2), dict(cn_cap=1.6), dict(cd0=0.08)):
+            jobs.append(dict(b, mode=m, **x))
+    return jobs
+
+
+def stage_f():
+    """Small strokes with the section force capped: what survives if the flow will not stay attached."""
+    return [dict(design="two20", tip_fixed=True, zeta=0.05, mode=m, cn_cap=cap, U=U, f=f, Phi_deg=p, alpha_deg=a)
+            for cap, m, U, f, p, a in itertools.product((1.2, 1.6), ("off", "down"), (3.0, 4.0, 5.0), (15.0, 20.0, 25.0, 30.0), (10.0, 15.0, 20.0, 30.0), (4.0, 8.0, 12.0, 16.0))]
+
+
+def stage_g():
+    """Bigger wing, same film and tensions (no finite-element check at these sizes)."""
+    jobs = []
+    for b, c, ns_, nc_ in ((0.05, 0.035, 10, 7), (0.07, 0.025, 14, 5), (0.07, 0.035, 14, 7), (0.10, 0.04, 16, 6)):
+        for cap, m, U, f, p, a in itertools.product((None, 1.6), ("off", "down"), (3.0, 4.0, 5.0), (10.0, 15.0, 20.0), (15.0, 20.0, 30.0), (8.0, 12.0)):
+            jobs.append(dict(design="two20", tip_fixed=True, zeta=0.05, mode=m, cn_cap=cap, U=U, f=f, Phi_deg=p, alpha_deg=a, b=b, c=c, ns=ns_, nc=nc_))
+    return jobs
+
+
 if __name__ == "__main__":
     stage = sys.argv[1]
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 13
     OUT = os.path.join(HERE, "data", f"timing_{stage}.jsonl")
-    jobs = dict(a=stage_a, b=stage_b, c=stage_c)[stage]()
-    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s")}, sort_keys=True)
+    jobs = dict(a=stage_a, b=stage_b, c=stage_c, d=stage_d, e=stage_e, f=stage_f, g=stage_g)[stage]()
+    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s", "batten_k", "steps_per", "cycles", "cd0", "b", "c")}, sort_keys=True)
     seen = {key(json.loads(l)) for l in open(OUT)} if os.path.exists(OUT) else set()
     todo = [j for j in jobs if key(j) not in seen]
     print(stage, len(todo), "of", len(jobs), flush=True)

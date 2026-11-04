@@ -30,6 +30,7 @@ PARAMS = dict(
     F0=0.020, eta_f=0.4, w_s=0.010, w_e=0.003, active=True,
     # LE and batten
     E_le=130e9, le_w=1.5e-3, le_t=0.2e-3, le_kind="cross", rho_cf=1550.0, batten_mg=3.0, EI_override=None,
+    batten_k=0.0,                   # N m/rad, torsional spring at the batten hinge on the LE, when tip_fixed is False
     tip_fixed=False,                # True: batten bonded to the LE, so the tip cannot twist. False: batten hinged on the LE
     # kinematics: phi = Phi cos(2 pi f t). alpha: stroke axis pitch. Downstroke is 0 < 2 pi f t < pi.
     f=25.0, Phi=np.radians(30.0), alpha=np.radians(8.0),
@@ -147,9 +148,18 @@ class Structure:
             for j in range(1, nc):
                 T[idx(ns, j), ka], T[idx(ns, j), kb] = 1 - j / nc, j / nc
         self.T, self.N, self.nd = T, N, len(free)
+        if not p["tip_fixed"] and p["batten_k"] > 0:
+            ka_, kb_ = len(free) - 2, len(free) - 1
+            kq = p["batten_k"] / p["c"] ** 2
+            self._Kbat = (ka_, kb_, kq)
+        else:
+            self._Kbat = None
         self.Mfull = M
         self.M = T.T @ np.diag(M) @ T
         self.Kc, self.Ks, self.Ksc, self.Kf, self.Kfc, self.Kle = [T.T @ k @ T for k in (Kc, Ks, Ksc, Kf, Kfc, Kle)]
+        if self._Kbat:
+            ka_, kb_, kq = self._Kbat
+            self.Kle[np.ix_([ka_, kb_], [ka_, kb_])] += kq * np.array([[1.0, -1.0], [-1.0, 1.0]])
         self.area_nodes = ds * dc
         # scalars
         self.Gt = 2 * p["C1"] * t
