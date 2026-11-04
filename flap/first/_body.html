@@ -1,0 +1,27 @@
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / First wing test</p>
+<h1>First wing test</h1>
+<p class="lead">2-layer wing, 1500 V, 1 Hz, still air. It worked: the trailing edge moved in step with the drive. First results, updated through the night.</p>
+<div class="warn"><b>Measured from one 10 s video, one view, one wing.</b> The voltage was not recorded in the video, so timing against the drive is unknown. Model comparisons are marked as predictions.</div>
+<nav class="toc"><a href="#video">Video</a><a href="#seen">What it shows</a></nav>
+
+<section class="card" id="video">
+<h2>Video</h2>
+<div class="two">
+<div><video src="clips/first_3s.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">First 3 s, real time. Voltage starts at about 0.35 s.</p></div>
+<div><video src="clips/cycle_averaged.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">One cycle averaged over 8 cycles, played 3 times. Right: change from before voltage, contrast ×5.</p></div>
+</div>
+</section>
+
+<section class="card" id="seen">
+<h2>What it shows</h2>
+<div class="fig"><img src="V_shape.png" alt="Left, the wing frame with the trailing edge traced before voltage and at the cycle high. Right, trailing edge sag along its length: 1.6 mm before voltage, 1.9 mm at the cycle low, 2.1 mm at the cycle high."></div>
+<div class="fig" style="margin-top:12px"><img src="V_time.png" alt="Left, mid trailing edge shift over 10 s: flat until 0.35 s, then a rise to 0.45 mm and cycling between 0.33 and 0.50 mm. Middle, averaged cycle. Right, shift along the edge, largest near mid chord."></div>
+<ul class="read">
+<li><b>Tension changes:</b> the trailing edge bows towards the leading edge by 0.5 mm at the cycle high. The swing is 0.18 mm at 1.00 Hz. Tracking noise is 2 µm per frame.</li>
+<li><b>It does not come back:</b> before voltage the shift is 0. After the first rise it never goes below 0.31 mm in 10 s. Either the voltage never returns to 0 (offset, or slow discharge), or the skin creeps. The video cannot separate these.</li>
+<li><b>The frame holds:</b> the leading edge moves less than 0.1 mm/100 and the distance from the knot to the tip changes by 0.02 mm.</li>
+</ul>
+</section>
+</div>
