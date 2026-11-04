@@ -107,12 +107,23 @@ def stage_g():
     return jobs
 
 
+def stage_h():
+    """Camber can raise the stall limit: cap = cn_cap + cn_cap_soft v. How much rise does the timing gain need?"""
+    kin = [(4.0, 25.0, 20.0, 16.0), (4.0, 20.0, 15.0, 8.0), (4.0, 25.0, 30.0, 8.0), (3.0, 25.0, 15.0, 16.0), (5.0, 25.0, 20.0, 12.0), (4.0, 15.0, 20.0, 12.0)]
+    jobs = []
+    for cap, ds, (U, f, p, a) in itertools.product((1.2, 1.6), (0.0, 0.1, 0.2, 0.4, 0.6, 0.8), kin):
+        jobs.append(dict(design="two20", tip_fixed=True, zeta=0.05, mode="down", cn_cap=cap, cn_cap_soft=ds, U=U, f=f, Phi_deg=p, alpha_deg=a))
+        if ds == 0.0:
+            jobs.append(dict(design="two20", tip_fixed=True, zeta=0.05, mode="off", cn_cap=cap, cn_cap_soft=ds, U=U, f=f, Phi_deg=p, alpha_deg=a))
+    return jobs
+
+
 if __name__ == "__main__":
     stage = sys.argv[1]
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 13
     OUT = os.path.join(HERE, "data", f"timing_{stage}.jsonl")
-    jobs = dict(a=stage_a, b=stage_b, c=stage_c, d=stage_d, e=stage_e, f=stage_f, g=stage_g)[stage]()
-    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s", "batten_k", "steps_per", "cycles", "cd0", "b", "c")}, sort_keys=True)
+    jobs = dict(a=stage_a, b=stage_b, c=stage_c, d=stage_d, e=stage_e, f=stage_f, g=stage_g, h=stage_h)[stage]()
+    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s", "batten_k", "steps_per", "cycles", "cd0", "b", "c", "cn_cap_soft")}, sort_keys=True)
     seen = {key(json.loads(l)) for l in open(OUT)} if os.path.exists(OUT) else set()
     todo = [j for j in jobs if key(j) not in seen]
     print(stage, len(todo), "of", len(jobs), flush=True)

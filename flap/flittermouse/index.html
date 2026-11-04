@@ -102,7 +102,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>Trend, timing:</b> soft on the downstroke gives the most lift of the five timings at each pitch shown, and soft on the upstroke gives the least. The gain is +1 mN on the coarse mesh and +0.5 to +0.6 mN (about +8 %) on a finer mesh or with a free wake.</li>
 <li><b>Trend, lag:</b> the gain has mostly gone by $\tau \approx 5$–10 ms. At the bench force-fall time (about 18 ms if that is real) the skin sits at its mean state.</li>
 <li><b>Trend, phase:</b> best within 45° of mid downstroke, which is where a shared sine drive puts it at resonance. So one channel per wing should work.</li>
-<li><b>Warning:</b> this assumes attached flow, though the tip sees about 45° of inflow on the downstroke. With section force capped at $c_n$ 1.2–1.6, lift falls from about 8 to 1–3 mN and the gain changes sign. Real flow lies somewhere between, perhaps with a leading-edge vortex.</li>
+<li><b>Warning:</b> this assumes attached flow, though the tip sees about 45° of inflow on the downstroke. With section force capped at $c_n$ 1.2–1.6, lift falls from about 8 to 1–3 mN and the gain changes sign. A fixed cap also leaves camber little way to help, so it largely rules out the gain by construction. Real flow lies somewhere between, perhaps with a leading-edge vortex. Published membrane studies disagree on whether compliance strengthens (Yeh and Chiang 2025) or suppresses (Gehrke and Mulleners 2025) that vortex.</li>
 <li><b>Other:</b> a free batten hinge is rejected: the tip swings about ±22 mm and power rises by half. A spring there, up to 1 mN m/rad, did not bring power down to the bonded value.</li>
 <li><b>Validate:</b> first, a flapping wing on a force sensor with no voltage, compared with these lift numbers. That tells you which lift model holds. Then 0 V, always on, and both sync phases, in randomised order with a sham.</li>
 </ul>
@@ -239,6 +239,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>3 Nov, evening:</b> finite-element reference finished: 15 of 42 settled, small lift change where settled. The coupled wing model does not yet reproduce it: 0 V lift is close after calibration, but it predicts about +0.15 for $\Delta C_L$ where the finite elements give about 0, with too little trailing-edge rise. Two calibration attempts failed: at this low tension the result also depends on the mesh, so calibration stopped there. </li>
 <li><b>3 Nov, 19:30:</b> finite elements at higher tension finished: 63 of 72 settled, with a region that is steady and responsive. The coupled model passes on held-out cases in that region, with two stated biases. Timing study running.</li>
 <li><b>3 Nov, 20:25:</b> timing, lag, phase, convergence and closure added. The timing helps with attached flow, by about +8 % once converged, not the +13 % of the coarse mesh. Lift itself is uncertain by a factor of about 3 from flow separation, and the budget does not close as drawn.</li>
+<li><b>3 Nov, 21:50:</b> small-stroke map finished (768 runs, section force capped). Small strokes cut power, and lift survives, but lift / weight stays below 1 at the bench and published energy per cycle. Testing next how much camber must raise the stall limit for the timing gain to survive.</li>
 </ul>
 </section>
 

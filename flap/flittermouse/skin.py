@@ -37,7 +37,7 @@ PARAMS = dict(
     # timing: 'off', 'on', 'down', 'up', 'sin'; psi shifts the voltage phase; tau is the electromechanical lag
     mode="off", psi=0.0, tau=0.0, duty=0.5,
     # numerics and viscous
-    zeta=0.05, zeta_f=80.0, cd0=0.04, cn_cap=None, free_wake=False, cycles=3, iters=3, relax=0.6, core=1e-4, steps_per=None,
+    zeta=0.05, zeta_f=80.0, cd0=0.04, cn_cap=None, cn_cap_soft=0.0, free_wake=False, cycles=3, iters=3, relax=0.6, core=1e-4, steps_per=None,
 )
 
 
@@ -281,7 +281,7 @@ def simulate(**kw):
             if p["cn_cap"] is not None:
                 q_loc = 0.5 * p["rho_air"] * (U ** 2 + (S0[:-1, None] + 0.5 * S.ds) ** 2 * dphi ** 2)
                 strip = Fn.sum(1) / (q_loc[:, 0] * S.ds * c)
-                ff = np.minimum(1.0, p["cn_cap"] / np.maximum(np.abs(strip), 1e-6))
+                ff = np.minimum(1.0, (p["cn_cap"] + p["cn_cap_soft"] * vs) / np.maximum(np.abs(strip), 1e-6))
                 Fn = Fn * ff[:, None]
             Fn_nodes = panels_to_nodes(Fn)
             Fn_load = (1 - p["relax"]) * Fn_load + p["relax"] * Fn_nodes if it or k else Fn_nodes
