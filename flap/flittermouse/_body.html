@@ -5,7 +5,7 @@
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published.</div>
 
-<nav class="toc"><a href="#verdict">Verdict</a><a href="#design">Design</a><a href="#shape">Wing shape</a><a href="#bat">Bumblebee bat</a><a href="#timing">Timing</a><a href="#stall">Stall limit</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tests">Tests</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#reference">Low tension</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#sources">Sources</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#verdict">Verdict</a><a href="#design">Design</a><a href="#shape">Wing shape</a><a href="#bat">Bumblebee bat</a><a href="#timing">Timing</a><a href="#stall">Stall limit</a><a href="#flip">Which stroke stiff?</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tests">Tests</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#reference">Low tension</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#sources">Sources</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -22,10 +22,12 @@
 <tr><th>Question</th><th>Answer from the models</th></tr>
 <tr class="main"><td>Tethered wing and core, in a wind tunnel</td><td>Feasible on paper, and worth building as a test</td></tr>
 <tr class="main"><td>Free flight, as specified</td><td>Does not close: lift / weight about 0.5–0.75, before any electronics</td></tr>
+<tr class="main"><td>Free flight with one rib, upstroke fold, tilted stroke</td><td>Closer, not closed at bench energy: 0.84 at 0.8 J/kg, 1.12 at 1.25 J/kg, with full suction, about 2 g, thrust about zero, before electronics. Half suction: 0.51 and 0.72</td></tr>
 <tr class="main"><td>Stiff upstroke, soft downstroke</td><td>Right sign in attached flow, about +8 %. Conditional: see below</td></tr>
 </table></div>
 <ul class="read">
 <li><b>Why free flight fails:</b> a DEA gives a fixed energy per cycle, so it is short of power at 25 Hz. It needs about 2 J/kg with full leading-edge suction; the bench gives about 0.8 if the isometric force holds in cycles (far less with the slow-cycle force), and the published value is 1.25. A larger wing does not help, and ideal twist helps by only about 10–15 %.</li>
+<li><b>Which timing:</b> stiff on the downstroke, as in bats, loses lift in attached flow and wins only if a soft skin stalls earlier. See <a href="#flip">Which stroke stiff?</a></li>
 <li><b>What the timing needs:</b> (1) a skin response of about 5–10 ms or faster, and (2) a soft skin that raises the stall limit by at least about 0.1–0.2 in section force. Neither is measured.</li>
 <li><b>What would change the verdict:</b> 2 J/kg in a loaded 25 Hz cycle, or lift sustained well beyond these models by a leading-edge vortex.</li>
 <li><b>Limits:</b> nothing is built. The coupled model is checked against steady finite elements and theory, not against flow data. Its trailing-edge rise is about 5× too low, it has no flow separation beyond a force cap, and it fails at low tension.</li>
@@ -62,27 +64,54 @@
 <li><b>Limits:</b> steady only. Above a $C_L$ of about 1.2 the attached-flow lift is not believable, so read the 10° taper values with care. No flapping, inertia or stall here. The mesh changes the lift change by about 10 %, with the ranking unchanged.</li>
 <li><b>Validate:</b> cut a rectangle and a 35–15 taper from the same film, and measure lift change on the static panel of test 2.</li>
 </ul>
+<h3>Ribs in flapping</h3>
+<p>Coupled model, 30 µm, 1370 V, voltage off. Ribs are cantilevers from the leading edge with their real stiffness.</p>
+<div class="fig"><img src="figures/R_ribs.png" alt="Lift, thrust and air power for five rib layouts as a share of the plain wing, and best lift over weight for three energies per cycle"></div>
+<ul class="read">
+<li><b>Equation:</b> rib load against deflection from $w = F x^2 (3y - x) / (6 EI)$ along the chord, added to the skin stiffness. Core mass $m_c = P / (e f \eta_{tr})$, so less air power means a lighter core.</li>
+<li><b>Trend:</b> the compliant skin bulges in step with the flap and costs power. One 0.5 × 0.2 mm carbon rib (about 4 mg) cuts air power by 29–34 % and lift by 12–17 % on the finest mesh. Best $L/W$ rises from 0.62 to 0.73 at 0.8 J/kg, and from 0.88 to 1.00 at 1.25 J/kg.</li>
+<li><b>Trend, limit:</b> four ribs approach the rigid flat wing (about 29 against 26 mW) but remove the voltage effect on lift. One stiff rib keeps it (+0.3 mN). A thinner rib (0.5 × 0.1 mm) saves less power and makes the voltage effect erratic, so it is not worth using.</li>
+<li><b>Validate:</b> test 4, with and without the rib. Measure shaft power: the prediction is about 30 % less for 15 % less lift.</li>
+<li><b>Limits:</b> the coupled model's trailing-edge rise was about 5× low in the steady check, so the power cost of the bulge is itself unverified. The taper is not in this model: it has only been run steady.</li>
+</ul>
 <div class="tw"><table>
 <tr><th>Family</th><th>What holds the skin</th><th>Fit with a DEA skin</th></tr>
 <tr><td>Yufeng Chen's and other insect wings</td><td>Stiff veins carry the load across a thin passive film; a compliant hinge sets pitch at hundreds of Hz</td><td>Poor as a copy: a fan of veins takes away most of the authority, and the film here is about 50× heavier per area than a 1.5 µm polyester film</td></tr>
 <tr><td>Forward-flying ornithopters such as DelFly</td><td>Spar and root stiffeners, slack foil, passive twist. DelFly II work credits outboard stiffeners with about 10 % better thrust per power</td><td>Twist is worth having, but a free tip does not settle under steady tension here</td></tr>
-<tr class="main"><td>Tensioned skin, tapered, no batten, at most one light rib</td><td>Root, leading edge and the rolled fibre</td><td>Best authority here. Next to test: one rib in flapping</td></tr>
+<tr class="main"><td>Tensioned skin, tapered, no batten, at most one light rib</td><td>Root, leading edge and the rolled fibre</td><td>Best authority here, and one stiff rib at mid span pays for itself. <b>This is the recommendation.</b></td></tr>
 </table></div>
 </section>
 
 <section class="card" id="bat">
 <h2>Bumblebee bat</h2>
-<p>Kitti's hog-nosed bat, <i>Craseonycteris thonglongyai</i>: the published size is close to this robot. No published wing area, wing loading, wingbeat frequency or kinematics were found for this species, so kinematics come from larger bats.</p>
+<p>Kitti's hog-nosed bat, <i>Craseonycteris thonglongyai</i>. No published wing area, wing loading, wingbeat frequency or kinematics were found for this species, so kinematics come from larger bats. A fitting robot name: <b>Kitti Hawk</b>, after the bat and the Wright brothers' first flight.</p>
 <div class="tw"><table>
-<tr><th></th><th>Bumblebee bat (published)</th><th>Flittermouse now (model)</th></tr>
-<tr><td>Mass</td><td>1.7–2.6 g</td><td>about 2.8 g with a 1 g core per wing, before electronics</td></tr>
-<tr><td>Span</td><td>15–17 cm</td><td>about 10 cm plus body</td></tr>
-<tr><td>Body</td><td>29–33 mm long</td><td>not designed yet</td></tr>
+<tr><th></th><th>Bumblebee bat (published)</th><th>Robot, 5 × 2.5 cm (model)</th><th>Robot, 7 × 3 cm (model)</th></tr>
+<tr><td>Mass</td><td>1.7–2.6 g</td><td>about 2 g with rib, fold and tilt, 0.58 g core per wing</td><td>about 4.7 g to reach the same $L/W$</td></tr>
+<tr><td>Span</td><td>15–17 cm</td><td>about 10 cm plus body</td><td>about 14 cm plus body</td></tr>
+<tr><td>$L/W$ held to 2 g, thrust ≥ 0 (full suction)</td><td>1</td><td>0.62, 1.09, 1.39 at 0.8, 1.25, 2.1 J/kg</td><td>Not reached at 0.8 or 1.25 J/kg; 0.89 at 2.1</td></tr>
 </table></div>
 <ul class="read">
-<li><b>What it says about size:</b> the bat has about 1.6× the span at about 0.7× the mass. A 7 × 3 cm wing is the right size to copy, but it weighs about 400 mg with 2 layers and a 20 mm roll, or about 240 mg with 1 layer and a 10 mm roll.</li>
-<li><b>Kinematics are next:</b> runs of span folding on the upstroke, tilted stroke plane and twist are below, once checked against the compliant skin.</li>
+<li><b>Same weight:</b> reachable at 5 × 2.5 cm if energy per cycle reaches the published value. <b>Same span and weight together:</b> not with this skin. A 7 × 3 cm wing weighs about 400 mg, mostly DEA film and roll. A 1-layer wing with a 10 mm roll (about 240 mg) would bring it back to 1.42 at 2.1 J/kg, but that tension state has not been checked and 10 mm rolls did not settle before.</li>
 </ul>
+<div class="fig"><img src="figures/K_bat.png" alt="Lift, thrust and power for fold and tilt, lift against span fold with and without stiff-downstroke timing, and best lift over weight against fold for two sizes and two suction values"></div>
+<ul class="read">
+<li><b>Equation:</b> span scale $1 - a(1 - \sin\omega t)/2$ on the wing, with fold $a$; stroke plane tilted by $\beta$ so the downstroke also moves forward. Both prescribed.</li>
+<li><b>Trend, fold:</b> a 40 % fold cuts air power by about 27 % and thrust by about 50 %, with lift unchanged or up. The same directions were measured on a robotic bat wing (Bahlman et al.). <b>Tilt 20°:</b> lift up about 18 %, power up about 12 %, thrust about the same. Together they raise lift per power by about 40 %.</li>
+<li><b>Trend, closure:</b> with one rib, best $L/W$ is 0.84, 1.12, 1.48 at 0.8, 1.25, 2.1 J/kg with full suction (plain wing, no fold: 0.62, 0.88, 1.25). With half suction it is 0.51, 0.72, 1.02.</li>
+<li><b>Limits:</b> fold is a prescribed span change, with 30 mg assumed for the mechanism. Its inertia is not counted, and bats pay real inertial cost for folding (Riskin et al.). Tensions do not follow the fold. Thrust is about zero at these best points, with no body drag.</li>
+<li><b>Validate:</b> test 4 with a fold hinge, locked and free, on the same wing: shaft power should fall by about 25 % and thrust by about 50 %.</li>
+</ul>
+<h3>Bat kinematics with DEAs only</h3>
+<div class="tw"><table>
+<tr><th>Bat motion</th><th>How, with no motor</th><th>Status</th></tr>
+<tr><td>Downstroke power</td><td>Core on the other side of the hinge, so its elastic tension pulls the wing down; a bias spring lifts it. A voltage rise relaxes the core and the wing rises.</td><td>Sized earlier for the mirror layout; same parts</td></tr>
+<tr><td>Stiff downstroke, slack upstroke</td><td>The same channel: voltage on during the upstroke softens core and skin together. One channel per wing.</td><td>Modelled below</td></tr>
+<tr><td>Upstroke fold</td><td><b>Passive one-way hinge at the mid-span rib.</b> Lift on the downstroke holds the outer wing straight against a stop. At the bottom of the stroke its inertia, then the air load on the upstroke, let it droop. Hand calculation: about 0.3 mN m of inertial torque on an 80 mg outer wing at 25 Hz.</td><td>Idea. The model uses a span change, not a droop</td></tr>
+<tr><td>Active fold, if passive is not enough</td><td>Rolled fibre along the leading edge across the hinge. About 45 mN (bench, isometric) on a 2 mm lever is about 0.09 mN m, about a third of the inertial torque, so it can only trim the fold.</td><td>Hand calculation</td></tr>
+<tr><td>Stroke-plane tilt</td><td>A fixed mounting angle. No actuator.</td><td>Modelled</td></tr>
+<tr><td>Slack skin when folded</td><td>Comes free: folding brings the root and tip closer. It needs no voltage, and could let the skin channel be dropped.</td><td>Not modelled</td></tr>
+</table></div>
 </section>
 
 <section class="card" id="timing">
@@ -107,6 +136,28 @@
 <ul class="read">
 <li><b>Trend:</b> break-even at $\Delta c_{n,max}$ of about 0.1–0.25 in all 12 cases. At 0.4 the gain is +0.3 to +1.8 mN per wing (4–63 %, the largest percentages at low baseline lift).</li>
 <li><b>Validate:</b> test 2 below. The steady finite elements give $\Delta C_L$ up to about 0.3 on this design, which is of the right order but is not a stall-limit measurement.</li>
+</ul>
+</section>
+
+<section class="card" id="flip">
+<h2>Which stroke stiff?</h2>
+<p>Bat plagiopatagiales are active mainly on the downstroke (Cheney et al. 2014), which suggests a skin stiff going down. Voltage lowers tension, so here that means voltage on during the upstroke. All the sections above assumed the opposite. This compares both, at 30 µm and 1370 V, over six flight points.</p>
+<div class="fig"><img src="figures/F_flip.png" alt="Lift change against the stall limit change when soft, for soft-downstroke and stiff-downstroke timing, at two stall limits and two response lags"></div>
+<div class="tw"><table>
+<tr><th>Flow case</th><th>Soft down, stiff up</th><th>Stiff down, soft up</th></tr>
+<tr><td>Attached, no stall limit</td><td>+0.31 mN (−0.51 to +1.05)</td><td>−0.91 mN (−1.34 to +0.23)</td></tr>
+<tr><td>Stall limit, not changed by softness</td><td>−0.5 to −0.7</td><td>−0.2 to −0.4</td></tr>
+<tr><td>Soft skin stalls 0.4 later</td><td>+1.0 to +1.3</td><td>−0.7</td></tr>
+<tr><td>Soft skin stalls 0.4 earlier</td><td>−2.3 to −2.4</td><td>−0.05 to +0.54</td></tr>
+<tr><td>Air power, against 0 V</td><td>about +8 %</td><td>about +6 %</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Equation:</b> as above, with a stall limit $c_{n,max} + \Delta c_{n,max} v$. Median, with range in brackets, per wing, against 0 V at the same limit.</li>
+<li><b>Trend:</b> the two timings cross near $\Delta c_{n,max}$ of 0 to +0.1. Soft down has much more to win and to lose. Stiff down stays near or below zero, and with 10 ms of lag it is negative in every median (−0.4 to −0.8 mN).</li>
+<li><b>Why it loses in attached flow:</b> a soft upstroke lets the skin bulge downward, and the downward force on the upstroke grows (−15.2 against −12.9 mN, at 35 µm). Voltage off is already stiff, so the stiff downstroke itself gains nothing here.</li>
+<li><b>Why bats may differ:</b> a muscle adds stiffness to a skin that is otherwise slack, and bats fold on the upstroke. In these runs a 40 % fold removes the penalty (panel b, Bumblebee bat), and a stiff rib limits the downstroke bulge at a large power saving. So what looks bat-like here is rib plus fold, with voltage as a trim. That reading is mine, not a measurement on bats.</li>
+<li><b>Validate:</b> test 2 gives the sign of $\Delta c_{n,max}$ and so picks the timing. Then test 5 runs both.</li>
+<li><b>Flipping the robot:</b> with a shared channel, rolling the body 180° about the flow axis swaps the two timings with no rewiring. Re-trim pitch, since the roll also flips its sign. The rolled fibre, leading edge cross and batten change sides against the pressure, so measure 0 V in both orientations and subtract. On a rig with a separate skin channel, a 180° phase shift does the same with fewer differences.</li>
 </ul>
 </section>
 
@@ -156,6 +207,7 @@
 <tr><td>4</td><td>One wing flapped at 0 V, on a sensor with 3 mN cycle scatter or better: lift, thrust, shaft power</td><td>Within the attached and capped bounds, near 18–26 mW at the flight point</td><td>Which flow model holds, and the effective suction</td></tr>
 <tr><td>5</td><td>Same wing: 0 V, always on, both sync phases, sham, randomised, about 1,100 paired cycles</td><td>Soft on the downstroke beats soft on the upstroke, beyond the sham</td><td>The claim itself</td></tr>
 </table></div>
+<p class="note">New: in test 2, cut a rectangle and a 35–15 taper from one film. In test 4, run with and without a mid-span rib, and with a fold hinge locked and free. In test 5, compare both timings; rolling the body 180° swaps them on a shared channel.</p>
 <p class="note">Tests 1 and 2 can use the 6 cm panel already planned. Test 2 needs no flapping rig.</p>
 </section>
 
@@ -285,6 +337,10 @@
 <li>Kim et al., <i>Laser-assisted failure recovery for dielectric elastomer actuators in aerial robots</i>, Sci. Robot. 2023: <a href="https://par.nsf.gov/biblio/10406085">record</a>. Defect isolation, for a core of this electrode area.</li>
 <li>Gehrke and Mulleners 2025: <a href="https://arxiv.org/pdf/2410.01670">arXiv 2410.01670</a>. Yeh and Chiang 2025: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11940779/">Biomimetics</a>. They disagree on what compliance does to the leading-edge vortex, in different conditions.</li>
 <li>A short search found no dielectric elastomer flapping robot in forward flight, so that comparison is missing. Bench data here are one bundle of 5 rolled fibres, with a second bundle far weaker in slow cycles.</li>
+<li>Cheney et al., <i>Membrane muscle function in the compliant wings of bats</i>, Bioinspir. Biomim. 2014: <a href="https://engineering.brown.edu/news/2014-05-24/tiny-muscles-help-bats-fine-tune-flight">summary</a>. Muscles active on the downstroke. Read from the abstract and press release.</li>
+<li>Bahlman, Swartz, Breuer, robotic bat wing: <a href="https://sicb.org/?p=21868">abstract</a>. Riskin et al., inertial cost of bat flight: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3385481">PMC3385481</a>. Fan et al. on upstroke folding: <a href="https://arxiv.org/abs/2411.01434">arXiv 2411.01434</a>.</li>
+<li>Bumblebee bat size: <a href="https://animaldiversity.org/site/accounts/information/Craseonycteris_thonglongyai.html">Animal Diversity Web</a>, <a href="https://www.encyclopedia.com/environment/encyclopedias-almanacs-transcripts-and-maps/kittis-hog-nosed-bats-craseonycteridae">Encyclopedia.com</a>, <a href="https://dimensions.com/element/bumblebee-bat-craseonycteris-thonglongyai">Dimensions</a>. Sizes come from reference pages, not primary measurements.</li>
+<li>DelFly II wing: <a href="https://www.delfly.nl/publications/MSc-Groen.pdf">Groen, MSc thesis</a>. Veins on soft flapping wings: <a href="https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2023.1243238/full">Ishiguro et al. 2023</a>, who measured more force from chord veins than from span veins, in line with the rib result here.</li>
 </ul>
 </section>
 
@@ -301,6 +357,7 @@
 <li><b>3 Nov, 23:50:</b> drive redone with coupled-model air power, Monte Carlo on closure, rig resolution.</li>
 <li><b>4 Nov, 00:30:</b> stall-limit, bigger-wing and prescribed-twist runs finished. Verdict and test order added. Overnight study complete.</li>
 <li><b>4 Nov:</b> layer thickness set to 30 µm for new work; older sections stay at 35 µm. Wing shape and reinforcement study added. A taper beats the rectangle, one rib costs little, a fan of veins costs most of the authority, a free tip does not settle. Next: bat kinematics, ribs in the flapping model, and the opposite timing (stiff on the downstroke).</li>
+<li><b>4 Nov, later:</b> ribs, span fold and stroke tilt added to the coupled model. Both timings compared. One stiff rib, fold and tilt raise best lift / weight to 0.84 at bench energy and 1.12 at the published value, with full suction. Stiff-downstroke timing wins only if a soft skin stalls earlier. Corrections: vein mass and lift-change area in the first post-processing, before anything was published.</li>
 </ul>
 </section>
 

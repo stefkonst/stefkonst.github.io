@@ -36,6 +36,8 @@ PARAMS = dict(
     f=25.0, Phi=np.radians(30.0), alpha=np.radians(8.0),
     # timing: 'off', 'on', 'down', 'up', 'sin'; psi shifts the voltage phase; tau is the electromechanical lag
     mode="off", psi=0.0, tau=0.0, duty=0.5,
+    ribs=(), rib_EI=5.4e-6, rib_mg_mm=0.078,  # chord ribs at these span fractions, cantilevers from the LE; default carbon strip 0.5 x 0.1 mm
+    fold=0.0, tilt=0.0,             # prescribed: span scale 1 - fold (1 - sin wt) / 2, largest on the upstroke; stroke plane tilt (rad), downstroke moves forward. Tensions do not follow the fold
     feather=0.0,                    # prescribed twist, rigid chord: pitch = -feather * atan(s phi'/U), cancels that share of the flap angle. A requirement test, not a mechanism
     # numerics and viscous
     zeta=0.05, zeta_f=80.0, cd0=0.04, cn_cap=None, cn_cap_soft=0.0, free_wake=False, cycles=3, iters=3, relax=0.6, core=1e-4, steps_per=None,
@@ -68,7 +70,8 @@ def masses(p):
     sheet = p["rho_f"] * t * p["b"] * p["c"]
     fibre = p["rho_f"] * t * p["w_s"] * p["b"]
     le = le_area(p) * p["b"] * p["rho_cf"]
-    return dict(sheet=sheet, fibre=fibre, le=le, batten=p["batten_mg"] * 1e-6, total=sheet + fibre + le + p["batten_mg"] * 1e-6)
+    ribs = len(p["ribs"]) * p["rib_mg_mm"] * p["c"] * 1e-3
+    return dict(sheet=sheet, fibre=fibre, le=le, batten=p["batten_mg"] * 1e-6, ribs=ribs, total=sheet + fibre + le + p["batten_mg"] * 1e-6 + ribs)
 
 
 class Structure:
@@ -136,6 +139,20 @@ class Structure:
         Kle = np.zeros((N, N))
         le_nodes = [idx(i + 1, 0) for i in range(ns)]
         Kle[np.ix_(le_nodes, le_nodes)] = Kb
+        for rs in p["ribs"]:                       # rib: cantilever from its LE node, acting on w_j - w_0
+            i_ = int(round(rs * ns))
+            cc = (np.arange(nc) + 1) * dc
+            Fr = np.zeros((nc, nc))
+            for a in range(nc):
+                for b_ in range(nc):
+                    x, y = min(cc[a], cc[b_]), max(cc[a], cc[b_])
+                    Fr[a, b_] = x ** 2 * (3 * y - x) / (6 * p["rib_EI"])
+            D = np.zeros((nc, N))
+            for a in range(nc):
+                D[a, idx(i_, a + 1)] = 1.0
+                D[a, idx(i_, 0)] = -1.0
+                M[idx(i_, a + 1)] += p["rib_mg_mm"] * dc * 1e-3   # mg/mm x m -> kg
+            Kle += D.T @ np.linalg.inv(Fr) @ D
         # reduction: drop root row; tip row follows the batten
         free = [idx(i, j) for i in range(1, ns) for j in range(nc + 1)] + [idx(ns, 0)] + ([] if p["tip_fixed"] else [idx(ns, nc)])
         T = np.zeros((N, len(free)))
@@ -225,14 +242,17 @@ def simulate(**kw):
             return 0.0, 0.0, 0.0
         return p["Phi"] * np.cos(om * t), -p["Phi"] * om * np.sin(om * t), -p["Phi"] * om ** 2 * np.cos(om * t)
 
+    t_now = [0.0]
+
     def to_global(wf, phi, dphi=0.0):
         if p["feather"]:
             wf = wf + p["feather"] * np.arctan2(-S0[:, None] * dphi, U) * C0[None, :]
-        Y = S0[:, None] * np.cos(phi) - wf * np.sin(phi)
-        Z = S0[:, None] * np.sin(phi) + wf * np.cos(phi)
+        sc = 1 - p["fold"] * (1 - np.sin(om * t_now[0])) / 2 if p["fold"] else 1.0
+        Y = sc * S0[:, None] * np.cos(phi) - wf * np.sin(phi)
+        Z = sc * S0[:, None] * np.sin(phi) + wf * np.cos(phi)
         Xw = np.repeat(C0[None, :], ns + 1, 0)
         X = np.zeros((ns + 1, nc + 1, 3))
-        X[..., 0] = Xw * ca + Z * sa
+        X[..., 0] = Xw * ca + Z * sa + sc * S0[:, None] * np.sin(phi) * np.sin(p["tilt"])
         X[..., 1] = Y
         X[..., 2] = -Xw * sa + Z * ca
         return X
@@ -264,6 +284,7 @@ def simulate(**kw):
         t = k * dt
         tn = t + dt
         phi, dphi, ddphi = kin(tn)
+        t_now[0] = tn
         cmd = voltage(p, om * tn)
         vs = cmd if tau <= 0 else vs + (1 - np.exp(-dt / tau)) * (cmd - vs)
         # inertial load in the flapping frame
