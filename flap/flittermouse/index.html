@@ -69,7 +69,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published.</div>
 
-<nav class="toc"><a href="#verdict">Verdict</a><a href="#design">Design</a><a href="#timing">Timing</a><a href="#stall">Stall limit</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tests">Tests</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#reference">Low tension</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#sources">Sources</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#verdict">Verdict</a><a href="#design">Design</a><a href="#shape">Wing shape</a><a href="#bat">Bumblebee bat</a><a href="#timing">Timing</a><a href="#stall">Stall limit</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tests">Tests</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#reference">Low tension</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#sources">Sources</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -111,6 +111,42 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <tr><td>Attachment</td><td>Hinge and fibre anchor on the stroke axis, within about 0.2 mm</td><td>1 mm off axis changes the fibre length by about 2 %</td></tr>
 <tr><td>Flight point</td><td>4 m/s, 25 Hz, ±20°, pitch 12–16°</td><td>8–11 mN lift and 18–26 mW air power per wing; thrust about zero, with full suction only</td></tr>
 </table></div>
+</section>
+
+<section class="card" id="shape">
+<h2>Wing shape and reinforcement</h2>
+<p>Steady finite elements, 4 m/s, 5 cm span, about 12 cm², 2 layers, 20 mm roll. New work uses $H$ = 30 µm and 1370 V, the same field as 1.6 kV at 35 µm. Veins are rigid lines bonded after tensioning, so they show the most a stiff vein can do.</p>
+<div class="fig"><img src="figures/W_shape.png" alt="Planform sketches of eleven wing layouts, the lift change with voltage for each at 6 and 10 degrees, and the lift coefficient at 0 V and 1370 V"></div>
+<ul class="read">
+<li><b>Equation:</b> same sheet and fibre as above; the tilted cut sets the fibre stretch, $\Delta L_f = c_r \tan\theta_r - c_t \tan\theta_t$, with root and tip chords $c_r$, $c_t$.</li>
+<li><b>Trend, shape:</b> at equal fibre tension, a taper of 35 mm at the root and 15 mm at the tip gives about 1.75× the lift change of the rectangle (5.2 against 2.9 mN at 6°; 5.6 against 3.2 on the finer mesh). It also lifts more at 0 V. The tip batten can shrink to 5 mm or less and the wing still settles, so a separate tip batten is not needed.</li>
+<li><b>Trend, veins:</b> one chord rib costs little (3.4 mN) and shrinks the 0 V bulge from 1.0 to 0.3 mm. More veins cost authority: two ribs 2.1 mN, a fan of three from the root 1.7 mN. Veins add very little mass (a 0.5 × 0.1 mm carbon strip is about 0.08 mg/mm).</li>
+<li><b>Trend, free tip:</b> with no tip edge on a rectangle, with or without diagonals, the wing did not settle in 8 minutes of solving, with bulges up to 4–9 mm. A plain ornithopter wing depends on a slack skin and flow to hold its shape, and steady tension does not give that. This solver cannot say whether it would hold shape while flapping.</li>
+<li><b>Thickness:</b> 30 µm at the same field gives about the same lift change as 35 µm (2.9 against 3.1 mN) and 12 % less wing mass. At 1.6 kV it gives 4.6 mN, at 53 V/µm, if the film survives that.</li>
+<li><b>Limits:</b> steady only. Above a $C_L$ of about 1.2 the attached-flow lift is not believable, so read the 10° taper values with care. No flapping, inertia or stall here. The mesh changes the lift change by about 10 %, with the ranking unchanged.</li>
+<li><b>Validate:</b> cut a rectangle and a 35–15 taper from the same film, and measure lift change on the static panel of test 2.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Family</th><th>What holds the skin</th><th>Fit with a DEA skin</th></tr>
+<tr><td>Yufeng Chen's and other insect wings</td><td>Stiff veins carry the load across a thin passive film; a compliant hinge sets pitch at hundreds of Hz</td><td>Poor as a copy: a fan of veins takes away most of the authority, and the film here is about 50× heavier per area than a 1.5 µm polyester film</td></tr>
+<tr><td>Forward-flying ornithopters such as DelFly</td><td>Spar and root stiffeners, slack foil, passive twist. DelFly II work credits outboard stiffeners with about 10 % better thrust per power</td><td>Twist is worth having, but a free tip does not settle under steady tension here</td></tr>
+<tr class="main"><td>Tensioned skin, tapered, no batten, at most one light rib</td><td>Root, leading edge and the rolled fibre</td><td>Best authority here. Next to test: one rib in flapping</td></tr>
+</table></div>
+</section>
+
+<section class="card" id="bat">
+<h2>Bumblebee bat</h2>
+<p>Kitti's hog-nosed bat, <i>Craseonycteris thonglongyai</i>: the published size is close to this robot. No published wing area, wing loading, wingbeat frequency or kinematics were found for this species, so kinematics come from larger bats.</p>
+<div class="tw"><table>
+<tr><th></th><th>Bumblebee bat (published)</th><th>Flittermouse now (model)</th></tr>
+<tr><td>Mass</td><td>1.7–2.6 g</td><td>about 2.8 g with a 1 g core per wing, before electronics</td></tr>
+<tr><td>Span</td><td>15–17 cm</td><td>about 10 cm plus body</td></tr>
+<tr><td>Body</td><td>29–33 mm long</td><td>not designed yet</td></tr>
+</table></div>
+<ul class="read">
+<li><b>What it says about size:</b> the bat has about 1.6× the span at about 0.7× the mass. A 7 × 3 cm wing is the right size to copy, but it weighs about 400 mg with 2 layers and a 20 mm roll, or about 240 mg with 1 layer and a 10 mm roll.</li>
+<li><b>Kinematics are next:</b> runs of span folding on the upstroke, tilted stroke plane and twist are below, once checked against the compliant skin.</li>
+</ul>
 </section>
 
 <section class="card" id="timing">
@@ -328,6 +364,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>3 Nov, 21:50:</b> small-stroke map finished (768 runs, section force capped). Small strokes cut power, and lift survives, but lift / weight stays below 1 at the bench and published energy per cycle. Testing next how much camber must raise the stall limit for the timing gain to survive.</li>
 <li><b>3 Nov, 23:50:</b> drive redone with coupled-model air power, Monte Carlo on closure, rig resolution.</li>
 <li><b>4 Nov, 00:30:</b> stall-limit, bigger-wing and prescribed-twist runs finished. Verdict and test order added. Overnight study complete.</li>
+<li><b>4 Nov:</b> layer thickness set to 30 µm for new work; older sections stay at 35 µm. Wing shape and reinforcement study added. A taper beats the rectangle, one rib costs little, a fan of veins costs most of the authority, a free tip does not settle. Next: bat kinematics, ribs in the flapping model, and the opposite timing (stiff on the downstroke).</li>
 </ul>
 </section>
 
