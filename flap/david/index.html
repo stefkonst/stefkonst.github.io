@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Di Stadio</title>
+<meta name="description" content="David Di Stadio, R&D engineer in microfabrication and additive manufacturing: parts printed in polymer, metal and ceramic, from 400 mm mechanisms down to 10 µm features.">
+<meta name="theme-color" content="#050506">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050506;--bg2:#0e0f12;--bg3:#17191e;--ink:#efece4;--dim:#a2a39f;--rule:#2a2c32;--amber:#ffb627;--amber2:#ff8a00;--cyan:#4de3d6;--steel:#8fb4e0;--ivory:#f4f1ea;--bar:40px;
+--disp:'Bricolage Grotesque',system-ui,sans-serif;--body:'Instrument Sans',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;padding-bottom:var(--bar);overflow-x:clip}
+h1,h2,h3{font-family:var(--disp);margin:0;font-weight:800;line-height:.98;letter-spacing:-.025em}
+p{margin:0 0 1em}
+a{color:var(--amber)}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+img,video,canvas,svg{display:block;max-width:100%}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+@media (max-width:640px){.wrap{padding:0 16px}body{font-size:16px}.toy{padding:14px}}
+
+/* hero */
+.hero{height:460vh;position:relative}
+.stage{position:sticky;top:0;height:calc(100vh - var(--bar));height:calc(100svh - var(--bar));overflow:hidden;background:#000}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(#000 0,transparent 16%,transparent 86%,rgba(0,0,0,.75))}
+.title{position:absolute;z-index:2;left:28px;right:28px;top:22px;will-change:opacity,transform}
+.title h1{font-size:clamp(50px,11.4vw,190px);color:var(--ink)}
+.title p{font-size:clamp(16px,1.6vw,22px);max-width:21em;margin:.7em 0 0;color:var(--ink)}
+@media (min-width:900px){.title p{position:absolute;right:0;top:calc(11.4vw + 26px);text-align:right}}
+.hint{position:absolute;z-index:2;left:50%;bottom:18px;transform:translateX(-50%);color:var(--dim);white-space:nowrap;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translate(-50%,6px)}}
+.hot{position:absolute;z-index:3;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink)}
+.hot i{width:18px;height:18px;border-radius:50%;background:var(--c);box-shadow:0 0 0 0 var(--c);animation:ping 2s infinite}
+.hot span{background:rgba(0,0,0,.65);padding:2px 7px;border-radius:3px}
+.hot:hover span{background:var(--c);color:#000}
+@keyframes ping{70%{box-shadow:0 0 0 18px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.say{position:absolute;z-index:2;left:28px;bottom:26px;max-width:min(440px,calc(100% - 56px));opacity:0;transition:opacity .35s;pointer-events:none;text-shadow:0 1px 14px #000}
+.say.on{opacity:1;pointer-events:auto}
+.say b{font-family:var(--disp);font-size:clamp(44px,7vw,104px);display:block;line-height:1;letter-spacing:-.03em;color:var(--c)}
+.say a{color:var(--ink)}
+.say.end{left:50%;bottom:auto;top:4%;transform:translateX(-50%);text-align:center;width:calc(100% - 32px);max-width:none}
+.say.end b{font-size:clamp(32px,4.8vw,76px);color:var(--ink)}
+
+/* ladder */
+.intro{padding-block:110px 34px}
+.intro h2{font-size:clamp(40px,7.2vw,112px);max-width:14em}
+.intro h2 em{font-style:normal;color:var(--amber)}
+.intro p{font-size:clamp(18px,1.8vw,23px);max-width:40em;margin-top:1.1em}
+.ladder{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:34px;align-items:center;margin-top:44px}
+.lad-view{position:relative;aspect-ratio:16/10;background:var(--bg2);border:1px solid var(--rule);overflow:hidden}
+.lad-view img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.72);transition:opacity .4s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.lad-view img.past{transform:scale(1.5)}
+.lad-view img.on{opacity:1;transform:none}
+.lad-read b{font-family:var(--disp);font-weight:800;font-size:clamp(58px,8vw,124px);display:block;line-height:1;letter-spacing:-.03em;color:var(--cyan);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lad-read h3{font-size:26px;margin:.5em 0 .25em}
+.lad-read p{color:var(--dim);margin:0 0 .7em}
+.ruler{grid-column:1/-1;position:relative;padding-top:8px}
+.ticks{position:relative;height:22px}
+.ticks button{position:absolute;top:0;width:22px;height:22px;transform:translateX(-50%);display:grid;place-items:center}
+.ticks button::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--cyan)}
+.ticks button:hover::after{transform:scale(1.5)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:none;margin:0;cursor:ew-resize}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:3px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-12px;border-radius:50%;background:var(--amber);border:5px solid var(--bg);box-shadow:0 0 0 2px var(--amber)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--amber);border:5px solid var(--bg);box-shadow:0 0 0 2px var(--amber)}
+.dec{position:relative;height:18px;color:var(--dim)}
+.dec span{position:absolute;transform:translateX(-50%);white-space:nowrap}.dec span:first-child{transform:none}.dec span:last-child{transform:translateX(-100%)}
+@media (max-width:820px){.ladder{grid-template-columns:minmax(0,1fr)}}
+
+/* chapters & projects */
+.ch{padding:130px 0 30px;border-top:1px solid var(--rule);margin-top:90px}
+.ch .mono{color:var(--amber)}
+.ch h2{font-size:clamp(46px,9vw,150px);margin:.15em 0 .28em}
+.ch>p,.ch .wrap>p{font-size:clamp(18px,1.7vw,22px);max-width:38em}
+.proj{padding-block:64px}
+.ph{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:12px 36px;margin-bottom:26px;align-items:start}
+.ph h3{font-size:clamp(32px,4.2vw,60px)}
+.ph .tag{grid-column:1/-1;color:var(--cyan)}
+.ph p:last-child{margin:0}
+@media (max-width:820px){.ph{grid-template-columns:minmax(0,1fr)}}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g12{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.g21{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+@media (max-width:820px){.g2,.g12,.g21{grid-template-columns:minmax(0,1fr)}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+figure{margin:0;min-width:0}
+figcaption{color:var(--dim);font-size:14px;padding:7px 0 0;line-height:1.4}
+.shot{display:block;width:100%;position:relative;cursor:zoom-in;background:var(--bg2);overflow:hidden}
+.shot img,.shot video{width:100%;height:auto}
+.neg img,img.neg{filter:invert(1) hue-rotate(180deg)}
+.shot.neg{background:#000}
+.white{background:#fff}
+/* layer-by-layer reveal: JS adds .armed, then .in when scrolled to */
+.armed>:first-child{clip-path:inset(100% 0 0 0)}
+.armed.in>:first-child{animation:print 1.15s steps(26) forwards}
+.armed::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--amber);box-shadow:0 0 22px 5px var(--amber2);opacity:0}
+.armed.in::after{animation:scan 1.15s steps(26) forwards}
+@keyframes print{to{clip-path:inset(0 0 0 0)}}
+@keyframes scan{0%{bottom:0;opacity:1}96%{opacity:1}100%{bottom:100%;opacity:0}}
+.lens{position:fixed;z-index:30;width:210px;height:210px;border-radius:50%;pointer-events:none;border:2px solid var(--cyan);box-shadow:0 8px 40px rgba(0,0,0,.7);background-repeat:no-repeat;opacity:0;transition:opacity .15s;transform:translate(-50%,-50%)}
+.lens.on{opacity:1}
+.toy{background:var(--bg2);border:1px solid var(--rule);padding:20px;min-width:0}
+.toy h4{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 12px;color:var(--amber)}
+.toy .fine,.fine{color:var(--dim);font-size:13.5px;margin:.7em 0 0}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.steps button,.btn{font-family:var(--mono);font-size:12px;border:1px solid var(--rule);padding:7px 10px;transition:.15s;text-align:left}
+.steps button:hover,.btn:hover{border-color:var(--amber)}
+.steps button.on,.btn.on{background:var(--amber);border-color:var(--amber);color:#000}
+.btn.big{font-size:14px;padding:12px 18px;border-color:var(--amber);color:var(--amber)}
+.btn.big:hover{background:var(--amber);color:#000}
+.toy svg{width:100%;height:auto}
+.toy svg text{font-family:var(--mono);fill:var(--ink);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;padding:0;list-style:none}
+.chips li{font-family:var(--mono);font-size:12px;border:1px solid var(--rule);padding:5px 9px}
+.chips b{color:var(--cyan);font-weight:500}
+.big-num{font-family:var(--disp);font-weight:800;letter-spacing:-.03em;font-size:clamp(50px,6.5vw,92px);line-height:1;color:var(--amber);display:block}
+.lab{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;margin-top:10px}
+.lab input{flex:1;min-width:0}
+.lab output{min-width:5.5em;text-align:right;color:var(--cyan)}
+
+/* microscope */
+.scope{position:relative;aspect-ratio:462/322;overflow:hidden;background:#000;cursor:zoom-in}
+.scope img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(.25);transition:opacity .45s,transform .75s cubic-bezier(.3,.7,.2,1)}
+.scope img.past{transform:scale(4)}
+.scope img.on{opacity:1;transform:none}
+.scope .ring{position:absolute;right:10px;top:10px;font-family:var(--mono);background:rgba(0,0,0,.72);color:var(--cyan);padding:3px 8px;font-size:15px}
+.turret{display:flex;gap:6px;margin-top:10px}
+.turret button{flex:1;font-family:var(--mono);border:1px solid var(--rule);padding:12px 0;text-align:center}
+.turret button:hover{border-color:var(--cyan)}
+.turret button.on{background:var(--cyan);border-color:var(--cyan);color:#000}
+/* sofia */
+.tilt{perspective:900px;background:#000;overflow:hidden;padding:26px 10px;display:grid;place-items:center}
+.tilt img{transform-style:preserve-3d;width:100%;height:auto}
+.pad{width:190px;height:190px;border-radius:50%;border:1px solid var(--cyan);position:relative;touch-action:none;cursor:grab;margin:0 auto;background:repeating-radial-gradient(circle,transparent 0 23px,var(--rule) 23px 24px)}
+.pad i{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;background:var(--amber);box-shadow:0 0 18px var(--amber)}
+
+/* timeline */
+.tl{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px}
+.tl li{background:var(--bg2);border:1px solid var(--rule);padding:18px 20px}
+.tl .mono{color:var(--cyan)}
+.tl h3{font-size:23px;margin:.35em 0 .3em;letter-spacing:-.01em;line-height:1.08}
+.tl p{margin:0;color:var(--dim);font-size:15px}
+.tl li.now h3{color:var(--amber)}
+.bye{padding-block:110px 120px;text-align:left}
+.bye h2{font-size:clamp(48px,10vw,170px)}
+.bye a.cta{display:inline-block;font-family:var(--mono);font-size:15px;margin-top:26px;border:1px solid var(--amber);padding:14px 22px;color:var(--amber);text-decoration:none}
+.bye a.cta:hover{background:var(--amber);color:#000}
+
+/* SEM info bar */
+.sem{position:fixed;z-index:20;left:0;right:0;bottom:0;height:var(--bar);display:flex;background:#0a0b0d;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;line-height:1.15}
+.sem>*{display:flex;flex-direction:column;justify-content:center;padding:0 12px;border-right:1px solid var(--rule);white-space:nowrap;min-width:0}
+.sem small{font-size:9.5px;color:var(--dim)}
+.sem .grow{flex:1;overflow:hidden;text-overflow:ellipsis}
+.sem span{overflow:hidden;text-overflow:ellipsis}
+.sem .sb{border-right:0;align-items:center;min-width:112px}
+.sem .sb i{display:block;width:88px;height:5px;border:1px solid var(--ink);border-top:0;margin-top:2px}
+.sem button{font:inherit;color:var(--amber);text-align:left}
+.sem button:hover{background:var(--amber);color:#000}
+@media (max-width:760px){.sem .hide{display:none}.sem .sb{min-width:92px}.sem .sb i{width:70px}}
+.index{position:fixed;z-index:19;left:0;bottom:var(--bar);width:min(400px,100%);max-height:calc(100vh - var(--bar));overflow:auto;background:#0a0b0d;border:1px solid var(--rule);transform:translateY(105%);transition:transform .22s;visibility:hidden}
+.index.on{transform:none;visibility:visible}
+.index a{display:flex;justify-content:space-between;gap:16px;padding:10px 14px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule);font-size:15px}
+.index a:hover{background:var(--amber);color:#000}
+.index a span{font-family:var(--mono);font-size:12px;color:var(--cyan);white-space:nowrap}
+.index a:hover span{color:#000}
+
+/* viewer */
+.box{position:fixed;z-index:40;inset:0;background:rgba(3,3,4,.97);display:none;touch-action:none}
+.box.on{display:block}
+.box img{position:absolute;left:50%;top:50%;max-width:none;transform-origin:0 0;cursor:grab;user-select:none;-webkit-user-drag:none}
+.box .cap{position:absolute;left:0;right:0;bottom:0;padding:12px 70px 12px 18px;font-size:15px;background:linear-gradient(transparent,#000 40%);pointer-events:none}
+.box .ctl{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:2}
+.box .ctl button{width:44px;height:44px;background:#16181c;border:1px solid var(--rule);font-size:20px}
+.box .ctl button:hover{background:var(--amber);color:#000}
+.box .read{position:absolute;top:24px;left:18px;color:var(--cyan)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hint,.hot i{animation:none}.armed>:first-child{clip-path:none}.armed::after{display:none}.armed.in>:first-child{animation:none}}
+@media (max-width:640px){.toy svg text{font-size:21px}}
+</style>
+</head>
+<body>
+
+<section class="hero" id="top" data-name="David Di Stadio" data-mat="polymer · metal · ceramic" data-proc="additive manufacturing" data-scale="3 parts">
+  <div class="stage" id="stage">
+    <canvas id="heroC" aria-label="Three copies of the same part, two cupped hands holding a lattice sphere, in amber polymer, grey metal and white ceramic, shrinking from left to right."></canvas>
+    <div class="title" id="heroT">
+      <h1>David Di Stadio</h1>
+      <p>R&amp;D engineer in microfabrication and additive manufacturing. CSEM, Neuchâtel.</p>
+    </div>
+    <button class="hot" data-go=".27" style="--c:var(--amber)"><i></i><span class="mono">Polymer</span></button>
+    <button class="hot" data-go=".52" style="--c:var(--steel)"><i></i><span class="mono">Metal</span></button>
+    <button class="hot" data-go=".76" style="--c:var(--ivory)"><i></i><span class="mono">Ceramic</span></button>
+    <div class="say" data-a=".2" data-b=".34" style="--c:var(--amber)"><b>Polymer</b>High-resolution stereolithography in photopolymer resin. <a href="#microsla">See it</a></div>
+    <div class="say" data-a=".45" data-b=".59" style="--c:var(--steel)"><b>Metal</b>316L and Ti64, printed as powder in resin, then debound and sintered. <a href="#lmm">See it</a></div>
+    <div class="say" data-a=".69" data-b=".83" style="--c:var(--ivory)"><b>Ceramic</b>Alumina by stereolithography. It fits beside a pencil lead. <a href="#alumina">See it</a></div>
+    <div class="say end" data-a=".92" data-b="1.01"><b>Same hands. Three materials.</b></div>
+    <div class="hint mono" id="hint">scroll to zoom in ↓</div>
+  </div>
+</section>
+
+<section class="wrap intro" id="scale" data-name="Scale ladder" data-mat="all" data-proc="all" data-scale="400 mm → 10 µm">
+  <h2>From 400&nbsp;mm down to <em>10&nbsp;µm</em>.</h2>
+  <p>David develops new fabrication processes and makes them work reliably enough to hand to industry. His projects cover printed metal watch cases, dissolvable implants, scintillating crystals and flexure mechanisms. Drag the scale to move through them.</p>
+  <div class="ladder" id="ladder">
+    <div class="lad-view" id="ladV"></div>
+    <div class="lad-read" aria-live="polite">
+      <b id="ladN">400 mm</b>
+      <h3 id="ladT"></h3>
+      <p id="ladD"></p>
+      <a id="ladL" class="mono" href="#">Go to the project ↓</a>
+    </div>
+    <div class="ruler">
+      <div class="ticks" id="ladTicks"></div>
+      <input type="range" id="ladR" min="0" max="1000" value="0" aria-label="Scale, from 400 millimetres to 10 micrometres">
+      <div class="dec mono" id="ladD2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CSEM ============ -->
+<section class="ch" id="csem-ch"><div class="wrap">
+  <div class="mono">CSEM, Neuchâtel · 2023 to now</div>
+  <h2>Five ways to print a small thing</h2>
+  <p>At CSEM, David transfers advanced polymer microfabrication to industry, working across CAD, materials, optics and bioengineering. Part quality is a large share of the job: surface roughness (Ra) on printed parts came down by more than 8×.</p>
+</div></section>
+
+<article class="wrap proj" id="microsla" data-name="Micro-SLA" data-mat="photopolymer" data-proc="stereolithography" data-scale="100 µm">
+  <div class="ph"><div class="tag mono">01 · polymer · life sciences, watchmaking</div><h3>Micro-SLA</h3>
+    <p>High-resolution resin printing, taken from process development to industrial transfer. Complex microstructures with fine features and a surface finish good enough for both functional and aesthetic parts.</p></div>
+  <div class="grid g12">
+    <figure><button class="shot print" data-full="img/cathedral.webp" data-cap="A cathedral printed in resin, down to the tracery. The white mark is the scale bar in the original image."><video data-src="video/cathedral.mp4" poster="video/cathedral.webp" muted loop playsinline width="960" height="720" aria-label="Slow pan up the facade of a miniature printed cathedral"></video></button><figcaption>A printed cathedral, down to the tracery.</figcaption></figure>
+    <div class="grid">
+      <figure><button class="shot print" data-full="img/chip.webp" data-cap="Printed microfluidic device on a glass slide. Scale bar 1 cm."><video data-src="video/chip.mp4" poster="video/chip.webp" muted loop playsinline width="1024" height="576" aria-label="Zoom from a whole microfluidic chip to a single 100 micrometre channel"></video></button><figcaption>From a 1 cm microfluidic chip to its 100 µm channel.</figcaption></figure>
+      <figure><button class="shot print" data-full="img/needles.webp" data-cap="SEM cross-section of a printed needle array: 1.560 mm tall, about 200 µm wide, 45.5° tip. Every print layer is visible."><video data-src="video/needles.mp4" poster="video/needles.webp" muted loop playsinline width="960" height="720" aria-label="Zoom into the tip of a printed needle in an electron micrograph"></video></button><figcaption>Needles 1.56 mm tall, 45.5° tip, under the SEM.</figcaption></figure>
+    </div>
+  </div>
+</article>
+
+<article class="wrap proj" id="liga" data-name="3D-LIGA" data-mat="metal, electroplated" data-proc="lithography + electroforming" data-scale="4-inch wafer">
+  <div class="ph"><div class="tag mono">02 · polymer mold → solid metal</div><h3>3D-LIGA</h3>
+    <p>Traditional LIGA makes 2D molds. Here the polymer molds are printed in full 3D, directly on 4-inch gold-coated wafers, then filled by electroplating. The result is fully metallic, watch-scale parts with low roughness.</p></div>
+  <div class="grid g21">
+    <figure><button class="shot print" data-full="img/wafer.webp" data-cap="3D-printed polymer molds on a wafer."><video data-src="video/wafer.mp4" poster="video/wafer.webp" muted loop playsinline width="960" height="720" aria-label="Zoom into rows of printed molds on a wafer lit in amber"></video></button><figcaption>A full wafer of printed molds, under the printer's amber light.</figcaption></figure>
+    <div class="toy"><h4>Drag to plate the part</h4>
+      <svg id="liga-svg" viewBox="0 0 600 340" role="img" aria-label="Cross-section of a mold filling with metal, being levelled, and the part lifting out"></svg>
+      <label class="lab">plate <input type="range" id="ligaR" min="0" max="100" value="0" aria-label="Process progress"><output id="ligaO">start</output></label>
+      <p class="fine">Schematic of the process, not to scale.</p>
+    </div>
+  </div>
+</article>
+
+<article class="wrap proj" id="elam" data-name="E-LAM" data-mat="metal shell on polymer" data-proc="lithography + electroforming" data-scale="4 mm">
+  <div class="ph"><div class="tag mono">03 · micromechanics, RF</div><h3>E-LAM</h3>
+    <p>Lithography-based electroforming: print a high-resolution polymer template, deposit metal over it, and optionally remove the polymer. What stays can be a metal part thin enough to be a shell, with a very clean surface.</p></div>
+  <div class="grid g12">
+    <figure><button class="shot print" data-full="img/turbine.webp" data-cap="Electroformed part made with E-LAM, held in tweezers. 4 mm across."><video data-src="video/turbine.mp4" poster="video/turbine.webp" muted loop playsinline width="960" height="720" aria-label="Zoom into a 4 millimetre electroformed metal part held by tweezers"></video></button><figcaption>4 mm across, in tweezers. Open it to see the print lines.</figcaption></figure>
+    <div class="toy" id="elamT"><h4>Follow the gear</h4><svg viewBox="0 0 320 300" role="img" aria-label="A gear going from resin block to a metal shell"></svg><div class="steps"></div><p class="fine" data-note></p></div>
+  </div>
+</article>
+
+<article class="wrap proj" id="alumina" data-name="Alumina by SLA" data-mat="alumina" data-proc="ceramic SLA · BMF S240" data-scale="pencil lead">
+  <div class="ph"><div class="tag mono">04 · ceramic</div><h3>Alumina you can lose on your desk</h3>
+    <p>Ceramic stereolithography on the BMF S240. High-resolution ceramic microfabrication stays hard because of material limits and the difficulty of debinding and sintering. This route gives dense, high-precision parts.</p></div>
+  <figure><button class="shot print" data-full="img/alumina_macro.webp" data-cap="Alumina part fabricated by SLA-based ceramic printing."><video data-src="video/pencil.mp4" poster="video/pencil.webp" muted loop playsinline width="1280" height="720" aria-label="Zoom from a pencil tip next to the tiny alumina hands, into the holes of the lattice sphere"></video></button><figcaption>Next to a pencil lead, then into the lattice. Click for the still.</figcaption></figure>
+</article>
+
+<article class="wrap proj" id="lmm" data-name="LMM" data-mat="316L · Ti64" data-proc="lithography-based metal mfg · Incus Hammer Lab35" data-scale="10 mm">
+  <div class="ph"><div class="tag mono">05 · metal</div><h3>Metal from a resin printer</h3>
+    <p>Lithography-based metal manufacturing in 316L stainless and Ti64 titanium, on the Incus Hammer Lab35. The work is in the steps after printing: cleaning, debinding and sintering. Titanium needs especially tight control during heat treatment. The workflows hold dimensions, minimise defects and reach high density.</p></div>
+  <div class="grid g12" style="margin-bottom:12px">
+    <figure><button class="shot print white" data-full="img/watch.webp" data-cap="Printed metal watch cases with lattice bezels. Scale bar 10 mm."><video data-src="video/watch.mp4" poster="video/watch.webp" muted loop playsinline width="1024" height="576" aria-label="Moving across the lattice bezels of two printed metal watch cases"></video></button><figcaption>Watch cases with lattice bezels.</figcaption></figure>
+    <div class="toy" id="lmmT"><h4>55 % metal powder, by volume</h4><svg viewBox="0 0 320 300" role="img" aria-label="Powder in resin becoming a dense sintered gear"></svg><div class="steps"></div><p class="fine" data-note></p></div>
+  </div>
+  <div class="grid g3">
+    <figure><button class="shot print white loupe" data-full="img/stud.webp" data-cap="316L / Ti64 microcomponent. Scale bar 5 mm."><img loading="lazy" src="img/stud.webp" width="307" height="316" alt="Stepped metal pin on a round base, scale bar 5 mm"></button></figure>
+    <figure><button class="shot print white loupe" data-full="img/blobs.webp" data-cap="316L / Ti64 microcomponents. Scale bar 10 mm."><img loading="lazy" src="img/blobs.webp" width="530" height="316" alt="Organic metal shapes with small channels, scale bar 10 mm"></button></figure>
+    <figure style="grid-column:span 1"><button class="shot print white loupe" data-full="img/cad_vs_lmm.webp" data-cap="Dimensional fidelity: the measured profile of an RF septum (orange) lies on the CAD (blue). Scale bar 5 mm."><img loading="lazy" src="img/cad_vs_lmm.webp" width="987" height="427" alt="Plot of CAD and printed profiles lying on top of each other, next to a 3D scan of an RF septum"></button><figcaption>Measured against CAD: the RF septum's steps overlap.</figcaption></figure>
+  </div>
+</article>
+
+<!-- ============ EPFL ============ -->
+<section class="ch" id="epfl-ch"><div class="wrap">
+  <div class="mono">EPFL · MSc Microengineering, 2021</div>
+  <h2>Implants, molds, crystals</h2>
+  <p>Master's thesis and research projects, two of them published.</p>
+</div></section>
+
+<article class="wrap proj" id="implant" data-name="Bioresorbable sensor" data-mat="PGS · PoMaC" data-proc="additive manufacturing" data-scale="11 mm">
+  <div class="ph"><div class="tag mono">06 · master's thesis</div><h3>A pressure sensor that disappears</h3>
+    <p>Neurosurgery sees 13.8 million cases a year, and brain swelling can turn severe fast. David designed, built and tested a wireless intracranial pressure sensor made only of bioresorbable materials, using additive manufacturing. It could be implanted temporarily and would not need to be taken out. He compared laminated PGS, laminated PoMaC and cast PoMaC dielectrics, and measured capacitance against force and hysteresis.</p></div>
+  <div class="grid g2">
+    <div class="toy"><h4>Drag to resorb</h4>
+      <canvas id="dissolve" width="504" height="376" style="width:100%;height:auto;background:#000" aria-label="Photo of the printed coils, dissolving as the slider moves"></canvas>
+      <label class="lab">time <input type="range" id="disR" min="0" max="100" value="0" aria-label="Dissolve"><output id="disO">day 0</output></label>
+      <p class="fine">A cartoon of the idea on a real photo, not degradation data. The days are not real either.</p>
+    </div>
+    <div class="grid g2" style="align-content:start">
+      <figure><button class="shot print" data-full="img/wired.webp" data-cap="Wired bioresorbable pressure sensor on its flexible PET substrate. 10 mm."><img loading="lazy" src="img/wired.webp" width="365" height="344" alt="Wired sensor"></button><figcaption>Wired, on PET</figcaption></figure>
+      <figure><button class="shot print" data-full="img/coils_kapton.webp" data-cap="Two wireless sensor designs printed on Kapton. 11 mm."><img loading="lazy" src="img/coils_kapton.webp" width="368" height="391" alt="Silver coils on Kapton"></button><figcaption>Coils on Kapton</figcaption></figure>
+      <figure><button class="shot print" data-full="img/fold_a.webp" data-cap="Folded wireless sensor on Kapton, round design. 11 mm."><img loading="lazy" src="img/fold_a.webp" width="406" height="332" alt="Folded round coil"></button><figcaption>Folded, round</figcaption></figure>
+      <figure><button class="shot print" data-full="img/fold_b.webp" data-cap="Folded wireless sensor on Kapton, square design. 11 mm."><img loading="lazy" src="img/fold_b.webp" width="406" height="361" alt="Folded square coil"></button><figcaption>Folded, square</figcaption></figure>
+      <figure><button class="shot print" data-full="img/coils_pomac.webp" data-cap="Two wireless sensor designs printed on PoMaC. 11 mm."><img loading="lazy" src="img/coils_pomac.webp" width="504" height="376" alt="Coils on PoMaC"></button><figcaption>Coils on PoMaC</figcaption></figure>
+      <figure><button class="shot print" data-full="img/fold_pomac.webp" data-cap="Folded sensors on PoMaC. 11 mm."><img loading="lazy" src="img/fold_pomac.webp" width="376" height="355" alt="Folded coils on PoMaC"></button><figcaption>Folded on PoMaC</figcaption></figure>
+    </div>
+  </div>
+</article>
+
+<article class="wrap proj" id="molds" data-name="Silicon micromolds" data-mat="Si → SiCN ceramic" data-proc="KOH etching + PDC casting" data-scale="⟨111⟩ planes">
+  <div class="ph"><div class="tag mono">07 · published</div><h3>Molds for ceramics</h3>
+    <p>Polymer-derived ceramics are poured into a mold and pyrolysed into SiCN. David's part: designing, fabricating and characterising a new type of KOH-etched silicon micromold, on a short deadline. <a href="https://www.sciencedirect.com/science/article/pii/S0955221921009389" target="_blank" rel="noopener">Read the paper ↗</a></p></div>
+  <div class="grid g21">
+    <figure><button class="shot print" data-full="img/mold.webp" data-cap="KOH-etched silicon micromolds, with the sloped ⟨111⟩ planes visible."><img loading="lazy" src="img/mold.webp" width="432" height="376" alt="Two etched silicon molds with sloped walls"></button><figcaption>The ⟨111⟩ etch planes form the mold walls.</figcaption></figure>
+    <div class="toy" id="pdcT"><h4>Multiscale casting</h4><img id="pdcI" src="img/pdc1.webp" width="570" height="206" alt="Cross-section of the casting step" style="width:100%;height:auto;aspect-ratio:570/206;object-fit:contain;background:#fff"><div class="steps"></div><p class="fine" data-note></p></div>
+  </div>
+</article>
+
+<article class="wrap proj" id="crystal" data-name="Scintillating crystals" data-mat="LYSO · BGO" data-proc="coincidence measurement" data-scale="PET detector pixel">
+  <div class="ph"><div class="tag mono">08 · published · PET imaging</div><h3>Getting the light out</h3>
+    <p>PET scanners detect gamma rays through flashes of light in crystals such as LYSO and BGO. The high refractive index traps much of that light inside. The study tried Bragg reflectors, metal coatings and photonic crystal structures to get it out. David characterised the crystals, analysed the signals in MATLAB, and designed and built the coincidence setup used for the measurements. <a href="https://www.mdpi.com/2073-4352/11/4/362" target="_blank" rel="noopener">Read the paper ↗</a></p></div>
+  <div class="grid g12">
+    <div class="toy"><h4>Click inside the crystal</h4>
+      <canvas id="ray" width="760" height="460" style="width:100%;height:auto;cursor:crosshair;background:#000" aria-label="Simulation: light rays bouncing inside a crystal, some leaving through the bottom face"></canvas>
+      <div class="steps" id="rayB"><button data-n="2.15" class="on">BGO · n 2.15</button><button data-n="1.82">LYSO · n 1.82</button><button data-p="0" class="on" style="margin-left:auto">bare face</button><button data-p="1">patterned face</button></div>
+      <p class="fine">A 2-D ray toy to show the trapping, not the measurement. <span id="rayS" class="mono"></span></p>
+    </div>
+    <div style="display:grid;gap:12px;align-content:start">
+      <div class="toy"><span class="big-num">+41 %</span>light output, at best</div>
+      <div class="toy"><span class="big-num">+21 %</span>energy resolution</div>
+      <p class="fine">Both for BGO crystals, from the published study.</p>
+    </div>
+  </div>
+</article>
+
+<!-- ============ Built ============ -->
+<section class="ch" id="built-ch"><div class="wrap">
+  <div class="mono">Design, electronics, cleanroom, mechanisms</div>
+  <h2>And the rest of the bench</h2>
+  <p>Foot to telescope: four engineering projects at different scales.</p>
+</div></section>
+
+<article class="wrap proj" id="foot" data-name="Happy Feet" data-mat="PDMS · silver nanowire" data-proc="stencil printing + spin coating" data-scale="a foot">
+  <div class="ph"><div class="tag mono">09 · wearable</div><h3>Happy Feet</h3>
+    <p>A sock for people with flat feet, worn inside the shoe. An array of PDMS capacitive sensors reads the pressure under the foot, and inflatable cushions counteract the collapse of the arch. The air needs no pump: a chamber at the heel is compressed by the wearer's own weight at each step, and valves decide where the air goes.</p></div>
+  <div class="grid g2" style="margin-bottom:12px">
+    <figure><button class="shot print neg" data-full="img/foot_sketch.webp" data-cap="Schematic of the sock design."><img class="neg" loading="lazy" src="img/foot_sketch.webp" width="1109" height="680" alt="Exploded drawing of the sock layers around a foot: sensors, actuators, fillers, protective layers, battery, process unit, antenna"></button></figure>
+    <div class="toy"><h4>Walk on it</h4>
+      <div style="position:relative;background:#fff"><img src="img/foot_3d.webp" loading="lazy" width="1174" height="240" alt="Actuator layer: cushions connected by tubes to a heel chamber" style="width:100%;height:auto">
+        <svg id="footS" viewBox="0 0 1174 240" style="position:absolute;inset:0" aria-hidden="true"></svg></div>
+      <div style="margin-top:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button class="btn big" id="footB">Take a step</button><span class="mono" id="footO" style="color:var(--dim)">steps: 0</span></div>
+      <p class="fine">Heel chamber on the right, cushions on the left. The animation is on the actual actuator design.</p>
+      <figure style="margin-top:14px"><button class="shot print neg" data-full="img/foot_blocks.webp" data-cap="Block diagram of the Happy Feet device: power supply, control unit, sensor array, integrator, valves and actuators."><img class="neg" loading="lazy" src="img/foot_blocks.webp" width="1055" height="500" alt="Block diagram of the electronics"></button></figure>
+    </div>
+  </div>
+  <div class="toy" id="stackT"><h4>Building one pressure sensor</h4><svg viewBox="0 0 700 260" role="img" aria-label="Layer stack of the capacitive pressure sensor"></svg><div class="steps"></div></div>
+</article>
+
+<article class="wrap proj" id="mems" data-name="Bimorph micro-actuators" data-mat="SiO₂ · Cr" data-proc="photolithography · KOH release" data-scale="20 µm">
+  <div class="ph"><div class="tag mono">10 · cleanroom</div><h3>Beams that bend when heated</h3>
+    <p>SiO₂ cantilevers with a chromium track. Joule heating makes the two layers expand differently, so the beam bends. David simulated the KOH etch to guarantee full release, ran the lithography and wet etch, and characterised them with four-point resistance measurements and resonance sweeps.</p></div>
+  <div class="grid g2" style="margin-bottom:12px">
+    <div class="toy"><h4>Change the objective</h4>
+      <div class="scope" id="scope" role="img" aria-label="Micrographs of the wafer at four magnifications">
+        <img src="img/mag5.webp" loading="lazy" alt="" class="on"><img src="img/mag20.webp" loading="lazy" alt=""><img src="img/mag50.webp" loading="lazy" alt=""><img src="img/mag100.webp" loading="lazy" alt=""><div class="ring" id="scopeR">5×</div>
+      </div>
+      <div class="turret" id="turret"><button class="on">5×</button><button>20×</button><button>50×</button><button>100×</button></div>
+      <p class="fine">Real micrographs of the wafer after resist stripping. Scale bars are in the images.</p>
+    </div>
+    <div class="toy"><h4>Drag to heat</h4>
+      <svg id="bim" viewBox="0 0 600 340" role="img" aria-label="Side view of a cantilever bending as the current rises"></svg>
+      <label class="lab">heat <input type="range" id="bimR" min="0" max="100" value="0" aria-label="Current"><output id="bimO">0 %</output></label>
+      <p class="fine">Cartoon: Cr expands more than SiO₂. Bending is exaggerated.</p>
+    </div>
+  </div>
+  <div class="grid g3">
+    <figure><button class="shot print" data-full="img/defect_b.webp" data-cap="Defects seen under the binocular."><img loading="lazy" src="img/defect_b.webp" width="370" height="277" alt="Bent released structure under a binocular"></button></figure>
+    <figure><button class="shot print" data-full="img/defect_e.webp" data-cap="Defects seen under the binocular."><img loading="lazy" src="img/defect_e.webp" width="370" height="277" alt="Crumpled membrane under a binocular"></button></figure>
+    <figure><button class="shot print" data-full="img/defect_c.webp" data-cap="Defects seen under the binocular."><img loading="lazy" src="img/defect_c.webp" width="371" height="276" alt="Close view of a broken structure"></button></figure>
+  </div>
+  <p class="fine">The failures are part of the record. Defects under the binocular.</p>
+</article>
+
+<article class="wrap proj" id="remote" data-name="IR remote control" data-mat="discrete analog" data-proc="TLC3701 · LD271 · BP104" data-scale="10 ms frame">
+  <div class="ph"><div class="tag mono">11 · electronics</div><h3>A remote that ignores the sun</h3>
+    <p>Press a button, toggle a relay, in infrared. It has to ignore daylight and lamps, and several identical units must share a room, so each press sends a signature: bursts of seven 1 ms pulses at 10 % duty and 1 A peak, in 10 ms frames. Two AAA batteries run it, and it sleeps about 99 % of the time.</p></div>
+  <div class="grid g12" style="margin-bottom:12px">
+    <div class="toy"><h4>Press it, then add light</h4>
+      <svg id="ir" viewBox="0 0 640 300" role="img" aria-label="Three signal traces: emitter drive, photodiode, and receiver output"></svg>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:8px"><button class="btn big" id="irB">Press</button><label class="lab" style="flex:1;min-width:190px;margin:0">ambient <input type="range" id="irA" min="0" max="100" value="35" aria-label="Ambient light"></label><span class="mono" id="irL">relay OFF</span></div>
+      <p class="fine">Pulse timing from the design. Ambient light and noise are drawn for illustration; the filters only pass the signature.</p>
+    </div>
+    <figure><button class="shot print" data-full="img/breadboard.webp" data-cap="The remote control circuit on the breadboard."><img loading="lazy" src="img/breadboard.webp" width="928" height="646" alt="Breadboard covered in coloured wires and op-amps"></button><figcaption>The prototype, all discrete parts.</figcaption></figure>
+  </div>
+  <div class="grid g2">
+    <figure><button class="shot print neg" data-full="img/emitter.webp" data-cap="Emitter: two astable comparators and an N-MOS driving the LD271 IR diode."><img class="neg" loading="lazy" src="img/emitter.webp" width="958" height="373" alt="Emitter schematic"></button><figcaption>Emitter: two astable comparator stages and an N-MOS driving the diode.</figcaption></figure>
+    <figure><button class="shot print neg" data-full="img/receiver.webp" data-cap="Receiver: BP104 photodiode, transimpedance stage, band-pass filter, gain, then comparator-based shaping that drives the relay."><img class="neg" loading="lazy" src="img/receiver.webp" width="976" height="252" alt="Receiver schematic"></button><figcaption>Receiver: photodiode, transimpedance, band-pass, gain and shaping.</figcaption></figure>
+  </div>
+</article>
+
+<article class="wrap proj" id="sofia" data-name="SOFIA mirror mechanism" data-mat="flexures" data-proc="kinematic + dynamic design" data-scale="400 mm">
+  <div class="ph"><div class="tag mono">12 · mechanism design</div><h3>Pointing a telescope mirror without friction</h3>
+    <p>A dynamically balanced two-axis mechanism for the secondary mirror of the SOFIA telescope. Anything that slides or rolls sheds particles onto the optics, so every joint is a flexure. After comparing concepts, the team refined an "Improved Cardan" design for its compact compensation, constant rotational inertia and simplicity.</p></div>
+  <div class="grid g12">
+    <figure><button class="shot tilt" id="tiltF" data-full="img/sofia.webp" data-cap="CAD of the dynamically balanced two-DOF mechanism for SOFIA's secondary mirror." style="cursor:zoom-in"><img class="neg" id="tiltI" loading="lazy" src="img/sofia.webp" width="1875" height="695" alt="Wireframe CAD of the flexure mechanism"></button><figcaption>The CAD follows the pad, with tilt exaggerated 6× so you can see it.</figcaption></figure>
+    <div class="toy"><h4>Drag the mirror</h4>
+      <div class="pad" id="pad" role="img" aria-label="Tilt pad"><i id="padI"></i></div>
+      <p class="mono" style="text-align:center;margin:10px 0 0" id="padO">tilt 0.0° · azimuth 0°</p>
+      <ul class="chips"><li><b>±2°</b> tilt</li><li><b>360°</b> orientation</li><li><b>400 × 200 mm</b> volume</li><li><b>±40 N</b> force</li><li><b>±4 mm</b> stroke</li></ul>
+    </div>
+  </div>
+</article>
+
+<!-- ============ About ============ -->
+<section class="ch" id="about" data-name="David" data-mat="people" data-proc="CV" data-scale="1 human"><div class="wrap">
+  <div class="mono">Outside the printer</div>
+  <h2>Also runs the bar</h2>
+  <p>He builds the test benches and writes the technology assessments. He also supervises students, gives the lab tours and represents his group at events. Before all that, he taught skiing and rigged stages.</p>
+  <ul class="chips" style="margin-top:20px">
+    <li>custom test benches, e.g. <b>microneedle penetration</b></li>
+    <li><b>AM vs MIM</b> technology assessment</li>
+    <li>supervises <b>2 students</b></li>
+    <li>lab infrastructure and safety upgrade</li>
+    <li><b>9</b> innovation events: SAMCE, Trends in Micro/Nano, AMX Luzern, Formnext, EPHJ…</li>
+    <li>collaborations with EPFL labs and startups</li>
+  </ul>
+  <ol class="tl">
+    <li class="now"><span class="mono">2023 → now</span><h3>R&amp;D Engineer, CSEM</h3><p>Micro-SLA, LCM and LMM workflows for polymer, ceramic and metal. Neuchâtel.</p></li>
+    <li><span class="mono">2021 → now</span><h3>Bar Manager, Ephemeral Festival</h3><p>Volunteers, logistics, stock, on-site operations.</p></li>
+    <li><span class="mono">2021</span><h3>MSc Microengineering, EPFL</h3><p>Microfabrication, additive manufacturing, biomedical engineering, optics and sensors.</p></li>
+    <li><span class="mono">2019</span><h3>R&amp;D Intern, Otowa Electric</h3><p>Osaka. Miniaturising high-power electronics, in a fully Japanese R&amp;D environment.</p></li>
+    <li><span class="mono">2018</span><h3>BSc Microengineering, EPFL</h3></li>
+    <li><span class="mono">2015 – 2018</span><h3>Stage Technician, Paléo Festival</h3><p>Setup and logistics for large concerts.</p></li>
+    <li><span class="mono">2014 – 2022</span><h3>Ski Instructor, St-Luc</h3><p>Swiss Ski School. Children and adults.</p></li>
+  </ol>
+  <ul class="chips" style="margin-top:20px"><li>French, native</li><li>English, C1, studied in Australia</li><li>trail running</li><li>skiing</li><li>climbing</li><li>scuba diving</li><li>drawing</li><li>3D creative design</li></ul>
+</div></section>
+
+<section class="wrap bye">
+  <h2>David Di Stadio</h2>
+  <a class="cta" href="https://www.linkedin.com/in/david-di-stadio/" target="_blank" rel="noopener">Say hello on LinkedIn ↗</a>
+</section>
+
+<nav class="sem" aria-label="Project index">
+  <button id="semI" aria-expanded="false" aria-controls="index"><small>INDEX</small>≡ open</button>
+  <div class="grow"><small>PROJECT</small><span id="semN">David Di Stadio</span></div>
+  <div class="hide"><small>MATERIAL</small><span id="semM">polymer · metal · ceramic</span></div>
+  <div class="hide"><small>PROCESS</small><span id="semP">additive manufacturing</span></div>
+  <div class="sb"><span id="semS">3 parts</span><i></i></div>
+</nav>
+<div class="index" id="index"></div>
+<div class="lens" id="lens" aria-hidden="true"></div>
+<div class="box" id="box" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <span class="read mono" id="boxR">100 %</span>
+  <div class="ctl"><button id="boxM" aria-label="Zoom out">−</button><button id="boxP" aria-label="Zoom in">+</button><button id="boxX" aria-label="Close">×</button></div>
+  <img id="boxI" alt="" draggable="false"><div class="cap" id="boxC"></div>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x)),NS='http://www.w3.org/2000/svg';
+const inView=(el,fn,o={threshold:.25})=>{new IntersectionObserver(es=>es.forEach(e=>fn(e.isIntersecting,e.target)),o).observe(el)};
+
+/* ---------- hero: a camera moving over the master photo ---------- */
+(()=>{
+  const sec=$('#top'),stage=$('#stage'),cv=$('#heroC'),ctx=cv.getContext('2d'),title=$('#heroT'),hint=$('#hint'),hots=$$('.hot'),says=$$('.say');
+  const base=new Image();base.src='img/hero_base.webp';
+  const patches=[['hero_polymer',.215,.190,.545,.800],['hero_metal',.525,.495,.705,.810],['hero_ceramic',.712,.630,.830,.825]].map(([n,x0,y0,x1,y1])=>{const im=new Image();im.src=`img/${n}.webp`;return{im,x0,y0,x1,y1}});
+  const AR=7166/4558;
+  const R={ov:[.0,.0,1,1],pol:[.285,.215,.482,.505],met:[.565,.515,.675,.69],cer:[.728,.645,.815,.79]};
+  const KEY=[[0,'ov'],[.05,'ov'],[.22,'pol'],[.33,'pol'],[.47,'met'],[.58,'met'],[.71,'cer'],[.82,'cer'],[.97,'ov'],[1,'ov']];
+  let W=0,H=0,dpr=1,cur=0,target=0;
+  const view=k=>{ // image height in px and centre, fitting rect k inside the stage
+    const r=R[k],rw=(r[2]-r[0])*AR,rh=r[3]-r[1];
+    if(k==='ov'){const tall=W/H<1.15;return{s:tall?W/(.70*AR):Math.max(H,W/AR*.92),x:tall?.525:.5,y:tall?.48:.5}} // portrait: all three hands must fit
+    return{s:Math.min(W/rw,H/rh)*(W<H?.98:.86),x:(r[0]+r[2])/2,y:(r[1]+r[3])/2};
+  };
+  const cam=p=>{
+    let i=0;while(i<KEY.length-2&&p>KEY[i+1][0])i++;
+    const [p0,a]=KEY[i],[p1,b]=KEY[i+1],t0=clamp((p-p0)/(p1-p0),0,1),t=t0*t0*(3-2*t0),A=view(a),B=view(b);
+    return{s:A.s*Math.pow(B.s/A.s,t),x:A.x+(B.x-A.x)*t,y:A.y+(B.y-A.y)*t};
+  };
+  const resize=()=>{dpr=Math.min(devicePixelRatio||1,2);W=stage.clientWidth;H=stage.clientHeight;cv.width=W*dpr;cv.height=H*dpr;draw()};
+  const toScreen=(c,x,y)=>[W/2+(x-c.x)*c.s*AR,H/2+(y-c.y)*c.s];
+  function draw(){
+    const c=cam(cur);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);
+    const iw=c.s*AR,ih=c.s,ox=W/2-c.x*iw,oy=H/2-c.y*ih;
+    ctx.imageSmoothingQuality='high';
+    if(base.complete&&base.naturalWidth)ctx.drawImage(base,ox,oy,iw,ih);
+    if(c.s*dpr>4558*.42)patches.forEach(p=>{if(p.im.complete&&p.im.naturalWidth)ctx.drawImage(p.im,ox+p.x0*iw,oy+p.y0*ih,(p.x1-p.x0)*iw,(p.y1-p.y0)*ih)});
+    const fade=clamp(1-cur/.05,0,1);
+    title.style.opacity=fade;title.style.transform=`translateY(${-(1-fade)*30}px)`;title.style.pointerEvents=fade>.1?'':'none';
+    hint.style.opacity=fade;
+    const spots=[[.385,.815],[.62,.835],[.77,.84]];
+    hots.forEach((h,i)=>{const[x,y]=toScreen(c,...spots[i]);h.style.left=x+'px';h.style.top=y+'px';h.style.opacity=fade;h.style.pointerEvents=fade>.5?'':'none';h.style.visibility=fade?'':'hidden'});
+    says.forEach(s=>s.classList.toggle('on',cur>=+s.dataset.a&&cur<=+s.dataset.b));
+  }
+  const prog=()=>clamp((scrollY-sec.offsetTop)/(sec.offsetHeight-stage.offsetHeight),0,1);
+  function tick(){target=prog();const d=target-cur;if(Math.abs(d)>.0004){cur=calm?target:cur+d*.12;draw()}requestAnimationFrame(tick)}
+  addEventListener('resize',resize);[base,...patches.map(p=>p.im)].forEach(i=>i.addEventListener('load',draw));
+  hots.forEach(h=>h.addEventListener('click',()=>scrollTo({top:sec.offsetTop+(+h.dataset.go)*(sec.offsetHeight-stage.offsetHeight),behavior:calm?'auto':'smooth'})));
+  resize();tick();
+})();
+
+/* ---------- scale ladder ---------- */
+(()=>{
+  const S=[
+    {mm:400,img:'sofia',neg:1,t:'Telescope mirror mechanism',d:'The 400 × 200 mm volume the whole mechanism must fit in.',a:'#sofia'},
+    {mm:11,img:'coils_pomac',t:'Dissolvable sensor coil',d:'A wireless coil printed on bioresorbable PoMaC.',a:'#implant'},
+    {mm:4,img:'turbine',t:'Electroformed part',d:'Held in tweezers. Made by E-LAM.',a:'#elam'},
+    {mm:1.56,img:'needles',t:'Printed needle',d:'Height of one needle. The layer lines are visible.',a:'#microsla'},
+    {mm:.1,img:'channel',t:'Microfluidic channel',d:'One channel in a printed chip.',a:'#microsla'},
+    {mm:.01,img:'mag50',t:'Chromium track',d:'The scale bar in this micrograph of a bimorph actuator.',a:'#mems'}];
+  const top=Math.log10(400),bot=Math.log10(.01),pos=mm=>(top-Math.log10(mm))/(top-bot);
+  [[400,'400 mm'],[10,'10 mm'],[1,'1 mm'],[.1,'100 µm'],[.01,'10 µm']].forEach(([m,t])=>{const e=document.createElement('span');e.textContent=t;e.style.left=pos(m)*100+'%';$('#ladD2').append(e)});
+  const V=$('#ladV'),R=$('#ladR'),N=$('#ladN'),T=$('#ladT'),D=$('#ladD'),L=$('#ladL'),K=$('#ladTicks');
+  let touched=false;
+  const ims=S.map((s,i)=>{const m=new Image();m.src=`img/${s.img}.webp`;m.alt=s.t;m.loading='lazy';if(s.neg)m.className='neg';V.append(m);
+    const b=document.createElement('button');b.style.left=pos(s.mm)*100+'%';b.title=s.t;b.setAttribute('aria-label',`${s.t}, ${fmt(s.mm)}`);b.onclick=()=>{touched=true;glide(pos(s.mm)*1000)};K.append(b);return m});
+  function fmt(mm){return mm>=1?`${mm>=10?Math.round(mm):mm.toFixed(mm<2?2:1)} mm`:`${Math.round(mm*1000)} µm`}
+  function set(v){
+    const p=v/1000,mm=Math.pow(10,top-p*(top-bot));N.textContent=fmt(mm);
+    let best=0,bd=9;S.forEach((s,i)=>{const d=Math.abs(pos(s.mm)-p);if(d<bd){bd=d;best=i}});
+    ims.forEach((m,i)=>{const c=(i===best?'on':i<best?'past':'')+(S[i].neg?' neg':'');m.className=c});
+    const s=S[best];T.textContent=s.t;D.textContent=s.d;L.href=s.a;
+  }
+  let raf;function glide(to){cancelAnimationFrame(raf);const from=+R.value,t0=performance.now(),dur=calm?1:600;(function f(t){const k=clamp((t-t0)/dur,0,1),e=k*k*(3-2*k);R.value=from+(to-from)*e;set(+R.value);if(k<1)raf=requestAnimationFrame(f)})(t0)}
+  R.addEventListener('input',()=>{touched=true;cancelAnimationFrame(raf);set(+R.value)});
+  // once, on arrival, sweep through the whole range
+  let swept=false;inView($('#ladder'),on=>{if(!on||swept||touched||calm)return;swept=true;const t0=performance.now(),dur=7000;(function f(t){if(touched)return;const k=clamp((t-t0)/dur,0,1);R.value=k*k*(3-2*k)*1000;set(+R.value);if(k<1)raf=requestAnimationFrame(f)})(t0)},{threshold:.5});
+  set(0);
+})();
+
+/* ---------- media: reveal, autoplay in view, loupe ---------- */
+(()=>{
+  if(!calm)$$('.print').forEach(el=>{el.classList.add('armed');inView(el,(on,t)=>{if(on)t.classList.add('in')},{threshold:.12})});
+  $$('video').forEach(v=>{
+    if(calm){return}
+    inView(v.closest('.shot')||v,on=>{if(on){if(!v.src)v.src=v.dataset.src;v.play().catch(()=>{})}else if(v.src)v.pause()},{threshold:.2});
+  });
+  const L=$('#lens');
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches)$$('.loupe').forEach(b=>{
+    const im=$('img',b),Z=2.6;
+    b.addEventListener('pointerenter',()=>{L.style.backgroundImage=`url(${im.src})`;L.classList.add('on')});
+    b.addEventListener('pointerleave',()=>L.classList.remove('on'));
+    b.addEventListener('pointermove',e=>{const r=im.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      L.style.left=e.clientX+'px';L.style.top=e.clientY+'px';L.style.backgroundSize=`${r.width*Z}px ${r.height*Z}px`;L.style.backgroundPosition=`${105-x*Z}px ${105-y*Z}px`});
+  });
+})();
+
+/* ---------- viewer: click any picture, wheel/pinch to zoom, drag to pan ---------- */
+(()=>{
+  const B=$('#box'),I=$('#boxI'),C=$('#boxC'),Rd=$('#boxR');let s=1,x=0,y=0,fit=1,last=null;const pts=new Map();let pd=0;
+  const apply=()=>{I.style.transform=`translate(${x}px,${y}px) scale(${s})`;Rd.textContent=Math.round(s/fit*100)+' %'};
+  const zoomAt=(f,cx,cy)=>{const ns=clamp(s*f,fit*.8,fit*12);f=ns/s;x=cx-(cx-x)*f;y=cy-(cy-y)*f;s=ns;apply()};
+  const reset=()=>{const w=innerWidth,h=innerHeight-70;fit=Math.min(w/I.naturalWidth,h/I.naturalHeight)*.96;s=fit;x=-I.naturalWidth*s/2;y=-I.naturalHeight*s/2-20;apply()};
+  let back=null;
+  const open=(src,cap,neg,from)=>{back=from;I.onload=reset;I.src=src;I.className=neg?'neg':'';C.textContent=cap||'';B.classList.add('on');document.body.style.overflow='hidden';$('#boxX').focus()};
+  const close=()=>{B.classList.remove('on');document.body.style.overflow='';I.removeAttribute('src');back&&back.focus()};
+  document.addEventListener('click',e=>{const b=e.target.closest('.shot');if(b&&b.dataset.full)open(b.dataset.full,b.dataset.cap,!!b.querySelector('.neg'),b)});
+  $('#scope').addEventListener('click',()=>{const m=$('#scope img.on');open(m.src,'Wafer after resist stripping, '+$('#scopeR').textContent,false,$('#scope'))});
+  $('#boxX').onclick=close;$('#boxP').onclick=()=>zoomAt(1.5,0,0);$('#boxM').onclick=()=>zoomAt(1/1.5,0,0);
+  addEventListener('keydown',e=>{if(!B.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='+'||e.key==='=')zoomAt(1.3,0,0);if(e.key==='-')zoomAt(1/1.3,0,0)});
+  B.addEventListener('wheel',e=>{e.preventDefault();zoomAt(Math.exp(-e.deltaY*.0016),e.clientX-innerWidth/2,e.clientY-innerHeight/2)},{passive:false});
+  B.addEventListener('pointerdown',e=>{if(e.target.closest('.ctl'))return;if(e.target===B){close();return}B.setPointerCapture(e.pointerId);pts.set(e.pointerId,e);last=e;pd=0});
+  B.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,e);
+    if(pts.size===2){const[a,b]=[...pts.values()],d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(pd)zoomAt(d/pd,(a.clientX+b.clientX)/2-innerWidth/2,(a.clientY+b.clientY)/2-innerHeight/2);pd=d}
+    else if(last){x+=e.clientX-last.clientX;y+=e.clientY-last.clientY;last=e;apply()}});
+  const up=e=>{pts.delete(e.pointerId);pd=0;last=pts.size?[...pts.values()][0]:null};B.addEventListener('pointerup',up);B.addEventListener('pointercancel',up);
+  B.addEventListener('dblclick',e=>{if(!e.target.closest('.ctl'))zoomAt(2,e.clientX-innerWidth/2,e.clientY-innerHeight/2)});
+})();
+
+/* ---------- SEM bar + index ---------- */
+(()=>{
+  const secs=$$('[data-name]'),idx=$('#index'),btn=$('#semI');
+  secs.forEach(s=>{if(!s.id)return;const a=document.createElement('a');a.href='#'+s.id;a.innerHTML=`<b style="font-weight:500"></b><span></span>`;a.firstChild.textContent=s.dataset.name;a.lastChild.textContent=s.dataset.scale;idx.append(a)});
+  const tog=on=>{idx.classList.toggle('on',on);btn.setAttribute('aria-expanded',on);btn.lastChild.textContent=on?'× close':'≡ open'};
+  btn.onclick=()=>tog(!idx.classList.contains('on'));idx.addEventListener('click',()=>tog(false));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const d=e.target.dataset;$('#semN').textContent=d.name;$('#semM').textContent=d.mat;$('#semP').textContent=d.proc;$('#semS').textContent=d.scale}),{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>io.observe(s));
+})();
+
+/* ---------- stepper shared by the process toys ---------- */
+function stepper(root,labels,notes,show){
+  const box=$('.steps',root),note=$('[data-note]',root);let i=0,touched=false,timer;
+  const go=k=>{i=k;$$('button',box).forEach((b,j)=>b.classList.toggle('on',j===k));if(note)note.textContent=notes[k]||'';show(k)};
+  labels.forEach((l,k)=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{touched=true;clearInterval(timer);go(k)};box.append(b)});
+  go(0);
+  if(!calm)inView(root,on=>{clearInterval(timer);if(on&&!touched)timer=setInterval(()=>go((i+1)%labels.length),2300)},{threshold:.5});
+}
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);p&&p.append(e);return e};
+
+/* ---------- gears ---------- */
+function gearPts(cx,cy,R,teeth=8){const r=R*.76,o=[];for(let i=0;i<teeth;i++){const a=i/teeth*2*Math.PI-Math.PI/2,w=Math.PI/teeth;
+  [[r,-.62],[R,-.34],[R,.34],[r,.62]].forEach(([q,t])=>o.push([cx+q*Math.cos(a+t*w),cy+q*Math.sin(a+t*w)]))}return o}
+const gearD=(cx,cy,R,h)=>'M'+gearPts(cx,cy,R).map(p=>p.map(v=>v.toFixed(1)).join(' ')).join('L')+`Z M${cx+h} ${cy}A${h} ${h} 0 1 0 ${cx-h} ${cy}A${h} ${h} 0 1 0 ${cx+h} ${cy}Z`;
+
+(()=>{ // E-LAM: resin, template, coated, shell
+  const root=$('#elamT'),s=$('svg',root),cx=160,cy=150;
+  const css=e=>e.style.transition='all .7s ease';
+  const sq=el('rect',{x:60,y:50,width:200,height:200,fill:'#3d9be0'},s),g=el('path',{d:gearD(cx,cy,118,38),'fill-rule':'evenodd',fill:'#3d9be0',stroke:'#c9ccd1','stroke-width':0},s);
+  [sq,g].forEach(css);
+  stepper(root,['Polymer resin','Polymer template','Metal coated','Metal shell'],
+    ['Liquid photopolymer before printing.','Lithography cures the template.','Electrodeposition grows metal over the surface.','Debinding, optional, removes the polymer. The shell is what remains.'],
+    k=>{sq.style.opacity=k===0?1:0;g.style.opacity=k===0?0:1;g.setAttribute('stroke-width',k>=2?10:0);g.style.fill=k===3?'transparent':'#3d9be0'});
+})();
+
+(()=>{ // LMM: powder in resin
+  const root=$('#lmmT'),s=$('svg',root),cx=160,cy=150;let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+  const sq=el('rect',{x:45,y:35,width:230,height:230,fill:'#3d9be0'},s),g=el('path',{d:gearD(cx,cy,122,36),'fill-rule':'evenodd',fill:'#3d9be0',stroke:'#c9ccd1','stroke-width':0},s);
+  const dust=el('g',{},s),solid=el('path',{d:gearD(cx,cy,122,36),'fill-rule':'evenodd',fill:'#b6bcc4'},s);
+  solid.style.transformOrigin=`${cx}px ${cy}px`;[sq,g,solid].forEach(e=>e.style.transition='all .8s ease');
+  const inGear=(x,y)=>{const d=Math.hypot(x-cx,y-cy);return d>46&&d<104};
+  const P=[];for(let t=0;t<1600&&P.length<70;t++){const x=52+rnd()*216,y=42+rnd()*216,r=8+rnd()*5;if(P.every(q=>Math.hypot(q.x-x,q.y-y)>q.r+r-2)&&(inGear(x,y)||P.filter(q=>!q.keep).length<24)){P.push({x,y,r,keep:inGear(x,y)})}}
+  P.forEach(p=>{p.e=el('circle',{cx:p.x,cy:p.y,r:p.r,fill:'#9aa0a8',stroke:'#14161a','stroke-width':1.5},dust);p.e.style.transition='opacity .6s'});
+  dust.style.transformOrigin=`${cx}px ${cy}px`;dust.style.transition='all .8s ease';
+  stepper(root,['Resin + powder','Green body','Brown body','Final part'],
+    ['Metal powder, 55 % by volume, in a photosensitive resin.','Lithography prints the shape. Resin holds the powder together.','Debinding burns the resin away. Only powder is left.','Sintering fuses the powder. The part densifies and shrinks.'],
+    k=>{sq.style.opacity=k===0?1:0;g.style.opacity=k===1?1:0;g.setAttribute('stroke-width',k===2?1.5:0);if(k===2){g.style.opacity=1;g.style.fill='transparent'}else g.style.fill='#3d9be0';
+      P.forEach(p=>p.e.style.opacity=(k===3||(k>0&&!p.keep))?0:1);
+      solid.style.opacity=k===3?1:0;solid.style.transform=`scale(${k===3?.82:1})`});
+})();
+
+/* ---------- 3D-LIGA plating ---------- */
+(()=>{
+  const s=$('#liga-svg'),r=$('#ligaR'),o=$('#ligaO'),Y=290,cut=[[210,Y],[210,Y-50],[150,Y-50],[150,Y-110],[70,Y-110]];
+  const cav=[[285,Y],[285,Y-55],[230,Y-55],[230,Y-115],[150,Y-115],[150,Y-175],[450,Y-175],[450,Y-115],[370,Y-115],[370,Y-55],[315,Y-55],[315,Y]];
+  const d=a=>'M'+a.map(p=>p.join(' ')).join('L')+'Z';
+  const defs=el('defs',{},s),cp=el('clipPath',{id:'lc'},defs),cr=el('rect',{x:0,y:0,width:600,height:0},cp);
+  el('rect',{x:40,y:Y,width:520,height:28,fill:'#caa24a'},s);
+  const moldL=el('path',{d:d([[80,Y],[285,Y],[285,Y-55],[230,Y-55],[230,Y-115],[150,Y-115],[150,Y-175],[80,Y-175]]),fill:'#6e7482'},s),moldR=el('path',{d:d([[520,Y],[315,Y],[315,Y-55],[370,Y-55],[370,Y-115],[450,Y-115],[450,Y-175],[520,Y-175]]),fill:'#6e7482'},s);
+  const part=el('g',{},s),fill=el('path',{d:d(cav),fill:'#f4a9a0','clip-path':'url(#lc)'},part),dome=el('path',{d:`M60 ${Y-175}Q300 ${Y-260} 540 ${Y-175}Z`,fill:'#f4a9a0'},s);
+  const lab=el('text',{x:300,y:26,'text-anchor':'middle','font-size':16},s),wl=el('text',{x:48,y:Y+20},s);wl.textContent='gold-coated wafer';wl.style.fill='#1a1405';
+  const mt=el('text',{x:90,y:Y-16},s);mt.textContent='printed mold';
+  function set(v){const p=v/100;
+    const plate=clamp(p/.62,0,1),h=plate*175;cr.setAttribute('y',Y-h);cr.setAttribute('height',h+1);
+    const over=clamp((p-.42)/.2,0,1),lev=clamp((p-.64)/.12,0,1),ret=clamp((p-.8)/.2,0,1);
+    dome.style.opacity=over*(1-lev);dome.setAttribute('transform',`translate(${lev*420} 0)`);
+    part.setAttribute('transform',`translate(0 ${-ret*70})`);
+    const t=p<.62?'Electroplating':p<.78?'Leveling':p<1?'Part retraction':'Done: solid metal part';lab.textContent=t;o.textContent=p===0?'start':t.split(':')[0].toLowerCase();
+  }
+  r.addEventListener('input',()=>set(+r.value));set(0);
+  let touched=false;r.addEventListener('pointerdown',()=>touched=true);
+  if(!calm){let run=false;inView(s,on=>{if(!on||run||touched)return;run=true;const t0=performance.now();(function f(t){if(touched)return;const k=clamp((t-t0)/6000,0,1);r.value=k*100;set(k*100);if(k<1)requestAnimationFrame(f)})(t0)},{threshold:.6})}
+})();
+
+/* ---------- PDC steps ---------- */
+stepper($('#pdcT'),['i · Print','ii · Pour','iii · Green body','iv · Pyrolysis'],
+  ['IP-S resin features are printed into the etched silicon mold through a 25× NA 0.8 objective.','Preceramic polymer (PCP) is poured into the mold.','It sets into a green body (GB) carrying the microstructure.','Pyrolysis turns it into the ceramic, and it shrinks as it goes.'],
+  k=>{$('#pdcI').src=`img/pdc${k+1}.webp`});
+
+/* ---------- dissolve ---------- */
+(()=>{
+  const c=$('#dissolve'),x=c.getContext('2d'),r=$('#disR'),o=$('#disO'),im=new Image();let src,noise;
+  const W=c.width,H=c.height;
+  im.onload=()=>{x.drawImage(im,0,0,W,H);src=x.getImageData(0,0,W,H);noise=new Float32Array(W*H);
+    const gv=[];let sd=11;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+    [[9,.5],[22,.3],[60,.2]].forEach(([n,a])=>{const g=[];for(let i=0;i<(n+1)*(n+1);i++)g.push(rnd());
+      for(let j=0;j<H;j++)for(let i=0;i<W;i++){const u=i/W*(n-1),v=j/H*(n-1),a0=u|0,b0=v|0,fu=u-a0,fv=v-b0,sm=t=>t*t*(3-2*t),su=sm(fu),sv=sm(fv),
+        A=g[b0*n+a0],B=g[b0*n+a0+1],C=g[(b0+1)*n+a0],D=g[(b0+1)*n+a0+1];noise[j*W+i]+=a*(A+(B-A)*su+(C-A)*sv+(A-B-C+D)*su*sv)}});
+    let lo=1e9,hi=-1e9;for(const v of noise){if(v<lo)lo=v;if(v>hi)hi=v}for(let i=0;i<noise.length;i++)noise[i]=(noise[i]-lo)/(hi-lo);draw(0)};
+  function draw(t){if(!src)return;const out=x.createImageData(W,H),d=out.data,s=src.data;
+    for(let i=0;i<W*H;i++){const n=noise[i],e=(n-t*1.14+.07)/.07,k=clamp(e,0,1),edge=e>0&&e<1?1-Math.abs(e-.5)*2:0;
+      d[i*4]=s[i*4]*k+edge*255;d[i*4+1]=s[i*4+1]*k+edge*182;d[i*4+2]=s[i*4+2]*k+edge*39;d[i*4+3]=255}
+    x.putImageData(out,0,0);o.textContent=t>=1?'gone':`"day" ${Math.round(t*90)}`}
+  r.addEventListener('input',()=>draw(r.value/100));im.src='img/coils_pomac.webp';
+})();
+
+/* ---------- crystal ray toy ---------- */
+(()=>{
+  const c=$('#ray'),x=c.getContext('2d'),W=c.width,H=c.height,B=$('#rayB'),S=$('#rayS');
+  const box={l:230,r:530,t:24,b:380},n2=1.5;let n=2.15,pat=false,rays=[],out=0,tot=0,running=false,seen=false;
+  const color=()=>n>2?'120,255,170':'130,190,255';
+  function frame(){
+    x.fillStyle='rgba(0,0,0,.14)';x.fillRect(0,0,W,H);
+    x.strokeStyle='#4a4f59';x.lineWidth=2;x.strokeRect(box.l,box.t,box.r-box.l,box.b-box.t);
+    x.fillStyle='rgba(255,182,39,.9)';x.fillRect(box.l-30,box.b+38,box.r-box.l+60,12);
+    x.fillStyle='#a2a39f';x.font='14px "JetBrains Mono",monospace';x.textAlign='left';x.fillText('detector',box.r+40,box.b+49);x.fillText(pat?'patterned':'bare',box.r+14,box.b+4);
+    x.lineWidth=1.6;
+    rays=rays.filter(r=>r.life>0);
+    for(const r of rays){
+      x.strokeStyle=`rgba(${r.c},${r.free?.95:.6})`;x.beginPath();x.moveTo(r.x,r.y);
+      for(let k=0;k<6;k++){r.x+=r.dx*3;r.y+=r.dy*3;
+        if(r.free){if(r.y>box.b+38)r.life=0;continue}
+        if(r.x<box.l){r.x=box.l;r.dx=-r.dx;r.life-=.1}if(r.x>box.r){r.x=box.r;r.dx=-r.dx;r.life-=.1}if(r.y<box.t){r.y=box.t;r.dy=-r.dy;r.life-=.1}
+        if(r.y>box.b){r.y=box.b;
+          const kx=n*r.dx;let esc=Math.abs(kx)<=n2,sx=kx;
+          if(!esc&&pat&&Math.random()<.14){sx=kx-Math.sign(kx)*1.0;esc=Math.abs(sx)<=n2}
+          if(esc){r.dx=sx/n2;r.dy=Math.sqrt(1-r.dx*r.dx);r.free=true;out++;r.c='255,214,120'}else{r.dy=-r.dy;r.life-=.1}
+        }
+        x.lineTo(r.x,r.y);if(r.life<=0)break;
+      }
+      x.stroke();
+    }
+    S.textContent=tot?`${out} of ${tot} rays reached the detector.`:'';
+    if(rays.length||running)requestAnimationFrame(frame);else running=false;
+    if(!rays.length)running=false;
+  }
+  function flash(px,py){const col=color();for(let i=0;i<70;i++){const a=(i+Math.random())/70*2*Math.PI;rays.push({x:px,y:py,dx:Math.cos(a),dy:Math.sin(a),life:1,c:col})}tot+=70;if(!running){running=true;requestAnimationFrame(frame)}
+    x.fillStyle='#fff';x.beginPath();x.arc(px,py,7,0,7);x.fill()}
+  c.addEventListener('click',e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width*W,py=(e.clientY-r.top)/r.height*H;
+    flash(clamp(px,box.l+4,box.r-4),clamp(py,box.t+4,box.b-4))});
+  $$('button',B).forEach(b=>b.addEventListener('click',()=>{
+    if(b.dataset.n){n=+b.dataset.n;$$('[data-n]',B).forEach(o=>o.classList.toggle('on',o===b))}else{pat=b.dataset.p==='1';$$('[data-p]',B).forEach(o=>o.classList.toggle('on',o===b))}
+    out=tot=0;rays=[];x.fillStyle='#000';x.fillRect(0,0,W,H);flash((box.l+box.r)/2,box.t+150)}));
+  x.fillStyle='#000';x.fillRect(0,0,W,H);
+  inView(c,on=>{if(on&&!seen){seen=true;flash((box.l+box.r)/2,box.t+150)}},{threshold:.5});
+  x.strokeStyle='#4a4f59';x.lineWidth=2;x.strokeRect(box.l,box.t,box.r-box.l,box.b-box.t);
+})();
+
+/* ---------- foot ---------- */
+(()=>{
+  const s=$('#footS'),btn=$('#footB'),o=$('#footO');let n=0;
+  // tube paths traced over the render, heel chamber at the right
+  const tubes=['M1054 110L780 118L651 122L600 90L32 97','M1054 110L780 118L651 122L600 130L83 136','M1054 110L780 118L651 122L613 174L332 219L121 209'].map(d=>{const p=el('path',{d,fill:'none',stroke:'none'},s);return p});
+  const glow=[[70,60],[150,50],[250,35],[350,35],[470,45],[120,105],[210,90],[330,95],[100,155],[190,145],[300,160],[120,190],[220,195],[320,185]].map(([cx,cy])=>{const c=el('circle',{cx,cy,r:0,fill:'#ffb627',opacity:.75},s);return c});
+  const heel=el('ellipse',{cx:1054,cy:110,rx:115,ry:66,fill:'none',stroke:'#ffb627','stroke-width':0},s);
+  const dots=[];tubes.forEach(p=>{for(let i=0;i<7;i++){const c=el('circle',{r:0,fill:'#ff5a1f'},s);dots.push({c,p,off:i*.045})}});
+  btn.onclick=()=>{n++;o.textContent='steps: '+n;const t0=performance.now();
+    (function f(t){const k=(t-t0)/1700;
+      heel.setAttribute('stroke-width',k<.25?clamp(k*40,0,8):clamp((.5-k)*32,0,8));heel.setAttribute('ry',66-clamp(k<.25?k*60:(.5-k)*60,0,14));
+      dots.forEach(d=>{const u=(k-d.off)/.62;if(u<0||u>1){d.c.setAttribute('r',0);return}const L=d.p.getTotalLength(),q=d.p.getPointAtLength(L*u*u*(3-2*u));d.c.setAttribute('cx',q.x);d.c.setAttribute('cy',q.y);d.c.setAttribute('r',8)});
+      glow.forEach((g,i)=>{const u=clamp((k-.5-i*.008)/.2,0,1),v=k>.85?clamp((1.1-k)/.25,0,1):1;g.setAttribute('r',u*v*26)});
+      if(k<1.12&&!calm)requestAnimationFrame(f);else{dots.forEach(d=>d.c.setAttribute('r',0));glow.forEach(g=>g.setAttribute('r',0));heel.setAttribute('stroke-width',0)}})(t0)};
+})();
+(()=>{ // sensor stack
+  const root=$('#stackT'),s=$('svg',root),L=[
+    {y:210,h:40,x:40,w:620,f:'#c7c9cc',t:'Silicon wafer',c:'#111',from:0},
+    {y:203,h:7,x:40,w:620,f:'#3d6ac0',from:0},
+    {y:168,h:35,x:40,w:620,f:'#f3b43a',t:'Polyimide',c:'#111',from:1},
+    {y:124,h:44,x:530,w:92,f:'#f5ec5a',from:2},{y:138,h:30,x:548,w:56,f:'#2e4f9c',from:2},
+    {y:138,h:30,x:230,w:200,f:'#74777d',t:'Silver nanowire ink',c:'#fff',from:3},
+    {y:70,h:98,x:40,w:620,f:'#5fb0e6',t:'PDMS',c:'#10222e',from:4,op:.93},
+    {y:40,h:30,x:230,w:200,f:'#74777d',t:'Silver nanowire ink',c:'#fff',from:5},
+    {y:5,h:35,x:40,w:620,f:'#f3b43a',t:'Polyimide',c:'#111',from:5}];
+  const R=L.map(l=>{const g=el('g',{},s);el('rect',{x:l.x,y:l.y,width:l.w,height:l.h,fill:l.f},g);if(l.t){const t=el('text',{x:l.x+l.w/2,y:l.y+l.h/2+5,'text-anchor':'middle'},g);t.textContent=l.t;t.style.fill=l.c}g.style.transition='opacity .45s,transform .45s';return g});
+  // PDMS sits below the CMOS block in the draw order, so raise that block last
+  s.append(R[3],R[4]);
+  stepper(root,['a · Spin-coat resin','b · Spin-coat polyimide','c · Lower electrode: CMOS microfabrication','d · Stencil-print silver nanowire','e · Spin-coat PDMS','f · Assemble top and bottom'],[],
+    k=>R.forEach((g,i)=>{const on=L[i].from<=k;g.style.opacity=on?(L[i].op||1):0;g.style.transform=on?'none':'translateY(-14px)'}));
+})();
+
+/* ---------- microscope turret ---------- */
+(()=>{
+  const ims=$$('#scope img'),bs=$$('#turret button'),spot=['82% 82%','40% 45%','50% 50%'],r=$('#scopeR');let cur=0;
+  ims.forEach((m,i)=>m.style.transformOrigin=spot[i]||'50% 50%');
+  const go=k=>{ims.forEach((m,i)=>{m.classList.toggle('on',i===k);m.classList.toggle('past',i<k)});bs.forEach((b,i)=>b.classList.toggle('on',i===k));r.textContent=bs[k].textContent;cur=k};
+  bs.forEach((b,i)=>b.onclick=()=>go(i));
+})();
+
+/* ---------- bimorph ---------- */
+(()=>{
+  const s=$('#bim'),r=$('#bimR'),o=$('#bimO');
+  el('rect',{x:20,y:70,width:90,height:80,fill:'#3a3d45'},s);const lb=el('text',{x:28,y:115},s);lb.textContent='silicon';
+  const ox=el('path',{fill:'none',stroke:'#e9e4d6','stroke-width':12},s),cr=el('path',{fill:'none',stroke:'#ffb627','stroke-width':6},s);
+  const t1=el('text',{x:190,y:70,'text-anchor':'middle'},s);t1.textContent='Cr track';t1.style.fill='#ffb627';
+  const t2=el('text',{x:190,y:134,'text-anchor':'middle'},s);t2.textContent='SiO₂';
+  function set(v){const k=v/100,L=400,kap=k*.0028,pts=off=>{let d='M';for(let i=0;i<=44;i++){const u=i/44*L,th=u*kap,R=kap?1/kap:0,x=110+(kap?R*Math.sin(th):u)-off*Math.sin(th),y=100+(kap?R*(1-Math.cos(th)):0)+off*Math.cos(th);d+=(i?'L':'')+x.toFixed(1)+' '+y.toFixed(1)}return d};
+    ox.setAttribute('d',pts(1));cr.setAttribute('d',pts(-8));
+    const heat=Math.round(255*k);cr.setAttribute('stroke',`rgb(255,${182-heat*.5|0},${39})`);cr.style.filter=k>.02?`drop-shadow(0 0 ${k*10}px #ff5a1f)`:'none';o.textContent=v+' %'}
+  r.addEventListener('input',()=>set(+r.value));set(0);
+})();
+
+/* ---------- IR remote ---------- */
+(()=>{
+  const s=$('#ir'),B=$('#irB'),A=$('#irA'),L=$('#irL');const X0=30,PX=30; // 20 ms over 600 px
+  const rows=[['LD271 drive',60,'#ff5a5a',45],['BP104 photodiode',170,'#4de3d6',60],['after filters, comparator',270,'#ffb627',45]];
+  const P=rows.map(([t,y,c])=>{const tx=el('text',{x:X0,y:y-(y===60?46:y===170?76:50)},s);tx.textContent=t;tx.style.fill='#a2a39f';el('line',{x1:X0,x2:X0+600,y1:y,y2:y,stroke:'#2a2c32'},s);return el('polyline',{fill:'none',stroke:c,'stroke-width':1.5},s)});
+  const fl=el('text',{x:X0+600,y:296,'text-anchor':'end'},s);fl.textContent='20 ms';fl.style.fill='#a2a39f';
+  let sent=0,on=false,seed=5;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;const N=[];for(let i=0;i<1300;i++)N.push(rnd()-.5);
+  const pulse=t=>(t%10)<7&&(t%1)<.1;
+  function draw(){const a=A.value/100,k=sent;let p=['','',''];
+    for(let i=0;i<=1200;i++){const t=i/60,x=(X0+t*PX).toFixed(1),show=t<=k*20,up=show&&pulse(t);
+      p[0]+=`${x},${rows[0][1]-(up?40:0)} `;
+      const amb=a*(16+12*Math.sin(t*2*Math.PI/10))+a*N[i]*12;
+      p[1]+=`${x},${(rows[1][1]-amb-(up?(26+N[i]*3):0)).toFixed(1)} `;
+      p[2]+=`${x},${rows[2][1]-(up?40:0)} `}
+    P.forEach((e,i)=>e.setAttribute('points',p[i]))}
+  B.onclick=()=>{const t0=performance.now();B.disabled=true;(function f(t){sent=clamp((t-t0)/(calm?1:1100),0,1);draw();if(sent<1)requestAnimationFrame(f);else{on=!on;L.textContent='relay '+(on?'ON':'OFF');L.style.color=on?'#ffb627':'';B.disabled=false}})(t0)};
+  A.addEventListener('input',draw);draw();
+})();
+
+/* ---------- SOFIA pad ---------- */
+(()=>{
+  const pad=$('#pad'),dot=$('#padI'),im=$('#tiltI'),o=$('#padO');let touched=false,drag=false;
+  function set(u,v){const m=Math.hypot(u,v);if(m>1){u/=m;v/=m}const R=pad.clientWidth/2-11;dot.style.transform=`translate(${u*R}px,${v*R}px)`;
+    const tilt=Math.min(m,1)*2,az=(Math.atan2(u,-v)*180/Math.PI+360)%360;
+    im.style.transform=`rotateX(${-v*2*6}deg) rotateY(${u*2*6}deg)`;o.textContent=`tilt ${tilt.toFixed(1)}° · azimuth ${Math.round(az)}°`}
+  const mv=e=>{const r=pad.getBoundingClientRect();set((e.clientX-r.left-r.width/2)/(r.width/2-11),(e.clientY-r.top-r.height/2)/(r.height/2-11))};
+  pad.addEventListener('pointerdown',e=>{touched=drag=true;pad.setPointerCapture(e.pointerId);mv(e)});pad.addEventListener('pointermove',e=>{if(drag)mv(e)});pad.addEventListener('pointerup',()=>drag=false);
+  let vis=false;inView(pad,on=>vis=on,{threshold:.2});
+  if(calm)set(0,0);else(function f(t){if(!touched){if(vis){const a=t/1400;set(Math.sin(a),-Math.cos(a))}requestAnimationFrame(f)}})(0);
+})();
+</script>
+</body>
+</html>
