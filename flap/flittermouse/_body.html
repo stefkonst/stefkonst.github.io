@@ -3,9 +3,9 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Flittermouse</p>
 <h1>Flittermouse</h1>
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
-<div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
+<div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#timing">Timing</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#verdict">Verdict</a><a href="#design">Design</a><a href="#timing">Timing</a><a href="#stall">Stall limit</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tests">Tests</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#reference">Low tension</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#sources">Sources</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -16,17 +16,37 @@
 </ul>
 </section>
 
-<section class="card" id="reference">
-<h2>Voltage on the 5 cm panel</h2>
-<p>The finite-element wing from the <a href="../full_membrane/">full membrane page</a>, unchanged, steady, on one 5 × 2.5 cm panel: one active layer, 10 mm roll, 3 mm active band, batten bonded in place. Code: <a href="fe_reference.py">fe_reference.py</a>. 42 cases, of which only 15 settled.</p>
-<div class="fig"><img src="figures/F_reference.png" alt="Lift coefficient at voltage against zero volts for settled and unsettled cases, lift change against fibre force, and trailing edge height against fibre force"></div>
+<section class="card" id="verdict">
+<h2>Verdict</h2>
+<div class="tw"><table>
+<tr><th>Question</th><th>Answer from the models</th></tr>
+<tr class="main"><td>Tethered wing and core, in a wind tunnel</td><td>Feasible on paper, and worth building as a test</td></tr>
+<tr class="main"><td>Free flight, as specified</td><td>Does not close: lift / weight about 0.5–0.75, before any electronics</td></tr>
+<tr class="main"><td>Stiff upstroke, soft downstroke</td><td>Right sign in attached flow, about +8 %. Conditional: see below</td></tr>
+</table></div>
 <ul class="read">
-<li><b>Equation:</b> the sheet is a set of spanwise strings, $w \approx p L^2 / (8 N_s)$. Chord tension is close to zero, so the surface tilts about the leading edge as well as bulging. A raised trailing edge lowers the local angle, which cancels part of the extra camber.</li>
-<li><b>Trend:</b> where it settles (10°, 4 m/s), $\Delta C_L$ runs from −0.10 to +0.14, or about −1 to +1.6 mN on a baseline near 10 mN. The 7–10 cm design predicted much more. At $\eta$ 0.25 and low tilt, voltage lowers lift.</li>
-<li><b>Trend:</b> the trailing edge rises 1–1.6 mm with voltage at $\eta$ 0.5, about 3° over this chord. That is a twist under voltage control, not a lift change.</li>
-<li><b>Trend:</b> at 6° almost nothing settles, and refining the mesh changes $C_L$ from 0.23 to 0.55. Some states sit on a negatively cambered branch at 0 V. The solver may be finding no steady state because there is none, but this is not proven.</li>
-<li><b>Validate:</b> one panel at 4 m/s, filmed from the side. Look for a steady edge or flutter, and measure edge height at 0 V and at voltage. Only then measure force.</li>
+<li><b>Why free flight fails:</b> a DEA gives a fixed energy per cycle, so it is short of power at 25 Hz. It needs about 2 J/kg with full leading-edge suction; the bench gives about 0.8 if the isometric force holds in cycles (far less with the slow-cycle force), and the published value is 1.25. A larger wing does not help, and ideal twist helps by only about 10–15 %.</li>
+<li><b>What the timing needs:</b> (1) a skin response of about 5–10 ms or faster, and (2) a soft skin that raises the stall limit by at least about 0.1–0.2 in section force. Neither is measured.</li>
+<li><b>What would change the verdict:</b> 2 J/kg in a loaded 25 Hz cycle, or lift sustained well beyond these models by a leading-edge vortex.</li>
+<li><b>Limits:</b> nothing is built. The coupled model is checked against steady finite elements and theory, not against flow data. Its trailing-edge rise is about 5× too low, it has no flow separation beyond a force cap, and it fails at low tension.</li>
 </ul>
+</section>
+
+<section class="card" id="design">
+<h2>The design these numbers describe</h2>
+<div class="fig"><img src="figures/S_concept.png" alt="Schematics of the wing from above, the drive from the front, and stroke and voltage over two strokes"></div>
+<div class="tw"><table>
+<tr><th>Part</th><th>Choice</th><th>Why</th></tr>
+<tr><td>Wing</td><td>50 × 25 mm, one panel, 2 layers, $H$ 35 µm, cut tilt 5° and 8.85°, $\lambda_n$ 1.06</td><td>Steady and responsive in the finite elements</td></tr>
+<tr><td>Trailing edge</td><td>Rolled 20 mm strip with a 5 mm active band</td><td>A stiff edge keeps the skin from simply tilting; 10 mm does not settle</td></tr>
+<tr><td>Leading edge</td><td>Cross 1.5 × 0.2 mm, 43 mg; or tube 1.0/0.7 mm, 31 mg</td><td>A single strip bends 4–14 mm</td></tr>
+<tr><td>Batten</td><td>Bonded to the leading edge</td><td>Hinged: tip swings about ±22 mm, power up by half</td></tr>
+<tr><td>Wing mass</td><td>About 300 mg</td><td>Skin and roll 253 mg</td></tr>
+<tr><td>Core</td><td>20 mm long, 0.5–1 g, 12–24 layers at 35.5 µm from 55 mm sheets, 5.5–7.8 mm across</td><td>About 1 g reaches ±20° with the isometric force</td></tr>
+<tr><td>Drive</td><td>Lever about 3 mm, bias spring, one channel per wing at 1.6 kV</td><td>Skin and core share $v(t)$, with peak voltage at mid downstroke</td></tr>
+<tr><td>Attachment</td><td>Hinge and fibre anchor on the stroke axis, within about 0.2 mm</td><td>1 mm off axis changes the fibre length by about 2 %</td></tr>
+<tr><td>Flight point</td><td>4 m/s, 25 Hz, ±20°, pitch 12–16°</td><td>8–11 mN lift and 18–26 mW air power per wing; thrust about zero, with full suction only</td></tr>
+</table></div>
 </section>
 
 <section class="card" id="timing">
@@ -44,6 +64,16 @@
 </ul>
 </section>
 
+<section class="card" id="stall">
+<h2>Stall limit and timing</h2>
+<p>With a fixed cap on section force, camber can hardly help, so the gain goes negative almost by construction. A cambered section may stall later, so here the cap rises with skin softness: $c_{n,max} + \Delta c_{n,max}\, v$.</p>
+<div class="fig"><img src="figures/G_stall.png" alt="Timing gain against the rise of the stall limit for six flight conditions and two stall limits"></div>
+<ul class="read">
+<li><b>Trend:</b> break-even at $\Delta c_{n,max}$ of about 0.1–0.25 in all 12 cases. At 0.4 the gain is +0.3 to +1.8 mN per wing (4–63 %, the largest percentages at low baseline lift).</li>
+<li><b>Validate:</b> test 2 below. The steady finite elements give $\Delta C_L$ up to about 0.3 on this design, which is of the right order but is not a stall-limit measurement.</li>
+</ul>
+</section>
+
 <section class="card" id="closure">
 <h2>Does it close?</h2>
 <p>Air power from the coupled model, then the core mass that supplies it, then lift against weight. Two wings at 299 mg, 200 mg frame, 80 % transmission, thrust at least zero, no electronics. Attached flow.</p>
@@ -55,10 +85,17 @@
 </table></div>
 <ul class="read">
 <li><b>Equation:</b> $m_c = P / (e f \eta_{tr})$ per wing, $L/W = 2L / \big[(2m_c + 2m_w + m_f) g\big]$.</li>
-<li><b>Trend:</b> as drawn, it does not support its own weight in level flight unless everything goes right. The air power is 3× the first-pass estimate, because the first pass assumed twist that this wing does not have.</li>
-<li><b>Caveat:</b> this is not a verdict on tethered tests, which do not need lift to exceed weight. Small-stroke and larger-wing runs are under way.</li>
+<li><b>Trend:</b> as drawn, it does not support its own weight in level flight unless energy per cycle rises about 2.5× above the bench value and suction is full. The air power is 3× the first-pass estimate, because the first pass assumed twist that this wing does not have.</li>
+<li><b>Caveat:</b> this is not a verdict on tethered tests, which do not need lift to exceed weight. With small strokes and the section force capped, the best values are similar: 0.57, 0.74 and 1.00 for the three energies at full suction, and 0.27, 0.35 and 0.51 at half.</li>
+</ul>
+<div class="fig"><img src="figures/C_closure.png" alt="Best lift over weight against ideal twist for three suction values, and against wing size for three energies per cycle"></div>
+<ul class="read">
+<li><b>Left:</b> published energy per cycle. Solid attached, dashed force capped at 1.6. Ideal twist removing about 30 % of the flap angle helps by about 10–15 % at full suction, and allows thrust with no suction. More twist does not help further. This twist is prescribed, a requirement rather than a mechanism.</li>
+<li><b>Right:</b> size does not rescue it: air power grows about as fast as lift. Tensions are held the same at these sizes, with no finite-element check.</li>
+<li><b>In one line:</b> required specific power $g U / [(L/D)\,\eta_p]$ is about 39 W/kg at 4 m/s with $L/D \approx 4$ and $\eta_p \approx 0.25$. Available $e f \eta_{tr} (m_c/m)$ is about 12 W/kg at 1.25 J/kg, 25 Hz and a core at half the mass.</li>
 </ul>
 </section>
+
 
 <section class="card" id="uncertainty">
 <h2>What decides it</h2>
@@ -71,6 +108,19 @@
 <li><b>Limit:</b> the ranges are my judgement and the draws are not probabilities of flight. The model has no sustained leading-edge vortex, which could raise lift above the capped cases.</li>
 <li><b>Validate:</b> flapping force and shaft power on one wing with no voltage gives lift, thrust and effective suction. Measuring a timing gain of 0.5 mN takes about 1,100 paired cycles at 3 mN cycle scatter, or 90 s at 25 Hz. The earlier rig, at about 40 mN, would be impractical (about 200,000 cycles).</li>
 </ul>
+</section>
+
+<section class="card" id="tests">
+<h2>Tests, in order</h2>
+<div class="tw"><table>
+<tr><th></th><th>Test</th><th>Pass line</th><th>Decides</th></tr>
+<tr><td>1</td><td>Skin coupon or 6 cm panel, no flow: amplitude at 1, 5, 25 Hz, with voltage measured at the device</td><td>Lag about 5–10 ms or less</td><td>Whether the sync can exist at all at 25 Hz</td></tr>
+<tr><td>2</td><td>Panel at 4 m/s, static, side view: pitch through stall at 0 V and at voltage</td><td>Steady edge; $\Delta c_{n,max} \geq$ 0.2</td><td>Whether the timing gain stays positive</td></tr>
+<tr><td>3</td><td>Core against a load at 25 Hz: integrate the force-displacement loop</td><td>0.8 J/kg for tests; about 2 J/kg for free flight</td><td>The free-flight question</td></tr>
+<tr><td>4</td><td>One wing flapped at 0 V, on a sensor with 3 mN cycle scatter or better: lift, thrust, shaft power</td><td>Within the attached and capped bounds, near 18–26 mW at the flight point</td><td>Which flow model holds, and the effective suction</td></tr>
+<tr><td>5</td><td>Same wing: 0 V, always on, both sync phases, sham, randomised, about 1,100 paired cycles</td><td>Soft on the downstroke beats soft on the upstroke, beyond the sham</td><td>The claim itself</td></tr>
+</table></div>
+<p class="note">Tests 1 and 2 can use the 6 cm panel already planned. Test 2 needs no flapping rig.</p>
 </section>
 
 <section class="card" id="tension">
@@ -109,6 +159,19 @@
 </ul>
 </section>
 
+<section class="card" id="reference">
+<h2>Voltage on the 5 cm panel</h2>
+<p>The finite-element wing from the <a href="../full_membrane/">full membrane page</a>, unchanged, steady, on one 5 × 2.5 cm panel: one active layer, 10 mm roll, 3 mm active band, batten bonded in place. Code: <a href="fe_reference.py">fe_reference.py</a>. 42 cases, of which only 15 settled.</p>
+<div class="fig"><img src="figures/F_reference.png" alt="Lift coefficient at voltage against zero volts for settled and unsettled cases, lift change against fibre force, and trailing edge height against fibre force"></div>
+<ul class="read">
+<li><b>Equation:</b> the sheet is a set of spanwise strings, $w \approx p L^2 / (8 N_s)$. Chord tension is close to zero, so the surface tilts about the leading edge as well as bulging. A raised trailing edge lowers the local angle, which cancels part of the extra camber.</li>
+<li><b>Trend:</b> where it settles (10°, 4 m/s), $\Delta C_L$ runs from −0.10 to +0.14, or about −1 to +1.6 mN on a baseline near 10 mN. The 7–10 cm design predicted much more. At $\eta$ 0.25 and low tilt, voltage lowers lift.</li>
+<li><b>Trend:</b> the trailing edge rises 1–1.6 mm with voltage at $\eta$ 0.5, about 3° over this chord. That is a twist under voltage control, not a lift change.</li>
+<li><b>Trend:</b> at 6° almost nothing settles, and refining the mesh changes $C_L$ from 0.23 to 0.55. Some states sit on a negatively cambered branch at 0 V. The solver may be finding no steady state because there is none, but this is not proven.</li>
+<li><b>Validate:</b> one panel at 4 m/s, filmed from the side. Look for a steady edge or flutter, and measure edge height at 0 V and at voltage. Only then measure force.</li>
+</ul>
+</section>
+
 <section class="card" id="actuator">
 <h2>How much energy per cycle?</h2>
 <p>A DEA gives a fixed amount of energy each cycle, so power falls with flapping frequency. This sets the whole budget. Bench data: bundle of 5 rolled fibres, 31 mm long.</p>
@@ -117,7 +180,7 @@
 <li><b>Equation:</b> $W = \frac{\pi}{2}\,\Delta F\,x_a - W_h$ for a sine drive, with $\Delta F$ the force change at full voltage and $x_a = s L_0$ the stroke amplitude. Loss $W_h \propto s^2$, so there is a best strain.</li>
 <li><b>Trend:</b> with the isometric force (44.7 mN at 1.6 kV), net energy at ±5 % is 0.7–0.9 J/kg. With the slow-cycle force (17 mN) it is 0.04–0.24 J/kg. Ren, Kim et al. 2022 report above 500 W/kg at 400 Hz, or 1.25 J/kg.</li>
 <li><b>Trend:</b> force falls in 35–42 ms at every voltage, while the vocal cord motion takes 130–190 ms. The logger samples at 200 Hz and its filter is unknown, so this is an upper limit on the force response.</li>
-<li><b>Validate:</b> drive a core against a load cell at 25 Hz and integrate the force-displacement loop. This also settles which force applies, 44.7 or 17 mN. One bundle shown; bundle b gave far less in the slow cycles (about 3 mN up to 1.4 kV).</li>
+<li><b>Validate:</b> drive a core against a load cell at 25 Hz and integrate the force-displacement loop. This also settles which force applies, 44.7 or 17 mN. One bundle shown; bundle b gave far less in the slow cycles (about 3 mN up to 1.4 kV). Layer thickness is unresolved: 15 + 30 + 15 µm in the bench record, 35 µm in the models.</li>
 </ul>
 </section>
 
@@ -160,7 +223,7 @@
 <ul class="read">
 <li><b>Core, 500 mg, 20 mm long, from 55 mm wide sheets:</b> about 12 layers at 35.5 µm, 5.5 mm outer diameter, 8.4 nF, 121 cm² of electrode. That is 4.6× the electrode area of the 6-layer device, which matters because breakdown probability grows with area.</li>
 <li><b>Time constants:</b> about 93 µs for the core, 20 µs for the skin and 78 µs for the fibre band, against a 20 ms half stroke. These assume the sheet resistance implied by that paper and a feed along the span. So electrode RC should not limit the sync, if the electrodes match theirs.</li>
-<li><b>Drive, one channel, core + skin + fibre:</b> 9.4 nF, 1.2 mA, about 301 mW at 25 Hz if no charge is recovered, against about 14 mW of mechanical output.</li>
+<li><b>Drive, one channel, core + skin + fibre:</b> 9.4 nF, 1.2 mA, about 301 mW at 25 Hz if no charge is recovered, against 18–26 mW of air power per wing. Counts one skin layer; a second adds about 1 nF.</li>
 <li><b>Validate:</b> measure $R$ and $C$ of each device before any force test, and compare the waveform at the device with the command at 25 Hz.</li>
 </ul>
 </section>
@@ -179,6 +242,16 @@
 <p class="note">Energy per cycle: Ren, Kim et al., Adv. Mater. 2022 report above 500 W/kg at 400 Hz, which is 1.25 J/kg per cycle.</p>
 </section>
 
+<section class="card" id="sources">
+<h2>Sources</h2>
+<ul class="read">
+<li>Ren, Kim et al., <i>A High-Lift Micro-Aerial-Robot Powered by Low-Voltage and Long-Endurance Dielectric Elastomer Actuators</i>, Adv. Mater. 2022: <a href="https://smrl.mit.edu/wp-content/uploads/2022/01/accepted_version.pdf">accepted manuscript</a>. Power density, force, displacement, layers, $R$, $C$, efficiency.</li>
+<li>Kim et al., <i>Laser-assisted failure recovery for dielectric elastomer actuators in aerial robots</i>, Sci. Robot. 2023: <a href="https://par.nsf.gov/biblio/10406085">record</a>. Defect isolation, for a core of this electrode area.</li>
+<li>Gehrke and Mulleners 2025: <a href="https://arxiv.org/pdf/2410.01670">arXiv 2410.01670</a>. Yeh and Chiang 2025: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11940779/">Biomimetics</a>. They disagree on what compliance does to the leading-edge vortex, in different conditions.</li>
+<li>A short search found no dielectric elastomer flapping robot in forward flight, so that comparison is missing. Bench data here are one bundle of 5 rolled fibres, with a second bundle far weaker in slow cycles.</li>
+</ul>
+</section>
+
 <section class="card" id="log">
 <h2>Update log</h2>
 <ul>
@@ -189,7 +262,8 @@
 <li><b>3 Nov, 19:30:</b> finite elements at higher tension finished: 63 of 72 settled, with a region that is steady and responsive. The coupled model passes on held-out cases in that region, with two stated biases. Timing study running.</li>
 <li><b>3 Nov, 20:25:</b> timing, lag, phase, convergence and closure added. The timing helps with attached flow, by about +8 % once converged, not the +13 % of the coarse mesh. Lift itself is uncertain by a factor of about 3 from flow separation, and the budget does not close as drawn.</li>
 <li><b>3 Nov, 21:50:</b> small-stroke map finished (768 runs, section force capped). Small strokes cut power, and lift survives, but lift / weight stays below 1 at the bench and published energy per cycle. Testing next how much camber must raise the stall limit for the timing gain to survive.</li>
-<li><b>3 Nov, 23:50:</b> drive redone with coupled-model air power, Monte Carlo on closure, rig resolution. Bigger-wing and stall-limit runs still going.</li>
+<li><b>3 Nov, 23:50:</b> drive redone with coupled-model air power, Monte Carlo on closure, rig resolution.</li>
+<li><b>4 Nov, 00:30:</b> stall-limit, bigger-wing and prescribed-twist runs finished. Verdict and test order added. Overnight study complete.</li>
 </ul>
 </section>
 

@@ -118,12 +118,22 @@ def stage_h():
     return jobs
 
 
+def stage_i():
+    """Prescribed ideal feathering: how much twist would close the budget?"""
+    jobs = []
+    for cap, U, f, p, a in itertools.product((None, 1.6), (3.0, 4.0), (15.0, 25.0), (20.0, 30.0), (8.0, 12.0, 16.0)):
+        for k_ in (0.0, 0.3, 0.6, 0.9):
+            jobs.append(dict(design="two20", tip_fixed=True, zeta=0.05, mode="down", cn_cap=cap, U=U, f=f, Phi_deg=p, alpha_deg=a, feather=k_))
+        jobs.append(dict(design="two20", tip_fixed=True, zeta=0.05, mode="off", cn_cap=cap, U=U, f=f, Phi_deg=p, alpha_deg=a, feather=0.6))
+    return jobs
+
+
 if __name__ == "__main__":
     stage = sys.argv[1]
     workers = int(sys.argv[2]) if len(sys.argv) > 2 else 13
     OUT = os.path.join(HERE, "data", f"timing_{stage}.jsonl")
-    jobs = dict(a=stage_a, b=stage_b, c=stage_c, d=stage_d, e=stage_e, f=stage_f, g=stage_g, h=stage_h)[stage]()
-    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s", "batten_k", "steps_per", "cycles", "cd0", "b", "c", "cn_cap_soft")}, sort_keys=True)
+    jobs = dict(a=stage_a, b=stage_b, c=stage_c, d=stage_d, e=stage_e, f=stage_f, g=stage_g, h=stage_h, i=stage_i)[stage]()
+    key = lambda j: json.dumps({k: j[k] for k in sorted(j) if k in ("design", "tip_fixed", "zeta", "mode", "psi", "tau", "U", "f", "Phi_deg", "alpha_deg", "eta", "cn_cap", "free_wake", "ns", "nc", "w_s", "batten_k", "steps_per", "cycles", "cd0", "b", "c", "cn_cap_soft", "feather")}, sort_keys=True)
     seen = {key(json.loads(l)) for l in open(OUT)} if os.path.exists(OUT) else set()
     todo = [j for j in jobs if key(j) not in seen]
     print(stage, len(todo), "of", len(jobs), flush=True)

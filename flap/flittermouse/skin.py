@@ -36,6 +36,7 @@ PARAMS = dict(
     f=25.0, Phi=np.radians(30.0), alpha=np.radians(8.0),
     # timing: 'off', 'on', 'down', 'up', 'sin'; psi shifts the voltage phase; tau is the electromechanical lag
     mode="off", psi=0.0, tau=0.0, duty=0.5,
+    feather=0.0,                    # prescribed twist, rigid chord: pitch = -feather * atan(s phi'/U), cancels that share of the flap angle. A requirement test, not a mechanism
     # numerics and viscous
     zeta=0.05, zeta_f=80.0, cd0=0.04, cn_cap=None, cn_cap_soft=0.0, free_wake=False, cycles=3, iters=3, relax=0.6, core=1e-4, steps_per=None,
 )
@@ -224,7 +225,9 @@ def simulate(**kw):
             return 0.0, 0.0, 0.0
         return p["Phi"] * np.cos(om * t), -p["Phi"] * om * np.sin(om * t), -p["Phi"] * om ** 2 * np.cos(om * t)
 
-    def to_global(wf, phi):
+    def to_global(wf, phi, dphi=0.0):
+        if p["feather"]:
+            wf = wf + p["feather"] * np.arctan2(-S0[:, None] * dphi, U) * C0[None, :]
         Y = S0[:, None] * np.cos(phi) - wf * np.sin(phi)
         Z = S0[:, None] * np.sin(phi) + wf * np.cos(phi)
         Xw = np.repeat(C0[None, :], ns + 1, 0)
@@ -275,7 +278,7 @@ def simulate(**kw):
             K = Nc * S.Kc + Ns * S.Ks + dphi ** 2 * S.Ksc + F * S.Kf + dphi ** 2 * S.Kfc + S.Kle
             C = alpha_d * S.M + beta_d * (K - S.Kle)
             A = S.M / (beta * dt ** 2) + C * gam / (beta * dt) + K
-            X = to_global(wf, phi)
+            X = to_global(wf, phi, dphi)
             r = air.step(X, commit=False)
             Fn = r["Fn"].copy()
             if p["cn_cap"] is not None:
@@ -288,7 +291,7 @@ def simulate(**kw):
             rhs = f_red + S.T.T @ Fn_load + S.M @ (un / (beta * dt ** 2)) + C @ (un * gam / (beta * dt) - vn)
             u_new = np.linalg.solve(A, rhs)
         wf = full(u_new)
-        X = to_global(wf, phi)
+        X = to_global(wf, phi, dphi)
         r = air.step(X, commit=True)
         a_new = (u_new - un) / (beta * dt ** 2)
         v = vn + gam * dt * a_new
