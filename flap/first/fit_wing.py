@@ -47,7 +47,7 @@ def build(k):
     A = w_s * Hm
     Ls = np.linalg.norm(P["knot"] - P["TE_root"])           # stub rest length, as cut
     q = w.tens[0]
-    q["k"] = 6 * M.YEOH[0] * A / Ls
+    q["k"] = 6 * M.YEOH[0] * A / Ls * k.get("stub", 1.0)     # stub=10: knot and cap stiffen the stub
     q["L0"] = Ls
     w.m[q["n"]] += 2 * q["k"]
     return w
