@@ -69,7 +69,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p class="lead">Two big rolled DEAs, each flapping a 5 cm wing whose whole skin is also a DEA, with an active rolled trailing edge and a carbon leading edge. Can it fly forward, and does stiffening the skin on the upstroke help?</p>
 <div class="warn"><b>Nothing here is built or measured on this robot.</b> Every number is a model prediction unless marked as bench or published. This page is being updated overnight, and the first-pass numbers below will be replaced.</div>
 
-<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#timing">Timing</a><a href="#closure">Closure</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
+<nav class="toc"><a href="#idea">Idea</a><a href="#reference">5 cm panel</a><a href="#timing">Timing</a><a href="#closure">Closure</a><a href="#uncertainty">Uncertainty</a><a href="#tension">Tension</a><a href="#coupled">Coupled model</a><a href="#actuator">Actuator</a><a href="#lattice">Lattice</a><a href="#structure">Structure</a><a href="#electrics">Electrics</a><a href="#first">First pass</a><a href="#log">Log</a></nav>
 <section class="card" id="idea">
 <h2>The idea</h2>
 <ul>
@@ -121,6 +121,19 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>Equation:</b> $m_c = P / (e f \eta_{tr})$ per wing, $L/W = 2L / \big[(2m_c + 2m_w + m_f) g\big]$.</li>
 <li><b>Trend:</b> as drawn, it does not support its own weight in level flight unless everything goes right. The air power is 3× the first-pass estimate, because the first pass assumed twist that this wing does not have.</li>
 <li><b>Caveat:</b> this is not a verdict on tethered tests, which do not need lift to exceed weight. Small-stroke and larger-wing runs are under way.</li>
+</ul>
+</section>
+
+<section class="card" id="uncertainty">
+<h2>What decides it</h2>
+<p>20,000 draws over the unknowns on the coupled-model map of 5 × 2.5 cm wings: energy per cycle 0.25–1.5 J/kg, transmission 50–90 %, suction 0–100 %, wing 240–330 mg, frame 100–300 mg, and three flow models (attached, or section force capped at 1.6 or 1.2). Each draw takes the best flight condition with thrust at least zero. Code: <a href="budget.py">budget.py</a>.</p>
+<div class="fig"><img src="figures/B_budget.png" alt="Histogram of best lift over weight, best lift over weight against energy per cycle for each flow model, and correlation of each unknown with lift over weight"></div>
+<ul class="read">
+<li><b>Equation:</b> $L/W = 2L / \big[(2 m_c + 2 m_w + m_f)\, g\big]$, with $m_c = P / (e f \eta_{tr})$. The core mass grows with air power and falls with energy per cycle.</li>
+<li><b>Trend:</b> median 0.20, 90th percentile 0.46, and no draw reached 1. Leading-edge suction matters most, then energy per cycle. Wing and frame mass hardly matter, because the core dominates.</li>
+<li><b>Drive:</b> with the isometric force, a 1 g core reaches ±20° at 25 Hz and a 500 mg core ±15°. With the slow-cycle force, a 1 g core reaches only ±11°. No slack in these cases.</li>
+<li><b>Limit:</b> the ranges are my judgement and the draws are not probabilities of flight. The model has no sustained leading-edge vortex, which could raise lift above the capped cases.</li>
+<li><b>Validate:</b> flapping force and shaft power on one wing with no voltage gives lift, thrust and effective suction. Measuring a timing gain of 0.5 mN takes about 1,100 paired cycles at 3 mN cycle scatter, or 90 s at 25 Hz. The earlier rig, at about 40 mN, would be impractical (about 200,000 cycles).</li>
 </ul>
 </section>
 
@@ -240,6 +253,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>3 Nov, 19:30:</b> finite elements at higher tension finished: 63 of 72 settled, with a region that is steady and responsive. The coupled model passes on held-out cases in that region, with two stated biases. Timing study running.</li>
 <li><b>3 Nov, 20:25:</b> timing, lag, phase, convergence and closure added. The timing helps with attached flow, by about +8 % once converged, not the +13 % of the coarse mesh. Lift itself is uncertain by a factor of about 3 from flow separation, and the budget does not close as drawn.</li>
 <li><b>3 Nov, 21:50:</b> small-stroke map finished (768 runs, section force capped). Small strokes cut power, and lift survives, but lift / weight stays below 1 at the bench and published energy per cycle. Testing next how much camber must raise the stall limit for the timing gain to survive.</li>
+<li><b>3 Nov, 23:50:</b> drive redone with coupled-model air power, Monte Carlo on closure, rig resolution. Bigger-wing and stall-limit runs still going.</li>
 </ul>
 </section>
 
