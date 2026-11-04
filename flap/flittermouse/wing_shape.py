@@ -27,7 +27,7 @@ def build(k):
     tip = AX + k["span"]
     w = M.Wing(panels=(0,), C=C, D=D, E=(tip, AY), T=(tip, AY + 1e-3), theta_deg=k["theta"], lam_d=(k["lam_d"], k["lam_d"]), lam_n=(k["lam_n"], k["lam_n"]), H=k["H"], t=(Hm, Hm), n_a=(k["N"], k["N"]),
                w_s=(k["ws"], k["ws"]), w_a_frac=(k["we"] / k["ws"],) * 2, n_f=k["N"], eta_s=k["eta"], eta_f=k["eta_f"], active_fibre=True,
-               cord_EA=(k["cord_EA"],) * 2, cord_pre=(k["cord_pre"],) * 2, U=k["U"], alpha_deg=k["alpha"], h=k["h"], na_x=24, na_y=12)
+               root_free=k.get("root_free", False), tensioners=k.get("tensioners", ()), cord_EA=(k["cord_EA"],) * 2, cord_pre=(k["cord_pre"],) * 2, U=k["U"], alpha_deg=k["alpha"], h=k["h"], na_x=24, na_y=12)
     x = w.x0.copy()
     g0 = w.ids[0]
     seam, rn = g0[-1, :], g0[0, :]
@@ -98,10 +98,16 @@ def run(over):
         out.update(ok0=bool(a0["ok"]), div0=bool(a0.get("diverged")))
         if not a0.get("diverged"):
             out["V0"] = state(w, a0["x"], 0.0)
+            n_d = w.fib[0][0]
+            out["root_end"] = dict(no_flow_mm=((xr[n_d] - x[n_d]) * 1e3).tolist(), flow_mm=((a0["x"][n_d] - x[n_d]) * 1e3).tolist())
+            out["wrinkled0"] = w.summary(a0["x"], 0.0)[0]["wrinkled"]
+            g_ = w.ids[0]
+            out["root_edge_z_mm"] = (a0["x"][g_[0, ::3], 2] * 1e3).round(2).tolist()
             a1 = w.relax(k["V"], x_init=a0["x"], fixed=fa, fixed_x=xr, aero=True)
             out.update(ok1=bool(a1["ok"]), div1=bool(a1.get("diverged")))
             if not a1.get("diverged"):
                 out["V1"] = state(w, a1["x"], k["V"])
+                out["wrinkled1"] = w.summary(a1["x"], k["V"])[0]["wrinkled"]
     except Exception as e:
         out["error"] = repr(e)
     out["wall"] = time.time() - t0

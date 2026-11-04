@@ -94,14 +94,19 @@ def s2(a):
 
 def s3(a):
     can(a, 1.0, 1.8, 8)
-    layer(a, 1.6, 1.86, 6.8, 0.22)
-    bar(a, 1.75, 2.1, 0.8); bar(a, 7.45, 2.1, 0.8)
-    for x in (2.15, 7.85):
-        arrow(a, (x, 3.1), (x, 2.4))
+    layer(a, 1.6, 1.86, 6.8, 0.14)
+    # the frame seen along the chord: T section lying on the film, tip piece at the end
+    a.add_patch(Rectangle((1.75, 2.0), 4.6, 0.09, fc=CF, ec="k", lw=.4, zorder=4))
+    a.add_patch(Rectangle((1.75, 2.09), 4.6, 0.26, fc=CF, ec="k", lw=.4, zorder=4))
+    a.add_patch(Rectangle((6.2, 2.0), 2.05, 0.08, fc=GREY, ec="k", lw=.4, zorder=4))
+    for x in (2.6, 4.6, 7.2):
+        arrow(a, (x, 3.05), (x, 2.5 if x < 6 else 2.2))
     label(a, 5, 3.3, "Press and cure with primer")
-    label(a, 2.15, 2.65, "Root bar", ha="left", fs=7) if False else None
-    label(a, 1.45, 2.72, "Root bar", ha="right", fs=7); label(a, 8.5, 2.72, "Tip piece", ha="left", fs=7)
-    label(a, 5, 2.35, "Film stays on the acrylic", col=FILM, fs=7)
+    label(a, 3.9, 1.0 + 1.67 - 0.0, "", fs=1)
+    label(a, 3.6, 2.66, "T section", fs=7)
+    label(a, 8.2, 2.6, "Tip piece", fs=7)
+    label(a, 1.3, 2.45, "No\nbar", fs=7, col=RED)
+    label(a, 8.7, 1.98, "", fs=1)
 
 
 def s4(a):
@@ -120,6 +125,7 @@ def s4(a):
     label(a, 6.0, 1.45, "", fs=1)
     a.annotate("Thread as axis", (cx, cy), (7.4, 3.2), fontsize=7, ha="center", arrowprops=dict(arrowstyle="-", lw=.5), zorder=7)
     label(a, 2.6, 2.25, "Skin", col=FILM, fs=7)
+    label(a, 5, 3.75, "Then glue the roll's tip end to the tip piece", fs=7.5)
 
 
 def s5(a):
@@ -127,44 +133,52 @@ def s5(a):
     x = np.linspace(2.0, 8.2, 80)
     y = 1.9 + (np.maximum(x - 4.2, 0) / 4.0) ** 1.4 * 1.15
     a.plot(x, y, color=FILM, lw=2.0, zorder=4, solid_capstyle="butt")
-    bar(a, 8.0, y[-1] - 0.02, 0.55, 0.2)
-    arrow(a, (8.25, y[-1] + 0.2), (8.8, y[-1] + 1.0))
+    a.add_patch(Rectangle((7.75, y[-1] - 0.1), 0.5, 0.42, fc=CF, ec="k", lw=.5, zorder=5))
+    arrow(a, (8.0, y[-1] + 0.34), (8.6, y[-1] + 1.05))
     a.add_patch(Polygon([[4.2, 2.16], [4.08, 1.98], [4.32, 1.98]], fc=BLUE, zorder=5))
     a.add_patch(Circle((4.2, 1.98), 0.12, color=BLUE, zorder=5))
-    label(a, 3.2, 2.75, "A little IPA\nat the peel front", col="k", fs=7)
+    label(a, 3.2, 2.75, "A little IPA\nat the peel front", fs=7)
     a.plot([3.6, 4.1], [2.45, 2.1], color="k", lw=.5)
-    label(a, 5.6, 3.65, "Lift by the bars: slow, shallow", fs=7.5)
+    label(a, 5.5, 3.65, "Lift by the leading edge: slow, shallow", fs=7.5)
+    label(a, 9.1, 2.45, "T section,\nend view", fs=7)
 
 
 def s6(a):
-    a.add_patch(Rectangle((0.9, 1.25), 8.2, 0.42, fc=CAN, ec=EDGE, lw=.9, zorder=1))
-    layer(a, 1.2, 1.67, 7.6, 0.06, GREY, 2)
-    layer(a, 2.2, 1.95, 5.6, 0.1)
-    bar(a, 1.7, 1.86, 0.65, 0.28); bar(a, 7.65, 1.86, 0.65, 0.28)
-    for x in (2.02, 7.97):
-        a.add_patch(Rectangle((x - 0.05, 1.67), 0.1, 0.72, fc="k", zorder=5))
-    a.add_patch(Rectangle((6.87, 1.67), 0.1, 0.42, fc="0.75", ec="0.5", lw=.4, zorder=2))
-    arrow(a, (7.0, 2.65), (8.0, 2.65))
-    label(a, 7.48, 2.87, "1.9 mm", fs=7)
-    a.annotate("", (1.97, 3.25), (8.02, 3.25), arrowprops=dict(arrowstyle="<->", lw=.7))
-    label(a, 5, 3.45, "50.0 mm between pins, cut at 48.1 mm: 4 %", fs=7.5)
-    label(a, 5, 2.3, "Taut film, above a release liner", col=FILM, fs=7)
-    label(a, 5, 1.46, "Laser-cut plate", col=EDGE, fs=7)
-    label(a, 1.3, 2.25, "Pin", fs=7)
+    M = plan(a, 3.0, 3.95, k=0.075)
+    x, yl = wing_xy()
+    m = x <= 35
+    px, py = M(x[m], yl[m])
+    a.plot(px, py, color="k", lw=3.0, zorder=5, solid_capstyle="butt")
+    m = x >= 34
+    px, py = M(x[m], yl[m])
+    a.plot(px, py, color=CF, lw=1.7, zorder=5)
+    px, py = M([0, 50], [27, 27])
+    a.plot(px, py, color=GREY, lw=3.4, zorder=4, solid_capstyle="butt")
+    ax_, ay_ = M(0, 27)
+    a.plot([1.1, ax_], [ay_, ay_], color="k", lw=.9, zorder=5)
+    a.add_patch(Rectangle((0.95, ay_ - 0.33), 0.12, 0.66, fc="k", zorder=5))
+    arrow(a, (2.55, ay_ - 0.3), (1.75, ay_ - 0.3))
+    label(a, 2.15, ay_ - 0.52, "Pull 4–5 mm", fs=7.5)
+    label(a, 1.5, ay_ + 0.22, "Thread", fs=7)
+    label(a, 0.95, ay_ - 0.85, "Stop", fs=7)
+    label(a, 5, 2.9, "Skin tensions", col=FILM, fs=7.5)
+    label(a, 5, 1.55, "Check the pull: about 50 mN", fs=7.5)
+    label(a, 5, 1.2, "8 mm of pull loses almost all the authority", fs=7, col=RED)
+    label(a, 1.95, 3.45, "Root edge\nstays free", fs=7, col=RED)
 
 
 def s7(a):
-    a.add_patch(Polygon([[1, 1.0], [9, 1.0], [9, 2.39], [5.75, 2.39], [5.75, 2.25], [5.1, 2.25], [5.1, 1.7], [4.9, 1.7], [4.9, 2.25], [4.25, 2.25], [4.25, 2.39], [1, 2.39]], fc=CAN, ec=EDGE, lw=.9, zorder=1))
-    a.add_patch(Rectangle((4.3, 2.27), 1.4, 0.12, fc=CF, ec="k", lw=.4, zorder=3))
-    a.add_patch(Rectangle((4.94, 1.8), 0.12, 0.58, fc=CF, ec="k", lw=.4, zorder=3))
-    layer(a, 3.8, 2.42, 5.2, 0.07)
-    a.add_patch(Rectangle((4.3, 2.52), 1.4, 0.09, fc=CF, ec="k", lw=.4, zorder=4))
-    a.add_patch(Polygon([[5.7, 2.5], [6.05, 2.5], [5.7, 2.6]], fc=GREY, ec="k", lw=.3, zorder=4))
-    arrow(a, (5.0, 3.55), (5.0, 2.72))
-    label(a, 5.0, 3.72, "Cap strip, press and cure")
-    a.annotate("T section in a groove,\nflat face up", (5.0, 1.95), (2.6, 1.55), fontsize=7, ha="center", arrowprops=dict(arrowstyle="-", lw=.5), zorder=7)
-    a.annotate("Soft silicone fillet", (5.9, 2.53), (7.8, 3.05), fontsize=7, ha="center", arrowprops=dict(arrowstyle="-", lw=.5), zorder=7)
-    label(a, 7.6, 2.72, "Stretched film", col=FILM, fs=7)
+    a.add_patch(Rectangle((4.3, 2.42), 1.4, 0.12, fc=CF, ec="k", lw=.4, zorder=3))
+    a.add_patch(Rectangle((4.94, 2.54), 0.12, 0.72, fc=CF, ec="k", lw=.4, zorder=3))
+    layer(a, 3.8, 2.33, 5.2, 0.09)
+    a.add_patch(Rectangle((4.3, 2.23), 1.4, 0.09, fc=CF, ec="k", lw=.4, zorder=4))
+    a.add_patch(Polygon([[5.7, 2.32], [6.05, 2.32], [5.7, 2.22]], fc=GREY, ec="k", lw=.3, zorder=4))
+    arrow(a, (5.0, 1.3), (5.0, 2.12))
+    label(a, 5.0, 1.12, "Cap strip from below, press and cure")
+    a.annotate("Soft silicone fillet", (5.9, 2.28), (7.8, 1.75), fontsize=7, ha="center", arrowprops=dict(arrowstyle="-", lw=.5), zorder=7)
+    label(a, 7.6, 2.62, "Film", col=FILM, fs=7)
+    label(a, 3.3, 2.95, "Already bonded in step 3", fs=7)
+    a.plot([3.9, 4.85], [2.82, 2.6], color="k", lw=.5)
 
 
 def s8(a):
@@ -176,35 +190,37 @@ def s8(a):
     m = x >= 34
     px, py = M(x[m], yl[m])
     a.plot(px, py, color=CF, lw=1.7, zorder=5)
-    px, py = M([0, 0], [0, 27])
-    a.plot(px, py, color=CF, lw=2.4, zorder=5)
     px, py = M([0, 50], [27, 27])
     a.plot(px, py, color=GREY, lw=3.6, zorder=4, solid_capstyle="butt")
+    ax_, ay_ = M(0, 27)
+    a.plot([1.2, ax_], [ay_, ay_], color="k", lw=.9, zorder=5)
+    label(a, 1.5, ay_ + 0.2, "Thread to body", fs=7)
     px, py = M([35, 45.6], [0, 27])
     a.plot(px, py, color=CF, lw=1.3, ls="--", zorder=5)
     label(a, 4.4, 3.9, "Straight T section", fs=7)
     label(a, 8.2, 3.52, "Curved tip piece,\nfrom carbon plate", fs=7, ha="center")
-    label(a, 2.3, 2.45, "Root\nbar", fs=7)
+    label(a, 2.1, 2.75, "Free\nroot edge", fs=7, col=RED)
     label(a, 5, 0.92, "Rolled trailing edge, about 2 mm across", fs=7)
     a.annotate("Rib, 0.5 × 0.2 mm", tuple(M(38, 12)), (8.0, 2.05), fontsize=7, ha="center", arrowprops=dict(arrowstyle="-", lw=.5), zorder=7)
     label(a, 4.6, 2.4, "Active skin", col=FILM, fs=7.5)
 
 
 def s9(a):
-    a.add_patch(Rectangle((1.3, 1.65), 2.5, 0.42, fc=CF, ec="k", lw=.5, zorder=3))
-    a.add_patch(Rectangle((2.32, 0.65), 0.46, 1.0, fc=CF, ec="k", lw=.5, zorder=3))
-    a.add_patch(Rectangle((1.3, 2.32), 2.5, 0.2, fc=CF, ec="k", lw=.5, zorder=3))
+    a.add_patch(Rectangle((1.3, 1.85), 2.5, 0.22, fc=CF, ec="k", lw=.5, zorder=3))
+    a.add_patch(Rectangle((2.32, 2.52), 0.46, 0, fc=CF, ec="k", lw=.5, zorder=3))
+    a.add_patch(Rectangle((1.3, 2.32), 2.5, 0.42, fc=CF, ec="k", lw=.5, zorder=3))
+    a.add_patch(Rectangle((2.32, 2.74), 0.46, 0.0, fc=CF, ec="k", lw=.5, zorder=3))
     a.add_patch(Rectangle((1.0, 2.07), 7.9, 0.25, fc=FILM2, ec=FILM, lw=.6, zorder=2))
     a.add_patch(Rectangle((5.0, 2.16), 3.9, 0.06, fc="k", zorder=4))
     a.add_patch(Polygon([[3.8, 2.32], [4.5, 2.32], [3.8, 2.5]], fc=GREY, ec="k", lw=.3, zorder=4))
     a.add_patch(Polygon([[3.8, 2.07], [4.5, 2.07], [3.8, 1.88]], fc=GREY, ec="k", lw=.3, zorder=4))
-    a.annotate("", (1.3, 2.95), (3.8, 2.95), arrowprops=dict(arrowstyle="<->", lw=.7))
-    label(a, 2.55, 3.13, "1.5 mm", fs=7)
-    a.annotate("", (1.3, 3.45), (5.0, 3.45), arrowprops=dict(arrowstyle="<->", lw=.7))
-    label(a, 3.15, 3.63, "2 mm: no electrode", fs=7)
-    a.plot([5.0, 5.0], [2.16, 3.45], color="k", lw=.5, ls=":")
-    a.plot([1.3, 1.3], [2.52, 3.45], color="k", lw=.5, ls=":")
-    a.plot([3.8, 3.8], [2.5, 2.95], color="k", lw=.5, ls=":")
+    a.annotate("", (1.3, 1.62), (3.8, 1.62), arrowprops=dict(arrowstyle="<->", lw=.7))
+    label(a, 2.55, 1.42, "1.5 mm", fs=7)
+    a.annotate("", (1.3, 3.75), (5.0, 3.75), arrowprops=dict(arrowstyle="<->", lw=.7))
+    label(a, 3.15, 3.93, "2 mm: no electrode", fs=7)
+    a.plot([5.0, 5.0], [2.16, 3.75], color="k", lw=.5, ls=":")
+    a.plot([1.3, 1.3], [2.74, 3.75], color="k", lw=.5, ls=":")
+    a.add_patch(Rectangle((2.42, 2.74), 0.26, 0.56, fc=CF, ec="k", lw=.5, zorder=3))
     label(a, 7.0, 2.68, "Electrodes start here", fs=7)
     label(a, 6.9, 1.75, "Film overhangs the rear edge,\nso no carbon meets high voltage", fs=7)
     label(a, 6.0, 0.95, "Sand and seal the strip edges", fs=7)
@@ -212,9 +228,9 @@ def s9(a):
     label(a, 8.3, 3.7, "Not to scale", fs=6.5, col=GREY)
 
 
-STEPS = [(s1, "1. Stack and cure on the acrylic"), (s2, "2. Cut the outline, film stays on"), (s3, "3. Bond the root bar and tip piece"),
-         (s4, "4. Roll the trailing edge, still on the acrylic"), (s5, "5. Release"), (s6, "6. Stretch on pins"),
-         (s7, "7. Bond the leading edge last"), (s8, "8. Finished wing, from above"), (s9, "9. Leading edge section")]
+STEPS = [(s1, "1. Stack and cure on the acrylic"), (s2, "2. Cut the outline, film stays on"), (s3, "3. Bond the leading edge frame, film stays on"),
+         (s4, "4. Roll the trailing edge, still on the acrylic"), (s5, "5. Release, by the frame"), (s6, "6. Pull the roll end against a stop"),
+         (s7, "7. Add the cap strip"), (s8, "8. Finished wing, from above"), (s9, "9. Leading edge section")]
 
 
 def finish(a, t):

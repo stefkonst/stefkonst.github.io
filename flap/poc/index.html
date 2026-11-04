@@ -115,6 +115,25 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="wings">
 <h2>Wing designs</h2>
+<h3>No root bar: pull the end of the roll</h3>
+<div class="tw"><table>
+<tr><th>Lift change at 6°, thread of fixed length, pull of</th><th>3 mm</th><th>4 mm</th><th>5 mm</th><th>6 mm</th><th>8 mm</th></tr>
+<tr><td>Fibre force, 0 V</td><td>37 mN</td><td>47 mN</td><td>57 mN</td><td>67 mN</td><td>85 mN</td></tr>
+<tr class="main"><td>A, rectangle, tip bar</td><td>5.4</td><td>10.9*</td><td>11.7*</td><td>9.9*</td><td>about 1</td></tr>
+<tr class="main"><td>B, curved tip, stiff edge</td><td>5.7</td><td>7.0–7.2</td><td>6.5</td><td>5.0</td><td>1.2</td></tr>
+<tr><td>B with a diagonal rib</td><td>5.1</td><td>5.4</td><td>3.2</td><td></td><td></td></tr>
+<tr><td>C, curved tip, soft edge, diagonal rib (not converged)</td><td>5.0</td><td>5.1</td><td>3.3</td><td></td><td></td></tr>
+</table></div>
+<ul class="read">
+<li><b>Trend:</b> tension is set by travel, and there is a window at about 4–5 mm. At 3 mm, authority is down by half or more. By 8 mm, nearly all of it has gone.</li>
+<li><b>*Rectangle:</b> near its peak, one of the two meshes failed at each pull. The solver lost the mesh at the root corner, so treat these as roughly 10 mN. The curved tip agrees across meshes.</li>
+<li><b>Thread, not spring:</b> a soft line gave erratic results, with 0 V lift jumping from 4.6 to 11.5 mN at the same force. A fixed thread and a stop should behave better. Hold the end by position, not force.</li>
+<li><b>Cost against a root bar:</b> about 50–65 % of the skin is wrinkled at 0 V (1 % with a bar and stretch), with more bulge at 0 V (4.6 against 1.3 mm) and less lift at 0 V at the best pull.</li>
+<li><b>Not modelled:</b> a free root edge may flutter, and the corner where the root edge meets the leading edge carries the pull and may tear. Round it, and add a small patch if tears start. No flapping run for this wing yet.</li>
+<li><b>Span:</b> these runs use a 50 mm sheet with no stretch. The masks cut 48.1 mm, for the 4 % route, so with no stretch this wing comes out about 48 mm. That is close enough for a first build.</li>
+<li><b>Validate:</b> pull in 1 mm steps on the bench and record force and bulge at voltage. Expect the peak near 4–5 mm.</li>
+</ul>
+<h3>With a root bar and 4 % stretch: the fallback</h3>
 <div class="fig"><img src="P_wings.png" alt="Three wing outlines, their lift change for several stretches and with a rib, and their mass"></div>
 <div class="tw"><table>
 <tr><th>Wing</th><th>Lift change, 4 % stretch</th><th>With rib</th><th>Wing mass</th><th>Purpose</th></tr>
@@ -161,19 +180,20 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="fab">
 <h2>Wing steps: never hold the film</h2>
-<p>This extends your pterosaur process, where the frame bonds on the acrylic and the film only comes off after. Proposed, untested on this wing. The film is only ever carried by its bars.</p>
-<div class="fig"><img src="steps/P_steps.png" alt="Nine sketches: stack on acrylic, cut outline, bond root bar and tip piece, roll the trailing edge, release with IPA, stretch on pins, bond the leading edge, finished wing, and a leading edge section"></div>
-<p class="note">Each step as its own file: <a href="steps/step_1.svg">1</a> <a href="steps/step_2.svg">2</a> <a href="steps/step_3.svg">3</a> <a href="steps/step_4.svg">4</a> <a href="steps/step_5.svg">5</a> <a href="steps/step_6.svg">6</a> <a href="steps/step_7.svg">7</a> <a href="steps/step_8.svg">8</a> <a href="steps/step_9.svg">9</a> (SVG, with PNG alongside), or <a href="steps/P_steps.svg">all in one SVG</a>.</p>
+<p>No root bar: the leading edge goes on while the film is still on the acrylic, and it becomes the handle. Tension comes from pulling the root end of the roll. This extends your pterosaur process. Proposed, untested on this wing.</p>
+<div class="fig"><img src="steps/P_steps.png" alt="Nine sketches: stack on acrylic, cut outline, bond the leading edge frame, roll the trailing edge, release by the frame, pull the roll end against a stop, add a cap strip, finished wing with a free root edge, and a leading edge section"></div>
+<p class="note">Each step as its own file: <a href="steps/step_1.svg">1</a> <a href="steps/step_2.svg">2</a> <a href="steps/step_3.svg">3</a> <a href="steps/step_4.svg">4</a> <a href="steps/step_5.svg">5</a> <a href="steps/step_6.svg">6</a> <a href="steps/step_7.svg">7</a> <a href="steps/step_8.svg">8</a> <a href="steps/step_9.svg">9</a> (SVG, with PNG alongside), or <a href="steps/P_steps.svg">all in one SVG</a>. Fallback route with a root bar and stretch: <a href="steps_bar/P_steps.png">PNG</a>, <a href="steps_bar/P_steps.svg">SVG</a>.</p>
 <ol class="read">
 <li><b>Stack and cure</b> as usual, on acrylic. Use a thicker top half-D if the surface stays tacky, and cure fully before going on.</li>
-<li><b>Cut the outline</b> on the acrylic, with the carrier still on. Leave extra film past the root and tip for bonding.</li>
-<li><b>Bond the root and tip bars</b> onto the film on the acrylic, with primer, press and cure. Use a carbon or FR4 bar with two pin holes. Keep them off the active area.</li>
-<li><b>Roll the trailing edge</b> on the acrylic: free edge first, a fine thread as the axis, stop at a fence on the fibre line. The bars now hold both ends of the fibre.</li>
-<li><b>Release:</b> lift both bars together at a shallow angle, slowly, with a little IPA at the peel front. Test IPA on the blank sheet first. If two sticky faces touch, IPA also helps part them.</li>
-<li><b>Stretch on pins:</b> drop the bars onto a laser-cut plate with pins at the 50.0 mm spacing (51.0 mm for 6 %). Hard stops, with no gauge to read. Lay the film on a PTFE or release liner, or hang it just above.</li>
-<li><b>Bond the leading edge last</b>, with the film stretched on the plate. See below. Bond the tip piece overlap at the same time.</li>
-<li><b>Lift off the plate,</b> then trim. Mark two points on the skin to check real stretch.</li>
+<li><b>Cut the outline</b> on the acrylic, with the carrier still on.</li>
+<li><b>Bond the leading edge frame</b> (T section, plus tip piece or tip bar, glued together first) onto the film on the acrylic, with primer, press and cure. No stretch.</li>
+<li><b>Roll the trailing edge</b> on the acrylic: free edge first, a fine thread as the axis, stop at a fence on the fibre line. Glue the roll's tip end to the tip piece. Keep the glue from wicking along the fibre.</li>
+<li><b>Release:</b> lift by the frame, at a shallow angle, slowly, with a little IPA at the peel front. Test IPA on the blank sheet first. If two sticky faces touch, IPA also helps part them.</li>
+<li><b>Pull the roll end</b> by a thread on its cap, 4–5 mm, against a hard stop. Check the force: about 50 mN. Stop well short of 8 mm.</li>
+<li><b>Add the cap strip</b> from below, with a soft fillet.</li>
+<li><b>Tie off:</b> thread to the body, with the eye on the stroke axis at the same chord, so its length stays constant through the stroke.</li>
 </ol>
+
 <ul class="read">
 <li><b>Tack:</b> keep tacky faces on PTFE or release liner, not paper or acrylic. Your earlier wings suffered from frame delamination: test the bond on the blank sheet by pulling on a bar.</li>
 <li><b>Later batches:</b> spin on a thin PET sheet taped to the acrylic. Then you peel by bending the carrier, not the film.</li>
@@ -183,8 +203,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <section class="card" id="le">
 <h2>Leading edge on a flat strip</h2>
 <ul class="read">
-<li><b>Make the T section first:</b> glue the two strips on a straight edge, one flat and one on its edge below it. Reject any that bow.</li>
-<li><b>Sandwich the film:</b> web in a groove on the plate, flat face up, level with the film. Film over it, with a thin cap strip on top (1.5 × 0.1 mm, about 12 mg). Peel at the strip's edge is what tears; a sandwich turns it into shear. Skip the cap on wing A if time is short, and compare.</li>
+<li><b>Make the T section first:</b> glue the two strips on a straight edge, one flat and one on its edge. Reject any that bow. The flat face goes on the film.</li>
+<li><b>Sandwich the film:</b> T section on top, from step 3, and a thin cap strip on the underside after release (1.5 × 0.1 mm, about 12 mg). Peel at the strip's edge is what tears; a sandwich turns it into shear. Skip the cap on wing A if time is short, and compare.</li>
 <li><b>Fillet:</b> leave a small bead of soft silicone at the strip's rear edge, so the film does not bend sharply over a corner.</li>
 <li><b>Shorts:</b> you found these deadly to the DEA. The strip is 1.5 mm and the electrode margin 2 mm, so film should overhang the strip's rear edge by 0.5 mm or more with no electrode on it. Check under the microscope. Sand strip edges and seal them, with polyimide tape or a primer and silicone coat.</li>
 <li><b>Stick:</b> your primer + press + cure. Measured bead width, stencilled if possible, and a straight weighted bar on top.</li>
