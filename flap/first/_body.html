@@ -2,9 +2,9 @@
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / First wing test</p>
 <h1>First wing test</h1>
-<p class="lead">2-electrode wing. First run 4 Nov: top view, 1500 V, 1 Hz. Second set 5 Nov: side, front and diagonal views, 1000–1800 V, 1–20 Hz, two tensions. It works at every frequency tried. Most of the trailing edge motion is out of plane, up to 1.8 mm at 1800 V, and extra tension cuts that by about 13×.</p>
+<p class="lead">2-electrode wing. First run 4 Nov: top view, 1500 V, 1 Hz. Second set 5 Nov: side, front and diagonal views, 1000–1800 V, 1–20 Hz, two tensions. It works at every frequency tried. Most of the trailing edge motion is out of plane, up to 1.8 mm at 1800 V, and extra tension cuts that by about 13×. The roll is tense (50–96 mN from its length), and a model with the wing's weight and a strongly active roll reproduces the shape of these results.</p>
 <div class="warn"><b>Bench videos, one wing, no voltage or force recorded.</b> Waveforms and layers are from you; the scale is from the ruler, which may sit at another depth. Runs went in ascending voltage, so wear-in may add to the voltage trend. Model numbers are predictions.</div>
-<nav class="toc"><a href="#views">5 Nov: three views</a><a href="#plan">Plan</a><a href="#core">Roll DEA</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
+<nav class="toc"><a href="#views">5 Nov: three views</a><a href="#weight">Model with weight</a><a href="#plan">Plan</a><a href="#core">Roll DEA</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
 
 <section class="card" id="sum">
 <h2>Summary</h2>
@@ -46,11 +46,25 @@
 <li><b>So the edge is tense:</b> 50–96 mN, against 17–30 mN from the finite-element pull and 4.5 mN from the gravity reading. With $T\kappa = N_n$ and the curvature before voltage (3.0 /m), the skin pulls across the edge with only 0.15–0.29 N/m. The skin carries little across the edge, as the wrinkles already said.</li>
 <li><b>Direction:</b> the wing was flat with the ruler upright, so the edge moves down, towards the floor, at voltage.</li>
 <li><b>Weight alone is too small:</b> at 50–96 mN the roll's own weight sags it only 0.09–0.16 mm. Moving it 1.8 mm out of plane takes about 0.17–0.33 N/m across the span, 10–20× the roll's weight. The DEA in the roll can drop 5–18 mN at 1800 V ($\eta_f$ 0.06–0.17), not enough on its own.</li>
-<li><b>What could do it:</b> the roll goes slack at voltage, which needs $\eta_f$ of about 0.6–1 or a thinner film than assumed. Or the roll lengthens enough to buckle out of plane, which the flat tops would fit. Or the skin buckles and carries the roll with it. The flip test and a weight on the tip separate these.</li>
+<li><b>What could do it:</b> a roll that loses a large part of its tension, so the slack skin drapes under its weight and drags the edge down. The model with weight below does this.</li>
 <li><b>Why it matters:</b> in flight, air pressure loads the edge more than gravity, so a loss of roll tension would move the edge. That is the camber effect we want. But if the edge goes slack at peak voltage, the control saturates, and more tension takes most of it away.</li>
 <li><b>Frequency:</b> the swing falls about as $f^{-0.8}$ from 1 to 5 Hz while the average holds. Either the film is slow, about 0.1 s, or the amplifier gives less swing at higher frequency. The 15 Hz bump looks like a mode of the slack edge; it is gone with tension. At 18–25 Hz, expect about one fifth of the 1 Hz swing unless that mode is tuned to the stroke.</li>
 <li><b>Drive:</b> plain sine ran from 0 V to the peak (your note), which is the same shape as sine squared: $V_p(1+\sin\omega t)/2 = V_p \sin^2(\omega t/2 + \pi/4)$. Both respond at the drive frequency, as seen. So differences between "sine" and "sine squared" runs come from run order and wear-in, not from the waveform.</li>
 <li><b>Not used:</b> the 13 short pieces of the 1000 V side run with tension, 66 kB each.</li>
+</ul>
+</section>
+
+<section class="card" id="weight">
+<h2>Model with weight</h2>
+<div class="fig"><img src="V_gravity.png" alt="Left, edge drop out of plane against voltage: model curves for a very active roll stay below 0.15 mm up to 1000 V, then rise steeply to 1.7 to 2.2 mm at 1800 V, close to the measured side-view points 0.28, 0.82 and 1.84 mm; a weakly active roll stays near zero. Right, in-plane bow: the active cases rise to 1.1 to 1.5 mm and level off or fall at the highest voltages; the measured front view at 1800 V is 1.2 mm, the first run at 1500 V 0.45 mm."></div>
+<ul class="read">
+<li><b>Model:</b> the same finite elements, wing flat, its own weight as nodal loads (115–130 mg of film, or doubled for the weighed 250 mg without leading edge). The roll is stretched as cut: 54–122 mN at 0 V for pulls of 6–12.9 mm, which brackets the 50–96 mN from its length.</li>
+<li><b>Equation:</b> out of plane, the edge and skin hold the weight with tension: drop $\approx q L^2 / (8T)$. Voltage lowers $T$ in the roll and in the skin. Once the skin goes slack it drapes, and the drop grows fast.</li>
+<li><b>Trend:</b> with a strongly active roll ($\eta_f$ 0.4–0.8), the drop stays near 0.1 mm to 1000 V, then rises to 1.7–2.2 mm at 1800 V. In plane, the bow rises to about 1–1.5 mm and then levels off or falls as the edge goes down instead. Both match the side and front views at 1800 V. With $\eta_f$ 0.1, nothing happens out of plane.</li>
+<li><b>Against:</b> the first run, 1500 V, top view, bowed 0.45 mm in plane, where these cases give 1.1–1.5 mm. That run may have had more tension, but I cannot tell. $\eta_f$ 0.4–0.8 is also far above the 0.06–0.17 from the earlier fit, which assumed 17–28 mN.</li>
+<li><b>So:</b> a tense, strongly active roll, with weight doing the rest, explains the 5 Nov videos: steep, mostly out of plane, saturating in plane. It is the best reading so far, not a fit.</li>
+<li><b>Validate:</b> the flip test (it should then rise towards the ceiling relative to the wing, falling to the floor in the room), the 1 g weight test, and the roll DEA force drop, which gives $\eta_f$ directly.</li>
+<li><b>For lift:</b> air load replaces weight in flight, and is several times larger, so a roll this active would drop the edge further. Earlier lift numbers assumed $\eta_f$ up to 0.17, so they no longer hold. Not yet rerun.</li>
 </ul>
 </section>
 
@@ -245,7 +259,7 @@
 
 <section class="card" id="files">
 <h2>Files</h2>
-<p class="note">Code: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>track_views.py</code>, <code>views_analysis.py</code>, <code>figures_views.py</code>, <code>fibre_tension.py</code>, <code>fit_wing.py</code>, <code>fit_roll.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the roll was known: <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_views.svg">views</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
+<p class="note">Code: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>track_views.py</code>, <code>views_analysis.py</code>, <code>figures_views.py</code>, <code>fibre_tension.py</code>, <code>fit_gravity.py</code>, <code>figures_gravity.py</code>, <code>fit_wing.py</code>, <code>fit_roll.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the roll was known: <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_views.svg">views</a>, <a href="V_gravity.svg">weight model</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}]})});</script>
