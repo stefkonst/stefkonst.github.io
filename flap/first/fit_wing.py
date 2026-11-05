@@ -42,7 +42,7 @@ def build(k):
     w_s, w_a = k["ws"], k["wa"]
     Hm = (N + 1) * H
     w = M.Wing(panels=(0,), A=tuple(P["LE_root"]), C=tuple(P["TE_tip"]), D=tuple(R0), E=tuple(P["tip"]), T=tuple(P["tip"] + [0, 1e-3]), theta_deg=0.0, lam_d=(1.0, 1.0), lam_n=(1.0, 1.0), H=H, t=(Hm, Hm), n_a=(N, N),
-               w_s=(w_s, w_s), w_a_frac=(w_a / w_s,) * 2, n_f=N, eta_s=k["eta"], eta_f=k["eta_f"], active_fibre=k["eta_f"] > 0, root_free=True, h=k["h"], tol=k.get("tol", 3e-7), max_iter=k.get("it", 120000),
+               w_s=(w_s, w_s), w_a_frac=(w_a / w_s,) * 2, n_f=k.get("n_f", N), eta_s=k["eta"], eta_f=k["eta_f"], active_fibre=k["eta_f"] > 0, root_free=True, h=k["h"], tol=k.get("tol", 3e-7), max_iter=k.get("it", 120000),
                tensioners=(dict(at="D", anchor=tuple(P["knot"]), kind="line", k=1.0, F0=0.0),))
     A = w_s * Hm
     Ls = np.linalg.norm(P["knot"] - P["TE_root"])           # stub rest length, as cut
