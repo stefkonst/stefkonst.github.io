@@ -2,9 +2,9 @@
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / First wing test</p>
 <h1>First wing test</h1>
-<p class="lead">2-electrode wing, 1500 V peak, sine squared from 0 V, 1 Hz, the only run so far. It worked: the trailing edge follows the drive, and the wrinkles change with it. The edge bows more at voltage because the rolled edge is active too. The same effect makes the predicted lift change small, and negative at low pull.</p>
-<div class="warn"><b>One 10 s video, one view, one wing, one run.</b> Waveform, offset and layers are from your settings (updated 5 Nov); voltage is not in the video. Film thickness (30 µm), pull, strip width (20 mm) and the width of electrode in the roll are assumed. Model numbers are predictions, and this video cannot separate skin $\eta$ from roll force.</div>
-<nav class="toc"><a href="#plan">Plan for tomorrow</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
+<p class="lead">2-electrode wing, 1500 V peak, sine squared from 0 V, 1 Hz, the only run so far. It worked: the trailing edge follows the drive, and the wrinkles change with it. The edge bows more at voltage because the rolled edge is active too. The roll cancels most of the skin's effect, so the predicted lift change is close to zero at 4 mm pull, and negative at low pull.</p>
+<div class="warn"><b>One 10 s video, one view, one wing, one run.</b> Waveform, layers, roll size and the roughly 2 mm pull are from you (updated 5 Nov); voltage is not in the video. Film thickness (30 µm) is assumed. Model numbers are predictions, and this video cannot separate skin $\eta$ from roll force.</div>
+<nav class="toc"><a href="#plan">Plan</a><a href="#core">Roll DEA</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
 
 <section class="card" id="sum">
 <h2>Summary</h2>
@@ -14,30 +14,31 @@
 <tr class="main"><td>It does not return to rest at 0 V</td><td>First rise 0.45 mm, then back only to 0.29 mm. About 0.3 mm stays</td><td>Measured; cause unknown</td></tr>
 <tr class="main"><td>Later cycles follow one path</td><td>Up and down agree within 3 µm, no lag at 1 Hz. Swing ∝ $V^{1.4\text{–}1.5}$, not $V^2$</td><td>Measured, assuming the waveform as set</td></tr>
 <tr><td>Wrinkles grow at voltage</td><td>Streak contrast +15–20 % in the root and middle thirds, +7 % at the tip</td><td>Measured</td></tr>
-<tr><td>Tension from the sag before voltage</td><td>About 26 mN in the thread, for a 3.2 mm pull</td><td>Model; not yet checked</td></tr>
-<tr class="main"><td>The active roll explains the sign</td><td>Passive roll −0.11 mm, active roll +0.19 to +0.21 mm, measured +0.18 mm</td><td>Model against measured</td></tr>
-<tr class="main"><td>Skin $\eta$ is still unknown</td><td>0.05 to 0.4 all fit, each with its own roll force. Roll loses 5–14 mN of 26 mN</td><td>Model; test 3 or a force gauge separates them</td></tr>
-<tr class="main"><td>Lift change at 4 m/s, 6°, 4 mm pull</td><td>−0.3 to −0.7 mN as built, out of 6.5 mN. Passive roll +0.15 to +1.3 mN. POC page: 7 mN</td><td>Prediction</td></tr>
+<tr><td>Tension from the pull</td><td>About 17 mN at 2 mm. The model's sag is then 1.32 mm against 1.6 mm measured, and 1.6 mm needs about 3.5 mm (30 mN)</td><td>Model; check with test 2</td></tr>
+<tr class="main"><td>The active roll explains the sign</td><td>Passive roll −0.15 mm, active roll +0.18 mm by fit, measured +0.18 mm</td><td>Model against measured</td></tr>
+<tr class="main"><td>Roll efficiency is low</td><td>$\eta_f$ 0.06–0.17 with 20 mm active. Earlier vocal cord fits: 0.05–0.15</td><td>Model fit</td></tr>
+<tr class="main"><td>Skin $\eta$ is still unknown</td><td>0.05 to 0.4 all fit. About 0.07–0.09 if roll and skin have the same $\eta$</td><td>Model; test 3 or the roll DEA test separates them</td></tr>
+<tr class="main"><td>Lift change at 4 m/s, 6°, 4 mm pull</td><td>−0.10 to +0.34 mN as built, out of 6.9 mN. Passive roll +0.19 to +1.6 mN. POC page: 7 mN</td><td>Prediction</td></tr>
 </table></div>
 </section>
 
 <section class="card" id="plan">
-<h2>Plan for tomorrow</h2>
+<h2>Plan</h2>
 <p><b>Yes, you need another view.</b> Top view shows in-plane motion only, and lift comes from out-of-plane shape. The cheapest way: a 45° mirror beside the wing, so the same camera sees top and side in one frame. Stop the lens down so both are in focus, and put a scale in each view.</p>
-<p><b>I would do the bench tests before flapping.</b> Tests 1 and 2 could change how you drive the wing, and in flapping the expected skin effect may be too small to see. Flapping still tells you a lot: transmission, stroke, tearing, wing motion.</p>
+<p><b>Flapping waits for the transmission,</b> so the bench tests and the <a href="#core">roll DEA</a> come first. The roll DEA gives $\eta$ for the same kind of film with a clean force reading, and the wing tests show whether that $\eta$ holds in the skin.</p>
 <div class="tw"><table>
 <tr><th>#</th><th>Test</th><th>Question</th><th>What to expect (prediction)</th><th>Time</th></tr>
-<tr class="main"><td>0</td><td>Set-up: LED in frame, mirror, scope on the device. Note strip width and electrode width in the roll from your mask</td><td>Sync, second view, true $V(t)$. Does it reach 0 V?</td><td>The fit needs $\eta_f w_a$ of 1.4–3.1 mm, so the electrode width gives $\eta_f$</td><td>30 min</td></tr>
+<tr class="main"><td>0</td><td>Set-up: LED in frame, mirror, scope on the device. Mark the thread at the clamp and measure the pull</td><td>Sync, second view, true $V(t)$, true pull. Does it reach 0 V?</td><td>$V$ sits at 0 V between peaks. The 2 mm pull is the weakest number in the fit</td><td>30 min</td></tr>
 <tr class="main"><td>1</td><td>Hold: 0 V 5 s, 1500 V 20 s, device shorted 60 s. Repeat after 5 min</td><td>Why does it not come back?</td><td>See the table below</td><td>20 min</td></tr>
 <tr class="main"><td>1b</td><td>Staircase on a wing never run: 500, 1000, 1500, 1000, 500 V, 5 cycles each. Do this first on the 4-electrode wing</td><td>Is the jump set by the highest voltage so far?</td><td>If so, each new level jumps and the steps back down do not. This wing's first rise passed about 0.08 mm at 500 V and 0.28 mm at 1000 V</td><td>10 min</td></tr>
-<tr class="main"><td>2</td><td>Pull sweep, same wing: 2, 3, 4, 5 mm, against a stop, with a force gauge on the thread if you can</td><td>Effect of tension. Tension from sag? Roll force</td><td>Below. Sag does not depend on layers. Swing falls about 2× from 2 to 8 mm. Force drop at voltage stays the same at every pull</td><td>45 min</td></tr>
-<tr class="main"><td>3</td><td>Same again on the 4-electrode wing</td><td>Effect of layers. Best single test for skin $\eta$</td><td>Below. Thread force 2×, same sag. Swing at 3.2 mm: +0.17, +0.13, +0.07, −0.14 mm for skin $\eta$ 0.05, 0.15, 0.25, 0.4</td><td>45 min</td></tr>
-<tr class="main"><td>4</td><td>Fan on the fixed wing, 6°, about 4 m/s, side view</td><td>Skin $\eta$ and the sign of the lift change</td><td>Peak bulge at 4 mm pull, 2-electrode wing: 2.7 → 3.0, 3.3, 3.6, 4.1 mm for $\eta$ 0.05, 0.15, 0.25, 0.4. Lift falls though the bulge grows, so watch the trailing edge too</td><td>45 min</td></tr>
+<tr class="main"><td>2</td><td>Pull sweep, same wing: 2, 3, 4, 5 mm at the clamp, measured, with a force gauge on the thread if you can</td><td>Effect of tension. Is the 2 mm right? Roll force</td><td>Below. Swing falls about 2× from 2 to 8 mm. Sag at a measured pull tests the outline in the model</td><td>45 min</td></tr>
+<tr class="main"><td>3</td><td>Same again on the 4-electrode wing</td><td>Effect of layers. Best single test for skin $\eta$</td><td>Below. Thread force 2×, same sag. Swing at 2 mm: +0.15, +0.08, −0.05 mm for skin $\eta$ 0.05, 0.15, 0.25, and about −0.5 mm at 0.4</td><td>45 min</td></tr>
+<tr class="main"><td>4</td><td>Fan on the fixed wing, 6°, about 4 m/s, side view</td><td>Skin $\eta$ and the sign of the lift change</td><td>Peak bulge at 4 mm pull, 2-electrode wing: 2.6 → 2.9, 3.1, 3.5, 4.0 mm for $\eta$ 0.05, 0.15, 0.25, 0.4. Lift barely changes though the bulge grows, so watch the trailing edge too</td><td>45 min</td></tr>
 <tr><td>5</td><td>Peak voltage: 500, 1000, 1500 V; frequency: 1, 5, 10, 25 Hz at 1500 V; shuffled order</td><td>Is the $V^{1.5}$ real? How fast does it respond?</td><td>Swing 34 and 96 µm if $V^{1.5}$, 20 and 79 µm if $V^2$. Timing work needs 5–10 ms response or better</td><td>30 min</td></tr>
 <tr><td>6</td><td>Tip spring: hang 0.5 and 1 g along the edge line, track the tip. Tap the edge, 1000 fps</td><td>Turns the tip into a force gauge, and the string mode into a tension reading</td><td>The tip moved 18 µm at voltage. String mode about 28 Hz (rig shakes at 26.6 Hz, so isolate it)</td><td>20 min</td></tr>
-<tr class="main"><td>7</td><td>Flapping: core alone, then wing</td><td>Does the mechanism work? Does the skin change anything in flapping?</td><td>18 Hz, ±10–18° (POC). Skin effect small, and its sign may reverse with an active roll</td><td>Rest of day</td></tr>
+<tr class="main"><td>7</td><td>Flapping, once the transmission is ready: core alone, then wing</td><td>Does the mechanism work? Does the skin change anything in flapping?</td><td>18 Hz, ±10–18° (POC). Skin effect small, and its sign may reverse with an active roll</td><td>When ready</td></tr>
 </table></div>
-<p class="note">If time is short, do 0, 1, 1b, 2 at three pulls, 3 at one pull, then 7. Keep one wing as a spare before flapping.</p>
+<p class="note">If time is short, do the roll DEA, then 0, 1, 1b, 2 at three pulls, and 3 at one pull. Keep one wing as a spare before flapping.</p>
 
 <h3>Test 1: what each result means</h3>
 <div class="tw"><table>
@@ -50,20 +51,21 @@
 </table></div>
 
 <h3>Tests 2 and 3: predicted values at 1500 V</h3>
-<p class="note">Each skin $\eta$ is paired with the roll force that fits this video. 4 electrodes is taken as 3 active layers in the skin and 4 in the roll, with the same electrode width in the roll. Confirm against your mask.</p>
+<p class="note">Each skin $\eta$ is paired with the roll $\eta_f$ that fits this video at 2 mm pull: 0.064, 0.089, 0.113, 0.148. 4 electrodes: 3 active layers in the skin, 4 in the roll, 20 mm active. If the true pull is 3.2 mm, 2-electrode swings are about 30 % higher above 2 mm, and the 4-electrode columns shift by +0.03 to +0.1 mm.</p>
 <div class="tw"><table>
 <tr><th rowspan="2">Pull</th><th rowspan="2">Sag, 0 V</th><th colspan="2">Thread force, 0 V</th><th rowspan="2">Sag change, 2 electrodes, $\eta$ 0.05–0.4</th><th colspan="4">Sag change, 4 electrodes, by skin $\eta$</th></tr>
 <tr><th>2 el.</th><th>4 el.</th><th>0.05</th><th>0.15</th><th>0.25</th><th>0.4</th></tr>
-<tr><td>2 mm</td><td>1.36 mm</td><td>16 mN</td><td>31 mN</td><td>+0.25 to +0.49 mm</td><td>+0.22</td><td>+0.17</td><td>+0.10</td><td>Roll slack</td></tr>
-<tr class="main"><td>3.2 mm</td><td>1.61 mm</td><td>26 mN</td><td>51 mN</td><td>+0.19 to +0.22 mm</td><td>+0.17</td><td>+0.13</td><td>+0.07</td><td>−0.14</td></tr>
-<tr><td>5 mm</td><td>1.87 mm</td><td>41 mN</td><td>82 mN</td><td>+0.15 to +0.16 mm</td><td>+0.13</td><td>+0.11</td><td>+0.06</td><td>−0.06</td></tr>
-<tr><td>8 mm</td><td>2.16 mm</td><td>67 mN</td><td>134 mN</td><td>+0.11 to +0.12 mm</td><td>+0.10</td><td>+0.08</td><td>+0.05</td><td>−0.03</td></tr>
+<tr class="main"><td>2 mm</td><td>1.32 mm</td><td>17 mN</td><td>35 mN</td><td>+0.17 to +0.18 mm</td><td>+0.15</td><td>+0.08</td><td>−0.05</td><td>Near slack</td></tr>
+<tr><td>2.5 mm</td><td>1.43 mm</td><td>22 mN</td><td>44 mN</td><td>+0.11 to +0.16 mm</td><td>+0.14</td><td>+0.07</td><td>−0.04</td><td>−0.39</td></tr>
+<tr><td>3.2 mm</td><td>1.56 mm</td><td>28 mN</td><td>56 mN</td><td>+0.09 to +0.14 mm</td><td>+0.12</td><td>+0.07</td><td>−0.02</td><td>−0.26</td></tr>
+<tr><td>5 mm</td><td>1.81 mm</td><td>45 mN</td><td>90 mN</td><td>+0.07 to +0.11 mm</td><td>+0.10</td><td>+0.06</td><td>0.00</td><td>−0.15</td></tr>
+<tr><td>8 mm</td><td>2.09 mm</td><td>74 mN</td><td>147 mN</td><td>+0.05 to +0.08 mm</td><td>+0.07</td><td>+0.04</td><td>0.00</td><td>−0.10</td></tr>
 </table></div>
 <ul class="read">
-<li><b>Layers separate skin $\eta$:</b> skin force goes up 3×, roll force 2×, film thickness 2×. So the skin gains on the roll, and the swing shrinks or flips. At 2 electrodes the swing barely depends on $\eta$ above 3 mm, so test 3 is what separates them.</li>
-<li><b>Low pull:</b> at 1 mm the model's roll goes slack at voltage, so the numbers stop being useful. Start at 2 mm.</li>
+<li><b>Layers separate skin $\eta$:</b> skin force goes up 3×, roll force 2×, film thickness 2×. So the skin gains on the roll, and the swing shrinks or flips. The sign flips near skin $\eta$ 0.2.</li>
+<li><b>Low pull:</b> below 2 mm the model's roll nears slack at voltage, so the numbers stop being useful, and the roll can buckle.</li>
 <li><b>Tear watch:</b> check the thread corner under the microscope after each pull step. Stop if it nicks. Capacitance before and after each wing.</li>
-<li><b>Thread force:</b> the drop at 1500 V is 5, 7.5, 10, 14 mN for skin $\eta$ 0.05, 0.15, 0.25, 0.4 (2 electrodes), and about the same at every pull above 3 mm. So a gauge on the thread measures the roll force directly.</li>
+<li><b>Thread force:</b> the drop at 1500 V is 4, 7, 10, 14 mN for skin $\eta$ 0.05, 0.15, 0.25, 0.4 (2 electrodes), and about the same at every pull. So a gauge on the thread measures the roll force directly.</li>
 </ul>
 
 <h3>Flapping: what to compare</h3>
@@ -85,6 +87,26 @@
 <p class="note">File name like <code>N2_pull3_1500V_1Hz_001</code>. Note: wing, layers, pull, thread force, voltage, frequency, waveform and offset, drive model, run order, capacitance before and after, time since last run, camera settings, anything that changed. Keep the 10 s before voltage: that baseline is what showed the non-return here.</p>
 </section>
 
+<section class="card" id="core">
+<h2>Roll DEA, before the transmission</h2>
+<p>Same film and drive as the wing, but a straight load path and a clean force. So it is the best place to get $\eta$ and to find out whether the wing's odd behaviour comes from the film.</p>
+<div class="tw"><table>
+<tr><th>#</th><th>Test</th><th>Question</th><th>What to expect (prediction)</th></tr>
+<tr class="main"><td>R1</td><td>Mass, capacitance, leakage on a ramp. Then hold at a fixed stretch, 0 V, force</td><td>Are all layers connected? What is $C_1$?</td><td>2-strip POC core: about 350 mg, 7–8.8 nF, 390 mN at 10 % stretch</td></tr>
+<tr class="main"><td>R2</td><td>Same drive as the wing, from before voltage, film or log the force: 1 Hz, 1500 V peak, sine squared, 10 cycles. Fixed length</td><td>Does the first cycle jump and stay?</td><td>Jump seen here too: it is the film. No jump: on the wing it comes from the roll, bond or knot</td></tr>
+<tr class="main"><td>R3</td><td>Force drop at 500, 1000, 1500 V, shuffled</td><td>$V^2$ or $V^{1.5}$? What is $\eta$?</td><td>$V^2$ is the textbook law. If the force also goes as $V^{1.5}$, it is the film or the drive, not wing geometry</td></tr>
+<tr><td>R4</td><td>Hold 20 s at voltage, then short the device for 60 s</td><td>Fast or slow? Compare the 0.4 isometric and 0.15 cyclic $\eta$ from earlier bundles</td><td>$\eta_f$ here of 0.06–0.17 at 1 Hz would support the wing fit</td></tr>
+<tr><td>R5</td><td>Force at 1, 5, 10, 25 Hz, voltage at the device</td><td>How fast is it? Enough for the stroke?</td><td>Timing work needs 5–10 ms or less</td></tr>
+<tr><td>R6</td><td>Same again at a second stretch</td><td>Does $\eta$ depend on stretch?</td><td>Best stretch is near 1.10 in earlier fits</td></tr>
+</table></div>
+<ul class="read">
+<li><b>Equation:</b> $\Delta F = \eta\, n\, \varepsilon_0 \varepsilon_r (V/H)^2 H\, w_a$, force drop at fixed length. Here $n$ is the active layers and $w_a$ the active width.</li>
+<li><b>Using the POC core:</b> the page lists 246 mN at $\eta$ 0.4 and 1370 V, so $\eta \approx \Delta F / 615$ mN for that core at that voltage. A different core scales with $n w_a$.</li>
+<li><b>Stroke needs:</b> a low $\eta$ means a low stroke. At $\eta_f$ 0.06–0.17 the same core would drop 37–105 mN, against the 95–246 mN the POC page lists. So measure this before designing the transmission ratio.</li>
+<li><b>Send me:</b> the force traces or even just $\Delta F$, layers, active width, thickness, and stretch. They replace the assumed $\eta$ in the wing and in the flapping model.</li>
+</ul>
+</section>
+
 <section class="card" id="video">
 <h2>Video</h2>
 <div class="two">
@@ -99,7 +121,7 @@
 <div class="fig" style="margin-top:12px"><img src="V_time.png" alt="Left, mid trailing edge shift over 10 s: flat until 0.35 s, then a rise to 0.45 mm and cycling between 0.33 and 0.50 mm. Middle, averaged cycle. Right, shift along the edge, largest near the middle."></div>
 <ul class="read">
 <li><b>How:</b> 8.24 px/mm from the ruler, which may not be at the wing's depth. Edge position from sub-pixel matching of its cross-section in all 2001 frames.</li>
-<li><b>Outline:</b> span 51.6 mm along the leading edge, straight for 42.7 mm. Root chord 24 mm, 8.3 mm at the end of the roll. Free root edge, about 17° off square. Roll about 1.6 mm wide. A tight 20 mm strip of 60 µm film would be 1.2 mm, so it is loose, or the strip or film is larger.</li>
+<li><b>Outline:</b> span 51.6 mm along the leading edge, straight for 42.7 mm. Root chord 24 mm, 8.3 mm at the end of the roll. Free root edge, about 17° off square. Roll about 1.6 mm wide. A tight 23 mm strip of 60 µm film would be 1.3 mm, so it is loose, or the film is thicker than 30 µm per layer.</li>
 <li><b>Very sensitive:</b> the edge length changes by only 16 µm over 54 mm (0.03 %) for the 0.18 mm swing. Bowing amplifies small length changes by about 10×, so it is a good sensor, and a small slip can also move it.</li>
 <li><b>The frame holds:</b> the leading edge moves about 1 µm. The tip moves 18 µm along the edge line at the cycle high, away from the root: the tip piece recoiling, which suggests less force in the edge.</li>
 <li><b>Root corner:</b> moves 43 µm towards the leading edge and 10 µm along the edge.</li>
@@ -116,22 +138,23 @@
 <li><b>So it is not a bias:</b> the edge sits about 0.3 mm from rest at 0 V. The earlier fit with a 0.27 minimum voltage is dropped.</li>
 <li><b>First cycle:</b> 0.45 mm at the first peak, and only 0.16 mm comes back. After that, about 0.17 mm of swing on a new path.</li>
 <li><b>Later cycles:</b> rise and fall agree within 3 µm, and the cycle is symmetric about its peak (0.5°). So there is no lag or loop at 1 Hz. A slow creep would show one.</li>
-<li><b>Equation:</b> $u = u_0 + a\,V^{p}$ with $V$ as set. Best $p$ is 1.5 (rms 2.5 µm, against 6.6 µm for $V^2$); a log fit of the rise alone gives 1.4. The first rise gives 1.65. The model gives 2.2, so it does not explain this. Check that the amplifier delivers the set shape.</li>
+<li><b>Equation:</b> $u = u_0 + a\,V^{p}$ with $V$ as set. Best $p$ is 1.5 (rms 2.5 µm, against 6.6 µm for $V^2$); a log fit of the rise alone gives 1.4. The first rise gives 1.65. The model gives 2.2 or steeper, so it does not explain this. Check that the amplifier delivers the set shape.</li>
 <li><b>Size:</b> the set needs only about 30 µm more edge length, so a small slip in the roll or at the knot or tip would do it. Softening in the first cycle would look the same. Tests 1 and 1b decide.</li>
 </ul>
 </section>
 
 <section class="card" id="sign">
 <h2>The roll is active</h2>
-<div class="fig"><img src="V_fit.png" alt="Left, measured and model trailing edge shape. Middle, predicted sag change against roll force for four skin efficiencies: each line crosses the measured swing at its own roll force. Right, predicted sag change against pull for 2 and 4 electrodes: 2-electrode curves collapse above 3 mm, 4-electrode curves spread and the highest efficiency turns negative."></div>
+<div class="fig"><img src="V_fit.png" alt="Left, measured and model trailing edge shape. Middle, predicted sag change against roll efficiency for four skin efficiencies at 2 mm pull: each line crosses the measured swing at its own roll efficiency. Right, predicted sag change against pull for 2 and 4 electrodes: 2-electrode curves collapse together, 4-electrode curves spread and two turn negative or near zero."></div>
 <ul class="read">
-<li><b>As built:</b> 2 electrodes, so 1 active layer in the skin and 60 µm of film. In the roll, top and bottom electrodes face each other from turn to turn, so 2 active layers.</li>
-<li><b>Model:</b> finite elements with the measured outline, no air. Leading edge and tip held, free root edge, roll held at the knot. A 3.2 mm pull matches the 1.6 mm peak sag. Sag at a given pull does not depend on layers.</li>
+<li><b>As built:</b> 2 electrodes, so 1 active layer in the skin and 60 µm of film. In the roll, top and bottom electrodes face each other from turn to turn, so 2 active layers. Strip 23 mm: 20 mm active, 1.5 mm of contact on each side.</li>
+<li><b>Model:</b> finite elements with the measured outline, no air. Leading edge and tip held, free root edge, roll held at the knot.</li>
 <li><b>Equation:</b> on the edge, $T\kappa = N_n$: edge force × curvature = skin pull across the edge. Voltage lowers both. If the skin wins, the edge straightens; if the roll wins, it bows more.</li>
-<li><b>Passive roll:</b> −0.11 mm at skin $\eta$ 0.15, the wrong sign at every $\eta$.</li>
-<li><b>Active roll:</b> $\Delta\delta \approx -0.73\,\eta + 0.155\,\eta_f w_a$, with $\eta_f w_a$ in mm. Only that product counts: 5 and 10 mm bands at the same product give the same sag. So 0.18 mm needs $\eta_f w_a$ of 1.4, 1.9, 2.3, 3.1 mm for skin $\eta$ 0.05, 0.15, 0.25, 0.4.</li>
-<li><b>Electrode width helps:</b> if the roll has the same $\eta$ as the skin, 19 mm of electrode in the roll means $\eta$ about 0.08, 10 mm about 0.2, 8 mm about 0.35. A 5 mm band would need a roll more efficient than the skin.</li>
-<li><b>Against:</b> the root corner moves about 100 µm across and 170–420 µm along in the model, against 43 and 10 µm measured. A stiffer stub cut this before, not rerun for this stack. The model's sag peaks at 18 mm, the real one at about 32 mm, so the tip end is not right yet.</li>
+<li><b>Passive roll:</b> −0.15 mm at skin $\eta$ 0.15 and 2 mm pull, the wrong sign at every $\eta$.</li>
+<li><b>Active roll:</b> at 2 mm pull, the +0.18 mm swing needs $\eta_f$ of 0.064, 0.089, 0.113, 0.148 for skin $\eta$ 0.05, 0.15, 0.25, 0.4. At 3.2 mm: 0.076, 0.101, 0.126, 0.166. So $\eta_f$ is fairly well set at 0.06–0.17, while skin $\eta$ is not.</li>
+<li><b>Same film, same $\eta$?</b> If roll and skin share one $\eta$, it is about 0.07 (2 mm) to 0.09 (3.2 mm). That is low, but near the 0.05–0.15 from the vocal cord fits. The roll has trapped wrinkles and layers that the skin does not, so this is only a guide.</li>
+<li><b>Pull:</b> 2 mm gives 1.32 mm sag, against 1.6 mm measured, and 1.6 mm needs about 3.5 mm. So the pull was more than 2 mm, or the skin was already loose as cut, or the model is too stiff. Test 2 tells which.</li>
+<li><b>Against:</b> the root corner moves 120–220 µm across and 160–410 µm along in the model, against 43 and 10 µm measured. A stiffer stub cut this before, not rerun for this roll. The model's sag peaks at 18 mm, the real one at about 32 mm, so the tip end is not right yet. The model has no first-cycle set and goes as $V^{2.2}$ or steeper.</li>
 <li><b>Not ruled out:</b> out-of-plane motion seen at an angle. Top view alone cannot exclude it, hence the side view.</li>
 </ul>
 </section>
@@ -160,26 +183,27 @@
 
 <section class="card" id="lift">
 <h2>What it means for lift</h2>
-<div class="fig"><img src="V_lift.png" alt="Predicted lift change against pull. With 2 electrodes the active roll gives a negative change at 3.2 and 4 mm, close to zero at 5 mm, while a passive roll is positive. With 4 electrodes all cases are positive and the passive roll is highest."></div>
+<div class="fig"><img src="V_lift.png" alt="Predicted lift change against pull, 3.2 to 5 mm. With 2 electrodes the active roll is slightly negative at 3.2 mm and rises to between 0 and 0.8 mN at 5 mm, below the flat passive roll lines. With 4 electrodes all cases are positive, up to about 3 mN, and the active roll is only a little below passive."></div>
 <div class="tw"><table>
 <tr><th>Lift change, 4 mm pull, 1500 V, 4 m/s, 6°</th><th>Skin $\eta$ 0.05</th><th>0.15</th><th>0.25</th><th>0.4</th></tr>
-<tr class="main"><td>2 electrodes, active roll: as built</td><td>−0.35 mN</td><td>−0.33 mN</td><td>−0.39 mN</td><td>−0.70 mN</td></tr>
-<tr><td>2 electrodes, passive roll</td><td>+0.15 mN</td><td>+0.46 mN</td><td>+0.79 mN</td><td>+1.32 mN</td></tr>
-<tr class="main"><td>4 electrodes, active roll</td><td>+0.22 mN</td><td>+0.80 mN</td><td>+1.33 mN</td><td>+2.11 mN</td></tr>
-<tr><td>4 electrodes, passive roll</td><td>+0.40 mN</td><td>+1.08 mN</td><td>+1.81 mN</td><td>+3.05 mN</td></tr>
+<tr class="main"><td>2 electrodes, active roll: as built</td><td>−0.10 mN</td><td>+0.08 mN</td><td>+0.22 mN</td><td>+0.34 mN</td></tr>
+<tr><td>2 electrodes, passive roll</td><td>+0.19 mN</td><td>+0.58 mN</td><td>+0.98 mN</td><td>+1.60 mN</td></tr>
+<tr class="main"><td>4 electrodes, active roll</td><td>+0.39 mN</td><td>+1.13 mN</td><td>+1.85 mN</td><td>+2.97 mN</td></tr>
+<tr><td>4 electrodes, passive roll</td><td>+0.48 mN</td><td>+1.27 mN</td><td>+2.09 mN</td><td>+3.46 mN</td></tr>
 </table></div>
 <ul class="read">
-<li><b>Baseline:</b> at 0 V the lift is 6.5 mN with 2 electrodes and 5.0 mN with 4, at this pull. For comparison, the POC page has 7 mN of lift change, with 3 active layers, skin $\eta$ 0.5, and 12.4 cm² in the lattice against 6.9 cm² here.</li>
-<li><b>Active roll reverses it:</b> the skin bulges more, but the slacker edge lifts up and loses more lift than the bulge adds. With 2 electrodes: −0.66 to −2.6 mN at 3.2 mm, −0.10 to +0.33 mN at 5 mm.</li>
-<li><b>For lift:</b> keep the electrode out of the roll, or use 4 electrodes, or pull harder. An active roll could still be useful as a separate control, but it fights the skin on one shared channel.</li>
-<li><b>Not in these runs:</b> pulls outside 3–5 mm, where the lift solver failed before (the mesh folds at the corner). So the best pull is still unknown. Inboard of the leading edge root, about 0.9 cm² is not in the lattice. The thread is assumed to hold its position at voltage.</li>
-<li><b>Flapping numbers:</b> the free-flight and L/W figures on the POC and Flittermouse pages used $\eta$ 0.5 on the skin and a passive roll, so treat them as upper limits until tests 3 and 4 give $\eta$. The lift a wing makes without voltage is not affected by this.</li>
+<li><b>Baseline:</b> at 0 V the lift is 6.9 mN with 2 electrodes and 5.1 mN with 4, at this pull. For comparison, the POC page has 7 mN of lift change, with 3 active layers, skin $\eta$ 0.5, and 12.4 cm² in the lattice against 6.9 cm² here.</li>
+<li><b>Active roll cancels the skin:</b> the skin bulges more, but the slacker edge lifts up and loses lift. With 2 electrodes: −0.21 to −0.37 mN at 3.2 mm, +0.03 to +0.83 mN at 5 mm. The lift falls more at low pull.</li>
+<li><b>4 electrodes:</b> the roll takes only 10–15 % off, as the skin then wins. So with an active roll, this is the wing to try. Predicted lift change up to about 3 mN, 40–60 % of the baseline at high $\eta$.</li>
+<li><b>At your 2 mm:</b> no number. The lift solver fails below 3 mm, because the slack skin folds the mesh in plane. A fallback I tried moved the baseline by up to 13 % and still failed at 2 mm, so I dropped it. The trend says the lift change at 2 mm is negative as built.</li>
+<li><b>Not in these runs:</b> inboard of the leading edge root, about 0.9 cm² is not in the lattice. The thread is assumed to hold its position at voltage.</li>
+<li><b>Flapping numbers:</b> the free-flight and L/W figures on the POC and Flittermouse pages used $\eta$ 0.5 on the skin and a passive roll, so treat them as upper limits. The lift a wing makes without voltage is not affected by this.</li>
 </ul>
 </section>
 
 <section class="card" id="files">
 <h2>Files</h2>
-<p class="note">Code: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>fit_wing.py</code>, <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the stack was known (2 active layers): <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
+<p class="note">Code: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>fit_wing.py</code>, <code>fit_roll.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the roll was known: <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}]})});</script>
