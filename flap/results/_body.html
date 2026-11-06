@@ -3,19 +3,22 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Results</p>
 <h1>Results</h1>
 <p class="lead">The main analysis in four figures, filtered from the <a href="../first/">bench page</a> and the <a href="../robot/">robot page</a>, with findings and preliminary conclusions. Figures are drawn as they would go in a paper.</p>
-<p class="note">Updated 5 Nov 2026, 22:33. One wing, bench only, no air. Everything about flight is a model.</p>
-<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
+<p class="note">Updated 6 Nov 2026, 05:14: Fig. 5 and findings 8–10 added, finding 2 narrowed to the bench. One wing, bench only, no air. Everything about flight is a model.</p>
+<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#f5">Fig. 5</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
 
 <section class="card" id="findings">
 <h2>Main findings</h2>
 <ol class="read">
 <li><b>The wing moves, mostly out of plane.</b> 1.8 mm out of plane at 1800 V and 1 Hz, against about 0.3 mm of swing in plane. The cycle high grows about as $V^{3.2}$ from 1000 to 1800 V, the swing within the cycle as $V^{4.2}$. Measured.</li>
-<li><b>It is the edge, not the skin.</b> The roll is stretched 16–22 % (50–96 mN). In the finite elements with the wing's weight, a passive edge gives almost nothing, with any skin efficiency. A strongly active roll ($\eta_f$ 0.4–0.8) gives the measured shape: flat to 1000 V, then 1.7–2.6 mm. Model fitted to one wing.</li>
+<li><b>On the bench, it is the edge, not the skin.</b> The roll is stretched 16–22 % (50–96 mN). In the finite elements with the wing's weight, a passive edge gives almost nothing, with any skin efficiency. A strongly active roll ($\eta_f$ 0.4–0.8) gives the measured shape: flat to 1000 V, then 1.7–2.6 mm. Model fitted to one wing.</li>
 <li><b>Two springs explain it.</b> The edge string ($8T/L^2$) and the skin behind it ($N/c$) hold the edge in parallel. At 0 V the string is about 13× stiffer; once the roll goes slack, only the skin is left. That is why the motion jumps, why it saturates, and why more tension cut it about 13×.</li>
 <li><b>Voltage tunes the edge's mode.</b> About 45 Hz at 0 V, 11–27 Hz at 1.4–1.8 kV. The 15 Hz bump in the 1800 V sweep fits a nearly slack edge.</li>
 <li><b>Lift: the sign depends on the load.</b> Steady, thin aerofoil: +0.2 to +0.4 in $C_L$ at 8 Pa, −0.6 to −1.0 at 15 Pa. The robot's mean load is about 10 Pa.</li>
 <li><b>A passive cord kills the effect; a short active part does not.</b> Tension is uniform along the edge, so an active roll near the body with nylon outboard keeps about 90 % of the motion.</li>
 <li><b>The robot does not close as built.</b> 1.88 g needs about 48 mW at 4 m/s. Two cores give 18–28 mW at the measured or published energy per cycle. Free flight needs about 2 J/kg; a tethered robot does not.</li>
+<li><b>In air, the skin matters too.</b> Only about 15 % of the skin's Maxwell stress stays as a drop in chord tension (the soft edge takes the rest), but the wing sits near membrane divergence ($C_T$ ≈ 3.3 at 4 m/s), so that is enough: the active skin alone adds $\Delta C_L$ +0.09 to +0.37 at 3–6 m/s, at every angle, and always settles. The bench cannot show it: its only load is the wing's weight, 0.65 Pa. <a href="../air/">Wing in air</a>.</li>
+<li><b>A slack edge has no steady state in flow,</b> at 4 m/s and faster, below about 7–9 mN. Discrete rolled fibres on the same wing keep 29 % of their pre-tension and give half the active skin's lift change, for 51 mg more. Model; backed by the earlier wings' bowed fibres.</li>
+<li><b>The force lags the voltage by about 50 ms.</b> This one constant fits the measured fall from 1 to 5 Hz. At 25 Hz, any on/off timing acts as half voltage held: voltage is a slow trim. Held, it trades thrust for lift: +11 to +38 % lift per wing, thrust 0.74 → −0.4 mN, +17 to +33 % power.</li>
 </ol>
 </section>
 
@@ -63,6 +66,17 @@
 </ul>
 </section>
 
+<section class="card" id="f5">
+<h2>Fig. 5. Skin, edge and fibres in air</h2>
+<div class="fig"><img src="fig/Fig5_air.png" alt="a, lift change at 4 metres per second and 9 degrees against voltage for active skin, active edge and four rolled fibres. b, lift against tension coefficient for the active skin at 3, 4 and 6 metres per second, moving towards 2D divergence with voltage. c, edge motion over its 1 Hz value against drive frequency, measured and modelled with force lags of 20, 50 and 100 ms. d, lift against thrust per wing flapping at 25 Hz for 0 V, half and full voltage."></div>
+<ul class="read">
+<li><b>a:</b> finite elements of the built wing coupled to a steady vortex lattice; settled points only. The edge has no steady state beyond 1400 V at 4 m/s.</li>
+<li><b>b:</b> $C_T = N_c/(qc)$ with the skin's mean chord tension. Voltage lowers $N_c$ and moves the wing towards divergence, where lift is most sensitive.</li>
+<li><b>c:</b> time model (sheet and edge as strings, gravity, bench drive) with a first-order lag on the DEA force. 50 ms fits 1–5 Hz; the 15 Hz bump is the edge mode, smoothed in the model.</li>
+<li><b>d:</b> time model in flow (unsteady vortex lattice), 25 Hz, ±20°, 4 m/s, with the lag. Dashed: half the robot weight.</li>
+</ul>
+</section>
+
 <section class="card" id="conclusions">
 <h2>Preliminary conclusions</h2>
 <ul class="read">
@@ -72,6 +86,8 @@
 <li><b>The strongest effect in flight may be dynamic:</b> voltage moves the edge mode through the flapping band, which switches the wing between following and feathering. Steady lift numbers miss this.</li>
 <li><b>Film: 45–90 µm in total,</b> layers set by the drive voltage. Measure the real thickness first.</li>
 <li><b>For a paper:</b> the bench mechanism (Figs. 1–3) stands on its own once $\eta_f$ is measured directly and a second wing repeats it. Fig. 4 is a design study until a tethered test.</li>
+<li><b>Keep the whole skin active and drop discrete fibres.</b> In air the skin is the cleaner lift trim; the edge is a twist trim that must stay above about 10 mN.</li>
+<li><b>Find the 50 ms lag</b> (electrodes of about 20 MΩ? viscoelasticity? the amplifier?) before planning per-stroke control.</li>
 <li><b>Free flight is not within reach</b> without about 2 J/kg per cycle from the cores in a loaded 25 Hz cycle.</li>
 </ul>
 </section>
@@ -86,13 +102,15 @@
 <tr><td>Edge mode</td><td>Pluck at 0 V and 1800 V</td><td>About 45 Hz, and 11–20 Hz</td></tr>
 <tr><td>Film thickness</td><td>Weigh a cut piece</td><td>60 µm assumed; up to about 90 µm if cables and glue are light</td></tr>
 <tr><td>Sign of lift change</td><td>Static wind tunnel, side view</td><td>Edge rises with voltage at 4 m/s</td></tr>
+<tr><td>Skin in air, $\eta_s$</td><td>Skin under a known load (suction box or fan), roll unpowered</td><td>14–50 % more bulge at 1800 V</td></tr>
+<tr><td>Source of the lag</td><td>Electrode resistance; current or blocked force at 1–20 Hz</td><td>About 20 MΩ if it is RC</td></tr>
 <tr><td>Energy per cycle</td><td>Core against a load at 25 Hz</td><td>0.8–1.25 J/kg; free flight needs about 2</td></tr>
 </table></div>
 </section>
 
 <section class="card" id="files">
 <h2>Files</h2>
-<p class="note">Figures as PNG, SVG and AI (PDF), each panel on its own in <code>fig/panels</code>: <a href="fig/Fig1_bench.svg">Fig. 1</a>, <a href="fig/Fig2_mechanism.svg">Fig. 2</a>, <a href="fig/Fig3_edge_design.svg">Fig. 3</a>, <a href="fig/Fig4_robot.svg">Fig. 4</a>. Code: <code>results/figures_results.py</code>, from <code>robot/</code> and <code>first/</code> data. Copies in <code>YEAR2/robot/results</code> (PNG) and <code>results/svg</code>.</p>
+<p class="note">Figures as PNG, SVG and AI (PDF), each panel on its own in <code>fig/panels</code>: <a href="fig/Fig1_bench.svg">Fig. 1</a>, <a href="fig/Fig2_mechanism.svg">Fig. 2</a>, <a href="fig/Fig3_edge_design.svg">Fig. 3</a>, <a href="fig/Fig4_robot.svg">Fig. 4</a>, <a href="fig/Fig5_air.svg">Fig. 5</a>. Code: <code>results/figures_results.py</code>, from <code>robot/</code> and <code>first/</code> data. Copies in <code>YEAR2/robot/results</code> (PNG) and <code>results/svg</code>.</p>
 </section>
 <div class="two">
   <a class="go" href="../robot/"><b>B-cube robot →</b><br>Every question in detail, with equations and steps.</a>

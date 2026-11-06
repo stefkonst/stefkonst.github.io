@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wing in air</title>
+<meta name="description" content="What the active skin, the active edge and discrete rolled fibres each do to the B-cube wing, on the bench and in flow: tension, lift, a slack-edge limit, the force lag, and flapping at 25 Hz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px} h3{font-size:17px;margin-top:16px}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:36px 16px}
+.lead{font-size:18px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+.fig img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.tw{overflow-x:auto;position:relative}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+tr.main td{font-weight:600}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.note{font-size:13.5px;color:var(--muted)}
+ul,ol{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
+ul.read,ol.read{font-size:14.5px;margin-top:10px}
+.eq{overflow-x:auto;margin:6px 0 10px;position:relative}
+.katex{position:relative}
+nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
+.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Wing in air</p>
+<h1>Wing in air</h1>
+<p class="lead">The whole skin is active, not only the edge. What does the skin do on its own, what does the edge do, and how do both compare with a passive membrane and with discrete rolled fibres on the same wing? On the bench and in flow, with the bench data as the check.</p>
+<p class="note">Updated 6 Nov 2026, 05:14. Follows the <a href="../robot/">robot page</a>; main figures on <a href="../results/">Results</a>.</p>
+<div class="warn"><b>What this rests on:</b> one wing measured on the bench (masses, roll length, videos at 1–20 Hz and 1–1.8 kV). Flow is modelled: finite elements of the built wing coupled to a steady vortex lattice, and a time model (sheet + edge + unsteady vortex lattice) checked against the bench sweep. No wind-tunnel data yet. Skin efficiency $\eta_s$ and edge efficiency $\eta_f$ are not measured directly; I show 0.15 and 0.4 for the skin, 0.4 and 0.8 for the edge.</div>
+<nav class="toc"><a href="#short">In short</a><a href="#q1">Skin tension</a><a href="#q2">Lift in flow</a><a href="#q3">Slack edge</a><a href="#q4">Fibres</a><a href="#q5">Force lag</a><a href="#q6">Flapping</a><a href="#design">For B-cube</a><a href="#tests">Tests</a><a href="#model">Equations</a><a href="#limits">Limits</a><a href="#code">Code</a></nav>
+
+<section class="card" id="short">
+<h2>In short</h2>
+<ul class="read">
+<li><b>Yes, the active skin changes tension,</b> but most of its pull does not stay as a tension change. The skin and the edge share the chord: when the skin relaxes, the soft edge moves aft and takes up most of it. At 1800 V, only about 15 % of the skin's Maxwell stress becomes a drop in chord tension (0.06–0.17 N/m out of 0.51), about a third in span.</li>
+<li><b>On the bench this is invisible; in air it is not.</b> The skin's tension sets its bulge under load, and the bench load is the wing's own weight, 0.65 Pa. In flight the load is 8–15 Pa. With a passive edge, the active skin alone adds $\Delta C_L$ +0.09 to +0.14 ($\eta_s$ 0.15) or +0.26 to +0.37 ($\eta_s$ 0.4) at 3–6 m/s and 3–12°, by more camber. It always settles.</li>
+<li><b>The edge does something else.</b> It changes twist, not camber. Up to 1400 V it moves lift by −0.04 to +0.15. Once it goes slack in flow (at 4 m/s or faster, below about 7–9 mN), the wing has no steady state. Keep the edge above about 10 mN in flight.</li>
+<li><b>Discrete fibres on the same wing do less.</b> Four chordwise rolled fibres (51 mg) keep only 29 % of their pre-tension, because the edge bows towards them. At voltage they lose 22 % of their ideal force, and give $\Delta C_L$ +0.05 against +0.11 for the active skin at the same efficiency. They also flatten the wing: −0.2 in $C_L$ at 0 V. This matches the earlier wings, whose fibres bowed and moved the wing 0.3–0.6 % of the chord, against 11.5 % here.</li>
+<li><b>The force lags the voltage by about 50 ms.</b> That alone fits the measured fall of the edge motion from 1 to 5 Hz. At 25 Hz the DEA cannot switch within a stroke: on in the downstroke, on in the upstroke and a sine all act like half voltage held. The voltage is a slow trim, not a per-stroke control.</li>
+<li><b>Flapping at 25 Hz, 4 m/s, per wing:</b> half force on the edge gives +11 % lift, −27 % thrust and +17 % power, and twist goes from 10° to 15°. Full force gives +38 % lift, slightly negative thrust and +33 % power. Full slack loses lift. The skin alone gives +3 to +7 % lift in this model, and +10 to +30 % in the finite elements.</li>
+</ul>
+</section>
+
+<section class="card" id="q1">
+<h2>Does the active skin change tension?</h2>
+<div class="fig"><img src="A_skin.png" alt="Four panels from the finite elements of the built wing on the bench. a, skin tension across the chord against voltage for six designs, with dashed lines for the drop if all the Maxwell stress became tension. b, change of the in-plane bow of the edge against voltage: the skin and the fibres straighten it, the active roll bows it. c, edge height change at 1800 V against pressure on the wing: the active edge flips from down to up, the skin and the fibres move it little. d, thin-aerofoil lift change from the mid-span chord at 0 and 15 Pa."></div>
+<ul class="read">
+<li><b>Equation, the pull:</b> each active layer of skin pushes outward with the Maxwell stress $P = \eta_s\, n\, \varepsilon (V/H)^2 H$, with $n$ active layers, $H$ the layer thickness and $\eta_s$ the share that acts. At 1800 V and $H$ 30 µm, $P$ = 0.40 N/m ($\eta_s$ 0.15) or 1.07 N/m (0.4). The skin's chord tension at 0 V is 0.51 N/m, so if all of $P$ stayed as tension the skin would go slack (dashed lines in a).</li>
+<li><b>Equation, where it goes:</b> the skin is held across the chord by the edge, which is bowed towards the LE: $N_c = 8 T s / L^2$ (tension $T$, bow $s$, length $L$). The skin and the edge are two springs in series. The share that stays as tension is $r = k_e / (k_e + k_s)$, with $k_e = 8T/L^2$ for the edge and $k_s$ for the skin's chord stiffness. The edge is soft (67 N/m² at 29 mN), so $r$ is small. Finite elements: $r$ = 0.15 across the chord, 0.33 along the span, for both skins. The rest becomes edge motion aft (b): 0.12 mm ($\eta_s$ 0.15) and 0.39 mm (0.4).</li>
+<li><b>Trend (a, b):</b> skin alone, chord tension 0.51 → 0.45 or 0.34 N/m, span tension 0.83 → 0.70 or 0.46. The active roll does the opposite in plane: it loses tension and bows by 1.1 mm. As built (both), the two partly cancel in plane.</li>
+<li><b>Equation, the bulge:</b> under a pressure $p$, the skin between the LE and the edge bulges by $h = p\,c^2/(8N_c)$, so $\Delta h/h = -\Delta N_c/N_c$. A 12–33 % drop in $N_c$ gives 14–50 % more camber, but only where there is a load.</li>
+<li><b>Trend (c, d), load:</b> the out-of-plane edge height barely changes with the skin, with or without load (under 0.15 mm). What changes is the shape between the LE and the edge: at 15 Pa, the skin alone gives thin-aerofoil $\Delta C_L$ +0.13 ($\eta_s$ 0.15) and +0.39 (0.4). At 0.65 Pa (the bench), almost nothing. The active edge goes the other way at 15 Pa (−0.6): it rises and washes the wing out.</li>
+<li><b>So:</b> the bench measures the edge, the air will also measure the skin. "It is the edge, not the skin" (robot page) holds on the bench only.</li>
+<li><b>Validate:</b> with the roll unpowered, put a known load on the skin and image the chord at 0 and 1800 V. A suction box at 10 Pa, or a fan, from the side. Prediction: the mid-chord bulge grows by 14–50 %, and the edge stays within 0.15 mm.</li>
+</ul>
+</section>
+
+<section class="card" id="q2">
+<h2>Lift in flow</h2>
+<div class="fig"><img src="A_lift.png" alt="Four panels, finite elements coupled to a steady vortex lattice, built wing. a, lift coefficient against angle of attack at 0 V and at 1800 V for the active skin, the fibres and the active edge at 1400 V. b, lift change at 4 metres per second and 9 degrees against voltage for all designs, open points not settled. c, classic membrane curve of lift against tension coefficient, with the wing's points moving left as voltage lowers the skin tension. d, mid-span chord shape at 0 and 1800 V for the active skin, the active edge and the fibres."></div>
+<ul class="read">
+<li><b>Equation:</b> the sheet is solved with the pressure from a vortex lattice on its current shape, until both agree (steady, attached flow, 3D, the real outline). Lift coefficient $C_L = L/(q S)$, $q = \rho U^2/2$, $S$ = 9.6 cm² in the lattice.</li>
+<li><b>Trend (a):</b> at 0 V every design is the same wing: $C_L$ 0.51, 0.84, 1.13, 1.41 at 3, 6, 9, 12° (4 m/s). This is the passive membrane, the reference. Active skin at 1800 V: +0.11 to +0.13 ($\eta_s$ 0.15), +0.33 to +0.37 (0.4), at every angle: a shift, like more camber. Above about 1.1 the real wing likely stalls at this Reynolds number (about 4,000).</li>
+<li><b>Trend (b):</b> the skin's change is smooth and grows like $V^2$. The edge's is small and changes sign: −0.04 at 1400 V and 4 m/s, +0.15 at 3 m/s. Beyond, a slack edge has no steady state (open points, <a href="#q3">next</a>).</li>
+<li><b>Equation, why the skin works (c):</b> a membrane is set by its tension coefficient $C_T = N_c/(q c)$. As $C_T$ falls towards about 1.7 (2D, inextensible), camber and lift grow without bound: static divergence. This wing sits at $C_T$ ≈ 3.3 at 4 m/s, 0 V, on the steep part. The active skin moves it left, to about 2.2. At 6 m/s it is already at 1.5, held only by the skin's stretch and the finite span. The skin is a lever because the wing already sits near divergence.</li>
+<li><b>Trend (d):</b> mid-span chord, 4 m/s, 9°. Active skin: camber grows from about 9 % to 16 % of the chord, the edge moves little. Active edge: the rear of the chord lifts. Fibres: as the skin, but much less.</li>
+<li><b>Validate:</b> static wind tunnel, 4 m/s, 6° and 9°. First the skin alone (roll unpowered), then the edge alone, randomised order, with a sham. Prediction: skin alone +0.1 to +0.35 in $C_L$ (+1 to +3 mN per wing), camber visible from the side.</li>
+</ul>
+</section>
+
+<section class="card" id="q3">
+<h2>A slack edge in flow</h2>
+<div class="fig"><img src="A_slack.png" alt="a, edge tension against voltage for the active-edge designs at 3, 4 and 6 metres per second, filled where the coupled solution settled, open red where it did not. b, the same against dynamic pressure, with a rough minimum tension line."></div>
+<ul class="read">
+<li><b>What happens:</b> with the edge slack, the skin alone holds the rear of the chord. In flow, lift pulls the rear up, that changes the lift, and the coupled solution never settles. A steady model cannot say if that is divergence or flutter; either way the wing has no steady shape.</li>
+<li><b>Trend:</b> at 3 m/s ($q$ 5.4 Pa) even a slack edge settles. At 4 m/s it needs about 7 mN, at 6 m/s about 9 mN (roughly $T_{min} \approx 0.5\,(q - 1)$ mN with $q$ in Pa). At 1800 V the as-built edge goes to 0.</li>
+<li><b>So:</b> for flight, start the edge at 55–70 mN and let voltage take off at most 40–50 mN, or stay at 1400 V. A fully slack edge is a bench effect, not a flight mode.</li>
+<li><b>Validate:</b> the static wind-tunnel test above, filmed at 200+ fps. Prediction: a visible flutter of the edge at 1800 V and 4 m/s if it goes slack; none at 1400 V.</li>
+</ul>
+</section>
+
+<section class="card" id="q4">
+<h2>Compared with discrete rolled fibres</h2>
+<div class="fig"><img src="A_compare.png" alt="a, lift change at 1800 V, 4 metres per second and 9 degrees, for active skin, active edge, both, and three fibre designs. b, force per chordwise fibre: pre-tension as cut against what the edge holds, and the ideal drop at voltage against the drop in the wing. c, measured edge motion over chord for the earlier wing and this wing."></div>
+<ul class="read">
+<li><b>The comparison wing:</b> same outline, same carbon LE, same unpowered roll as the edge, passive skin, plus four chordwise rolled DEA fibres as in the earlier wings, scaled to this span: 12 mm sheet rolled, 10 mm electrode, 2 active films, 12.5 mm apart, pre-stretch 1.10 (as before) or 1.03. They add 51 mg per wing, and 8 contacts.</li>
+<li><b>Equation:</b> each fibre pulls on the edge, a string of tension $T$. The edge gives way under a point load with stiffness about $4T/L$. That is soft next to the fibre ($EA/c$), so the fibre's pre-tension and its change at voltage mostly go into bowing the edge: $F = F_0\,k_{edge}/(k_{edge} + k_{fibre})$.</li>
+<li><b>Trend (b):</b> pre-tension 16.9 mN as cut, 4.9 mN held (29 %). Ideal drop at 1800 V: 8.0 mN ($\eta$ 0.15), 1.8 in the wing (22 %). With $\eta$ 0.4 the fibres go slack. Meanwhile the edge bows 1.9 mm more than without fibres.</li>
+<li><b>Trend (a):</b> 4 m/s, 9°: fibres +0.05 ($\eta$ 0.15), +0.09 (pre-stretch 1.03), +0.19 ($\eta$ 0.4). Active skin at the same efficiencies: +0.11 and +0.34, with no added mass. The fibres also lower $C_L$ at 0 V by 0.2 (they tension the skin, so it cambers less), and at 6 m/s their effect is about zero.</li>
+<li><b>Backed by the earlier wings (c):</b> in the gliding videos the fibres were visibly bowed with wrinkles beside them, so they carried almost no tension. The FAAV wing moved its tip by 0.2–0.4 mm at 1.6 kV on a 70 mm chord (0.3–0.6 %), and the force campaigns were null. This wing moves its edge 1.84 mm on a 16 mm chord (11.5 %), from tension rather than from fibres. Same reason as the model: a soft edge cannot react a chordwise fibre.</li>
+<li><b>So:</b> for this size, an active skin is better than discrete fibres: same or more lift change per volt, no added mass, no extra contacts, and a smooth wing. Fibres need a stiff edge to push against (a carbon TE frame), which adds the mass back.</li>
+<li><b>Validate:</b> if a fibre wing is built anyway, photograph the edge bow at 0 V. Prediction: about 2 mm more bow than the wing without fibres.</li>
+</ul>
+</section>
+
+<section class="card" id="q5">
+<h2>The force lags the voltage</h2>
+<div class="fig"><img src="A_bench_dyn.png" alt="a, edge motion at the drive frequency over its 1 Hz value against frequency, measured and from the time model without and with a force lag of 20, 50 and 100 ms. b, edge drop over the 1 Hz cycle against voltage, measured and from the model. c, model time trace at 1800 V and 1 Hz: edge height, edge tension and the drive."></div>
+<ul class="read">
+<li><b>Equation:</b> the time model is the sheet and the edge as strings with mass, $m\,\ddot w = N_c w'' + N_s w'' + \dots - m g$, with the edge tension $T = T_0 - \Delta F\,v + EA\langle w'^2\rangle/2$ and $v = (V/V_{max})^2$. The lag is one first-order step on the force: $\tau\,\dot v_{eff} + v_{eff} = v$.</li>
+<li><b>Trend (a):</b> without a lag the model stays flat to about 12 Hz, while the measured motion falls 3.5× from 1 to 5 Hz. A lag of $\tau$ = 50 ms fits 1–5 Hz to within 3–8 % (0.62, 0.43, 0.33, 0.26 against 0.62, 0.43, 0.35, 0.28). It misses the 15 Hz bump: the edge mode, which the damped model smooths away.</li>
+<li><b>Trend (b):</b> at 1800 V the model gives 1.5–1.6 mm against 1.84 measured. At 1400 V it gives 0.15 against 0.82: the measured edge loses its tension more gradually than the model's. $\eta_f$ between 0.4 and 0.8 brackets the data.</li>
+<li><b>Where 50 ms could come from:</b> the electrodes and the cable, if they add up to about 20 MΩ: the roll and skin are about 2.4 nF, and $\tau = RC$. Or the silicone's viscoelasticity. Or the amplifier's slew at 1.8 kV.</li>
+<li><b>So:</b> with this lag, within-stroke timing at 25 Hz is gone (only 13 % of a 25 Hz change passes). Make the lag shorter first if per-stroke control matters, then revisit timing.</li>
+<li><b>Validate:</b> measure the electrode resistance end to end (MΩ range), and the current or the blocked roll force at 1–20 Hz. If $R \approx$ 20 MΩ, better electrodes or contacts fix it.</li>
+</ul>
+</section>
+
+<section class="card" id="q6">
+<h2>Flapping at 25 Hz</h2>
+<div class="fig"><img src="A_flap.png" alt="a to c, mean lift, thrust and aerodynamic power per wing at 25 Hz, plus and minus 20 degrees, 4 metres per second, against 0 V, half force and full voltage held, for the active skin, the active edge, both, and both strong; crosses for voltage on in the down- or upstroke. d, twist amplitude of the mid-span chord against flapping frequency at 0 V and 1800 V."></div>
+<ul class="read">
+<li><b>Model:</b> the time model in flow, unsteady vortex lattice with a shed wake, ±20° stroke, stroke plane at 10°, 4 m/s, with the 50 ms lag. The wing is a 50 × 19 mm rectangle of the same area, edge at 43 mN.</li>
+<li><b>Trend, passive (0 V):</b> 7.9 mN lift, 0.74 mN thrust, 16.3 mW per wing, twist ±10° (the edge already lags the stroke). Half the robot weight is 9.2 mN.</li>
+<li><b>Trend, edge (a–c):</b> half force (or any on/off timing, which the lag averages): 8.8–8.9 mN (+11 %), thrust 0.52–0.55 (−27 %), power 18.8–19.4 mW (+17 %), twist ±15°. Full force held: 11.0 mN (+38 %), thrust −0.4, power 21–22 mW, twist ±23°. Fully slack (both strong): lift falls to 5.8 mN and drag rises (−11 mN thrust).</li>
+<li><b>Trend, skin:</b> $\eta_s$ 0.4 held: 8.5 mN (+7 %), thrust 0.62, power +19 %. This model holds the chord tension through the edge only, so it gives less than the finite elements (+30 %). Take +7 to +30 % as the range.</li>
+<li><b>Trend (d):</b> twist grows with frequency, and voltage adds 12–14° across 15–30 Hz. With the edge mode at 11–27 Hz at voltage, the edge lags the stroke and the wing feathers.</li>
+<li><b>So:</b> voltage trades thrust for lift, at more power. It is a trim knob for slow flight or climb, not free lift. It should stay above the slack limit.</li>
+<li><b>Validate:</b> tethered flapping on the force sensor at 0 V, half and full voltage held, random order, sham channel. Prediction: +10 to +40 % lift, −25 % to −150 % thrust, +15 to +35 % power.</li>
+</ul>
+</section>
+
+<section class="card" id="design">
+<h2>What this means for B-cube</h2>
+<ol class="read">
+<li><b>Keep the whole skin active.</b> It costs no mass, settles in flow, and gives the cleanest lift change: +0.1 to +0.35 in $C_L$ held. Give it its own channel so the skin and the edge can be tested apart.</li>
+<li><b>Use the edge for twist, with a floor.</b> Start it at 55–70 mN and keep it above about 10 mN in flight: limit the voltage, or use the part-active edge with nylon outboard (<a href="../robot/#q2">robot page</a>), which takes off a set share.</li>
+<li><b>Drop discrete fibres</b> for this size. They do less, weigh 51 mg, and need a stiff edge.</li>
+<li><b>Plan voltage as a trim,</b> set once per manoeuvre, until the 50 ms lag is explained and shortened.</li>
+<li><b>Flight budget:</b> half force on the edge closes the lift gap per wing at 4 m/s and 10° (7.9 → 8.9 mN against 9.2 needed), at +17 % aerodynamic power. The power gap of the <a href="../robot/#q6">robot page</a> stays: about 2 J/kg is needed from the cores.</li>
+</ol>
+</section>
+
+<section class="card" id="tests">
+<h2>Tests, in order</h2>
+<div class="tw"><table>
+<tr><th>Test</th><th>What it settles</th><th>Prediction</th></tr>
+<tr><td>Electrode resistance; current or blocked force at 1–20 Hz</td><td>Source of the 50 ms lag</td><td>About 20 MΩ if it is RC</td></tr>
+<tr><td>Skin under a known load (suction box or fan), roll unpowered</td><td>$\eta_s$, and whether the skin matters</td><td>14–50 % more bulge at 1800 V; edge within 0.15 mm</td></tr>
+<tr><td>Static wind tunnel, 4 m/s, 6° and 9°: skin, then edge</td><td>Lift change of each</td><td>Skin +1 to +3 mN per wing; edge ±0.5 mN up to 1400 V</td></tr>
+<tr><td>Same, edge at 1800 V, high-speed</td><td>Slack limit</td><td>Edge flutter at 4 m/s if $T$ drops below about 7 mN</td></tr>
+<tr><td>Tethered flapping, 25 Hz, voltage held</td><td>Trim: lift against thrust</td><td>+10 to +40 % lift, thrust falls, +15 to +35 % power</td></tr>
+</table></div>
+</section>
+
+<section class="card" id="model">
+<h2>Equations</h2>
+<ul class="read">
+<li><b>Maxwell stress of the skin:</b> $P = \eta_s\,n\,\varepsilon_0\varepsilon_r V^2/H$. $\varepsilon_r$ 2.8, $H$ 30 µm, $n$ 1 active layer.</li>
+<li><b>Force the edge loses:</b> $\Delta F = \eta_f\,n_f\,\varepsilon_0\varepsilon_r V^2 w_a / H$, $n_f$ 2 films, $w_a$ 20 mm.</li>
+<li><b>Chord held by the edge:</b> $N_c = 8 T s/L^2$; share kept as tension $r = k_e/(k_e + k_s)$, $k_e = 8T/L^2$. FE: $r$ 0.15 chord, 0.33 span.</li>
+<li><b>Bulge:</b> $h = p c^2/(8 N_c)$. <b>Edge drop:</b> $\Delta z = q_e/(8T/L^2 + N/c)$ (robot page).</li>
+<li><b>Tension coefficient:</b> $C_T = N_c/(q c)$; 2D static divergence at $C_T$ ≈ 1.73 (Glauert + string, <a href="../plagiopatagiales/">section model</a>).</li>
+<li><b>Fibre on a soft edge:</b> $F = F_0\,k_{edge}/(k_{edge}+k_{fibre})$, $k_{edge} \approx 4T/L$, $k_{fibre} = EA/c$.</li>
+<li><b>Lag:</b> $\tau \dot v_{eff} + v_{eff} = (V/V_{max})^2$; a change at $f$ passes as $1/\sqrt{1 + (2\pi f \tau)^2}$: 0.13 at 25 Hz for 50 ms.</li>
+<li><b>Thin aerofoil:</b> $\Delta C_L = 2\int_0^\pi z'(\cos\theta - 1)\,d\theta$ (bench panel d only).</li>
+</ul>
+</section>
+
+<section class="card" id="limits">
+<h2>Limits</h2>
+<ul class="read">
+<li>Steady lattice: attached flow, no stall. Lift above about 1.1 is likely too high at Reynolds number 4,000.</li>
+<li>"No steady state" for a slack edge is a property of the coupled steady solution, capped at 40,000 iterations. It points to divergence or flutter, but does not show which.</li>
+<li>The time model is a rectangle with the same area and a simpler tension law; it gives a smaller skin effect than the finite elements. The lag is one fitted constant, from one wing.</li>
+<li>$\eta_s$, $\eta_f$ and the film thickness are not measured. The fibre wing is a model of the earlier design scaled down, not a built wing.</li>
+</ul>
+</section>
+
+<section class="card" id="code">
+<h2>Code and files</h2>
+<p class="note"><code>air/fe_air.py</code> (finite elements: bench and flow, all designs), <code>air/flap_dyn.py</code> (time model: bench sweep, lag fit, flapping; uses <code>flittermouse/skin.py</code> and <code>uvlm.py</code>), <code>air/figures_air.py</code> (figures, <code>data/air_numbers.json</code>). Run in that order. Figures as PNG and SVG beside this page, copies in <code>YEAR2/air</code>.</p>
+</section>
+<div class="two">
+  <a class="go" href="../results/"><b>Results →</b><br>Main figures and conclusions.</a>
+  <a class="go" href="../robot/"><b>B-cube robot →</b><br>Specification, steps and the edge questions.</a>
+</div>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>

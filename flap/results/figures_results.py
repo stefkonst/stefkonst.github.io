@@ -184,4 +184,52 @@ a.axhline(1, color="k", lw=0.6)
 a.set(xlabel="Energy per cycle (J kg$^{-1}$)", ylabel="Power available / required")
 ST.note(a, "%d %% of 20,000 draws $\\geq$ 1" % round(100 * MC["p_fly"]), xy=(0.04, 0.96))
 save(fig, "Fig4_robot")
+
+# ---------------- Fig. 5: the skin, the edge and fibres in air (flap/air) ----------------
+AD = lambda n: os.path.join(FLAP, "air", "data", n)
+if os.path.exists(AD("fe_flow.jsonl")):
+    FL = [r for r in map(json.loads, open(AD("fe_flow.jsonl"))) if "res" in r]
+    LAG = [r for r in map(json.loads, open(AD("dyn_lag.jsonl"))) if "L_m" in r]
+    DFL = [r for r in map(json.loads, open(AD("dyn_lagflight.jsonl"))) if "L_m" in r] + [r for r in map(json.loads, open(AD("dyn_flight.jsonl"))) if "L_m" in r]
+    flw = lambda d, U, al: next(r for r in FL if r["design"] == d and r["U"] == U and r["alpha"] == al)
+    fig, ax = ST.make_fig(4)
+    a = ax[0]
+    for d, col, lab in (("skin", C[0], r"skin, $\eta_s$ 0.15"), ("skin strong", C[4], r"skin, $\eta_s$ 0.4"), ("edge", C[1], r"edge, $\eta_f$ 0.4"), ("fibres", C[3], "4 fibres, 0.15"), ("fibres, eta 0.4", "#9fd36a", "4 fibres, 0.4")):
+        r = flw(d, 4.0, 9.0)
+        q = [x for x in r["res"] if x.get("CL") is not None and x["ok"]]
+        a.plot([x["V"] / 1e3 for x in q], [x["CL"] - r["res"][0]["CL"] for x in q], "o-", ms=2.5, color=col, label=lab)
+    a.axhline(0, color="k", lw=0.5)
+    a.set(xlabel="Voltage (kV)", ylabel=r"$\Delta C_L$ (4 m s$^{-1}$, 9°)")
+    a.legend(loc="upper left", fontsize=5)
+    a = ax[1]
+    for d, col in (("skin", C[0]), ("skin strong", C[4])):
+        for U, mk in ((3.0, "s"), (4.0, "o"), (6.0, "^")):
+            r = next((r for r in FL if r["design"] == d and r["U"] == U and r["alpha"] in (9.0, 6.0) and (U != 4.0 or r["alpha"] == 9.0)), None)
+            ct = [x["Nc"] / (0.6 * U ** 2 * 0.016) for x in r["res"]]; cl = [x["CL"] for x in r["res"]]
+            a.plot(ct, cl, mk + "-", ms=2.5, color=col)
+    a.axvline(1.73, color="0.5", lw=0.6)
+    ST.note(a, "2D divergence", xy=(0.03, 0.96))
+    a.set(xscale="log", xlabel=r"$C_T = N_c/(qc)$", ylabel=r"$C_L$")
+    from matplotlib.ticker import FixedLocator, NullLocator, FixedFormatter
+    a.xaxis.set_major_locator(FixedLocator([1.5, 2, 3, 4, 6])); a.xaxis.set_major_formatter(FixedFormatter(["1.5", "2", "3", "4", "6"])); a.xaxis.set_minor_locator(NullLocator())
+    ST.note(a, "▲ 6, ● 4, ■ 3 m s$^{-1}$", xy=(0.45, 0.10))
+    a = ax[2]
+    mf = sorted([(W[k]["f"], W[k]["A1_mm"]) for k in W if k.startswith("1800V") and k.endswith("diag_sine")])
+    a.loglog([m[0] for m in mf], [m[1] / mf[0][1] for m in mf], "ks", ms=3, label="measured")
+    for tau, col in ((0.02, C[0]), (0.05, C[1]), (0.1, C[3])):
+        rr = sorted([r for r in LAG if r["tau"] == tau], key=lambda r: r["f_v"])
+        a.loglog([r["f_v"] for r in rr], [r["w_te_a1"] / rr[0]["w_te_a1"] for r in rr], "-", color=col, label=r"$\tau$ = %g ms" % (tau * 1e3))
+    a.set(xlabel="Drive frequency (Hz)", ylabel="Edge motion / 1 Hz value")
+    a.legend(loc="lower left", fontsize=5)
+    a = ax[3]
+    g = lambda d, m, tau: next(r for r in DFL if r["design"] == d and r["mode"] == m and r.get("alpha_deg") == 10.0 and r.get("U", 4.0) == 4.0 and r.get("f", 25.0) == 25.0 and r.get("tau", 0.0) == tau)
+    off = g("passive", "off", 0.0)
+    for d, col, lab in (("skin strong", C[4], "skin 0.4"), ("edge", C[1], "edge 0.4"), ("both", C[3], "both")):
+        rs = [off, g(d, "sin", 0.05), g(d, "on", 0.05)]
+        a.plot([r["T_m"] * 1e3 for r in rs], [r["L_m"] * 1e3 for r in rs], "o-", ms=3, color=col, label=lab)
+    a.axhline(18.4 / 2, color="k", ls="--", lw=0.6)
+    ST.note(a, "0 V → half → full", xy=(0.04, 0.06))
+    a.set(xlabel="Thrust per wing (mN)", ylabel="Lift per wing (mN)")
+    a.legend(loc="upper right", fontsize=5)
+    save(fig, "Fig5_air")
 print("saved", os.listdir(OUTS[0]))
