@@ -74,6 +74,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Model</p>
 <h1>One model for both wings</h1>
 <p class="lead">Lift changes because voltage lowers the tension in the wing, so the wing bulges more under its air load. That is the whole idea. The steps below build it up term by term, with equations on the left and their meaning and how to measure each term on the right.</p>
+<div class="warn"><b>Update, 5 Nov 2026, 22:40:</b> the analytical model here is joined by a two-spring edge equation, fitted to the finite elements of the built wing (correlation 0.93): <a href="../robot/">B-cube robot</a> and <a href="../results/">Results</a>.</div>
 <nav class="toc"><a href="#start">The idea</a><a href="#equations">Equations, step by step</a><a href="#example">Worked example</a><a href="#plots">What it predicts</a><a href="#limits">Where it fails, and what to do</a><a href="../design/">The design</a><a href="../manufacturing/">Manufacturing</a></nav>
 <div class="two" style="margin-bottom:18px">
   <a class="go" href="../wing_analytical.py"><b>wing_analytical.py</b><br>The model, in one file. Change the parameters at the top and run it.</a>

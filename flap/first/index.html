@@ -67,6 +67,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / First wing test</p>
 <h1>First wing test</h1>
 <p class="lead">2-electrode wing. First run 4 Nov: top view, 1500 V, 1 Hz. Second set 5 Nov: side, front and diagonal views, 1000–1800 V, 1–20 Hz, two tensions. It works at every frequency tried. Most of the trailing edge motion is out of plane, up to 1.8 mm at 1800 V, and extra tension cuts that by about 13×. The roll is tense (50–96 mN from its length), and a model with the wing's weight and a strongly active roll reproduces the shape of these results.</p>
+<div class="warn"><b>Update, 5 Nov 2026, 22:40:</b> the model is now taken to the whole robot on <a href="../robot/">B-cube robot</a>, with the main figures on <a href="../results/">Results</a>. New since this page: a passive edge, even with a strong skin, gives almost nothing in the finite elements; under a lift-like load the edge rises and the sign of the lift change depends on the load; voltage pulls the edge mode from about 45 Hz to 11–27 Hz, which fits the 15 Hz bump. Correction: the cycle high grows about as $V^{3.2}$, the swing as $V^{4.2}$.</div>
 <div class="warn"><b>Bench videos, one wing, no voltage or force recorded.</b> Waveforms and layers are from you; the scale is from the ruler, which may sit at another depth. Runs went in ascending voltage, so wear-in may add to the voltage trend. Model numbers are predictions.</div>
 <nav class="toc"><a href="#views">5 Nov: three views</a><a href="#weight">Model with weight</a><a href="#plan">Plan</a><a href="#core">Roll DEA</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
 
@@ -96,7 +97,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="tw"><table>
 <tr><th>Finding</th><th>Number</th><th>Basis</th></tr>
 <tr class="main"><td>Out of plane dominates</td><td>1800 V, 1 Hz: side view high 1.84 mm, swing ±0.69 mm. Front view, in plane: ±0.14 mm</td><td>Measured</td></tr>
-<tr class="main"><td>Steep with voltage</td><td>Side view high 0.28, 0.82, 1.84 mm at 1000, 1400, 1800 V: about $V^4$</td><td>Measured; ascending order</td></tr>
+<tr class="main"><td>Steep with voltage</td><td>Side view high 0.28, 0.82, 1.84 mm at 1000, 1400, 1800 V: about $V^{3.2}$; the swing within the cycle about $V^{4.2}$</td><td>Measured; ascending order</td></tr>
 <tr class="main"><td>Flat tops</td><td>Plain sine gives an almost square motion in the diagonal view. The edge seems to go slack at the top of each cycle</td><td>Measured; reading</td></tr>
 <tr class="main"><td>Frequency</td><td>Diagonal swing ±0.58 mm at 1 Hz, 0.17 at 5 Hz, 0.10 at 10 and 20 Hz, a bump to 0.23 at 15 Hz. The average offset stays 0.35–0.40 mm</td><td>Measured; voltage at the device unknown</td></tr>
 <tr class="main"><td>Tension</td><td>Out-of-plane swing 13× smaller at 1 Hz, 12–40× at 5–15 Hz, no bump. In plane only 2× smaller</td><td>Measured; tension not measured</td></tr>
@@ -140,7 +141,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <tr class="main"><td>Turn the wing over, same side view, 1800 V, 1 Hz. Or stand it on its edge</td><td>Does the out-of-plane motion have a preferred side?</td><td>It moves down with the wing flat. If it still moves towards the floor upside down, weight is involved and the roll must go nearly slack. If it moves the same way relative to the wing, it is a buckle with a built-in side</td></tr>
 <tr class="main"><td>Scope the voltage at the device: 1, 5, 10, 20 Hz, plain sine and sine squared</td><td>Is the fall with frequency the film or the drive? What does plain sine look like?</td><td>If the voltage holds, the film's time constant is about 0.1 s</td></tr>
 <tr class="main"><td>Hang 1 g at mid-edge, side view, at 0 V and at 1800 V</td><td>Does the edge carry 50–100 mN at 0 V, and how much at 1800 V?</td><td>At 70 mN, 1 g adds about 0.6 mm of sag. If the roll goes slack at voltage, much more</td></tr>
-<tr><td>Voltages in shuffled order, 1 min rest between, 10 s before voltage each time</td><td>Is $V^4$ real or wear-in?</td><td>Same steps both ways if real</td></tr>
+<tr><td>Voltages in shuffled order, 1 min rest between, 10 s before voltage each time</td><td>Is the steep rise real or wear-in?</td><td>Same steps both ways if real</td></tr>
 <tr><td>Frequency sweep at 3–4 tensions, 10–25 Hz in 1 Hz steps</td><td>Where is the mode, and does it follow tension?</td><td>A string mode goes as $\sqrt{T}$</td></tr>
 <tr><td>Same set on the 4-electrode wing</td><td>Effect of layers</td><td>See tests 2 and 3 below</td></tr>
 </table></div>
