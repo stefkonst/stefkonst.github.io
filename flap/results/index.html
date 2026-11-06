@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Results</title>
+<meta name="description" content="Main figures, findings and preliminary conclusions for the DEA-skin wing and the B-cube robot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--warn:#9a5b00;--warnbg:#fff4e0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}}
+:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--warn:#ffcc80;--warnbg:#3a2c12}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
+h2{font-size:22px} h3{font-size:17px;margin-top:16px}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:36px 16px}
+.lead{font-size:18px;max-width:820px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
+svg text.h{fill:#c8440a;font-weight:600}
+.fig img,.plotrow>img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
+.tw{overflow-x:auto;position:relative}
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+tr.main td{font-weight:600}
+.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
+.note{font-size:13.5px;color:var(--muted)}
+ul,ol{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
+ul.read{font-size:14.5px;margin-top:10px}
+.eq{overflow-x:auto;margin:6px 0 10px;position:relative}
+.katex{position:relative}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:18px;align-items:start;border-top:1px solid var(--rule);padding:14px 0}
+@media (max-width:820px){.row{grid-template-columns:minmax(0,1fr)}}
+.row p{margin:.2em 0 .5em}
+.step{font-family:'Source Serif 4',Georgia,serif;font-weight:600;font-size:17px;margin:0 0 4px}
+nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
+.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
+.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+.plotrow{display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:14px;align-items:start}
+.plotrow>img{min-width:0}
+@media (max-width:820px){.plotrow{grid-template-columns:minmax(0,1fr)}.ps{max-width:380px}}
+.pcard{--ps-hi:#c8440a}
+.pcard svg text.h{fill:var(--ps-hi);font-weight:600}
+.ps{--ps-hi:#c8440a;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font-size:12.5px;line-height:1.4;background:var(--card)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ps,:root:not([data-theme="light"]) .pcard{--ps-hi:#f08a55}}
+:root[data-theme="dark"] .ps,:root[data-theme="dark"] .pcard{--ps-hi:#f08a55}
+.ps svg{width:100%;height:auto;display:block;margin-bottom:6px}
+.ps svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:10.5px}
+.ps svg text.h{fill:var(--ps-hi);font-weight:600}
+.ps svg text.m{fill:var(--muted)}
+.ps p{margin:.25em 0;color:var(--ink);font-size:12.5px}
+.ps b{color:var(--ps-hi)}
+.ps p+p b{color:var(--muted)}
+</style>
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Results</p>
+<h1>Results</h1>
+<p class="lead">The main analysis in four figures, filtered from the <a href="../first/">bench page</a> and the <a href="../robot/">robot page</a>, with findings and preliminary conclusions. Figures are drawn as they would go in a paper.</p>
+<p class="note">Updated 5 Nov 2026, 22:35. One wing, bench only, no air. Everything about flight is a model.</p>
+<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
+
+<section class="card" id="findings">
+<h2>Main findings</h2>
+<ol class="read">
+<li><b>The wing moves, mostly out of plane.</b> 1.8 mm out of plane at 1800 V and 1 Hz, against about 0.3 mm of swing in plane. The cycle high grows about as $V^{3.2}$ from 1000 to 1800 V. Measured.</li>
+<li><b>It is the edge, not the skin.</b> The roll is stretched 16–22 % (50–96 mN). In the finite elements with the wing's weight, a passive edge gives almost nothing, with any skin efficiency. A strongly active roll ($\eta_f$ 0.4–0.8) gives the measured shape: flat to 1000 V, then 1.7–2.6 mm. Model fitted to one wing.</li>
+<li><b>Two springs explain it.</b> The edge string ($8T/L^2$) and the skin behind it ($N/c$) hold the edge in parallel. At 0 V the string is about 13× stiffer; once the roll goes slack, only the skin is left. That is why the motion jumps, why it saturates, and why more tension cut it about 13×.</li>
+<li><b>Voltage tunes the edge's mode.</b> About 45 Hz at 0 V, 11–27 Hz at 1.4–1.8 kV. The 15 Hz bump in the 1800 V sweep fits a nearly slack edge.</li>
+<li><b>Lift: the sign depends on the load.</b> Steady, thin aerofoil: +0.2 to +0.4 in $C_L$ at 8 Pa, −0.6 to −1.0 at 15 Pa. The robot's mean load is about 10 Pa.</li>
+<li><b>A passive cord kills the effect; a short active part does not.</b> Tension is uniform along the edge, so an active roll near the body with nylon outboard keeps about 90 % of the motion.</li>
+<li><b>The robot does not close as built.</b> 1.88 g needs about 48 mW at 4 m/s. Two cores give 18–28 mW at the measured or published energy per cycle. Free flight needs about 2 J/kg; a tethered robot does not.</li>
+</ol>
+</section>
+
+<section class="card" id="f1">
+<h2>Fig. 1. The wing on the bench</h2>
+<div class="fig"><img src="fig/Fig1_bench.png" alt="a, trailing-edge motion over four seconds at 1800 V and 1 Hz, out of plane from the side and in plane from the front. b, out-of-plane cycle high against voltage on log axes with a V to the 3.2 line. c, swing amplitude against frequency, as built and with more tension. d, roll length as cut and as measured."></div>
+<ul class="read">
+<li><b>a:</b> 1800 V, 1 Hz, sine squared from 0 V. Out of plane (side view) the edge swings between about 0.5 and 1.7 mm, with flat tops: the edge is slack for part of the cycle. In plane (front) it is smaller and lags.</li>
+<li><b>b:</b> cycle high from the side, 0.28, 0.82, 1.84 mm. Slope 3.2 on log axes. Voltages were run in ascending order, so some may be wear-in.</li>
+<li><b>c:</b> diagonal view, 1800 V. Falls about as $f^{-0.8}$ to 5 Hz, bump at 15 Hz, about 0.1 mm at 10 and 20 Hz. Pulling the thread further cuts it about 13× at 1 Hz.</li>
+<li><b>d:</b> roll cut 52.94 mm (mask), measured 61.6–64.8 mm in the front view. With the P7670 fit ($C_1$ 42.8 kPa) and 60–87 µm film, 50–96 mN.</li>
+</ul>
+</section>
+
+<section class="card" id="f2">
+<h2>Fig. 2. Why: the edge goes slack</h2>
+<div class="fig"><img src="fig/Fig2_mechanism.png" alt="a, finite-element edge height change against voltage for edge efficiencies 0, 0.4 and 0.8, with measured points. b, edge equation against finite elements for 160 points. c, first edge mode against voltage for four cases, flapping band shaded, measured bump marked. d, thin-aerofoil lift change against voltage at 8 and 15 Pa for three edge efficiencies."></div>
+<ul class="read">
+<li><b>a:</b> finite elements of the built outline, flat, with its weight, roll pulled 6 mm. $\eta_f$ is the share of Maxwell stress the roll turns into lost force. The measured points sit between 0.4 and 0.8.</li>
+<li><b>b:</b> $\Delta z = q_e/(8T/L^2 + N/c)$, with the roll's tension $T = T_0 - \eta_f n_f \varepsilon (V/H)^2 H w_a + $ (stretch from sagging). Three constants fitted on all 40 roll runs, 0–15 Pa: correlation 0.93, rms 0.21 mm.</li>
+<li><b>c:</b> $f_e = \frac{1}{2\pi}\sqrt{(T(\pi/L)^2 + N/c)/(\mu_e + \rho t c/3)}$. Star: the bump measured at 15 Hz.</li>
+<li><b>d:</b> $\Delta C_L = 2\int_0^\pi z'(\cos\theta-1)\,d\theta$ on the mid-span chord, uniform pressure. Dotted: passive edge, +0.1 from the skin. A rising edge washes the wing out, so at 15 Pa voltage removes lift.</li>
+</ul>
+</section>
+
+<section class="card" id="f3">
+<h2>Fig. 3. Designing the edge</h2>
+<div class="fig"><img src="fig/Fig3_edge_design.png" alt="a, edge height change against voltage at 8 Pa for active roll, passive roll, TPU, nylon, and half roll plus nylon. b, share of the active force that reaches the edge tension against active share, for three materials as the rest. c, finite elements: edge motion at 1800 V against active share with unpowered roll as the rest, at 0 and 15 Pa. d, force the roll loses against film thickness at two fields, with the needed band and the 45 to 90 micrometre window."></div>
+<ul class="read">
+<li><b>a:</b> edge equation, 43 mN, 8 Pa. Only an active roll moves the edge; half active roll + nylon does almost as much.</li>
+<li><b>b:</b> series rule $\Delta T/\Delta F = k_p/(k_a + k_p)$. Stiff rest (nylon): almost all of it. Same roll as the rest: just the active share.</li>
+<li><b>c:</b> finite elements, inner share of the roll with electrodes. Below the dotted line: worse than proportional, because the unpowered part takes up the slack.</li>
+<li><b>d:</b> $\Delta F = \eta_f n_f \varepsilon E^2 H w_a$ at $\eta_f$ 0.4. It depends only on total thickness at a given field. Grey: half to all of the 55 mN a flight edge needs. Green: the 45–90 µm window, capped above by mass and the stroke resonance.</li>
+</ul>
+</section>
+
+<section class="card" id="f4">
+<h2>Fig. 4. The robot</h2>
+<div class="fig"><img src="fig/Fig4_robot.png" alt="a, stroke resonance against lever arm, flapping band shaded. b, edge motion over leading-edge motion against frequency at 0 and 1800 V, bench and in flow. c, power required against speed with the range and three power levels from the cores. d, power available over required against core energy per cycle for 20,000 draws."></div>
+<ul class="read">
+<li><b>a:</b> $f_r = \frac{1}{2\pi}\sqrt{2kr^2/I}$, measured wing (1.6×10⁻⁷ kg m²) and cores (565 mg, $k$ 276 N/m from $C_1$). 20–25 Hz at a 2.2–2.8 mm lever.</li>
+<li><b>b:</b> base-excited edge, damping 0.03 (bench) and 0.15 (flow). In the flapping band (grey) the edge follows at 0 V and stays put at 1800 V: about 15° of twist against 35°.</li>
+<li><b>c:</b> $P = (D_i + D_p + D_b)U/\eta_p$ for 1.88 g. Lines: two cores at 25 Hz, 80 % transmission, at 0.8 (bench), 1.25 (published) and 2.1 J/kg (estimate). Grey: below stall.</li>
+<li><b>d:</b> 20,000 draws over the unknowns. Energy per cycle decides it.</li>
+</ul>
+</section>
+
+<section class="card" id="conclusions">
+<h2>Preliminary conclusions</h2>
+<ul class="read">
+<li><b>The new wing works as an actuator,</b> and for a reason we can write down: the rolled edge loses its tension, and the skin cannot hold the edge on its own. That is new against the earlier wings, whose DEA strips carried almost no tension.</li>
+<li><b>It is a tension switch more than a camber dial.</b> The response is flat, then steep, then saturates. A design should either work near the slack point on purpose (big, fast change) or keep the edge tense (small, proportional change).</li>
+<li><b>Keep the active roll, but maybe only near the body,</b> with nylon outboard. Lighter, shorter high-voltage path, same motion. A fully passive cord removes the effect.</li>
+<li><b>The strongest effect in flight may be dynamic:</b> voltage moves the edge mode through the flapping band, which switches the wing between following and feathering. Steady lift numbers miss this.</li>
+<li><b>Film: 45–90 µm in total,</b> layers set by the drive voltage. Measure the real thickness first.</li>
+<li><b>For a paper:</b> the bench mechanism (Figs. 1–3) stands on its own once $\eta_f$ is measured directly and a second wing repeats it. Fig. 4 is a design study until a tethered test.</li>
+<li><b>Free flight is not within reach</b> without about 2 J/kg per cycle from the cores in a loaded 25 Hz cycle.</li>
+</ul>
+</section>
+
+<section class="card" id="open">
+<h2>Open, and what settles it</h2>
+<div class="tw"><table>
+<tr><th>Open</th><th>Test</th><th>Prediction</th></tr>
+<tr><td>Edge efficiency $\eta_f$</td><td>Roll DEA force drop at 1800 V</td><td>0.4–0.8, so about 40–90 mN lost</td></tr>
+<tr><td>Is the drop gravity?</td><td>Flip the wing</td><td>Edge moves towards the floor in both orientations</td></tr>
+<tr><td>Edge tension</td><td>1 g at the edge centre, 0 V and 1800 V</td><td>About 1.5–3 mm at 0 V from the string alone, $FL/4T$ (less with the skin); several times more at 1800 V</td></tr>
+<tr><td>Edge mode</td><td>Pluck at 0 V and 1800 V</td><td>About 45 Hz, and 11–20 Hz</td></tr>
+<tr><td>Film thickness</td><td>Weigh a cut piece</td><td>60 µm assumed; up to about 90 µm if cables and glue are light</td></tr>
+<tr><td>Sign of lift change</td><td>Static wind tunnel, side view</td><td>Edge rises with voltage at 4 m/s</td></tr>
+<tr><td>Energy per cycle</td><td>Core against a load at 25 Hz</td><td>0.8–1.25 J/kg; free flight needs about 2</td></tr>
+</table></div>
+</section>
+
+<section class="card" id="files">
+<h2>Files</h2>
+<p class="note">Figures as PNG, SVG and AI (PDF), each panel on its own in <code>fig/panels</code>: <a href="fig/Fig1_bench.svg">Fig. 1</a>, <a href="fig/Fig2_mechanism.svg">Fig. 2</a>, <a href="fig/Fig3_edge_design.svg">Fig. 3</a>, <a href="fig/Fig4_robot.svg">Fig. 4</a>. Code: <code>results/figures_results.py</code>, from <code>robot/</code> and <code>first/</code> data. Copies in <code>YEAR2/robot/results</code> (PNG) and <code>results/svg</code>.</p>
+</section>
+<div class="two">
+  <a class="go" href="../robot/"><b>B-cube robot →</b><br>Every question in detail, with equations and steps.</a>
+  <a class="go" href="../first/"><b>First wing test →</b><br>Bench data and the earlier model work.</a>
+</div>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>
