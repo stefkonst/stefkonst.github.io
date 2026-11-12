@@ -95,12 +95,11 @@ def figure1():
 
 if __name__ == "__main__":
     figure1()
-    bench_side = frame("2layer_1800V_1hz_side", 300)
-    bench_front = frame("2layer_1800V_1hz_front_avi", 300)
-    compose("Figure2", "B2_bench", bench_side, "Fig1_bench", "wing on the bench, side, 1.8 kV")
-    compose("Figure3", "B3_mechanism", bench_front, "Fig2_mechanism", "rolled edge, front view")
-    compose("Figure4", "B4_flapping", frame("full_DEA_core_wing_8hz_1200V_side", mode="range"), "Fig6_flapping", "swept area at resonance, 8 Hz")
+    OV = lambda n: mpimg.imread(os.path.join(CACHE, n + ".png"))
+    compose("Figure2", "B2_bench", OV("ov_bench_side"), "Fig1_bench", None, None)
+    compose("Figure3", "B3_mechanism", OV("ov_bench_front"), "Fig2_mechanism", None, None)
+    compose("Figure4", "B4_flapping", OV("ov_robot_side"), "Fig6_flapping", None, None)
     compose_b("Figure5", "B5_wing_state", "Fig8_cycle")
     compose_b("Figure6", "B6_model", "Fig11_model")
-    compose("Figure7", "B7_air", frame("full_DEA_core_wing_8hz_1400V", 0), "Fig5_air", "the wing from above")
-    compose("Figure8", "B8_flight", frame("full_DEA_core_wing_8hz_1200V_diag_good", mode="range"), "Fig7_flight", "swept area, diagonal, 8 Hz")
+    compose("Figure7", "B7_air", OV("ov_bench_diag"), "Fig5_air", None, None)
+    compose("Figure8", "B8_flight", OV("ov_robot_diag"), "Fig7_flight", None, None)

@@ -103,7 +103,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="fig/Figure2.png" alt="Figure2"></div>
 <p class="disc">Voltage drops the trailing edge out of plane, 1.8 mm at 1.8 kV, six times more than it moves in plane. The response is not the smooth V² of an electrostatic actuator: it stays flat, rises steeply and saturates, and extra tension cuts it about 13-fold. That signature points to a change in how the edge is held, not to the skin pushing it.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the wing clamped at its leading edge; at voltage the rolled edge drops out of plane (amber) far more than it moves in plane, with a flat, steep, saturating response.</li><li><b>b:</b> the wing on the bench, side view, 1.8 kV, 1 Hz (frame from the high-speed video; scale bar 10 mm).</li>
+<li><b>a:</b> schematic: the wing clamped at its leading edge; at voltage the rolled edge drops out of plane (amber) far more than it moves in plane, with a flat, steep, saturating response.</li><li><b>b:</b> the wing on the bench, side view: its outline at 0 V (blue) and at the peak of a 1.8 kV, 1 Hz cycle (amber), traced from the high-speed video. The edge drops; the leading edge does not move.</li>
 <li><b>c:</b> 1800 V, 1 Hz, sine squared from 0 V. Out of plane (side view) the edge swings between about 0.5 and 1.7 mm, with flat tops: the edge is slack for part of the cycle. In plane (front) it is smaller and lags.</li>
 <li><b>d:</b> cycle high from the side, 0.28, 0.82, 1.84 mm. Slope 3.2 on log axes. Voltages were run in ascending order, so some may be wear-in.</li>
 <li><b>e:</b> diagonal view, 1800 V. Falls about as $f^{-0.8}$ to 5 Hz, bump at 15 Hz, about 0.1 mm at 10 and 20 Hz. Pulling the thread further cuts it about 13× at 1 Hz.</li>
@@ -116,7 +116,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="fig/Figure3.png" alt="Figure3"></div>
 <p class="disc">The edge is held by two springs in parallel, its own tension and the skin behind it, and at 0 V the tension is about 13 times stiffer. Voltage removes the tension; once the edge is slack only the soft skin is left, so the edge jumps and then saturates. The same tension sets the edge's own mode, which voltage pulls from about 45 Hz into the flapping band.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the edge held by its own tension (maroon) and the skin (blue spring) under a load q; at voltage the tension is gone and only the skin holds it. Right: the equation and the edge mode moved by voltage.</li><li><b>b:</b> the rolled edge seen from the front.</li>
+<li><b>a:</b> schematic: the edge held by its own tension (maroon) and the skin (blue spring) under a load q; at voltage the tension is gone and only the skin holds it. Right: the equation and the edge mode moved by voltage.</li><li><b>b:</b> the same wing from the front: outline at 0 V (blue) and at the 1.8 kV peak (amber). In plane, the edge barely moves.</li>
 <li><b>c:</b> finite elements of the built outline, flat, with its weight, roll pulled 6 mm. $\eta_f$ is the share of Maxwell stress the roll turns into lost force. The measured points sit between 0.4 and 0.8.</li>
 <li><b>d:</b> $\Delta z = q_e/(8T/L^2 + N/c)$, with the roll's tension $T = T_0 - \eta_f n_f \varepsilon (V/H)^2 H w_a + $ (stretch from sagging). Three constants fitted on all 40 roll runs, 0–15 Pa: correlation 0.93, rms 0.21 mm.</li>
 <li><b>e:</b> $f_e = \frac{1}{2\pi}\sqrt{(T(\pi/L)^2 + N/c)/(\mu_e + \rho t c/3)}$. Star: the bump measured at 15 Hz.</li>
@@ -129,7 +129,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="fig/Figure4.png" alt="Figure4"></div>
 <p class="disc">The robot behaves as one resonator: the stroke peaks at 8 Hz, next to its natural frequency of 8.4 Hz, with a damping ratio of 0.07. The peak is half the height that damping allows because the DEA force lags the voltage by about 40 ms, the same order as on the bench. The resonance sits well below the 20–25 Hz the design assumed.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the robot as one resonator (stiffness of the cores, damping, wing and leading edge as the mass) pushed by the DEA core through a force lag; right, its resonance against the design band.</li><li><b>b:</b> area swept by the robot's wing at 8 Hz and 1.2 kV (brightest minus darkest pixel).</li>
+<li><b>a:</b> schematic: the robot as one resonator (stiffness of the cores, damping, wing and leading edge as the mass) pushed by the DEA core through a force lag; right, its resonance against the design band.</li><li><b>b:</b> the robot's wing at the top (blue) and bottom (amber) of the stroke, 8 Hz, 1.2 kV, side view, traced from the video.</li>
 <li><b>c:</b> fundamental of the leading-edge angle (side view) at 1200 V, ± spread between blocks. Line: $\theta_1 = K\,[(1-r^2)^2+(2\zeta r)^2]^{-1/2}\,[1+(2\pi f\tau)^2]^{-1/2}$, $r = f/f_n$, with $\zeta$ 0.07 from the decays: $f_n$ 8.38 ± 0.20 Hz, $\tau$ 38 ± 13 ms. Dotted: the same without the lag. Square: wing unpowered.</li>
 <li><b>d:</b> frequency between successive extremes of the free decays, against their amplitude; diamond: the ringing at the bottom of the 1 Hz cycle. The spring softens at large stroke, so each run sits on its own resonance curve, which broadens the measured peak in a.</li>
 <li><b>e:</b> dotted lines $\propto V^2$ from the 1000 V (1 Hz) and 1200 V (8 Hz) points. At resonance, 1400 V adds only 8 %.</li>
@@ -167,7 +167,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="fig/Figure7.png" alt="Figure7"></div>
 <p class="disc">In flow the loads are ten times those on the bench and the skin's own effect appears: only about 15 % of its electrostatic stress becomes a drop in tension, but the wing sits near membrane divergence, so the lift coefficient changes by up to 0.37. Discrete fibres on the same wing lose most of their pre-tension to the bowing edge and give half the effect for more mass. The whole skin, not a few fibres, is the efficient actuator.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the wing section in flow cambers further at voltage (amber); right, discrete fibres on the same wing bow with the soft edge.</li><li><b>b:</b> the wing from above (top view).</li>
+<li><b>a:</b> schematic: the wing section in flow cambers further at voltage (amber); right, discrete fibres on the same wing bow with the soft edge.</li><li><b>b:</b> the wing on the bench, diagonal view: outline at 0 V (blue) and at the 1.8 kV peak (amber). This shape change, small without load, is what the flow amplifies into camber.</li>
 <li><b>c:</b> finite elements of the built wing coupled to a steady vortex lattice; settled points only. The edge has no steady state beyond 1400 V at 4 m/s.</li>
 <li><b>d:</b> $C_T = N_c/(qc)$ with the skin's mean chord tension. Voltage lowers $N_c$ and moves the wing towards divergence, where lift is most sensitive.</li>
 <li><b>e:</b> time model (sheet and edge as strings, gravity, bench drive) with a first-order lag on the DEA force. 50 ms fits 1–5 Hz; the robot's resonance gives 38 ± 13 ms (Fig. 4a); the 15 Hz bump is the edge mode, smoothed in the model.</li>
@@ -180,7 +180,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="fig"><img src="fig/Figure8.png" alt="Figure8"></div>
 <p class="disc">Flapping makes thrust only above a Strouhal number of about 0.15; the robot as built sits at 0.05 at 4 m/s, so at 8.4 Hz its flapping adds drag. Lift at these speeds comes from forward flight and barely depends on the stroke. Raising the stroke frequency to 16–25 Hz is the first step towards flight, before energy per cycle matters.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the wake of the robot's stroke as built (small, slow: net drag) and at 16–25 Hz (net thrust); bottom, the Strouhal number of each.</li><li><b>b:</b> area swept by the wing in the diagonal view at 8 Hz.</li>
+<li><b>a:</b> schematic: the wake of the robot's stroke as built (small, slow: net drag) and at 16–25 Hz (net thrust); bottom, the Strouhal number of each.</li><li><b>b:</b> the wing in the diagonal view at the top (blue) and bottom (amber) of the stroke, 8 Hz, 1.2 kV.</li>
 <li><b>c, d:</b> time model in flow (strings for sheet and edge, unsteady vortex lattice with a shed wake), α 10°, wing at 0 V, 50 × 19 mm rectangle of the same area. Measured kinematics: 8.4 Hz, ±12.2° (half the measured peak-to-peak angle). At 4 m/s: -0.69 mN thrust per wing measured, +0.74 mN at the design point.</li>
 <li><b>e:</b> all runs, α 6° and 10°, against $St = f A_{tip}/U$ with $A_{tip} = 2R\sin\Phi$, $R$ 50 mm. Thrust turns positive at $St \approx 0.15$. Lift (d) is set by the forward speed: 7.7 mN against 7.9 mN per wing at 4 m/s.</li>
 </ul>

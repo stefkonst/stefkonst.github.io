@@ -54,7 +54,7 @@ un = next(r for r in runs if r["run"].startswith("only"))
 a.plot([un["f"]], [un["A"][0]], "s", mfc="white", mec=C[1], ms=4, label="wing unpowered")
 a.set(xlabel="Drive frequency (Hz)", ylabel="Stroke, fundamental (deg)", ylim=(0, 26), xlim=(0, 16))
 a.legend(loc="upper left", fontsize=5)
-ST.note(a, r"fit: $f_n$ %.1f Hz, $\zeta$ %.2f" % (P["fn"], P["zeta"]), xy=(0.66, 0.70))
+ST.note(a, r"fit: $f_n$ %.1f Hz, $\zeta$ %.2f" % (P["fn"], P["zeta"]), xy=(0.55, 0.40))
 
 a = ax[1]
 for d, col, lab in ((DEC[0], C[3], "decay after 1400 V (side)"), (DEC[1], C[1], "decay, wing unpowered (diag.)")):
@@ -66,8 +66,8 @@ a.axhline(P["fn"], color=C[0], lw=0.6, ls="--")
 ST.note(a, "sweep fit", xy=(0.03, (P["fn"] - 7.2) / 3.0 + 0.045))
 a.axhline(8.0, color="0.6", lw=0.5)
 ST.note(a, "drive 8 Hz", xy=(0.03, (8.0 - 7.2) / 3.0 - 0.01))
-a.set(xlabel="Amplitude, half peak to peak (deg)", ylabel="Free frequency (Hz)", ylim=(7.2, 10.2), xlim=(0, 7))
-a.legend(loc="lower right", fontsize=5)
+a.set(xlabel="Amplitude, half peak to peak (deg)", ylabel="Free frequency (Hz)", ylim=(7.2, 11.0), xlim=(0, 7))
+a.legend(loc="upper right", fontsize=5)
 
 a = ax[2]
 v1 = {r["V"]: r["A"][0] for r in runs if r["f_drive"] == 1 and r["run"].startswith("full")}
