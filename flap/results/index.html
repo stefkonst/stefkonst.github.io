@@ -61,6 +61,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 .ps p{margin:.25em 0;color:var(--ink);font-size:12.5px}
 .ps b{color:var(--ps-hi)}
 .ps p+p b{color:var(--muted)}
+.disc{font-size:15.5px;line-height:1.6;margin:12px 0 14px;max-width:880px}
 </style>
 <body>
 <div class="wrap">
@@ -87,17 +88,21 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f1">
 <h2>Fig. 1. B-cube and its all-DEA wing</h2>
-<div class="fig"><img src="fig/Fig10_schematic.png" alt="a to c, the robot in side, diagonal and top views from the high-speed camera; d, schematic side view in the stroke plane with the DEA cores, lever, hinge, carbon leading edge, DEA skin and the rolled DEA edge tied to an anchor off the stroke axis; e, the skin stack and the rolled edge; f, block diagram of the drive, DEA core, stroke mode, wing DEA, wing mode and video."></div>
+<div class="fig"><img src="blocks/B1_robot.svg" alt="Schematic of B-cube: a body with two rolled DEA cores, a hinge and lever driving a carbon leading edge, a DEA skin and a rolled DEA trailing edge anchored to the body; inset, the skin stack and the rolled edge."></div>
+<p class="disc">B-cube makes the wing itself an actuator: the whole skin and its rolled trailing edge are DEAs on the same drive as the core. The rolled edge does two jobs, carrying the tension that shapes the wing and the electrode contacts of a film too thin to connect otherwise. One drive therefore reaches the stroke along two paths, through the core and through the wing's tension, and the rest of the figures resolve how they couple.</p>
+<div class="fig" style="margin-top:10px"><img src="fig/Fig0_robot.png" alt="The robot in side, diagonal and top views from the high-speed camera, and the motion range at 8 Hz in each view."></div>
+<div class="fig" style="margin-top:10px"><img src="blocks/B1_system.svg" alt="Block diagram: drive to DEA core and wing DEA; core drives the stroke mode through a lag; wing tension sets the wing mode; stroke and wing mode coupled; the video sees both."></div>
 <ul class="read">
-<li><b>a–c:</b> the robot in the three camera views, 200 fps, scale bars 10 mm.</li>
-<li><b>d:</b> side view in the stroke plane. Two rolled DEA cores (one drives, one is the spring) turn the carbon leading edge about a hinge through a lever. The DEA skin spans the wing; its rolled DEA edge is tied to the body at an anchor off the stroke axis.</li>
-<li><b>e:</b> the skin stack (two carbon-nanotube electrodes, one active silicone layer) and the rolled edge, which also carries the contacts. At voltage the skin is squeezed and the edge loses tension.</li>
-<li><b>f:</b> the system as modelled: one drive signal for core and wing; the core drives the stroke through a force lag; the edge tension sets a wing mode that couples to the stroke (red); the video sees both.</li>
+<li><b>Top:</b> a, the robot in the stroke plane: two rolled DEA cores (one drives, one is the spring) turn the carbon leading edge about a hinge through a lever; the DEA skin spans the wing and its rolled DEA edge is tied to the body off the stroke axis. b, the skin stack (two carbon-nanotube electrodes, one active silicone layer) and the rolled edge.</li>
+<li><b>Middle:</b> the robot in the three camera views at 200 fps, and the area swept by the wing at 8 Hz (brightest minus darkest pixel).</li>
+<li><b>Bottom:</b> the system as modelled. One drive signal powers core and wing; the core drives the stroke through a force lag; the edge tension sets a wing mode coupled to the stroke (red); the video records their sum.</li>
 </ul>
 </section>
 
 <section class="card" id="f2">
 <h2>Fig. 2. The wing on the bench</h2>
+<div class="fig"><img src="blocks/B2_bench.svg" alt="Schematic for this figure."></div>
+<p class="disc">Voltage drops the trailing edge out of plane, 1.8 mm at 1.8 kV, six times more than it moves in plane. The response is not the smooth V² of an electrostatic actuator: it stays flat, rises steeply and saturates, and extra tension cuts it about 13-fold. That signature points to a change in how the edge is held, not to the skin pushing it.</p>
 <div class="fig"><img src="fig/Fig1_bench.png" alt="a, trailing-edge motion over four seconds at 1800 V and 1 Hz, out of plane from the side and in plane from the front. b, out-of-plane cycle high against voltage on log axes with a V to the 3.2 line. c, swing amplitude against frequency, as built and with more tension. d, roll length as cut and as measured."></div>
 <ul class="read">
 <li><b>a:</b> 1800 V, 1 Hz, sine squared from 0 V. Out of plane (side view) the edge swings between about 0.5 and 1.7 mm, with flat tops: the edge is slack for part of the cycle. In plane (front) it is smaller and lags.</li>
@@ -109,6 +114,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f3">
 <h2>Fig. 3. Why: the edge goes slack</h2>
+<div class="fig"><img src="blocks/B3_mechanism.svg" alt="Schematic for this figure."></div>
+<p class="disc">The edge is held by two springs in parallel, its own tension and the skin behind it, and at 0 V the tension is about 13 times stiffer. Voltage removes the tension; once the edge is slack only the soft skin is left, so the edge jumps and then saturates. The same tension sets the edge's own mode, which voltage pulls from about 45 Hz into the flapping band.</p>
 <div class="fig"><img src="fig/Fig2_mechanism.png" alt="a, finite-element edge height change against voltage for edge efficiencies 0, 0.4 and 0.8, with measured points. b, edge equation against finite elements for 160 points. c, first edge mode against voltage for four cases, flapping band shaded, measured bump marked. d, thin-aerofoil lift change against voltage at 8 and 15 Pa for three edge efficiencies."></div>
 <ul class="read">
 <li><b>a:</b> finite elements of the built outline, flat, with its weight, roll pulled 6 mm. $\eta_f$ is the share of Maxwell stress the roll turns into lost force. The measured points sit between 0.4 and 0.8.</li>
@@ -120,6 +127,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f4">
 <h2>Fig. 4. The robot flapping</h2>
+<div class="fig"><img src="blocks/B4_flapping.svg" alt="Schematic for this figure."></div>
+<p class="disc">The robot behaves as one resonator: the stroke peaks at 8 Hz, next to its natural frequency of 8.4 Hz, with a damping ratio of 0.07. The peak is half the height that damping allows because the DEA force lags the voltage by about 40 ms, the same order as on the bench. The resonance sits well below the 20–25 Hz the design assumed.</p>
 <div class="fig" style="margin-bottom:10px"><img src="fig/Fig9_sweep.png" alt="Swept area of the wing at 1, 5, 7, 8, 9, 10 and 15 Hz with the wing powered and at 8 Hz unpowered, 1200 V, same scale."></div>
 <div class="fig"><img src="fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency with a one-mode fit with and without lag; b, free-vibration frequency against amplitude; c, stroke against voltage at 1 and 8 Hz; d, model stroke at 8 Hz against natural frequency with measured values for powered and unpowered wing."></div>
 <ul class="read">
@@ -133,6 +142,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f5">
 <h2>Fig. 5. Wing powered against unpowered</h2>
+<div class="fig"><img src="blocks/B5_wing_state.svg" alt="Schematic for this figure."></div>
+<p class="disc">With the wing powered, the robot strokes 20 % further and its cycle loses most of its lopsidedness. Both runs reach the same lowest point; the extra stroke is all on one side, where a tense edge would hold the wing back. A drift of the natural frequency could change the size but not the shape, so the wing's state changed the robot's mechanics.</p>
 <div class="fig"><img src="fig/Fig8_cycle.png" alt="a and b, leading edge and lower outline at 12 phases of one 8 Hz cycle with the wing powered and unpowered, in millimetres from the hinge; c, stroke of each of 35 cycles for each run; d, the mean cycle of each run aligned at the lowest point."></div>
 <ul class="read">
 <li><b>a, b:</b> 12 phases of one cycle at 8 Hz, 1200 V, over a faded frame, in mm from the hinge. Solid: leading edge; dotted: lower outline of the wing.</li>
@@ -143,6 +154,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f6">
 <h2>Fig. 6. A model of the stroke and the wing</h2>
+<div class="fig"><img src="blocks/B6_model.svg" alt="Schematic for this figure."></div>
+<p class="disc">A second mode, the wing bending with its tense edge, explains both changes: at 0 V it sits at 17 Hz, on the stroke's second harmonic, where it loads the stroke and amplifies its 16 Hz part. The bench wing model places a 17 Hz mode at about 4 mN of edge tension, which the roll loses at 1.2 kV, so voltage slackens the edge and moves the mode out of the band. One chain links bench and robot: voltage removes tension, tension sets the mode, the mode limits the stroke.</p>
 <div class="fig"><img src="fig/Fig11_model.png" alt="a, asymmetry of the stroke spring for each run from harmonic balance; b, mean cycles, video and model; c, harmonic amplitudes, video and model; d, edge mode against edge tension from the wing model, with the fitted robot wing mode at 17 Hz and the bench tension range."></div>
 <ul class="read">
 <li><b>Model:</b> stroke $\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta + \beta\theta^2 = G u(t) - \mu\omega_w^2 q$, $\tau\dot u + u = \sin^4(\pi f t)$; wing mode $\ddot q + 2\zeta_w\omega_w\dot q + \omega_w^2 q = -\ddot\theta$; the video sees $\theta + q$.</li>
@@ -154,6 +167,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f7">
 <h2>Fig. 7. Skin, edge and fibres in air</h2>
+<div class="fig"><img src="blocks/B7_air.svg" alt="Schematic for this figure."></div>
+<p class="disc">In flow the loads are ten times those on the bench and the skin's own effect appears: only about 15 % of its electrostatic stress becomes a drop in tension, but the wing sits near membrane divergence, so the lift coefficient changes by up to 0.37. Discrete fibres on the same wing lose most of their pre-tension to the bowing edge and give half the effect for more mass. The whole skin, not a few fibres, is the efficient actuator.</p>
 <div class="fig"><img src="fig/Fig5_air.png" alt="a, lift change at 4 metres per second and 9 degrees against voltage for active skin, active edge and four rolled fibres. b, lift against tension coefficient for the active skin at 3, 4 and 6 metres per second, moving towards 2D divergence with voltage. c, edge motion over its 1 Hz value against drive frequency, measured and modelled with force lags of 20, 50 and 100 ms. d, lift against thrust per wing flapping at 25 Hz for 0 V, half and full voltage."></div>
 <ul class="read">
 <li><b>a:</b> finite elements of the built wing coupled to a steady vortex lattice; settled points only. The edge has no steady state beyond 1400 V at 4 m/s.</li>
@@ -165,6 +180,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f8">
 <h2>Fig. 8. Flight at the measured kinematics</h2>
+<div class="fig"><img src="blocks/B8_flight.svg" alt="Schematic for this figure."></div>
+<p class="disc">Flapping makes thrust only above a Strouhal number of about 0.15; the robot as built sits at 0.05 at 4 m/s, so at 8.4 Hz its flapping adds drag. Lift at these speeds comes from forward flight and barely depends on the stroke. Raising the stroke frequency to 16–25 Hz is the first step towards flight, before energy per cycle matters.</p>
 <div class="fig"><img src="fig/Fig7_flight.png" alt="a, thrust per wing against flight speed at the measured kinematics and at higher frequencies; b, lift per wing against speed with half the robot weight; c, thrust against Strouhal number."></div>
 <ul class="read">
 <li><b>a, b:</b> time model in flow (strings for sheet and edge, unsteady vortex lattice with a shed wake), α 10°, wing at 0 V, 50 × 19 mm rectangle of the same area. Measured kinematics: 8.4 Hz, ±12.2° (half the measured peak-to-peak angle). At 4 m/s: -0.69 mN thrust per wing measured, +0.74 mN at the design point.</li>

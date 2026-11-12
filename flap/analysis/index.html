@@ -39,6 +39,7 @@ ul.read,ol.read{font-size:14.5px;margin-top:10px}
 nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 .go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
 .go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
+.disc{font-size:15.5px;line-height:1.6;margin:12px 0 14px;max-width:880px}
 </style>
 </head>
 <body>
@@ -60,6 +61,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="gap">
 <h2>The 20 %</h2>
+<div class="fig"><img src="../results/blocks/B5_wing_state.svg" alt="Schematic."></div>
+<p class="disc">With the wing powered, the robot strokes 20 % further and its cycle loses most of its lopsidedness. Both runs reach the same lowest point; the extra stroke is all on one side, where a tense edge would hold the wing back. A drift of the natural frequency could change the size but not the shape, so the wing's state changed the robot's mechanics.</p>
 <div class="fig"><img src="../results/fig/Fig8_cycle.png" alt="a and b, the leading edge and lower outline at 12 phases of one 8 Hz cycle, wing powered and unpowered, over a faded frame, in millimetres from the hinge. c, stroke of each of 35 cycles for each run. d, the mean cycle of each run, aligned at the lowest point."></div>
 <ul class="read">
 <li><b>Measured (c):</b> 24.3 ± 1.0° peak to peak with the wing powered, 20.2 ± 0.7° with it unpowered, 35 cycles each; the ranges barely touch (21.7–25.1° against 19.7–22.4°). In the fundamental: 12.4° against 9.1°, +37 %. The gap is four times the cycle-to-cycle spread.</li>
@@ -97,6 +100,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="fn">
 <h2>Natural frequency</h2>
+<div class="fig"><img src="../results/blocks/B4_flapping.svg" alt="Schematic."></div>
+<p class="disc">The robot behaves as one resonator: the stroke peaks at 8 Hz, next to its natural frequency of 8.4 Hz, with a damping ratio of 0.07. The peak is half the height that damping allows because the DEA force lags the voltage by about 40 ms, the same order as on the bench. The resonance sits well below the 20–25 Hz the design assumed.</p>
 <div class="fig"><img src="../results/fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency with a one-mode fit with and without lag; b, free-vibration frequency against amplitude; c, stroke against voltage at 1 and 8 Hz; d, stroke at 8 Hz against natural frequency with the measured powered and unpowered strokes."></div>
 <ul class="read">
 <li><b>Equation (a):</b> $\theta_1(f) = K\,[(1-r^2)^2+(2\zeta r)^2]^{-1/2}\,[1+(2\pi f\tau)^2]^{-1/2}$, $r = f/f_n$. With $\zeta$ 0.07 from the decays: $f_n$ 8.38 ± 0.20 Hz, force lag $\tau$ 38 ± 13 ms. Without the lag the peak would be twice as high.</li>
@@ -108,6 +113,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="why">
 <h2>A model that explains it</h2>
+<div class="fig"><img src="../results/blocks/B6_model.svg" alt="Schematic."></div>
+<p class="disc">A second mode, the wing bending with its tense edge, explains both changes: at 0 V it sits at 17 Hz, on the stroke's second harmonic, where it loads the stroke and amplifies its 16 Hz part. The bench wing model places a 17 Hz mode at about 4 mN of edge tension, which the roll loses at 1.2 kV, so voltage slackens the edge and moves the mode out of the band. One chain links bench and robot: voltage removes tension, tension sets the mode, the mode limits the stroke.</p>
 <div class="fig"><img src="../results/fig/Fig11_model.png" alt="a, asymmetry of the stroke spring per run; b, mean cycles, video and model; c, harmonics, video and model; d, edge mode against edge tension with the robot's fitted wing mode."></div>
 <ul class="read">
 <li><b>Stroke:</b> $\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta + \beta\theta^2 = G u(t) - \mu\omega_w^2 q$, with the core's force $u$ lagged ($\tau\dot u + u = \sin^4\pi f t$).</li>
