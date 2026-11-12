@@ -46,7 +46,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Analysis</p>
 <h1>Analysis and discussion</h1>
 <p class="lead">What the high-speed videos of the robot say, read as closely as they allow. The main question: does powering the wing change how the robot flaps? At 8 Hz and 1200 V, the run with the wing powered swings 20 % further than the run with only the core powered, and its cycle has a different shape. Everything on this page comes from the video.</p>
-<nav class="toc"><a href="#sweep">Sweep</a><a href="#gap">The 20 %</a><a href="#drift">Drift or wing?</a><a href="#shape">Shape</a><a href="#fn">Natural frequency</a><a href="#why">Why</a><a href="#further">Further analysis</a><a href="#method">Method</a></nav>
+<nav class="toc"><a href="#sweep">Sweep</a><a href="#gap">The 20 %</a><a href="#drift">Drift or wing?</a><a href="#shape">Shape</a><a href="#fn">Natural frequency</a><a href="#why">Model</a><a href="#further">Further analysis</a><a href="#method">Method</a></nav>
 
 <section class="card" id="sweep">
 <h2>The robot across the sweep</h2>
@@ -107,18 +107,20 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 </section>
 
 <section class="card" id="why">
-<h2>Why powering the wing could help the stroke</h2>
+<h2>A model that explains it</h2>
+<div class="fig"><img src="../results/fig/Fig11_model.png" alt="a, asymmetry of the stroke spring per run; b, mean cycles, video and model; c, harmonics, video and model; d, edge mode against edge tension with the robot's fitted wing mode."></div>
 <ul class="read">
-<li><b>The membrane is a spring on the stroke.</b> The skin is stretched between the leading edge and the body, and the rolled trailing edge is tied to the body. As the leading edge swings, the membrane is stretched more on one side of the stroke than the other: a stiff, lopsided spring. That is the $\beta$ above.</li>
-<li><b>Voltage slackens it.</b> On the bench, voltage takes the tension out of the rolled edge until it goes slack (<a href="../results/#f3">Results, Fig. 3</a>). On the robot, that removes part of the membrane's pull on the leading edge.</li>
-<li><b>What follows:</b> a softer and more symmetric restoring force, so less 2nd harmonic; a natural frequency nearer the 8 Hz drive and a larger static gain, so a larger stroke on the side where the membrane held it back. Both are seen: less 2nd harmonic, and a larger stroke on one side of the cycle only (Fig. above, d).</li>
-<li><b>What it would mean:</b> the wing's voltage tunes the robot's stroke, not only the wing's shape. With a 40–50 ms force lag this is a slow control, set over many strokes, like a trim of amplitude.</li>
+<li><b>Stroke:</b> $\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta + \beta\theta^2 = G u(t) - \mu\omega_w^2 q$, with the core's force $u$ lagged ($\tau\dot u + u = \sin^4\pi f t$).</li>
+<li><b>Spring asymmetry (a):</b> the ratio $X_2/X_1^2$ does not depend on when the clock starts, so it gives $\beta$ for each run without a drive signal. Powered: one real value at 7 and 8 Hz and at 1.4 kV, and with it the model reproduces the powered 2nd harmonic (0.76° against 0.72°). Unpowered: opposite sign, three times larger, and not real: a phase lag at 16 Hz, so a resonance near twice the stroke frequency. A drift of $f_n$ changes these values by less than 10 %.</li>
+<li><b>Wing mode (b, c):</b> $\ddot q + 2\zeta_w\omega_w\dot q + \omega_w^2 q = -\ddot\theta$, the leading edge bending with the tense membrane; the video sees $\theta + q$. Fitted to five clock-free numbers of the unpowered run: $f_w$ 17.0 ± 1.1 Hz, damping 0.05, coupling 0.21. It gives the size (9.34° against 9.07°) and the 2nd harmonic (1.85° against 1.71°) within 1 s.d., and the cycle shape; it misses the 3rd harmonic. A static one-sided spring gets the size but not the shape.</li>
+<li><b>Edge tension (d):</b> the bench wing model's edge mode is 17 Hz at $T \approx$ 4.2 mN, against 50–96 mN on the bench mount, and 10 Hz when slack. At 1.2 kV the roll loses 3–38 mN, so it goes slack and the mode leaves the band.</li>
+<li><b>So:</b> at 0 V the barely tense edge gives the wing a mode at 17 Hz that takes energy from the stroke and amplifies its 16 Hz part; voltage slackens the edge, removes the mode and frees the stroke. Prediction to check: the edge on the robot carries about 4 mN at rest.</li>
 </ul>
 </section>
 
 <section class="card" id="further">
 <h2>Further analysis</h2>
-<p>The most interesting result in these videos is that the robot flaps differently when its wing is powered: 20 % more stroke, and a cycle whose shape no drift of the natural frequency can produce. Its likely cause is that the active membrane, slack at voltage, stops acting as a stiff, lopsided spring on the leading edge. Two things limit the claim: the camera moved and 20 minutes passed between the two runs, so part of the gap may be drift, and the leading-edge bending cannot be compared across the two side views because they were filmed from different heights (the diagonal pair bends the same way in both states). One session with the wing switched on and off every 10 s, at 8 Hz and then across 6–11 Hz, under a fixed camera, will separate the two: a wing effect follows the switching, a drift follows the clock. If it holds, the wing becomes a way to trim the robot's stroke amplitude.</p>
+<p>The most interesting result in these videos is that the robot flaps differently when its wing is powered: 20 % more stroke, and a cycle whose shape no drift of the natural frequency can produce. A model with one wing mode explains both: at 0 V the barely tense edge (about 4 mN) gives the wing a mode at 17 Hz that loads the stroke and amplifies its 16 Hz part; voltage slackens the edge and removes it. Two things limit the claim: the camera moved and 20 minutes passed between the two runs, so part of the gap may be drift, and the leading-edge bending cannot be compared across the two side views because they were filmed from different heights (the diagonal pair bends the same way in both states). One session with the wing switched on and off every 10 s, at 8 Hz and then across 6–11 Hz, under a fixed camera, will separate the two: a wing effect follows the switching, a drift follows the clock. If it holds, the wing becomes a way to trim the robot's stroke amplitude.</p>
 </section>
 
 <section class="card" id="method">
