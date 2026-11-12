@@ -1,5 +1,7 @@
 """LE line per frame from dark-vs-background, then tip y and angle."""
-import sys,json,numpy as np,cv2
+import os,sys,json,numpy as np,cv2
+HERE=os.path.dirname(os.path.abspath(__file__)); DATA=os.path.join(HERE,"..","data"); TR=os.path.join(DATA,"tracks")
+
 sys.path.insert(0,r"C:/Users/stefk/Documents/website/site/flap/first")
 from track_views import Stack
 from scipy.ndimage import uniform_filter1d
@@ -26,7 +28,7 @@ def run(n,x0=400,x1=660,y0=150,y1=480,thr=35,fps=200.):
         g=ok[k]
         if g.sum()>10:
             p=np.polyfit(xs[g],top[k,g],1); ang[k]=np.degrees(np.arctan(p[0])); tip[k]=np.polyval(p,x1)
-    np.savez(n+".npz",top=top,bot=bot,xs=xs,ang=ang,tip=tip,fps=fps)
+    np.savez_compressed(os.path.join(TR,n+".npz"),top=top.astype(np.float32),bot=bot.astype(np.float32),xs=xs,ang=ang,tip=tip,fps=fps)
     return ang,tip,bg
 def stats(n,f,ang,tip,fps=200.):
     t=np.arange(len(tip))/fps; g=np.isfinite(tip)
@@ -43,4 +45,4 @@ if __name__=="__main__":
     n=sys.argv[1]; f=float(sys.argv[2])
     ang,tip,bg=run(n)
     r=stats(n,f,ang,tip); print(json.dumps(r))
-    open("results.jsonl","a").write(json.dumps(r)+"\n")
+    open(os.path.join(DATA,"results.jsonl"),"a").write(json.dumps(r)+"\n")

@@ -1,10 +1,12 @@
+import os
+HERE=os.path.dirname(os.path.abspath(__file__)); DATA=os.path.join(HERE,"..","data"); TR=os.path.join(DATA,"tracks")
 import sys,numpy as np,cv2
 sys.path.insert(0,r"C:/Users/stefk/Documents/website/site/flap/first")
 from track_views import Stack
 D=r"C:/Users/stefk/MIT Dropbox/SMRL/Shared/Stefania/full_tension/"
 out=[]
 for n in sys.argv[1:]:
-    d=np.load(n+".npz"); s=Stack(D+n+".avi"); a=d["ang"]
+    d=np.load(os.path.join(TR,n+".npz")); s=Stack(D+n+".avi"); a=d["ang"]
     ims=[]
     for k in (int(np.nanargmin(a[200:]))+200,int(np.nanargmax(a[200:]))+200):
         im=cv2.cvtColor(np.ascontiguousarray(s[k]),cv2.COLOR_GRAY2BGR)

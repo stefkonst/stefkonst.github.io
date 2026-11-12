@@ -1,30 +1,68 @@
 <body>
 <div class="wrap">
-<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / First wing test</p>
-<h1>First wing test</h1>
-<p class="lead">2-electrode wing. First run 4 Nov: top view, 1500 V, 1 Hz. Second set 5 Nov: side, front and diagonal views, 1000–1800 V, 1–20 Hz, two tensions. It works at every frequency tried. Most of the trailing edge motion is out of plane, up to 1.8 mm at 1800 V, and extra tension cuts that by about 13×. The roll is tense (50–96 mN from its length), and a model with the wing's weight and a strongly active roll reproduces the shape of these results.</p>
-<div class="warn"><b>Update, 5 Nov 2026, 22:33:</b> the model is now taken to the whole robot on <a href="../robot/">B-cube robot</a>, with the main figures on <a href="../results/">Results</a>. New since this page: a passive edge, even with a strong skin, gives almost nothing in the finite elements; under a lift-like load the edge rises and the sign of the lift change depends on the load; voltage pulls the edge mode from about 45 Hz to 11–27 Hz, which fits the 15 Hz bump. Correction: the cycle high grows about as $V^{3.2}$, the swing as $V^{4.2}$.</div>
-<div class="warn"><b>Bench videos, one wing, no voltage or force recorded.</b> Waveforms and layers are from you; the scale is from the ruler, which may sit at another depth. Runs went in ascending voltage, so wear-in may add to the voltage trend. Model numbers are predictions.</div>
-<nav class="toc"><a href="#views">5 Nov: three views</a><a href="#weight">Model with weight</a><a href="#plan">Plan</a><a href="#core">Roll DEA</a><a href="#video">Video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Experiments</p>
+<h1>Experiments</h1>
+<p class="lead">Two sets. The wing alone on the bench (2 electrodes, 1000–1800 V, 1–20 Hz, three views, two tensions), and the full B-cube robot flapping (DEA core, transmission, powered wing; 1000–1400 V, 1–15 Hz, high-speed video). The wing's edge moves up to 1.8 mm out of plane. The robot resonates at about 8.4 Hz and reaches 24° of stroke at 1200 V.</p>
+<div class="warn"><b>What this rests on:</b> one wing and one robot, videos only (no force, current or drive signal recorded), scale from a ruler that may sit at another depth. Runs went in ascending voltage, so wear-in may add to voltage trends.</div>
+<nav class="toc"><a href="#sum">Summary</a><a href="#flapping">Robot flapping</a><a href="#active">Powered against unpowered wing</a><a href="#views">Wing: three views</a><a href="#weight">Model with weight</a><a href="#video">Wing: video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
 
 <section class="card" id="sum">
 <h2>Summary</h2>
 <div class="tw"><table>
 <tr><th>Finding</th><th>Number</th><th>Basis</th></tr>
-<tr class="main"><td>Trailing edge bows towards the leading edge at voltage</td><td>Swing 0.18 mm at 1.00 Hz, noise 2 µm per frame</td><td>Measured</td></tr>
-<tr class="main"><td>It does not return to rest at 0 V</td><td>First rise 0.45 mm, then back only to 0.29 mm. About 0.3 mm stays</td><td>Measured; cause unknown</td></tr>
-<tr class="main"><td>Later cycles follow one path</td><td>Up and down agree within 3 µm, no lag at 1 Hz. Swing ∝ $V^{1.4\text{–}1.5}$, not $V^2$</td><td>Measured, assuming the waveform as set</td></tr>
-<tr><td>Wrinkles grow at voltage</td><td>Streak contrast +15–20 % in the root and middle thirds, +7 % at the tip</td><td>Measured</td></tr>
-<tr><td>Tension</td><td>50–96 mN from the roll's length (cut 52.94 mm). The model gave 17 mN at a 2 mm pull, about 30 mN for the measured sag</td><td>Measured length; the model is too slack</td></tr>
-<tr class="main"><td>The active roll explains the sign</td><td>Passive roll −0.15 mm, active roll +0.18 mm by fit, measured +0.18 mm</td><td>Model against measured</td></tr>
-<tr class="main"><td>Roll efficiency is low</td><td>$\eta_f$ 0.06–0.17 with 20 mm active. Earlier vocal cord fits: 0.05–0.15</td><td>Model fit</td></tr>
-<tr class="main"><td>Skin $\eta$ is still unknown</td><td>0.05 to 0.4 all fit. About 0.07–0.09 if roll and skin have the same $\eta$</td><td>Model; test 3 or the roll DEA test separates them</td></tr>
-<tr class="main"><td>Lift change at 4 m/s, 6°, 4 mm pull</td><td>−0.10 to +0.34 mN as built, out of 6.9 mN. Passive roll +0.19 to +1.6 mN. POC page: 7 mN</td><td>Prediction</td></tr>
+<tr class="main"><td>The wing's edge moves mostly out of plane</td><td>1.84 mm at 1800 V, 1 Hz (side), ±0.14 mm in plane. Cycle high ∝ $V^{3.2}$</td><td>Measured, wing on the bench</td></tr>
+<tr class="main"><td>The edge goes slack at voltage</td><td>Flat tops in the cycle; more tension cuts the motion about 13×. Roll tension 50–96 mN from its length</td><td>Measured; mechanism by model (<a href="../results/">Results</a>, Fig. 3)</td></tr>
+<tr><td>Motion falls with frequency</td><td>About $f^{-0.8}$ to 5 Hz, bump at 15 Hz (edge mode)</td><td>Measured, wing on the bench</td></tr>
+<tr class="main"><td>The robot flaps at resonance</td><td>Peak at 8 Hz: 24.3 ± 1.0° peak to peak at 1200 V, tip 23 mm. Fit: $f_n$ 8.4 ± 0.2 Hz, $\zeta$ 0.07</td><td>Measured, robot</td></tr>
+<tr class="main"><td>The natural frequency is not fixed</td><td>7.7 Hz (small ringing in the 1 Hz runs) to about 9 Hz (free decays near 1°); it falls with amplitude (8.0 Hz at 3.4°)</td><td>Measured, robot</td></tr>
+<tr class="main"><td>The DEA force lags the voltage</td><td>$\tau$ = 38 ± 13 ms from the robot sweep; about 50 ms from the wing's bench sweep</td><td>Model fit to two independent data sets</td></tr>
+<tr><td>Voltage</td><td>$V^2$ at 1 Hz (×1.44 from 1000 to 1200 V); only ×1.08 at 8 Hz from 1200 to 1400 V</td><td>Measured, robot</td></tr>
+<tr class="main"><td>Powered against unpowered wing</td><td>+20 % stroke (peak to peak), +37 % in the fundamental, at 8 Hz. A 7 % shift in $f_n$ between the two sessions, measured at 0 V, explains all of it</td><td>Not established: needs an interleaved test</td></tr>
 </table></div>
 </section>
 
+<section class="card" id="flapping">
+<h2>Robot flapping</h2>
+<div class="fig"><img src="../results/fig/Fig0_robot.png" alt="The robot in side, diagonal and front views, and the motion range at 8 Hz in each view."></div>
+<p class="note">Phantom VEO 710L, 200 fps, 832 × 600 px, 0.152 mm/px. Bottom row: brightest minus darkest pixel over the run.</p>
+<div class="fig"><img src="../results/fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency at 1200 V with a one-mode fit with and without lag; b, free-vibration frequency against amplitude for two decays and the 1 Hz ringing; c, stroke against voltage at 1 and 8 Hz with V squared lines; d, model stroke at 8 Hz against natural frequency, with measured natural frequencies and measured strokes for powered and unpowered wing."></div>
+<ul class="read">
+<li><b>Equation (a):</b> one mode with a lagged force, $\theta_1(f) = \dfrac{K}{\sqrt{(1-r^2)^2+(2\zeta r)^2}}\,\dfrac{1}{\sqrt{1+(2\pi f\tau)^2}}$, $r = f/f_n$. Fit with $\zeta$ fixed at 0.07 from the decays: $K$ 4.7°, $f_n$ 8.38 Hz, $\tau$ 38 ms. Freeing $\zeta$ gives 0.068, the same.</li>
+<li><b>Trend (a):</b> the model gets the peak's place and height, and needs the lag: without it the peak would be twice as high. It is too narrow: the measured peak is about twice as broad. Panel b says why: $f_n$ moves with amplitude, so each run sits on its own curve.</li>
+<li><b>Trend (b):</b> free decays after the drive stops. The frequency rises as the motion dies out, from 8.0 Hz at 3.4° to about 9 Hz near 1°: the spring softens at large stroke. The small ringing at the bottom of the 1 Hz cycle sits lower, at 7.7 Hz, so the position in the stroke matters too.</li>
+<li><b>Trend (c):</b> at 1 Hz the stroke goes as $V^2$, as a DEA should. At 8 Hz, 1400 V adds only 8 %: an end stop, the transmission, the core's strain limit, or the run itself, which cut out at 2.2 s.</li>
+<li><b>Validate:</b> log the drive voltage with the video (an LED on the drive) to measure $\tau$ as a phase; sweep at two amplitudes to map $f_n$ against stroke; pluck the robot at 0 V before and after each run.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Wing</th><th>f (Hz)</th><th>V</th><th>Stroke, fundamental (°)</th><th>2nd / 1st harmonic</th></tr>
+<tr><td>powered</td><td>1</td><td>1000</td><td>2.9 ± 0.0</td><td>0.21</td></tr>
+<tr><td>powered</td><td>1</td><td>1200</td><td>4.2 ± 0.1</td><td>0.23</td></tr>
+<tr><td>powered</td><td>5</td><td>1200</td><td>5.9 ± 0.2</td><td>0.19</td></tr>
+<tr><td>powered</td><td>7</td><td>1200</td><td>9.1 ± 0.2</td><td>0.04</td></tr>
+<tr><td>powered</td><td>8</td><td>1200</td><td>12.4 ± 0.4</td><td>0.06</td></tr>
+<tr><td>powered</td><td>9</td><td>1200</td><td>9.8 ± 0.1</td><td>0.02</td></tr>
+<tr><td>powered</td><td>10</td><td>1200</td><td>7.1 ± 0.5</td><td>0.10</td></tr>
+<tr><td>powered</td><td>15</td><td>1200</td><td>0.4 ± 0.0</td><td>0.40</td></tr>
+<tr><td>powered</td><td>8</td><td>1400</td><td>13.4 ± 0.3</td><td>0.06</td></tr>
+<tr><td>unpowered</td><td>8</td><td>1200</td><td>9.1 ± 0.4</td><td>0.19</td></tr>
+</table></div>
+<p class="note">Fundamental = amplitude of the first harmonic of the leading-edge angle, ± spread between blocks of 0.5 s or two cycles. Peak to peak at 8 Hz, 1200 V: 24.3 ± 1.0° (35 cycles). The stroke is the angle in the image, not the 3D stroke. Code and tracks: <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>, <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/data">flapping/data</a>.</p>
+</section>
+
+<section class="card" id="active">
+<h2>Powered against unpowered wing</h2>
+<p>At 8 Hz and 1200 V, the run with the wing powered gives 24.3 ± 1.0° peak to peak (35 cycles); the run with only the core powered gives 20.2 ± 0.7° (35 cycles), which is +20 %. In the fundamental the gap is +37 % (12.4° against 9.1°). It is large compared with the cycle-to-cycle spread, but it is not evidence that powering the wing helps:</p>
+<ul>
+<li><b>The robot changed between the runs.</b> They were filmed 20 min apart (12:22 and 12:42) with the camera moved. Free decays, both at 0 V, give $f_n$ 8.64 Hz at 12:28 and 9.04 Hz at 12:43.</li>
+<li><b>That shift alone explains the gap.</b> With the fitted model, the unpowered stroke is reproduced if $f_n$ moves from 8.38 to 8.95 Hz (+7 %), which is what the 12:43 decay measured (Fig. 6d). The 8 Hz drive sits on the steep side of the peak, where 1 % in $f_n$ changes the stroke by about 5 %.</li>
+<li><b>The motion differs in shape, and that is real, not noise.</b> The edge fit is tighter in the unpowered run (0.4 against 0.9 px), but its 2nd harmonic is 2.4× larger (1.7° against 0.7°) and it carries a ripple at 56 Hz, the 7th harmonic, locked to the stroke: a higher bending mode. Its leading-edge lines also do not cross at the hinge (205, 211 px, against 323, 269 px with the wing powered), so the leading edge bends as well as rotates. This is why its cycle looked noisy.</li>
+<li><b>The unpowered diagonal run is a decay,</b> not steady flapping: four cycles, then the drive stops (2 s, 401 frames). It gives the 12:43 decay above.</li>
+</ul>
+<p><b>To settle it:</b> same session, same camera, one robot, alternate the wing on and off every 10 s at 8 Hz, with a pluck at 0 V between blocks; better, sweep 6–11 Hz in both states. A real wing effect shows as a gap that survives the alternation; a drift shows as a trend in time.</p>
+</section>
+
 <section class="card" id="views">
-<h2>5 Nov: three views, voltage, frequency, tension</h2>
+<h2>Wing: three views, voltage, frequency, tension</h2>
 <div class="two">
 <div><video src="clips/side_1800V.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">Side view, 1800 V, sine squared, 1 Hz, first 4 s, real time. The rolled edge is the lower line.</p></div>
 <div><video src="clips/diag_15Hz.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">Diagonal view, 1800 V, plain sine, 15 Hz, played 8× slower.</p></div>
@@ -63,109 +101,14 @@
 <li><b>Equation:</b> out of plane, the edge and skin hold the weight with tension: drop $\approx q L^2 / (8T)$. Voltage lowers $T$ in the roll and in the skin. Once the skin goes slack it drapes, and the drop grows fast.</li>
 <li><b>Trend:</b> with a strongly active roll ($\eta_f$ 0.4–0.8), the drop stays near 0.1 mm to 1000 V, then rises to 1.7–2.2 mm at 1800 V. In plane, the bow rises to about 1–1.5 mm and then levels off or falls as the edge goes down instead. Both match the side and front views at 1800 V. With $\eta_f$ 0.1, nothing happens out of plane.</li>
 <li><b>Against:</b> the first run, 1500 V, top view, bowed 0.45 mm in plane, where these cases give 1.1–1.5 mm. That run may have had more tension, but I cannot tell. $\eta_f$ 0.4–0.8 is also far above the 0.06–0.17 from the earlier fit, which assumed 17–28 mN.</li>
-<li><b>So:</b> a tense, strongly active roll, with weight doing the rest, explains the 5 Nov videos: steep, mostly out of plane, saturating in plane. It is the best reading so far, not a fit.</li>
+<li><b>So:</b> a tense, strongly active roll, with weight doing the rest, explains the bench videos: steep, mostly out of plane, saturating in plane. It is the best reading so far, not a fit.</li>
 <li><b>Validate:</b> the flip test (it should then rise towards the ceiling relative to the wing, falling to the floor in the room), the 1 g weight test, and the roll DEA force drop, which gives $\eta_f$ directly.</li>
 <li><b>For lift:</b> air load replaces weight in flight, and is several times larger, so a roll this active would drop the edge further. Earlier lift numbers assumed $\eta_f$ up to 0.17, so they no longer hold. Not yet rerun.</li>
 </ul>
 </section>
 
-<section class="card" id="plan">
-<h2>Plan</h2>
-<p><b>Done on 5 Nov:</b> second view (side and diagonal), voltage steps, frequency up to 20 Hz, a higher tension. Thanks: these settled the biggest open question, which motion matters.</p>
-<div class="tw"><table>
-<tr><th>Next</th><th>Question</th><th>What to expect</th></tr>
-<tr class="main"><td>Turn the wing over, same side view, 1800 V, 1 Hz. Or stand it on its edge</td><td>Does the out-of-plane motion have a preferred side?</td><td>It moves down with the wing flat. If it still moves towards the floor upside down, weight is involved and the roll must go nearly slack. If it moves the same way relative to the wing, it is a buckle with a built-in side</td></tr>
-<tr class="main"><td>Scope the voltage at the device: 1, 5, 10, 20 Hz, plain sine and sine squared</td><td>Is the fall with frequency the film or the drive? What does plain sine look like?</td><td>If the voltage holds, the film's time constant is about 0.1 s</td></tr>
-<tr class="main"><td>Hang 1 g at mid-edge, side view, at 0 V and at 1800 V</td><td>Does the edge carry 50–100 mN at 0 V, and how much at 1800 V?</td><td>At 70 mN, 1 g adds about 0.6 mm of sag. If the roll goes slack at voltage, much more</td></tr>
-<tr><td>Voltages in shuffled order, 1 min rest between, 10 s before voltage each time</td><td>Is the steep rise real or wear-in?</td><td>Same steps both ways if real</td></tr>
-<tr><td>Frequency sweep at 3–4 tensions, 10–25 Hz in 1 Hz steps</td><td>Where is the mode, and does it follow tension?</td><td>A string mode goes as $\sqrt{T}$</td></tr>
-<tr><td>Same set on the 4-electrode wing</td><td>Effect of layers</td><td>See tests 2 and 3 below</td></tr>
-</table></div>
-<p class="note">The earlier plan follows, with the roll DEA tests, which still apply.</p>
-<div class="tw"><table>
-<tr><th>#</th><th>Test</th><th>Question</th><th>What to expect (prediction)</th><th>Time</th></tr>
-<tr class="main"><td>0</td><td>Set-up: LED in frame, mirror, scope on the device. Mark the thread at the clamp and measure the pull</td><td>Sync, second view, true $V(t)$, true pull. Does it reach 0 V?</td><td>$V$ sits at 0 V between peaks. The 2 mm pull is the weakest number in the fit</td><td>30 min</td></tr>
-<tr class="main"><td>1</td><td>Hold: 0 V 5 s, 1500 V 20 s, device shorted 60 s. Repeat after 5 min</td><td>Why does it not come back?</td><td>See the table below</td><td>20 min</td></tr>
-<tr class="main"><td>1b</td><td>Staircase on a wing never run: 500, 1000, 1500, 1000, 500 V, 5 cycles each. Do this first on the 4-electrode wing</td><td>Is the jump set by the highest voltage so far?</td><td>If so, each new level jumps and the steps back down do not. This wing's first rise passed about 0.08 mm at 500 V and 0.28 mm at 1000 V</td><td>10 min</td></tr>
-<tr class="main"><td>2</td><td>Pull sweep, same wing: 2, 3, 4, 5 mm at the clamp, measured, with a force gauge on the thread if you can</td><td>Effect of tension. Is the 2 mm right? Roll force</td><td>Below. Swing falls about 2× from 2 to 8 mm. Sag at a measured pull tests the outline in the model</td><td>45 min</td></tr>
-<tr class="main"><td>3</td><td>Same again on the 4-electrode wing</td><td>Effect of layers. Best single test for skin $\eta$</td><td>Below. Thread force 2×, same sag. Swing at 2 mm: +0.15, +0.08, −0.05 mm for skin $\eta$ 0.05, 0.15, 0.25, and about −0.5 mm at 0.4</td><td>45 min</td></tr>
-<tr class="main"><td>4</td><td>Fan on the fixed wing, 6°, about 4 m/s, side view</td><td>Skin $\eta$ and the sign of the lift change</td><td>Peak bulge at 4 mm pull, 2-electrode wing: 2.6 → 2.9, 3.1, 3.5, 4.0 mm for $\eta$ 0.05, 0.15, 0.25, 0.4. Lift barely changes though the bulge grows, so watch the trailing edge too</td><td>45 min</td></tr>
-<tr><td>5</td><td>Peak voltage: 500, 1000, 1500 V; frequency: 1, 5, 10, 25 Hz at 1500 V; shuffled order</td><td>Is the $V^{1.5}$ real? How fast does it respond?</td><td>Swing 34 and 96 µm if $V^{1.5}$, 20 and 79 µm if $V^2$. Timing work needs 5–10 ms response or better</td><td>30 min</td></tr>
-<tr><td>6</td><td>Tip spring: hang 0.5 and 1 g along the edge line, track the tip. Tap the edge, 1000 fps</td><td>Turns the tip into a force gauge, and the string mode into a tension reading</td><td>The tip moved 18 µm at voltage. String mode about 28 Hz (rig shakes at 26.6 Hz, so isolate it)</td><td>20 min</td></tr>
-<tr class="main"><td>7</td><td>Flapping, once the transmission is ready: core alone, then wing</td><td>Does the mechanism work? Does the skin change anything in flapping?</td><td>18 Hz, ±10–18° (POC). Skin effect small, and its sign may reverse with an active roll</td><td>When ready</td></tr>
-</table></div>
-<p class="note">If time is short, do the roll DEA, then 0, 1, 1b, 2 at three pulls, and 3 at one pull. Keep one wing as a spare before flapping.</p>
-
-<h3>Test 1: what each result means</h3>
-<div class="tw"><table>
-<tr><th>Edge after voltage is removed</th><th>Likely cause</th><th>What to do</th></tr>
-<tr><td>Returns at once when shorted, not before</td><td>The device does not reach 0 V, or charge is trapped. Less likely, as the TREK sets 0 V at each low</td><td>Check on the scope. Swap the leads and repeat: trapped charge changes the first rise</td></tr>
-<tr><td>Returns over seconds to minutes</td><td>Slow recovery of the silicone. The cycles show no lag at 1 Hz, so a single time constant near 1 s is out</td><td>Fit the time constant. Expect a smaller swing than a static test</td></tr>
-<tr class="main"><td>Stays, and the second run has no first jump</td><td>One-time set: slip in the roll or at a bond, or first-cycle softening. Best match to this video</td><td>Condition every wing with a few cycles before measuring</td></tr>
-<tr><td>Stays, and the first jump comes back after the 5 min rest</td><td>Softening that recovers with rest</td><td>Use a fixed rest time and a fixed number of cycles before each measurement</td></tr>
-<tr><td>Stays and keeps growing every run</td><td>A bond or the roll is slipping</td><td>Check the tip and knot under the microscope before going on</td></tr>
-</table></div>
-
-<h3>Tests 2 and 3: predicted values at 1500 V</h3>
-<p class="note">Each skin $\eta$ is paired with the roll $\eta_f$ that fits this video at 2 mm pull: 0.064, 0.089, 0.113, 0.148. 4 electrodes: 3 active layers in the skin, 4 in the roll, 20 mm active. If the true pull is 3.2 mm, 2-electrode swings are about 30 % higher above 2 mm, and the 4-electrode columns shift by +0.03 to +0.1 mm.</p>
-<div class="tw"><table>
-<tr><th rowspan="2">Pull</th><th rowspan="2">Sag, 0 V</th><th colspan="2">Thread force, 0 V</th><th rowspan="2">Sag change, 2 electrodes, $\eta$ 0.05–0.4</th><th colspan="4">Sag change, 4 electrodes, by skin $\eta$</th></tr>
-<tr><th>2 el.</th><th>4 el.</th><th>0.05</th><th>0.15</th><th>0.25</th><th>0.4</th></tr>
-<tr class="main"><td>2 mm</td><td>1.32 mm</td><td>17 mN</td><td>35 mN</td><td>+0.17 to +0.18 mm</td><td>+0.15</td><td>+0.08</td><td>−0.05</td><td>Near slack</td></tr>
-<tr><td>2.5 mm</td><td>1.43 mm</td><td>22 mN</td><td>44 mN</td><td>+0.11 to +0.16 mm</td><td>+0.14</td><td>+0.07</td><td>−0.04</td><td>−0.39</td></tr>
-<tr><td>3.2 mm</td><td>1.56 mm</td><td>28 mN</td><td>56 mN</td><td>+0.09 to +0.14 mm</td><td>+0.12</td><td>+0.07</td><td>−0.02</td><td>−0.26</td></tr>
-<tr><td>5 mm</td><td>1.81 mm</td><td>45 mN</td><td>90 mN</td><td>+0.07 to +0.11 mm</td><td>+0.10</td><td>+0.06</td><td>0.00</td><td>−0.15</td></tr>
-<tr><td>8 mm</td><td>2.09 mm</td><td>74 mN</td><td>147 mN</td><td>+0.05 to +0.08 mm</td><td>+0.07</td><td>+0.04</td><td>0.00</td><td>−0.10</td></tr>
-</table></div>
-<ul class="read">
-<li><b>Layers separate skin $\eta$:</b> skin force goes up 3×, roll force 2×, film thickness 2×. So the skin gains on the roll, and the swing shrinks or flips. The sign flips near skin $\eta$ 0.2.</li>
-<li><b>Low pull:</b> below 2 mm the model's roll nears slack at voltage, so the numbers stop being useful, and the roll can buckle.</li>
-<li><b>Tear watch:</b> check the thread corner under the microscope after each pull step. Stop if it nicks. Capacitance before and after each wing.</li>
-<li><b>Thread force:</b> the drop at 1500 V is 4, 7, 10, 14 mN for skin $\eta$ 0.05, 0.15, 0.25, 0.4 (2 electrodes), and about the same at every pull. So a gauge on the thread measures the roll force directly.</li>
-</ul>
-
-<h3>Flapping: what to compare</h3>
-<div class="tw"><table>
-<tr><th>Step</th><th>Compare</th><th>Read from video</th></tr>
-<tr><td>Core alone, with a dummy leading edge</td><td>Frequency: 5, 10, 18, 25 Hz</td><td>Stroke angle against frequency, resonance</td></tr>
-<tr><td>Wing on, 0 V on the skin</td><td>With and without wing</td><td>Stroke loss, skin motion, tearing</td></tr>
-<tr class="main"><td>Skin timing, at the best frequency</td><td>0 V; on all stroke; on in the upstroke; on in the downstroke</td><td>Camber and trailing edge lag in each half stroke</td></tr>
-<tr><td>Control</td><td>Skin lead connected, generator off</td><td>Scatter between identical runs</td></tr>
-</table></div>
-<ul class="read">
-<li><b>Views:</b> side-on to the stroke plane for stroke angle, and along the span for camber. The mirror gives both.</li>
-<li><b>Frame rate:</b> at least 40 frames per cycle, so 1000 fps at 25 Hz. The camera is a VEO 710L, so check whether you can also use the full sensor: this run used 640 × 480, about 0.12 mm per pixel.</li>
-<li><b>Order:</b> shuffle conditions and repeat each at least 3 times. Ascending order and n = 1 are what made the earlier flapping result inconclusive.</li>
-<li><b>Sync:</b> LED in frame from the generator's sync output, in every run. Scope the voltage at the device at least once for each drive setting.</li>
-</ul>
-
-<h3>Log for every run</h3>
-<p class="note">File name like <code>N2_pull3_1500V_1Hz_001</code>. Note: wing, layers, pull, thread force, voltage, frequency, waveform and offset, drive model, run order, capacitance before and after, time since last run, camera settings, anything that changed. Keep the 10 s before voltage: that baseline is what showed the non-return here.</p>
-</section>
-
-<section class="card" id="core">
-<h2>Roll DEA, before the transmission</h2>
-<p>Same film and drive as the wing, but a straight load path and a clean force. So it is the best place to get $\eta$ and to find out whether the wing's odd behaviour comes from the film.</p>
-<div class="tw"><table>
-<tr><th>#</th><th>Test</th><th>Question</th><th>What to expect (prediction)</th></tr>
-<tr class="main"><td>R1</td><td>Mass, capacitance, leakage on a ramp. Then hold at a fixed stretch, 0 V, force</td><td>Are all layers connected? What is $C_1$?</td><td>2-strip POC core: about 350 mg, 7–8.8 nF, 390 mN at 10 % stretch</td></tr>
-<tr class="main"><td>R2</td><td>Same drive as the wing, from before voltage, film or log the force: 1 Hz, 1500 V peak, sine squared, 10 cycles. Fixed length</td><td>Does the first cycle jump and stay?</td><td>Jump seen here too: it is the film. No jump: on the wing it comes from the roll, bond or knot</td></tr>
-<tr class="main"><td>R3</td><td>Force drop at 500, 1000, 1500 V, shuffled</td><td>$V^2$ or $V^{1.5}$? What is $\eta$?</td><td>$V^2$ is the textbook law. If the force also goes as $V^{1.5}$, it is the film or the drive, not wing geometry</td></tr>
-<tr><td>R4</td><td>Hold 20 s at voltage, then short the device for 60 s</td><td>Fast or slow? Compare the 0.4 isometric and 0.15 cyclic $\eta$ from earlier bundles</td><td>$\eta_f$ here of 0.06–0.17 at 1 Hz would support the wing fit</td></tr>
-<tr><td>R5</td><td>Force at 1, 5, 10, 25 Hz, voltage at the device</td><td>How fast is it? Enough for the stroke?</td><td>Timing work needs 5–10 ms or less</td></tr>
-<tr><td>R6</td><td>Same again at a second stretch</td><td>Does $\eta$ depend on stretch?</td><td>Best stretch is near 1.10 in earlier fits</td></tr>
-</table></div>
-<ul class="read">
-<li><b>Equation:</b> $\Delta F = \eta\, n\, \varepsilon_0 \varepsilon_r (V/H)^2 H\, w_a$, force drop at fixed length. Here $n$ is the active layers and $w_a$ the active width.</li>
-<li><b>Using the POC core:</b> the page lists 246 mN at $\eta$ 0.4 and 1370 V, so $\eta \approx \Delta F / 615$ mN for that core at that voltage. A different core scales with $n w_a$.</li>
-<li><b>Stroke needs:</b> a low $\eta$ means a low stroke. At $\eta_f$ 0.06–0.17 the same core would drop 37–105 mN, against the 95–246 mN the POC page lists. So measure this before designing the transmission ratio.</li>
-<li><b>Weight:</b> both cores together 1131 mg, so about 565 mg each, against 350 mg in the POC estimate. The earlier sizing asked for 500 mg or more per core for ±20° at 25 Hz, so the stroke should be fine, but the robot is heavier: two 273 mg wings and the cores make 1.68 g before frame and transmission.</li>
-<li><b>Send me:</b> the force traces or even just $\Delta F$, layers, active width, thickness, and stretch. They replace the assumed $\eta$ in the wing and in the flapping model.</li>
-</ul>
-</section>
-
 <section class="card" id="video">
-<h2>Video</h2>
+<h2>Wing: video</h2>
 <div class="two">
 <div><video src="clips/first_3s.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">First 3 s, real time. Movement starts at about 0.35 s.</p></div>
 <div><video src="clips/cycle_averaged.mp4" controls loop muted playsinline style="width:100%;border-radius:8px"></video><p class="note">One cycle averaged over 8 cycles, played 3 times. Right: change from before voltage, contrast ×5.</p></div>
@@ -212,7 +155,7 @@
 <li><b>Same film, same $\eta$?</b> If roll and skin share one $\eta$, it is about 0.07 (2 mm) to 0.09 (3.2 mm). That is low, but near the 0.05–0.15 from the vocal cord fits. The roll has trapped wrinkles and layers that the skin does not, so this is only a guide.</li>
 <li><b>Pull:</b> 2 mm gives 1.32 mm sag, against 1.6 mm measured, and 1.6 mm needs about 3.5 mm. So the pull was more than 2 mm, or the skin was already loose as cut, or the model is too stiff. Test 2 tells which.</li>
 <li><b>Against:</b> the root corner moves 120–220 µm across and 160–410 µm along in the model, against 43 and 10 µm measured. A stiffer stub cut this before, not rerun for this roll. The model's sag peaks at 18 mm, the real one at about 32 mm, so the tip end is not right yet. The model has no first-cycle set and goes as $V^{2.2}$ or steeper.</li>
-<li><b>Out of plane:</b> the 5 Nov side view shows it is the larger motion, so the in-plane fit here explains only part of the picture. See <a href="#views">5 Nov</a>.</li>
+<li><b>Out of plane:</b> the side view shows it is the larger motion, so the in-plane fit here explains only part of the picture. See <a href="#views">three views</a>.</li>
 </ul>
 </section>
 
@@ -249,7 +192,7 @@
 <tr><td>4 electrodes, passive roll</td><td>+0.48 mN</td><td>+1.27 mN</td><td>+2.09 mN</td><td>+3.46 mN</td></tr>
 </table></div>
 <ul class="read">
-<li><b>Baseline:</b> at 0 V the lift is 6.9 mN with 2 electrodes and 5.1 mN with 4, at this pull. For comparison, the POC page has 7 mN of lift change, with 3 active layers, skin $\eta$ 0.5, and 12.4 cm² in the lattice against 6.9 cm² here.</li>
+<li><b>Baseline:</b> at 0 V the lift is 6.9 mN with 2 electrodes and 5.1 mN with 4, at this pull. For comparison, the first design study had 7 mN of lift change, with 3 active layers, skin $\eta$ 0.5, and 12.4 cm² in the lattice against 6.9 cm² here.</li>
 <li><b>Active roll cancels the skin:</b> the skin bulges more, but the slacker edge lifts up and loses lift. With 2 electrodes: −0.21 to −0.37 mN at 3.2 mm, +0.03 to +0.83 mN at 5 mm. The lift falls more at low pull.</li>
 <li><b>4 electrodes:</b> the roll takes only 10–20 % off, as the skin then wins. So with an active roll, this is the wing to try. Predicted lift change up to about 3 mN at skin $\eta$ 0.4, about 60 % of the baseline.</li>
 <li><b>At your 2 mm:</b> no number. The lift solver fails below 3 mm, because the slack skin folds the mesh in plane. A fallback I tried moved the baseline by up to 13 % and still failed at 2 mm, so I dropped it. The trend says the lift change at 2 mm is negative as built.</li>
@@ -260,7 +203,7 @@
 
 <section class="card" id="files">
 <h2>Files</h2>
-<p class="note">Code: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>track_views.py</code>, <code>views_analysis.py</code>, <code>figures_views.py</code>, <code>fibre_tension.py</code>, <code>fit_gravity.py</code>, <code>figures_gravity.py</code>, <code>fit_wing.py</code>, <code>fit_roll.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the roll was known: <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_views.svg">views</a>, <a href="V_gravity.svg">weight model</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
+<p class="note">Robot flapping: <code>flapping/code/track.py</code> (leading-edge tracking), <code>pair.py</code>, <code>decay.py</code>, <code>ring1hz.py</code>, <code>sweepfit.py</code>; figures in <code>results/figures_tests.py</code>. Wing on the bench: <code>geometry.py</code>, <code>video_tracks.py</code>, <code>ends_drive.py</code>, <code>drive_check.py</code>, <code>first_rise.py</code>, <code>track_views.py</code>, <code>views_analysis.py</code>, <code>figures_views.py</code>, <code>fibre_tension.py</code>, <code>fit_gravity.py</code>, <code>figures_gravity.py</code>, <code>fit_wing.py</code>, <code>fit_roll.py</code>, <code>figures_video.py</code>, <code>figures_stack.py</code>, <code>figures_fit.py</code> (wrinkle lines). From before the roll was known: <code>fit_stack.py</code>, <code>fit_family.py</code>, <code>fit_sign.py</code>, <code>fit_cases.py</code>, <code>fit_stub.py</code>, <code>lift_bridge.py</code>. Data: <code>data/</code>. All figures also as SVG: <a href="V_shape.svg">shape</a>, <a href="V_time.svg">time</a>, <a href="V_fit.svg">fit</a>, <a href="V_views.svg">views</a>, <a href="V_gravity.svg">weight model</a>, <a href="V_drive.svg">drive</a>, <a href="V_lift.svg">lift</a>, <a href="V_contrast.svg">contrast</a>, <a href="V_wrinkle.svg">wrinkles</a>. Background: <a href="../poc/">B-cube POC</a>.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}]})});</script>

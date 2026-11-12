@@ -1,23 +1,20 @@
 <body>
 <div class="wrap">
-<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / B-cube robot</p>
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Robot</p>
 <h1>B-cube: the whole robot</h1>
-<p class="lead">From the parts measured on 4–5 Nov to a full robot in forward flight: what to build, with numbers and ranges, and answers to six questions. Main figures and conclusions: <a href="../results/">Results</a>.</p>
-<p class="note">Updated 5 Nov 2026, 22:33.</p>
-<div class="warn"><b>Update, 6 Nov 2026, 13:15:</b> first flapping of the full robot (<a href="../flapping/">First flapping</a>): resonance at 8.7 Hz, not 20–25 Hz, and 24° stroke at 1200 V, so the lift and power numbers below are not reached yet.</div>
-<div class="warn"><b>Update, 6 Nov 2026, 05:14:</b> the answers below hold on the bench. In flow (<a href="../air/">Wing in air</a>): the active skin alone changes lift, by camber (+0.1 to +0.35 in $C_L$), so "a passive edge does nothing" is true only without air. A fully slack edge has no steady state at 4 m/s and faster: keep it above about 10 mN. The DEA force lags the voltage by about 50 ms, so the edge mode cannot be switched within a 25 Hz stroke.</div>
-<div class="warn"><b>What this rests on:</b> one wing, measured on the bench with no air (masses, roll length, videos). Everything about flight is a model. Labels: <b>M</b> measured, <b>F</b> fitted to the measurements, <b>A</b> my assumption, <b>P</b> published.</div>
+<p class="lead">The design of the B-cube robot, its specification and how it was built, with answers to six design questions. Design values come from the measured parts; where the built robot has now been tested, the measured value stands next to the design value. Main figures and conclusions: <a href="../results/">Results</a>; data: <a href="../first/">Experiments</a>.</p>
+<div class="warn"><b>What this rests on:</b> one wing on the bench and one robot flapping in still air (masses, roll length, high-speed video). Everything about flight is a model. Labels: <b>M</b> measured, <b>F</b> fitted to the measurements, <b>A</b> my assumption, <b>P</b> published.</div>
 <nav class="toc"><a href="#short">In short</a><a href="#spec">Specification</a><a href="#steps">Steps</a><a href="#q1">Nylon or TPU edge?</a><a href="#q2">Part of the edge</a><a href="#q3">Lift</a><a href="#q4">Thickness</a><a href="#q5">Resonance</a><a href="#q6">Can it fly?</a><a href="#model">Edge equation</a><a href="#limits">Limits</a><a href="#code">Code</a></nav>
 
 <section class="card" id="short">
 <h2>In short</h2>
 <ul class="read">
-<li><b>Nylon or TPU instead of the rolled DEA edge?</b> Not if you want the edge to move. On the bench, a passive edge gives almost nothing, even with a strong skin: the motion comes from the roll losing tension. A nylon or TPU cord is 10–150× lighter and holds tension better, so it is the right choice for a <i>passive</i> wing.</li>
+<li><b>Nylon or TPU instead of the rolled DEA edge?</b> Not if you want the edge to move, and the roll is also how the electrodes are contacted. On the bench, a passive edge gives almost nothing, even with a strong skin: the motion comes from the roll losing tension. In flow the skin alone does change lift (<a href="../air/">Wing in air</a>). A nylon or TPU cord is 10–150× lighter and holds tension better, so it is the right choice for a <i>passive</i> wing.</li>
 <li><b>Only part of the edge active?</b> Yes, with a stiff passive rest. Tension is the same along a string, so an active part near the body with nylon outboard gives about 90 % of the full edge's motion, at about a third of the edge mass. With the rest still rolled film, it falls to about the active share or less.</li>
 <li><b>What it does to lift:</b> it depends on the load. At 8 Pa, voltage adds lift ($\Delta C_L$ +0.2 to +0.4, the skin bulges). At 15 Pa, the edge rises so much that it removes lift (−0.6 to −1.0). The mean load of this robot is about 10 Pa, right between. Steady model, untested in flow.</li>
 <li><b>Thickness:</b> each layer is set by the voltage: $H \le V/E$, so 30–39 µm at 1.8 kV. In total, about 45–90 µm. Thinner, the roll cannot slacken a flight edge. Thicker, the wing passes 350 mg and the flapping resonance drops below the band with these cores.</li>
-<li><b>Resonance:</b> two cores and this wing give 20–25 Hz with a lever of 2.2–2.8 mm. Q is only about 2 in flight, so tuning is easy and gain is small. Voltage pulls the edge's own mode from about 45 Hz down through the flapping band (11–27 Hz at 1.4–1.8 kV). That changes how the edge lags the stroke, from about 15° of twist to about 35°.</li>
-<li><b>Can it fly?</b> Not as built, at the energy measured so far. Level flight at 4 m/s needs about 46–48 mW for the 1.9 g robot. Two cores give 18 mW at the bench energy and 28 mW at the published one. Across 20,000 draws over the unknowns, 7 % close. It needs about 2 J/kg per cycle from the cores, before any electronics. A tethered robot in a wind tunnel is feasible.</li>
+<li><b>Resonance:</b> designed for 20–25 Hz with a lever of 2.2–2.8 mm; <b>measured 8.4 Hz</b> (7.7–9 Hz depending on amplitude), with a damping ratio of 0.07 (Q about 7 in still air). At the 2.5 mm design lever that means a spring-to-inertia ratio about 7× below the model. Voltage pulls the edge's own mode from about 45 Hz down to 11–27 Hz at 1.4–1.8 kV.</li>
+<li><b>Can it fly?</b> Not as built. At the measured kinematics (8.4 Hz, ±12°) the flapping wing makes no thrust above 2 m/s: -0.69 mN per wing at 4 m/s, against +0.74 mN at the design point (25 Hz, ±20°). Thrust needs a Strouhal number above about 0.15, so at 4 m/s about 16 Hz or more. Even at the design point, level flight needs 46–48 mW and two cores give 18–28 mW: it needs about 2 J/kg per cycle from the cores. A tethered robot is feasible.</li>
 </ul>
 </section>
 
@@ -35,13 +32,14 @@
 <tr class="main"><td>Robot</td><td>1.88 g, 18.4 mN</td><td>1.8–2.0 g</td><td></td></tr>
 <tr><td>Flight speed</td><td>4 m/s</td><td>3.4–4.2 m/s best in the draws; stall 3.9 m/s at $C_{L,max}$ 1.1</td><td></td></tr>
 <tr><td>Lift coefficient needed, 4 m/s</td><td>1.0</td><td></td><td>High for this Reynolds number (about 6,000)</td></tr>
-<tr class="main"><td>Flapping</td><td>25 Hz, ±20°</td><td>20–25 Hz, ±15–30°</td><td>Strouhal 0.19 at 4 m/s</td></tr>
-<tr><td>Lever arm on the cores</td><td>2.5 mm</td><td>2.2–2.8 mm for 20–25 Hz</td><td></td></tr>
+<tr class="main"><td>Flapping</td><td>25 Hz, ±20° (design)</td><td>measured: 8.4 Hz resonance, 24° peak to peak at 1200 V</td><td>Strouhal 0.19 at 4 m/s (design), 0.05 (measured)</td></tr>
+<tr><td>Lever arm on the cores</td><td>2.5 mm (design)</td><td>2.2–2.8 mm for 20–25 Hz in the model</td><td>measured resonance 8.4 Hz</td></tr>
 <tr><td>Core strain at ±20°</td><td>±4.4 %</td><td>±3.8–4.9 %</td><td></td></tr>
-<tr><td>Quality factor of the stroke</td><td>2</td><td>1–4</td><td>From air power</td></tr>
+<tr><td>Quality factor of the stroke</td><td>2 in flight (model)</td><td>measured 7 in still air (damping ratio 0.07)</td><td>M, free decays</td></tr>
 <tr><td>Edge tension at 0 V</td><td>40–70 mN</td><td>needs ≥ 55 mN to hold 0.5 mm at 8 Pa</td><td>F</td></tr>
 <tr><td>Edge mode</td><td>45 Hz at 0 V</td><td>11–27 Hz at 1.4–1.8 kV</td><td>Edge equation; bench bump at 15 Hz</td></tr>
-<tr><td>Drive</td><td>1.8 kV, one channel per wing</td><td>skin on its own channel for the first tests</td><td></td></tr>
+<tr><td>Drive</td><td>1.8 kV, one channel per wing</td><td>robot tested at 1.0–1.4 kV</td><td></td></tr>
+<tr><td>DEA force lag</td><td>38 ms (robot), 50 ms (wing)</td><td>voltage is a slow trim at 25 Hz</td><td>F</td></tr>
 <tr class="main"><td>Power, level flight</td><td>46–48 mW</td><td>about 20–90 mW</td><td>Model</td></tr>
 <tr class="main"><td>Power from two cores, 25 Hz, 80 % transmission</td><td>18 / 28 / 48 mW</td><td>at 0.8 / 1.25 / 2.1 J/kg</td><td>M / P / A</td></tr>
 <tr class="main"><td>Available / required</td><td>0.51 median</td><td>0.21–1.06 (5–95 %)</td><td>7 % of draws ≥ 1</td></tr>
@@ -50,21 +48,20 @@
 
 <section class="card" id="steps">
 <h2>Steps</h2>
+<p><b>Done:</b> masks, wings (2 electrodes), rolled cores, transmission, assembly; the wing on the bench in three views (1000–1800 V, 1–20 Hz, two tensions); the robot flapping (1000–1400 V, 1–15 Hz, side, diagonal and front views). <b>Next, in order:</b></p>
 <ol class="read">
-<li><b>Tomorrow, bench, no air:</b> flip test (does the drop follow gravity?), hang 1 g at the edge centre at 0 V and 1800 V (gives $T$), scope at the device, roll DEA force at voltage (gives $\eta_f$ directly). Weigh a cut piece of film of known area: the wing mass suggests the film is thicker than 60 µm (see <a href="#q4">thickness</a>).</li>
-<li><b>Pluck the edge</b> at 0 V and 1800 V, from the side at 200 fps. Prediction: about 45 Hz at 0 V and 11–20 Hz at 1800 V. This checks the edge model in one video.</li>
-<li><b>Second wing:</b> same mask, 4 electrodes, roll length measured after rolling (61–65 mm here). Mark the roll every 10 mm before rolling, so the stretch can be read from photos.</li>
-<li><b>Part-active edge, if you want less mass:</b> electrodes only on the inner half of the roll (one mask change), or cut the roll at half span and tie 0.10 mm nylon to the tip. Expect about 90 % of the motion with nylon, about 25–50 % with passive roll.</li>
-<li><b>Static wind tunnel, before flapping:</b> wing at 4 m/s, 6° and 10°, side view at 0 V and 1800 V, randomised order. This is the test that tells whether voltage adds or removes lift at real loads (<a href="#q3">lift</a>).</li>
-<li><b>Transmission:</b> lever 2.5 mm on a core pair, sweep frequency at low voltage with a dummy mass, find the peak. Then the wing, flow off.</li>
-<li><b>Tethered flapping</b> on the force sensor, 0 V first, then with voltage in random order and a sham. Lift, thrust, shaft power.</li>
-<li><b>Free flight</b> only if a core gives about 2 J/kg in a 25 Hz loaded cycle.</li>
+<li><b>Raise the resonance</b> towards 20 Hz: shorter lever, stiffer spring core, lighter wing root (cables and glue are 108 mg near the root). Pluck at 0 V after each change.</li>
+<li><b>Powered against unpowered wing, interleaved:</b> one session, one camera, wing on and off every 10 s at a fixed frequency, then a sweep in both states. Log the drive with an LED in view.</li>
+<li><b>Find the stroke limit at 1400 V</b> (end stop, transmission or core strain): 8 Hz at 1200, 1300, 1400 V, side view.</li>
+<li><b>Measure the lag:</b> electrode resistance end to end; current or blocked force at 1–20 Hz.</li>
+<li><b>Measure $\eta_f$ and the film:</b> roll force drop at 1800 V; weigh a cut piece of film of known area.</li>
+<li><b>Tethered flapping on a force sensor,</b> then a static wind tunnel at 4 m/s, 6° and 10°, 0 V and 1800 V in random order.</li>
 </ol>
 </section>
 
 <section class="card" id="q1">
 <h2>Nylon or TPU instead of the rolled DEA edge?</h2>
-<p>I read this as the trailing edge, where the roll is now. The leading edge must stay carbon: it carries bending from the stroke and from the skin, and a nylon or TPU strip bends by millimetres under those loads (beam table on the <a href="../flittermouse/#structure">Flittermouse page</a>).</p>
+<p>I read this as the trailing edge, where the roll is now. The leading edge must stay carbon: it carries bending from the stroke and from the skin, and a nylon or TPU strip bends by millimetres under those loads (beam table on the <a href="../flittermouse/#structure">Flittermouse page</a>, archived).</p>
 <div class="fig"><img src="R_edge.png" alt="Six panels. a, bench: edge height change against voltage for the roll at four edge efficiencies, a passive roll with a strong skin, and the measured side-view highs. b, the same with lift-like pressures of 8 and 15 Pa. c, thin-aerofoil lift change at mid span against voltage. d, edge options from the edge equation at 8 Pa. e, edge mass for each option, log scale. f, tension error for 0.1 mm of length error for each option."></div>
 <ul class="read">
 <li><b>Equation:</b> the edge holds its load with two springs in parallel, the edge string and the skin behind it: $\Delta z = q_e / (8T/L^2 + N/c)$, with $q_e$ the load per length on the edge, $T$ the edge tension, $L$ its length, $N$ the skin tension across it and $c$ the strip of skin that holds it. At 0 V the string is about 13× stiffer than the skin. When $T$ falls to zero, only the skin holds the edge, and the motion jumps.</li>
@@ -74,7 +71,7 @@
 <li><b>Mass (e):</b> roll 80 mg per wing, TPU 1 × 0.1 mm 7 mg, nylon 0.10 mm 0.5 mg. A cord saves 73–80 mg per wing, about 8 % of the robot.</li>
 <li><b>Setting the tension (f):</b> 0.1 mm of length error moves the tension by 1.3 mN for the roll, 4 mN for thin TPU, 33 mN for 0.10 mm nylon. Nylon must be tensioned by a spring or a weight, not by length. TPU creeps, so its tension falls over hours; nylon creeps far less.</li>
 <li><b>So:</b> keep the active roll if voltage should move the edge. Use nylon, with a set force, for a passive wing or for the outer part of a part-active edge. TPU sits between, with creep as its cost.</li>
-<li><b>Validate:</b> one wing with the roll replaced by 0.10 mm nylon at 40–70 mN, same videos as 5 Nov. Prediction: less than 0.1 mm at 1800 V.</li>
+<li><b>Validate:</b> one wing with the roll replaced by 0.10 mm nylon at 40–70 mN, same videos as the bench set. Prediction: less than 0.1 mm at 1800 V.</li>
 <li><b>Limits:</b> nylon and TPU did not settle in the finite elements (a stiff cord on a soft skin), so their numbers come from the edge equation, fitted on the 40 roll curves that did (<a href="#model">below</a>).</li>
 </ul>
 </section>
@@ -88,7 +85,7 @@
 <li><b>Trend (b), finite elements:</b> same roll, electrodes only near the body. At 1800 V, 25 % active gives 0.1 mm on the bench and 0.27 at 15 Pa; 50 % gives 0.3–0.4 and 0.5–0.7; 75 % gives 1.1–1.2 and 1.3–1.4 mm. Full edge: 1.5–1.7 and 2.1 mm.</li>
 <li><b>Trend (c):</b> active roll near the body with nylon outboard keeps about 90 % of the motion at 50 % active (0.38 against 0.42 mm). It saves about 40 mg per wing and keeps the high voltage near the body, where the cables are short.</li>
 <li><b>Catch:</b> a stiff rest makes tension depend on length to 0.1 mm, so set it with a spring. The edge equation has not been checked for roll + nylon in the finite elements.</li>
-<li><b>Validate:</b> cut the roll at half span and tie nylon from the cut to the tip, set to the same tension. Same videos as 5 Nov.</li>
+<li><b>Validate:</b> cut the roll at half span and tie nylon from the cut to the tip, set to the same tension. Same videos as the bench set.</li>
 </ul>
 </section>
 
@@ -121,6 +118,8 @@
 <h2>Resonance: what the wing and the cores do</h2>
 <div class="fig"><img src="R_resonance.png" alt="a, flapping resonance against lever arm for the wing on two cores, with and without air mass. b, first edge mode against voltage for four edge cases, the flapping band and the 15 Hz bump measured at 1800 V. c, edge motion relative to the leading edge against frequency at 0 and 1800 V, bench and in flow. d, phase lag of the edge."></div>
 <ul class="read">
+<li><b>Measured:</b> the built robot resonates at 8.4 Hz (sweep fit), with free decays at 8.0–9 Hz depending on amplitude and a damping ratio of 0.07 (<a href="../first/#flapping">Experiments</a>). Q is about 7 in still air, against 2 expected in flight, where the air takes more power.</li>
+<li><b>Model against measurement:</b> at the 2.5 mm design lever the model gives 22.6 Hz. The measured 8.4 Hz means $2kr^2/I$ is about 7× smaller: a softer core than the Yeoh fit (pre-stretch, creep), compliance in the transmission, or more inertia than the wing alone (crank, cables, moving frame). Which one is a pluck test away: with and without the wing, then with a known added mass.</li>
 <li><b>Equation, stroke:</b> $f_r = \frac{1}{2\pi}\sqrt{2 k r^2 / (I_w + I_{air})}$. Core stiffness $k = 2C_1(1+2\lambda^{-3})\,A/L$ with $A = m/(\rho L)$: 276 N/m for a 565 mg, 20 mm core at 10 % stretch. Wing $I_w$ = 1.6×10⁻⁷ kg m² from the measured masses, air adds 5 %.</li>
 <li><b>Trend (a):</b> 20 Hz at $r$ 2.2 mm, 25 Hz at 2.8 mm. The roll is 30 % of the wing mass but about half its inertia, since cables and glue sit near the root. A nylon edge would raise $f_r$ by about 40 %, so the lever would shrink to keep 25 Hz.</li>
 <li><b>Quality factor:</b> $Q = 2\pi\,\tfrac12 I\omega^2\Phi^2 / (P_{air}/f)$ = 2 at 25 Hz, ±20°, 20 mW per wing. Resonance gives about 2× the quasi-static stroke, and a band of about ±25 %, so it is forgiving.</li>
@@ -136,6 +135,13 @@
 
 <section class="card" id="q6">
 <h2>Can it fly?</h2>
+<div class="fig"><img src="../results/fig/Fig7_flight.png" alt="a, thrust per wing against flight speed for the measured kinematics, 8.4 Hz plus or minus 12 degrees, and for 8.4 Hz, 16 Hz and 25 Hz at plus or minus 20 degrees. b, lift per wing against speed for the same, with half the robot weight. c, thrust against Strouhal number for all runs."></div>
+<ul class="read">
+<li><b>At the measured kinematics:</b> the unsteady lattice (time model, <a href="../air/">Wing in air</a>) at 8.4 Hz, ±12°, α 10°, wing at 0 V: thrust -0.11 mN per wing at 2 m/s and -0.69 mN at 4 m/s. At the design point, 25 Hz, ±20°: +0.74 mN at 4 m/s.</li>
+<li><b>Trend (c):</b> all runs fall on one curve against the Strouhal number $St = f A_{tip}/U$: thrust is positive above about 0.15. The robot as built is at 0.05 at 4 m/s.</li>
+<li><b>Lift (b)</b> barely depends on the flapping: 7.7 mN per wing at 4 m/s with the measured stroke, 7.9 at the design point. It comes from the forward speed; flapping has to pay for the drag.</li>
+<li><b>So:</b> frequency is the first gap, then energy per cycle (below). The numbers below are for the design point.</li>
+</ul>
 <div class="fig"><img src="R_flight.png" alt="a, power required for level flight against speed for the 1.88 g robot, middle and range, with power from two cores at three energies per cycle and the stall speed shaded. b, histogram of power available over required for 20,000 draws; 7 percent at or above 1. c, the same against core energy per cycle. d, energy per cycle the cores need against core share of robot mass."></div>
 <ul class="read">
 <li><b>Equation, required:</b> $P = (D_i + D_p + D_b)\,U/\eta_p$, with induced drag $D_i = W^2/(q\pi b^2 e)$, profile drag $D_p = q S C_{D0}\,\overline{(1+(V_f/U)^2)^{3/2}}$ including the flapping speed $V_f$, body $D_b = q\,(S C_D)_b$, and propulsive efficiency $\eta_p$. Lift must equal weight above stall: $U \ge \sqrt{2W/(\rho S C_{L,max})}$.</li>
@@ -156,7 +162,7 @@
 <li><b>Equations:</b> drop $\Delta z = q_e/(8T/L^2 + N/c)$, in-plane bow $s = N L^2/(8T)$, tension $T = T_0 - \Delta F + k_e\,\frac{8}{3L}(\Delta z^2 + s^2 - \dots_0)$, skin $N = N_0 - \Delta N + \frac{Et}{c}\,\frac{8}{3}(h/c)^2$, bulge $h = p\,c^2/(8N)$. The path-length terms are what hold a slack edge: it has to stretch to sag further.</li>
 <li><b>Fitted:</b> three constants on 160 points from 40 settled finite-element runs (roll, $\eta_f$ 0–0.8, 0–15 Pa, two pulls): $N_0$ 0.10 N/m (0.15–0.29 from the edge curvature), $c$ 5.9 mm (skin strip that holds the edge), load share 0.28. rms 0.21 mm, correlation 0.93.</li>
 <li><b>Use:</b> comparing edges (cords, part-active) where the finite elements do not settle, and the edge mode. Not absolute numbers.</li>
-<li><b>Finite elements:</b> the 5 Nov wing (first/fit_wing.py): built outline, one active skin layer, 23 mm roll with 20 mm active and 2 films, roll stretched by a 6 or 9 mm pull, wing weight from film density, uniform pressure 0–15 Pa. All 60 runs settled. Median edge tension 29 and 43 mN at 0 V.</li>
+<li><b>Finite elements:</b> the bench wing (first/fit_wing.py): built outline, one active skin layer, 23 mm roll with 20 mm active and 2 films, roll stretched by a 6 or 9 mm pull, wing weight from film density, uniform pressure 0–15 Pa. All 60 runs settled. Median edge tension 29 and 43 mN at 0 V.</li>
 </ul>
 </section>
 
@@ -177,7 +183,7 @@
 
 <div class="two">
   <a class="go" href="../results/"><b>Results →</b><br>Main figures, findings and preliminary conclusions.</a>
-  <a class="go" href="../first/"><b>First wing test →</b><br>The bench data this rests on.</a>
+  <a class="go" href="../first/"><b>Experiments →</b><br>The bench and robot data this rests on.</a>
 </div>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>

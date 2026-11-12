@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Wing in air</p>
 <h1>Wing in air</h1>
 <p class="lead">The whole skin is active, not only the edge. What does the skin do on its own, what does the edge do, and how do both compare with a passive membrane and with discrete rolled fibres on the same wing? On the bench and in flow, with the bench data as the check.</p>
-<p class="note">Updated 6 Nov 2026, 05:14. Follows the <a href="../robot/">robot page</a>; main figures on <a href="../results/">Results</a>.</p>
+<p class="note">Models of the wing in air: finite elements with a vortex lattice (steady), and a time model with an unsteady lattice. The tests they are checked against are on <a href="../first/">Experiments</a>; main figures on <a href="../results/">Results</a>.</p>
 <div class="warn"><b>What this rests on:</b> one wing measured on the bench (masses, roll length, videos at 1–20 Hz and 1–1.8 kV). Flow is modelled: finite elements of the built wing coupled to a steady vortex lattice, and a time model (sheet + edge + unsteady vortex lattice) checked against the bench sweep. No wind-tunnel data yet. Skin efficiency $\eta_s$ and edge efficiency $\eta_f$ are not measured directly; I show 0.15 and 0.4 for the skin, 0.4 and 0.8 for the edge.</div>
 <nav class="toc"><a href="#short">In short</a><a href="#q1">Skin tension</a><a href="#q2">Lift in flow</a><a href="#q3">Slack edge</a><a href="#q4">Fibres</a><a href="#q5">Force lag</a><a href="#q6">Flapping</a><a href="#design">For B-cube</a><a href="#tests">Tests</a><a href="#model">Equations</a><a href="#limits">Limits</a><a href="#code">Code</a></nav>
 
@@ -79,6 +79,7 @@
 <li><b>Trend (a):</b> without a lag the model stays flat to about 12 Hz, while the measured motion falls 3.5× from 1 to 5 Hz. A lag of $\tau$ = 50 ms fits 1–5 Hz to within 3–8 % (0.62, 0.43, 0.33, 0.26 against 0.62, 0.43, 0.35, 0.28). It misses the 15 Hz bump: the edge mode, which the damped model smooths away.</li>
 <li><b>Trend (b):</b> at 1800 V the model gives 1.5–1.6 mm against 1.84 measured. At 1400 V it gives 0.15 against 0.82: the measured edge loses its tension more gradually than the model's. $\eta_f$ between 0.4 and 0.8 brackets the data.</li>
 <li><b>Where 50 ms could come from:</b> the electrodes and the cable, if they add up to about 20 MΩ: the roll and skin are about 2.4 nF, and $\tau = RC$. Or the silicone's viscoelasticity. Or the amplifier's slew at 1.8 kV.</li>
+<li><b>Second check, on the robot:</b> the robot's frequency sweep, fitted with one mode and the same first-order lag, gives $\tau$ = 38 ± 13 ms (<a href="../first/#flapping">Experiments</a>). Without a lag its resonance peak would be twice as high. Two independent data sets, the same order: the lag is in the DEA, not in the wing model.</li>
 <li><b>So:</b> with this lag, within-stroke timing at 25 Hz is gone (only 13 % of a 25 Hz change passes). Make the lag shorter first if per-stroke control matters, then revisit timing.</li>
 <li><b>Validate:</b> measure the electrode resistance end to end (MΩ range), and the current or the blocked roll force at 1–20 Hz. If $R \approx$ 20 MΩ, better electrodes or contacts fix it.</li>
 </ul>
@@ -93,6 +94,7 @@
 <li><b>Trend, edge (a–c):</b> half force (or any on/off timing, which the lag averages): 8.8–8.9 mN (+11 %), thrust 0.52–0.55 (−27 %), power 18.8–19.4 mW (+17 %), twist ±15°. Full force held: 11.0 mN (+38 %), thrust −0.4, power 21–22 mW, twist ±23°. Fully slack (both strong): lift falls to 5.8 mN and drag rises (−11 mN thrust).</li>
 <li><b>Trend, skin:</b> $\eta_s$ 0.4 held: 8.5 mN (+7 %), thrust 0.62, power +19 %. This model holds the chord tension through the edge only, so it gives less than the finite elements (+30 %). Take +7 to +30 % as the range.</li>
 <li><b>Trend (d):</b> twist grows with frequency, and voltage adds 12–14° across 15–30 Hz. With the edge mode at 11–27 Hz at voltage, the edge lags the stroke and the wing feathers.</li>
+<li><b>At the measured kinematics</b> (8.4 Hz, ±12°, 4 m/s, α 10°): 7.7 mN lift and -0.69 mN thrust per wing at 0 V; edge held at full voltage: 7.2 mN and -2.20 mN. Below a Strouhal number of about 0.15 the flapping makes no thrust, so the trim question only matters once the robot flaps at 16–25 Hz (<a href="../robot/#q6">robot page</a>).</li>
 <li><b>So:</b> voltage trades thrust for lift, at more power. It is a trim knob for slow flight or climb, not free lift. It should stay above the slack limit.</li>
 <li><b>Validate:</b> tethered flapping on the force sensor at 0 V, half and full voltage held, random order, sham channel. Prediction: +10 to +40 % lift, −25 % to −150 % thrust, +15 to +35 % power.</li>
 </ul>
@@ -101,11 +103,11 @@
 <section class="card" id="design">
 <h2>What this means for B-cube</h2>
 <ol class="read">
-<li><b>Keep the whole skin active.</b> It costs no mass, settles in flow, and gives the cleanest lift change: +0.1 to +0.35 in $C_L$ held. Give it its own channel so the skin and the edge can be tested apart.</li>
+<li><b>Keep the whole skin active.</b> It costs no mass, settles in flow, and gives the cleanest lift change: +0.1 to +0.35 in $C_L$ held. A separate skin channel would let the skin and the edge be tested apart, but the roll is also how the electrodes are contacted, so it needs its own contact path.</li>
 <li><b>Use the edge for twist, with a floor.</b> Start it at 55–70 mN and keep it above about 10 mN in flight: limit the voltage, or use the part-active edge with nylon outboard (<a href="../robot/#q2">robot page</a>), which takes off a set share.</li>
 <li><b>Drop discrete fibres</b> for this size. They do less, weigh 51 mg, and need a stiff edge.</li>
 <li><b>Plan voltage as a trim,</b> set once per manoeuvre, until the 50 ms lag is explained and shortened.</li>
-<li><b>Flight budget:</b> half force on the edge closes the lift gap per wing at 4 m/s and 10° (7.9 → 8.9 mN against 9.2 needed), at +17 % aerodynamic power. The power gap of the <a href="../robot/#q6">robot page</a> stays: about 2 J/kg is needed from the cores.</li>
+<li><b>Flight budget:</b> half force on the edge closes the lift gap per wing at 4 m/s and 10° (7.9 → 8.9 mN against 9.2 needed), at +17 % aerodynamic power. The power gap of the <a href="../robot/#q6">robot page</a> stays: about 2 J/kg is needed from the cores. And all of this assumes the design stroke: the built robot flaps at 8.4 Hz, where there is no thrust to trade.</li>
 </ol>
 </section>
 
@@ -117,7 +119,7 @@
 <tr><td>Skin under a known load (suction box or fan), roll unpowered</td><td>$\eta_s$, and whether the skin matters</td><td>14–50 % more bulge at 1800 V; edge within 0.15 mm</td></tr>
 <tr><td>Static wind tunnel, 4 m/s, 6° and 9°: skin, then edge</td><td>Lift change of each</td><td>Skin +1 to +3 mN per wing; edge ±0.5 mN up to 1400 V</td></tr>
 <tr><td>Same, edge at 1800 V, high-speed</td><td>Slack limit</td><td>Edge flutter at 4 m/s if $T$ drops below about 7 mN</td></tr>
-<tr><td>Tethered flapping, 25 Hz, voltage held</td><td>Trim: lift against thrust</td><td>+10 to +40 % lift, thrust falls, +15 to +35 % power</td></tr>
+<tr><td>Tethered flapping at the highest frequency reached, voltage held</td><td>Trim: lift against thrust</td><td>+10 to +40 % lift, thrust falls, +15 to +35 % power</td></tr>
 </table></div>
 </section>
 
