@@ -293,16 +293,16 @@ def B1_system():
     b += wave(60, 228, 150, 10, 2.0, 0, AMBER, 2.2)
     b += card(286, 90, 230, 110, "DEA core", ["force ∝ V²", "lag τ ≈ 40 ms"], BLUE)
     b += card(286, 250, 230, 130, "Wing DEA", ["skin + rolled edge", "edge tension T₀ − ΔF(V)", "robot: T₀ ≈ 4 mN"], BLUE)
-    b += card(586, 70, 250, 140, "Stroke mode", ["8.4 Hz, damping 0.07", "θ″ + 2ζωθ′ + ω²θ + βθ²", "     = G·u(t) − μ·ω_w²·q"], INK)
-    b += card(586, 250, 250, 140, "Wing mode", ["17 Hz at 0 V (edge ≈ 4 mN)", "≈ 10 Hz when the edge is slack", "q″ + 2ζ_wω_w q′ + ω_w² q = −θ″"], MAROON)
-    b += card(906, 160, 160, 120, "Video", ["leading-edge angle", "θ + q, 200 fps"], TEAL)
+    b += card(586, 70, 250, 140, "Stroke mode", ["8.4 Hz, damping 0.07", "θ″ + 2ζωθ′ + ω²θ + βθ²", "     = G·u(t) + M_edge(T)"], INK)
+    b += card(586, 250, 250, 140, "Edge on the stroke", ["tension T pulls the wing", "toward the body", "effect on the stroke: under test"], MAROON)
+    b += card(906, 160, 160, 120, "Video", ["wing tip about the", "fitted hinge, 200 fps"], TEAL)
     b += arrow(227, 160, 282, 145, AMBER, 2.6, "ahA") + arrow(227, 190, 282, 300, AMBER, 2.6, "ahA")
     b += arrow(517, 145, 582, 140, INK, 2.4) + t(530, 132, "u(t)", 14, MUTED, 600, italic=True)
     b += arrow(517, 315, 582, 320, INK, 2.4) + t(533, 306, "T", 14, MUTED, 600, italic=True)
     b += arrow(680, 212, 680, 246, MAROON, 2.8, "ahM") + arrow(742, 246, 742, 212, MAROON, 2.8, "ahM")
-    b += t(626, 235, "−θ″", 15, MAROON, 700) + t(752, 235, "−μω_w² q", 15, MAROON, 700)
+    b += t(626, 235, "θ", 15, MAROON, 700) + t(752, 235, "M_edge", 15, MAROON, 700)
     b += arrow(837, 140, 902, 200, TEAL, 2.4, "ahT") + arrow(837, 320, 902, 245, TEAL, 2.4, "ahT")
-    b += chip(286, 408, "voltage slackens the edge  →  the wing mode leaves the band  →  the stroke is freed", AMBER_L, "#b45309", 14, 550)
+    b += chip(286, 408, "one drive reaches the stroke through the core and, possibly, through the wing's tension", AMBER_L, "#b45309", 14, 550)
     write("B1_system", W, H + 40, b, "System block diagram")
 
 
@@ -425,69 +425,53 @@ def B4():
 # ============================== B5: powered against unpowered ==============================
 def B5():
     W, H = 1100, 450
-    b = head(36, 52, "Powering the wing frees the stroke", "8 Hz, 1.2 kV on the core in both runs; only the wing's state differs")
-    for k, (x0, title, slack, ang, big, harm, col) in enumerate(((36, "wing powered", True, 15, "24.3°", "2nd harmonic 0.7°", BLUE_D), (566, "wing unpowered", False, 11, "20.2°", "2nd harmonic 1.7°", MAROON))):
-        b += f'<rect x="{x0}" y="88" width="500" height="330" rx="18" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/>'
+    b = ""
+    for k, (x0, title, slack, asym, col, hlab) in enumerate(((36, "wing powered", True, 0.25, BLUE_D, "lopsided one way"), (566, "wing unpowered", False, -0.45, MAROON, "lopsided the other way"))):
         b += t(x0 + 22, 120, title, 18, col, 700)
         if slack: b += bolt(x0 + 200, 98, 0.62)
-        hx, hy = x0 + 70, 225; R = 300
+        hx, hy = x0 + 70, 225; R = 300; ang = 12
         for sgn in (1, -1):
             a = math.radians(ang * sgn)
             tip = (hx + R * math.cos(a), hy - R * math.sin(a))
             anc = (hx - 6, hy + 48)
             mid = ((tip[0] + anc[0]) / 2 + 8, (tip[1] + anc[1]) / 2 + (24 if slack else 8))
             b += f'<path d="M{hx},{hy} L{tip[0]:.1f},{tip[1]:.1f} Q{mid[0]:.1f},{mid[1]:.1f} {anc[0]},{anc[1]} Z" fill="{"url(#skinV)" if slack else "url(#skin)"}" opacity="0.42"/>'
-            if slack:
-                b += path(qbez(anc, mid, tip), AMBER, 4, extra='opacity="0.8" stroke-dasharray="1 6"')
-            else:
-                b += path(qbez(anc, mid, tip), MAROON, 4.5, extra='opacity="0.85"')
+            b += path(qbez(anc, mid, tip), AMBER if slack else MAROON, 4, extra='opacity="0.8"' + (' stroke-dasharray="1 6"' if slack else ""))
             b += rod(hx, hy, tip[0], tip[1], 5)
-        b += path(f"M{hx + R + 14:.1f},{hy - R * math.sin(math.radians(ang)) :.1f} A{R},{R} 0 0 1 {hx + R + 14:.1f},{hy + R * math.sin(math.radians(ang)):.1f}", col, 2.4, extra='marker-start="url(#ah)" marker-end="url(#ah)"')
-        b += t(x0 + 480, 128, big, 34, col, 800, "end")
+            b += f'<circle cx="{tip[0]:.1f}" cy="{tip[1]:.1f}" r="7" fill="none" stroke="#16a34a" stroke-width="2.5"/>'
+        b += path(f"M{hx + R + 14:.1f},{hy - R * math.sin(math.radians(ang)):.1f} A{R},{R} 0 0 1 {hx + R + 14:.1f},{hy + R * math.sin(math.radians(ang)):.1f}", col, 2.4, extra='marker-start="url(#ah)" marker-end="url(#ah)"')
+        b += t(x0 + 480, 128, "24°", 34, col, 800, "end")
         b += f'<circle cx="{hx}" cy="{hy}" r="8" fill="#fff" stroke="#0f172a" stroke-width="2.2"/>'
-        b += t(x0 + 22, 352, "edge slack" if slack else "edge tense, ≈ 4 mN", 14, "#b45309" if slack else MAROON, 400)
-        b += wave(x0 + 22, 392, 300, 15 if slack else 11, 2.0, 0.0 if slack else 0.42, col, 2.6)
-        b += t(x0 + 340, 396, harm, 14, col, 700)
-    write("B5_wing_state", W, H, b, "Powered against unpowered wing")
+        b += t(x0 + 22, 352, "edge slack" if slack else "edge tense", 14, "#b45309" if slack else MAROON, 400)
+        b += wave(x0 + 22, 392, 300, 13, 2.0, asym, col, 2.6)
+        b += t(x0 + 340, 396, hlab, 14, col, 400)
+    write("B5_wing_state", W, H, b, "Powered against unpowered wing: same stroke, opposite asymmetry")
 
 
-# ============================== B6: model ==============================
 def B6():
     W, H = 1100, 450
-    b = head(36, 52, "A wing mode explains it", "the edge's tension sets a second mode that steals from the stroke")
-    x0 = 36
-    b += f'<rect x="{x0}" y="88" width="540" height="330" rx="18" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/>'
-    # wall, stroke mass, wing mass
-    b += f'<rect x="{x0 + 22}" y="150" width="16" height="160" rx="4" fill="#334155"/>'
-    b += spring(x0 + 38, 230, x0 + 150, 230, 8, 11, BLUE_D, 2.6)
-    b += f'<rect x="{x0 + 150}" y="175" width="120" height="110" rx="14" fill="url(#ball)" stroke="{BLUE_D}" filter="url(#sh)"/>' + t(x0 + 210, 225, "stroke", 16, "#fff", 700, "middle") + t(x0 + 210, 246, "8.4 Hz", 14, "#fff", 600, "middle")
-    b += spring(x0 + 270, 230, x0 + 380, 230, 7, 11, MAROON, 2.6) + t(x0 + 290, 205, "coupling μ", 13.5, MAROON, 700)
-    b += f'<rect x="{x0 + 380}" y="190" width="90" height="80" rx="12" fill="url(#ballR)" stroke="{MAROON}" filter="url(#sh)"/>' + t(x0 + 425, 228, "wing", 15, "#fff", 700, "middle") + t(x0 + 425, 247, "mode", 13, "#fff", 600, "middle")
-    b += arrow(x0 + 120, 150, x0 + 150, 190, AMBER, 2.8, "ahA") + t(x0 + 52, 140, "DEA core push", 13.5, "#b45309", 700)
-    # tension knob controlling wing mode
-    kx, ky = x0 + 425, 340
-    b += f'<circle cx="{kx}" cy="{ky}" r="30" fill="#fff" stroke="{MAROON}" stroke-width="3" filter="url(#soft)"/>' + line(kx, ky, kx - 14, ky - 22, MAROON, 4)
-    b += path(f"M{kx - 44},{ky + 6} A44,44 0 0 1 {kx + 40},{ky - 18}", MAROON, 2, extra='marker-end="url(#ahM)" opacity="0.6"')
-    b += t(kx - 60, ky + 50, "edge tension T: 4 mN → 0 at voltage", 13.5, MAROON, 700, "middle")
-    b += arrow(kx, ky - 32, kx, 274, MAROON, 2, "ahM", 'opacity="0.6"')
-    # frequency ruler
-    gx, gy, gw = 610, 120, 455
-    b += f'<rect x="{gx}" y="88" width="{gw}" height="330" rx="18" fill="#fff" stroke="#e2e8f0" filter="url(#sh)"/>'
-    fx = lambda f: gx + 40 + (f - 5) / 20 * (gw - 80)
-    yl = 250
-    b += line(fx(5), yl, fx(25), yl, INK, 2) + "".join(line(fx(f), yl - 6, fx(f), yl + 6, INK, 1.5) + t(fx(f), yl + 26, f"{f}", 13, MUTED, 600, "middle") for f in (5, 10, 15, 20, 25))
-    b += t(fx(25), yl + 46, "Hz", 13, MUTED, 600, "end")
-    def mark(f, lab, col, up=True, dy=0):
-        yy = yl - 40 - dy if up else yl + 60 + dy
-        return line(fx(f), yl, fx(f), yy + (8 if up else -8), col, 2.2) + f'<circle cx="{fx(f):.1f}" cy="{yl}" r="7" fill="{col}"/>' + t(fx(f), yy, lab, 14, col, 700, "middle")
-    b += mark(8, "stroke 8", BLUE_D, True, 0) + mark(16, "2nd harmonic 16", INK, True, 40) + mark(17, "wing mode 17 (0 V)", MAROON, False, 0)
-    b += mark(10, "slack edge ≈ 10", "#b45309", False, 70)
-    b += path(f"M{fx(17):.1f},{yl + 14} C{fx(15):.1f},{yl + 60} {fx(12):.1f},{yl + 60} {fx(10.3):.1f},{yl + 22}", AMBER, 2.4, extra='marker-end="url(#ahA)"')
-    b += f'<rect x="{fx(15.6):.1f}" y="{yl - 90:.1f}" width="{fx(17.6) - fx(15.6):.1f}" height="80" fill="{MAROON}" opacity="0.1"/>'
-    write("B6_model", W, H, b, "Two-mode model schematic")
+    b = ""
+    for k, (x0, title, good) in enumerate(((36, "silhouette (top edge of the dark region)", False), (566, "tip, about the fitted hinge", True))):
+        b += t(x0 + 22, 120, title, 16, INK, 700)
+        hx, hy = x0 + 60, 190; tip = (x0 + 420, 300)
+        anc = (hx - 6, hy + 40); mid = ((tip[0] + anc[0]) / 2 + 30, (tip[1] + anc[1]) / 2 + 10)
+        b += f'<path d="M{hx},{hy} L{tip[0]},{tip[1]} Q{mid[0]:.1f},{mid[1]:.1f} {anc[0]},{anc[1]} Z" fill="url(#skin)" opacity="0.55"/>'
+        b += tube(qbez(anc, mid, tip), 8)
+        b += rod(hx, hy, tip[0], tip[1], 5)
+        # a faint feature above the spar (membrane, seen from above)
+        b += path(f"M{hx + 120},{hy + 22} Q{hx + 230},{hy + 30} {tip[0] - 40},{tip[1] - 34}", "#94a3b8", 3, extra='opacity="0.8"')
+        b += f'<circle cx="{hx}" cy="{hy}" r="7" fill="#fff" stroke="#0f172a" stroke-width="2"/>'
+        if good:
+            b += line(hx, hy, tip[0], tip[1], "#16a34a", 2.5, 'stroke-dasharray="6 5"') + f'<circle cx="{tip[0]}" cy="{tip[1]}" r="9" fill="none" stroke="#16a34a" stroke-width="3"/>'
+            b += path(f"M{hx + 90},{hy} A90,90 0 0 1 {hx + 86},{hy + 27}", "#16a34a", 2) + t(hx + 100, hy + 12, "θ", 18, "#16a34a", 700)
+            b += t(x0 + 22, 372, "follows the stroke whatever the wing's shape", 14, "#16a34a", 400)
+        else:
+            b += line(hx + 120, hy + 6, tip[0] - 30, tip[1] - 52, "#e11d48", 3) + t(tip[0] - 40, tip[1] - 64, "fitted line", 13, "#e11d48", 400)
+            b += t(x0 + 22, 372, "jumps to whatever is highest in the image", 14, "#e11d48", 400)
+    write("B6_model", W, H, b, "Measuring the stroke: silhouette against tip")
 
 
-# ============================== B7: air ==============================
+
 def B7():
     W, H = 1100, 430
     b = head(36, 52, "In air, the active skin cambers the wing", "only ~15 % of the electrostatic stress becomes a tension drop, but the wing sits near divergence")

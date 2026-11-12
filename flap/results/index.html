@@ -80,8 +80,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>In air, the skin matters too.</b> Only about 15 % of the skin's Maxwell stress stays as a drop in chord tension, but the wing sits near membrane divergence ($C_T \approx$ 3.3 at 4 m/s), so the active skin alone adds $\Delta C_L$ +0.09 to +0.37 and always settles. Discrete rolled fibres on the same wing give half of it for 51 mg more. A fully slack edge has no steady state at 4 m/s and faster (Fig. 7). Model.</li>
 <li><b>The DEA force lags the voltage by 40–50 ms,</b> found twice: the fall of the wing's bench motion from 1 to 5 Hz (50 ms) and the height of the robot's resonance peak (38 ± 13 ms). At 25 Hz, any on/off timing acts as half the voltage held: voltage is a slow trim (Fig. 4, 7).</li>
 <li><b>The robot's resonance is 8.4 Hz, not 20–25 Hz,</b> with a damping ratio of 0.07 (Q about 7 in still air). It is not fixed: the spring softens with stroke (9 Hz near 1°, 8 Hz at 3.4°) and it moved by 5 % between sessions. At 1 Hz the stroke goes as $V^2$; at resonance 1400 V adds only 8 % (Fig. 4). Measured.</li>
-<li><b>Powering the wing changes how the robot flaps.</b> At 8 Hz and 1200 V the stroke is 24.3 ± 1.0° with the wing powered against 20.2 ± 0.7° with only the core powered (+20 %, 35 cycles each), and the cycle changes shape: unpowered, it carries 2.4× more 2nd harmonic although it is smaller, which a drift of the natural frequency cannot produce (Fig. 5).</li>
-<li><b>The coupling goes through the leading edge, and it snaps.</b> Harmonic balance gives one real spring asymmetry for all powered runs and a reversed, complex one for the unpowered run: something near 16 Hz lags. A linear wing mode at 17 Hz reproduces the unpowered size and 2nd harmonic, but it predicts a second free mode that the decays do not show. The video shows why: the unpowered leading edge snaps once per cycle (bend harmonics up to 32 Hz, 3–4× larger), the edge going taut and slack at large stroke. Powering the wing slackens the edge and removes the snap (Fig. 6, <a href="../model/">Models</a>).</li>
+<li><b>Powering the wing leaves the stroke size unchanged.</b> Measured from the wing tip, the stroke at 8 Hz and 1.2 kV is 23.8 ± 1.0° with the wing powered and 24.4 ± 1.1° with it unpowered, and the tip moves 23.8 against 22.1 mm: equal within the few percent the two camera set-ups allow. An earlier reading of +20 % came from the stroke tracker following a feature above the spar in the unpowered view (Fig. 6).</li>
+<li><b>The stroke's shape may change.</b> The tip-based spring asymmetry is one real value for every powered run (+0.18 to +0.31) and -0.43 for the unpowered run, with a lag at 16 Hz. The two runs were filmed 20 min apart, so the robot may have changed in between; an interleaved test decides it (Figs. 5, 6).</li>
 <li><b>At the measured kinematics the flapping makes no thrust.</b> Thrust needs $St \gtrsim 0.15$; the robot is at 0.05 at 4 m/s, so it needs 16–25 Hz. Lift comes from the forward speed (Fig. 8). Even at the design point, free flight needs about 2 J/kg per cycle from the cores, about twice what the bench gave (Fig. S2). Model.</li>
 </ol>
 </section>
@@ -94,7 +94,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>a:</b> the robot in the stroke plane: two rolled DEA cores (one drives, one is the spring) turn the carbon leading edge about a hinge through a lever; the DEA skin spans the wing, and its rolled DEA edge, which also carries the contacts, is tied to the body. Right: the skin stack (two carbon-nanotube electrodes, one active silicone layer) and the rolled edge.</li>
 <li><b>b–d:</b> the robot in the side, diagonal and top views of the high-speed camera, 200 fps, scale bars 10 mm.</li>
 <li><b>e:</b> area swept by the wing at 8 Hz (brightest minus darkest pixel over the run).</li>
-<li><b>f:</b> the system as modelled: one drive signal powers core and wing; the core drives the stroke through a force lag; the edge tension sets a wing mode coupled to the stroke (red); the video records their sum.</li>
+<li><b>f:</b> the system: one drive signal powers core and wing; the core drives the stroke through a force lag; the wing's edge tension acts on the stroke (red), which is the effect still under test; the video measures the tip about its fitted hinge.</li>
 </ul>
 </section>
 
@@ -139,26 +139,26 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f5">
 <h2>Fig. 5. Wing powered against unpowered</h2>
-<div class="fig"><img src="fig/Figure5.png" alt="Figure5"></div>
-<p class="disc">With the wing powered, the robot strokes 20 % further and its cycle loses most of its lopsidedness. Both runs reach the same lowest point; the extra stroke is all on one side, where a tense edge would hold the wing back. A drift of the natural frequency could change the size but not the shape, so the wing's state changed the robot's mechanics.</p>
+<div class="fig"><img src="fig/Figure5.png" alt="Figure 5"></div>
+<p class="disc">Powering the wing does not change how far the robot flaps: measured from the wing tip, both runs swing about 24° at 8 Hz, and the tip excursions agree within the camera calibration. What may change is the shape of the cycle: the stroke is lopsided one way with the wing powered and slightly the other way without it. The two runs were filmed 20 minutes apart, so a drift of the robot cannot be ruled out.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the stroke with the wing powered (edge slack) and unpowered (edge tense), with their peak-to-peak strokes and second harmonics.</li>
-<li><b>b, c:</b> 12 phases of one cycle at 8 Hz, 1200 V, over a faded frame, in mm from the hinge. Solid: leading edge; dotted: lower outline of the wing.</li>
-<li><b>d:</b> peak-to-peak stroke of every cycle; square, mean ± s.d. 24.3 ± 1.0° against 20.2 ± 0.7°.</li>
-<li><b>e:</b> mean cycle ± s.d., aligned at the lowest point. Both reach the same bottom; the powered wing waits there, then swings further. Unpowered/powered: 0.73 in the fundamental (0.68 expected from a natural-frequency drift), 2.37 in the 2nd harmonic (1.20 expected), 0.78 in the 3rd (1.16 expected).</li>
+<li><b>a:</b> schematic: the same stroke with the wing powered (edge slack) and unpowered (edge tense), and the opposite asymmetry of the two cycles.</li>
+<li><b>b, c:</b> the wing at the top (blue) and bottom (amber, maroon) of the stroke, 8 Hz, 1.2 kV, side view, traced from the video; the unpowered view is zoomed (0.135 against 0.152 mm per pixel).</li>
+<li><b>d:</b> stroke of each cycle from the wing tip (angle about the hinge, found as the centre of the tip's path), 33 cycles each; square, mean ± s.d.: 23.8 ± 1.0° and 24.4 ± 1.1°. In millimetres the tip moves 23.8 ± 1.0 and 22.1 ± 1.0 mm.</li>
+<li><b>e:</b> mean tip cycle ± s.d., aligned at the lowest point.</li>
 </ul>
 </section>
 
 <section class="card" id="f6">
-<h2>Fig. 6. A model of the stroke and the wing</h2>
-<div class="fig"><img src="fig/Figure6.png" alt="Figure6"></div>
-<p class="disc">Two tests separate the explanations. The spring asymmetry is one real number for every powered run but complex for the unpowered one, which needs something that lags near 16 Hz; a linear wing mode at 17 Hz reproduces the driven stroke, but it would ring after the drive stops and the decays show no such mode. The leading edge itself answers: unpowered, it snaps once per cycle as the barely tense edge goes taut, and powering the wing removes the snap. The model in panel a is therefore a linear stand-in for a taut–slack event; the full model is on the Models page.</p>
+<h2>Fig. 6. Measuring the stroke</h2>
+<div class="fig"><img src="fig/Figure6.png" alt="Figure 6"></div>
+<p class="disc">How the stroke is measured decides the comparison. A line fitted to the top edge of the wing's silhouette follows the spar when the camera looks from below, but in the unpowered view, filmed from above, it locks onto a faint feature above the spar near the bottom of the stroke and clips the stroke by about 4°; that produced the earlier +20 %. The wing tip, measured about the centre of its own path, cannot switch features: with it the two runs have the same stroke, and the spring asymmetry is one real value across the powered runs and reversed for the unpowered one.</p>
 <ul class="read">
-<li><b>a:</b> schematic: the stroke mode pushed by the core and coupled to a wing mode whose stiffness the edge tension sets; right, where the modes sit in frequency.</li>
-<li><b>Model:</b> stroke $\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta + \beta\theta^2 = G u(t) - \mu\omega_w^2 q$, $\tau\dot u + u = \sin^4(\pi f t)$; wing mode $\ddot q + 2\zeta_w\omega_w\dot q + \omega_w^2 q = -\ddot\theta$; the video sees $\theta + q$.</li>
-<li><b>b:</b> asymmetry of the stroke spring per run, from the clock-free ratio $X_2/X_1^2$ (harmonic balance). Powered runs: one real value, 0.23–0.35, at 7 and 8 Hz and 1.4 kV. Unpowered: −0.86 and not real, a phase lag at 16 Hz. Hatched: the same if $f_n$ had drifted to 8.95 Hz (less than 10 % change).</li>
-<li><b>c, d:</b> powered, one mode with that term reproduces the 2nd harmonic it was not fitted to (0.76° against 0.72°). Unpowered, a wing mode fitted to five clock-free numbers gives $f_w$ 17.0 ± 1.1 Hz, damping 0.05, coupling 0.21, and reproduces the size and the complex 2nd harmonic within 1 s.d.; it misses the 3rd harmonic (0.12° against 0.68°).</li>
-<li><b>e:</b> the bench wing model's edge mode, $f_e = \frac{1}{2\pi}\sqrt{(T\pi^2/L^2 + N/c)/(\mu_e + \rho t c/3)}$: 17 Hz needs $T \approx$ 4.2 mN (3.4–5.1), against 50–96 mN on the bench mount; slack, 10 Hz. At 1.2 kV the roll loses 3–38 mN, so the edge goes slack and the mode leaves the band.</li>
+<li><b>a:</b> schematic: the silhouette line jumps to whatever is highest in the image; the tip angle about the fitted hinge follows the stroke whatever the wing's shape.</li>
+<li><b>b:</b> the unpowered run through the bottom of the stroke: silhouette track (red) and tip (green).</li>
+<li><b>c:</b> mean cycles from the silhouette (dashed) and the tip (solid). Powered, they coincide; unpowered, the silhouette clips the bottom of the stroke.</li>
+<li><b>d:</b> spring asymmetry $\beta A_1/\omega^2$ from the tip, by harmonic balance ($X_2/X_1^2$ with the fixed $\sin^4$ drive), ± s.d. over 0.5 s blocks. Powered: +0.18, +0.23, +0.31, real within the noise; unpowered -0.43, with an imaginary part 5 s.d. from zero.</li>
+<li><b>e:</b> free decays after the drive stops: one mode, 8–9.4 Hz, rising as the motion dies out.</li>
 </ul>
 </section>
 
@@ -188,7 +188,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="further">
 <h2>Further analysis</h2>
-<p>The most interesting result in the robot videos is that it flaps differently when its wing is powered: 20 % more stroke, and a cycle whose shape no drift of the natural frequency can produce. The likely cause is that the active membrane, slack at voltage, stops acting as a stiff, lopsided spring on the leading edge; the same tension switch that moves the edge on the bench (Fig. 3) would then tune the robot's stroke. The camera moved and 20 minutes passed between the two runs, so part of the size gap may be drift. One session with the wing switched on and off every 10 s under a fixed camera separates the two: a wing effect follows the switching, a drift follows the clock. Details on <a href="../analysis/">Analysis</a>.</p>
+<p>The robot's stroke does not depend measurably on whether its wing is powered: from the wing tip, both runs swing about 24° at 8 Hz. The earlier +20 % had a clear cause, a silhouette tracker meeting a membrane wing filmed from a new camera position, and Fig. 6 shows it step by step. What remains is a difference in the stroke's shape, a spring asymmetry that is one real value for every powered run and reversed for the unpowered one; it would follow if the tense edge pulled on the wing more on one side of the stroke, but the two runs were filmed 20 minutes apart. One session with the wing switched on and off every 10 s, the tip tracked and the drive logged, will separate the two. Details on <a href="../analysis/">Analysis</a> and <a href="../model/">Models</a>.</p>
 </section>
 
 <section class="card" id="s1">
@@ -218,12 +218,11 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <ul class="read">
 <li><b>An all-DEA wing works as an actuator, for a reason we can write down:</b> the rolled edge loses its tension and the skin cannot hold it alone. That is new against the earlier wings, whose DEA strips carried almost no tension.</li>
 <li><b>It is a tension switch more than a camber dial:</b> flat, then steep, then saturating. A design either works near the slack point on purpose (large change) or keeps the edge tense (small, proportional change). In flight it must stay above about 10 mN.</li>
-<li><b>The wing can trim the stroke.</b> Powering it changed the robot's stroke size and shape; if the interleaved test confirms it, the active membrane is a slow amplitude trim for the whole robot, not only a camber or twist control.</li>
-<li><b>Model the edge as taut or slack.</b> The robot's response to the wing is set by an edge that goes taut once per cycle; a linear mode describes the driven stroke but not the free decay.</li>
+<li><b>Measure the stroke at the tip.</b> The silhouette of a membrane wing changes with its shape and with the camera's height; the tip about the fitted hinge does not. All comparisons between wing states should use it, with the drive logged in the video.</li>
 <li><b>Keep the whole skin active and the rolled edge</b> (it is also the electrode contact); drop discrete fibres at this size.</li>
 <li><b>Voltage is a trim, not a per-stroke control,</b> until the 40–50 ms lag is explained (electrodes of about 20 MΩ, viscoelasticity, or the amplifier) and shortened.</li>
 <li><b>The robot's gap is frequency first, then energy.</b> 8.4 Hz gives no thrust; raising it to 16–25 Hz (shorter lever, stiffer spring core, lighter root) comes before any flight test. Free flight then needs about 2 J/kg per cycle from the cores.</li>
-<li><b>For a paper:</b> the wing mechanism (Figs. 2, 3), the robot's dynamics (Figs. 1, 4) and the effect of powering the wing (Fig. 5) are measured; the flight figures (7, 8) are models that say which tests matter. The interleaved test below makes Fig. 5 a result.</li>
+<li><b>For a paper:</b> the wing mechanism (Figs. 2, 3), the robot's dynamics (Figs. 1, 4) and the effect of powering the wing (Fig. 5) are measured; the flight figures (7, 8) are models that say which tests matter. Whether powering the wing changes the stroke's shape needs the interleaved test below.</li>
 </ul>
 </section>
 
@@ -231,7 +230,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <h2>Open, and what settles it</h2>
 <div class="tw"><table>
 <tr><th>Open</th><th>Test</th><th>Prediction</th></tr>
-<tr><td>How much of the 20 % is the wing</td><td>One session, one camera, wing on and off every 10 s at 8 Hz; then a 6–11 Hz sweep in both states</td><td>Stroke and 2nd harmonic switch with the wing, block by block</td></tr>
+<tr><td>Does the wing change the stroke's shape?</td><td>One session, one camera, wing on and off every 10 s at 8 Hz, tip tracked, drive LED in view</td><td>The asymmetry switches sign with the wing, block by block, if it is the wing</td></tr>
 <tr><td>Why 8.4 Hz</td><td>Pluck with and without the wing, then with a known added mass</td><td>Separates core stiffness, transmission compliance and inertia; the model is about 7× too stiff at a 2.5 mm lever</td></tr>
 <tr><td>Stroke limit at 1400 V</td><td>8 Hz at 1200, 1300, 1400 V, side view</td><td>A hard stop shows as flat tops</td></tr>
 <tr><td>Source of the lag</td><td>Electrode resistance; current or blocked force at 1–20 Hz; drive LED in the video</td><td>About 20 MΩ if it is RC; phase lag atan(2πfτ)</td></tr>

@@ -16,7 +16,7 @@
 <tr class="main"><td>The natural frequency is not fixed</td><td>7.7 Hz (small ringing in the 1 Hz runs) to about 9 Hz (free decays near 1°); it falls with amplitude (8.0 Hz at 3.4°)</td><td>Measured, robot</td></tr>
 <tr class="main"><td>The DEA force lags the voltage</td><td>$\tau$ = 38 ± 13 ms from the robot sweep; about 50 ms from the wing's bench sweep</td><td>Model fit to two independent data sets</td></tr>
 <tr><td>Voltage</td><td>$V^2$ at 1 Hz (×1.44 from 1000 to 1200 V); only ×1.08 at 8 Hz from 1200 to 1400 V</td><td>Measured, robot</td></tr>
-<tr class="main"><td>Powering the wing changes the stroke</td><td>+20 % peak to peak at 8 Hz (24.3 against 20.2°), and a different cycle shape: 2.4× less 2nd harmonic when powered, which drift cannot produce</td><td>Measured; size partly confounded with drift (<a href="../analysis/">Analysis</a>)</td></tr>
+<tr class="main"><td>Powering the wing does not change the stroke size</td><td>From the tip: 23.8 against 24.4° at 8 Hz; tip 23.8 against 22.1 mm, within calibration. Shape may differ (asymmetry reversed)</td><td>Measured; an earlier +20 % was a tracking error (<a href="../analysis/">Analysis</a>)</td></tr>
 </table></div>
 </section>
 
@@ -50,14 +50,12 @@
 
 <section class="card" id="active">
 <h2>Powered against unpowered wing</h2>
-<div class="fig"><img src="../results/fig/Fig8_cycle.png" alt="Leading edge at 12 phases of one cycle with the wing powered and unpowered, the stroke of every cycle, and the mean cycles."></div>
+<div class="fig"><img src="../results/fig/Figure5.png" alt="Figure 5"></div>
 <ul class="read">
-<li><b>Size:</b> 24.3 ± 1.0° with the wing powered, 20.2 ± 0.7° with only the core powered, 35 cycles each at 8 Hz and 1200 V (+20 %; +37 % in the fundamental).</li>
-<li><b>Shape:</b> both cycles reach the same bottom; powered, the wing waits there and then swings further. Unpowered, the 2nd harmonic is 1.75 ± 0.17° against 0.71 ± 0.07°, although the stroke is smaller.</li>
-<li><b>Drift or wing:</b> the runs were 20 min apart and the camera moved. A drift of the natural frequency (8.38 → 8.95 Hz) would explain the size of the fundamental (0.68 expected, 0.73 measured) but not the 2nd harmonic (1.20 expected, 2.37 measured) or the 3rd (1.16 expected, 0.78 measured). So the wing's state changed the robot's restoring force; how much of the size gap it accounts for is open.</li>
-<li><b>Not noise:</b> the edge fit is tighter in the unpowered run (0.4 against 0.9 px); its extra wiggle is a 56 Hz ripple locked to the stroke, the 7th harmonic. The unpowered diagonal run is a free decay (four cycles, then the drive stops), not steady flapping.</li>
+<li><b>Size:</b> from the wing tip, 23.8 ± 1.0° powered and 24.4 ± 1.1° unpowered, 33 cycles each, 8 Hz, 1.2 kV; the tip moves 23.8 ± 1.0 and 22.1 ± 1.0 mm. No measurable difference.</li>
+<li><b>Shape:</b> the spring asymmetry is +0.23 powered and -0.43 unpowered; the runs were 20 min apart, so drift is possible.</li>
+<li><b>Correction:</b> a first analysis gave +20 % with the wing powered. It used a line fitted to the top of the silhouette, which in the unpowered view (filmed from above, camera moved) follows a feature above the spar near the bottom of the stroke. Details on <a href="../analysis/#how">Analysis</a>.</li>
 </ul>
-<p class="note">Full reading, with the tests and a proposed mechanism: <a href="../analysis/">Analysis</a>.</p>
 </section>
 
 <section class="card" id="views">

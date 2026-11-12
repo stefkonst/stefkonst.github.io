@@ -144,58 +144,57 @@ arrow(ax, (136.5, 50), (145.5, 39)); arrow(ax, (136.5, 18), (145.5, 30))
 lab(ax, 2, 1.2, "Blue: dielectric elastomer actuators. Red arrows: coupling between the stroke and the wing mode, which the edge tension switches on (0 V) and off (powered).", fontsize=5.4, color=GREY)
 save(fig, "Fig10_schematic")
 
-# ======================= Fig. 11: model =======================
-HB = FD("harmonic_balance.json"); TM = FD("two_mode.json"); WL = FD("wing_link.json"); EO = FD("edge_on_stroke.json")
+# ======================= Fig. 11: measuring the stroke =======================
+# b: frames of the unpowered run through the bottom of the stroke, with the top-silhouette track (red) and the tip;
+# c: silhouette angle against tip angle over the same cycles, both runs; d: spring asymmetry per run from the tip;
+# e: free decays (one mode).
+import sys as _s
+_s.path.insert(0, os.path.join(FLAP, "first")); _s.path.insert(0, os.path.join(FLAP, "flapping", "code"))
+from track_views import Stack
+import matplotlib.image as mpimg
+VID = r"C:/Users/stefk/MIT Dropbox/SMRL/Shared/Stefania/full_tension/"
+TRK = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", n + ".npz"))
+TIPd = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", "tip_" + n + ".npz"))
+HT = FD("hb_tip.json"); DEC = FD("decays.json")
 fig = plt.figure(figsize=(ST.WIDTH_MM * ST.MM, 150 * ST.MM))
-ax = [fig.add_axes([0.09 + c_ * 0.5, 0.57 - r_ * 0.49, 0.38, 0.38]) for r_ in (0, 1) for c_ in (0, 1)]
-for i_, a_ in enumerate(ax): a_.text(-0.2, 1.04, "bcde"[i_], transform=a_.transAxes, fontsize=9, fontweight="bold")
+# b: four frames
+n = "only_DEA_core_8hz_1200V_side"; d = TRK(n); tp = TIPd(n)["tip"]; s = Stack(VID + n + ".avi")
+k0 = 400 + int(np.nanargmax(tp[400:425, 1]))
+for c_, k in enumerate((k0 - 4, k0, k0 + 3, k0 + 6)):
+    a_ = fig.add_axes([0.01 + c_ * 0.2475, 0.70, 0.24, 0.27]); im = np.asarray(s[k], float)[170:420, 230:780]
+    a_.imshow(im, cmap="gray"); a_.set_axis_off()
+    xs = d["xs"]; top = d["top"][k]; m = np.isfinite(top)
+    a_.plot(xs[m] - 230, top[m] - 170, color="#e11d48", lw=1.2); a_.plot(tp[k, 0] - 230, tp[k, 1] - 170, "o", ms=4, mfc="none", mec="#22c55e", mew=1.4)
+    a_.text(0.03, 0.88, "%+d ms" % ((k - k0) * 5), transform=a_.transAxes, color="w", fontsize=6.5)
+fig.text(0.005, 0.975, "b", fontsize=9, fontweight="bold")
+fig.text(0.03, 0.975, "unpowered run through the bottom of the stroke: silhouette track (red) and tip (green)", fontsize=6.5)
+# c: silhouette angle vs tip angle, mean cycle
+ax = [fig.add_axes([0.09 + c_ * 0.33, 0.07, 0.24, 0.55]) for c_ in range(3)]
+for i_, a_ in enumerate(ax): a_.text(-0.3, 1.04, "cde"[i_], transform=a_.transAxes, fontsize=9, fontweight="bold")
 a = ax[0]
-runs = [("full_DEA_core_wing_7hz_1200V_side", "7 Hz"), ("full_DEA_core_wing_8hz_1200V_side", "8 Hz"), ("full_DEA_core_wing_8hz_1400V_side", "8 Hz\n1.4 kV"), ("only_DEA_core_8hz_1200V_side", "8 Hz\nunpow.")]
-wn2 = (2 * np.pi * 8.38) ** 2
-for i, (n, l) in enumerate(runs):
-    r = HB[n]; A = r["A1_deg"] * np.pi / 180
-    for j, (case, hatch) in enumerate((("fn 8.38 (sweep fit)", None), ("fn 8.95 (drift case)", "////"))):
-        c = r["cases"][case]; val = c["beta_re"] * A / wn2; err = c["beta_re_sd"] * A / wn2
-        a.bar(i + (j - 0.5) * 0.36, val, width=0.34, color=(C[1] if "only" in n else C[0]), alpha=1.0 if j == 0 else 0.45, hatch=hatch, edgecolor="white", lw=0.3, yerr=err, error_kw=dict(lw=0.6, capsize=1.2))
-a.axhline(0, color="k", lw=0.5)
-a.set_xticks(range(len(runs))); a.set_xticklabels([l for _, l in runs], fontsize=6); a.minorticks_off()
-a.set(ylabel=r"Spring asymmetry $\beta A_1/\omega^2$")
-ST.note(a, "hatched: the same if $f_n$ had\ndrifted to 8.95 Hz", xy=(0.04, 0.06), va="bottom")
+for nn, col in (("full_DEA_core_wing_8hz_1200V_side", C[0]), ("only_DEA_core_8hz_1200V_side", C[1])):
+    sil = -TRK(nn)["ang"]; tip = -np.degrees(TIPd(nn)["ang"]); t = np.arange(len(sil)) / 200.0; g = (t > 0.9) & np.isfinite(sil) & np.isfinite(tip)
+    ph = (t[g] * 8.0) % 1; b = np.linspace(0, 1, 26); idx = np.minimum(np.digitize(ph, b) - 1, 24)
+    A_s = np.array([np.mean(sil[g][idx == k] - np.mean(sil[g])) for k in range(25)]); A_t = np.array([np.mean(tip[g][idx == k] - np.mean(tip[g])) for k in range(25)])
+    sh = int(np.argmin(A_t)); A_s, A_t = np.roll(A_s, -sh), np.roll(A_t, -sh); x = (b[:-1] + b[1:]) / 2
+    lab = "powered" if "full" in nn else "unpowered"
+    a.plot(x, A_t, color=col, lw=1.2, label=lab + ", tip"); a.plot(x, A_s, color=col, lw=1.0, ls="--", label=lab + ", silhouette")
+a.set(xlabel="Phase from the lowest point", ylabel="Stroke angle, up positive (deg)")
+a.legend(loc="upper left", fontsize=4.8)
+# d: asymmetry per run, from the tip
 a = ax[1]
-x = np.arange(25) / 25
-for key, mkey, col, lb in (("cycle_powered", "cycle_model_powered", C[0], "powered"), ("cycle_unpowered", "cycle_model_unpowered", C[1], "unpowered")):
-    d = FD("stroke_model.json")[key] if os.path.exists(os.path.join(FLAP, "flapping", "data", "stroke_model.json")) else None
-    data = np.array(d["data"]); sd = np.array(d["sd"])
-    a.errorbar(x, data, yerr=sd, fmt="o", ms=2.2, color=col, lw=0.5, capsize=0, label=lb + ", video")
-    a.plot(x, TM[mkey], color=col, lw=1.0)
-a.set(xlabel="Phase from the lowest point", ylabel="Stroke angle (deg, mean removed)")
-a.legend(loc="upper left", fontsize=5)
-ST.note(a, "lines: model\n(powered: one mode;\n0 V: + wing mode)", xy=(0.40, 0.05), va="bottom")
+order = (("full_DEA_core_wing_7hz_1200V_side", "7 Hz"), ("full_DEA_core_wing_8hz_1200V_side", "8 Hz"), ("full_DEA_core_wing_8hz_1400V_side", "8 Hz\n1.4 kV"), ("only_DEA_core_8hz_1200V_side", "8 Hz\nunpow."))
+for i_, (nn, lab) in enumerate(order):
+    r = HT[nn]; a.bar(i_, r["asym"], yerr=r["asym_sd"], color=C[1] if "only" in nn else C[0], width=0.6, error_kw=dict(lw=0.6, capsize=1.5))
+a.axhline(0, color="k", lw=0.5); a.set_xticks(range(4)); a.set_xticklabels([l for _, l in order], fontsize=6); a.minorticks_off()
+a.set(ylabel=r"Spring asymmetry $\beta A_1/\omega^2$, tip")
+# e: free decays
 a = ax[2]
-hh = np.arange(3)
-for k, (key_m, key_d, col, off) in enumerate((("model_powered", "data_powered", C[0], -0.2), ("model_unpowered", "data_unpowered", C[1], 0.2))):
-    a.bar(hh + off - 0.08, TM[key_d], width=0.16, color=col, label=("powered" if k == 0 else "unpowered") + ", video")
-    a.bar(hh + off + 0.08, TM[key_m], width=0.16, color="white", edgecolor=col, hatch="////", lw=0.6, label="model")
-a.set_yscale("log"); a.set_ylim(0.05, 30)
-a.set_xticks(hh); a.set_xticklabels(["8 Hz", "16 Hz", "24 Hz"]); a.minorticks_off()
-a.set(ylabel="Harmonic amplitude (deg)")
-a.legend(loc="upper right", fontsize=4.8, ncol=1)
-a = ax[3]
-T = np.array(WL["T"]) * 1e3; fe = np.array(WL["f_e"])
-a.plot(T, fe, color=INK, lw=1.0)
-lo, mid, hi = WL["T_robot_mN"]
-a.axhspan(WL["f_w"] - WL["f_w_se"], WL["f_w"] + WL["f_w_se"], color=C[1], alpha=0.25, lw=0)
-a.plot([mid], [WL["f_w"]], "o", color=C[1], ms=4)
-a.axhline(16, color=GREY, ls=":", lw=0.7); a.axhline(8, color=GREY, ls=":", lw=0.7)
-ST.note(a, "16 Hz (2nd harmonic)", xy=(0.62, (16 - 5) / 65 + 0.045)); ST.note(a, "8 Hz (stroke)", xy=(0.62, (8 - 5) / 65 + 0.045))
-pk = [WL["dF"]["1200.0"][e]["peak_mN"] for e in ("0.17", "0.8")] if "1200.0" in WL["dF"] else [8, 38]
-a.annotate("", xy=(0, WL["f_skin_only"] + 1.5), xytext=(mid, WL["f_w"] - 1.5), arrowprops=dict(arrowstyle="-|>", lw=0.8, color=C[0]))
-ST.note(a, "1.2 kV: the roll loses\n%.0f–%.0f mN, edge slack" % tuple(pk), xy=(0.03, 0.36), color=C[0])
-ST.note(a, "robot at 0 V: %.1f Hz\n→ T = %.1f mN" % (WL["f_w"], mid), xy=(0.38, 0.50), color=C[1])
-a.axvspan(50, 96, color=GREY, alpha=0.15, lw=0); ST.note(a, "bench\nmount", xy=(0.80, 0.72))
-a.set(xscale="symlog", xlabel="Edge tension $T$ (mN)", ylabel="Wing (edge) mode $f_w$ (Hz)", ylim=(5, 70))
-a.set_xlim(0, 120)
-from matplotlib.ticker import FixedLocator, FixedFormatter, NullLocator
-a.xaxis.set_major_locator(FixedLocator([0, 1, 3, 10, 30, 100])); a.xaxis.set_major_formatter(FixedFormatter(["0", "1", "3", "10", "30", "100"])); a.xaxis.set_minor_locator(NullLocator())
+for q, col, lab in ((DEC[0]["f_vs_amp"], C[3], "after the 1.4 kV run"), (DEC[1]["f_vs_amp"], C[1], "unpowered session")):
+    q = np.array([v for v in q if v[0] > 0.8]); a.plot(q[:, 0], q[:, 1], "o-", ms=2.5, lw=0.7, color=col, label=lab)
+a.axhline(8.38, color=C[0], ls="--", lw=0.7); ST.note(a, "sweep fit", xy=(0.62, 0.30), color=C[0])
+a.set(xlabel="Amplitude (deg)", ylabel="Free frequency (Hz)", ylim=(7, 11))
+a.legend(loc="upper right", fontsize=4.8)
+
 save(fig, "Fig11_model")
 print("done")

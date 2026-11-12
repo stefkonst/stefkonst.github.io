@@ -28,51 +28,38 @@ def save(fig, name):
     plt.close(fig)
 
 
-# ---------------- Fig. 8: one cycle, powered against unpowered ----------------
-runs = (("full_DEA_core_wing_8hz_1200V_side", 0.152, "wing powered"), ("only_DEA_core_8hz_1200V_side", 0.135, "wing unpowered"))
+# ---------------- Fig. 8: powered against unpowered, from the wing tip ----------------
+# b, c: outlines at both ends of the stroke traced from the video (overlays.py); d: stroke per cycle from the tip
+# (tip_track.py; the top-silhouette tracker follows the rolled edge in the unpowered view and is not used here);
+# e: mean tip cycle.
+import matplotlib.image as mpimg
 fig = plt.figure(figsize=(ST.WIDTH_MM * ST.MM, 118 * ST.MM))
-cmap = cm.twilight_shifted
-for i, (n, mm, lab) in enumerate(runs):
-    d = TR(n); s = Stack(VID + n + ".avi")
-    hx, hy = PAIR[n]["hinge"] if "full" in n else PAIR["full_DEA_core_wing_8hz_1200V_side"]["hinge"]
-    # hinge for the unpowered view: where the leading edge meets the body in the first frame (the crossing of its
-    # lines is far off because its leading edge bends); take the left end of the tracked edge, extrapolated 10 mm
-    xs = d["xs"].astype(float); top, bot = d["top"], d["bot"]
-    if "only" in n:
-        hx, hy = 305.0, 237.0          # leading edge leaves the body, read from frame 10
-    k0 = int(1.0 * FS); N = 25
-    frames = list(range(k0, k0 + N, 2))
-    ax = fig.add_axes([0.04 + i * 0.49, 0.42, 0.45, 0.54])
-    bg = np.asarray(s[k0], float)
-    ext = [(-hx) * mm, (bg.shape[1] - hx) * mm, (bg.shape[0] - hy) * mm, (-hy) * mm]
-    ax.imshow(bg, cmap="gray", extent=ext, alpha=0.35, vmin=0, vmax=255)
-    for j, k in enumerate(frames):
-        c = cmap(j / len(frames))
-        m = np.isfinite(top[k]); ax.plot((xs[m] - hx) * mm, (top[k][m] - hy) * mm, color=c, lw=1.0)
-        m2 = np.isfinite(bot[k]); ax.plot((xs[m2] - hx) * mm, (bot[k][m2] - hy) * mm, color=c, lw=0.6, ls=":")
-    ax.set(xlim=(-5, 72), ylim=(22, -22), xlabel="mm from the hinge", ylabel="mm" if i == 0 else None)
-    ax.set_aspect("equal")
-    ax.text(0.02, 0.97, "bc"[i] + "  " + lab, transform=ax.transAxes, fontsize=8, fontweight="bold", va="top")
-    ST.note(ax, "solid: leading edge, dotted: lower outline\n12 phases of one 8 Hz cycle", xy=(0.02, 0.10), va="bottom")
-# c: stroke of every cycle; d: the mean cycle
-ax = fig.add_axes([0.08, 0.08, 0.36, 0.25])
-for x0, (n, col, lab) in enumerate((("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "powered"), ("only_DEA_core_8hz_1200V_side", ST.C[1], "unpowered"))):
-    pp = np.array(PAIR[n]["pp_all"]); jit = (np.random.default_rng(1).random(len(pp)) - 0.5) * 0.35
-    ax.plot(x0 + jit, pp, "o", ms=2.5, color=col, alpha=0.8)
-    ax.errorbar([x0 + 0.32], [pp.mean()], yerr=[pp.std()], fmt="s", color="k", ms=3)
-ax.set_xticks([0, 1]); ax.set_xticklabels(["wing powered", "wing unpowered"]); ax.set_xlim(-0.5, 1.6)
-ax.set(ylabel="Stroke per cycle, peak to peak (deg)"); ax.minorticks_off(); ax.yaxis.set_minor_locator(plt.NullLocator())
-ST.note(ax, "8 Hz, 1200 V, side view, 35 cycles each", xy=(0.03, 0.06), va="bottom")
+FR = os.path.join(HERE, "blocks", "frames")
+for i_, (fn, lab) in enumerate((("ov_pw", "wing powered"), ("ov_un", "wing unpowered"))):
+    ax = fig.add_axes([0.02 + i_ * 0.49, 0.44, 0.47, 0.53]); ax.imshow(mpimg.imread(os.path.join(FR, fn + ".png"))); ax.set_axis_off()
+    ax.text(0.0, 1.02, "bc"[i_], transform=ax.transAxes, fontsize=9, fontweight="bold")
+    ax.text(0.06, 1.02, lab, transform=ax.transAxes, fontsize=7)
+TIP = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", "tip_" + n + ".npz"))
+runs = (("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "wing powered"), ("only_DEA_core_8hz_1200V_side", ST.C[1], "wing unpowered"))
+ax = fig.add_axes([0.08, 0.07, 0.36, 0.28])
+for x0, (n, col, lab) in enumerate(runs):
+    a = np.degrees(TIP(n)["ang"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a); N = 25; idx = np.where(g)[0]
+    pp = np.array([np.nanmax(a[k:k + N]) - np.nanmin(a[k:k + N]) for k in range(idx[0], idx[-1] - N, N)])
+    jit = (np.random.default_rng(1).random(len(pp)) - 0.5) * 0.35
+    ax.plot(x0 + jit, pp, "o", ms=2.5, color=col, alpha=0.8); ax.errorbar([x0 + 0.32], [pp.mean()], yerr=[pp.std()], fmt="s", color="k", ms=3)
+ax.set_xticks([0, 1]); ax.set_xticklabels(["wing powered", "wing unpowered"]); ax.set_xlim(-0.5, 1.6); ax.minorticks_off()
+ax.set(ylabel="Stroke per cycle, from the tip (deg)", ylim=(18, 30))
+ST.note(ax, "8 Hz, 1.2 kV, side view, 33 cycles each", xy=(0.03, 0.06), va="bottom")
 ax.text(-0.22, 1.02, "d", transform=ax.transAxes, fontsize=9, fontweight="bold")
-ax = fig.add_axes([0.58, 0.08, 0.36, 0.25])
-for n, col, lab in (("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "powered"), ("only_DEA_core_8hz_1200V_side", ST.C[1], "unpowered")):
-    a = TR(n)["ang"]; t = np.arange(len(a)) / FS; f = PAIR[n]["f"]; g = (t > 0.6) & np.isfinite(a)
-    ph = (t[g] * f) % 1; y = a[g] - np.nanmean(a[g]); b = np.linspace(0, 1, 26); idx = np.digitize(ph, b) - 1
+ax = fig.add_axes([0.58, 0.07, 0.36, 0.28])
+for n, col, lab in runs:
+    a = np.degrees(TIP(n)["ang"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a)
+    ph = (t[g] * 8.0) % 1; y = -(a[g] - np.nanmean(a[g])); b = np.linspace(0, 1, 26); idx = np.minimum(np.digitize(ph, b) - 1, 24)
     A = np.array([np.mean(y[idx == k]) for k in range(25)]); S = np.array([np.std(y[idx == k]) for k in range(25)])
     sh = int(np.argmin(A)); A = np.roll(A, -sh); S = np.roll(S, -sh); x = (b[:-1] + b[1:]) / 2
     ax.plot(x, A, color=col, label=lab); ax.fill_between(x, A - S, A + S, color=col, alpha=0.25, lw=0)
-ax.set(xlabel="Phase from the lowest point", ylabel="Stroke angle (deg, mean removed)")
-ax.legend(loc="upper left", fontsize=5.5)
+ax.set(xlabel="Phase from the lowest point of the tip", ylabel="Tip angle, up positive (deg)")
+ax.legend(loc="upper center", fontsize=5.5)
 ax.text(-0.22, 1.02, "e", transform=ax.transAxes, fontsize=9, fontweight="bold")
 save(fig, "Fig8_cycle")
 
