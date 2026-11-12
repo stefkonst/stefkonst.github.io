@@ -1,0 +1,44 @@
+{
+ "full_DEA_core_wing_8hz_1200V_side": {
+  "span_mm": 38.912,
+  "rest_sag_mm": -0.2228677591065707,
+  "sag_pp_mm": 1.061336447433171,
+  "sag_per_deg_um": -34.2865370947258,
+  "sag_rms_um": 328.90252450238034
+ },
+ "only_DEA_core_8hz_1200V_side": {
+  "span_mm": 34.56,
+  "rest_sag_mm": -0.030574798335988987,
+  "sag_pp_mm": 1.5315998628237368,
+  "sag_per_deg_um": 45.68174704696839,
+  "sag_rms_um": 468.01495671806447
+ },
+ "full_DEA_core_wing_8hz_1400V_side": {
+  "span_mm": 38.912,
+  "rest_sag_mm": -0.2845377508064172,
+  "sag_pp_mm": 1.9976193995059768,
+  "sag_per_deg_um": -66.6379806333678,
+  "sag_rms_um": 682.369797951533
+ },
+ "full_DEA_core_wing_7hz_1200V_side": {
+  "span_mm": 38.912,
+  "rest_sag_mm": -0.47625624127117205,
+  "sag_pp_mm": 2.0167644144909853,
+  "sag_per_deg_um": -113.72099755032342,
+  "sag_rms_um": 744.1097093527243
+ },
+ "full_DEA_core_wing_9hz_1200V_side": {
+  "span_mm": 38.912,
+  "rest_sag_mm": -0.2430537422776226,
+  "sag_pp_mm": 0.961992400435395,
+  "sag_per_deg_um": -44.032383653516455,
+  "sag_rms_um": 318.3058748667242
+ },
+ "full_DEA_core_wing_5hz_1200v_side": {
+  "span_mm": 38.912,
+  "rest_sag_mm": -0.3889125799573569,
+  "sag_pp_mm": 1.1461388506021393,
+  "sag_per_deg_um": -94.19756704544858,
+  "sag_rms_um": 414.21647930459335
+ }
+}

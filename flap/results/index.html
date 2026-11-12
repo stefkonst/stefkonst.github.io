@@ -66,9 +66,8 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <div class="wrap">
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Results</p>
 <h1>Results</h1>
-<p class="lead">B-cube, a flapping robot with an all-DEA wing: the main findings in six figures, as they would go in a paper, with conclusions and the tests that settle what is open. Data on <a href="../first/">Experiments</a>, design on <a href="../robot/">Robot</a>, models on <a href="../air/">Wing in air</a>.</p>
-<div class="warn"><b>What this rests on:</b> one wing on the bench and one robot flapping in still air, filmed at 200 fps. No force, current or drive signal was recorded. Everything about flight is a model; each finding says which.</div>
-<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#f5">Fig. 5</a><a href="#f6">Fig. 6</a><a href="#s1">Fig. S1</a><a href="#s2">Fig. S2</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
+<p class="lead">B-cube, a flapping robot with an all-DEA wing: the main findings in seven figures, as they would go in a paper, with conclusions and the tests that settle what is open. Data on <a href="../first/">Experiments</a>, design on <a href="../robot/">Robot</a>, models on <a href="../air/">Wing in air</a>.</p>
+<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#f5">Fig. 5</a><a href="#f6">Fig. 6</a><a href="#f7">Fig. 7</a><a href="#s1">Fig. S1</a><a href="#s2">Fig. S2</a><a href="#further">Further analysis</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
 
 <section class="card" id="findings">
 <h2>Main findings</h2>
@@ -80,7 +79,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>In air, the skin matters too.</b> Only about 15 % of the skin's Maxwell stress stays as a drop in chord tension, but the wing sits near membrane divergence ($C_T \approx$ 3.3 at 4 m/s), so the active skin alone adds $\Delta C_L$ +0.09 to +0.37 and always settles. Discrete rolled fibres on the same wing give half of it for 51 mg more. A fully slack edge has no steady state at 4 m/s and faster (Fig. 5). Model.</li>
 <li><b>The DEA force lags the voltage by 40–50 ms,</b> found twice: the fall of the wing's bench motion from 1 to 5 Hz (50 ms) and the height of the robot's resonance peak (38 ± 13 ms). At 25 Hz, any on/off timing acts as half the voltage held: voltage is a slow trim (Fig. 4, 5).</li>
 <li><b>The robot's resonance is 8.4 Hz, not 20–25 Hz,</b> with a damping ratio of 0.07 (Q about 7 in still air). It is not fixed: the spring softens with stroke (9 Hz near 1°, 8 Hz at 3.4°) and it moved by 5 % between sessions. At 1 Hz the stroke goes as $V^2$; at resonance 1400 V adds only 8 % (Fig. 4). Measured.</li>
-<li><b>An effect of powering the wing on the stroke is not established.</b> The powered run gave +20 % peak to peak (+37 % in the fundamental) over the unpowered one, but a 7 % shift in $f_n$ between the two sessions, measured at 0 V, reproduces it. The unpowered run did differ in shape (2.4× more 2nd harmonic, a 56 Hz ripple, the leading edge bending): real motion, not tracking noise (Fig. 4).</li>
+<li><b>Powering the wing changes how the robot flaps.</b> At 8 Hz and 1200 V the stroke is 24.3 ± 1.0° with the wing powered against 20.2 ± 0.7° with only the core powered (+20 %, 35 cycles each), and the cycle changes shape: unpowered, the stroke carries 2.4× more 2nd harmonic although it is smaller, which a drift of the natural frequency cannot produce (it predicts 1.2×). Read: the unpowered membrane acts as a stiff, lopsided spring on the leading edge, and voltage slackens it. The two runs were 20 min apart, so part of the size gap may be drift (Fig. 7, <a href="../analysis/">Analysis</a>).</li>
 <li><b>At the measured kinematics the flapping makes no thrust.</b> Thrust needs $St \gtrsim 0.15$; the robot is at 0.05 at 4 m/s, so it needs 16–25 Hz. Lift comes from the forward speed (Fig. 6). Even at the design point, free flight needs about 2 J/kg per cycle from the cores, about twice what the bench gave (Fig. S2). Model.</li>
 </ol>
 </section>
@@ -118,12 +117,14 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="f4">
 <h2>Fig. 4. The robot flapping</h2>
+<div class="fig" style="margin-bottom:10px"><img src="fig/Fig9_sweep.png" alt="Swept area of the wing at 1, 5, 7, 8, 9, 10 and 15 Hz with the wing powered and at 8 Hz unpowered, 1200 V, same scale."></div>
 <div class="fig"><img src="fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency with a one-mode fit with and without lag; b, free-vibration frequency against amplitude; c, stroke against voltage at 1 and 8 Hz; d, model stroke at 8 Hz against natural frequency with measured values for powered and unpowered wing."></div>
 <ul class="read">
+<li><b>Top row:</b> swept area (brightest minus darkest pixel over the run), side view, 1200 V, same scale; the unpowered view is rescaled and placed hinge on hinge.</li>
 <li><b>a:</b> fundamental of the leading-edge angle (side view) at 1200 V, ± spread between blocks. Line: $\theta_1 = K\,[(1-r^2)^2+(2\zeta r)^2]^{-1/2}\,[1+(2\pi f\tau)^2]^{-1/2}$, $r = f/f_n$, with $\zeta$ 0.07 from the decays: $f_n$ 8.38 ± 0.20 Hz, $\tau$ 38 ± 13 ms. Dotted: the same without the lag. Square: wing unpowered.</li>
 <li><b>b:</b> frequency between successive extremes of the free decays, against their amplitude; diamond: the ringing at the bottom of the 1 Hz cycle. The spring softens at large stroke, so each run sits on its own resonance curve, which broadens the measured peak in a.</li>
 <li><b>c:</b> dotted lines $\propto V^2$ from the 1000 V (1 Hz) and 1200 V (8 Hz) points. At resonance, 1400 V adds only 8 %.</li>
-<li><b>d:</b> stroke at 8 Hz from the fit in a, against $f_n$. The powered and unpowered runs (horizontal lines) sit where the model puts $f_n$ = 8.38 and 8.95 Hz; decays at 0 V measured 8.64 Hz (12:28) and 9.04 Hz (12:43). A drift in $f_n$ explains the gap.</li>
+<li><b>d:</b> stroke at 8 Hz from the fit in a, against $f_n$. A shift to 8.95 Hz would account for the size of the unpowered fundamental, but not for its shape (Fig. 7).</li>
 </ul>
 </section>
 
@@ -145,6 +146,21 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <li><b>a, b:</b> time model in flow (strings for sheet and edge, unsteady vortex lattice with a shed wake), α 10°, wing at 0 V, 50 × 19 mm rectangle of the same area. Measured kinematics: 8.4 Hz, ±12.2° (half the measured peak-to-peak angle). At 4 m/s: -0.69 mN thrust per wing measured, +0.74 mN at the design point.</li>
 <li><b>c:</b> all runs, α 6° and 10°, against $St = f A_{tip}/U$ with $A_{tip} = 2R\sin\Phi$, $R$ 50 mm. Thrust turns positive at $St \approx 0.15$. Lift (b) is set by the forward speed: 7.7 mN against 7.9 mN per wing at 4 m/s.</li>
 </ul>
+</section>
+
+<section class="card" id="f7">
+<h2>Fig. 7. Wing powered against unpowered</h2>
+<div class="fig"><img src="fig/Fig8_cycle.png" alt="a and b, leading edge and lower outline at 12 phases of one 8 Hz cycle with the wing powered and unpowered, in millimetres from the hinge; c, stroke of each of 35 cycles for each run; d, the mean cycle of each run aligned at the lowest point."></div>
+<ul class="read">
+<li><b>a, b:</b> 12 phases of one cycle at 8 Hz, 1200 V, over a faded frame, in mm from the hinge. Solid: leading edge; dotted: lower outline of the wing.</li>
+<li><b>c:</b> peak-to-peak stroke of every cycle; square, mean ± s.d. 24.3 ± 1.0° against 20.2 ± 0.7°.</li>
+<li><b>d:</b> mean cycle ± s.d., aligned at the lowest point. Both reach the same bottom; the powered wing waits there, then swings further. Unpowered/powered: 0.73 in the fundamental (0.68 expected from a natural-frequency drift), 2.37 in the 2nd harmonic (1.20 expected), 0.78 in the 3rd (1.16 expected).</li>
+</ul>
+</section>
+
+<section class="card" id="further">
+<h2>Further analysis</h2>
+<p>The most interesting result in the robot videos is that it flaps differently when its wing is powered: 20 % more stroke, and a cycle whose shape no drift of the natural frequency can produce. The likely cause is that the active membrane, slack at voltage, stops acting as a stiff, lopsided spring on the leading edge; the same tension switch that moves the edge on the bench (Fig. 3) would then tune the robot's stroke. The camera moved and 20 minutes passed between the two runs, so part of the size gap may be drift. One session with the wing switched on and off every 10 s under a fixed camera separates the two: a wing effect follows the switching, a drift follows the clock. Details on <a href="../analysis/">Analysis</a>.</p>
 </section>
 
 <section class="card" id="s1">
@@ -174,10 +190,11 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <ul class="read">
 <li><b>An all-DEA wing works as an actuator, for a reason we can write down:</b> the rolled edge loses its tension and the skin cannot hold it alone. That is new against the earlier wings, whose DEA strips carried almost no tension.</li>
 <li><b>It is a tension switch more than a camber dial:</b> flat, then steep, then saturating. A design either works near the slack point on purpose (large change) or keeps the edge tense (small, proportional change). In flight it must stay above about 10 mN.</li>
+<li><b>The wing can trim the stroke.</b> Powering it changed the robot's stroke size and shape; if the interleaved test confirms it, the active membrane is a slow amplitude trim for the whole robot, not only a camber or twist control.</li>
 <li><b>Keep the whole skin active and the rolled edge</b> (it is also the electrode contact); drop discrete fibres at this size.</li>
 <li><b>Voltage is a trim, not a per-stroke control,</b> until the 40–50 ms lag is explained (electrodes of about 20 MΩ, viscoelasticity, or the amplifier) and shortened.</li>
 <li><b>The robot's gap is frequency first, then energy.</b> 8.4 Hz gives no thrust; raising it to 16–25 Hz (shorter lever, stiffer spring core, lighter root) comes before any flight test. Free flight then needs about 2 J/kg per cycle from the cores.</li>
-<li><b>For a paper:</b> the wing mechanism (Figs. 2, 3) and the robot's dynamics (Figs. 1, 4) are measured; the flight figures (5, 6) are models that say which tests matter. The wing's effect on the robot needs the interleaved test below.</li>
+<li><b>For a paper:</b> the wing mechanism (Figs. 2, 3), the robot's dynamics (Figs. 1, 4) and the effect of powering the wing (Fig. 7) are measured; the flight figures (5, 6) are models that say which tests matter. The interleaved test below makes Fig. 7 a result.</li>
 </ul>
 </section>
 
@@ -185,7 +202,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <h2>Open, and what settles it</h2>
 <div class="tw"><table>
 <tr><th>Open</th><th>Test</th><th>Prediction</th></tr>
-<tr><td>Does powering the wing change the stroke?</td><td>One session, one camera, wing on and off every 10 s at 8 Hz, pluck at 0 V between blocks; then a 6–11 Hz sweep in both states</td><td>No gap beyond the drift if the wing does not load the transmission</td></tr>
+<tr><td>How much of the 20 % is the wing</td><td>One session, one camera, wing on and off every 10 s at 8 Hz; then a 6–11 Hz sweep in both states</td><td>Stroke and 2nd harmonic switch with the wing, block by block</td></tr>
 <tr><td>Why 8.4 Hz</td><td>Pluck with and without the wing, then with a known added mass</td><td>Separates core stiffness, transmission compliance and inertia; the model is about 7× too stiff at a 2.5 mm lever</td></tr>
 <tr><td>Stroke limit at 1400 V</td><td>8 Hz at 1200, 1300, 1400 V, side view</td><td>A hard stop shows as flat tops</td></tr>
 <tr><td>Source of the lag</td><td>Electrode resistance; current or blocked force at 1–20 Hz; drive LED in the video</td><td>About 20 MΩ if it is RC; phase lag atan(2πfτ)</td></tr>
@@ -199,7 +216,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="files">
 <h2>Files</h2>
-<p class="note">Figures as PNG, SVG and AI (PDF), each panel in <code>fig/panels</code>: <a href="fig/Fig0_robot.svg">Fig. 1</a>, <a href="fig/Fig1_bench.svg">Fig. 2</a>, <a href="fig/Fig2_mechanism.svg">Fig. 3</a>, <a href="fig/Fig6_flapping.svg">Fig. 4</a>, <a href="fig/Fig5_air.svg">Fig. 5</a>, <a href="fig/Fig7_flight.svg">Fig. 6</a>, <a href="fig/Fig3_edge_design.svg">Fig. S1</a>, <a href="fig/Fig4_robot.svg">Fig. S2</a>. Code: <code>results/figures_results.py</code> (Figs. 2, 3, 5, S1, S2), <code>results/figures_tests.py</code> (Figs. 1, 4, 6); robot tracking and fits in <code>flapping/code</code>; flight model in <code>air/flap_dyn.py</code>, <code>air/measured_flight.py</code>.</p>
+<p class="note">Figures as PNG, SVG and AI (PDF), each panel in <code>fig/panels</code>: <a href="fig/Fig0_robot.svg">Fig. 1</a>, <a href="fig/Fig1_bench.svg">Fig. 2</a>, <a href="fig/Fig2_mechanism.svg">Fig. 3</a>, <a href="fig/Fig6_flapping.svg">Fig. 4</a>, <a href="fig/Fig5_air.svg">Fig. 5</a>, <a href="fig/Fig7_flight.svg">Fig. 6</a>, <a href="fig/Fig8_cycle.svg">Fig. 7</a>, <a href="fig/Fig3_edge_design.svg">Fig. S1</a>, <a href="fig/Fig4_robot.svg">Fig. S2</a>. Code: <code>results/figures_results.py</code> (Figs. 2, 3, 5, S1, S2), <code>results/figures_tests.py</code> (Figs. 1, 4, 6), <code>results/figures_video.py</code> (Fig. 7, top of Fig. 4); robot tracking and fits in <code>flapping/code</code>; flight model in <code>air/flap_dyn.py</code>, <code>air/measured_flight.py</code>.</p>
 </section>
 <div class="two">
   <a class="go" href="../first/"><b>Experiments →</b><br>The bench and robot data, and how each number was measured.</a>

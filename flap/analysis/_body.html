@@ -1,0 +1,93 @@
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Analysis</p>
+<h1>Analysis and discussion</h1>
+<p class="lead">What the high-speed videos of the robot say, read as closely as they allow. The main question: does powering the wing change how the robot flaps? At 8 Hz and 1200 V, the run with the wing powered swings 20 % further than the run with only the core powered, and its cycle has a different shape. Everything on this page comes from the video.</p>
+<nav class="toc"><a href="#sweep">Sweep</a><a href="#gap">The 20 %</a><a href="#drift">Drift or wing?</a><a href="#shape">Shape</a><a href="#fn">Natural frequency</a><a href="#why">Why</a><a href="#further">Further analysis</a><a href="#method">Method</a></nav>
+
+<section class="card" id="sweep">
+<h2>The robot across the sweep</h2>
+<div class="fig"><img src="../results/fig/Fig9_sweep.png" alt="Swept area of the wing, brightest minus darkest pixel over each run, at 1, 5, 7, 8, 9, 10 and 15 Hz with the wing powered, and at 8 Hz with the wing unpowered, all at 1200 V and the same scale."></div>
+<ul class="read">
+<li><b>What it shows:</b> the area the wing sweeps over a run, side view, 1200 V, same scale and colour range. It grows from 1 to 8 Hz and collapses by 15 Hz: a resonance near 8–9 Hz.</li>
+<li><b>Trend:</b> 8° of stroke at 1 Hz, 12° at 5, 18° at 7, 25° at 8, 20° at 9, 14° at 10 and about 1° at 15 Hz (fundamental, peak to peak).</li>
+<li><b>h</b> (wing unpowered, 8 Hz) is scaled to the same mm per pixel and placed hinge on hinge; its fan is narrower than d.</li>
+</ul>
+</section>
+
+<section class="card" id="gap">
+<h2>The 20 %</h2>
+<div class="fig"><img src="../results/fig/Fig8_cycle.png" alt="a and b, the leading edge and lower outline at 12 phases of one 8 Hz cycle, wing powered and unpowered, over a faded frame, in millimetres from the hinge. c, stroke of each of 35 cycles for each run. d, the mean cycle of each run, aligned at the lowest point."></div>
+<ul class="read">
+<li><b>Measured (c):</b> 24.3 ± 1.0° peak to peak with the wing powered, 20.2 ± 0.7° with it unpowered, 35 cycles each; the ranges barely touch (21.7–25.1° against 19.7–22.4°). In the fundamental: 12.4° against 9.1°, +37 %. The gap is four times the cycle-to-cycle spread.</li>
+<li><b>Shape (d):</b> both cycles reach the same lowest point. With the wing powered, the wing waits longer at the bottom, then swings further on the other side. Unpowered, the cycle is more triangular and peaks earlier. The gap is on one side of the stroke only.</li>
+<li><b>a, b:</b> twelve phases of one cycle, in mm from the hinge. In both runs the leading edge bends as it turns; how much cannot be compared between the two, because the side views were filmed from different heights.</li>
+</ul>
+</section>
+
+<section class="card" id="drift">
+<h2>Drift or wing?</h2>
+<p>The two runs were filmed 20 minutes apart (12:22 and 12:42), and the camera was moved and zoomed in between. The 8 Hz drive sits on the steep side of the robot's resonance, where a 1 % shift in natural frequency changes the stroke by about 5 %. So a drift of the robot between the runs could make a gap of this size on its own. The video gives two tests.</p>
+<div class="tw"><table>
+<tr><th>Test</th><th>If it is a drift in natural frequency</th><th>Measured</th><th>Reading</th></tr>
+<tr><td>Size of the fundamental (8 Hz), unpowered / powered</td><td>0.68 for a shift from 8.38 to 8.95 Hz</td><td>0.73</td><td>Consistent with drift</td></tr>
+<tr class="main"><td>2nd harmonic (16 Hz), unpowered / powered</td><td>1.20: far above resonance, it barely moves</td><td>2.37 (1.75 ± 0.17° against 0.71 ± 0.07°)</td><td>Not drift: the motion changed shape</td></tr>
+<tr class="main"><td>3rd harmonic (24 Hz), unpowered / powered</td><td>1.16</td><td>0.78</td><td>Not drift: opposite direction</td></tr>
+<tr><td>Free decay at 0 V, natural frequency</td><td>Different between sessions</td><td>8.64 Hz (12:28) and 9.04 Hz (12:43)</td><td>Different, but the first decay starts right after the wing was powered</td></tr>
+<tr><td>Switch-on transient, natural frequency (oscillator from rest)</td><td>Same model, different $f_n$</td><td>Powered runs 8.3–8.9 Hz; unpowered 7.3 Hz</td><td>Disagrees with the decays: the robot is not linear enough for one $f_n$</td></tr>
+</table></div>
+<ul class="read">
+<li><b>So:</b> the size of the fundamental alone could be a drift. The shape could not. Unpowered, the stroke carries 2.4× more 2nd harmonic even though it is smaller; with the same lopsided spring, a larger stroke would carry about $(12.4/9.1)^2 = 1.9\times$ more, not less. Powering the wing changed the robot's restoring force, not just its natural frequency.</li>
+<li><b>What is not settled:</b> how much of the 20 % comes from that change and how much from drift. Both are in the data.</li>
+</ul>
+</section>
+
+<section class="card" id="shape">
+<h2>Shape of the stroke</h2>
+<ul class="read">
+<li><b>Equation:</b> a restoring moment with a quadratic part, $M = k\theta + \beta\theta^2$, turns a pure 8 Hz drive into an 8 Hz stroke plus a 16 Hz part of size $\approx \beta A_1^2 / (2k)$ times the response at 16 Hz. The 2nd harmonic measures the asymmetry $\beta$ of the spring.</li>
+<li><b>Measured:</b> $A_2/A_1^2$ = 0.0046 /° powered and 0.021 /° unpowered. The spring is about 4.5× more lopsided with the wing unpowered.</li>
+<li><b>Ripple:</b> the unpowered stroke also carries a 56 Hz ripple, the 7th harmonic, locked to the stroke; the powered one does not. A tense membrane has modes that a slack one does not.</li>
+<li><b>Validate:</b> the same robot, same camera, wing on and off every 10 s: the 2nd harmonic should jump with the wing's state, block by block.</li>
+</ul>
+</section>
+
+<section class="card" id="fn">
+<h2>Natural frequency</h2>
+<div class="fig"><img src="../results/fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency with a one-mode fit with and without lag; b, free-vibration frequency against amplitude; c, stroke against voltage at 1 and 8 Hz; d, stroke at 8 Hz against natural frequency with the measured powered and unpowered strokes."></div>
+<ul class="read">
+<li><b>Equation (a):</b> $\theta_1(f) = K\,[(1-r^2)^2+(2\zeta r)^2]^{-1/2}\,[1+(2\pi f\tau)^2]^{-1/2}$, $r = f/f_n$. With $\zeta$ 0.07 from the decays: $f_n$ 8.38 ± 0.20 Hz, force lag $\tau$ 38 ± 13 ms. Without the lag the peak would be twice as high.</li>
+<li><b>Trend (b):</b> in the free decays the frequency rises as the motion dies out, about 8.0 Hz at 3.4° to 9 Hz near 1°: the spring softens at large stroke. This is also why the measured peak in a is broader than the model's.</li>
+<li><b>Trend (c):</b> at 1 Hz the stroke goes as $V^2$; at 8 Hz, 1400 V adds only 8 % over 1200 V.</li>
+<li><b>d:</b> the stroke at 8 Hz against $f_n$, all else fixed: 8.95 Hz would give the unpowered fundamental. Read with the shape test above: a shift like this may be part of the gap, not all of it.</li>
+</ul>
+</section>
+
+<section class="card" id="why">
+<h2>Why powering the wing could help the stroke</h2>
+<ul class="read">
+<li><b>The membrane is a spring on the stroke.</b> The skin is stretched between the leading edge and the body, and the rolled trailing edge is tied to the body. As the leading edge swings, the membrane is stretched more on one side of the stroke than the other: a stiff, lopsided spring. That is the $\beta$ above.</li>
+<li><b>Voltage slackens it.</b> On the bench, voltage takes the tension out of the rolled edge until it goes slack (<a href="../results/#f3">Results, Fig. 3</a>). On the robot, that removes part of the membrane's pull on the leading edge.</li>
+<li><b>What follows:</b> a softer and more symmetric restoring force, so less 2nd harmonic; a natural frequency nearer the 8 Hz drive and a larger static gain, so a larger stroke on the side where the membrane held it back. Both are seen: less 2nd harmonic, and a larger stroke on one side of the cycle only (Fig. above, d).</li>
+<li><b>What it would mean:</b> the wing's voltage tunes the robot's stroke, not only the wing's shape. With a 40–50 ms force lag this is a slow control, set over many strokes, like a trim of amplitude.</li>
+</ul>
+</section>
+
+<section class="card" id="further">
+<h2>Further analysis</h2>
+<p>The most interesting result in these videos is that the robot flaps differently when its wing is powered: 20 % more stroke, and a cycle whose shape no drift of the natural frequency can produce. Its likely cause is that the active membrane, slack at voltage, stops acting as a stiff, lopsided spring on the leading edge. Two things limit the claim: the camera moved and 20 minutes passed between the two runs, so part of the gap may be drift, and the leading-edge bending cannot be compared across the two side views because they were filmed from different heights (the diagonal pair bends the same way in both states). One session with the wing switched on and off every 10 s, at 8 Hz and then across 6–11 Hz, under a fixed camera, will separate the two: a wing effect follows the switching, a drift follows the clock. If it holds, the wing becomes a way to trim the robot's stroke amplitude.</p>
+</section>
+
+<section class="card" id="method">
+<h2>Method</h2>
+<p class="note">Phantom VEO 710L, 200 fps, 832 × 600 px; 0.152 mm/px (0.135 for the unpowered side view) from the ruler. Per run: background = 97th percentile of each pixel; leading edge = upper edge of the region darker than the background by more than 35 grey levels, in columns across the wing, fitted with a line (stroke angle) and a parabola (bend). Peak to peak per cycle; harmonics by least-squares Fourier fit at the refined drive frequency, spread from 0.5 s blocks. Decays: damped cosine and the frequency between successive extremes. Switch-on transient: linear oscillator from rest driven by $\sin^4(\pi f t)$ (sine-squared voltage, force ∝ $V^2$). Code: <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a> (track.py, pair.py, decay.py, ring1hz.py, sweepfit.py, onset_fit.py, le_bend.py); figures: results/figures_video.py, results/figures_tests.py.</p>
+</section>
+
+<div class="two">
+  <a class="go" href="../results/"><b>Results →</b><br>The main figures and conclusions.</a>
+  <a class="go" href="../first/"><b>Experiments →</b><br>All measured data.</a>
+</div>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>

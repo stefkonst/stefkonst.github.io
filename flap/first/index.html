@@ -67,7 +67,6 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Experiments</p>
 <h1>Experiments</h1>
 <p class="lead">Two sets. The wing alone on the bench (2 electrodes, 1000–1800 V, 1–20 Hz, three views, two tensions), and the full B-cube robot flapping (DEA core, transmission, powered wing; 1000–1400 V, 1–15 Hz, high-speed video). The wing's edge moves up to 1.8 mm out of plane. The robot resonates at about 8.4 Hz and reaches 24° of stroke at 1200 V.</p>
-<div class="warn"><b>What this rests on:</b> one wing and one robot, videos only (no force, current or drive signal recorded), scale from a ruler that may sit at another depth. Runs went in ascending voltage, so wear-in may add to voltage trends.</div>
 <nav class="toc"><a href="#sum">Summary</a><a href="#flapping">Robot flapping</a><a href="#active">Powered against unpowered wing</a><a href="#views">Wing: three views</a><a href="#weight">Model with weight</a><a href="#video">Wing: video</a><a href="#seen">Measured</a><a href="#back">No return</a><a href="#sign">Active roll</a><a href="#wr">Wrinkles</a><a href="#lift">Lift</a><a href="#files">Files</a></nav>
 
 <section class="card" id="sum">
@@ -81,7 +80,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <tr class="main"><td>The natural frequency is not fixed</td><td>7.7 Hz (small ringing in the 1 Hz runs) to about 9 Hz (free decays near 1°); it falls with amplitude (8.0 Hz at 3.4°)</td><td>Measured, robot</td></tr>
 <tr class="main"><td>The DEA force lags the voltage</td><td>$\tau$ = 38 ± 13 ms from the robot sweep; about 50 ms from the wing's bench sweep</td><td>Model fit to two independent data sets</td></tr>
 <tr><td>Voltage</td><td>$V^2$ at 1 Hz (×1.44 from 1000 to 1200 V); only ×1.08 at 8 Hz from 1200 to 1400 V</td><td>Measured, robot</td></tr>
-<tr class="main"><td>Powered against unpowered wing</td><td>+20 % stroke (peak to peak), +37 % in the fundamental, at 8 Hz. A 7 % shift in $f_n$ between the two sessions, measured at 0 V, explains all of it</td><td>Not established: needs an interleaved test</td></tr>
+<tr class="main"><td>Powering the wing changes the stroke</td><td>+20 % peak to peak at 8 Hz (24.3 against 20.2°), and a different cycle shape: 2.4× less 2nd harmonic when powered, which drift cannot produce</td><td>Measured; size partly confounded with drift (<a href="../analysis/">Analysis</a>)</td></tr>
 </table></div>
 </section>
 
@@ -115,14 +114,14 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="active">
 <h2>Powered against unpowered wing</h2>
-<p>At 8 Hz and 1200 V, the run with the wing powered gives 24.3 ± 1.0° peak to peak (35 cycles); the run with only the core powered gives 20.2 ± 0.7° (35 cycles), which is +20 %. In the fundamental the gap is +37 % (12.4° against 9.1°). It is large compared with the cycle-to-cycle spread, but it is not evidence that powering the wing helps:</p>
-<ul>
-<li><b>The robot changed between the runs.</b> They were filmed 20 min apart (12:22 and 12:42) with the camera moved. Free decays, both at 0 V, give $f_n$ 8.64 Hz at 12:28 and 9.04 Hz at 12:43.</li>
-<li><b>That shift alone explains the gap.</b> With the fitted model, the unpowered stroke is reproduced if $f_n$ moves from 8.38 to 8.95 Hz (+7 %), which is what the 12:43 decay measured (Fig. 6d). The 8 Hz drive sits on the steep side of the peak, where 1 % in $f_n$ changes the stroke by about 5 %.</li>
-<li><b>The motion differs in shape, and that is real, not noise.</b> The edge fit is tighter in the unpowered run (0.4 against 0.9 px), but its 2nd harmonic is 2.4× larger (1.7° against 0.7°) and it carries a ripple at 56 Hz, the 7th harmonic, locked to the stroke: a higher bending mode. Its leading-edge lines also do not cross at the hinge (205, 211 px, against 323, 269 px with the wing powered), so the leading edge bends as well as rotates. This is why its cycle looked noisy.</li>
-<li><b>The unpowered diagonal run is a decay,</b> not steady flapping: four cycles, then the drive stops (2 s, 401 frames). It gives the 12:43 decay above.</li>
+<div class="fig"><img src="../results/fig/Fig8_cycle.png" alt="Leading edge at 12 phases of one cycle with the wing powered and unpowered, the stroke of every cycle, and the mean cycles."></div>
+<ul class="read">
+<li><b>Size:</b> 24.3 ± 1.0° with the wing powered, 20.2 ± 0.7° with only the core powered, 35 cycles each at 8 Hz and 1200 V (+20 %; +37 % in the fundamental).</li>
+<li><b>Shape:</b> both cycles reach the same bottom; powered, the wing waits there and then swings further. Unpowered, the 2nd harmonic is 1.75 ± 0.17° against 0.71 ± 0.07°, although the stroke is smaller.</li>
+<li><b>Drift or wing:</b> the runs were 20 min apart and the camera moved. A drift of the natural frequency (8.38 → 8.95 Hz) would explain the size of the fundamental (0.68 expected, 0.73 measured) but not the 2nd harmonic (1.20 expected, 2.37 measured) or the 3rd (1.16 expected, 0.78 measured). So the wing's state changed the robot's restoring force; how much of the size gap it accounts for is open.</li>
+<li><b>Not noise:</b> the edge fit is tighter in the unpowered run (0.4 against 0.9 px); its extra wiggle is a 56 Hz ripple locked to the stroke, the 7th harmonic. The unpowered diagonal run is a free decay (four cycles, then the drive stops), not steady flapping.</li>
 </ul>
-<p><b>To settle it:</b> same session, same camera, one robot, alternate the wing on and off every 10 s at 8 Hz, with a pluck at 0 V between blocks; better, sweep 6–11 Hz in both states. A real wing effect shows as a gap that survives the alternation; a drift shows as a trend in time.</p>
+<p class="note">Full reading, with the tests and a proposed mechanism: <a href="../analysis/">Analysis</a>.</p>
 </section>
 
 <section class="card" id="views">
