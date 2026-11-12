@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Models</p>
 <h1>Models</h1>
 <p class="lead">The models behind the B-cube results, what each one explains, and the tests it passes or fails. The robot models are fitted to the high-speed video; each is then tested on data it was not fitted to. Two of them were withdrawn once a measurement error in their data was found; they stay here, with the reason.</p>
-<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#spring">Spring</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
+<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#spring">Spring</a><a href="#calib">Lever and inertia</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
 
 <section class="card" id="status">
 <h2>Status</h2>
@@ -13,6 +13,7 @@
 <tr class="main"><td>Spring asymmetry (harmonic balance), from the tip</td><td>2nd harmonic of each run</td><td>Powered: one real value (+0.18 to +0.31) at 7–8 Hz and 1.2–1.4 kV; predicts the powered 2nd harmonic</td><td>Unpowered: −0.43, not real (a lag at 16 Hz); drift or wing, open</td></tr>
 <tr class="main"><td>Lag on the force (viscoelastic) against lag on the voltage (RC)</td><td>Complex 2nd harmonics of the powered runs</td><td>Force lag 52 ms: one real asymmetry at 7 and 8 Hz (misfit 0.3)</td><td>Voltage lag: misfit 388 at its best (40 ms); the 1.4 kV run fits neither well</td></tr>
 <tr><td>Softening stroke spring (cubic term)</td><td>Sweep at 1.2 kV and the free decay</td><td>Predicts little gain at 1.4 kV (×1.015 against ×1.075 measured; linear ×1.15, $V^2$ ×1.36); misfit 72 against 95 linear</td><td>Overshoots 8 Hz at 1.2 kV by 9 %; the free decay does not need it; predicts a jump near 7.2 Hz, untested</td></tr>
+<tr><td>Lever, inertia and core efficiency</td><td>Resonance and 1 Hz stroke</td><td colspan="2">One relation between them; at the design lever (2.5 mm) the moving inertia is 7.4 × the wing's and $\eta_c$ 0.21. Needs the built lever</td></tr>
 <tr><td>Linear wing mode at 17 Hz; edge tension ≈ 4 mN</td><td>Silhouette track of the unpowered run</td><td colspan="2"><b>Withdrawn:</b> its data were a tracking error; it also predicted a second free mode the decays do not show</td></tr>
 <tr><td>Asymmetric air drag</td><td>Same</td><td colspan="2"><b>Withdrawn:</b> same data; it also missed the phase by 14 s.d.</td></tr>
 </table></div>
@@ -58,6 +59,17 @@
 </ul>
 </section>
 
+<section class="card" id="calib">
+<h2>What the robot says about its lever, inertia and cores</h2>
+<div class="fig"><img src="fig/T4_calib.png" alt="a, moving inertia relative to the wing's against lever arm; b, core efficiency needed against lever arm, for 30 and 45 micrometre film, with the range of the bench roll fits; c, stiffness over inertia needed relative to now against target resonance."></div>
+<ul class="read">
+<li><b>Equations:</b> two cores of axial stiffness $k_c$ = 276 N/m (Yeoh fit, 565 mg, 20 mm) through a lever $r$ give $k_\theta = 2k_c r^2$; the resonance gives the moving inertia, $I = k_\theta/(2\pi f_n)^2$; the quasi-static stroke at 1 Hz (fundamental 4.22° at 1.2 kV, sine-squared drive, lag 52 ms) gives the core's force drop, $F_{pk} = 2\theta_1 k_\theta/(r\,\ell)$, and its efficiency $\eta_c = F_{pk}/(\varepsilon (V/H)^2 A_c)$, $A_c$ = 25.7 mm².</li>
+<li><b>a, b:</b> with the design lever, 2.5 mm, the moving inertia must be 7.4 times the wing's and the cores must lose 214 mN at 1.2 kV ($\eta_c$ 0.21 with 30 µm film): something besides the wing moves with the stroke (crank, frame, cables), which is why the design model, with the wing alone, predicted 22.8 Hz. With the wing alone moving, the lever would be about 1 mm and $\eta_c$ 0.08, close to the bench roll fits (0.06–0.17).</li>
+<li><b>c:</b> 20 Hz needs 5.7 times more stiffness per inertia than now, 25 Hz 8.9 times: a stiffer spring core, less moving mass at the hinge, or a longer lever (which costs stroke as $1/r$ for the same core force).</li>
+<li><b>To close it:</b> the lever arm as built, and a pluck of the transmission without the wing (its own inertia). With $r$ known, the core's $\eta_c$ follows directly from the video.</li>
+</ul>
+</section>
+
 <section class="card" id="withdrawn">
 <h2>Withdrawn: the wing mode and the asymmetric drag</h2>
 <div class="fig"><img src="fig/T1_tests.png" alt="Tests of the withdrawn wing-mode model: misfit against its frequency, free decay predicted against measured, and the apparent bend harmonics from the silhouette track."></div>
@@ -93,7 +105,7 @@
 
 <section class="card" id="code">
 <h2>Code</h2>
-<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag), softening.py and decay_models.py (spring); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
+<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag), softening.py and decay_models.py (spring), calibration.py (lever, inertia, cores); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
