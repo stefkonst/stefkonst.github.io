@@ -13,7 +13,7 @@
 <tr class="main"><td>The edge goes slack at voltage</td><td>Flat tops in the cycle; more tension cuts the motion about 13×. Roll tension 50–96 mN from its length</td><td>Measured; mechanism by model (<a href="../results/">Results</a>, Fig. 3)</td></tr>
 <tr><td>Motion falls with frequency</td><td>About $f^{-0.8}$ to 5 Hz, bump at 15 Hz (edge mode)</td><td>Measured, wing on the bench</td></tr>
 <tr class="main"><td>The robot flaps at resonance</td><td>Peak at 8 Hz: 24.3 ± 1.0° peak to peak at 1200 V, tip 23 mm. Fit: $f_n$ 8.4 ± 0.2 Hz, $\zeta$ 0.07</td><td>Measured, robot</td></tr>
-<tr class="main"><td>The natural frequency is not fixed</td><td>7.7 Hz (small ringing in the 1 Hz runs) to about 9 Hz (free decays near 1°); it falls with amplitude (8.0 Hz at 3.4°)</td><td>Measured, robot</td></tr>
+<tr class="main"><td>The stroke spring is not linear</td><td>Peak broader than one mode allows; 1.4 kV adds only 8 % at 8 Hz. Free decays 8.6–9.0 Hz; small ringing in the 1 Hz runs 7.7 Hz</td><td>Measured; a softening spring predicts the saturation (<a href="../model/#spring">Models</a>)</td></tr>
 <tr class="main"><td>The DEA force lags the voltage</td><td>$\tau$ = 38 ± 13 ms from the robot sweep; about 50 ms from the wing's bench sweep</td><td>Model fit to two independent data sets</td></tr>
 <tr><td>Voltage</td><td>$V^2$ at 1 Hz (×1.44 from 1000 to 1200 V); only ×1.08 at 8 Hz from 1200 to 1400 V</td><td>Measured, robot</td></tr>
 <tr class="main"><td>Powering the wing does not change the stroke size</td><td>From the tip: 23.8 against 24.4° at 8 Hz; tip 23.8 against 22.1 mm, within calibration. Shape may differ (asymmetry reversed)</td><td>Measured; an earlier +20 % was a tracking error (<a href="../analysis/">Analysis</a>)</td></tr>
@@ -24,12 +24,12 @@
 <h2>Robot flapping</h2>
 <div class="fig"><img src="../results/fig/Fig0_robot.png" alt="The robot in side, diagonal and front views, and the motion range at 8 Hz in each view."></div>
 <p class="note">Phantom VEO 710L, 200 fps, 832 × 600 px, 0.152 mm/px. Bottom row: brightest minus darkest pixel over the run.</p>
-<div class="fig"><img src="../results/fig/Fig6_flapping.png" alt="a, stroke fundamental against drive frequency at 1200 V with a one-mode fit with and without lag; b, free-vibration frequency against amplitude for two decays and the 1 Hz ringing; c, stroke against voltage at 1 and 8 Hz with V squared lines; d, model stroke at 8 Hz against natural frequency, with measured natural frequencies and measured strokes for powered and unpowered wing."></div>
+<div class="fig"><img src="../results/fig/Figure4.png" alt="a, stroke fundamental against drive frequency at 1200 V with a one-mode fit with and without lag; b, free-vibration frequency against amplitude for two decays and the 1 Hz ringing; c, stroke against voltage at 1 and 8 Hz with V squared lines; d, model stroke at 8 Hz against natural frequency, with measured natural frequencies and measured strokes for powered and unpowered wing."></div>
 <ul class="read">
-<li><b>Equation (a):</b> one mode with a lagged force, $\theta_1(f) = \dfrac{K}{\sqrt{(1-r^2)^2+(2\zeta r)^2}}\,\dfrac{1}{\sqrt{1+(2\pi f\tau)^2}}$, $r = f/f_n$. Fit with $\zeta$ fixed at 0.07 from the decays: $K$ 4.7°, $f_n$ 8.38 Hz, $\tau$ 38 ms. Freeing $\zeta$ gives 0.068, the same.</li>
-<li><b>Trend (a):</b> the model gets the peak's place and height, and needs the lag: without it the peak would be twice as high. It is too narrow: the measured peak is about twice as broad. Panel b says why: $f_n$ moves with amplitude, so each run sits on its own curve.</li>
-<li><b>Trend (b):</b> free decays after the drive stops. The frequency rises as the motion dies out, from 8.0 Hz at 3.4° to about 9 Hz near 1°: the spring softens at large stroke. The small ringing at the bottom of the 1 Hz cycle sits lower, at 7.7 Hz, so the position in the stroke matters too.</li>
-<li><b>Trend (c):</b> at 1 Hz the stroke goes as $V^2$, as a DEA should. At 8 Hz, 1400 V adds only 8 %: an end stop, the transmission, the core's strain limit, or the run itself, which cut out at 2.2 s.</li>
+<li><b>Equation (c):</b> one mode with a lagged force, $\theta_1(f) = \dfrac{K}{\sqrt{(1-r^2)^2+(2\zeta r)^2}}\,\dfrac{1}{\sqrt{1+(2\pi f\tau)^2}}$, $r = f/f_n$. Fit with $\zeta$ fixed at 0.07 from the decays: $K$ 4.7°, $f_n$ 8.38 Hz, $\tau$ 38 ms. Freeing $\zeta$ gives 0.068, the same.</li>
+<li><b>Trend (c):</b> the model gets the peak's place and height, and needs the lag: without it the peak would be twice as high. It is too narrow: the measured peak is about twice as broad. A softening spring, fitted to the sweep, also predicts the 1.4 kV saturation (Models).</li>
+<li><b>Trend (f):</b> free decays after the drive stops, 8.6 and 9.0 Hz; the change of frequency read from zero crossings is within the tracking noise. The small ringing at the bottom of the 1 Hz cycle sits lower, at 7.7 Hz.</li>
+<li><b>Trend (e):</b> at 1 Hz the stroke goes as $V^2$, as a DEA should. At 8 Hz, 1400 V adds only 8 %: an end stop, the transmission, the core's strain limit, or the run itself, which cut out at 2.2 s.</li>
 <li><b>Validate:</b> log the drive voltage with the video (an LED on the drive) to measure $\tau$ as a phase; sweep at two amplitudes to map $f_n$ against stroke; pluck the robot at 0 V before and after each run.</li>
 </ul>
 <div class="tw"><table>
