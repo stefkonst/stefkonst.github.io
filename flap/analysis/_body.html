@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Analysis</p>
 <h1>Analysis and discussion</h1>
 <p class="lead">What the high-speed videos of the robot say about one question: does powering the wing change how the robot flaps? Measured from the wing tip, the stroke is the same with the wing powered and unpowered; its shape may differ. An earlier reading of a 20 % larger stroke came from the tracker, and this page shows how.</p>
-<nav class="toc"><a href="#sweep">Sweep</a><a href="#same">Same stroke</a><a href="#how">How the 20 % arose</a><a href="#shape">Shape</a><a href="#models">Models</a><a href="#fn">Natural frequency</a><a href="#further">Further analysis</a><a href="#method">Method</a></nav>
+<nav class="toc"><a href="#sweep">Sweep</a><a href="#same">Stroke</a><a href="#how">How the 20 % arose</a><a href="#shape">Shape</a><a href="#models">Models</a><a href="#fn">Natural frequency</a><a href="#further">Further analysis</a><a href="#method">Method</a></nav>
 
 <section class="card" id="sweep">
 <h2>The robot across the sweep</h2>
@@ -12,9 +12,9 @@
 </section>
 
 <section class="card" id="same">
-<h2>The same stroke</h2>
+<h2>Nearly the same stroke</h2>
 <div class="fig"><img src="../results/fig/Figure5.png" alt="Figure 5"></div>
-<p class="disc">Measured from the tip, the stroke is 23.8 ± 1.0° with the wing powered and 24.4 ± 1.1° with it unpowered (33 cycles each), and the tip moves 23.8 ± 1.0 against 22.1 ± 1.0 mm. The difference in degrees and in millimetres has opposite signs and is within the calibration of the two camera set-ups (the unpowered view is zoomed, 0.135 against 0.152 mm per pixel, and the hinge of each view is found from the tip's path). Powering the wing does not change the stroke size measurably.</p>
+<p class="disc">Measured from the tip, the stroke is 24.4 ± 1.0° with the wing powered and 23.3 ± 1.0° with it unpowered (33 cycles each), and the tip moves 23.4 ± 1.0 against 22.3 ± 0.9 mm. The stroke angle uses the tip's vertical excursion, each view's ruler scale (0.1518 and 0.1345 mm per pixel, both to 0.1 %) and one spar length, 55.2 mm (54.4 and 56.1 mm measured in the two views, a 3 % spread that bounds the scale error). The powered stroke is 4.7 ± 1.1 % (statistical) ± 3 % (scale) larger: small, and within reach of a drift of the robot between the runs.</p>
 </section>
 
 <section class="card" id="how">
@@ -45,7 +45,7 @@
 
 <section class="card" id="further">
 <h2>Further analysis</h2>
-<p>Powering the wing does not change how far B-cube flaps; at most it changes the shape of the stroke, and that difference cannot yet be separated from a change of the robot between the two sessions. The earlier +20 % was a measurement error with a clear cause: a silhouette tracker meets a membrane wing filmed from a new camera position. The lesson for the next test is the method: track the tip about its fitted hinge, keep the camera fixed, log the drive with an LED, and switch the wing on and off every 10 s within one session. If the asymmetry then follows the switching, the wing's tension acts on the stroke; if not, the robot drifted.</p>
+<p>Powering the wing changes how far B-cube flaps by about 5 %, not 20 %, and may change the shape of the stroke; and that difference cannot yet be separated from a change of the robot between the two sessions. The earlier +20 % was a measurement error with a clear cause: a silhouette tracker meets a membrane wing filmed from a new camera position. The lesson for the next test is the method: track the tip about its fitted hinge, keep the camera fixed, log the drive with an LED, and switch the wing on and off every 10 s within one session. If the asymmetry then follows the switching, the wing's tension acts on the stroke; if not, the robot drifted.</p>
 </section>
 
 <section class="card" id="method">

@@ -40,26 +40,27 @@ for i_, (fn, lab) in enumerate((("ov_pw", "wing powered"), ("ov_un", "wing unpow
     ax.text(0.0, 1.02, "bc"[i_], transform=ax.transAxes, fontsize=9, fontweight="bold")
     ax.text(0.06, 1.02, lab, transform=ax.transAxes, fontsize=7)
 TIP = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", "tip_" + n + ".npz"))
+TS = json.load(open(os.path.join(FLAP, "flapping", "data", "tip_stroke.json")))
 runs = (("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "wing powered"), ("only_DEA_core_8hz_1200V_side", ST.C[1], "wing unpowered"))
 ax = fig.add_axes([0.08, 0.07, 0.36, 0.28])
 for x0, (n, col, lab) in enumerate(runs):
-    a = np.degrees(TIP(n)["ang"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a); N = 25; idx = np.where(g)[0]
+    a = np.array(TS[n]["theta"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a); N = 25; idx = np.where(g)[0]
     pp = np.array([np.nanmax(a[k:k + N]) - np.nanmin(a[k:k + N]) for k in range(idx[0], idx[-1] - N, N)])
     jit = (np.random.default_rng(1).random(len(pp)) - 0.5) * 0.35
     ax.plot(x0 + jit, pp, "o", ms=2.5, color=col, alpha=0.8); ax.errorbar([x0 + 0.32], [pp.mean()], yerr=[pp.std()], fmt="s", color="k", ms=3)
 ax.set_xticks([0, 1]); ax.set_xticklabels(["wing powered", "wing unpowered"]); ax.set_xlim(-0.5, 1.6); ax.minorticks_off()
 ax.set(ylabel="Stroke per cycle, from the tip (deg)", ylim=(18, 30))
-ST.note(ax, "8 Hz, 1.2 kV, side view, 33 cycles each", xy=(0.03, 0.06), va="bottom")
+ST.note(ax, "8 Hz, 1.2 kV, side view, 32 cycles each", xy=(0.03, 0.06), va="bottom")
 ax.text(-0.22, 1.02, "d", transform=ax.transAxes, fontsize=9, fontweight="bold")
 ax = fig.add_axes([0.58, 0.07, 0.36, 0.28])
 for n, col, lab in runs:
-    a = np.degrees(TIP(n)["ang"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a)
-    ph = (t[g] * 8.0) % 1; y = -(a[g] - np.nanmean(a[g])); b = np.linspace(0, 1, 26); idx = np.minimum(np.digitize(ph, b) - 1, 24)
+    a = np.array(TS[n]["theta"]); t = np.arange(len(a)) / FS; g = (t > 0.9) & np.isfinite(a)
+    ph = (t[g] * 8.0) % 1; y = a[g] - np.nanmean(a[g]); b = np.linspace(0, 1, 26); idx = np.minimum(np.digitize(ph, b) - 1, 24)
     A = np.array([np.mean(y[idx == k]) for k in range(25)]); S = np.array([np.std(y[idx == k]) for k in range(25)])
     sh = int(np.argmin(A)); A = np.roll(A, -sh); S = np.roll(S, -sh); x = (b[:-1] + b[1:]) / 2
     ax.plot(x, A, color=col, label=lab); ax.fill_between(x, A - S, A + S, color=col, alpha=0.25, lw=0)
 ax.set(xlabel="Phase from the lowest point of the tip", ylabel="Tip angle, up positive (deg)")
-ax.legend(loc="upper center", fontsize=5.5)
+ax.legend(loc="lower center", fontsize=5.5)
 ax.text(-0.22, 1.02, "e", transform=ax.transAxes, fontsize=9, fontweight="bold")
 save(fig, "Fig8_cycle")
 

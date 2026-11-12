@@ -155,7 +155,7 @@ import matplotlib.image as mpimg
 VID = r"C:/Users/stefk/MIT Dropbox/SMRL/Shared/Stefania/full_tension/"
 TRK = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", n + ".npz"))
 TIPd = lambda n: np.load(os.path.join(FLAP, "flapping", "data", "tracks", "tip_" + n + ".npz"))
-HT = FD("hb_tip.json"); DEC = FD("decays.json")
+HT = FD("hb_tip.json"); DEC = FD("decays.json"); TSd = FD("tip_stroke.json")
 fig = plt.figure(figsize=(ST.WIDTH_MM * ST.MM, 150 * ST.MM))
 # b: four frames
 n = "only_DEA_core_8hz_1200V_side"; d = TRK(n); tp = TIPd(n)["tip"]; s = Stack(VID + n + ".avi")
@@ -173,7 +173,7 @@ ax = [fig.add_axes([0.09 + c_ * 0.33, 0.07, 0.24, 0.55]) for c_ in range(3)]
 for i_, a_ in enumerate(ax): a_.text(-0.3, 1.04, "cde"[i_], transform=a_.transAxes, fontsize=9, fontweight="bold")
 a = ax[0]
 for nn, col in (("full_DEA_core_wing_8hz_1200V_side", C[0]), ("only_DEA_core_8hz_1200V_side", C[1])):
-    sil = -TRK(nn)["ang"]; tip = -np.degrees(TIPd(nn)["ang"]); t = np.arange(len(sil)) / 200.0; g = (t > 0.9) & np.isfinite(sil) & np.isfinite(tip)
+    sil = -TRK(nn)["ang"]; tip = np.array(TSd[nn]["theta"]); t = np.arange(len(sil)) / 200.0; g = (t > 0.9) & np.isfinite(sil) & np.isfinite(tip)
     ph = (t[g] * 8.0) % 1; b = np.linspace(0, 1, 26); idx = np.minimum(np.digitize(ph, b) - 1, 24)
     A_s = np.array([np.mean(sil[g][idx == k] - np.mean(sil[g])) for k in range(25)]); A_t = np.array([np.mean(tip[g][idx == k] - np.mean(tip[g])) for k in range(25)])
     sh = int(np.argmin(A_t)); A_s, A_t = np.roll(A_s, -sh), np.roll(A_t, -sh); x = (b[:-1] + b[1:]) / 2
