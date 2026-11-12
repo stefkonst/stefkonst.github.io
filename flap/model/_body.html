@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Models</p>
 <h1>Models</h1>
 <p class="lead">The models behind the B-cube results, what each one explains, and the tests it passes or fails. The robot models are fitted to the high-speed video; each is then tested on data it was not fitted to. Two of them were withdrawn once a measurement error in their data was found; they stay here, with the reason.</p>
-<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#spring">Spring</a><a href="#calib">Lever and inertia</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
+<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#spring">Spring</a><a href="#calib">Lever and inertia</a><a href="#design">What it needs</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
 
 <section class="card" id="status">
 <h2>Status</h2>
@@ -70,6 +70,18 @@
 </ul>
 </section>
 
+<section class="card" id="design">
+<h2>What B-cube needs to make thrust: a faster actuator, then a faster stroke</h2>
+<div class="fig"><img src="fig/T5_design.png" alt="Stroke amplitude reachable at resonance against resonance frequency, for a stiffer spring (a) and for less moving mass (b), with lines for force lags of 52 (measured), 20, 10, 5 and 2 ms, and the stroke needed for thrust at 2, 3 and 4 m/s."></div>
+<ul class="read">
+<li><b>Model:</b> from the measured point (12.2° amplitude at 8.4 Hz, 1.2 kV), same cores, voltage and damping ratio; a stiffer spring scales the static stroke as $(f_0/f_r)^2$, less moving mass keeps it; the lag passes $1/\sqrt{1+(2\pi f\tau)^2}$ of the force. Thrust needs $St = f\,2R\sin\Phi/U \ge 0.15$ (Fig. 8), $R$ = 55 mm.</li>
+<li><b>a:</b> stiffening the spring never works: the static stroke falls faster than the threshold, whatever the lag.</li>
+<li><b>b:</b> removing moving mass works only with a faster actuator. With the measured 52 ms lag, the robot stays below the thrust threshold at every frequency (black). With the wing alone moving (22.9 Hz, from the calibration above), it reaches thrust at 3 m/s if the lag is 10–20 ms or less, and at 4 m/s if it is about 10 ms or less.</li>
+<li><b>So:</b> the force lag, set by the elastomer (see Lag), is the first limit to flight, before frequency and before energy per cycle. Shortening it 3–5 times is the first design target; it is a material choice (a less lossy silicone, a different pre-stretch), not wiring.</li>
+<li><b>Limits:</b> linear scaling from one operating point; the softening spring and the air load at higher frequency are not included.</li>
+</ul>
+</section>
+
 <section class="card" id="withdrawn">
 <h2>Withdrawn: the wing mode and the asymmetric drag</h2>
 <div class="fig"><img src="fig/T1_tests.png" alt="Tests of the withdrawn wing-mode model: misfit against its frequency, free decay predicted against measured, and the apparent bend harmonics from the silhouette track."></div>
@@ -105,7 +117,7 @@
 
 <section class="card" id="code">
 <h2>Code</h2>
-<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag), softening.py and decay_models.py (spring), calibration.py (lever, inertia, cores); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
+<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag), softening.py and decay_models.py (spring), calibration.py (lever, inertia, cores), design_map.py (what thrust needs); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
