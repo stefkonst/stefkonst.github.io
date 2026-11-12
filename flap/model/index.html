@@ -46,7 +46,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Models</p>
 <h1>Models</h1>
 <p class="lead">The models behind the B-cube results, what each one explains, and the tests it passes or fails. The robot models are fitted to the high-speed video; each is then tested on data it was not fitted to. Two of them were withdrawn once a measurement error in their data was found; they stay here, with the reason.</p>
-<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
+<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
 
 <section class="card" id="status">
 <h2>Status</h2>
@@ -54,6 +54,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <tr><th>Model</th><th>Fitted to</th><th>Passes</th><th>Fails or open</th></tr>
 <tr><td>Stroke resonance with force lag</td><td>Stroke against frequency, 1200 V</td><td>Peak place and height; lag 38 ± 13 ms, like the bench (50 ms)</td><td>Peak width: the spring softens with stroke</td></tr>
 <tr class="main"><td>Spring asymmetry (harmonic balance), from the tip</td><td>2nd harmonic of each run</td><td>Powered: one real value (+0.18 to +0.31) at 7–8 Hz and 1.2–1.4 kV; predicts the powered 2nd harmonic</td><td>Unpowered: −0.43, not real (a lag at 16 Hz); drift or wing, open</td></tr>
+<tr class="main"><td>Lag on the force (viscoelastic) against lag on the voltage (RC)</td><td>Complex 2nd harmonics of the powered runs</td><td>Force lag 52 ms: one real asymmetry at 7 and 8 Hz (misfit 0.3)</td><td>Voltage lag: misfit 388 at its best (40 ms); the 1.4 kV run fits neither well</td></tr>
 <tr><td>Linear wing mode at 17 Hz; edge tension ≈ 4 mN</td><td>Silhouette track of the unpowered run</td><td colspan="2"><b>Withdrawn:</b> its data were a tracking error; it also predicted a second free mode the decays do not show</td></tr>
 <tr><td>Asymmetric air drag</td><td>Same</td><td colspan="2"><b>Withdrawn:</b> same data; it also missed the phase by 14 s.d.</td></tr>
 </table></div>
@@ -73,6 +74,18 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 <section class="card" id="m2">
 <h2>Spring asymmetry from the 2nd harmonic</h2>
 <p>With a quadratic term $\beta\theta^2$ and the fixed $\sin^4$ drive, the ratio $X_2/X_1^2$ does not depend on when the clock starts, so it gives $\beta$ for each run without a drive signal; it must be real if the model holds. From the tip: powered +0.18 (7 Hz), +0.23 (8 Hz), +0.31 (8 Hz, 1.4 kV), real within the noise, and with this term the model predicts the powered 2nd harmonic. Unpowered: −0.43 ± 0.02, with an imaginary part 5 s.d. from zero, so something lags at 16 Hz. A tense edge pulling the wing more on one side of the stroke would do this; so would a change of the robot between the two sessions, 20 min apart. <a href="../results/#f6">Results, Fig. 6d</a>.</p>
+</section>
+
+<section class="card" id="lag">
+<h2>The lag is in the force, not the voltage</h2>
+<div class="fig"><img src="fig/T2_lag.png" alt="a, misfit of one real spring asymmetry across the 7 and 8 Hz runs against the lag time, for a lag on the force (minimum near 52 ms, misfit below 1) and on the voltage (no good minimum); b, the same including the 1.4 kV run; c, the asymmetry per run at each model's best lag, real and imaginary parts."></div>
+<ul class="read">
+<li><b>Two kinds of lag give different 2nd harmonics.</b> The drive is $V = V_{max}\sin^2(\pi f t) = V_{max}(1-\cos\Omega t)/2$. If the force lags ($\tau\dot F + F = V^2$, viscoelastic), its harmonics are $-\tfrac12 L_1$ and $\tfrac18 L_2$, with $L_h = 1/(1+ih\Omega\tau)$. If the voltage on the film lags and is then squared (RC charging through the electrodes, or amplifier slew), they are $-\tfrac12 L_1$ and $\tfrac18 L_1^2$. At 8 Hz and 50 ms the two 2nd harmonics differ by about 50° in phase.</li>
+<li><b>Test:</b> for each kind and each $\tau$, solve the spring asymmetry $\beta$ from the measured complex $X_2/X_1^2$ of each powered run (tip-based); the right lag gives one real $\beta$ for all runs.</li>
+<li><b>a:</b> with the two cleanest runs (7 and 8 Hz, 1.2 kV) the force lag gives $\beta$ = 3087 and 3050 s⁻², imaginary parts 18 and 5, at $\tau$ = 52 ms (misfit 0.3), the same lag as the bench (50 ms). The voltage lag never does better than a misfit of 388.</li>
+<li><b>b, c:</b> adding the 1.4 kV run, the force lag is still better (178 against 426), but that run's imaginary part stays at about 800: at larger stroke the spring's stiffness changes with amplitude, which the model does not include.</li>
+<li><b>So:</b> the lag is the elastomer's own force response. Better electrodes or a faster amplifier will not shorten it. Validate with the blocked force of a core at 1–20 Hz, voltage logged.</li>
+</ul>
 </section>
 
 <section class="card" id="withdrawn">
@@ -110,7 +123,7 @@ nav.toc{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;margin:8px 0 18px}
 
 <section class="card" id="code">
 <h2>Code</h2>
-<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
+<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>

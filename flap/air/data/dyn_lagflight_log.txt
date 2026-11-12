@@ -1,0 +1,33 @@
+skin strong  up    air True fv - U 4.0 a 10.0 | L 8.19 T 0.72 P 17.74 mW | F 45.2 mN Nc 0.51 | wTE amp 3.553 mm a1 3.432 hi -3.385 twist 10.4 deg |  19s
+edge         down  air True fv - U 4.0 a 10.0 | L 8.85 T 0.52 P 18.87 mW | F 25.6 mN Nc 0.38 | wTE amp 5.049 mm a1 4.775 hi -4.928 twist 14.7 deg |  19s
+both         sin   air True fv - U 4.0 a 10.0 | L 8.91 T 0.52 P 19.37 mW | F 26.2 mN Nc 0.37 | wTE amp 5.124 mm a1 4.814 hi -4.809 twist 15.0 deg |  20s
+edge         on    air True fv - U 4.0 a 10.0 | L 11.02 T -0.40 P 21.03 mW | F 10.6 mN Nc 0.20 | wTE amp 8.122 mm a1 6.868 hi -7.366 twist 23.0 deg |  24s
+skin strong  sin   air True fv - U 4.0 a 10.0 | L 8.19 T 0.71 P 17.75 mW | F 45.2 mN Nc 0.51 | wTE amp 3.546 mm a1 3.420 hi -3.454 twist 10.4 deg |  25s
+skin strong  on    air True fv - U 4.0 a 10.0 | L 8.46 T 0.62 P 19.39 mW | F 45.6 mN Nc 0.46 | wTE amp 3.799 mm a1 3.625 hi -3.587 twist 11.2 deg |  25s
+both         on    air True fv - U 4.0 a 10.0 | L 10.97 T -0.46 P 22.14 mW | F 11.1 mN Nc 0.19 | wTE amp 8.131 mm a1 7.078 hi -7.324 twist 23.0 deg |  26s
+skin strong  down  air True fv - U 4.0 a 10.0 | L 8.20 T 0.71 P 17.78 mW | F 45.2 mN Nc 0.51 | wTE amp 3.549 mm a1 3.424 hi -3.462 twist 10.4 deg |  27s
+edge         sin   air True fv - U 4.0 a 10.0 | L 8.77 T 0.55 P 18.80 mW | F 26.0 mN Nc 0.38 | wTE amp 5.008 mm a1 4.736 hi -4.789 twist 14.6 deg |  27s
+edge         up    air True fv - U 4.0 a 10.0 | L 8.13 T 0.65 P 18.82 mW | F 26.6 mN Nc 0.39 | wTE amp 4.961 mm a1 4.760 hi -4.179 twist 14.5 deg |  28s
+both         down  air True fv - U 4.0 a 10.0 | L 9.00 T 0.49 P 19.44 mW | F 25.8 mN Nc 0.37 | wTE amp 5.155 mm a1 4.854 hi -4.931 twist 15.0 deg |  28s
+both         up    air True fv - U 4.0 a 10.0 | L 8.24 T 0.64 P 19.39 mW | F 26.8 mN Nc 0.37 | wTE amp 5.074 mm a1 4.852 hi -4.196 twist 14.8 deg |  31s
+both strong  on    air True fv - U 4.0 a 10.0 | L 5.81 T -11.24 P 12.22 mW | F 0.9 mN Nc 0.06 | wTE amp 11.319 mm a1 11.048 hi -11.327 twist 30.7 deg |  20s
+both strong  down  air True fv - U 4.0 a 10.0 | L 5.63 T 0.18 P 21.22 mW | F 11.2 mN Nc 0.20 | wTE amp 8.243 mm a1 7.199 hi -9.593 twist 23.2 deg |  20s
+skin strong  down  air True fv - U 4.0 a 10.0 | L 8.18 T 0.72 P 17.71 mW | F 45.2 mN Nc 0.51 | wTE amp 3.537 mm a1 3.419 hi -3.439 twist 10.4 deg |  19s
+skin strong  on    air True fv - U 4.0 a 10.0 | L 8.42 T 0.63 P 19.23 mW | F 45.5 mN Nc 0.47 | wTE amp 3.779 mm a1 3.608 hi -3.580 twist 11.1 deg |  22s
+both strong  sin   air True fv - U 4.0 a 10.0 | L 10.57 T -0.35 P 22.50 mW | F 11.5 mN Nc 0.20 | wTE amp 8.223 mm a1 7.128 hi -8.032 twist 23.3 deg |  24s
+both strong  up    air True fv - U 4.0 a 10.0 | L 8.89 T -0.39 P 22.04 mW | F 12.0 mN Nc 0.20 | wTE amp 7.508 mm a1 6.895 hi -6.252 twist 21.4 deg |  28s
+skin strong  sin   air True fv - U 4.0 a 10.0 | L 8.17 T 0.72 P 17.68 mW | F 45.2 mN Nc 0.51 | wTE amp 3.533 mm a1 3.415 hi -3.432 twist 10.4 deg |  24s
+edge         on    air True fv - U 4.0 a 10.0 | L 10.62 T -0.34 P 20.91 mW | F 11.8 mN Nc 0.21 | wTE amp 7.523 mm a1 6.641 hi -6.683 twist 21.4 deg |  24s
+skin strong  up    air True fv - U 4.0 a 10.0 | L 8.18 T 0.72 P 17.65 mW | F 45.2 mN Nc 0.52 | wTE amp 3.529 mm a1 3.416 hi -3.392 twist 10.4 deg |  29s
+edge         down  air True fv - U 4.0 a 10.0 | L 8.62 T 0.58 P 18.73 mW | F 26.4 mN Nc 0.39 | wTE amp 4.939 mm a1 4.708 hi -4.688 twist 14.4 deg |  28s
+edge         up    air True fv - U 4.0 a 10.0 | L 8.25 T 0.65 P 18.63 mW | F 27.4 mN Nc 0.40 | wTE amp 4.814 mm a1 4.645 hi -4.250 twist 14.1 deg |  28s
+both         down  air True fv - U 4.0 a 10.0 | L 8.75 T 0.56 P 19.29 mW | F 26.6 mN Nc 0.37 | wTE amp 5.046 mm a1 4.788 hi -4.703 twist 14.7 deg |  18s
+edge         sin   air True fv - U 4.0 a 10.0 | L 8.57 T 0.60 P 18.67 mW | F 26.8 mN Nc 0.39 | wTE amp 4.891 mm a1 4.665 hi -4.598 twist 14.3 deg |  27s
+both         on    air True fv - U 4.0 a 10.0 | L 10.48 T -0.39 P 21.86 mW | F 12.2 mN Nc 0.21 | wTE amp 7.544 mm a1 6.834 hi -6.652 twist 21.5 deg |  20s
+both         up    air True fv - U 4.0 a 10.0 | L 8.35 T 0.64 P 19.16 mW | F 27.6 mN Nc 0.38 | wTE amp 4.917 mm a1 4.730 hi -4.274 twist 14.4 deg |  18s
+both         sin   air True fv - U 4.0 a 10.0 | L 8.69 T 0.57 P 19.21 mW | F 27.0 mN Nc 0.38 | wTE amp 4.999 mm a1 4.744 hi -4.617 twist 14.6 deg |  18s
+both strong  on    air True fv - U 4.0 a 10.0 | L -3.29 T -10.70 P 20.34 mW | F 0.9 mN Nc 0.07 | wTE amp 10.070 mm a1 8.618 hi -10.140 twist 27.9 deg |  18s
+both strong  down  air True fv - U 4.0 a 10.0 | L 10.95 T -0.42 P 22.39 mW | F 11.8 mN Nc 0.20 | wTE amp 8.023 mm a1 7.009 hi -7.546 twist 22.7 deg |  17s
+both strong  up    air True fv - U 4.0 a 10.0 | L 9.43 T -0.26 P 21.92 mW | F 13.0 mN Nc 0.21 | wTE amp 7.212 mm a1 6.720 hi -6.070 twist 20.6 deg |  16s
+both strong  sin   air True fv - U 4.0 a 10.0 | L 11.02 T -0.46 P 22.29 mW | F 12.4 mN Nc 0.21 | wTE amp 7.771 mm a1 6.931 hi -7.161 twist 22.1 deg |  16s
+DONE

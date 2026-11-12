@@ -77,10 +77,10 @@
 <li><b>Equation:</b> the time model is the sheet and the edge as strings with mass, $m\,\ddot w = N_c w'' + N_s w'' + \dots - m g$, with the edge tension $T = T_0 - \Delta F\,v + EA\langle w'^2\rangle/2$ and $v = (V/V_{max})^2$. The lag is one first-order step on the force: $\tau\,\dot v_{eff} + v_{eff} = v$.</li>
 <li><b>Trend (a):</b> without a lag the model stays flat to about 12 Hz, while the measured motion falls 3.5× from 1 to 5 Hz. A lag of $\tau$ = 50 ms fits 1–5 Hz to within 3–8 % (0.62, 0.43, 0.33, 0.26 against 0.62, 0.43, 0.35, 0.28). It misses the 15 Hz bump: the edge mode, which the damped model smooths away.</li>
 <li><b>Trend (b):</b> at 1800 V the model gives 1.5–1.6 mm against 1.84 measured. At 1400 V it gives 0.15 against 0.82: the measured edge loses its tension more gradually than the model's. $\eta_f$ between 0.4 and 0.8 brackets the data.</li>
-<li><b>Where 50 ms could come from:</b> the electrodes and the cable, if they add up to about 20 MΩ: the roll and skin are about 2.4 nF, and $\tau = RC$. Or the silicone's viscoelasticity. Or the amplifier's slew at 1.8 kV.</li>
+<li><b>Where 50 ms comes from:</b> the elastomer's force response. The phases of the robot's harmonics place it in the force, not the voltage: a 52 ms lag on the force makes the stroke's spring asymmetry one real value at 7 and 8 Hz (misfit 0.3), while a lag on the voltage before squaring, as RC charging of the electrodes or amplifier slew would give, cannot (misfit 388) (<a href="../model/#lag">Models</a>). So better electrodes or a faster amplifier would not shorten it; a less lossy silicone or a different pre-stretch might.</li>
 <li><b>Second check, on the robot:</b> the robot's frequency sweep, fitted with one mode and the same first-order lag, gives $\tau$ = 38 ± 13 ms (<a href="../first/#flapping">Experiments</a>). Without a lag its resonance peak would be twice as high. Two independent data sets, the same order: the lag is in the DEA, not in the wing model.</li>
-<li><b>So:</b> with this lag, within-stroke timing at 25 Hz is gone (only 13 % of a 25 Hz change passes). Make the lag shorter first if per-stroke control matters, then revisit timing.</li>
-<li><b>Validate:</b> measure the electrode resistance end to end (MΩ range), and the current or the blocked roll force at 1–20 Hz. If $R \approx$ 20 MΩ, better electrodes or contacts fix it.</li>
+<li><b>So:</b> with this lag, within-stroke timing at 25 Hz is gone (only 13 % of a 25 Hz change passes). A shorter lag needs a different material response, not better wiring; revisit timing only then.</li>
+<li><b>Validate:</b> blocked force of a core at 1–20 Hz with the voltage on the film logged: the force should lag the voltage by about 50 ms at all frequencies (a first-order viscoelastic lag), whatever the electrode resistance.</li>
 </ul>
 </section>
 
@@ -114,7 +114,7 @@
 <h2>Tests, in order</h2>
 <div class="tw"><table>
 <tr><th>Test</th><th>What it settles</th><th>Prediction</th></tr>
-<tr><td>Electrode resistance; current or blocked force at 1–20 Hz</td><td>Source of the 50 ms lag</td><td>About 20 MΩ if it is RC</td></tr>
+<tr><td>Blocked force at 1–20 Hz, voltage logged</td><td>Confirms the 50 ms lag is in the material</td><td>Force lags voltage by about 50 ms</td></tr>
 <tr><td>Skin under a known load (suction box or fan), roll unpowered</td><td>$\eta_s$, and whether the skin matters</td><td>14–50 % more bulge at 1800 V; edge within 0.15 mm</td></tr>
 <tr><td>Static wind tunnel, 4 m/s, 6° and 9°: skin, then edge</td><td>Lift change of each</td><td>Skin +1 to +3 mN per wing; edge ±0.5 mN up to 1400 V</td></tr>
 <tr><td>Same, edge at 1800 V, high-speed</td><td>Slack limit</td><td>Edge flutter at 4 m/s if $T$ drops below about 7 mN</td></tr>
