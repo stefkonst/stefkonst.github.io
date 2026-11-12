@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Results</p>
 <h1>Results</h1>
 <p class="lead">B-cube, a flapping robot with an all-DEA wing: the main findings in eight figures, as they would go in a paper, with conclusions and the tests that settle what is open. Data on <a href="../first/">Experiments</a>, design on <a href="../robot/">Robot</a>, models on <a href="../air/">Wing in air</a>.</p>
-<nav class="toc"><a href="#findings">Findings</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#f5">Fig. 5</a><a href="#f6">Fig. 6</a><a href="#f7">Fig. 7</a><a href="#f8">Fig. 8</a><a href="#s1">Fig. S1</a><a href="#s2">Fig. S2</a><a href="#further">Further analysis</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
+<nav class="toc"><a href="#findings">Findings</a><a href="#numbers">Numbers</a><a href="#f1">Fig. 1</a><a href="#f2">Fig. 2</a><a href="#f3">Fig. 3</a><a href="#f4">Fig. 4</a><a href="#f5">Fig. 5</a><a href="#f6">Fig. 6</a><a href="#f7">Fig. 7</a><a href="#f8">Fig. 8</a><a href="#s1">Fig. S1</a><a href="#s2">Fig. S2</a><a href="#further">Further analysis</a><a href="#conclusions">Conclusions</a><a href="#open">Open</a><a href="#files">Files</a></nav>
 
 <section class="card" id="findings">
 <h2>Main findings</h2>
@@ -19,6 +19,26 @@
 <li><b>The stroke's shape may change.</b> The tip-based spring asymmetry is one real value for every powered run (+0.18 to +0.31) and -0.43 for the unpowered run, with a lag at 16 Hz. The two runs were filmed 20 min apart, so the robot may have changed in between; an interleaved test decides it (Figs. 5, 6).</li>
 <li><b>At the measured kinematics the flapping makes no thrust.</b> Thrust needs $St \gtrsim 0.15$; the robot is at 0.05 at 4 m/s, so it needs 16–25 Hz. Lift comes from the forward speed (Fig. 8). Even at the design point, free flight needs about 2 J/kg per cycle from the cores, about twice what the bench gave (Fig. S2). Model.</li>
 </ol>
+</section>
+
+<section class="card" id="numbers">
+<h2>Key numbers</h2>
+<div class="tw"><table>
+<tr><th>Quantity</th><th>Value</th><th>How</th><th>Basis</th></tr>
+<tr><td>Edge drop, wing on the bench, 1.8 kV, 1 Hz</td><td>1.84 mm out of plane; ±0.14 mm in plane</td><td>Edge tracked at 16 stations, side and front views, 200 fps</td><td>Measured</td></tr>
+<tr><td>Growth with voltage, cycle high</td><td>$\propto V^{3.2}$, 1000–1800 V</td><td>Three voltages, ascending order</td><td>Measured</td></tr>
+<tr><td>Roll tension at rest, bench</td><td>50–96 mN</td><td>Roll length after rolling and the elastomer fit ($C_1$ 42.8 kPa)</td><td>Derived</td></tr>
+<tr><td>Robot resonance</td><td>8.38 ± 0.20 Hz</td><td>One mode with lag, fitted to the 1.2 kV sweep</td><td>Fitted</td></tr>
+<tr><td>Damping ratio</td><td>0.07 (0.068–0.073)</td><td>Free decays after the drive stops</td><td>Measured</td></tr>
+<tr class="main"><td>Stroke at 8 Hz, 1.2 kV</td><td>24.4 ± 1.0° peak to peak; tip 23.4 ± 1.0 mm</td><td>Tip excursion over the 55.2 mm spar, 32 cycles</td><td>Measured</td></tr>
+<tr class="main"><td>DEA force lag</td><td>52 ms in the force (not the voltage); 38 ± 13 ms from the sweep; 50 ms on the bench</td><td>Harmonic phases at 7 and 8 Hz (misfit 0.3 against 388 for a voltage lag)</td><td>Fitted, two data sets</td></tr>
+<tr><td>Stroke, 1.4 kV over 1.2 kV at 8 Hz</td><td>×1.075 measured; ×1.015 predicted by a softening spring</td><td>Softening term fitted without the 1.4 kV point</td><td>Measured; model</td></tr>
+<tr class="main"><td>Powered over unpowered wing, stroke</td><td>+4.7 ± 1.1 % (statistical) ± 3 % (scale)</td><td>Tip; runs 20 min apart, camera moved</td><td>Measured; drift not excluded</td></tr>
+<tr><td>Spring asymmetry $\beta A_1/\omega^2$</td><td>+0.18 to +0.31 powered; −0.43 ± 0.02 unpowered</td><td>Harmonic balance on the tip, 0.5 s blocks</td><td>Measured; drift not excluded</td></tr>
+<tr><td>Lever, inertia, core efficiency</td><td>at r = 2.5 mm: inertia 7.4 × wing, $\eta_c$ 0.21</td><td>Resonance and 1 Hz stroke with the core stiffness</td><td>Derived; needs the built lever</td></tr>
+<tr><td>Lift change from the active skin in air</td><td>$\Delta C_L$ +0.09 to +0.37</td><td>Finite elements with a vortex lattice, 3–6 m/s</td><td>Model</td></tr>
+<tr><td>Thrust at the measured kinematics, 4 m/s</td><td>−0.69 mN per wing (net drag); thrust above St ≈ 0.15</td><td>Unsteady vortex lattice, 8.4 Hz, ±12.2°</td><td>Model</td></tr>
+</table></div>
 </section>
 
 <section class="card" id="f1">
