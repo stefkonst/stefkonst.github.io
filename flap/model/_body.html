@@ -1,0 +1,74 @@
+<body>
+<div class="wrap">
+<p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Models</p>
+<h1>Models</h1>
+<p class="lead">The models behind the B-cube results, what each one explains, and the tests it passes or fails. The robot models are fitted to the high-speed video only; each is then tested on data it was not fitted to.</p>
+<nav class="toc"><a href="#status">Status</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#m3">Wing mode</a><a href="#m4">Asymmetric drag</a><a href="#snap">The edge snaps</a><a href="#next">Next model</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
+
+<section class="card" id="status">
+<h2>Status</h2>
+<div class="tw"><table>
+<tr><th>Model</th><th>Fitted to</th><th>Passes</th><th>Fails</th></tr>
+<tr><td>Stroke resonance with force lag</td><td>Stroke against frequency, 1200 V</td><td>Peak place and height; lag 38 ± 13 ms, like the bench (50 ms)</td><td>Peak width: the spring softens with stroke</td></tr>
+<tr><td>Spring asymmetry (harmonic balance)</td><td>2nd harmonic of each run</td><td>Powered: one real value at 7 and 8 Hz and 1.4 kV; predicts the powered 2nd harmonic (0.76° against 0.72°)</td><td>Unpowered: not real (a phase at 16 Hz)</td></tr>
+<tr class="main"><td>Linear wing mode</td><td>Five numbers of the unpowered run</td><td>Size and 2nd harmonic within 1 s.d.; one clear minimum at 17 Hz</td><td><b>Free decay:</b> predicts modes at 7.5 and 19 Hz; the decays show one mode, 8.7–9.4 Hz. Misses the 3rd harmonic</td></tr>
+<tr><td>Asymmetric air drag</td><td>Same five numbers</td><td>Size</td><td>Phase of the 2nd harmonic by 14 s.d.</td></tr>
+<tr class="main"><td>Taut–slack edge on a flexible leading edge</td><td>In progress</td><td colspan="2">Motivated by the leading-edge bend: the unpowered edge snaps once per cycle</td></tr>
+</table></div>
+</section>
+
+<section class="card" id="m1">
+<h2>Resonance with a lagging force</h2>
+<p>$\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta = G\,u(t)$, $\tau\dot u + u = \sin^4(\pi f t)$ (sine-squared voltage from 0 V, force ∝ $V^2$). Fitted with $\zeta$ = 0.07 from the free decays: $f_n$ 8.38 ± 0.20 Hz, $\tau$ 38 ± 13 ms. The measured peak is about twice as broad as this model's: the free decays show the frequency rising as the motion dies (8.0 Hz at 3.4°, about 9 Hz near 1°), so each run sits on its own curve. Figures: <a href="../results/#f4">Results, Fig. 4</a>.</p>
+</section>
+
+<section class="card" id="m2">
+<h2>Spring asymmetry from the 2nd harmonic</h2>
+<p>With a quadratic term $\beta\theta^2$ and the fixed $\sin^4$ drive, the ratio $X_2/X_1^2$ of the 2nd harmonic to the square of the fundamental does not depend on when the clock starts, so it can be measured in each run without a drive signal and solved for $\beta$, which must be real if the model holds. Powered runs give one real value ($\beta A_1/\omega^2$ 0.23–0.35), and with it the model predicts the powered 2nd harmonic. The unpowered run gives −0.86 and a large imaginary part: something at 16 Hz lags. A drift of $f_n$ changes these values by less than 10 %. Figure: <a href="../results/#f6">Results, Fig. 6</a>.</p>
+</section>
+
+<section class="card" id="m3">
+<h2>A linear wing mode: fits the driven stroke, fails the decay</h2>
+<div class="fig"><img src="fig/T1_tests.png" alt="a, misfit of the linear wing-mode model against its frequency, with a single minimum at 17 Hz and the bootstrap band; b, frequency against amplitude in free decay, measured (two decays near 8 to 9.5 Hz) against the model with the wing mode (12 to 16 Hz) and without it (8.4 Hz); c, harmonics of the leading-edge bend relative to the fundamental, larger for the unpowered wing; d, mean leading-edge bend over one cycle, smooth when powered, a sharp snap when unpowered."></div>
+<ul class="read">
+<li><b>Model:</b> the stroke plus a second mode $q$, the leading edge bending with the membrane, driven by the stroke and pulling back on it: $\ddot q + 2\zeta_w\omega_w\dot q + \omega_w^2 q = -\ddot\theta$, $-\mu\omega_w^2 q$ in the stroke equation; the video sees $\theta + q$.</li>
+<li><b>a:</b> fitted to five clock-free numbers of the unpowered run, the misfit has one clear minimum, at $f_w$ = 17.0 Hz (damping 0.05, coupling 0.21). The bootstrap over 0.5 s blocks gives 16.9–17.2 Hz, but that only measures the noise of the data, not the error of the model.</li>
+<li><b>b, the decisive test:</b> a linear mode at 17 Hz with this coupling would ring after the drive stops: the coupled system has modes at 7.5 and 19 Hz, and the model's free decay runs at 12–16 Hz. The measured decays show one mode, 8.7 Hz (12:28) and 9.4 Hz (12:43), with less than 5 % of their energy between 15 and 25 Hz. The model is wrong in this form.</li>
+<li><b>c, d, the reason:</b> the leading-edge bend, tracked in the same frames, is smooth and once per cycle when the wing is powered. Unpowered, it bends hard at the bottom of the stroke and snaps to the other side within about 10 ms (d), with harmonics up to 32 Hz three to four times larger relative to the fundamental (c). The coupling is an event, the edge going taut and slack once per cycle at large stroke, not a linear mode. In the small free decays the event does not happen, so they show one mode.</li>
+<li><b>What still holds:</b> powering the wing changes the stroke (size and shape), and the change is mechanical, through the leading edge. What changes: the 17 Hz mode and the 4 mN tension inferred from it are a linear stand-in for a taut–slack event, and the tension estimate needs the next model.</li>
+</ul>
+</section>
+
+<section class="card" id="m4">
+<h2>Asymmetric air drag: fails</h2>
+<p>A tense membrane could hold its camber one way and so drag more in one direction of the stroke: $\gamma\dot\theta|\dot\theta| + \kappa\dot\theta^2$ in the stroke equation, three unknowns ($\beta$, $\gamma$, $\kappa$) against the same five numbers. It gets the size, but misses the phase of the 2nd harmonic by 14 s.d. (misfit 103 against 15 for the wing mode). Air drag is not the main coupling.</p>
+</section>
+
+<section class="card" id="snap">
+<h2>The edge snaps</h2>
+<p>The snap in the leading-edge bend (d above) is the clearest sign in the video of how the wing acts on the stroke. With the wing at 0 V, the rolled edge is barely tense; as the stroke reaches its lowest point the edge goes taut and pulls the leading edge, then releases it. Powering the wing slackens the edge for longer, so the pull is weaker or absent: the bend follows the stroke smoothly, the stroke is larger, and its cycle is symmetric. The side views were filmed from different heights, so the sign of the bend is not comparable between runs, but its harmonic content is: the diagonal view of the powered wing gives the same small harmonics as the side view.</p>
+</section>
+
+<section class="card" id="next">
+<h2>Next model: a taut–slack edge on a flexible leading edge</h2>
+<p>The stroke $\theta$, the leading-edge bend $q$ with its own stiffness, and the rolled edge as a tension-only spring between the wing tip and its anchor on the body: it pulls only when stretched, $F = k_e\max(\delta - \delta_0, 0)$, with $\delta$ set by the stroke and the bend, and $\delta_0$ by the edge's slack, which voltage increases. It must reproduce the driven harmonics, the snap in $q$, and a single mode in the small free decays, with the edge stiffness and the leading-edge stiffness set from the parts rather than fitted.</p>
+</section>
+
+<section class="card" id="wing">
+<h2>Wing and flight models</h2>
+<ul class="read">
+<li><b>Edge on the bench:</b> two springs in parallel, edge tension and skin, fitted to finite elements of the built wing (correlation 0.93): <a href="../results/#f3">Results, Fig. 3</a>; details on the <a href="../robot/">Robot</a> page.</li>
+<li><b>Wing in air:</b> finite elements with a vortex lattice (steady), and a time model with an unsteady lattice: <a href="../air/">Wing in air</a>, <a href="../results/#f7">Results, Fig. 7</a>.</li>
+<li><b>Flight at the measured kinematics:</b> <a href="../results/#f8">Results, Fig. 8</a>.</li>
+<li><b>Earlier analytical model</b> for discrete and full-membrane wings: <a href="analytical.html">archived page</a>.</li>
+</ul>
+</section>
+
+<section class="card" id="code">
+<h2>Code</h2>
+<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: sweepfit.py (resonance), harmonic_balance.py (spring asymmetry), tm_core.py and two_mode.py (wing mode), model_tests.py (landscape, bootstrap, decay test), drag_model.py (asymmetric drag), le_bend.py (leading-edge bend). Figure: model/code/figures_tests.py.</p>
+</section>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>
