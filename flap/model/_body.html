@@ -3,7 +3,7 @@
 <p style="margin:0 0 8px"><a href="../">Active membrane wings</a> / Models</p>
 <h1>Models</h1>
 <p class="lead">The models behind the B-cube results, what each one explains, and the tests it passes or fails. The robot models are fitted to the high-speed video; each is then tested on data it was not fitted to. Two of them were withdrawn once a measurement error in their data was found; they stay here, with the reason.</p>
-<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
+<nav class="toc"><a href="#status">Status</a><a href="#measure">Measuring the stroke</a><a href="#m1">Resonance</a><a href="#m2">Spring asymmetry</a><a href="#lag">Lag</a><a href="#spring">Spring</a><a href="#withdrawn">Withdrawn</a><a href="#spar">The spar</a><a href="#next">Next</a><a href="#wing">Wing and flight</a><a href="#code">Code</a></nav>
 
 <section class="card" id="status">
 <h2>Status</h2>
@@ -12,6 +12,7 @@
 <tr><td>Stroke resonance with force lag</td><td>Stroke against frequency, 1200 V</td><td>Peak place and height; lag 38 ± 13 ms, like the bench (50 ms)</td><td>Peak width: the spring softens with stroke</td></tr>
 <tr class="main"><td>Spring asymmetry (harmonic balance), from the tip</td><td>2nd harmonic of each run</td><td>Powered: one real value (+0.18 to +0.31) at 7–8 Hz and 1.2–1.4 kV; predicts the powered 2nd harmonic</td><td>Unpowered: −0.43, not real (a lag at 16 Hz); drift or wing, open</td></tr>
 <tr class="main"><td>Lag on the force (viscoelastic) against lag on the voltage (RC)</td><td>Complex 2nd harmonics of the powered runs</td><td>Force lag 52 ms: one real asymmetry at 7 and 8 Hz (misfit 0.3)</td><td>Voltage lag: misfit 388 at its best (40 ms); the 1.4 kV run fits neither well</td></tr>
+<tr><td>Softening stroke spring (cubic term)</td><td>Sweep at 1.2 kV and the free decay</td><td>Predicts little gain at 1.4 kV (×1.015 against ×1.075 measured; linear ×1.15, $V^2$ ×1.36); misfit 72 against 95 linear</td><td>Overshoots 8 Hz at 1.2 kV by 9 %; the free decay does not need it; predicts a jump near 7.2 Hz, untested</td></tr>
 <tr><td>Linear wing mode at 17 Hz; edge tension ≈ 4 mN</td><td>Silhouette track of the unpowered run</td><td colspan="2"><b>Withdrawn:</b> its data were a tracking error; it also predicted a second free mode the decays do not show</td></tr>
 <tr><td>Asymmetric air drag</td><td>Same</td><td colspan="2"><b>Withdrawn:</b> same data; it also missed the phase by 14 s.d.</td></tr>
 </table></div>
@@ -25,7 +26,7 @@
 
 <section class="card" id="m1">
 <h2>Resonance with a lagging force</h2>
-<p>$\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta = G\,u(t)$, $\tau\dot u + u = \sin^4(\pi f t)$ (sine-squared voltage from 0 V, force ∝ $V^2$). Fitted with $\zeta$ = 0.07 from the free decays: $f_n$ 8.38 ± 0.20 Hz, $\tau$ 38 ± 13 ms. The powered runs were filmed from below, where silhouette and tip agree (within 0.6° at 7, 8 and 9 Hz), so this fit stands. The measured peak is about twice as broad as the model's: in free decay the frequency rises as the motion dies (8.0 Hz at 3.4°, about 9 Hz near 1°), so each run sits on its own curve. <a href="../results/#f4">Results, Fig. 4</a>.</p>
+<p>$\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\theta = G\,u(t)$, $\tau\dot u + u = \sin^4(\pi f t)$ (sine-squared voltage from 0 V, force ∝ $V^2$). Fitted with $\zeta$ = 0.07 from the free decays: $f_n$ 8.38 ± 0.20 Hz, $\tau$ 38 ± 13 ms. The powered runs were filmed from below, where silhouette and tip agree (within 0.6° at 7, 8 and 9 Hz), so this fit stands. The measured peak is about twice as broad as the model's; see the spring below. <a href="../results/#f4">Results, Fig. 4</a>.</p>
 </section>
 
 <section class="card" id="m2">
@@ -42,6 +43,18 @@
 <li><b>a:</b> with the two cleanest runs (7 and 8 Hz, 1.2 kV) the force lag gives $\beta$ = 3087 and 3050 s⁻², imaginary parts 18 and 5, at $\tau$ = 52 ms (misfit 0.3), the same lag as the bench (50 ms). The voltage lag never does better than a misfit of 388.</li>
 <li><b>b, c:</b> adding the 1.4 kV run, the force lag is still better (178 against 426), but that run's imaginary part stays at about 800: at larger stroke the spring's stiffness changes with amplitude, which the model does not include.</li>
 <li><b>So:</b> the lag is the elastomer's own force response. Better electrodes or a faster amplifier will not shorten it. Validate with the blocked force of a core at 1–20 Hz, voltage logged.</li>
+</ul>
+</section>
+
+<section class="card" id="spring">
+<h2>The spring is not linear, and it is not clear why</h2>
+<div class="fig"><img src="fig/T3_soft.png" alt="a, stroke against frequency at 1.2 kV with a softening and a linear spring model; b, frequency against amplitude in the free decay with both models; c, ratio of the stroke at 1.4 kV to 1.2 kV at 8 Hz: measured, softening model, linear model and V squared."></div>
+<ul class="read">
+<li><b>Model:</b> $\ddot\theta + 2\zeta\omega\dot\theta + \omega^2(1+\gamma\theta^2)\theta + \beta\theta^2 = G\,u(t)$, force lag 52 ms, $\beta$ from the tip; fitted to the 1.2 kV sweep and the free decay; the 1.4 kV point is left out.</li>
+<li><b>What it gets:</b> $\gamma$ = -5.9 rad⁻² (the spring 26 % softer at a 12° stroke), a broader peak, and almost no gain from 1.2 to 1.4 kV at 8 Hz (c): ×1.015 against ×1.075 measured, where a fixed spring with $V^2$ forcing gives ×1.36. So the "saturation" at 1.4 kV needs no end stop: a stronger drive softens the spring and moves the resonance below 8 Hz.</li>
+<li><b>What it misses:</b> it overshoots 8 Hz at 1.2 kV by 9 % and predicts a jump between two branches near 7.2 Hz (a), which a single upward sweep cannot show.</li>
+<li><b>The free decay does not decide:</b> fitted in the time domain, a constant frequency (8.64 Hz) leaves an rms of 0.36°, amplitude softening 0.34° and a stiffness recovering after the drive stops (voltage softening) 0.32°: all within the tracking noise. The rise of the frequency read from zero crossings (8.0 to 9.2 Hz) is within that noise too.</li>
+<li><b>Test:</b> sweep 6–10 Hz upward and downward at 1.2 kV (a softening spring gives different strokes near 7–7.5 Hz), and repeat at 0.8 kV: if the resonance moves with voltage at the same stroke, the elastomer softens with voltage; if it moves with stroke at the same voltage, with amplitude.</li>
 </ul>
 </section>
 
@@ -80,7 +93,7 @@
 
 <section class="card" id="code">
 <h2>Code</h2>
-<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
+<p class="note">In <a href="https://github.com/stefkonst/stefkonst.github.io/tree/main/flap/flapping/code">flapping/code</a>: tip_track.py (tip and hinge), hb_tip.py (spring asymmetry from the tip), sweepfit.py (resonance), decay.py (free decays), lag_type.py (force against voltage lag), softening.py and decay_models.py (spring); withdrawn: two_mode.py, tm_core.py, model_tests.py, drag_model.py, le_bend.py (all on the silhouette track, track.py). Figures: model/code/figures_tests.py, results/figures_model.py.</p>
 </section>
 </div>
 <script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false})});</script>
