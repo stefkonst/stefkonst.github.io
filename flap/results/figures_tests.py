@@ -40,6 +40,7 @@ def model(p, f, tau=None):
 
 
 # ---------------- Fig. 6: flapping ----------------
+ST.LETTER_START = 2
 fig, ax = ST.make_fig(4)
 P = SW["fits"]["zeta 0.07 (decay)"]
 runs = SW["runs"]
@@ -97,6 +98,7 @@ save(fig, "Fig6_flapping")
 
 # ---------------- Fig. 7: flight at the measured kinematics ----------------
 DM = [r for r in map(json.loads, open(os.path.join(FLAP, "air", "data", "dyn_measured.jsonl"))) if "L_m" in r]
+ST.LETTER_START = 2
 fig, ax = ST.make_fig(3)
 cases = (((8.4, 12.2), "k", "measured: 8.4 Hz, ±12°"), ((8.4, 20.0), C[0], "8.4 Hz, ±20°"), ((16.0, 20.0), C[2], "16 Hz, ±20°"), ((25.0, 20.0), C[1], "design: 25 Hz, ±20°"))
 g = lambda f, Ph, d, a_: sorted([r for r in DM if r["f"] == f and r["Phi_deg"] == Ph and r["design"] == d and r["alpha_deg"] == a_], key=lambda r: r["U"])

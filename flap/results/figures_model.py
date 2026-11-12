@@ -148,7 +148,7 @@ save(fig, "Fig10_schematic")
 HB = FD("harmonic_balance.json"); TM = FD("two_mode.json"); WL = FD("wing_link.json"); EO = FD("edge_on_stroke.json")
 fig = plt.figure(figsize=(ST.WIDTH_MM * ST.MM, 150 * ST.MM))
 ax = [fig.add_axes([0.09 + c_ * 0.5, 0.57 - r_ * 0.49, 0.38, 0.38]) for r_ in (0, 1) for c_ in (0, 1)]
-for i_, a_ in enumerate(ax): a_.text(-0.2, 1.04, "abcd"[i_], transform=a_.transAxes, fontsize=9, fontweight="bold")
+for i_, a_ in enumerate(ax): a_.text(-0.2, 1.04, "bcde"[i_], transform=a_.transAxes, fontsize=9, fontweight="bold")
 a = ax[0]
 runs = [("full_DEA_core_wing_7hz_1200V_side", "7 Hz"), ("full_DEA_core_wing_8hz_1200V_side", "8 Hz"), ("full_DEA_core_wing_8hz_1400V_side", "8 Hz\n1.4 kV"), ("only_DEA_core_8hz_1200V_side", "8 Hz\nunpow.")]
 wn2 = (2 * np.pi * 8.38) ** 2

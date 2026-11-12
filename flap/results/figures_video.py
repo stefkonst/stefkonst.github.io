@@ -52,7 +52,7 @@ for i, (n, mm, lab) in enumerate(runs):
         m2 = np.isfinite(bot[k]); ax.plot((xs[m2] - hx) * mm, (bot[k][m2] - hy) * mm, color=c, lw=0.6, ls=":")
     ax.set(xlim=(-5, 72), ylim=(22, -22), xlabel="mm from the hinge", ylabel="mm" if i == 0 else None)
     ax.set_aspect("equal")
-    ax.text(0.02, 0.97, "ab"[i] + "  " + lab, transform=ax.transAxes, fontsize=8, fontweight="bold", va="top")
+    ax.text(0.02, 0.97, "bc"[i] + "  " + lab, transform=ax.transAxes, fontsize=8, fontweight="bold", va="top")
     ST.note(ax, "solid: leading edge, dotted: lower outline\n12 phases of one 8 Hz cycle", xy=(0.02, 0.10), va="bottom")
 # c: stroke of every cycle; d: the mean cycle
 ax = fig.add_axes([0.08, 0.08, 0.36, 0.25])
@@ -63,7 +63,7 @@ for x0, (n, col, lab) in enumerate((("full_DEA_core_wing_8hz_1200V_side", ST.C[0
 ax.set_xticks([0, 1]); ax.set_xticklabels(["wing powered", "wing unpowered"]); ax.set_xlim(-0.5, 1.6)
 ax.set(ylabel="Stroke per cycle, peak to peak (deg)"); ax.minorticks_off(); ax.yaxis.set_minor_locator(plt.NullLocator())
 ST.note(ax, "8 Hz, 1200 V, side view, 35 cycles each", xy=(0.03, 0.06), va="bottom")
-ax.text(-0.22, 1.02, "c", transform=ax.transAxes, fontsize=9, fontweight="bold")
+ax.text(-0.22, 1.02, "d", transform=ax.transAxes, fontsize=9, fontweight="bold")
 ax = fig.add_axes([0.58, 0.08, 0.36, 0.25])
 for n, col, lab in (("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "powered"), ("only_DEA_core_8hz_1200V_side", ST.C[1], "unpowered")):
     a = TR(n)["ang"]; t = np.arange(len(a)) / FS; f = PAIR[n]["f"]; g = (t > 0.6) & np.isfinite(a)
@@ -73,7 +73,7 @@ for n, col, lab in (("full_DEA_core_wing_8hz_1200V_side", ST.C[0], "powered"), (
     ax.plot(x, A, color=col, label=lab); ax.fill_between(x, A - S, A + S, color=col, alpha=0.25, lw=0)
 ax.set(xlabel="Phase from the lowest point", ylabel="Stroke angle (deg, mean removed)")
 ax.legend(loc="upper left", fontsize=5.5)
-ax.text(-0.22, 1.02, "d", transform=ax.transAxes, fontsize=9, fontweight="bold")
+ax.text(-0.22, 1.02, "e", transform=ax.transAxes, fontsize=9, fontweight="bold")
 save(fig, "Fig8_cycle")
 
 # ---------------- Fig. 9: swept area across the sweep ----------------

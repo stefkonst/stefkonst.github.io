@@ -48,6 +48,7 @@ def eq(V, **kw):
 
 
 # ---------------- Fig. 1: the wing on the bench ----------------
+ST.LETTER_START = 2
 fig, ax = ST.make_fig(4)
 a = ax[0]
 for nm, col, lab in (("1800V_1hz_side", C[1], "out of plane (side)"), ("1800V_1hz_front_avi", C[0], "in plane (front)")):
@@ -88,6 +89,7 @@ ST.note(a, "stretch 1.16–1.22\ntension 50–96 mN", xy=(0.04, 0.96))
 save(fig, "Fig1_bench")
 
 # ---------------- Fig. 2: the edge goes slack ----------------
+ST.LETTER_START = 2
 fig, ax = ST.make_fig(4)
 a = ax[0]
 for ef, col in ((0.0, C[0]), (0.4, C[1]), (0.8, C[3])):
@@ -120,6 +122,7 @@ a.legend(loc="lower left", fontsize=5)
 save(fig, "Fig2_mechanism")
 
 # ---------------- Fig. 3: designing the edge ----------------
+ST.LETTER_START = 0
 fig, ax = ST.make_fig(4)
 a = ax[0]
 Vs = np.linspace(0, 1800, 19)
@@ -155,6 +158,7 @@ a.legend(loc="upper left")
 save(fig, "Fig3_edge_design")
 
 # ---------------- Fig. 4: the robot ----------------
+ST.LETTER_START = 0
 fig, ax = ST.make_fig(4)
 R = S["resonance"]
 a = ax[0]
@@ -192,6 +196,7 @@ if os.path.exists(AD("fe_flow.jsonl")):
     LAG = [r for r in map(json.loads, open(AD("dyn_lag.jsonl"))) if "L_m" in r]
     DFL = [r for r in map(json.loads, open(AD("dyn_lagflight.jsonl"))) if "L_m" in r] + [r for r in map(json.loads, open(AD("dyn_flight.jsonl"))) if "L_m" in r]
     flw = lambda d, U, al: next(r for r in FL if r["design"] == d and r["U"] == U and r["alpha"] == al)
+    ST.LETTER_START = 2
     fig, ax = ST.make_fig(4)
     a = ax[0]
     for d, col, lab in (("skin", C[0], r"skin, $\eta_s$ 0.15"), ("skin strong", C[4], r"skin, $\eta_s$ 0.4"), ("edge", C[1], r"edge, $\eta_f$ 0.4"), ("fibres", C[3], "4 fibres, 0.15"), ("fibres, eta 0.4", "#9fd36a", "4 fibres, 0.4")):

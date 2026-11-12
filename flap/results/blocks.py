@@ -175,7 +175,6 @@ LETTERS = {"B1_robot": [(28, 104, "a"), (745, 104, "b")], "B2_bench": [(28, 104,
 
 
 def write(name, w, h, body, title):
-    body += "".join(letter(x, y, c) for x, y, c in LETTERS.get(name, []))
     return _write(name, w, h, body, title)
 
 
