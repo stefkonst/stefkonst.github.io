@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B-fruit Wings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../flap.css">
+</head>
+<body>
+<div class="wrap">
+<div class="crumb"><a href="../">Active membrane wings</a> / B-fruit</div>
+<h1>B-fruit: 10 cm scale</h1>
+<p class="lead">Silicone membrane wings of fruit-bat size (12 × 7 cm per side on the FAAV flapping rig; 6 × 5 cm for gliding), with discrete rolled DEAs running chordwise in the skin, like the plagiopatagiales muscles of bats. The DEAs work on the bench, but in the wing they have nothing to pull against (<a href="#e1">Eq. 1</a>).</p>
+<nav class="toc"><a href="#glide">Gliding</a><a href="#dea">The DEA</a><a href="#skin">The membrane</a><a href="#flap">Flapping</a><a href="#eq">Equations</a></nav>
+
+<h2 id="glide">No lift change while gliding, and why</h2>
+<div class="fig">
+<img src="../img/fig4_gliding.png" alt="Four gliding campaigns, no DEA effect">
+<div class="side">
+<span class="tag m">Measured</span><span class="tag p">Statics</span>
+<ul>
+<li><b>a</b> Each voltage switch gives a spike, not a step: a transient of the switching, $i = C\,dV/dt$, picked up by the rig (<a href="#e3">Eq. 3</a>, likely cause).</li>
+<li><b>b, d</b> Four campaigns, two strip wings and two membranes: the lift changes stay below the detection floor (<a href="#e2">Eq. 2</a>), within 1.5 % of lift.</li>
+<li><b>c</b> The response is the same with and without wind, so its aerodynamic part, the difference between the two, is about zero (<a href="#e2">Eq. 2</a>).</li>
+</ul>
+<p><b>Why:</b> with a free trailing edge, the chordwise forces across any cut must sum to zero (<a href="#e1">Eq. 1</a>). DEA tension would need membrane compression, so the DEAs go slack and bow, as seen in the wings.</p>
+</div>
+</div>
+
+<h2 id="dea">The rolled DEA on the bench</h2>
+<div class="fig">
+<img src="../img/fig2_dea_actuator.png" alt="Rolled DEA force and elongation">
+<div class="side">
+<span class="tag m">Measured</span><span class="tag p">Model</span>
+<ul>
+<li><b>c</b> Force drop about 50 mN at 1.6 kV, following $V^2$ at 0.37 of the ideal Maxwell force (<a href="#e4">Eq. 4</a>).</li>
+<li>At $\lambda$ = 1.00 it saturates near 30 mN from 1.4 kV: the DEA has lost all its pre-tension and cannot drop further (<a href="#e5">Eq. 5</a>).</li>
+<li><b>d</b> Clean square response at 1 Hz.</li>
+</ul>
+<p>The actuator itself works. What was missing is a load path (<a href="#e1">Eq. 1</a>).</p>
+</div>
+</div>
+
+<h2 id="skin">A membrane with bat-skin anisotropy</h2>
+<div class="fig">
+<img src="../img/fig1_membrane.png" alt="Membrane anisotropy against bat skin">
+<div class="side">
+<span class="tag m">Measured</span><span class="tag p">Yeoh fit</span>
+<ul>
+<li><b>b, c</b> The composite model (<a href="#e7">Eq. 7</a>) matches bat skin in both directions; the measured membrane is softer chordwise.</li>
+<li><b>d</b> The chord-to-span stress ratio, $s_y/s_x$ from Eq. 7, is about 2, as in bat skin (measured membrane 1.8).</li>
+</ul>
+<p class="note">n = 1 per direction; specimen width and gauge assumed.</p>
+</div>
+</div>
+
+<h2 id="flap">Flapping on the FAAV rig</h2>
+<div class="warn">Not established. Voltages ran in ascending order while the force zero drifted about 8× the effect (f), so drift and voltage cannot be separated (<a href="#e8">Eq. 8</a>). The voltage monitor saturated above 1.1 kV (shaded), and there was one run.</div>
+<div class="fig">
+<img src="../img/fig5_flapping.png" alt="Flapping lift change, preliminary">
+<div class="side">
+<span class="tag w">Preliminary</span>
+<ul>
+<li><b>a, b</b> Lift change antisymmetric in angle of attack and near zero at 0°, as camber that follows load would give (<a href="#e6">Eq. 6</a>); the sign flips after stall, where the model no longer holds.</li>
+<li><b>e</b> At −5° it grows roughly as $U^2$, as $\Delta L = q S\,\Delta C_L$ would (<a href="#e9">Eq. 9</a>).</li>
+</ul>
+<p>Needs a randomised repeat with a sham before any claim.</p>
+</div>
+</div>
+
+<h2 id="eq">Equations</h2>
+<div class="eq" id="e1"><h3>1. Free trailing edge (exact statics)</h3>
+<div class="k">$$\sum_{\text{DEAs cut}}F_i+\int_\text{cut}N_{yy}\,dx=R_\text{supports aft of the cut}\;\xrightarrow{\ \text{free TE, free tip}\ }\;0$$</div>
+<ul><li>Cut the wing along a spanwise line and take the part behind it. If no support (root plate, digit, tendon) acts on it, the chordwise forces across the cut sum to zero.</li>
+<li>DEA tension then requires membrane compression, which a membrane cannot carry (it wrinkles), so the DEA relaxes to near zero tension and voltage only lengthens it.</li>
+<li>Only shear transfer to the root plate keeps some tension, fading within about 50–70 mm of it.</li></ul></div>
+<div class="eq" id="e2"><h3>2. Detection floor and aerodynamic part</h3>
+<div class="k">$$\Delta L_{min} = 3\,\frac{\sigma_{pair}}{\sqrt{n}},\qquad \Delta L_{aero} = \Delta L_{wind} - \Delta L_{no\ wind}$$</div>
+<ul><li>$\sigma_{pair}$: scatter of paired on/off differences; $n$ pairs. An effect below $\Delta L_{min}$, or present without wind, is not aerodynamic.</li></ul></div>
+<div class="eq" id="e3"><h3>3. Switching transient</h3>
+<div class="k">$$i = C\,\frac{dV}{dt}$$</div>
+<ul><li>A fast switch drives a current spike through the leads; its electrostatic or mechanical pickup gives a spike in the force, not a step.</li></ul></div>
+<div class="eq" id="e4"><h3>4. Rolled DEA force</h3>
+<div class="k">$$\Delta F = \eta\;v_{act}\,\varepsilon_0\varepsilon_r\left(\frac{V}{t_{act}}\right)^2 A_{roll}\,N,\qquad \eta \approx 0.37\ \text{(measured / ideal)}$$</div>
+<ul><li>About 11 µm of air gap per film would explain the missing part (hypothesis).</li></ul></div>
+<div class="eq" id="e5"><h3>5. Running out of pre-tension</h3>
+<div class="k">$$F(V) = \max\big(0,\;F_0 - \Delta F(V)\big)$$</div>
+<ul><li>Once $\Delta F$ reaches the pre-tension $F_0$ the DEA is slack and voltage only lengthens it: the flat top at $\lambda$ = 1.00. Pre-stretch raises $F_0$.</li></ul></div>
+<div class="eq" id="e6"><h3>6. Camber follows load</h3>
+<div class="k">$$\frac{h}{c} = \frac{C_L\, q\, c}{8T},\qquad \Delta\!\left(\frac{h}{c}\right) \approx -\frac{h}{c}\,\frac{\Delta T}{T}$$</div>
+<ul><li>A tension drop raises camber in proportion to the camber already there, so the change has the sign of $C_L$: antisymmetric about zero lift.</li>
+<li>Lower pre-stretch lowers $T$ and raises the authority, about tenfold from $\lambda$ 1.08 to slack.</li></ul></div>
+<div class="eq" id="e7"><h3>7. Membrane strain energy</h3>
+<div class="k">$$W_s=v_m\sum_{i=1}^{3}C_i\,(I_1-3)^i+\sum_{x,y} v_f\,\frac{E_f\,(\sqrt{I_4}-1)^2}{2},\qquad s=2(\lambda-\lambda^{-2})\frac{\partial W_s}{\partial I_1}+v_fE_f(\lambda-1)$$</div>
+<ul><li>Yeoh matrix plus fibre families along span and chord; the anisotropy comes from compliant silicone features, not stiff fibres. Valid to $\lambda$ = 1.22.</li></ul></div>
+<div class="eq" id="e8"><h3>8. Drift confounds an ascending voltage order</h3>
+<div class="k">$$\Delta L_{apparent}(V_k) = \Delta L(V_k) + d\,(t_k - t_0)$$</div>
+<ul><li>If voltage rises with time, a linear drift $d$ looks like a dose response. A randomised order with a sham separates them.</li></ul></div>
+<div class="eq" id="e9"><h3>9. Quasi-steady flapping</h3>
+<div class="k">$$\Delta\alpha_{eff}=-\arctan\frac{\Omega r}{U},\qquad k=\frac{\pi fc}{U},\qquad \Delta L = \tfrac12\rho U^2 S\,\Delta C_L$$</div>
+<ul><li>For $k \lesssim 0.1$ (1–2 Hz at 4 m/s or more) a flapping section passes through slow static states, so a static angle sweep covers the whole cycle, and a fixed $\Delta C_L$ gives $\Delta L \propto U^2$.</li></ul></div>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>

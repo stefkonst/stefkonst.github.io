@@ -1,96 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Active Membrane Wings</title>
-<meta name="description" content="Lift change over a flap cycle for two dielectric elastomer membrane wings, from one analytical model.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
-<style>
-:root{--ink:#14171a;--paper:#f5f6f4;--rule:#d3d8dc;--accent:#1f64b5;--accent-dim:#dce7f5;--muted:#5d646b;--card:#fff;--a:#0072BD;--b:#D95319;--sheet:#dce7f5;--sheet2:#fbe3d6;--warn:#9a5b00;--warnbg:#fff4e0}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}}
-:root[data-theme="dark"]{--ink:#e7eaec;--paper:#15181b;--rule:#33393f;--accent:#6aa5ea;--accent-dim:#1d2c3e;--muted:#9aa2a9;--card:#1d2125;--a:#5aaee0;--b:#f08a55;--sheet:#1d2c3e;--sheet2:#3a2a20;--warn:#ffcc80;--warnbg:#3a2c12}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:16px;line-height:1.55}
-h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;line-height:1.15;margin:0 0 .5em}
-h2{font-size:22px} h3{font-size:17px;margin-top:16px}
-a{color:var(--accent)}
-.wrap{max-width:980px;margin:0 auto;padding:36px 16px}
-.lead{font-size:18px;max-width:800px}
-.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;margin-bottom:18px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media (max-width:720px){.two{grid-template-columns:1fr}}
-.wing h3{font-size:18px;margin:6px 0 4px}
-.wing p{margin:0 0 8px;font-size:14.5px}
-svg{width:100%;height:auto;display:block}
-svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:11px}
-.fig img{width:100%;border:1px solid var(--rule);border-radius:8px;background:#fff}
-.tw{overflow-x:auto}
-table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
-th,td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
-tr.main td{font-weight:600}
-.warn{background:var(--warnbg);color:var(--warn);border-radius:8px;padding:10px 14px;font-size:14.5px;margin-bottom:18px}
-.note{font-size:13.5px;color:var(--muted)}
-ul{padding-left:20px;margin:.4em 0} li{margin:.3em 0}
-ul.read{font-size:14.5px;margin-top:10px}
-.eq{overflow-x:auto;margin:6px 0 10px}
-code{font-size:13px;background:var(--accent-dim);padding:1px 4px;border-radius:4px}
-.go{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);border-radius:10px;padding:12px 14px}
-.go:hover{border-color:var(--accent)} .go b{color:var(--accent)}
-.plotrow{display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:14px;align-items:start}
-.plotrow>img{min-width:0}
-@media (max-width:820px){.plotrow{grid-template-columns:minmax(0,1fr)}.ps{max-width:380px}}
-.pcard{--ps-hi:#c8440a}
-.pcard svg text.h{fill:var(--ps-hi);font-weight:600}
-.ps{--ps-hi:#c8440a;border:1px solid var(--rule);border-radius:8px;padding:8px 10px;font-size:12.5px;line-height:1.4;background:var(--card)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ps,:root:not([data-theme="light"]) .pcard{--ps-hi:#f08a55}}
-:root[data-theme="dark"] .ps,:root[data-theme="dark"] .pcard{--ps-hi:#f08a55}
-.ps svg{width:100%;height:auto;display:block;margin-bottom:6px}
-.ps svg text{fill:var(--ink);font-family:'Source Sans 3',system-ui,sans-serif;font-size:10.5px}
-.ps svg text.h{fill:var(--ps-hi);font-weight:600}
-.ps svg text.m{fill:var(--muted)}
-.ps p{margin:.25em 0;color:var(--ink);font-size:12.5px}
-.ps b{color:var(--ps-hi)}
-.ps p+p b{color:var(--muted)}
-</style>
+<link rel="stylesheet" href="flap.css">
 </head>
 <body>
 <div class="wrap">
+<div class="crumb"><a href="../">Stefania Konstantinidi</a> / Active membrane wings</div>
 <h1>Active membrane wings</h1>
-<p class="lead">Bat-inspired wings whose membrane is a dielectric elastomer actuator (DEA). The current work is <b>B-cube</b>: a small flapping robot driven by a rolled DEA core, with an all-DEA wing whose skin and rolled trailing edge are both active. The robot is built and flaps; the wing on the bench, the robot's dynamics and models of flight are below.</p>
+<p class="lead">Bats tune the tension of their wing membrane with muscles in the skin and at the skeleton. Here the muscles are dielectric elastomer actuators (DEAs). One question runs through the work: <b>where must a DEA sit to change a wing's tension, and is it fast enough to act within a stroke?</b> The answer depends on scale, so the work is grouped by wing size.</p>
 
-<h2 style="margin-top:22px">B-cube</h2>
-<a class="go" href="results/" style="margin-bottom:12px"><b>Results →</b><br>Main findings in seven figures, as for a paper: the robot, the wing on the bench and why it moves, the robot flapping, the wing in air, flight at the measured kinematics, the wing powered against unpowered, and how the stroke is measured. Conclusions and open tests.</a>
-<a class="go" href="analysis/" style="margin-bottom:12px"><b>Analysis →</b><br>The robot videos read closely: the frequency sweep, powered against unpowered wing (5 % more stroke, not 20 %, and possibly a different shape), and how a tracking error first suggested +20 %.</a>
-<a class="go" href="first/" style="margin-bottom:12px"><b>Experiments →</b><br>All measured data: the wing on the bench (three views, 1000–1800 V, 1–20 Hz) and the robot flapping (1000–1400 V, 1–15 Hz), with how each number was obtained, including the powered against unpowered wing comparison.</a>
-<a class="go" href="robot/" style="margin-bottom:12px"><b>Robot →</b><br>Specification, design against measured values, six design questions (edge material, part-active edge, lift, thickness, resonance, flight) and next steps.</a>
-<a class="go" href="model/" style="margin-bottom:12px"><b>Models →</b><br>The models of the robot and the wing, what each one explains, and the tests each one passes or fails.</a>
-<a class="go" href="air/" style="margin-bottom:12px"><b>Wing in air →</b><br>Models in flow: skin, edge and discrete fibres compared; the slack-edge limit; the force lag; flapping.</a>
-<a class="go" href="manufacturing/" style="margin-bottom:12px"><b>Manufacturing →</b><br>Stack, masks, process steps and checks, with schematics.</a>
+<div class="three">
+<a class="go" href="bcube/"><img src="img/Figure1.png" alt="B-cube robot"><h3>B-cube</h3><div class="sc">centimetre scale, 5 cm wing, DEA-flapped</div><p>Built and flapping. Whole skin active; the rolled edge is a tension switch. Next: two wings, and discrete and attachment wings on the same robot.</p></a>
+<a class="go" href="bfruit/"><img src="img/fig4_gliding.png" alt="Gliding tests"><h3>B-fruit</h3><div class="sc">10 cm scale, FAAV test wings</div><p>Discrete DEAs in the skin. Four gliding campaigns: no effect above noise, explained by a missing load path. Flapping effect not established.</p></a>
+<a class="go" href="bfaav/"><img src="img/scales.png" alt="Scaling"><h3>B-FAAV</h3><div class="sc">100 cm scale, 250 g robot</div><p>Nothing built. Calculations: only actuators at the wing's attachments can change its tension at this size.</p></a>
+</div>
 
-<h2 style="margin-top:22px">Earlier studies</h2>
-<p class="note">Kept for reference. Numbers there are from before the robot was built; where they differ, the B-cube pages above hold.</p>
-<div class="two" style="margin-bottom:12px">
-  <a class="go" href="compare/"><b>Full against discrete →</b><br>Model study of a full active membrane against discrete DEAs, and the re-analysis of the tested FAAV wings.</a>
-  <a class="go" href="model/analytical.html"><b>One model for both wings →</b><br>The analytical model, step by step.</a>
+<h2>Where the muscle can go at each scale</h2>
+<div class="fig">
+<img src="img/scales.png" alt="Tension needed and tension a DEA can change, three scales">
+<div class="side">
+<span class="tag p">Model</span>
+<p><b>a</b> The tension a membrane wing needs grows with chord and speed, $T_0 = C_T\,q\,c$. One active skin layer changes a fixed tension per width, set by the film alone (grey) (<a href="bfaav/#e1">Eq. 1</a>, <a href="bfaav/#e2">Eq. 2</a>).</p>
+<p><b>b</b> So the skin's authority, $\Delta T_{skin}/T_0 \propto 1/(q\,c)$, falls with size (<a href="bfaav/#e2">Eq. 2</a>): above 20 % at B-cube, borderline at B-fruit, 3–7 % at B-FAAV, which would need 3–8 layers.</p>
+<p><b>c</b> Rolled cores at the attachment work at every size: a fraction of one core at B-cube, 8–36 cores (4–20 g) per wing at B-FAAV (<a href="bfaav/#e3">Eq. 3</a>).</p>
+<p class="note">Assumed: 30 µm layers, 1.6 kV, $\varepsilon_r$ 2.8, $C_T$ 3. Equations on the <a href="bfaav/#eq">B-FAAV page</a>.</p>
 </div>
-<div class="two" style="margin-bottom:12px">
-  <a class="go" href="full_membrane/"><b>Full membrane wing →</b><br>Tensioning by rotation, design study, finite elements.</a>
-  <a class="go" href="design/"><b>The wing to build →</b><br>First design of the B-cube wing (3 Nov), superseded by the robot page.</a>
 </div>
-<div class="two" style="margin-bottom:12px">
-  <a class="go" href="poc/"><b>B-cube prototype plan →</b><br>Masks, wing variants and steps for the first prototype (4 Nov).</a>
-  <a class="go" href="flittermouse/"><b>Flittermouse →</b><br>Feasibility study that led to B-cube: rolled DEAs flapping a DEA-skin wing.</a>
+
+<div class="card" style="margin-top:18px">
+<div class="tw"><table>
+<tr><th></th><th>Whole skin active</th><th>Discrete DEAs in the skin</th><th>DEAs at the attachment</th></tr>
+<tr><td><b>B-cube</b> (cm)</td><td class="y">built, tested</td><td class="y">to build</td><td class="y">to build</td></tr>
+<tr><td><b>B-fruit</b> (10 cm)</td><td class="n">fabrication limit (70 mm electrodes)</td><td class="y">built, tested</td><td class="y">possible</td></tr>
+<tr><td><b>B-FAAV</b> (100 cm)</td><td class="n">too little authority (fig. b)</td><td class="n">no load path (<a href="bfruit/#e1">statics</a>)</td><td class="y">only option</td></tr>
+</table></div>
+<p class="note">At B-fruit the physics still allows an active skin (fig. b); the limit there is fabrication. At B-FAAV the limit is physical.</p>
 </div>
-<a class="go" href="plagiopatagiales/"><b>Plagiopatagiales →</b><br>Wings with discrete DEAs: observations and the load-path finding.</a>
+
 </div>
-<script>
-document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false});});
-</script>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false})});</script>
 </body>
 </html>

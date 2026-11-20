@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B-cube Wings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../flap.css">
+</head>
+<body>
+<div class="wrap">
+<div class="crumb"><a href="../">Active membrane wings</a> / B-cube</div>
+<h1>B-cube: centimetre scale</h1>
+<p class="lead">A flapping robot driven by rolled DEA cores, with a 50 mm wing whose skin and rolled trailing edge are DEAs. At this size one active layer can change the wing's tension by more than 20 % (<a href="../bfaav/#e2">scaling</a>), so every placement is possible: whole skin, discrete strips and the attachment.</p>
+<nav class="toc"><a href="#switch">Tension switch</a><a href="#air">Placements in air</a><a href="#robot">Robot</a><a href="#ptero">First prototypes</a><a href="#next">Next</a><a href="#eq">Equations</a><a href="fabrication/">Fabrication</a></nav>
+
+<h2 id="switch">The edge is a tension switch</h2>
+<div class="fig">
+<img src="../img/Figure3.png" alt="Edge tension switch: model and measurement">
+<div class="side">
+<span class="tag m">Measured</span><span class="tag p">Model</span>
+<p>The rolled edge carries the wing's chordwise load. Voltage removes its tension, and the skin alone cannot hold the edge (<a href="#e1">Eq. 1</a>).</p>
+<ul>
+<li><b>c</b> Only an active edge, $\eta_f$ 0.4–0.8, reproduces the measured drop (stars, 1.84 mm at 1.8 kV). A passive edge, $\eta_f = 0$, keeps $T = T_0$ and gives about zero (<a href="#e1">Eq. 1</a>).</li>
+<li><b>d</b> The two-spring equation follows 160 finite-element runs: r 0.93, rms 0.21 mm (<a href="#e1">Eq. 1</a>, three constants fitted).</li>
+<li><b>e</b> Voltage lowers $T$ and so the edge mode, from 45 Hz to 11–27 Hz; the 15 Hz bump on the bench fits a nearly slack edge (<a href="#e2">Eq. 2</a>).</li>
+<li><b>f</b> The sign of the lift change follows the slope of the edge's shape under load (<a href="#e3">Eq. 3</a>): $+0.2$ to $+0.4$ at 8 Pa, $-0.6$ to $-1.0$ at 15 Pa.</li>
+</ul>
+<p>Flat, then steep, then saturating: at 0 V the string term $8T/L^2$ is about 13× the skin term $N/c$, and extra tension cut the motion about 13× (<a href="#e1">Eq. 1</a>).</p>
+</div>
+</div>
+
+<h2 id="air">Skin, edge or fibres in air</h2>
+<div class="fig">
+<img src="../img/Figure7.png" alt="Skin, edge and discrete fibres in air, model">
+<div class="side">
+<span class="tag p">Model</span><span class="tag m">Measured (e)</span>
+<ul>
+<li><b>c</b> Only about 15 % of the skin's Maxwell stress becomes a drop in chord tension (<a href="#e4">Eq. 4</a>, $\eta_s$ 0.15), yet the skin alone changes $C_L$ by up to 0.34 at 1.8 kV.</li>
+<li><b>d</b> That is because the wing sits near membrane divergence, $C_T \approx 3.3$ against 1.73, where camber is most sensitive to tension (<a href="#e5">Eq. 5</a>).</li>
+<li>Four discrete fibres give about half: in series with a soft edge they keep only 29 % of their pre-tension (<a href="#e6">Eq. 6</a>).</li>
+<li><b>e</b> Bench motion falls with frequency as a first-order force lag of about 50 ms (<a href="#e7">Eq. 7</a>).</li>
+<li><b>f</b> Holding voltage raises lift and lowers thrust (unsteady vortex lattice, <a href="#e10">Eq. 10</a>).</li>
+</ul>
+</div>
+</div>
+
+<h2 id="robot">The robot flaps at resonance, with a lagging force</h2>
+<div class="fig">
+<img src="../img/Figure4.png" alt="Robot resonance with model">
+<div class="side">
+<span class="tag m">Measured</span><span class="tag p">Model fit</span>
+<ul>
+<li><b>c</b> 24.3 ± 1.0° peak to peak at 8 Hz and 1.2 kV. One mode with a force lag (<a href="#e9">Eq. 9</a>): $f_n$ 8.38 Hz, $\zeta$ 0.07, $\tau$ 38 ± 13 ms. Without the lag the peak would be twice as high.</li>
+<li><b>d, e</b> The spring softens, $\gamma = -5.9$ rad$^{-2}$ (<a href="#e8">Eq. 8</a>): 1.4 kV adds only 8 % at resonance, although the 1 Hz stroke grows as $V^2$.</li>
+<li>The lag sits in the force, not the voltage: lagging the force fits the stroke's harmonics with one real asymmetry (misfit 0.3); lagging the voltage before squaring, as electrode RC would, cannot (misfit 388) (<a href="#e8">Eq. 8</a>).</li>
+</ul>
+<p>At 25 Hz a 38–50 ms lag passes only 13–17 % of a voltage change (<a href="#e7">Eq. 7</a>), so on/off timing acts as half the voltage held. Timing within the stroke needs a faster force or a slower stroke: at 2 Hz, 85–90 % passes.</p>
+<p class="note">Powering the wing adds 5 ± 1 % (± 3 % camera scale) to the stroke, measured from the tip; the runs were 20 min apart, so drift could explain it.</p>
+</div>
+</div>
+
+<h2 id="ptero">First prototypes, July and October</h2>
+<div class="fig">
+<img src="../img/pterosaur.png" alt="Pterosaur prototype and its motion range">
+<div class="side">
+<span class="tag m">Measured</span>
+<p>All-DEA membrane, no flow. Brightness is the range of each pixel over the run (same scale in b and c).</p>
+<ul>
+<li><b>b</b> Without fibres, the free edges move most: the film expands in plane under the Maxwell pressure (<a href="#e11">Eq. 11</a>) and the free edges have nothing to resist it.</li>
+<li><b>c</b> With fibres (another wing), the motion stays in the fibre lines: fibres raise the stiffness along them (<a href="#e11">Eq. 11</a>).</li>
+</ul>
+</div>
+</div>
+<div class="fig" style="margin-top:16px">
+<img src="../img/fig3_pterosaur.png" alt="Pterosaur tip displacement">
+<div class="side">
+<span class="tag m">Measured</span>
+<ul>
+<li><b>a, d</b> Without fibres the tip moves up to 1.5 mm at 1.8 kV, roughly linear in $V^2$ above about 1.3 kV ($R^2$ 0.93), as the Maxwell pressure (<a href="#e11">Eq. 11</a>). Fibres hold it to the noise floor.</li>
+<li><b>c</b> 78 % of the 1 Hz stroke at 2 Hz and 55 % at 10 Hz. One first-order lag cannot fit both: 64 ms from the 2 Hz point, 24 ms from the 10 Hz point (<a href="#e7">Eq. 7</a>).</li>
+</ul>
+<p class="note">Pixel-to-mm scale and the 2 and 10 Hz values were read from earlier plots; n = 1.</p>
+</div>
+</div>
+
+<h2 id="next">Next: two wings, three placements</h2>
+<div class="card">
+<p>Same robot, mirrored to two wings, same outline. Wings: (1) all-DEA skin, as now; (2) passive membrane tensioned by a DEA at its attachment (<a href="#e6">Eq. 6</a>); (3) passive membrane, nothing powered, as the baseline. Forces in the wind tunnel with a Nano17 under the robot: voltage on, off, phase-locked to the stroke and sham, wind on and off.</p>
+<p>The effect counts if it beats the scatter of paired cycles, $|\Delta L| > 3\,\sigma_{pair}/\sqrt{n}$ for $n$ paired cycles. Expected: $\Delta L = q S \Delta C_L \approx$ 1–3 mN per wing at 4 m/s for $\Delta C_L$ 0.1–0.3 (<a href="#e5">Eq. 5</a>).</p>
+<p class="note">First test: the scatter of cycle-averaged lift with the robot flapping and the wing at 0 V.</p>
+</div>
+
+<h2 id="eq">Equations</h2>
+<div class="eq" id="e1"><h3>1. Edge as a tension switch</h3>
+<div class="k">$$\Delta z = \frac{q_e}{8T/L^2 + N/c},\qquad T = T_0 - \eta_f\, n_f\, \varepsilon\left(\frac{V}{H}\right)^{2} H\, w_a + T_{\mathrm{sag}}$$</div>
+<ul><li>The edge holds its load $q_e$ with two springs in parallel: the edge as a string ($8T/L^2$) and the skin strip behind it ($N/c$).</li>
+<li>At 0 V the string is about 13× stiffer than the skin. Voltage removes $T$, the stiffness falls to the skin's: the motion jumps, then saturates once the edge is slack.</li>
+<li>$\eta_f$: share of the Maxwell stress the roll turns into lost tension; $n_f$ active films, $w_a$ their width, $H$ film thickness, $T_{\mathrm{sag}}$ the tension the edge regains by sagging.</li></ul></div>
+<div class="eq" id="e2"><h3>2. Edge mode</h3>
+<div class="k">$$f_e = \frac{1}{2\pi}\sqrt{\frac{T\pi^2/L^2 + N/c}{\mu_e + \rho t c/3}}$$</div>
+<ul><li>Voltage lowers $T$, so it tunes the edge mode down: 45 Hz at 0 V to 11–27 Hz at 1.4–1.8 kV.</li></ul></div>
+<div class="eq" id="e3"><h3>3. Lift change from the edge's shape (thin aerofoil)</h3>
+<div class="k">$$\Delta C_L = 2\int_0^\pi z'(x)\,(\cos\theta-1)\,d\theta,\qquad x = \tfrac{c}{2}(1-\cos\theta)$$</div>
+<ul><li>Under light load the slack edge rises and camber grows; under heavier load the soft edge is blown back and camber falls. Same voltage, opposite sign.</li></ul></div>
+<div class="eq" id="e4"><h3>4. Tension drop from an active skin</h3>
+<div class="k">$$\Delta N_c = \eta_s\,\varepsilon_0\varepsilon_r\left(\frac{V}{H}\right)^{2} H$$</div>
+<ul><li>The Maxwell pressure $\varepsilon E^2$ (about 70 kPa at 30 µm and 1.6 kV) times the layer thickness gives a tension per width; the soft edge takes up most of it, so only $\eta_s \approx$ 0.15 reaches the chord.</li></ul></div>
+<div class="eq" id="e5"><h3>5. Membrane camber, tension coefficient, divergence</h3>
+<div class="k">$$\frac{h}{c} = \frac{C_L\, q\, c}{8T},\qquad C_T = \frac{N_c}{q\,c},\qquad \frac{\partial (h/c)}{\partial T} = -\frac{C_L\,q\,c}{8T^2}$$</div>
+<ul><li>Camber falls as tension rises, and its sensitivity to a tension change grows as $1/T^2$: largest just above divergence ($C_T$ = 1.73 in 2D).</li>
+<li>Too slack and the wing has no steady state: in flight, keep the edge above about 10 mN.</li></ul></div>
+<div class="eq" id="e6"><h3>6. Series rule</h3>
+<div class="k">$$\Delta T = \Delta F\,\frac{k_p}{k_a + k_p}$$</div>
+<ul><li>An actuator in series with a passive path passes on the share $k_p/(k_a+k_p)$ of its force change.</li>
+<li>Discrete fibres hang on a soft edge (small $k_p$), so they lose most of their pull. An actuator at the attachment pulls on the stiff membrane path (large $k_p$) and keeps most of it.</li></ul></div>
+<div class="eq" id="e7"><h3>7. First-order force lag</h3>
+<div class="k">$$\tau\,\dot F + F = k\,V(t)^2,\qquad \frac{|F(f)|}{|F(0)|} = \frac{1}{\sqrt{1+(2\pi f\tau)^2}}$$</div>
+<ul><li>With $\tau$ = 38–50 ms: 85–90 % passes at 2 Hz, 37–46 % at 8 Hz, 13–17 % at 25 Hz.</li></ul></div>
+<div class="eq" id="e8"><h3>8. Stroke equation</h3>
+<div class="k">$$\ddot\theta + 2\zeta\omega\dot\theta + \omega^2\left(1+\gamma\theta^2\right)\theta + \beta\theta^2 = G\,F(t) + M_{edge}(T)$$</div>
+<ul><li>$\gamma<0$: the spring softens with amplitude, so a stronger drive moves the resonance below the drive and the stroke saturates.</li>
+<li>$\beta$: asymmetry of the spring. With the fixed $\sin^4$ drive, $X_2/X_1^2$ gives $\beta$ for each run without a drive signal; $\beta$ must come out real. It does only if the lag acts on $F$ (Eq. 7), not on $V$ before squaring.</li></ul></div>
+<div class="eq" id="e9"><h3>9. Resonance with a force lag</h3>
+<div class="k">$$\theta_1(f) = \frac{K}{\sqrt{(1-r^2)^2+(2\zeta r)^2}}\,\frac{1}{\sqrt{1+(2\pi f\tau)^2}},\qquad r = f/f_n$$</div>
+<ul><li>Fitted: $f_n$ 8.38 Hz, $\tau$ 38 ms, with $\zeta$ 0.07 from free decays.</li></ul></div>
+<div class="eq" id="e10"><h3>10. Thrust needs a Strouhal number</h3>
+<div class="k">$$St = \frac{f A_{tip}}{U},\qquad A_{tip} = 2R\sin\Phi$$</div>
+<ul><li>In the model thrust turns positive near $St \approx 0.15$; the robot is at 0.05 at 4 m/s, so it needs 16–25 Hz. Holding voltage adds camber, which adds lift and drag.</li></ul></div>
+<div class="eq" id="e11"><h3>11. Film expansion and fibres</h3>
+<div class="k">$$p_M = \varepsilon_0\varepsilon_r\left(\frac{V}{H}\right)^2,\qquad \Delta\varepsilon_\parallel \approx \frac{p_M}{v_m E_m + v_f E_f},\qquad \Delta\varepsilon_\perp \approx \frac{p_M}{E_m}$$</div>
+<ul><li>Displacement goes with $V^2$. Stiff fibres ($v_f E_f \gg E_m$) block expansion along them, so motion concentrates between them.</li></ul></div>
+</div>
+<script>document.addEventListener("DOMContentLoaded",function(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:true},{left:"$",right:"$",display:false}],throwOnError:false})});</script>
+</body>
+</html>
