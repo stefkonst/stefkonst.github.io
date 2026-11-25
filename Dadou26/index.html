@@ -67,6 +67,9 @@ header p{margin:0 auto;max-width:560px;color:var(--soft)}
 .bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:8px}
 .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent),var(--accent2));width:0;transition:width .4s}
 .gifts{margin-top:18px}
+.kissbox{margin-top:18px;text-align:center;font-family:Caveat,cursive;font-size:1.45rem;color:var(--accent2);line-height:1.25}
+.kissbox b{font-family:Fraunces,serif;font-size:1.3rem}
+#hint small{font-weight:600;opacity:.75}
 .gifts ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
 .gifts li button{width:100%;text-align:left;font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);
   border-radius:10px;padding:8px 12px;cursor:pointer;display:flex;gap:10px;align-items:center}
@@ -132,7 +135,7 @@ footer{text-align:center;color:var(--soft);margin-top:30px;font-family:Caveat,cu
           <button class="btn" id="zout" aria-label="Dézoomer">−</button>
           <button class="btn" id="zin" aria-label="Zoomer">+</button>
         </div>
-        <button class="btn" id="hint">✨ Où sont mes cases ?</button>
+        <button class="btn" id="hint">✨ Où sont mes cases ? <small>(1 💋)</small></button>
       </div>
     </section>
 
@@ -142,6 +145,7 @@ footer{text-align:center;color:var(--soft);margin-top:30px;font-family:Caveat,cu
         <div class="pal" id="pal"></div>
         <div class="info" id="info"></div>
       </div>
+      <div class="board kissbox" id="kiss"></div>
       <div class="gifts board" style="margin-top:18px">
         <h2>Tes cadeaux</h2>
         <ul id="glist"></ul>
@@ -172,10 +176,10 @@ const GIFTS = (() => {
 })();
 
 // --- state
-let filled = new Set();
+let filled = new Set(), kisses = 0;
 const store = {
-  load(){ try{ const v = JSON.parse(localStorage.getItem(KEY) || '{}'); filled = new Set(v.f || []); }catch(e){} },
-  save(){ if (PREVIEW) return; try{ localStorage.setItem(KEY, JSON.stringify({ f:[...filled] })); }catch(e){} }
+  load(){ try{ const v = JSON.parse(localStorage.getItem(KEY) || '{}'); filled = new Set(v.f || []); kisses = v.k || 0; }catch(e){} },
+  save(){ if (PREVIEW) return; try{ localStorage.setItem(KEY, JSON.stringify({ f:[...filled], k:kisses })); }catch(e){} }
 };
 store.load();
 
@@ -346,7 +350,14 @@ document.getElementById('hint').onclick = () => {
   if (!sel) return toast('Choisis d\'abord une couleur 🎨');
   if (dayDone(sel)) return toast('Cette couleur est déjà terminée ♥');
   flash = { day: sel, t0: performance.now() }; draw();
+  kisses++; store.save(); updateKisses();
+  toast(`Indice payé : 1 bisou 💋 · tu m'en dois ${kisses}`);
 };
+function updateKisses(){
+  document.getElementById('kiss').innerHTML = kisses
+    ? `Chaque indice se paie en bisou 💋<br><b>${kisses} bisou${kisses>1?'s':''}</b> à me donner`
+    : `Chaque indice se paie en bisou 💋`;
+}
 let zoom = 1;
 function setZoom(z){
   const vp = document.getElementById('vp');
@@ -406,7 +417,7 @@ function init(){
     for (let d = 1; d <= td; d++) if (!dayDone(d)){ sel = d; break; }
   }
   if (PREVIEW) sel = 1;
-  buildPalette(); updateInfo(); updateStatus(); buildGiftList();
+  buildPalette(); updateInfo(); updateStatus(); buildGiftList(); updateKisses();
   document.fonts && document.fonts.ready.then(draw);
   draw();
 }
