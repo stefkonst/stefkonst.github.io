@@ -225,7 +225,7 @@ function draw(){
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   for (const r of regs){
     if (filled.has(r.id)) continue;
-    const fs = Math.max(6, Math.min(26, r.rad * 1.0)) * SC;
+    const fs = Math.max(10, Math.min(26, r.rad * 1.1)) * SC;
     ctx.font = `800 ${fs}px Nunito, sans-serif`;
     ctx.fillStyle = unlocked(r.day) ? '#6d5149' : '#c2b2aa';
     ctx.fillText(r.day, r.x*SC, r.y*SC + fs*0.05);
